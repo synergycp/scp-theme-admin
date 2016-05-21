@@ -1,0 +1,17 @@
+extends /resources/jade/list-checkable
+
+block title
+ | Clients
+
+block headings
+  th Name
+  th Email
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td {{ row.email }} 
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.users.clients.view({id: row.id})")
+        | {{ 'action.EDIT' | translate }}

@@ -1,0 +1,33 @@
+doctype html
+include /resources/jade/mixins/form
+
++field(
+  "{{ 'client.form.email.LABEL' | translate }}",
+  "email"
+)(
+  ng-model="vm.input.email"
+)
+
++field(
+  "{{ 'client.form.password.LABEL' | translate }}",
+  "password"
+)(
+  placeholder="{{ 'client.form.password.PLACEHOLDER' | translate }}"
+  ng-model="vm.input.password"
+)
+
++double-field(
+  "{{ 'client.form.name.LABEL' | translate }}",
+  "name", {
+    "ng-model": "vm.input.first"
+  }, {
+    "ng-model": "vm.input.last"
+  }
+)
+
++field(
+  "{{ 'client.form.billing_id.LABEL' | translate }}",
+  "billing_id"
+)(
+  ng-model="vm.input.billing_id"
+)

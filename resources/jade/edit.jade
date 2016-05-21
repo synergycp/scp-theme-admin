@@ -1,0 +1,28 @@
+doctype html
+
+.row
+  .col-md-6
+    form.form-horizontal(ng-submit="vm.submit()")
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            block title
+        
+        .panel-body
+          block form
+        
+        .panel-footer.clearfix
+          .pull-right
+            input(
+              type="submit"
+              class="btn btn-default"
+              value="Save Changes"
+            )
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title Logs
+        
+      .panel-body
+        

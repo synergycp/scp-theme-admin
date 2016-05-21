@@ -1,0 +1,10 @@
+h3.text-center.text-thin {{ 'right-sidebar.layout.TITLE' | translate }}
+
+.col-xs-12
+  div.checkbox
+    label.control-label
+      input(
+        type="checkbox"
+        ng-model="app.layout.isCollapsed"
+      )
+      | Collapse Navigation

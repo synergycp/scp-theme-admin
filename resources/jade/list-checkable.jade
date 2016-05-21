@@ -1,0 +1,9 @@
+extends list
+
+block headings-pre
+  th.checkbox-col
+    input(type="checkbox", ng-model="list.checkAll", ng-change="list.toggleCheckAll")
+
+block columns-pre
+  td.checkbox-col
+    input(type="checkbox")

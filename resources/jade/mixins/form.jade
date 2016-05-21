@@ -1,0 +1,32 @@
+mixin field(label, name)
+  .form-group
+    .col-md-3.col-sm-2
+      label.control-label(for="form-"+name)=label
+    .col-md-9.col-sm-10
+      input.form-control(
+        type="text"
+        id="form-"+name
+      )&attributes(attributes)
+      if block
+        p.help-block
+          block
+
+mixin double-field(label, name, fattrs, sattrs, dualClass)
+  .form-group.dual-input(
+    class=dualClass
+  )
+    .col-md-3.col-sm-2
+      label.control-label(for="form-"+name)=label
+    .col-md-9.col-sm-10
+      div.first-input
+        input.form-control(
+          type="text"
+        )&attributes(fattrs)
+      div.second-input
+        input(
+          type="text"
+          class="form-control"
+        )&attributes(sattrs)
+      if block
+        p.help-block
+          block

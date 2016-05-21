@@ -1,0 +1,13 @@
+list
+  list-heading
+    block title
+  table.table.table-bordered.table-striped.table-condensed.table-hover.table-checkable
+    thead
+      tr
+        block headings-pre
+        block headings
+    tbody
+      tr(ng-repeat="row in vm.list.items")
+        block columns-pre
+        block columns
+  list-footer

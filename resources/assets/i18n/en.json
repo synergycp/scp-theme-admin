@@ -1,0 +1,78 @@
+{
+  "app": {
+    "title": "Synergy"
+  },
+  "dashboard": {
+    "WELCOME": "Welcome to {{appName}}"
+  },
+  "topbar": {
+    "search": {
+      "PLACEHOLDER": "Type to search..."
+    }
+  },
+  "sidebar": {
+    "WELCOME": "Welcome",
+    "heading": {
+      "HEADER": "Navigation"
+    },
+    "nav": {
+      "SINGLEVIEW": "Single View",
+      "menu": {
+        "MENU": "Menu",
+        "SUBMENU": "Sub Menu"
+      }
+    }
+  },
+  "right-sidebar": {
+    "user": {
+      "TITLE": "User Controls",
+      "links": {
+        "LOGOUT": "Logout"
+      }
+    },
+    "layout": {
+      "TITLE": "Layout Controls"
+    }
+  },
+  "auth": {
+    "login": {
+      "SIGNIN": "Sign in to continue.",
+      "REMEMBER": "Remember Me",
+      "FORGOT": "Forgot your password?",
+      "LOGIN": "Login",
+      "input": {
+        "username": {
+          "PLACEHOLDER": "Enter your username"
+        },
+        "password": {
+          "PLACEHOLDER": "Enter your password"
+        }
+      }
+    }
+  },
+  "client": {
+    "form": {
+      "title": {
+        "ADD": "Create Client",
+        "EDIT": "Edit {{ email }}"
+      },
+      "email": {
+        "LABEL": "Email"
+      },
+      "password": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Enter a password to set"
+      },
+      "billing_id": {
+        "LABEL": "Billing ID"
+      },
+      "name": {
+        "LABEL": "Name"
+      }
+    }
+  },
+  "action": {
+    "EDIT": "edit",
+    "DELETE": "delete"
+  }
+}

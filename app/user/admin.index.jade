@@ -1,0 +1,12 @@
+extends /resources/jade/list-checkable
+
+block title
+ | Administrators
+
+block headings
+  th Username
+  th Email
+
+block columns
+  td {{ row.username }}
+  td {{ row.email }}

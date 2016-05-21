@@ -1,0 +1,54 @@
+{
+  "name": "Synergy Control Panel",
+  "version": "0.0.0",
+  "authors": [
+    "synergycontrolpanel"
+  ],
+  "description": "Synergy Control Panel Default Theme",
+  "main": "index.html",
+  "keywords": [],
+  "license": "http://synergycp.net/license",
+  "homepage": "http://synergycp.net",
+  "private": true,
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "angular-loading-bar": "0.8.0",
+    "angular-translate": "2.9.2",
+    "angular-ui-router": "0.2.18",
+    "angular": "1.5.0",
+    "angular-bootstrap": "1.1.2",
+    "angular-cookies": "1.5.0",
+    "angular-translate-loader-url": "2.9.2",
+    "angular-translate-loader-static-files": "2.9.2",
+    "angular-translate-storage-local": "2.9.2",
+    "angular-translate-storage-cookie": "2.9.2",
+    "angular-animate": "1.5.0",
+    "angular-ui-utils": "3.0.0",
+    "fontawesome": "4.5.0",
+    "oclazyload": "1.0.9",
+    "ngstorage": "0.3.10",
+    "jquery": "2.2.1",
+    "modernizr": "https://modernizr.com/download?backgroundsize-bgpositionshorthand-bgpositionxy-bgrepeatspace_bgrepeatround-bgsizecover-borderradius-cssanimations-csscalc-csstransforms-csstransforms3d-csstransitions-flexboxtweener-fontface-inlinesvg-localstorage-multiplebgs-preserve3d-sessionstorage-smil-svgclippaths-svgfilters-svgforeignobject-todataurljpeg_todataurlpng_todataurlwebp-setclasses&q=background.zip",
+    "angular-sanitize": "1.5.0",
+    "angular-resource": "1.5.0",
+    "angular-touch": "1.5.0",
+    "jquery.browser": "master",
+    "angular-ui-map": "0.5.0",
+    "angular-material": "1.0.5",
+    "angular-aria": "1.5.0",
+    "angular-messages": "1.5.0"
+  },
+  "resolutions": {
+    "angular": "1.5.0",
+    "angular-translate": "2.9.2",
+    "angular-translate-storage-cookie": "2.9.2",
+    "angular-cookies": "1.5.0",
+    "angular-ui-utils": "3.0.0"
+  },
+  "devDependencies": {
+    "restangular": "^1.5.2",
+    "lodash": "^4.11.2"
+  }
+}

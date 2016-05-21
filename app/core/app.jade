@@ -1,0 +1,16 @@
+// top navbar
+header.topnavbar-wrapper(ng-include="'app/layout/top-navbar/top-navbar.html'")
+
+// sidebar
+aside.aside(ng-include="'app/layout/sidebar/sidebar.html'")
+
+// offsidebar
+aside.offsidebar(ng-include="'app/layout/right-sidebar/right-sidebar.html'")
+
+// Main section
+section
+  // Page content
+  .content-wrapper(ui-view="", autoscroll="false", ng-class="app.viewAnimation")
+  
+// Page footer
+footer(ng-include="'app/layout/footer/footer.html'")

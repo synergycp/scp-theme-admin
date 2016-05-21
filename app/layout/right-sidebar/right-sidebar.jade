@@ -1,0 +1,15 @@
+// START Off Sidebar (right)
+nav
+  uib-tabset(justified="true")
+    uib-tab
+      uib-tab-heading
+        em.fa.fa-user.fa-lg
+      div(ng-include="'app/layout/right-sidebar/right-sidebar.tab.user.html'")
+
+    uib-tab
+      uib-tab-heading
+        em.fa.fa-cog.fa-lg
+      div
+        div(ng-include="'app/layout/right-sidebar/right-sidebar.tab.layout.html'")
+
+// END Off Sidebar (right)

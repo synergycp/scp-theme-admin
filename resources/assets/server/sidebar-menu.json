@@ -1,0 +1,64 @@
+[
+  {
+    "text": "Navigation",
+    "heading": "true",
+    "translate": "sidebar.heading.HEADER"
+  },
+  {
+    "text": "Dashboard",
+    "sref": "app.dashboard",
+    "icon": "fa fa-home",
+    "alert": "1"
+  },
+  {
+    "text": "Users",
+    "sref": "#",
+    "icon": "fa fa-user",
+    "submenu": [
+        {"text": "Clients",         "sref": "app.users.clients"},
+        {"text": "Administrators",  "sref": "app.users.admins"}
+    ]
+  },
+  {
+    "text": "Hardware",
+    "sref": "#",
+    "icon": "fa fa-server",
+    "submenu": [
+        {"text": "Servers",         "sref": "app.servers"},
+        {"text": "Server Inventory","sref": "app.servers.inventory"},
+        {"text": "Provision",       "sref": "app.servers.provision"},
+        {"text": "Part Inventory",  "sref": "app.parts"},
+        {"text": "Switches",        "sref": "app.switches"}
+    ]
+  },
+  {
+    "text": "Network",
+    "sref": "#",
+    "icon": "fa fa-sitemap",
+    "submenu": [
+        {"text": "IP Entities",     "sref": "app.ip.entities"},
+        {"text": "IP Groups",       "sref": "app.ip.groups"},
+        {"text": "Abuse Reports",   "sref": "app.ip.abuse"}
+    ]
+  },
+  {
+    "text": "System",
+    "sref": "#",
+    "icon": "fa fa-wrench",
+    "submenu": [
+        {"text": "Settings",        "sref": "app.system.settings"},
+        {"text": "Logs",            "sref": "app.system.logs"},
+        {"text": "PXE Installs",    "sref": "app.pxe.installs"},
+        {"text": "ISO Manager",     "sref": "app.pxe.isos"}
+    ]
+  },
+  {
+    "text": "Templates",
+    "sref": "#",
+    "icon": "fa fa-file-code-o",
+    "submenu": [
+        {"text": "Emails",          "sref": "app.templates.emails"},
+        {"text": "PXE Scripts",     "sref": "app.templates.pxe"}
+    ]
+  }
+]

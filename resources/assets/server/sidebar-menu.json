@@ -47,9 +47,19 @@
     "icon": "fa fa-wrench",
     "submenu": [
         {"text": "Settings",        "sref": "app.system.settings"},
-        {"text": "Logs",            "sref": "app.system.logs"},
-        {"text": "PXE Installs",    "sref": "app.pxe.installs"},
-        {"text": "ISO Manager",     "sref": "app.pxe.isos"}
+        {"text": "Logs",            "sref": "app.system.logs"}
+    ]
+  },
+  {
+    "text": "OS Reload",
+    "sref": "app.pxe.install.list",
+    "icon": "fa fa-wrench",
+    "submenu": [
+        {"text": "Installs",        "sref": "app.pxe.install.list"},
+        {"text": "Preseeds",        "sref": "app.pxe.preseed.list"},
+        {"text": "Profiles",        "sref": "app.pxe.profile.list"},
+        {"text": "Shell Scripts",   "sref": "app.pxe.shell.list"},
+        {"text": "ISO Manager",     "sref": "app.pxe.iso.list"}
     ]
   },
   {

@@ -7,6 +7,7 @@
       'app.auth',
       'app.dashboard',
       'app.layout',
-      'app.user'
+      'app.user',
+      'app.pxe',
     ]);
 })();

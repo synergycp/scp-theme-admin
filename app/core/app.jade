@@ -11,6 +11,11 @@ aside.offsidebar(ng-include="'app/layout/right-sidebar/right-sidebar.html'")
 section
   // Page content
   .content-wrapper(ui-view="", autoscroll="false", ng-class="app.viewAnimation")
-  
+
+// Alerts section
+.alerts(ng-controller="AlertController as alert")
+  .alert(ng-repeat="message in alert.items", ng-class="'alert-'+message.type")
+    | {{message.text}}
+
 // Page footer
 footer(ng-include="'app/layout/footer/footer.html'")

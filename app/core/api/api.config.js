@@ -21,6 +21,7 @@
     function apiResponseTranslator(data, operation, what, url, response, deferred) {
       var extractedData = data.data || {};
       extractedData.messages = data.messages;
+      console.log(data, response);
 
       if (operation === "getList") {
         var meta = extractedData;

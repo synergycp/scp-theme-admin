@@ -25,7 +25,6 @@
       var message = new Message(msg, type);
 
       Alert.alerts.push(message);
-      console.log(Alert.alerts);
 
       return message;
     }

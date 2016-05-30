@@ -50,7 +50,14 @@
     }
 
     function apiErrorTranslator(response, deferred, responseHandler) {
-      angular.forEach(response.data.messages, displayMessage);
+      if (response.data) {
+        return angular.forEach(response.data.messages, displayMessage);
+      }
+
+      displayMessage({
+        type: 'danger',
+        text: 'Invalid API Response'
+      });
     }
 
     function displayMessages(data, operation, what, url, response, deferred) {

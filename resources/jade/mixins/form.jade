@@ -30,3 +30,16 @@ mixin double-field(label, name, fattrs, sattrs, dualClass)
       if block
         p.help-block
           block
+
+mixin textarea(label, name)
+  .form-group
+    .col-md-3.col-sm-2
+      label.control-label(for="form-"+name)=label
+    .col-md-9.col-sm-10
+      textarea.form-control(
+        type="text"
+        id="form-"+name
+      )&attributes(attributes)
+      if block
+        p.help-block
+          block

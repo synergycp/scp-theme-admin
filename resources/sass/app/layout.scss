@@ -30,6 +30,8 @@ $navbar-hg:                               $navbar-height;
 $boxed-max-width:                         1140px;
 $z-index-main-section:                    111;
 
+@import 'components/alert.scss';
+
 html {
   /* $replace rtl */ direction: ltr;
   height: 100%;

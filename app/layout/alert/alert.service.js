@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.layout')
+    .module('app.layout.alert')
     .service('Alert', AlertService);
 
   /**
@@ -21,16 +21,17 @@
 
     //////////
 
-    function newMessage(msg, type) {
+    function newMessage(type, msg) {
       var message = new Message(msg, type);
 
-      Alert.alerts.push(alert);
+      Alert.alerts.push(message);
+      console.log(Alert.alerts);
 
-      return alert;
+      return message;
     }
 
     function Message(text, type) {
-      this.msg = text;
+      this.text = text;
       this.type = type || 'info';
     }
   }

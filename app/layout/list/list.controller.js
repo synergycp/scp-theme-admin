@@ -20,7 +20,6 @@
     list.checkAll = false;
 
     list.toggleCheckAll = function () {
-      console.log('hmm');
     };
 
 

@@ -3,8 +3,7 @@
 
   angular
     .module('app.core.api')
-    .factory('Api', ApiService)
-    ;
+    .factory('Api', ApiService);
 
   /**
    * Proxy for the Restangular service.
@@ -31,6 +30,7 @@
       Restangular.addErrorInterceptor(apiErrorInterceptor);
       Restangular.addFullRequestInterceptor(apiRequestAddApiKey);
       Restangular.addResponseInterceptor(displayMessages);
+      Restangular.addErrorInterceptor(apiErrorTranslator);
     }
 
     function proxy() {
@@ -38,8 +38,10 @@
     }
 
     function apiErrorInterceptor(response) {
-      switch(response.status) {
-      case 401: sendToLogin(); return false;
+      switch (response.status) {
+      case 401:
+        sendToLogin();
+        return false;
       }
     }
 
@@ -47,10 +49,14 @@
       $state.go('auth.login');
     }
 
-    function displayMessages(data, operation, what, url, response, deferred) {
-        angular.forEach(data.messages, displayMessage);
+    function apiErrorTranslator(response, deferred, responseHandler) {
+      angular.forEach(response.data.messages, displayMessage);
+    }
 
-        return data;
+    function displayMessages(data, operation, what, url, response, deferred) {
+      angular.forEach(data.messages, displayMessage);
+
+      return data;
     }
 
     function displayMessage(message) {

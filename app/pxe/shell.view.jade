@@ -1,0 +1,10 @@
+extends /resources/jade/edit
+
+block title
+  span(
+    data-translate='pxe.shell.form.title.EDIT'
+    data-translate-value-name='{{vm.input.name}}'
+  )
+
+block form
+  div(ng-include="'app/pxe/shell.form.html'")

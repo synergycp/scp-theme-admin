@@ -71,6 +71,28 @@
       }
     }
   },
+  "pxe": {
+    "shell": {
+      "form": {
+        "title": {
+          "ADD": "Create Shell Script",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "description": {
+          "LABEL": "Description",
+          "PLACEHOLDER": ""
+        },
+        "body": {
+          "LABEL": "Body",
+          "PLACEHOLDER": "This will be parsed using Smarty."
+        }
+      }
+    }
+  },
   "action": {
     "EDIT": "edit",
     "DELETE": "delete"

@@ -91,6 +91,29 @@
           "PLACEHOLDER": "This will be parsed using Smarty."
         }
       }
+    },
+    "preseed": {
+      "form": {
+        "title": {
+          "ADD": "Create Preseed",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "description": {
+          "LABEL": "Description",
+          "PLACEHOLDER": ""
+        },
+        "body": {
+          "LABEL": "Body",
+          "PLACEHOLDER": "This will be parsed using Smarty."
+        },
+        "is_installable": {
+          "LABEL": "Installable"
+        }
+      }
     }
   },
   "action": {

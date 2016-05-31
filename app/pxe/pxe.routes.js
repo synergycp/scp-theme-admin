@@ -22,7 +22,24 @@
         url: '',
         title: 'PXE Installs',
         //controller: 'ClientListCtrl as vm',
-        templateUrl: helper.basepath('pxe/install.index.html'),
+        templateUrl: helper.basepath('pxe/install/install.list.html'),
+      })
+      .state('app.pxe.profile', {
+        url: '/profile',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.pxe.profile.list', {
+        url: '',
+        title: 'Profiles',
+        controller: 'ProfileListCtrl as vm',
+        templateUrl: helper.basepath('pxe/profile/profile.list.html'),
+      })
+      .state('app.pxe.profile.view', {
+        url: '/:id',
+        title: 'View Profile',
+        controller: 'ProfileViewCtrl as vm',
+        templateUrl: helper.basepath('pxe/profile/profile.view.html'),
       })
       .state('app.pxe.preseed', {
         url: '/preseed',
@@ -33,13 +50,13 @@
         url: '',
         title: 'Preseeds',
         controller: 'PreseedListCtrl as vm',
-        templateUrl: helper.basepath('pxe/preseed.index.html'),
+        templateUrl: helper.basepath('pxe/preseed/preseed.list.html'),
       })
       .state('app.pxe.preseed.view', {
         url: '/:id',
         title: 'View Preseed',
         controller: 'PreseedViewCtrl as vm',
-        templateUrl: helper.basepath('pxe/preseed.view.html'),
+        templateUrl: helper.basepath('pxe/preseed/preseed.view.html'),
       })
       .state('app.pxe.shell', {
         url: '/shell',
@@ -50,13 +67,13 @@
         url: '',
         title: 'Shell Scripts',
         controller: 'ShellListCtrl as vm',
-        templateUrl: helper.basepath('pxe/shell.index.html'),
+        templateUrl: helper.basepath('pxe/shell/shell.list.html'),
       })
       .state('app.pxe.shell.view', {
         url: '/:id',
         title: 'View Shell Script',
         controller: 'ShellViewCtrl as vm',
-        templateUrl: helper.basepath('pxe/shell.view.html'),
+        templateUrl: helper.basepath('pxe/shell/shell.view.html'),
       })
       ;
   }

@@ -5,12 +5,15 @@ block title
 
 block headings
   th Name
-  th Email
+  th Description
+  th Installable
   th Actions
 
 block columns
   td {{ row.name }}
-  td {{ row.email }} 
+  td {{ row.description }} 
+  td
+    span.fa.fa-check.text-success(ng-if="row.is_installable")
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(ui-sref="app.pxe.preseed.view({id: row.id})")

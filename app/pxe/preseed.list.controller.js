@@ -12,7 +12,7 @@
     var vm = this;
     var withSelected = new WithSelected();
 
-    vm.list = List('preseed');
+    vm.list = List('pxe/preseed');
 
     activate();
 

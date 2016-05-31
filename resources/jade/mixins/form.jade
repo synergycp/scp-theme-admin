@@ -1,7 +1,6 @@
 mixin field(label, name)
   .form-group
-    .col-md-3.col-sm-2
-      label.control-label(for="form-"+name)=label
+    label.control-label.col-md-3.col-sm-2(for="form-"+name)=label
     .col-md-9.col-sm-10
       input.form-control(
         type="text"
@@ -15,8 +14,7 @@ mixin double-field(label, name, fattrs, sattrs, dualClass)
   .form-group.dual-input(
     class=dualClass
   )
-    .col-md-3.col-sm-2
-      label.control-label(for="form-"+name)=label
+    label.control-label.col-md-3.col-sm-2(for="form-"+name)=label
     .col-md-9.col-sm-10
       div.first-input
         input.form-control(
@@ -33,13 +31,25 @@ mixin double-field(label, name, fattrs, sattrs, dualClass)
 
 mixin textarea(label, name)
   .form-group
-    .col-md-3.col-sm-2
-      label.control-label(for="form-"+name)=label
+    label.control-label.col-md-3.col-sm-2(for="form-"+name)=label
     .col-md-9.col-sm-10
       textarea.form-control(
-        type="text"
         id="form-"+name
       )&attributes(attributes)
+      if block
+        p.help-block
+          block
+
+mixin checkbox(label, name)
+  .form-group
+    label.control-label.col-md-3.col-sm-2(for="form-"+name)=label
+    .col-md-9.col-sm-10
+      .checkbox
+        label 
+          input(
+            type="checkbox"
+            id="form-"+name
+          )&attributes(attributes)
       if block
         p.help-block
           block

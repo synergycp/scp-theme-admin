@@ -16,11 +16,10 @@
     var edit = Edit('pxe/preseed/'+$stateParams.id);
 
     vm.input = {
-      email: '',
-      password: '',
-      first: '',
-      last: '',
-      billing_id: ''
+      name: '',
+      description: '',
+      body: '',
+      is_installable: false,
     };
     vm.submit = submit;
 

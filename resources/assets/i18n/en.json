@@ -91,6 +91,57 @@
           "PLACEHOLDER": "This will be parsed using Smarty."
         }
       }
+    },
+    "profile": {
+      "form": {
+        "title": {
+          "ADD": "Create Profile",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "billing_id": {
+          "LABEL": "Billing ID",
+          "PLACEHOLDER": "Optional. Must be unique"
+        },
+        "preseed": {
+          "LABEL": "Preseed"
+        },
+        "iso": {
+          "LABEL": "ISO"
+        },
+        "boot": {
+          "LABEL": "Boot Script"
+        },
+        "client_access": {
+          "LABEL": "Client Access"
+        }
+      }
+    },
+    "preseed": {
+      "form": {
+        "title": {
+          "ADD": "Create Preseed",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "description": {
+          "LABEL": "Description",
+          "PLACEHOLDER": ""
+        },
+        "body": {
+          "LABEL": "Body",
+          "PLACEHOLDER": "This will be parsed using Smarty."
+        },
+        "is_installable": {
+          "LABEL": "Installable"
+        }
+      }
     }
   },
   "action": {

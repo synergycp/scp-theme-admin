@@ -1,0 +1,46 @@
+doctype html
+include /resources/jade/mixins/form
+
++field(
+  "{{ 'pxe.profile.form.name.LABEL' | translate }}",
+  "name"
+)(
+  placeholder="{{ 'pxe.profile.form.name.PLACEHOLDER' | translate }}"
+  ng-model="vm.input.name"
+)
+
++field(
+  "{{ 'pxe.profile.form.billing_id.LABEL' | translate }}",
+  "billing_id"
+)(
+  placeholder="{{ 'pxe.profile.form.billing_id.PLACEHOLDER' | translate }}"
+  ng-model="vm.input.billing_id"
+)
+
++field(
+  "{{ 'pxe.profile.form.preseed.LABEL' | translate }}",
+  "pxe_preseed_id"
+)(
+  ng-model="vm.input.preseed.id"
+)
+
++field(
+  "{{ 'pxe.profile.form.boot.LABEL' | translate }}",
+  "pxe_template_id"
+)(
+  ng-model="vm.input.boot_script.id"
+)
+
++field(
+  "{{ 'pxe.profile.form.iso.LABEL' | translate }}",
+  "iso_id"
+)(
+  ng-model="vm.input.iso.id"
+)
+
++checkbox(
+  "{{ 'pxe.profile.form.client_access.LABEL' | translate }}",
+  "access_client"  
+)(
+  ng-model="vm.input.access_client"
+)

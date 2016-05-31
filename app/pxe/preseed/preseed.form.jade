@@ -1,0 +1,34 @@
+doctype html
+include /resources/jade/mixins/form
+
++field(
+  "{{ 'pxe.preseed.form.name.LABEL' | translate }}",
+  "name"
+)(
+  placeholder="{{ 'pxe.preseed.form.name.PLACEHOLDER' | translate }}"
+  ng-model="vm.input.name"
+)
+
++field(
+  "{{ 'pxe.preseed.form.description.LABEL' | translate }}",
+  "description"
+)(
+  placeholder="{{ 'pxe.preseed.form.description.PLACEHOLDER' | translate }}"
+  ng-model="vm.input.description"
+)
+
++textarea(
+  "{{ 'pxe.preseed.form.body.LABEL' | translate }}",
+  "body"
+)(
+  placeholder="{{ 'pxe.preseed.form.body.PLACEHOLDER' | translate }}"
+  ng-model="vm.input.body"
+  rows="20"
+)
+
++checkbox(
+  "{{ 'pxe.preseed.form.is_installable.LABEL' | translate }}",
+  "is_installable"  
+)(
+  ng-model="vm.input.is_installable"
+)

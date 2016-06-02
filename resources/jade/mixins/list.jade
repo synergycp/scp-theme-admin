@@ -1,0 +1,13 @@
+mixin create-form(title)
+  form(
+    ng-submit="vm.create.submit()"
+  )
+    +panel(title)
+      .panel-body.form-horizontal
+        block
+      .panel-footer.clearfix
+        .pull-right
+          input.btn.btn-info(
+            type="submit"
+            value=title
+          )

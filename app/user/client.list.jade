@@ -1,17 +1,17 @@
 extends /resources/jade/list-checkable
 
 block title
- | Administrators
+ | Clients
 
 block headings
-  th Username
+  th Name
   th Email
   th Actions
 
 block columns
-  td {{ row.username }}
-  td {{ row.email }}
+  td {{ row.name }}
+  td {{ row.email }} 
   td
     .btn-group.btn-group-xs
-      a.btn.btn-default(ui-sref="app.users.admins.view({id: row.id})")
+      a.btn.btn-default(ui-sref="app.users.clients.view({id: row.id})")
         | {{ 'action.EDIT' | translate }}

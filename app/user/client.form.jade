@@ -5,7 +5,7 @@ include /resources/jade/mixins/form
   "{{ 'client.form.email.LABEL' | translate }}",
   "email"
 )(
-  ng-model="vm.input.email"
+  ng-model="clientForm.input.email"
 )
 
 +field(
@@ -13,15 +13,15 @@ include /resources/jade/mixins/form
   "password"
 )(
   placeholder="{{ 'client.form.password.PLACEHOLDER' | translate }}"
-  ng-model="vm.input.password"
+  ng-model="clientForm.input.password"
 )
 
 +double-field(
   "{{ 'client.form.name.LABEL' | translate }}",
   "name", {
-    "ng-model": "vm.input.first"
+    "ng-model": "clientForm.input.first"
   }, {
-    "ng-model": "vm.input.last"
+    "ng-model": "clientForm.input.last"
   }
 )
 
@@ -29,5 +29,5 @@ include /resources/jade/mixins/form
   "{{ 'client.form.billing_id.LABEL' | translate }}",
   "billing_id"
 )(
-  ng-model="vm.input.billing_id"
+  ng-model="clientForm.input.billing_id"
 )

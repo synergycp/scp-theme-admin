@@ -27,6 +27,7 @@
     list.pages = pages;
     list.bulk = bulk;
     list.delete = deleteItems;
+    list.create = create;
 
     event.bindTo(list);
 
@@ -94,19 +95,22 @@
       return promise;
     }
 
-    function storeItems(response) {
-      var meta = response.meta;
+    function create(item) {
+      var promise = $api.post(item);
 
+      promise.then(load, load);
+
+      return promise;
+    }
+
+    function storeItems(response) {
       list.items.length = 0;
-      _(response).forEach(function (item) {
+      _(response).forEach(function(item) {
         item.checked = false;
-      }).forEach(function (item) {
         list.items.push(item);
       });
-      list.pages.setMax(meta.last_page);
-      list.pages.current = meta.current_page;
-      list.pages.per_page = meta.per_page;
-      list.pages.total = parseInt(meta.total);
+
+      list.pages.fromMeta(response.meta);
     }
   }
 })();

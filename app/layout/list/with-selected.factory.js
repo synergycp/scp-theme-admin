@@ -15,6 +15,7 @@
   function WithSelected(event) {
     var bulk = this;
 
+    bulk.hasOptions = false;
     bulk.options = {};
     bulk.items = [];
     bulk.add = add;
@@ -40,6 +41,7 @@
           event.fire('apply');
         }
       };
+      bulk.hasOptions = true;
     }
 
     function setSelectedResolver(resolver) {

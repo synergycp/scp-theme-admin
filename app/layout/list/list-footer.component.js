@@ -7,8 +7,12 @@
       require: {
         list: '^list'
       },
+      controller: 'ListFooterCtrl as footer',
+      scope: {},
+      bindings: {},
       transclude: true,
       replace: true,
       templateUrl: 'app/layout/list/list-footer.html'
-    });
+    })
+    ;
 })();

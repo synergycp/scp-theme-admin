@@ -1,4 +1,6 @@
-list
+list(
+  list="vm.list"
+)
   list-heading
     block title
   table.table.table-bordered.table-striped.table-condensed.table-hover.table-checkable
@@ -7,7 +9,10 @@ list
         block headings-pre
         block headings
     tbody
-      tr(ng-repeat="row in vm.list.items")
+      tr(
+        ng-repeat="row in vm.list.items track by row.id"
+        ng-click="row.checked = !row.checked"
+      )
         block columns-pre
         block columns
   list-footer

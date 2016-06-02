@@ -146,6 +146,7 @@
   },
   "action": {
     "EDIT": "edit",
+    "BULK": "With Selected:",
     "DELETE": "delete"
   }
 }

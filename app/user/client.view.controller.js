@@ -15,13 +15,7 @@
     var vm = this;
     var edit = Edit('client/'+$stateParams.id);
 
-    vm.input = {
-      email: '',
-      password: '',
-      first: '',
-      last: '',
-      billing_id: ''
-    };
+    vm.input = {};
     vm.submit = submit;
 
     activate();

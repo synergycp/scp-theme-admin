@@ -1,17 +1,17 @@
-extends /resources/jade/list-checkable
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
 
-block title
- | Clients
+block list
+  include client.list.jade
 
-block headings
-  th Name
-  th Email
-  th Actions
+block bottom-left
+  +create-form("Create Client")
+    client-form(
+      input="vm.create.input"
+    )
 
-block columns
-  td {{ row.name }}
-  td {{ row.email }} 
-  td
-    .btn-group.btn-group-xs
-      a.btn.btn-default(ui-sref="app.users.clients.view({id: row.id})")
-        | {{ 'action.EDIT' | translate }}
+block bottom-right
+  logs(
+    title="Client Logs"
+    filter="vm.logs.filter"
+  )

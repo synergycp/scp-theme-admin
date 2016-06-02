@@ -10,6 +10,7 @@
     var vm = this;
 
     vm.list = List('admin');
+    vm.list.bulk.add('Delete', vm.list.delete);
 
     activate();
 

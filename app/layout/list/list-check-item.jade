@@ -1,0 +1,6 @@
+input(
+  type="checkbox"
+  ng-model="check.checked"
+  ng-change="check.listCtrl.checkAllToggled()"
+  ng-click="check.checked = !check.checked;event.stopPropagation()"
+)

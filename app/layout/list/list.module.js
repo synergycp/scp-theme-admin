@@ -3,6 +3,6 @@
 
   angular
     .module('app.layout.list', [
-
+      'app.layout.pages',
     ]);
 })();

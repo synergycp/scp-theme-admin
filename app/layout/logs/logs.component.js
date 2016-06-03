@@ -22,7 +22,7 @@
    */
   function LogListCtrl(Loader, Api, Pages) {
     var logs = this;
-    var $api = Api.all('logs');
+    var $api = Api.all('log');
 
     logs.items = [];
     logs.filter = logs.filter || {};

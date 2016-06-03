@@ -1,7 +1,18 @@
 include /resources/jade/mixins/panel
 
 +panel("{{ logs.title }}")
-  | logs  
+  table.table.table-bordered.table-striped.table-condensed.table-hover
+    thead
+      tr
+        th Date
+        th User
+        th Description
+    tbody
+      tr(ng-repeat="log in logs.items")
+        td
+          a(ng-sref="app.system.log.view({id: log.id})"){{ log.created_at }}
+        td {{ log.admin.name }}
+        td {{ log.desc }}
   .panel-footer.clearfix
     .pull-right
       | pagination

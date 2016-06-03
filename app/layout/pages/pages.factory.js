@@ -21,6 +21,7 @@
 
     pages.set = setPage;
     pages.setMax = setMax;
+    pages.fromMeta = fromMeta;
 
     event.bindTo(pages);
 
@@ -53,6 +54,13 @@
         Math.max(pages.current, pages.min),
         pages.max
       ));
+    }
+
+    function fromMeta(meta) {
+      pages.setMax(meta.last_page);
+      pages.current = meta.current_page;
+      pages.per_page = meta.per_page;
+      pages.total = parseInt(meta.total);
     }
   }
 

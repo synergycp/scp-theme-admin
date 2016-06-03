@@ -10,9 +10,9 @@
    */
   function ProfileListCtrl(List) {
     var vm = this;
-    var withSelected = new WithSelected();
 
     vm.list = List('pxe/profile');
+    vm.list.bulk.add('Delete', vm.list.delete);
 
     activate();
 
@@ -20,13 +20,6 @@
 
     function activate() {
       vm.list.load();
-    }
-
-    function WithSelected() {
-      var withSelected = this;
-      withSelected.delete = function () {
-
-      };
     }
   }
 })();

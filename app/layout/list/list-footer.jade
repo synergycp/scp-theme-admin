@@ -1,7 +1,8 @@
-.panel-footer(ng-if="(footer.pages.max > 1) || !$.isEmptyObject(footer.bulk.options)")
+.panel-footer(ng-if="(footer.pages.max > 1) || footer.bulk.hasOptions")
   .row
     div.col-md-4
       with-selected(
+        ng-if="footer.bulk.hasOptions"
         options="footer.bulk.options"
       )
     pagination.col-md-8.text-right(

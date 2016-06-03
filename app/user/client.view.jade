@@ -7,4 +7,6 @@ block title
   )
 
 block form
-  div(ng-include="'app/user/client.form.html'")
+  client-form(
+    input="vm.input"
+  )

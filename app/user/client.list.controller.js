@@ -12,9 +12,18 @@
     var vm = this;
 
     vm.list = List('client');
+    vm.list.bulk.add('Delete', vm.list.delete);
 
-    var bulk = vm.list.bulk;
-    bulk.add('Delete', vm.list.delete);
+    vm.create = {
+      input: {},
+      submit: create,
+    };
+
+    vm.logs = {
+      filter: {
+        type: 'client',
+      },
+    };
 
     activate();
 
@@ -22,6 +31,10 @@
 
     function activate() {
       vm.list.load();
+    }
+
+    function create() {
+      vm.list.create(vm.create.input);
     }
   }
 })();

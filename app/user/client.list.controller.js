@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        type: 'client',
+        target_type: 'client',
       },
     };
 

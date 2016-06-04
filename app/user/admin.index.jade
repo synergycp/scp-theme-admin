@@ -1,17 +1,17 @@
-extends /resources/jade/list-checkable
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
 
-block title
- | Administrators
+block list
+  include admin.list.jade
 
-block headings
-  th Username
-  th Email
-  th Actions
+block bottom-left
+  +create-form("Create Administrator")
+    admin-form(
+      input="vm.create.input"
+    )
 
-block columns
-  td {{ row.username }}
-  td {{ row.email }}
-  td
-    .btn-group.btn-group-xs
-      a.btn.btn-default(ui-sref="app.users.admins.view({id: row.id})")
-        | {{ 'action.EDIT' | translate }}
+block bottom-right
+  logs(
+    title="Administrator Logs"
+    filter="vm.logs.filter"
+  )

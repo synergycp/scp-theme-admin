@@ -1,0 +1,10 @@
+.sort
+  a.sort-asc.glyphicon.glyphicon-chevron-up(
+    ng-class="sortCtrl.query[sortCtrl.col] === sortCtrl.ASCEND ? '' : 'text-muted'"
+    ng-click="sortCtrl.sort(sortCtrl.ASCEND, $event)"
+  )
+  br
+  a.sort-desc.glyphicon.glyphicon-chevron-down(
+    ng-class="sortCtrl.query[sortCtrl.col] === sortCtrl.DESCEND ? '' : 'text-muted'"
+    ng-click="sortCtrl.sort(sortCtrl.DESCEND, $event)"
+  )

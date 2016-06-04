@@ -68,7 +68,7 @@
 
     function loaded() {
       list.loading = false;
-      list.fire('change', list.items);
+      event.fire('change', list.items);
     }
 
     function loading() {

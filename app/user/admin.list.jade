@@ -1,0 +1,19 @@
+extends /resources/jade/list-checkable
+
+block title
+  | Administrators
+
+block headings
+  th.relative Username
+    sort(col="username")
+  th.relative Email
+    sort(col="email")
+  th Actions
+
+block columns
+  td {{ row.username }}
+  td {{ row.email }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.users.admins.view({id: row.id})")
+        | {{ 'action.EDIT' | translate }}

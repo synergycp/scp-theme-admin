@@ -27,7 +27,7 @@
 
     function submit() {
       if (!bulk.selected) {
-        Alert.warning('Please select a bulk action');
+        return Alert.warning('Please select a bulk action');
       }
 
       if (bulk.onSubmit) {

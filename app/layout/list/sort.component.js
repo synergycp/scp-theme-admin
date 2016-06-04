@@ -5,14 +5,13 @@
     .module('app.user')
     .component('sort', {
       require: {
-        list: '^list',
+        listCtrl: '^list',
       },
       bindings: {
         col: '@',
-        mode: '=',
       },
       controller: 'SortCtrl as sortCtrl',
-      templateUrl: 'app/layout/list/sort.html'
+      templateUrl: 'app/layout/list/sort.html',
     })
     .controller('SortCtrl', SortCtrl)
     ;
@@ -22,28 +21,31 @@
 
     EventEmitter().bindTo(sortCtrl);
 
-    sortCtrl.$onInit = init;
-    sortCtrl.asc = asc;
-    sortCtrl.desc = desc;
     sortCtrl.ASCEND = 'asc';
     sortCtrl.DESCEND = 'desc';
-    sortCtrl.on('change', function (mode) {
-      sortCtrl.list.sort(sortCtrl.col, mode);
-    });
+
+    sortCtrl.$onInit = init;
+    sortCtrl.sort = sort;
 
     //////////
 
     function init() {
+      sortCtrl.query = sortCtrl.listCtrl.list.sortQuery;
     }
 
-    function asc() {
-      sortCtrl.mode = sortCtrl.ASCEND;
-      sortCtrl.fire('change', sortCtrl.mode);
+    function sort(mode, $event) {
+      var list = sortCtrl.listCtrl.list;
+
+      if (shouldClear($event)) {
+        list.clearSort();
+      }
+
+      list.sort(sortCtrl.col, mode);
+      sortCtrl.fire('change', mode);
     }
 
-    function desc() {
-      sortCtrl.mode = sortCtrl.DESCEND;
-      sortCtrl.fire('change', sortCtrl.mode);
+    function shouldClear($event) {
+      return !($event.ctrlKey || $event.shiftKey);
     }
   }
 })();

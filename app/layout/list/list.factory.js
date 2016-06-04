@@ -10,24 +10,27 @@
    *
    * @ngInject
    */
-  function ListFactory(Api, Pages, WithSelected, EventEmitter, _) {
+  function ListFactory(Api, Pages, WithSelected, EventEmitter, Loader, _) {
     return function (path) {
-      return new List(Api.all(path), Pages(), WithSelected(), EventEmitter(), _);
+      return new List(Api.all(path), Pages(), WithSelected(), EventEmitter(), Loader(), _);
     };
   }
 
-  function List(api, pages, bulk, event, _) {
+  function List(api, pages, bulk, event, loader, _) {
     var list = this;
     var $api = api;
 
-    list.loading = false;
     list.items = [];
-    list.load = load;
+    list.sortQuery = {};
+    list.load = _.debounce(forceLoad, 5);
+    list.loader = loader;
 
     list.pages = pages;
     list.bulk = bulk;
     list.delete = deleteItems;
     list.create = create;
+    list.sort = sort;
+    list.clearSort = clearSort;
 
     event.bindTo(list);
 
@@ -36,7 +39,7 @@
     ///////////
 
     function activate() {
-      list.pages.on('change', load);
+      list.pages.on('change', list.load);
 
       setBulkEvents();
     }
@@ -46,6 +49,28 @@
       list.bulk.on('apply', resetSelectedItems);
     }
 
+    function sort(key, val) {
+      if (_.isObject(key)) {
+        _.assign(list.sortQuery, key);
+      } else {
+        list.sortQuery[key] = val;
+      }
+
+      list.load();
+
+      return list;
+    }
+
+    function clearSort() {
+      _.each(list.sortQuery, function (value, key) {
+        delete list.sortQuery[key];
+      });
+
+      list.load();
+
+      return list;
+    }
+
     function getSelectedItems() {
       return _.filter(list.items, {
         checked: true,
@@ -53,32 +78,21 @@
     }
 
     function resetSelectedItems() {
-      return _.each(list.items, function (item) {
-        item.checked = false;
+      return _.each(list.items, {
+        checked: false,
       });
     }
 
-    function load() {
-      loading();
-
-      return getItems()
-        .then(storeItems)
-        .then(loaded, loaded);
-    }
-
-    function loaded() {
-      list.loading = false;
-      event.fire('change', list.items);
-    }
-
-    function loading() {
-      list.loading = true;
+    function forceLoad() {
+      return list.loader.during(
+        getItems()
+          .then(storeItems)
+          .then(fireChangeEvent)
+      );
     }
 
     function getItems() {
-      var query = {
-        page: list.pages.current,
-      };
+      var query = buildQuery();
 
       return $api.getList(query);
     }
@@ -86,21 +100,32 @@
     function deleteItems(items) {
       var ids = _.map(items, 'id').join(',');
 
-      loading();
+      return $api.all(ids)
+        .remove()
+        .then(list.load)
+        ;
+    }
 
-      var promise = $api.all(ids).remove();
+    function buildQuery() {
+      return _.assign({}, buildSortQuery(), {
+        page: list.pages.current,
+      });
+    }
 
-      promise.then(load, load);
+    function buildSortQuery() {
+      var sortQuery = {};
 
-      return promise;
+      _.each(list.sortQuery, function (direction, col) {
+        sortQuery['sort['+col+']'] = direction;
+      });
+
+      return sortQuery;
     }
 
     function create(item) {
-      var promise = $api.post(item);
-
-      promise.then(load, load);
-
-      return promise;
+      return $api.post(item)
+        .then(list.load)
+        ;
     }
 
     function storeItems(response) {
@@ -111,6 +136,10 @@
       });
 
       list.pages.fromMeta(response.meta);
+    }
+
+    function fireChangeEvent() {
+      event.fire('change', list.items);
     }
   }
 })();

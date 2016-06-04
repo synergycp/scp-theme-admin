@@ -9,7 +9,6 @@
         list: '=',
       },
       scope: {},
-      replace: true,
       templateUrl: 'app/layout/list/list.html',
       controller: 'ListCtrl as listCtrl',
     });

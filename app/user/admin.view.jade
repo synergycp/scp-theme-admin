@@ -1,0 +1,12 @@
+extends /resources/jade/edit
+
+block title
+  span(
+    data-translate='admin.form.title.EDIT'
+    data-translate-value-email='{{vm.input.email}}'
+  )
+
+block form
+  admin-form(
+    input="vm.input"
+  )

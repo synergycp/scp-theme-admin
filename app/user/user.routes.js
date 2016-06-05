@@ -21,14 +21,14 @@
       .state('app.users.clients.list', {
         url: '',
         title: 'Clients',
-        templateUrl: helper.basepath('user/client.index.html'),
+        templateUrl: helper.basepath('user/client/client.index.html'),
         controller: 'ClientListCtrl as vm'
       })
       .state('app.users.clients.view', {
         url: '/:id',
         title: 'View Client',
         controller: 'ClientViewCtrl as vm',
-        templateUrl: helper.basepath('user/client.view.html'),
+        templateUrl: helper.basepath('user/client/client.view.html'),
       })
       .state('app.users.admins', {
         url: '/admins',
@@ -39,13 +39,13 @@
         url: '',
         title: 'Administrators',
         controller: 'AdminListCtrl as vm',
-        templateUrl: helper.basepath('user/admin.index.html'),
+        templateUrl: helper.basepath('user/admin/admin.index.html'),
       })
       .state('app.users.admins.view', {
         url: '/:id',
         title: 'View Administrator',
         controller: 'AdminViewCtrl as vm',
-        templateUrl: helper.basepath('user/admin.view.html'),
+        templateUrl: helper.basepath('user/admin/admin.view.html'),
       })
       ;
   }

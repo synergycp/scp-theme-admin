@@ -2,16 +2,15 @@ extends /resources/jade/list-page
 include /resources/jade/mixins/list
 
 block list
-  include admin.list.jade
+  include profile.list.jade
 
 block bottom-left
-  +create-form("Create Administrator")
-    admin-form(
-      input="vm.create.input"
-    )
+  +create-form("Create PXE Profile")
+    profile-form(input="vm.create.input")
 
 block bottom-right
   logs(
-    title="Administrator Logs"
+    title="PXE Profile Logs"
     filter="vm.logs.filter"
+    listen-to="vm.list"
   )

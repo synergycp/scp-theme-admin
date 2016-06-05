@@ -19,7 +19,7 @@
       },
       controller: 'ClientFormCtrl as clientForm',
       transclude: true,
-      templateUrl: 'app/user/client.form.html'
+      templateUrl: 'app/user/client/client.form.html'
     })
     .controller('ClientFormCtrl', ClientFormCtrl)
     ;

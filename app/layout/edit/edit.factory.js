@@ -10,29 +10,39 @@
    *
    * @ngInject
    */
-  function EditFactory (Api) {
+  function EditFactory (Api, Loader, EventEmitter) {
     return function (url) {
-      return new Edit(url, Api);
+      return new Edit(Api.one(url), Loader(), EventEmitter());
     };
   }
 
-  function Edit(url, Api) {
+  function Edit($api, loader, event) {
+    // Private variables
     var edit = this;
-    var $api = Api.one(url);
 
+    // Public variables
+    edit.loader = loader;
+
+    // Public methods
     edit.patch = patch;
     edit.getCurrent = getCurrent;
+    event.bindTo(edit);
 
-    ///////////
-
+    // Private methods
     function patch(data) {
-      return $api.patch(data);
+      return edit.loader.during(
+        $api.patch(data).then(fireChangeEvent)
+      );
+    }
+
+    function fireChangeEvent() {
+      event.fire('change');
     }
 
     function getCurrent(obj) {
-      $api.get()
-        .then(saveCurrent)
-        ;
+      edit.loader.during(
+        $api.get().then(saveCurrent)
+      );
 
       function saveCurrent(response) {
         angular.forEach(obj, function (value, key) {

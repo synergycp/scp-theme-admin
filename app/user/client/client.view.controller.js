@@ -11,23 +11,29 @@
    *
    * @ngInject
    */
-  function ClientViewCtrl(Edit, $stateParams) {
+  function ClientViewCtrl(Edit, EventEmitter, $stateParams) {
     var vm = this;
-    var edit = Edit('client/'+$stateParams.id);
 
+    vm.edit = Edit('client/'+$stateParams.id);
     vm.input = {};
     vm.submit = submit;
+    vm.logs = {
+      filter: {
+        target_type: 'client',
+        target_id: $stateParams.id,
+      },
+    };
 
     activate();
 
     //////////
 
     function activate() {
-      edit.getCurrent(vm.input);
+      vm.edit.getCurrent(vm.input);
     }
 
     function submit() {
-      edit.patch(getInputs());
+      vm.edit.patch(getInputs());
     }
 
     function getInputs() {

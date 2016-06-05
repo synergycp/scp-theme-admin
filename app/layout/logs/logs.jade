@@ -1,6 +1,9 @@
 include /resources/jade/mixins/panel
 
-.relative(ng-class="logs.loader.active ? 'loading' : ''")
+.relative(
+  ng-if="logs.items.length"
+  ng-class="logs.loader.active ? 'loading' : ''"
+)
   .loader
   +panel("{{ logs.title }}")
     table.table.table-bordered.table-striped.table-condensed.table-hover

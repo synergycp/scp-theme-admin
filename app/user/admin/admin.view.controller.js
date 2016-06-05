@@ -11,23 +11,29 @@
    *
    * @ngInject
    */
-  function AdminViewCtrl(Edit, $stateParams) {
+  function AdminViewCtrl(Edit, EventEmitter, $stateParams) {
     var vm = this;
-    var edit = Edit('admin/'+$stateParams.id);
 
+    vm.edit = Edit('admin/'+$stateParams.id);
     vm.input = {};
     vm.submit = submit;
+    vm.logs = {
+      filter: {
+        target_type: 'admin',
+        target_id: $stateParams.id,
+      },
+    };
 
     activate();
 
     //////////
 
     function activate() {
-      edit.getCurrent(vm.input);
+      vm.edit.getCurrent(vm.input);
     }
 
     function submit() {
-      edit.patch(getInputs());
+      vm.edit.patch(getInputs());
     }
 
     function getInputs() {

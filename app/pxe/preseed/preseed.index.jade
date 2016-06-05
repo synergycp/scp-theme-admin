@@ -1,0 +1,16 @@
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
+
+block list
+  include preseed.list.jade
+
+block bottom-left
+  +create-form("Create PXE Preseed")
+    preseed-form(input="vm.create.input")
+
+block bottom-right
+  logs(
+    title="PXE Preseed Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

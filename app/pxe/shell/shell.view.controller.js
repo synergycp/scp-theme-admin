@@ -13,13 +13,9 @@
    */
   function ShellViewCtrl(Edit, $stateParams) {
     var vm = this;
-    var edit = Edit('pxe/shell/'+$stateParams.id);
+    vm.edit = Edit('pxe/shell/'+$stateParams.id);
 
-    vm.input = {
-      name: '',
-      description: '',
-      body: '',  
-    };
+    vm.input = {};
     vm.submit = submit;
 
     activate();
@@ -27,11 +23,11 @@
     //////////
 
     function activate() {
-      edit.getCurrent(vm.input);
+      vm.edit.getCurrent(vm.input);
     }
 
     function submit() {
-      edit.patch(getInputs());
+      vm.edit.patch(getInputs());
     }
 
     function getInputs() {

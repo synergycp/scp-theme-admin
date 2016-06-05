@@ -1,13 +1,17 @@
 ul.pagination(ng-class="pagination.pages.max > pagination.pages.min ? '' : 'hidden'")
-  li(ng-class="pagination.pages.current === pagination.pages.min ? 'disabled' : ''")
+  li(ng-if="pagination.pages.min < pagination.visible[0]")
     a(ng-click="pagination.pages.set(pagination.pages.min)")
-      | &laquo;
+      | {{ pagination.pages.min }}
+  li(ng-if="pagination.pages.min + 1 < pagination.visible[0]")
+    a.no-hover ...
   li(
     ng-repeat="page in pagination.visible"
     ng-class="page === pagination.pages.current ? 'active' : ''"
   )
     a(ng-click="pagination.pages.set(page)")
       | {{ page }}
-  li(ng-class="pagination.pages.current === pagination.pages.max ? 'disabled' : ''")
+  li(ng-if="pagination.pages.max-1 > pagination.visible[pagination.visible.length-1]")
+    a.no-hover ...
+  li(ng-if="pagination.pages.max > pagination.visible[pagination.visible.length-1]")
     a(ng-click="pagination.pages.set(pagination.pages.max)")
-      | &raquo;
+      | {{ pagination.pages.max }}

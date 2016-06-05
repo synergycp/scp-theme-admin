@@ -20,7 +20,7 @@
       },
       controller: 'AdminFormCtrl as adminForm',
       transclude: true,
-      templateUrl: 'app/user/admin.form.html'
+      templateUrl: 'app/user/admin/admin.form.html'
     })
     .controller('AdminFormCtrl', AdminFormCtrl)
     ;

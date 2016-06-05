@@ -3,14 +3,17 @@ doctype html
 .row
   .col-md-6
     form.form-horizontal(ng-submit="vm.submit()")
-      .panel.panel-default
+      .panel.panel-default.relative(
+        ng-class="vm.edit.loader.class"
+      )
+        .loader
         .panel-heading
           h3.panel-title
             block title
-        
+
         .panel-body
           block form
-        
+
         .panel-footer.clearfix
           .pull-right
             input(
@@ -20,9 +23,9 @@ doctype html
             )
 
   .col-md-6
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title Logs
-        
-      .panel-body
-        
+    block right-side
+      logs(
+        title="Logs"
+        filter="vm.logs.filter"
+        listen-to="vm.edit"
+      )

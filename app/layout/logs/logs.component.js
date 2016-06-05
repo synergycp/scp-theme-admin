@@ -9,6 +9,7 @@
       bindings: {
         title: '@',
         filter: '=',
+        listenTo: '=',
       },
       controller: 'LogListCtrl as logs',
       transclude: true,
@@ -37,6 +38,10 @@
     function init() {
       logs.refresh();
       logs.pages.on('change', logs.refresh);
+
+      if (logs.listenTo) {
+        logs.listenTo.on('change', logs.refresh);
+      }
     }
 
     function refresh() {

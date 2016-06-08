@@ -124,6 +124,45 @@
         }
       }
     },
+    "boot": {
+      "form": {
+        "title": {
+          "ADD": "Create Boot Script",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "body": {
+          "LABEL": "Body",
+          "PLACEHOLDER": "This will be parsed using Smarty."
+        }
+      }
+    },
+    "iso": {
+      "form": {
+        "title": {
+          "ADD": "Create ISO",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "folder": {
+          "LABEL": "Folder",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "url": {
+          "LABEL": "URL",
+          "PLACEHOLDER": "e.g. http://example.com/win2008r2.iso"
+        }
+      },
+      "logs": {
+        "TITLE": "ISO Logs"
+      }
+    },
     "profile": {
       "form": {
         "title": {
@@ -180,7 +219,7 @@
     "entity": {
       "form": {
         "title": {
-          "EDIT": "Edit {{ name }}",
+          "EDIT": "Edit {{ nickname }}",
           "CREATE": "Create IP Entity"
         },
         "nickname": {
@@ -237,11 +276,34 @@
           }
         }
       }
+    },
+    "group": {
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ name }}",
+          "CREATE": "Create IP Group"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be alphanumeric and unique"
+        },
+        "billing_id": {
+          "LABEL": "Billing ID",
+          "PLACEHOLDER": "Optional. Must be alphanumeric and unique"
+        },
+        "options": {
+          "LABEL": "Options",
+          "reserved": {
+            "LABEL": "Reserved"
+          }
+        }
+      }
     }
   },
   "action": {
     "EDIT": "edit",
     "BULK": "With Selected:",
+    "VIEW": "view",
     "DELETE": "delete"
   }
 }

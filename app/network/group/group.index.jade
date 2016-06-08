@@ -5,8 +5,8 @@ block list
   include group.list.jade
 
 block bottom-left
-  +create-form("Create Group")
-    group-form(input="vm.create.input")
+  +create-form("{{ 'network.group.form.title.CREATE' | translate }}")
+    group-form(form="vm.create")
 
 block bottom-right
   logs(

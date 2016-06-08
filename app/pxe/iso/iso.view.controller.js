@@ -2,24 +2,24 @@
   'use strict';
 
   angular
-    .module('app.user')
-    .controller('AdminViewCtrl', AdminViewCtrl)
+    .module('app.pxe')
+    .controller('IsoViewCtrl', IsoViewCtrl)
     ;
 
   /**
-   * AdminView Controller
+   * View Iso Controller
    *
    * @ngInject
    */
-  function AdminViewCtrl(Edit, EventEmitter, $stateParams) {
+  function IsoViewCtrl(Edit, $stateParams) {
     var vm = this;
 
-    vm.edit = Edit('admin/'+$stateParams.id);
-    vm.edit.input = {};
+    vm.edit = Edit('pxe/iso/'+$stateParams.id);
     vm.edit.submit = submit;
+
     vm.logs = {
       filter: {
-        target_type: 'admin',
+        target_type: 'iso',
         target_id: $stateParams.id,
       },
     };
@@ -29,7 +29,7 @@
     //////////
 
     function activate() {
-      vm.edit.getCurrent(vm.edit.input);
+      vm.edit.getCurrent();
     }
 
     function submit() {

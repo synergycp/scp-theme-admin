@@ -1,0 +1,15 @@
+extends /resources/jade/list-checkable
+
+block title
+  | Boot Scripts
+
+block headings
+  th Name
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.pxe.boot.view({id: row.id})")
+        | {{ 'action.EDIT' | translate }}

@@ -2,27 +2,26 @@
   'use strict';
 
   angular
-    .module('app.network')
-    .controller('EntityListCtrl', EntityListCtrl);
+    .module('app.pxe')
+    .controller('BootListCtrl', BootListCtrl);
 
   /**
    * @ngInject
    */
-  function EntityListCtrl(List, $stateParams) {
+  function BootListCtrl(List) {
     var vm = this;
 
-    vm.list = List('entity').filter({
-      group: $stateParams.group,
-    });
+    vm.list = List('pxe/template');
     vm.list.bulk.add('Delete', vm.list.delete);
 
     vm.create = {
+      input: {},
       submit: create,
     };
 
     vm.logs = {
       filter: {
-        target_type: 'entity',
+        target_type: 'pxe-boot-script',
       },
     };
 
@@ -35,7 +34,7 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.input);
     }
   }
 })();

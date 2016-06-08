@@ -3,10 +3,8 @@ extends /resources/jade/edit
 block title
   span(
     data-translate='admin.form.title.EDIT'
-    data-translate-value-username='{{vm.input.username}}'
+    data-translate-value-username='{{vm.edit.input.username}}'
   )
 
 block form
-  admin-form(
-    input="vm.input"
-  )
+  admin-form(form="vm.edit")

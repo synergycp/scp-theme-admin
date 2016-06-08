@@ -2,15 +2,15 @@ extends /resources/jade/list-page
 include /resources/jade/mixins/list
 
 block list
-  include profile.list.jade
+  include boot.list.jade
 
 block bottom-left
-  +create-form("Create PXE Profile")
-    profile-form(form="vm.create")
+  +create-form("Create PXE Boot Script")
+    boot-form(form="vm.create")
 
 block bottom-right
   logs(
-    title="PXE Profile Logs"
+    title="PXE Boot Script Logs"
     filter="vm.logs.filter"
     listen-to="vm.list"
   )

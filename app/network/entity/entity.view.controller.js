@@ -15,8 +15,8 @@
     var vm = this;
 
     vm.edit = Edit('entity/'+$stateParams.id);
-    vm.input = {};
-    vm.submit = submit;
+    vm.edit.submit = submit;
+
     vm.logs = {
       filter: {
         target_type: 'entity',
@@ -29,15 +29,11 @@
     //////////
 
     function activate() {
-      vm.edit.getCurrent(vm.input);
+      vm.edit.getCurrent();
     }
 
     function submit() {
-      vm.edit.patch(getInputs());
-    }
-
-    function getInputs() {
-      return vm.input;
+      vm.edit.patch(vm.edit.getData());
     }
   }
 })();

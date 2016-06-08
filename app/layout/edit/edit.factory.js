@@ -22,6 +22,7 @@
 
     // Public variables
     edit.loader = loader;
+    edit.input = {};
 
     // Public methods
     edit.patch = patch;
@@ -31,30 +32,34 @@
     // Private methods
     function patch(data) {
       return edit.loader.during(
-        $api.patch(data).then(fireChangeEvent)
+        $api.patch(data)
+          .then(saveCurrent)
+          .then(fireChangeEvent)
       );
     }
 
-    function fireChangeEvent() {
-      event.fire('change');
-    }
-
     function getCurrent(obj) {
+      edit.input = obj || edit.input;
+
       return edit.loader.during(
         $api.get()
           .then(saveCurrent)
           .then(fireLoadEvent)
       );
+    }
 
-      function saveCurrent(response) {
-        angular.forEach(obj, function (value, key) {
-          obj[key] = response[key];
-        });
-      }
+    function saveCurrent(response) {
+      _.forEach(edit.input, function (value, key) {
+        edit.input[key] = response[key];
+      });
     }
 
     function fireLoadEvent() {
       event.fire('load');
+    }
+
+    function fireChangeEvent() {
+      event.fire('change');
     }
   }
 })();

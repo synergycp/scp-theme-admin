@@ -15,7 +15,7 @@
       require: {
       },
       bindings: {
-        input: '=',
+        form: '=',
       },
       controller: 'ClientFormCtrl as clientForm',
       transclude: true,
@@ -32,7 +32,13 @@
     //////////
 
     function init() {
+      clientForm.form.getData = getData;
+      clientForm.input = clientForm.form.input = clientForm.form.input || {};
       _.assign(clientForm.input, INPUTS);
+    }
+
+    function getData() {
+      return _.clone(clientForm.input);
     }
   }
 })();

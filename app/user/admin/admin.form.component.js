@@ -16,7 +16,7 @@
       require: {
       },
       bindings: {
-        input: '=',
+        form: '=',
       },
       controller: 'AdminFormCtrl as adminForm',
       transclude: true,
@@ -33,7 +33,13 @@
     //////////
 
     function init() {
+      adminForm.form.getData = getData;
+      adminForm.input = adminForm.form.input = adminForm.form.input || {};
       _.assign(adminForm.input, INPUTS);
+    }
+
+    function getData() {
+      return _.clone(adminForm.input);
     }
   }
 })();

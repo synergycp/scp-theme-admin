@@ -3,9 +3,8 @@
 
   var INPUTS = {
     name: '',
-    description: '',
-    body: '',
-    is_installable: false,
+    billing_id: '',
+    reserved: false,
   };
 
   angular
@@ -14,7 +13,7 @@
       require: {
       },
       bindings: {
-        input: '=',
+        form: '=',
       },
       controller: 'GroupFormCtrl as groupForm',
       transclude: true,
@@ -31,7 +30,13 @@
     //////////
 
     function init() {
+      groupForm.form.getData = getData;
+      groupForm.input = groupForm.form.input = groupForm.form.input || {};
       _.assign(groupForm.input, INPUTS);
+    }
+
+    function getData() {
+      return _.clone(groupForm.input);
     }
   }
 })();

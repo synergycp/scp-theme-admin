@@ -13,7 +13,7 @@
       require: {
       },
       bindings: {
-        input: '=',
+        form: '=',
       },
       controller: 'ShellFormCtrl as shellForm',
       transclude: true,
@@ -30,7 +30,13 @@
     //////////
 
     function init() {
+      shellForm.form.getData = getData;
+      shellForm.input = shellForm.form.input = shellForm.form.input || {};
       _.assign(shellForm.input, INPUTS);
+    }
+
+    function getData() {
+      return _.clone(shellForm.input);
     }
   }
 })();

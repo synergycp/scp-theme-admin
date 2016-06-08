@@ -15,8 +15,8 @@
     var vm = this;
 
     vm.edit = Edit('group/'+$stateParams.id);
-    vm.input = {};
-    vm.submit = submit;
+    vm.edit.input = {};
+    vm.edit.submit = submit;
     vm.logs = {
       filter: {
         target_type: 'group',
@@ -30,15 +30,11 @@
     //////////
 
     function activate() {
-      vm.edit.getCurrent(vm.input);
+      vm.edit.getCurrent(vm.edit.input);
     }
 
     function submit() {
-      vm.edit.patch(getInputs());
-    }
-
-    function getInputs() {
-      return vm.input;
+      vm.edit.patch(vm.edit.getData());
     }
   }
 })();

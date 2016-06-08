@@ -1,0 +1,5 @@
+span(ng-if="logUser.log.client")
+  | {{ logUser.log.client.email }}
+  span(ng-if="logUser.log.admin") via 
+span(ng-if="logUser.log.admin")
+  | {{ logUser.log.admin.name }}

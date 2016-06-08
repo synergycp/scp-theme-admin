@@ -13,7 +13,7 @@
   };
 
   var INPUTS = {
-    name: '',
+    nickname: '',
     billing_id: '',
     vlan: '',
     v4: {
@@ -39,12 +39,11 @@
       require: {
       },
       bindings: {
-        edit: '=',
-        input: '=',
+        form: '=',
       },
       controller: 'EntityFormCtrl as entityForm',
       transclude: true,
-      templateUrl: 'app/network/entity/entity.form.html'
+      templateUrl: 'app/network/entity/entity.form.html',
     })
     .controller('EntityFormCtrl', EntityFormCtrl)
     ;
@@ -64,7 +63,7 @@
       is_range: false,
       onTypeChange: onV4TypeChange,
       range_end: '',
-      onRangeChange: onV4RangeChange,
+      onRangeChange: function() {},
     };
     entityForm.$onInit = init;
     entityForm.onTypeChange = onTypeChange;
@@ -80,11 +79,6 @@
     function onV4TypeChange() {
       entityForm.v4.is_single = entityForm.v4.type === TYPE_V4.SINGLE;
       entityForm.v4.is_range = !entityForm.v4.is_single;
-
-      entityForm.v4.range_end = entityForm.v4.type === TYPE_V4.RANGE ?
-        entityForm.input.v4.range_end.match(/\d+$/).pop() :
-        null;
-      onV4RangeChange();
     }
 
     function onTypeChange() {
@@ -93,23 +87,62 @@
     }
 
     function init() {
+      entityForm.form.getData = getData;
+      entityForm.input = entityForm.form.input = entityForm.form.input || {};
       _.assign(entityForm.input, INPUTS);
 
-      if (entityForm.edit) {
-        entityForm.edit.on('load', updateTypeFromInput);
-        entityForm.edit.on('change', updateTypeFromInput);
+      if (entityForm.form.on) {
+        entityForm.form
+          .on('load', updateTypeFromInput)
+          .on('change', updateTypeFromInput)
+          ;
       }
     }
 
-    function onV4RangeChange() {
-      if (entityForm.v4.type === TYPE_V4.SINGLE) {
-        entityForm.input.v4.range_end = null;
+    function getData() {
+      var data = _.clone(entityForm.input);
 
+      data.v4 = getV4Data();
+      data.v6 = getV6Data();
+
+      return data;
+    }
+
+    function getV6Data() {
+      if (!(entityForm.type & TYPE.V6)) {
+        return {
+          address: null,
+          gateway: null,
+        };
+      }
+
+      return entityForm.input.v6;
+    }
+
+    function getV4Data() {
+      if (!(entityForm.type & TYPE.V4)) {
+        return {
+          address: null,
+          gateway: null,
+          subnet_mask: null,
+        };
+      }
+
+      var input = _.clone(entityForm.input.v4);
+
+      input.range_end = getV4RangeEnd();
+
+      return input;
+    }
+
+    function getV4RangeEnd() {
+      if (entityForm.v4.type === TYPE_V4.SINGLE) {
         return;
       }
 
       var first3 = entityForm.input.v4.address.match(/\d+.\d+.\d+/).pop();
-      entityForm.input.v4.range_end = first3+'.'+entityForm.v4.range_end;
+
+      return first3+'.'+entityForm.v4.range_end;
     }
 
     function updateTypeFromInput() {
@@ -118,6 +151,8 @@
 
       entityForm.v4.type = getV4TypeFromInput();
       onV4TypeChange();
+
+      entityForm.v4.range_end = getV4RangeEndFromInput();
     }
 
     function getTypeFromInput() {
@@ -130,9 +165,15 @@
     function getV4TypeFromInput() {
       var input = entityForm.input;
 
-      return input.v4.range_end && input.v4.range_end != input.v4.address ?
+      return input.v4.range_end != input.v4.address ?
         TYPE_V4.RANGE :
         TYPE_V4.SINGLE;
+    }
+
+    function getV4RangeEndFromInput() {
+      return entityForm.input.v4.range_end ?
+        entityForm.input.v4.range_end.match(/\d+$/).pop() :
+        null;
     }
   }
 })();

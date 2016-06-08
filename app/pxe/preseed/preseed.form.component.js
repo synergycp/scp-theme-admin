@@ -14,7 +14,7 @@
       require: {
       },
       bindings: {
-        input: '=',
+        form: '=',
       },
       controller: 'PreseedFormCtrl as preseedForm',
       transclude: true,
@@ -31,7 +31,13 @@
     //////////
 
     function init() {
+      preseedForm.form.getData = getData;
+      preseedForm.input = preseedForm.form.input = preseedForm.form.input || {};
       _.assign(preseedForm.input, INPUTS);
+    }
+
+    function getData() {
+      return _.clone(preseedForm.input);
     }
   }
 })();

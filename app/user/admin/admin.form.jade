@@ -15,14 +15,14 @@ include /resources/jade/mixins/form
   placeholder="{{ 'admin.form.email.PLACEHOLDER' | translate }}"
   ng-model="adminForm.input.email"
 )
-  +checkbox("receive_copies")(
+  +checkbox()(
     ng-model="adminForm.input.receive_copies"
   ) {{ 'admin.form.receive_copies.LABEL' | translate }}
 
 +label("{{ 'admin.form.access.LABEL' | translate }}")
-  +checkbox("access_admins")(
+  +checkbox()(
     ng-model="adminForm.input.access_admins"
   ) {{ 'admin.form.access.admins.LABEL' | translate }}
-  +checkbox("access_logs")(
+  +checkbox()(
     ng-model="adminForm.input.access_logs"
   ) {{ 'admin.form.access.logs.LABEL' | translate }}

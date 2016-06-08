@@ -15,6 +15,7 @@ mixin double-field(label, name, fattrs, sattrs, dualClass)
       div.first-input
         input.form-control(
           type="text"
+          id="form-"+name
         )&attributes(fattrs)
       div.second-input
         input.form-control(
@@ -29,7 +30,7 @@ mixin textarea(label, name)
     )&attributes(attributes)
     block
 
-mixin checkbox(name, label)
+mixin checkbox(label, name)
   .checkbox
     label
       input(
@@ -37,6 +38,13 @@ mixin checkbox(name, label)
         name=name
       )&attributes(attributes)
       =label
+      block
+
+mixin select(label, name)
+  +label(label, name)
+    select.form-control(
+      id="form-"+name
+    )&attributes(attributes)
       block
 
 mixin label(label, name)

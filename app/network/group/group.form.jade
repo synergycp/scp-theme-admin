@@ -1,0 +1,32 @@
+doctype html
+include /resources/jade/mixins/form
+
++field(
+  "{{ 'network.group.form.name.LABEL' | translate }}",
+  "name"
+)(
+  placeholder="{{ 'network.group.form.name.PLACEHOLDER' | translate }}"
+  ng-model="groupForm.input.name"
+)
+
++field(
+  "{{ 'network.group.form.description.LABEL' | translate }}",
+  "description"
+)(
+  placeholder="{{ 'network.group.form.description.PLACEHOLDER' | translate }}"
+  ng-model="groupForm.input.description"
+)
+
++textarea(
+  "{{ 'network.group.form.body.LABEL' | translate }}",
+  "body"
+)(
+  placeholder="{{ 'network.group.form.body.PLACEHOLDER' | translate }}"
+  ng-model="groupForm.input.body"
+  rows="20"
+)
+
++label("{{ 'network.group.form.is_installable.LABEL' | translate }}")
+  +checkbox()(
+    ng-model="groupForm.input.is_installable"
+  )

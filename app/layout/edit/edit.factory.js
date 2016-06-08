@@ -40,8 +40,10 @@
     }
 
     function getCurrent(obj) {
-      edit.loader.during(
-        $api.get().then(saveCurrent)
+      return edit.loader.during(
+        $api.get()
+          .then(saveCurrent)
+          .then(fireLoadEvent)
       );
 
       function saveCurrent(response) {
@@ -49,6 +51,10 @@
           obj[key] = response[key];
         });
       }
+    }
+
+    function fireLoadEvent() {
+      event.fire('load');
     }
   }
 })();

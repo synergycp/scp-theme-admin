@@ -1,0 +1,13 @@
+extends /resources/jade/edit
+
+block title
+  span(
+    data-translate='network.entity.form.title.EDIT'
+    data-translate-value-name='{{vm.input.name}}'
+  )
+
+block form
+  entity-form(
+    edit="vm.edit"
+    input="vm.input"
+  )

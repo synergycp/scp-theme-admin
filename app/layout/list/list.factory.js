@@ -19,6 +19,7 @@
   function List(api, pages, bulk, event, loader, _) {
     var list = this;
     var $api = api;
+    var filter = {};
 
     list.items = [];
     list.sortQuery = {};
@@ -31,6 +32,7 @@
     list.create = create;
     list.sort = sort;
     list.clearSort = clearSort;
+    list.filter = setFilter;
 
     event.bindTo(list);
 
@@ -107,7 +109,17 @@
     }
 
     function buildQuery() {
-      return _.assign({}, buildSortQuery(), {
+      return _.assign({}, buildFilterQuery(), buildSortQuery());
+    }
+
+    function setFilter(filters) {
+      _.assign(filter, filters);
+
+      return list;
+    }
+
+    function buildFilterQuery() {
+      return _.assign({}, filter, {
         page: list.pages.current,
       });
     }

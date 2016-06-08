@@ -1,0 +1,16 @@
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
+
+block list
+  include group.list.jade
+
+block bottom-left
+  +create-form("Create Group")
+    group-form(input="vm.create.input")
+
+block bottom-right
+  logs(
+    title="Group Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

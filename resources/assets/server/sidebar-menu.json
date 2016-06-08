@@ -36,9 +36,9 @@
     "sref": "#",
     "icon": "fa fa-sitemap",
     "submenu": [
-        {"text": "IP Entities",     "sref": "app.ip.entities"},
-        {"text": "IP Groups",       "sref": "app.ip.groups"},
-        {"text": "Abuse Reports",   "sref": "app.ip.abuse"}
+        {"text": "IP Entities",     "sref": "app.network.entity"},
+        {"text": "IP Groups",       "sref": "app.network.group"},
+        {"text": "Abuse Reports",   "sref": "app.network.abuse"}
     ]
   },
   {
@@ -55,11 +55,11 @@
     "sref": "app.pxe.install.list",
     "icon": "fa fa-wrench",
     "submenu": [
-        {"text": "Installs",        "sref": "app.pxe.install.list"},
-        {"text": "Preseeds",        "sref": "app.pxe.preseed.list"},
-        {"text": "Profiles",        "sref": "app.pxe.profile.list"},
-        {"text": "Shell Scripts",   "sref": "app.pxe.shell.list"},
-        {"text": "ISO Manager",     "sref": "app.pxe.iso.list"}
+        {"text": "Installs",        "sref": "app.pxe.install"},
+        {"text": "Preseeds",        "sref": "app.pxe.preseed"},
+        {"text": "Profiles",        "sref": "app.pxe.profile"},
+        {"text": "Shell Scripts",   "sref": "app.pxe.shell"},
+        {"text": "ISO Manager",     "sref": "app.pxe.iso"}
     ]
   },
   {

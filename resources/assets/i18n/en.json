@@ -176,6 +176,69 @@
       }
     }
   },
+  "network": {
+    "entity": {
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ name }}",
+          "CREATE": "Create IP Entity"
+        },
+        "nickname": {
+          "LABEL": "Nickname",
+          "PLACEHOLDER": "e.g. 192.168.0.0/24"
+        },
+        "billing_id": {
+          "LABEL": "Billing ID",
+          "PLACEHOLDER": "Optional"
+        },
+        "group": {
+          "LABEL": "Group"
+        },
+        "vlan": {
+          "LABEL": "VLAN",
+          "PLACEHOLDER": "1"
+        },
+        "type": {
+          "LABEL": "IP Type",
+          "V4": "IPv4",
+          "V6": "IPv6",
+          "BOTH": "IPv4 & IPv6"
+        },
+        "v4": {
+          "type": {
+            "LABEL": "IPv4 Type",
+            "RANGE": "Range",
+            "SINGLE": "IP"
+          },
+          "address": {
+            "LABEL": "IPv4 Address",
+            "PLACEHOLDER": "e.g. 192.168.0.1"
+          },
+          "subnet": {
+            "LABEL": "IPv4 Subnet Mask",
+            "PLACEHOLDER": "e.g. 255.255.255.0"
+          },
+          "gateway": {
+            "LABEL": "IPv4 Gateway",
+            "PLACEHOLDER": "e.g. 192.168.0.1"
+          },
+          "range": {
+            "PLACEHOLDER": "e.g. 255"
+          }
+        },
+        "v6": {
+          "address": {
+            "LABEL": "IPv6 Address",
+            "PLACEHOLDER": "Optional"
+          },
+          "gateway": {
+            "LABEL": "IPv6 Gateway",
+            "PLACEHOLDER": "Optional"
+          }
+        }
+      }
+    }
+  },
   "action": {
     "EDIT": "edit",
     "BULK": "With Selected:",

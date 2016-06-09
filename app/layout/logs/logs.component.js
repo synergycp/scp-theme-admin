@@ -45,7 +45,6 @@
     }
 
     function refresh() {
-      console.log('hmm');
       return logs.loader.during(
         getItems().then(storeItems)
       );

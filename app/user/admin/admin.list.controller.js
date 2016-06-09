@@ -32,7 +32,7 @@
     }
 
     function create() {
-      vm.list.create(vm.create.input);
+      vm.list.create(vm.create.getData());
     }
   }
 })();

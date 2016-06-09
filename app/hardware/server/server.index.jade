@@ -2,15 +2,15 @@ extends /resources/jade/list-page
 include /resources/jade/mixins/list
 
 block list
-  include group.list.jade
+  include server.list.jade
 
 block bottom-left
-  +create-form("{{ 'network.group.form.title.ADD' | translate }}")
-    group-form(form="vm.create")
+  +create-form("{{ 'hardware.server.form.title.ADD' | translate }}")
+    server-form(form="vm.create")
 
 block bottom-right
   logs(
-    title="Group Logs"
+    title="Server Logs"
     filter="vm.logs.filter"
     listen-to="vm.list"
   )

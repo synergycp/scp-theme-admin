@@ -5,10 +5,11 @@
     .module('app.core')
     .config(coreConfig);
 
-  coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
 
-  function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider) {
-
+  /**
+   * @ngInject
+   */
+   function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider) {
     var core = angular.module('app.core');
     // registering components after bootstrap
     core.controller = $controllerProvider.register;
@@ -22,6 +23,8 @@
     // Disables animation on items with class .ng-no-animation
     $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
 
+    // Disable debug info for performance boost.
+    $compileProvider.debugInfoEnabled(false);
   }
 
 })();

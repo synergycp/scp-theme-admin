@@ -5,7 +5,7 @@ block list
   include profile.list.jade
 
 block bottom-left
-  +create-form("Create PXE Profile")
+  +create-form("{{ 'pxe.profile.form.title.ADD' | translate }}")
     profile-form(form="vm.create")
 
 block bottom-right

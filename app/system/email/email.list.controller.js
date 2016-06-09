@@ -2,16 +2,16 @@
   'use strict';
 
   angular
-    .module('app.pxe')
-    .controller('BootListCtrl', BootListCtrl);
+    .module('app.system')
+    .controller('EmailListCtrl', EmailListCtrl);
 
   /**
    * @ngInject
    */
-  function BootListCtrl(List) {
+  function EmailListCtrl(List) {
     var vm = this;
 
-    vm.list = List('pxe/template');
+    vm.list = List('email/template');
     vm.list.bulk.add('Delete', vm.list.delete);
 
     vm.create = {
@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe-boot-script',
+        target_type: 'email-template',
       },
     };
 

@@ -19,7 +19,7 @@
         template: helper.dummyTemplate,
       })
       .state('app.hardware.server.list', {
-        url: '',
+        url: '?switch&group&client',
         title: 'Servers',
         controller: 'ServerListCtrl as vm',
         templateUrl: helper.basepath('hardware/server/server.index.html'),

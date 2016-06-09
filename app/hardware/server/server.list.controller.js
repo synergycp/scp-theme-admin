@@ -2,16 +2,20 @@
   'use strict';
 
   angular
-    .module('app.pxe')
-    .controller('BootListCtrl', BootListCtrl);
+    .module('app.hardware')
+    .controller('ServerListCtrl', ServerListCtrl);
 
   /**
    * @ngInject
    */
-  function BootListCtrl(List) {
+  function ServerListCtrl(List, $stateParams) {
     var vm = this;
 
-    vm.list = List('pxe/template');
+    vm.list = List('server').filter({
+      hub: $stateParams.switch,
+      group: $stateParams.group,
+      client: $stateParams.client,
+    });
     vm.list.bulk.add('Delete', vm.list.delete);
 
     vm.create = {
@@ -21,7 +25,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe-boot-script',
+        target_type: 'server',
       },
     };
 

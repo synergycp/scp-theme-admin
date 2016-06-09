@@ -1,0 +1,126 @@
+doctype html
+include /resources/jade/mixins/form
+
++field(
+  "{{ 'hardware.server.form.id.LABEL' | translate }}",
+  "id"
+)(
+  placeholder="{{ 'hardware.server.form.id.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.srv_id"
+)
+
++field(
+  "{{ 'hardware.server.form.mac.LABEL' | translate }}",
+  "mac"
+)(
+  placeholder="{{ 'hardware.server.form.mac.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.mac"
+)
+
+// Hardware Dropdowns
+
+hr
+
+// Switch Dropdown
+
++label("{{ 'hardware.server.form.switch.port.LABEL' | translate }}")
+  .row
+    .col-xs-6
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.switch.port.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.switch.port"
+      )
+    .col-xs-6
+      select.form-control(
+        ng-model="serverForm.input.switch.speed"
+      )
+        option 10mbps
+
+// IP Group/Entities
+
+hr
+
++field(
+  "{{ 'hardware.server.form.ipmi.ip.LABEL' | translate }}",
+  "ipmi.ip"
+)(
+  placeholder="{{ 'hardware.server.form.ipmi.ip.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.ipmi.ip"
+)
+
++label("{{ 'hardware.server.form.ipmi.admin.LABEL' | translate }}")
+  .row 
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.admin.username.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.admin.username"
+      )
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.admin.password.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.admin.password"
+      )
+
++label("{{ 'hardware.server.form.ipmi.client.LABEL' | translate }}")
+  .row 
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.client.username.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.client.username"
+      )
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.client.password.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.client.password"
+      )
+hr 
+
+// Client 
+
++field(
+  "{{ 'hardware.server.form.billing.id.LABEL' | translate }}",
+  "billing.id"
+)(
+  placeholder="{{ 'hardware.server.form.billing.id.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.billing.id"
+)
+
++field(
+  "{{ 'hardware.server.form.billing.date.LABEL' | translate }}",
+  "billing.date"
+)(
+  placeholder="{{ 'hardware.server.form.billing.date.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.billing.date"
+)
+
++field(
+  "{{ 'hardware.server.form.billing.max_bandwidth.LABEL' | translate }}",
+  "billing.max_bandwidth"
+)(
+  placeholder="{{ 'hardware.server.form.billing.max_bandwidth.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.billing.max_bandwidth"
+)
+
++field(
+  "{{ 'hardware.server.form.nickname.LABEL' | translate }}",
+  "nickname"
+)(
+  placeholder="{{ 'hardware.server.form.nickname.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.nickname"
+)
+
++label("{{ 'hardware.server.form.access.LABEL' | translate }}")
+  +checkbox()(
+    ng-model="serverForm.input.access.ipmi"
+  ) {{ 'hardware.server.form.access.ipmi.LABEL' | translate }}
+  +checkbox()(
+    ng-model="serverForm.input.access.switch"
+  ) {{ 'hardware.server.form.access.switch.LABEL' | translate }}
+  +checkbox()(
+    ng-model="serverForm.input.access.pxe"
+  ) {{ 'hardware.server.form.access.pxe.LABEL' | translate }}

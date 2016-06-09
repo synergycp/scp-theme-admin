@@ -5,7 +5,7 @@ block list
   include client.list.jade
 
 block bottom-left
-  +create-form("Create Client")
+  +create-form("{{ 'user.client.form.title.ADD' | translate }}")
     client-form(form="vm.create")
 
 block bottom-right

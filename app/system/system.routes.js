@@ -13,6 +13,23 @@
         abstract: true,
         template: helper.dummyTemplate,
       })
+      .state('app.system.email', {
+        url: '/email',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.system.email.list', {
+        url: '',
+        title: 'Emails',
+        controller: 'EmailListCtrl as vm',
+        templateUrl: helper.basepath('system/email/email.index.html'),
+      })
+      .state('app.system.email.view', {
+        url: '/:id',
+        title: 'View Email',
+        controller: 'EmailViewCtrl as vm',
+        templateUrl: helper.basepath('system/email/email.view.html'),
+      })
       .state('app.system.log', {
         url: '/log',
         abstract: true,

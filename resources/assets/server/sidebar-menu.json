@@ -24,11 +24,11 @@
     "sref": "#",
     "icon": "fa fa-server",
     "submenu": [
-        {"text": "Servers",         "sref": "app.servers"},
-        {"text": "Server Inventory","sref": "app.servers.inventory"},
-        {"text": "Provision",       "sref": "app.servers.provision"},
-        {"text": "Part Inventory",  "sref": "app.parts"},
-        {"text": "Switches",        "sref": "app.switches"}
+        {"text": "Servers",         "sref": "app.hardware.server"},
+        {"text": "Server Inventory","sref": "app.hardware.server.inventory"},
+        {"text": "Provision",       "sref": "app.hardware.server.provision"},
+        {"text": "Part Inventory",  "sref": "app.hardware.part"},
+        {"text": "Switches",        "sref": "app.hardware.switch"}
     ]
   },
   {

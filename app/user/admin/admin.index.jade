@@ -5,7 +5,7 @@ block list
   include admin.list.jade
 
 block bottom-left
-  +create-form("Create Administrator")
+  +create-form("{{ 'user.admin.form.title.ADD' | translate }}")
     admin-form(form="vm.create")
 
 block bottom-right

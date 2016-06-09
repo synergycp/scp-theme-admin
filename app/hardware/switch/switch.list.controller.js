@@ -2,16 +2,16 @@
   'use strict';
 
   angular
-    .module('app.pxe')
-    .controller('BootListCtrl', BootListCtrl);
+    .module('app.hardware')
+    .controller('SwitchListCtrl', SwitchListCtrl);
 
   /**
    * @ngInject
    */
-  function BootListCtrl(List) {
+  function SwitchListCtrl(List) {
     var vm = this;
 
-    vm.list = List('pxe/template');
+    vm.list = List('switch');
     vm.list.bulk.add('Delete', vm.list.delete);
 
     vm.create = {
@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe-boot-script',
+        target_type: 'switch',
       },
     };
 

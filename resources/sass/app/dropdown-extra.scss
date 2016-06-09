@@ -1,16 +1,16 @@
 /* ========================================================================
      Component: dropdown-extras
  ========================================================================== */
- 
-// 
+
+//
 // Dropdopwn extras
-// 
+//
 // ------------------------------
 
 .dropdown-menu {
   @include box-shadow(0 2px 6px rgba(0,0,0,0.15));
   @media only screen and (min-width: $mq-tablet) {
-    top: 4px;
+    //top: 4px;
   }
 }
 
@@ -21,7 +21,7 @@
 
 // Allows to mix list group inside dropdowns
 .dropdown-list {
-  
+
   > .dropdown-menu {
     padding: 0;
     min-width: 220px;

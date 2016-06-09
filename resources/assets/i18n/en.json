@@ -343,7 +343,8 @@
           "LABEL": "Type"
         },
         "group": {
-          "LABEL": "IP Group"
+          "LABEL": "IP Groups",
+          "PLACEHOLDER": "Select IP Group(s)..."
         }
       }
     },

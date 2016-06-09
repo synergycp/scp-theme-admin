@@ -27,9 +27,12 @@
     //////////
 
     function on(name, callback) {
-      var cbs = event.callbacks[name] = event.callbacks[name] || [];
+      var names = angular.isArray(name) ? name : [name];
+      _.each(names, function (name) {
+        var cbs = event.callbacks[name] = event.callbacks[name] || [];
 
-      cbs.push(callback);
+        cbs.push(callback);
+      });
 
       return event;
     }

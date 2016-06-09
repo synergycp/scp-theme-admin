@@ -5,5 +5,6 @@
     .module('app.hardware', [
       'app.layout.list',
       'app.core.api',
+      'ui.select',
     ]);
 })();

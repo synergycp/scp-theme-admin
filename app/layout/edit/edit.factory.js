@@ -52,14 +52,16 @@
       _.forEach(edit.input, function (value, key) {
         edit.input[key] = response[key];
       });
+
+      return response;
     }
 
-    function fireLoadEvent() {
-      event.fire('load');
+    function fireLoadEvent(response) {
+      event.fire('load', response);
     }
 
-    function fireChangeEvent() {
-      event.fire('change');
+    function fireChangeEvent(response) {
+      event.fire('change', response);
     }
   }
 })();

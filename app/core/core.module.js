@@ -21,6 +21,7 @@
       'app.core.preloader',
       'app.core.routes',
       'app.core.settings',
-      'app.core.translate'
+      'app.core.translate',
+      'app.core.mixins',
     ]);
 })();

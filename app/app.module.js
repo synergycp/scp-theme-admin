@@ -9,5 +9,8 @@
       'app.layout',
       'app.user',
       'app.pxe',
+      'app.network',
+      'app.hardware',
+      'app.system',
     ]);
 })();

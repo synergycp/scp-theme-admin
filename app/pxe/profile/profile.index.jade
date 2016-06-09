@@ -1,0 +1,16 @@
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
+
+block list
+  include profile.list.jade
+
+block bottom-left
+  +create-form("{{ 'pxe.profile.form.title.ADD' | translate }}")
+    profile-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="PXE Profile Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

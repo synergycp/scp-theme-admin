@@ -56,6 +56,8 @@
 
         return target;
       }
+
+      return event;
     }
   }
 })();

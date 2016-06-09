@@ -13,29 +13,27 @@
    */
   function ShellViewCtrl(Edit, $stateParams) {
     var vm = this;
-    var edit = Edit('pxe/shell/'+$stateParams.id);
 
-    vm.input = {
-      name: '',
-      description: '',
-      body: '',  
+    vm.edit = Edit('pxe/shell/'+$stateParams.id);
+    vm.edit.submit = submit;
+
+    vm.logs = {
+      filter: {
+        target_type: 'pxe-shell-script',
+        target_id: $stateParams.id,
+      },
     };
-    vm.submit = submit;
 
     activate();
 
     //////////
 
     function activate() {
-      edit.getCurrent(vm.input);
+      vm.edit.getCurrent();
     }
 
     function submit() {
-      edit.patch(getInputs());
-    }
-
-    function getInputs() {
-      return vm.input;
+      vm.edit.patch(vm.edit.getData());
     }
   }
 })();

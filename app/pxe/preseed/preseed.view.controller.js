@@ -13,30 +13,28 @@
    */
   function PreseedViewCtrl(Edit, $stateParams) {
     var vm = this;
-    var edit = Edit('pxe/preseed/'+$stateParams.id);
 
-    vm.input = {
-      name: '',
-      description: '',
-      body: '',
-      is_installable: false,
+    vm.edit = Edit('pxe/preseed/'+$stateParams.id);
+    vm.edit.input = {};
+    vm.edit.submit = submit;
+    vm.logs = {
+      filter: {
+        target_type: 'pxe-preseed',
+        target_id: $stateParams.id,
+      },
     };
-    vm.submit = submit;
+
 
     activate();
 
     //////////
 
     function activate() {
-      edit.getCurrent(vm.input);
+      vm.edit.getCurrent(vm.edit.input);
     }
 
     function submit() {
-      edit.patch(getInputs());
-    }
-
-    function getInputs() {
-      return vm.input;
+      vm.edit.patch(vm.edit.getData());
     }
   }
 })();

@@ -1,0 +1,33 @@
+doctype html
+include /resources/jade/mixins/form
+
++field(
+  "{{ 'pxe.iso.form.name.LABEL' | translate }}",
+  "name"
+)(
+  placeholder="{{ 'pxe.iso.form.name.PLACEHOLDER' | translate }}"
+  ng-model="isoForm.input.name"
+)
+
+div(ng-if="!isoForm.create")
+  +label(
+    "{{ 'pxe.iso.form.folder.LABEL' | translate }}"
+  )
+    p.form-control-static {{ isoForm.input.folder }}
+
+div(ng-if="isoForm.create")
+  +field(
+    "{{ 'pxe.iso.form.folder.LABEL' | translate }}",
+    "folder"
+  )(
+    placeholder="{{ 'pxe.iso.form.folder.PLACEHOLDER' | translate }}"
+    ng-model="isoForm.input.folder"
+  )
+
+  +field(
+    "{{ 'pxe.iso.form.url.LABEL' | translate }}",
+    "url"
+  )(
+    placeholder="{{ 'pxe.iso.form.url.PLACEHOLDER' | translate }}"
+    ng-model="isoForm.input.url"
+  )

@@ -13,41 +13,27 @@
    */
   function ProfileViewCtrl(Edit, $stateParams) {
     var vm = this;
-    var edit = Edit('pxe/profile/'+$stateParams.id);
 
-    vm.input = {
-      name: '',
-      billing_id: '',
-      preseed: {
-        id: null,
-        name: '',
+    vm.edit = Edit('pxe/profile/'+$stateParams.id);
+    vm.edit.input = {};
+    vm.edit.submit = submit;
+    vm.logs = {
+      filter: {
+        target_type: 'pxe-profile',
+        target_id: $stateParams.id,
       },
-      boot_script: {
-        id: null,
-        name: '',
-      },
-      iso: {
-        id: null,
-        name: '',
-      },
-      access_client: false,
     };
-    vm.submit = submit;
 
     activate();
 
     //////////
 
     function activate() {
-      edit.getCurrent(vm.input);
+      vm.edit.getCurrent(vm.edit.input);
     }
 
     function submit() {
-      edit.patch(getInputs());
-    }
-
-    function getInputs() {
-      return vm.input;
+      vm.edit.patch(vm.edit.getData());
     }
   }
 })();

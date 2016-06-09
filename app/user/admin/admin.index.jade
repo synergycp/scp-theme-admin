@@ -1,0 +1,16 @@
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
+
+block list
+  include admin.list.jade
+
+block bottom-left
+  +create-form("{{ 'user.admin.form.title.ADD' | translate }}")
+    admin-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="Administrator Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

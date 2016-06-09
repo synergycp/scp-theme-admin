@@ -50,55 +50,57 @@
       }
     }
   },
-  "client": {
-    "form": {
-      "title": {
-        "ADD": "Create Client",
-        "EDIT": "Edit {{ email }}"
-      },
-      "email": {
-        "LABEL": "Email"
-      },
-      "password": {
-        "LABEL": "Password",
-        "PLACEHOLDER": "Enter a password to set"
-      },
-      "billing_id": {
-        "LABEL": "Billing ID"
-      },
-      "name": {
-        "LABEL": "Name"
-      }
-    }
-  },
-  "admin": {
-    "form": {
-      "title": {
-        "ADD": "Create Administrator",
-        "EDIT": "Edit {{ username }}"
-      },
-      "email": {
-        "LABEL": "Email",
-        "PLACEHOLDER": "Optional"
-      },
-      "password": {
-        "LABEL": "Password",
-        "PLACEHOLDER": "Enter a password to set"
-      },
-      "username": {
-        "LABEL": "Username",
-        "PLACEHOLDER": "Required. Must be alphanumeric and unique"
-      },
-      "receive_copies": {
-        "LABEL": "Receive All Emails"
-      },
-      "access": {
-        "LABEL": "Access",
-        "admins": {
-          "LABEL": "Edit Administrators"
+  "user": {
+    "admin": {
+      "form": {
+        "title": {
+          "ADD": "Create Administrator",
+          "EDIT": "Edit {{ username }}"
         },
-        "logs": {
-          "LABEL": "View Logs"
+        "email": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "Optional"
+        },
+        "password": {
+          "LABEL": "Password",
+          "PLACEHOLDER": "Enter a password to set"
+        },
+        "username": {
+          "LABEL": "Username",
+          "PLACEHOLDER": "Required. Must be alphanumeric and unique"
+        },
+        "receive_copies": {
+          "LABEL": "Receive All Emails"
+        },
+        "access": {
+          "LABEL": "Access",
+          "admins": {
+            "LABEL": "Edit Administrators"
+          },
+          "logs": {
+            "LABEL": "View Logs"
+          }
+        }
+      }
+    },
+    "client": {
+      "form": {
+        "title": {
+          "ADD": "Create Client",
+          "EDIT": "Edit {{ email }}"
+        },
+        "email": {
+          "LABEL": "Email"
+        },
+        "password": {
+          "LABEL": "Password",
+          "PLACEHOLDER": "Enter a password to set"
+        },
+        "billing_id": {
+          "LABEL": "Billing ID"
+        },
+        "name": {
+          "LABEL": "Name"
         }
       }
     }
@@ -107,7 +109,7 @@
     "shell": {
       "form": {
         "title": {
-          "ADD": "Create Shell Script",
+          "ADD": "Create PXE Shell Script",
           "EDIT": "Edit {{ name }}"
         },
         "name": {
@@ -124,10 +126,49 @@
         }
       }
     },
+    "boot": {
+      "form": {
+        "title": {
+          "ADD": "Create Boot Script",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "body": {
+          "LABEL": "Body",
+          "PLACEHOLDER": "This will be parsed using Smarty."
+        }
+      }
+    },
+    "iso": {
+      "form": {
+        "title": {
+          "ADD": "Create ISO",
+          "EDIT": "Edit {{ name }}"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "folder": {
+          "LABEL": "Folder",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "url": {
+          "LABEL": "URL",
+          "PLACEHOLDER": "e.g. http://example.com/win2008r2.iso"
+        }
+      },
+      "logs": {
+        "TITLE": "ISO Logs"
+      }
+    },
     "profile": {
       "form": {
         "title": {
-          "ADD": "Create Profile",
+          "ADD": "Create OS Reload Profile",
           "EDIT": "Edit {{ name }}"
         },
         "name": {
@@ -155,7 +196,7 @@
     "preseed": {
       "form": {
         "title": {
-          "ADD": "Create Preseed",
+          "ADD": "Create PXE Preseed Script",
           "EDIT": "Edit {{ name }}"
         },
         "name": {
@@ -176,9 +217,270 @@
       }
     }
   },
+  "network": {
+    "entity": {
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ nickname }}",
+          "ADD": "Create IP Entity"
+        },
+        "nickname": {
+          "LABEL": "Nickname",
+          "PLACEHOLDER": "e.g. 192.168.0.0/24"
+        },
+        "billing_id": {
+          "LABEL": "Billing ID",
+          "PLACEHOLDER": "Optional"
+        },
+        "group": {
+          "LABEL": "Group"
+        },
+        "vlan": {
+          "LABEL": "VLAN",
+          "PLACEHOLDER": "1"
+        },
+        "type": {
+          "LABEL": "IP Type",
+          "V4": "IPv4",
+          "V6": "IPv6",
+          "BOTH": "IPv4 & IPv6"
+        },
+        "v4": {
+          "type": {
+            "LABEL": "IPv4 Type",
+            "RANGE": "Range",
+            "SINGLE": "IP"
+          },
+          "address": {
+            "LABEL": "IPv4 Address",
+            "PLACEHOLDER": "e.g. 192.168.0.1"
+          },
+          "subnet": {
+            "LABEL": "IPv4 Subnet Mask",
+            "PLACEHOLDER": "e.g. 255.255.255.0"
+          },
+          "gateway": {
+            "LABEL": "IPv4 Gateway",
+            "PLACEHOLDER": "e.g. 192.168.0.1"
+          },
+          "range": {
+            "PLACEHOLDER": "e.g. 255"
+          }
+        },
+        "v6": {
+          "address": {
+            "LABEL": "IPv6 Address",
+            "PLACEHOLDER": "Optional"
+          },
+          "gateway": {
+            "LABEL": "IPv6 Gateway",
+            "PLACEHOLDER": "Optional"
+          }
+        }
+      }
+    },
+    "group": {
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ name }}",
+          "ADD": "Create IP Group"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be alphanumeric and unique"
+        },
+        "billing_id": {
+          "LABEL": "Billing ID",
+          "PLACEHOLDER": "Optional. Must be alphanumeric and unique"
+        },
+        "options": {
+          "LABEL": "Options",
+          "reserved": {
+            "LABEL": "Reserved"
+          }
+        }
+      }
+    }
+  },
+  "hardware": {
+    "switch": {
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ name }}",
+          "ADD": "Create Switch"
+        },
+        "name": {
+          "LABEL": "Switch ID",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "network": {
+          "LABEL": "IP/SSH Port",
+          "ip": {
+            "PLACEHOLDER": "IP"
+          },
+          "port": {
+            "PLACEHOLDER": "SSH Port"
+          }
+        },
+        "ssh": {
+          "LABEL": "SSH User/Pass",
+          "username": {
+            "PLACEHOLDER": "SSH Username"
+          },
+          "password": {
+            "PLACEHOLDER": "SSH Password"
+          }
+        },
+        "enable": {
+          "LABEL": "(En)able Pass",
+          "PLACEHOLDER": "Required"
+        },
+        "snmp": {
+          "LABEL": "SNMP Key",
+          "PLACEHOLDER": "SNMP Community / Key"
+        },
+        "type": {
+          "LABEL": "Type"
+        },
+        "group": {
+          "LABEL": "IP Group"
+        }
+      }
+    },
+    "server": {
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ name }}",
+          "ADD": "Create Server"
+        },
+        "id": {
+          "LABEL": "Server ID",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "mac": {
+          "LABEL": "MAC Address",
+          "PLACEHOLDER": "Required to enable PXE"
+        },
+        "cpu": {
+          "LABEL": "CPU"
+        },
+        "mem": {
+          "LABEL": "Memory"
+        },
+        "disk": {
+          "LABEL": "Disk"
+        },
+        "add-on": {
+          "LABEL": "Add-On",
+          "PLACEHOLDER": "None"
+        },
+        "switch": {
+          "LABEL": "Switch",
+          "port": {
+            "LABEL": "Switch Port",
+            "PLACEHOLDER": "ex. Gi0/0/1"
+          }
+        },
+        "group": {
+          "LABEL": "IP Group"
+        },
+        "entity": {
+          "primary": {
+            "LABEL": "IP Entity",
+            "PLACEHOLDER": "Assign an IP Entity"
+          },
+          "secondary": {
+            "LABEL": "IP Entity",
+            "PLACEHOLDER": "Assign an extra IP Entity"
+          }
+        },
+        "ipmi": {
+          "ip": {
+            "LABEL": "IPMI IP",
+            "PLACEHOLDER": "IPMI IP Address"
+          },
+          "admin": {
+            "LABEL": "IPMI Admin",
+            "username": {
+              "PLACEHOLDER": "IPMI Admin Username"
+            },
+            "password": {
+              "PLACEHOLDER": "IPMI Admin Password"
+            }
+          },
+          "client": {
+            "LABEL": "IPMI Client",
+            "username": {
+              "PLACEHOLDER": "IPMI Client Username"
+            },
+            "password": {
+              "PLACEHOLDER": "IPMI Client Password"
+            }
+          }
+        },
+        "client": {
+          "LABEL": "Client",
+          "PLACEHOLDER": "Assign a Client"
+        },
+        "billing": {
+          "id": {
+            "LABEL": "Billing ID",
+            "PLACEHOLDER": "Optional. Must be unique"
+          },
+          "date": {
+            "LABEL": "Billing Date",
+            "PLACEHOLDER": "Bandwidth data before this date will be hidden"
+          },
+          "max_bandwidth": {
+            "LABEL": "Max Bandwidth",
+            "PLACEHOLDER": "e.g. 10TB. Leave blank for no maximum"
+          }
+        },
+        "nickname": {
+          "LABEL": "Nickname",
+          "PLACEHOLDER": "Will be set as server hostname. Defaults to Server ID."
+        },
+        "access": {
+          "LABEL": "Client Access",
+          "ipmi": {
+            "LABEL": "IPMI Controls"
+          },
+          "switch": {
+            "LABEL": "Switch Controls"
+          },
+          "pxe": {
+            "LABEL": "OS Reload"
+          }
+        }
+      }
+    }
+  },
+  "system": {
+    "email": {
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ name }}",
+          "ADD": "Create Email Template"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be unique"
+        },
+        "subject": {
+          "LABEL": "Subject",
+          "PLACEHOLDER": "Optional"
+        },
+        "body": {
+          "LABEL": "Template",
+          "PLACEHOLDER": "Will be parsed using Smarty."
+        }
+      }
+    }
+  },
   "action": {
     "EDIT": "edit",
     "BULK": "With Selected:",
+    "VIEW": "view",
     "DELETE": "delete"
   }
 }

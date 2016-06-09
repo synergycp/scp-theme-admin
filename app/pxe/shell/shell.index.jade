@@ -1,0 +1,16 @@
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
+
+block list
+  include shell.list.jade
+
+block bottom-left
+  +create-form("{{ 'pxe.shell.form.title.ADD' | translate }}")
+    shell-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="PXE Shell Script Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

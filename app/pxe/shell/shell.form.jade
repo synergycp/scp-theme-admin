@@ -6,7 +6,7 @@ include /resources/jade/mixins/form
   "name"
 )(
   placeholder="{{ 'pxe.shell.form.name.PLACEHOLDER' | translate }}"
-  ng-model="vm.input.name"
+  ng-model="shellForm.input.name"
 )
 
 +field(
@@ -14,7 +14,7 @@ include /resources/jade/mixins/form
   "description"
 )(
   placeholder="{{ 'pxe.shell.form.description.PLACEHOLDER' | translate }}"
-  ng-model="vm.input.description"
+  ng-model="shellForm.input.description"
 )
 
 +textarea(
@@ -22,6 +22,6 @@ include /resources/jade/mixins/form
   "body"
 )(
   placeholder="{{ 'pxe.shell.form.body.PLACEHOLDER' | translate }}"
-  ng-model="vm.input.body"
+  ng-model="shellForm.input.body"
   rows="20"
 )

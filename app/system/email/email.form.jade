@@ -1,0 +1,24 @@
+doctype html
+include /resources/jade/mixins/form
+
++label(
+  "{{ 'system.email.form.name.LABEL' | translate }}"
+)
+  p.form-control-static {{ emailForm.input.name }}
+
++field(
+  "{{ 'system.email.form.subject.LABEL' | translate }}",
+  "subject"
+)(
+  placeholder="{{ 'system.email.form.subject.PLACEHOLDER' | translate }}"
+  ng-model="emailForm.input.subject"
+)
+
++textarea(
+  "{{ 'system.email.form.body.LABEL' | translate }}",
+  "body"
+)(
+  placeholder="{{ 'system.email.form.body.PLACEHOLDER' | translate }}"
+  ng-model="emailForm.input.body"
+  rows="20"
+)

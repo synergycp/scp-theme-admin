@@ -1,0 +1,28 @@
+extends /resources/jade/list-checkable
+
+block title
+  | Entities
+
+block headings
+  th.relative Name
+    sort(col="nickname")
+  th.relative IP
+    sort(col="ip")
+  th.relative IP Group
+    sort(col="ip_group")
+  th.relative Server
+    sort(col="server")
+  th.relative VLAN
+    sort(col="vlan")
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td {{ row.full_ip }}
+  td {{ row.group.name || '-' }}
+  td {{ row.server.name || '-' }}
+  td {{ row.vlan }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.network.entity.view({id: row.id})")
+        | {{ 'action.EDIT' | translate }}

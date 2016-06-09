@@ -9,34 +9,39 @@
       bindings: {
         title: '@',
         filter: '=',
+        listenTo: '=',
       },
-      controller: 'LogListCtrl as logs',
+      controller: 'LogCtrl as logs',
       transclude: true,
       templateUrl: 'app/layout/logs/logs.html',
     })
-    .controller('LogListCtrl', LogListCtrl)
+    .controller('LogCtrl', LogCtrl)
     ;
 
   /**
    * @ngInject
    */
-  function LogListCtrl(_, Loader, Api, Pages) {
+  function LogCtrl(_, Loader, Api, Pages) {
     var logs = this;
     var $api = Api.all('log');
 
     logs.items = [];
-    logs.filter = logs.filter || {};
 
     logs.$onInit = init;
-    logs.refresh = refresh;
+    logs.refresh = _.debounce(refresh, 5);
     logs.loader = Loader();
     logs.pages = Pages();
 
     //////////
 
     function init() {
+      logs.filter = logs.filter || {};
       logs.refresh();
       logs.pages.on('change', logs.refresh);
+
+      if (logs.listenTo) {
+        logs.listenTo.on('change', logs.refresh);
+      }
     }
 
     function refresh() {
@@ -49,7 +54,6 @@
       // Clear and refill log list.
       logs.items.length = 0;
       _(response).forEach(function(item) {
-        item.checked = false;
         logs.items.push(item);
       });
 

@@ -6,7 +6,7 @@ include /resources/jade/mixins/form
   "name"
 )(
   placeholder="{{ 'pxe.preseed.form.name.PLACEHOLDER' | translate }}"
-  ng-model="vm.input.name"
+  ng-model="preseedForm.input.name"
 )
 
 +field(
@@ -14,7 +14,7 @@ include /resources/jade/mixins/form
   "description"
 )(
   placeholder="{{ 'pxe.preseed.form.description.PLACEHOLDER' | translate }}"
-  ng-model="vm.input.description"
+  ng-model="preseedForm.input.description"
 )
 
 +textarea(
@@ -22,13 +22,11 @@ include /resources/jade/mixins/form
   "body"
 )(
   placeholder="{{ 'pxe.preseed.form.body.PLACEHOLDER' | translate }}"
-  ng-model="vm.input.body"
+  ng-model="preseedForm.input.body"
   rows="20"
 )
 
-+checkbox(
-  "{{ 'pxe.preseed.form.is_installable.LABEL' | translate }}",
-  "is_installable"  
-)(
-  ng-model="vm.input.is_installable"
-)
++label("{{ 'pxe.preseed.form.is_installable.LABEL' | translate }}")
+  +checkbox()(
+    ng-model="preseedForm.input.is_installable"
+  )

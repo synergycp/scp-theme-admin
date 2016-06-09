@@ -1,0 +1,10 @@
+.table {
+
+  tr {
+    th, td {
+      &.border-only {
+        padding: 0px;
+      }
+    }
+  }
+}

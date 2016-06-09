@@ -1,0 +1,16 @@
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
+
+block list
+  include boot.list.jade
+
+block bottom-left
+  +create-form("{{ 'pxe.boot.form.title.ADD' | translate }}")
+    boot-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="PXE Boot Script Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

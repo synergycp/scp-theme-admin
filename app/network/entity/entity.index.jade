@@ -5,8 +5,10 @@ block list
   include entity.list.jade
 
 block bottom-left
-  +create-form("Create Entity")
-    entity-form(input="vm.create.input")
+  +create-form("{{ 'network.entity.form.title.ADD' | translate }}")
+    entity-form(
+      form="vm.create"
+    )
 
 block bottom-right
   logs(

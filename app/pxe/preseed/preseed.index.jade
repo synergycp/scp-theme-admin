@@ -5,8 +5,8 @@ block list
   include preseed.list.jade
 
 block bottom-left
-  +create-form("Create PXE Preseed")
-    preseed-form(input="vm.create.input")
+  +create-form("{{ 'pxe.preseed.form.title.ADD' | translate }}")
+    preseed-form(form="vm.create")
 
 block bottom-right
   logs(

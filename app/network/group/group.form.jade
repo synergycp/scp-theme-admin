@@ -10,23 +10,14 @@ include /resources/jade/mixins/form
 )
 
 +field(
-  "{{ 'network.group.form.description.LABEL' | translate }}",
-  "description"
+  "{{ 'network.group.form.billing_id.LABEL' | translate }}",
+  "billing_id"
 )(
-  placeholder="{{ 'network.group.form.description.PLACEHOLDER' | translate }}"
-  ng-model="groupForm.input.description"
+  placeholder="{{ 'network.group.form.billing_id.PLACEHOLDER' | translate }}"
+  ng-model="groupForm.input.billing_id"
 )
 
-+textarea(
-  "{{ 'network.group.form.body.LABEL' | translate }}",
-  "body"
-)(
-  placeholder="{{ 'network.group.form.body.PLACEHOLDER' | translate }}"
-  ng-model="groupForm.input.body"
-  rows="20"
-)
-
-+label("{{ 'network.group.form.is_installable.LABEL' | translate }}")
++label("{{ 'network.group.form.options.LABEL' | translate }}")
   +checkbox()(
-    ng-model="groupForm.input.is_installable"
-  )
+    ng-model="groupForm.input.reserved"
+  ) {{ 'network.group.form.options.reserved.LABEL' | translate }}

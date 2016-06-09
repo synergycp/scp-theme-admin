@@ -17,7 +17,6 @@
     vm.list.bulk.add('Delete', vm.list.delete);
 
     vm.create = {
-      input: {},
       submit: create,
     };
 
@@ -36,7 +35,7 @@
     }
 
     function create() {
-      vm.list.create(vm.create.input);
+      vm.list.create(vm.create.getData());
     }
   }
 })();

@@ -2,11 +2,9 @@ extends /resources/jade/edit
 
 block title
   span(
-    data-translate='client.form.title.EDIT'
-    data-translate-value-email='{{vm.input.email}}'
+    data-translate='user.client.form.title.EDIT'
+    data-translate-value-email='{{vm.edit.input.email}}'
   )
 
 block form
-  client-form(
-    input="vm.input"
-  )
+  client-form(form="vm.edit")

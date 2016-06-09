@@ -25,7 +25,7 @@
       require: {
       },
       bindings: {
-        input: '=',
+        form: '=',
       },
       controller: 'ProfileFormCtrl as profileForm',
       transclude: true,
@@ -42,7 +42,13 @@
     //////////
 
     function init() {
+      profileForm.form.getData = getData;
+      profileForm.input = profileForm.form.input = profileForm.form.input || {};
       _.assign(profileForm.input, INPUTS);
+    }
+
+    function getData() {
+      return _.clone(profileForm.input);
     }
   }
 })();

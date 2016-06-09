@@ -24,11 +24,11 @@
     "sref": "#",
     "icon": "fa fa-server",
     "submenu": [
-        {"text": "Servers",         "sref": "app.servers"},
-        {"text": "Server Inventory","sref": "app.servers.inventory"},
-        {"text": "Provision",       "sref": "app.servers.provision"},
-        {"text": "Part Inventory",  "sref": "app.parts"},
-        {"text": "Switches",        "sref": "app.switches"}
+        {"text": "Servers",         "sref": "app.hardware.server"},
+        {"text": "Server Inventory","sref": "app.hardware.server.inventory"},
+        {"text": "Provision",       "sref": "app.hardware.server.provision"},
+        {"text": "Part Inventory",  "sref": "app.hardware.part"},
+        {"text": "Switches",        "sref": "app.hardware.switch"}
     ]
   },
   {
@@ -43,32 +43,25 @@
   },
   {
     "text": "System",
-    "sref": "#",
+    "sref": "app.system.setting",
     "icon": "fa fa-wrench",
     "submenu": [
-        {"text": "Settings",        "sref": "app.system.settings"},
-        {"text": "Logs",            "sref": "app.system.logs"}
+        {"text": "Settings",        "sref": "app.system.setting"},
+        {"text": "Emails",          "sref": "app.system.email"},
+        {"text": "Logs",            "sref": "app.system.log"}
     ]
   },
   {
     "text": "OS Reload",
     "sref": "app.pxe.install.list",
-    "icon": "fa fa-wrench",
+    "icon": "fa fa-upload",
     "submenu": [
         {"text": "Installs",        "sref": "app.pxe.install"},
         {"text": "Preseeds",        "sref": "app.pxe.preseed"},
         {"text": "Profiles",        "sref": "app.pxe.profile"},
         {"text": "Shell Scripts",   "sref": "app.pxe.shell"},
+        {"text": "Boot Scripts",    "sref": "app.pxe.boot"},
         {"text": "ISO Manager",     "sref": "app.pxe.iso"}
-    ]
-  },
-  {
-    "text": "Templates",
-    "sref": "#",
-    "icon": "fa fa-file-code-o",
-    "submenu": [
-        {"text": "Emails",          "sref": "app.templates.emails"},
-        {"text": "PXE Scripts",     "sref": "app.templates.pxe"}
     ]
   }
 ]

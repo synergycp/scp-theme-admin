@@ -1,0 +1,12 @@
+extends /resources/jade/list-page
+include /resources/jade/mixins/list
+
+block list
+  include email.list.jade
+
+block bottom-left
+  logs(
+    title="Email Template Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

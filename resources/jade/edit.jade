@@ -2,7 +2,7 @@ doctype html
 
 .row
   .col-md-6
-    form.form-horizontal(ng-submit="vm.submit()")
+    form.form-horizontal(ng-submit="vm.edit.submit()")
       .panel.panel-default.relative(
         ng-class="vm.edit.loader.class"
       )
@@ -25,6 +25,7 @@ doctype html
   .col-md-6
     block right-side
       logs(
+        ng-if="vm.logs"
         title="Logs"
         filter="vm.logs.filter"
         listen-to="vm.edit"

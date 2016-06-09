@@ -58,6 +58,40 @@
         controller: 'PreseedViewCtrl as vm',
         templateUrl: helper.basepath('pxe/preseed/preseed.view.html'),
       })
+      .state('app.pxe.iso', {
+        url: '/iso',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.pxe.iso.list', {
+        url: '',
+        title: 'ISO Manager',
+        controller: 'IsoListCtrl as vm',
+        templateUrl: helper.basepath('pxe/iso/iso.index.html'),
+      })
+      .state('app.pxe.iso.view', {
+        url: '/:id',
+        title: 'View ISO',
+        controller: 'IsoViewCtrl as vm',
+        templateUrl: helper.basepath('pxe/iso/iso.view.html'),
+      })
+      .state('app.pxe.boot', {
+        url: '/boot',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.pxe.boot.list', {
+        url: '',
+        title: 'Boot Scripts',
+        controller: 'BootListCtrl as vm',
+        templateUrl: helper.basepath('pxe/boot/boot.index.html'),
+      })
+      .state('app.pxe.boot.view', {
+        url: '/:id',
+        title: 'View Boot Script',
+        controller: 'BootViewCtrl as vm',
+        templateUrl: helper.basepath('pxe/boot/boot.view.html'),
+      })
       .state('app.pxe.shell', {
         url: '/shell',
         abstract: true,

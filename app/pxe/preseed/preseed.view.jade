@@ -3,8 +3,8 @@ extends /resources/jade/edit
 block title
   span(
     data-translate='pxe.preseed.form.title.EDIT'
-    data-translate-value-name='{{vm.input.name}}'
+    data-translate-value-name='{{vm.edit.input.name}}'
   )
 
 block form
-  preseed-form(input="vm.input")
+  preseed-form(form="vm.edit")

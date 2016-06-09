@@ -5,8 +5,8 @@ block list
   include shell.list.jade
 
 block bottom-left
-  +create-form("Create PXE Shell Script")
-    shell-form(input="vm.create.input")
+  +create-form("{{ 'pxe.shell.form.title.ADD' | translate }}")
+    shell-form(form="vm.create")
 
 block bottom-right
   logs(

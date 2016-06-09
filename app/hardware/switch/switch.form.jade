@@ -63,3 +63,26 @@ include /resources/jade/mixins/form
   placeholder="{{ 'hardware.switch.form.snmp.PLACEHOLDER' | translate }}"
   ng-model="switchForm.input.snmp_pass"
 )
+
++label("{{ 'hardware.switch.form.group.LABEL' | translate }}")
+  ui-select(
+    multiple
+    ng-model="switchForm.groups.selected"
+    theme="bootstrap"
+    close-on-select="false"
+  )
+    ui-select-match(placeholder="{{ 'hardware.switch.form.group.LABEL' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+        "group in (" +
+          "switchForm.groups.items |" +
+          "filter: {name: $select.search} |" +
+          "filter: switchForm.notSelected" +
+        ") track by group.id"
+      refresh="switchForm.groups.load($select.search)"
+      refresh-delay="0"
+    )
+      div(ng-bind-html="group.name | highlight: $select.search")
+        small servers: {{ group.serversCount }}

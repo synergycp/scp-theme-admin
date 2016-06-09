@@ -14,6 +14,8 @@
   "bower_components/angular-ui-scrollpoint/dist/scrollpoint.js",
   "bower_components/angular-ui-scroll/dist/ui-scroll.js",
   "bower_components/angular-ui-uploader/dist/uploader.js",
+  "bower_components/angular-ui-select/dist/select.min.js",
+  "bower_components/angular-ui-select/dist/select.min.css",
   "bower_components/angular-sanitize/angular-sanitize.js",
   "bower_components/angular-translate/angular-translate.js",
   "bower_components/angular-translate-loader-url/angular-translate-loader-url.js",

@@ -17,11 +17,87 @@ include /resources/jade/mixins/form
   ng-model="serverForm.input.mac"
 )
 
-// Hardware Dropdowns
++label("{{ 'hardware.server.form.cpu.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.input.cpu")
+    ui-select-match(placeholder="{{ 'hardware.server.form.cpu.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "cpu in (" +
+          "serverForm.cpu.items" +
+          "| filter: {name: $select.search}" +
+        ") track by cpu.id"
+      refresh="serverForm.cpu.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="cpu.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.mem.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.input.mem")
+    ui-select-match(placeholder="{{ 'hardware.server.form.mem.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "mem in (" +
+          "serverForm.mem.items" +
+          "| filter: {name: $select.search}" +
+        ") track by mem.id"
+      refresh="serverForm.mem.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="mem.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.disk.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.input.disks[0]")
+    ui-select-match(placeholder="{{ 'hardware.server.form.disk.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "disk in (" +
+          "serverForm.disk.items" +
+          "| filter: {name: $select.search}" +
+        ") track by disk.id"
+      refresh="serverForm.disk.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="disk.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.add-on.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.input.addon")
+    ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "addon in (" +
+          "serverForm.addon.items" +
+          "| filter: {name: $select.search}" +
+        ") track by addon.id"
+      refresh="serverForm.addon.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="addon.name | highlight: $select.search")
 
 hr
 
-// Switch Dropdown
++label("{{ 'hardware.server.form.switch.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.switch.selected")
+    ui-select-match(placeholder="{{ 'hardware.server.form.switch.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "switch in (" +
+          "serverForm.switch.items" +
+          "| filter: {name: $select.search}" +
+        ") track by switch.id"
+      refresh="serverForm.switch.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="switch.name | highlight: $select.search")
 
 +label("{{ 'hardware.server.form.switch.port.LABEL' | translate }}")
   .row
@@ -32,12 +108,60 @@ hr
         ng-model="serverForm.input.switch.port"
       )
     .col-xs-6
-      select.form-control(
-        ng-model="serverForm.input.switch.speed"
-      )
-        option 10mbps
+      ui-select(ng-model="serverForm.input.switch.speed")
+        ui-select-match
+          | {{ $select.selected.name }}
 
-// IP Group/Entities
+        ui-select-choices(
+          repeat=
+            "switchSpeed in (" +
+              "serverForm.switchSpeed.items" +
+              "| filter: {name: $select.search}" +
+            ") track by switchSpeed.id"
+          refresh="serverForm.switchSpeed.load($select.search)"
+          refresh-delay="0"
+        )
+          span(ng-bind-html="switchSpeed.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.group.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.input.group")
+    ui-select-match(placeholder="{{ 'hardware.server.form.group.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "group in (" +
+          "serverForm.group.items" +
+          "| filter: {name: $select.search}" +
+        ") track by group.id"
+      refresh="serverForm.group.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="group.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.entities.LABEL' | translate }}")
+  ui-select(
+    multiple
+    ng-model="serverForm.entities.selected"
+    close-on-select="false"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.entities.PLACEHOLDER' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+        "entity in (" +
+          "serverForm.entities.items" +
+          "| filter: {name: $select.search}" +
+        ") track by entity.id"
+      refresh="serverForm.entities.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="entity.name | highlight: $select.search")
+      small
+        | (VLAN:
+        span(ng-bind-html="entity.vlan | highlight: $select.search")
+        | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
 
 hr
 
@@ -78,9 +202,27 @@ hr
         placeholder="{{ 'hardware.server.form.ipmi.client.password.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.client.password"
       )
+
 hr 
 
-// Client 
++label("{{ 'hardware.server.form.client.LABEL' | translate }}")
+  +input-with-btn("fa fa-times-circle")(
+    ng-click="serverForm.input.client = null"
+  )
+    ui-select(ng-model="serverForm.input.client")
+      ui-select-match(placeholder="{{ 'hardware.server.form.client.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "client in (" +
+            "serverForm.client.items" +
+            "| filter: {name: $select.search}" +
+          ") track by client.id"
+        refresh="serverForm.client.load($select.search)"
+        refresh-delay="0"
+      )
+        span(ng-bind-html="client.name | highlight: $select.search")
 
 +field(
   "{{ 'hardware.server.form.billing.id.LABEL' | translate }}",

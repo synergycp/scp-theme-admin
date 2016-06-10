@@ -79,7 +79,7 @@ include /resources/jade/mixins/form
         "group in (" +
           "switchForm.groups.items |" +
           "filter: {name: $select.search} |" +
-          "filter: switchForm.notSelected" +
+          "filter: switchForm.groups.notSelected" +
         ") track by group.id"
       refresh="switchForm.groups.load($select.search)"
       refresh-delay="0"

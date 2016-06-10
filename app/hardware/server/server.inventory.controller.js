@@ -2,18 +2,21 @@
   'use strict';
 
   angular
-    .module('app.user')
-    .controller('AdminListCtrl', AdminListCtrl);
+    .module('app.hardware')
+    .controller('ServerInventoryCtrl', ServerInventoryCtrl)
+    ;
 
   /**
+   * ServerInventory Controller
+   *
    * @ngInject
    */
-  function AdminListCtrl(List) {
+  function ServerInventoryCtrl(ServerList) {
     var vm = this;
 
-    vm.list = List('admin');
-    vm.list.bulk.add('Delete', vm.list.delete);
-
+    vm.list = ServerList().filter({
+      available: 1,
+    });
     vm.create = {
       input: {},
       submit: create,
@@ -21,7 +24,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'admin',
+        target_type: 'server',
       },
     };
 

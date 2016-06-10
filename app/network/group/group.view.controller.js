@@ -15,7 +15,6 @@
     var vm = this;
 
     vm.edit = Edit('group/'+$stateParams.id);
-    vm.edit.input = {};
     vm.edit.submit = submit;
     vm.logs = {
       filter: {

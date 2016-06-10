@@ -11,17 +11,68 @@ include /resources/jade/mixins/form
   ng-model="profileForm.input.billing_id"
 )
 
-+field("{{ 'pxe.profile.form.preseed.LABEL' | translate }}", "pxe_preseed_id")(
-  ng-model="profileForm.input.preseed.id"
-)
++label("{{ 'pxe.profile.form.preseed.LABEL' | translate }}")
+  .input-group
+    ui-select(ng-model="profileForm.input.preseed")
+      ui-select-match(placeholder="{{ 'pxe.profile.form.preseed.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
 
-+field("{{ 'pxe.profile.form.boot.LABEL' | translate }}", "pxe_template_id")(
-  ng-model="profileForm.input.boot_script.id"
-)
+      ui-select-choices(
+        repeat=
+          "preseed in (" +
+            "profileForm.preseeds.items" +
+            "| filter: {name: $select.search}" +
+          ") track by preseed.id"
+        refresh="profileForm.preseeds.load($select.search)"
+        refresh-delay="0"
+      )
+        span(ng-bind-html="preseed.name | highlight: $select.search")
+    span.input-group-btn
+      button.btn.btn-default(
+        type="button"
+        ng-click="profileForm.input.preseed = null"
+      )
+        span.fa.fa-times-circle
 
-+field("{{ 'pxe.profile.form.iso.LABEL' | translate }}", "iso_id")(
-  ng-model="profileForm.input.iso.id"
-)
++label("{{ 'pxe.profile.form.boot.LABEL' | translate }}")
+  ui-select(ng-model="profileForm.input.boot_script")
+    ui-select-match(placeholder="{{ 'pxe.profile.form.boot.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "bootScript in (" +
+          "profileForm.bootScripts.items" +
+          "| filter: {name: $select.search}" +
+        ") track by bootScript.id"
+      refresh="profileForm.bootScripts.load($select.search)"
+      refresh-delay="0"
+    )
+      span(ng-bind-html="bootScript.name | highlight: $select.search")
+
++label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
+  .input-group 
+    ui-select(ng-model="profileForm.input.iso")
+      ui-select-match(placeholder="{{ 'pxe.profile.form.iso.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "iso in (" +
+            "profileForm.isos.items" +
+            "| filter: {name: $select.search}" +
+          ") track by iso.id"
+        refresh="profileForm.isos.load($select.search)"
+        refresh-delay="0"
+      )
+        span(ng-bind-html="iso.name | highlight: $select.search")
+        small ({{ iso.status }})
+    span.input-group-btn
+      button.btn.btn-default(
+        type="button"
+        ng-click="profileForm.input.iso = null"
+      )
+        span.fa.fa-times-circle
 
 +label("{{ 'pxe.profile.form.client_access.LABEL' | translate }}")
   +checkbox()(

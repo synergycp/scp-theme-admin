@@ -180,13 +180,16 @@
           "PLACEHOLDER": "Optional. Must be unique"
         },
         "preseed": {
-          "LABEL": "Preseed"
+          "LABEL": "Preseed",
+          "PLACEHOLDER": "Type to search..."
         },
         "iso": {
-          "LABEL": "ISO"
+          "LABEL": "ISO",
+          "PLACEHOLDER": "Type to search..."
         },
         "boot": {
-          "LABEL": "Boot Script"
+          "LABEL": "Boot Script",
+          "PLACEHOLDER": "Type to search..."
         },
         "client_access": {
           "LABEL": "Client Access"
@@ -233,7 +236,8 @@
           "PLACEHOLDER": "Optional"
         },
         "group": {
-          "LABEL": "Group"
+          "LABEL": "Group",
+          "PLACEHOLDER": "Type to search..."
         },
         "vlan": {
           "LABEL": "VLAN",
@@ -363,13 +367,16 @@
           "PLACEHOLDER": "Required to enable PXE"
         },
         "cpu": {
-          "LABEL": "CPU"
+          "LABEL": "CPU",
+          "PLACEHOLDER": "Type to search..."
         },
         "mem": {
-          "LABEL": "Memory"
+          "LABEL": "Memory",
+          "PLACEHOLDER": "Type to search..."
         },
         "disk": {
-          "LABEL": "Disk"
+          "LABEL": "Disk",
+          "PLACEHOLDER": "Type to search..."
         },
         "add-on": {
           "LABEL": "Add-On",
@@ -380,20 +387,16 @@
           "port": {
             "LABEL": "Switch Port",
             "PLACEHOLDER": "ex. Gi0/0/1"
-          }
+          },
+          "PLACEHOLDER": "Type to search..."
         },
         "group": {
-          "LABEL": "IP Group"
+          "LABEL": "IP Group",
+          "PLACEHOLDER": "Type to search..."
         },
-        "entity": {
-          "primary": {
-            "LABEL": "IP Entity",
-            "PLACEHOLDER": "Assign an IP Entity"
-          },
-          "secondary": {
-            "LABEL": "IP Entity",
-            "PLACEHOLDER": "Assign an extra IP Entity"
-          }
+        "entities": {
+          "LABEL": "IP Entity",
+          "PLACEHOLDER": "Assign an IP Entity"
         },
         "ipmi": {
           "ip": {

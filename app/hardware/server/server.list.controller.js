@@ -8,16 +8,10 @@
   /**
    * @ngInject
    */
-  function ServerListCtrl(List, $stateParams) {
+  function ServerListCtrl(ServerList) {
     var vm = this;
 
-    vm.list = List('server').filter({
-      hub: $stateParams.switch,
-      group: $stateParams.group,
-      client: $stateParams.client,
-    });
-    vm.list.bulk.add('Delete', vm.list.delete);
-
+    vm.list = ServerList();
     vm.create = {
       input: {},
       submit: create,

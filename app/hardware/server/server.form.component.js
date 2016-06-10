@@ -4,18 +4,10 @@
   var INPUTS = {
     srv_id: '',
     mac: '',
-    cpu: {
-      id: null,
-      name: '',
-    },
-    mem: {
-      id: null,
-      name: '',
-    },
-    disks: [{
-      id: null,
-      name: '',
-    }],
+    cpu: null,
+    mem: null,
+    disks: [null],
+    entities: [],
     ipmi: {
       ip: '',
       admin: {
@@ -30,7 +22,7 @@
     switch: {
       id: null,
       port: '',
-      speed: null
+      speed: null,
     },
     billing: {
       id: '',
@@ -59,10 +51,22 @@
     .controller('ServerFormCtrl', ServerFormCtrl)
     ;
 
-  function ServerFormCtrl() {
+  /**
+   * @ngInject
+   */
+  function ServerFormCtrl(_, Select) {
     var serverForm = this;
 
     serverForm.$onInit = init;
+    serverForm.switch = Select('switch');
+    serverForm.cpu = Select('part?part_type=cpu');
+    serverForm.mem = Select('part?part_type=mem');
+    serverForm.disk = Select('part?part_type=disk');
+    serverForm.addon = Select('part?part_type=add-on');
+    serverForm.group = Select('group');
+    serverForm.client = Select('client');
+    serverForm.switchSpeed = Select('port-speed');
+    serverForm.entities = Select('entity');
 
     //////////
 

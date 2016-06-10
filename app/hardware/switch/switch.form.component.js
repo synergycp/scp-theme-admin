@@ -27,20 +27,22 @@
     .controller('SwitchFormCtrl', SwitchFormCtrl)
     ;
 
-  function SwitchFormCtrl(Api, $q) {
+  /**
+   * @ngInject
+   */
+  function SwitchFormCtrl(Api) {
     var switchForm = this;
     var $groups = Api.all('group');
-    var waitForCurrentGroups = $q.defer();
 
     switchForm.switchTypes = ['Dell', 'Juniper'];
     switchForm.groups = {
       items: [],
       selected: [],
       load: loadGroups,
+      notSelected: groupNotSelected,
     };
 
     switchForm.$onInit = init;
-    switchForm.notSelected = notSelected;
 
     //////////
 
@@ -54,7 +56,6 @@
           var items = switchForm.groups.selected;
 
           _.setContents(items, response.groups);
-          waitForCurrentGroups.resolve(items);
         });
       }
     }
@@ -74,14 +75,10 @@
     }
 
     function storeGroups(groups) {
-      return waitForCurrentGroups.promise.then(function () {
-        //console.log(groups = _.filter(groups, notSelected));
-        _.setContents(switchForm.groups.items, groups);
-      });
+      _.setContents(switchForm.groups.items, groups);
     }
 
-    function notSelected(group) {
-      console.log('hmm');
+    function groupNotSelected(group) {
       return !_.some(switchForm.groups.selected, {id: group.id});
     }
   }

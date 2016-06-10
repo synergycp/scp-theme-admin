@@ -25,6 +25,9 @@
     .controller('AdminFormCtrl', AdminFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function AdminFormCtrl() {
     var adminForm = this;
 

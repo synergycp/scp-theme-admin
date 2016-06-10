@@ -23,6 +23,9 @@
     .controller('PreseedFormCtrl', PreseedFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function PreseedFormCtrl() {
     var preseedForm = this;
 

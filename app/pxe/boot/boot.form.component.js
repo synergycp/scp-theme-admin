@@ -21,6 +21,9 @@
     .controller('BootFormCtrl', BootFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function BootFormCtrl() {
     var bootForm = this;
 

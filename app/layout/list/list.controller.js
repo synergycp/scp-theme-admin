@@ -5,7 +5,9 @@
     .module('app.layout.list')
     .controller('ListCtrl', ListCtrl);
 
-  /*ngInject*/
+  /**
+   * @ngInject
+   */
   function ListCtrl (_, $timeout) {
     var listCtrl = this;
 

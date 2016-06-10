@@ -16,6 +16,7 @@
     nickname: '',
     billing_id: '',
     vlan: '',
+    group: null,
     v4: {
       address: '',
       gateway: '',
@@ -51,8 +52,9 @@
   /**
    * @ngInject
    */
-  function EntityFormCtrl(_) {
+  function EntityFormCtrl(_, Api) {
     var entityForm = this;
+    var $groups = Api.all('group');
 
     entityForm.types = TYPES;
     entityForm.type = TYPE.V4;
@@ -67,6 +69,11 @@
     };
     entityForm.$onInit = init;
     entityForm.onTypeChange = onTypeChange;
+
+    entityForm.groups = {
+      items: [],
+      load: loadGroups,
+    };
 
     activate();
 
@@ -174,6 +181,16 @@
       return entityForm.input.v4.range_end ?
         entityForm.input.v4.range_end.match(/\d+$/).pop() :
         null;
+    }
+
+    function loadGroups(search) {
+      $groups.getList({ q: search })
+        .then(storeGroups)
+        ;
+    }
+
+    function storeGroups(groups) {
+      _.setContents(entityForm.groups.items, groups);
     }
   }
 })();

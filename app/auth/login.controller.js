@@ -13,7 +13,7 @@
   /**
    * @ngInject
    */
-  function AuthLoginController(Auth, $state) {
+  function AuthLoginController(Auth, Alert) {
     var vm = this;
 
     vm.type = 'admin';
@@ -46,6 +46,8 @@
 
         return;
       }
+
+      Alert.clear();
 
       var remember = false; // TODO
 

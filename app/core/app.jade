@@ -14,7 +14,16 @@ section
 
 // Alerts section
 .alerts(ng-controller="AlertController as alert")
-  .alert(ng-repeat="message in alert.items", ng-class="'alert-'+message.type")
+  .alert(
+    ng-repeat="message in alert.items"
+    ng-class="'alert-'+message.type"
+  )
+    button.close(
+      type="button"
+      aria-label="Close"
+      ng-click="message.remove()"
+    )
+      span(aria-hidden="true") &times;
     | {{message.text}}
 
 // Page footer

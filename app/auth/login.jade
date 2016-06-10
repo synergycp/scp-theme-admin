@@ -1,5 +1,9 @@
 doctype html
 .block-center.mt-xl.wd-xl(ng-controller="AuthLoginController as login")
+  .auth-alerts(ng-controller="AlertController as alert")
+    .alert(ng-repeat="message in alert.items", ng-class="'alert-'+message.type")
+      | {{message.text}}
+
   // START panel
   .panel.panel-inverse.panel-flat
     .panel-heading.text-center
@@ -55,10 +59,10 @@ doctype html
           .pull-right
             a.text-muted(ui-sref="auth.recover")
               | {{ 'auth.login.FORGOT' | translate }}
-        
+
         button.btn.btn-block.btn-primary.mt-lg(type='submit')
           | {{ 'auth.login.LOGIN' | translate }}
-      
+
       .alert.alert-danger.text-center(ng-show='login.authMsg') {{login.authMsg}}
   // END panel
   .p-lg.text-center

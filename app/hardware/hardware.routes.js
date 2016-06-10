@@ -18,6 +18,12 @@
         abstract: true,
         template: helper.dummyTemplate,
       })
+      .state('app.hardware.server.inventory', {
+        url: '/inventory',
+        title: 'Server Inventory',
+        controller: 'ServerInventoryCtrl as vm',
+        templateUrl: helper.basepath('hardware/server/server.inventory.html'),
+      })
       .state('app.hardware.server.list', {
         url: '?switch&group&client',
         title: 'Servers',

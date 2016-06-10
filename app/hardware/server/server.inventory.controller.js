@@ -3,15 +3,20 @@
 
   angular
     .module('app.hardware')
-    .controller('ServerListCtrl', ServerListCtrl);
+    .controller('ServerInventoryCtrl', ServerInventoryCtrl)
+    ;
 
   /**
+   * ServerInventory Controller
+   *
    * @ngInject
    */
-  function ServerListCtrl(ServerList) {
+  function ServerInventoryCtrl(ServerList) {
     var vm = this;
 
-    vm.list = ServerList();
+    vm.list = ServerList().filter({
+      available: 1,
+    });
     vm.create = {
       input: {},
       submit: create,

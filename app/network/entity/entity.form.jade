@@ -25,6 +25,29 @@ include /resources/jade/mixins/form
   ng-model="entityForm.input.vlan"
 )
 
++label("{{ 'network.entity.form.group.LABEL' | translate }}")
+  .input-group
+    ui-select(ng-model="entityForm.input.group")
+      ui-select-match(placeholder="{{ 'network.entity.form.group.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "group in (" +
+            "entityForm.groups.items" +
+            "| filter: {name: $select.search}" +
+          ") track by group.id"
+        refresh="entityForm.groups.load($select.search)"
+        refresh-delay="0"
+      )
+        span(ng-bind-html="group.name | highlight: $select.search")
+    span.input-group-btn
+      button.btn.btn-default(
+        type="button"
+        ng-click="entityForm.input.group = null"
+      )
+        span.fa.fa-times-circle
+
 +select(
   "{{ 'network.entity.form.type.LABEL' | translate }}",
   "type"

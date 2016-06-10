@@ -16,6 +16,9 @@
     .controller('SortCtrl', SortCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function SortCtrl(EventEmitter) {
     var sortCtrl = this;
 

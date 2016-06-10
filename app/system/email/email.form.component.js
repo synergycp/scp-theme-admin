@@ -22,6 +22,9 @@
     .controller('EmailFormCtrl', EmailFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function EmailFormCtrl() {
     var emailForm = this;
 

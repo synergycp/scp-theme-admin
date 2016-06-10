@@ -51,6 +51,9 @@
     .controller('ServerFormCtrl', ServerFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function ServerFormCtrl(_, Select) {
     var serverForm = this;
 

@@ -24,6 +24,9 @@
     .controller('ClientFormCtrl', ClientFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function ClientFormCtrl() {
     var clientForm = this;
 

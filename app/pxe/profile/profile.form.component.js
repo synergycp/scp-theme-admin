@@ -25,6 +25,9 @@
     .controller('ProfileFormCtrl', ProfileFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function ProfileFormCtrl(Api, _) {
     var profileForm = this;
     var $preseeds = Api.all('pxe/preseed');

@@ -27,6 +27,9 @@
     .controller('SwitchFormCtrl', SwitchFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function SwitchFormCtrl(Api) {
     var switchForm = this;
     var $groups = Api.all('group');

@@ -22,6 +22,9 @@
     .controller('GroupFormCtrl', GroupFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function GroupFormCtrl() {
     var groupForm = this;
 

@@ -22,6 +22,9 @@
     .controller('ShellFormCtrl', ShellFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function ShellFormCtrl() {
     var shellForm = this;
 

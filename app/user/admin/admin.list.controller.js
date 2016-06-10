@@ -5,7 +5,9 @@
     .module('app.user')
     .controller('AdminListCtrl', AdminListCtrl);
 
-  /*@ngInject*/
+  /**
+   * @ngInject
+   */
   function AdminListCtrl(List) {
     var vm = this;
 

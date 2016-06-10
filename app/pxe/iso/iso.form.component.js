@@ -23,6 +23,9 @@
     .controller('ISOFormCtrl', ISOFormCtrl)
     ;
 
+  /**
+   * @ngInject
+   */
   function ISOFormCtrl() {
     var isoForm = this;
 

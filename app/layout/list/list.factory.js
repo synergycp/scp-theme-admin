@@ -20,6 +20,7 @@
     var list = this;
     var $api = api;
     var filter = {};
+    var refreshInterval;
 
     list.items = [];
     list.sortQuery = {};
@@ -33,6 +34,7 @@
     list.sort = sort;
     list.clearSort = clearSort;
     list.filter = setFilter;
+    list.refreshEvery = refreshEvery;
 
     event.bindTo(list);
 
@@ -44,6 +46,18 @@
       list.pages.on('change', list.load);
 
       setBulkEvents();
+    }
+
+    function refreshEvery(interval) {
+      if (refreshInterval) {
+        clearInterval(refreshInterval);
+      }
+
+      if (interval) {
+        refreshInterval = setInterval(list.load, interval);
+      }
+
+      return list;
     }
 
     function setBulkEvents() {

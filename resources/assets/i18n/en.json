@@ -106,6 +106,20 @@
     }
   },
   "pxe": {
+    "install": {
+      "progress": {
+        "RELOADING": "This server's operating system is being reloaded.",
+        "OS": "Operating System: {{ value }}",
+        "STATUS": "Status: {{ value }}",
+        "UPDATED": "Last Updated: {{ value }}",
+        "STARTED": "Install Started: {{ value }}",
+        "CANCEL": "Progress bar stopped?",
+        "delete": {
+          "TITLE": "Are you sure?",
+          "BODY": "This will stop tracking the installation and reboot the server via IPMI. If the server hasn't started overwriting the disk yet, then it will be left in its original state."
+        }
+      }
+    },
     "shell": {
       "form": {
         "title": {

@@ -191,6 +191,14 @@
           "LABEL": "Boot Script",
           "PLACEHOLDER": "Type to search..."
         },
+        "shell": {
+          "LABEL": "Shell Scripts",
+          "PLACEHOLDER": "Type to search..."
+        },
+        "driver": {
+          "LABEL": "Drivers",
+          "PLACEHOLDER": "Type to search..."
+        },
         "client_access": {
           "LABEL": "Client Access"
         }

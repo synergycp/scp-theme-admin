@@ -28,25 +28,15 @@
   /**
    * @ngInject
    */
-  function ProfileFormCtrl(Api, _) {
+  function ProfileFormCtrl(Select, _) {
     var profileForm = this;
-    var $preseeds = Api.all('pxe/preseed');
-    var $bootScripts = Api.all('pxe/template');
-    var $isos = Api.all('pxe/iso');
 
     profileForm.$onInit = init;
-    profileForm.preseeds = {
-      items: [],
-      load: loadPreseeds,
-    };
-    profileForm.bootScripts = {
-      items: [],
-      load: loadBootScripts,
-    };
-    profileForm.isos = {
-      items: [],
-      load: loadIsos,
-    };
+    profileForm.preseeds = Select('pxe/preseed');
+    profileForm.bootScripts = Select('pxe/template');
+    profileForm.isos = Select('pxe/iso');
+    profileForm.shellScripts = Select('pxe/shell').multi();
+    profileForm.drivers = Select('pxe/driver').multi();
 
     //////////
 
@@ -54,40 +44,28 @@
       profileForm.form.getData = getData;
       profileForm.input = profileForm.form.input = profileForm.form.input || {};
       _.assign(profileForm.input, INPUTS);
+
+      if (profileForm.form.on) {
+        subscribeTo(profileForm.form);
+      }
+    }
+
+    function subscribeTo(data) {
+      data.on(['load', 'change'], function (response) {
+        _.setContents(profileForm.shellScripts.selected, response.shell.after);
+        _.setContents(profileForm.drivers.selected, response.drivers);
+      });
     }
 
     function getData() {
-      return _.clone(profileForm.input);
-    }
+      var data = _.clone(profileForm.input);
 
-    function loadPreseeds(search) {
-      $preseeds.getList({ q: search })
-        .then(storePreseeds)
-        ;
-    }
+      data.shell = {
+        after: _.map(profileForm.shellScripts.selected, 'id'),
+      };
+      data.drivers = _.map(profileForm.drivers.selected, 'id');
 
-    function storePreseeds(preseeds) {
-      _.setContents(profileForm.preseeds.items, preseeds);
-    }
-
-    function loadBootScripts(search) {
-      $bootScripts.getList({ q: search })
-        .then(storeBootScripts)
-        ;
-    }
-
-    function storeBootScripts(bootScripts) {
-      _.setContents(profileForm.bootScripts.items, bootScripts);
-    }
-
-    function loadIsos(search) {
-      $isos.getList({ q: search })
-        .then(storeIsos)
-        ;
-    }
-
-    function storeIsos(bootScripts) {
-      _.setContents(profileForm.isos.items, bootScripts);
+      return data;
     }
   }
 })();

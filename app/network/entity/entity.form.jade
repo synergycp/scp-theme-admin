@@ -38,7 +38,7 @@ include /resources/jade/mixins/form
             "| filter: {name: $select.search}" +
           ") track by group.id"
         refresh="entityForm.groups.load($select.search)"
-        refresh-delay="0"
+        refresh-delay="400"
       )
         span(ng-bind-html="group.name | highlight: $select.search")
     span.input-group-btn

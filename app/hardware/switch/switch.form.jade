@@ -82,7 +82,7 @@ include /resources/jade/mixins/form
           "filter: switchForm.groups.notSelected" +
         ") track by group.id"
       refresh="switchForm.groups.load($select.search)"
-      refresh-delay="0"
+      refresh-delay="400"
     )
       div(ng-bind-html="group.name | highlight: $select.search")
         small servers: {{ group.serversCount }}

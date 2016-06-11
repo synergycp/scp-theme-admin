@@ -1,0 +1,21 @@
+extends /resources/jade/list-checkable
+
+block title
+  | {{ 'hardware.speed.list.TITLE' | translate }} 
+
+block headings
+  th.relative Name
+    sort(col="name")
+  th.relative Billing ID
+    sort(col="billing_id")
+  th Servers
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td {{ row.billing_id }}
+  td {{ row.server_count }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.hardware.switch.speed.view({id: row.id})")
+        | {{ 'action.EDIT' | translate }}

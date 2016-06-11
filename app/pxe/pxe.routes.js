@@ -21,7 +21,7 @@
       .state('app.pxe.install.list', {
         url: '',
         title: 'PXE Installs',
-        //controller: 'ClientListCtrl as vm',
+        controller: 'InstallIndexCtrl as vm',
         templateUrl: helper.basepath('pxe/install/install.index.html'),
       })
       .state('app.pxe.profile', {

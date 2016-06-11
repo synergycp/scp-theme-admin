@@ -50,6 +50,7 @@
   "devDependencies": {
     "restangular": "^1.5.2",
     "lodash": "^4.11.2",
-    "angular-ui-select": "^0.17.1"
+    "angular-ui-select": "^0.17.1",
+    "angular-ui-bootstrap": "^1.3.3"
   }
 }

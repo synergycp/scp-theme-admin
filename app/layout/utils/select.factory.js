@@ -19,6 +19,7 @@
   function Select ($api, _) {
     // Private variables
     var select = this;
+    var filter = {};
 
     // Public variables
     select.items = [];
@@ -29,14 +30,21 @@
     select.load = load;
     select.notSelected = notSelected;
     select.multi = multi;
+    select.filter = setFilter;
 
     //////////
 
     function load(search) {
       return $api
-        .getList({ q: search })
+        .getList(_.assign({}, filter, { q: search }))
         .then(store)
         ;
+    }
+
+    function setFilter(newFilters) {
+      _.assign(filter, newFilters);
+
+      return select;
     }
 
     function multi() {

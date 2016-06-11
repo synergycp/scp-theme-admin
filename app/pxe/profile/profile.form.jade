@@ -24,7 +24,7 @@ include /resources/jade/mixins/form
             "| filter: {name: $select.search}" +
           ") track by preseed.id"
         refresh="profileForm.preseeds.load($select.search)"
-        refresh-delay="0"
+        refresh-delay="400"
       )
         span(ng-bind-html="preseed.name | highlight: $select.search")
     span.input-group-btn
@@ -46,7 +46,7 @@ include /resources/jade/mixins/form
           "| filter: {name: $select.search}" +
         ") track by bootScript.id"
       refresh="profileForm.bootScripts.load($select.search)"
-      refresh-delay="0"
+      refresh-delay="400"
     )
       span(ng-bind-html="bootScript.name | highlight: $select.search")
 
@@ -63,7 +63,7 @@ include /resources/jade/mixins/form
             "| filter: {name: $select.search}" +
           ") track by iso.id"
         refresh="profileForm.isos.load($select.search)"
-        refresh-delay="0"
+        refresh-delay="400"
       )
         span(ng-bind-html="iso.name | highlight: $select.search")
         small ({{ iso.status }})
@@ -73,6 +73,43 @@ include /resources/jade/mixins/form
         ng-click="profileForm.input.iso = null"
       )
         span.fa.fa-times-circle
+
+div(ng-if="profileForm.input.iso")
+  +label("{{ 'pxe.profile.form.driver.LABEL' | translate }}")
+    ui-select(multiple, sortable="true", ng-model="profileForm.drivers.selected")
+      ui-select-match(placeholder="{{ 'pxe.profile.form.driver.PLACEHOLDER' | translate }}")
+        | {{ $item.name }}
+
+      ui-select-choices(
+        repeat=
+          "driver in (" +
+            "profileForm.drivers.items" +
+            "| filter: {name: $select.search}" +
+            "| filter: profileForm.drivers.notSelected" +
+          ") track by driver.id"
+        refresh="profileForm.drivers.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="driver.name | highlight: $select.search")
+
++label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
+  ui-select(multiple, sortable="true", ng-model="profileForm.shellScripts.selected")
+    ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+        "shellScript in (" +
+          "profileForm.shellScripts.items" +
+          "| filter: {name: $select.search}" +
+          "| filter: profileForm.shellScripts.notSelected" +
+        ") track by shellScript.id"
+      refresh="profileForm.shellScripts.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="shellScript.name | highlight: $select.search")
+      br
+      small(ng-bind-html="shellScript.description | highlight: $select.search")
 
 +label("{{ 'pxe.profile.form.client_access.LABEL' | translate }}")
   +checkbox()(

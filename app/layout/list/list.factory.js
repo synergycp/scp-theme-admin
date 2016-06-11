@@ -99,11 +99,11 @@
       return $api.getList(query);
     }
 
-    function deleteItems(items) {
+    function deleteItems(items, data) {
       var ids = _.map(items, 'id').join(',');
 
       return $api.all(ids)
-        .remove()
+        .remove(data || {})
         .then(list.load)
         ;
     }

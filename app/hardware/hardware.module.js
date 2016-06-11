@@ -3,8 +3,7 @@
 
   angular
     .module('app.hardware', [
-      'app.layout.list',
-      'app.core.api',
-      'ui.select',
+      'app.hardware.server',
+      'app.hardware.switch',
     ]);
 })();

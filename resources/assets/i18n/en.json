@@ -360,6 +360,40 @@
         }
       }
     },
+    "speed": {
+      "list": {
+        "TITLE": "Switch Speeds"
+      },
+      "logs": {
+        "TITLE": "Switch Speed Logs"
+      },
+      "modal": {
+        "merge": {
+          "speed": {
+            "LABEL": "Switch Port Speed",
+            "PLACEHOLDER": "Type to search..."
+          }
+        }
+      },
+      "form": {
+        "title": {
+          "EDIT": "Edit {{ name }}",
+          "ADD": "Create Switch Speed"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Must be alpha-numeric and unique"
+        },
+        "billing_id": {
+          "LABEL": "Billing ID",
+          "PLACEHOLDER": "Must be alpha-numeric and unique"
+        },
+        "speed": {
+          "LABEL": "Speed (mbps)",
+          "PLACEHOLDER": "Speed in mbps (numbers only)"
+        }
+      }
+    },
     "server": {
       "form": {
         "title": {

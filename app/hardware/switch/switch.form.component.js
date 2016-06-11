@@ -30,17 +30,11 @@
   /**
    * @ngInject
    */
-  function SwitchFormCtrl(Api) {
+  function SwitchFormCtrl(Select) {
     var switchForm = this;
-    var $groups = Api.all('group');
 
     switchForm.switchTypes = ['Dell', 'Juniper'];
-    switchForm.groups = {
-      items: [],
-      selected: [],
-      load: loadGroups,
-      notSelected: groupNotSelected,
-    };
+    switchForm.groups = Select('group').multi();
 
     switchForm.$onInit = init;
 
@@ -66,20 +60,6 @@
       data.groups = _.map(switchForm.groups.selected, 'id');
 
       return data;
-    }
-
-    function loadGroups(search) {
-      $groups.getList({ q: search })
-        .then(storeGroups)
-        ;
-    }
-
-    function storeGroups(groups) {
-      _.setContents(switchForm.groups.items, groups);
-    }
-
-    function groupNotSelected(group) {
-      return !_.some(switchForm.groups.selected, {id: group.id});
     }
   }
 })();

@@ -13,12 +13,13 @@
   /**
    * @ngInject
    */
-  function RouteHelpersProvider(APP_REQUIRES) {
+  function RouteHelpersProvider(APP_REQUIRES, ApiProvider) {
     // provider access level
     var result = {
       basepath: basepath,
       resolveFor: resolveFor,
-      dummyTemplate: '<ui-view />'
+      dummyTemplate: '<ui-view />',
+      package: makePackage,
     };
 
     // controller access level
@@ -28,9 +29,28 @@
 
     return result;
 
+    function makePackage(name) {
+      return new Package(name);
+    }
+
     // Set the base of the relative path for all app views
     function basepath(uri) {
       return 'app/' + uri;
+    }
+
+    function Package(name) {
+      var pkg = this;
+
+      pkg.asset = asset;
+      pkg.lang = lang;
+
+      function lang(language) {
+        return 'lang:pkg:'+name+':'+language;
+      }
+
+      function asset(path) {
+        return ApiProvider.baseUrl()+'pkg/'+name+'/'+path;
+      }
     }
 
     // Generates a resolve object by passing script names
@@ -38,7 +58,7 @@
     function resolveFor() {
       var _args = arguments;
       return {
-        deps: ['$ocLazyLoad', '$q', function ($ocLL, $q) {
+        deps: ['$ocLazyLoad', '$q', '$translateModuleLoader', '$translate', function ($ocLL, $q, $translateModuleLoader, $translate) {
           // Creates a promise chain for each argument
           var promise = $q.when(1); // empty promise
           for (var i = 0, len = _args.length; i < len; i++) {
@@ -53,6 +73,13 @@
               return promise.then(_arg);
             else
               return promise.then(function () {
+                var split = _arg.split(':');
+                if (split.shift() == 'lang') {
+                  $translateModuleLoader.addPart(split.join(':'));
+                  $translate.refresh();
+                  return;
+                }
+
                 // if is a module, pass the name. If not, pass the array
                 var whatToLoad = getRequired(_arg);
                 // simple error check

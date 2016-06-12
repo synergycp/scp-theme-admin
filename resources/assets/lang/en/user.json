@@ -1,0 +1,55 @@
+{
+  "admin": {
+    "form": {
+      "title": {
+        "ADD": "Create Administrator",
+        "EDIT": "Edit {{ username }}"
+      },
+      "email": {
+        "LABEL": "Email",
+        "PLACEHOLDER": "Optional"
+      },
+      "password": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Enter a password to set"
+      },
+      "username": {
+        "LABEL": "Username",
+        "PLACEHOLDER": "Required. Must be alphanumeric and unique"
+      },
+      "receive_copies": {
+        "LABEL": "Receive All Emails"
+      },
+      "access": {
+        "LABEL": "Access",
+        "admins": {
+          "LABEL": "Edit Administrators"
+        },
+        "logs": {
+          "LABEL": "View Logs"
+        }
+      }
+    }
+  },
+  "client": {
+    "form": {
+      "title": {
+        "ADD": "Create Client",
+        "EDIT": "Edit {{ email }}"
+      },
+      "email": {
+        "LABEL": "Email"
+      },
+      "password": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Enter a password to set"
+      },
+      "billing_id": {
+        "LABEL": "Billing ID"
+      },
+      "name": {
+        "LABEL": "Name"
+      }
+    }
+  }
+}

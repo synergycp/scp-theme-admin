@@ -12,6 +12,7 @@
         url: '/system',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:system'),
       })
       .state('app.system.email', {
         url: '/email',

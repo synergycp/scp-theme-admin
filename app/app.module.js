@@ -12,5 +12,6 @@
       'app.network',
       'app.hardware',
       'app.system',
+      'app.package',
     ]);
 })();

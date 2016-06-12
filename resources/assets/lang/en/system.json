@@ -1,0 +1,22 @@
+{
+  "email": {
+    "form": {
+      "title": {
+        "EDIT": "Edit {{ name }}",
+        "ADD": "Create Email Template"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "subject": {
+        "LABEL": "Subject",
+        "PLACEHOLDER": "Optional"
+      },
+      "body": {
+        "LABEL": "Template",
+        "PLACEHOLDER": "Will be parsed using Smarty."
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@
 
   angular
     .module('app.core.routes', [
-      'app.core.lazyload'
+      'app.core.lazyload',
+      'app.core.api',
     ]);
 })();

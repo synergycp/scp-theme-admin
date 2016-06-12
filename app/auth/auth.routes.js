@@ -13,9 +13,7 @@
         url: '/auth',
         abstract: true,
         templateUrl: helper.basepath('auth/page.html'),
-        resolveFor: helper.resolveFor([
-          'icons'
-        ])
+        resolveFor: helper.resolveFor('icons', 'lang:auth'),
       })
       .state('auth.login', {
         url: '/login',

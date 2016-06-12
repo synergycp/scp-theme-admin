@@ -8,13 +8,13 @@
   /**
    * @ngInject
    */
-  function ApiConfigRestangular(RestangularProvider, $stateProvider) {
+  function ApiConfigRestangular(ApiProvider) {
     var url = '/';
-    if (location.host == 'localhost:3000') {
+    if (location.host.substr(0, 'localhost'.length) == 'localhost') {
       url = 'http://dev.synergycp.net/';
     }
-    RestangularProvider.setBaseUrl(url+'api');
-    RestangularProvider.addResponseInterceptor(apiResponseTranslator);
+    ApiProvider.setUrl(url);
+    ApiProvider.addResponseInterceptor(apiResponseTranslator);
 
     ///////////
 

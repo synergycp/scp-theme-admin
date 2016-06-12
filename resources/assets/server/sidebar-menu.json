@@ -2,7 +2,7 @@
   {
     "text": "Navigation",
     "heading": "true",
-    "translate": "sidebar.heading.HEADER"
+    "translate": "app.sidebar.heading.HEADER"
   },
   {
     "text": "Dashboard",

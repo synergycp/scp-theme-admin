@@ -16,9 +16,8 @@
     };
   }
 
-  function List(api, pages, bulk, event, loader, _) {
+  function List($api, pages, bulk, event, loader, _) {
     var list = this;
-    var $api = api;
     var filter = {};
     var refreshInterval;
 

@@ -16,7 +16,7 @@
         url: '',
         abstract: true,
         templateUrl: helper.basepath('core/app.html'),
-        resolve: helper.resolveFor('modernizr', 'icons')
+        resolve: helper.resolveFor('modernizr', 'icons', 'lang:app'),
       });
   }
 })();

@@ -1,0 +1,187 @@
+{
+  "switch": {
+    "form": {
+      "title": {
+        "EDIT": "Edit {{ name }}",
+        "ADD": "Create Switch"
+      },
+      "name": {
+        "LABEL": "Switch ID",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "network": {
+        "LABEL": "IP/SSH Port",
+        "ip": {
+          "PLACEHOLDER": "IP"
+        },
+        "port": {
+          "PLACEHOLDER": "SSH Port"
+        }
+      },
+      "ssh": {
+        "LABEL": "SSH User/Pass",
+        "username": {
+          "PLACEHOLDER": "SSH Username"
+        },
+        "password": {
+          "PLACEHOLDER": "SSH Password"
+        }
+      },
+      "enable": {
+        "LABEL": "(En)able Pass",
+        "PLACEHOLDER": "Required"
+      },
+      "snmp": {
+        "LABEL": "SNMP Key",
+        "PLACEHOLDER": "SNMP Community / Key"
+      },
+      "type": {
+        "LABEL": "Type"
+      },
+      "group": {
+        "LABEL": "IP Groups",
+        "PLACEHOLDER": "Select IP Group(s)..."
+      }
+    }
+  },
+  "speed": {
+    "list": {
+      "TITLE": "Switch Speeds"
+    },
+    "logs": {
+      "TITLE": "Switch Speed Logs"
+    },
+    "modal": {
+      "merge": {
+        "speed": {
+          "LABEL": "Switch Port Speed",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
+    "form": {
+      "title": {
+        "EDIT": "Edit {{ name }}",
+        "ADD": "Create Switch Speed"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be alpha-numeric and unique"
+      },
+      "billing_id": {
+        "LABEL": "Billing ID",
+        "PLACEHOLDER": "Must be alpha-numeric and unique"
+      },
+      "speed": {
+        "LABEL": "Speed (mbps)",
+        "PLACEHOLDER": "Speed in mbps (numbers only)"
+      }
+    }
+  },
+  "server": {
+    "form": {
+      "title": {
+        "EDIT": "Edit {{ name }}",
+        "ADD": "Create Server"
+      },
+      "id": {
+        "LABEL": "Server ID",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "mac": {
+        "LABEL": "MAC Address",
+        "PLACEHOLDER": "Required to enable PXE"
+      },
+      "cpu": {
+        "LABEL": "CPU",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "mem": {
+        "LABEL": "Memory",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "disk": {
+        "LABEL": "Disk",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "add-on": {
+        "LABEL": "Add-On",
+        "PLACEHOLDER": "None"
+      },
+      "switch": {
+        "LABEL": "Switch",
+        "port": {
+          "LABEL": "Switch Port",
+          "PLACEHOLDER": "ex. Gi0/0/1"
+        },
+        "PLACEHOLDER": "Type to search..."
+      },
+      "group": {
+        "LABEL": "IP Group",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "entities": {
+        "LABEL": "IP Entity",
+        "PLACEHOLDER": "Assign an IP Entity"
+      },
+      "ipmi": {
+        "ip": {
+          "LABEL": "IPMI IP",
+          "PLACEHOLDER": "IPMI IP Address"
+        },
+        "admin": {
+          "LABEL": "IPMI Admin",
+          "username": {
+            "PLACEHOLDER": "IPMI Admin Username"
+          },
+          "password": {
+            "PLACEHOLDER": "IPMI Admin Password"
+          }
+        },
+        "client": {
+          "LABEL": "IPMI Client",
+          "username": {
+            "PLACEHOLDER": "IPMI Client Username"
+          },
+          "password": {
+            "PLACEHOLDER": "IPMI Client Password"
+          }
+        }
+      },
+      "client": {
+        "LABEL": "Client",
+        "PLACEHOLDER": "Assign a Client"
+      },
+      "billing": {
+        "id": {
+          "LABEL": "Billing ID",
+          "PLACEHOLDER": "Optional. Must be unique"
+        },
+        "date": {
+          "LABEL": "Billing Date",
+          "PLACEHOLDER": "Bandwidth data before this date will be hidden"
+        },
+        "max_bandwidth": {
+          "LABEL": "Max Bandwidth",
+          "PLACEHOLDER": "e.g. 10TB. Leave blank for no maximum"
+        }
+      },
+      "nickname": {
+        "LABEL": "Nickname",
+        "PLACEHOLDER": "Will be set as server hostname. Defaults to Server ID."
+      },
+      "access": {
+        "LABEL": "Client Access",
+        "ipmi": {
+          "LABEL": "IPMI Controls"
+        },
+        "switch": {
+          "LABEL": "Switch Controls"
+        },
+        "pxe": {
+          "LABEL": "OS Reload"
+        }
+      }
+    }
+  }
+}

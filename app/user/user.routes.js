@@ -12,6 +12,7 @@
         url: '/users',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:user'),
       })
       .state('app.users.clients', {
         url: '/clients',

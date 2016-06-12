@@ -1,6 +1,6 @@
 .form-inline
   select.form-control(ng-model="bulk.selected")
-    option(value) {{ 'action.BULK' | translate }}
+    option(value) {{ 'app.action.BULK' | translate }}
     option(
       ng-repeat="(name, __) in bulk.options"
       value="{{ name }}"

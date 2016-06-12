@@ -1,0 +1,137 @@
+{
+  "install": {
+    "progress": {
+      "RELOADING": "This server's operating system is being reloaded.",
+      "OS": "Operating System: {{ value }}",
+      "STATUS": "Status: {{ value }}",
+      "UPDATED": "Last Updated: {{ value }}",
+      "STARTED": "Install Started: {{ value }}",
+      "CANCEL": "Progress bar stopped?",
+      "delete": {
+        "TITLE": "Are you sure?",
+        "BODY": "This will stop tracking the installation and reboot the server via IPMI. If the server hasn't started overwriting the disk yet, then it will be left in its original state."
+      }
+    }
+  },
+  "shell": {
+    "form": {
+      "title": {
+        "ADD": "Create PXE Shell Script",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "description": {
+        "LABEL": "Description",
+        "PLACEHOLDER": ""
+      },
+      "body": {
+        "LABEL": "Body",
+        "PLACEHOLDER": "This will be parsed using Smarty."
+      }
+    }
+  },
+  "boot": {
+    "form": {
+      "title": {
+        "ADD": "Create Boot Script",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "body": {
+        "LABEL": "Body",
+        "PLACEHOLDER": "This will be parsed using Smarty."
+      }
+    }
+  },
+  "iso": {
+    "form": {
+      "title": {
+        "ADD": "Create ISO",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "folder": {
+        "LABEL": "Folder",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "url": {
+        "LABEL": "URL",
+        "PLACEHOLDER": "e.g. http://example.com/win2008r2.iso"
+      }
+    },
+    "logs": {
+      "TITLE": "ISO Logs"
+    }
+  },
+  "profile": {
+    "form": {
+      "title": {
+        "ADD": "Create OS Reload Profile",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "billing_id": {
+        "LABEL": "Billing ID",
+        "PLACEHOLDER": "Optional. Must be unique"
+      },
+      "preseed": {
+        "LABEL": "Preseed",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "iso": {
+        "LABEL": "ISO",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "boot": {
+        "LABEL": "Boot Script",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "shell": {
+        "LABEL": "Shell Scripts",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "driver": {
+        "LABEL": "Drivers",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "client_access": {
+        "LABEL": "Client Access"
+      }
+    }
+  },
+  "preseed": {
+    "form": {
+      "title": {
+        "ADD": "Create PXE Preseed Script",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "description": {
+        "LABEL": "Description",
+        "PLACEHOLDER": ""
+      },
+      "body": {
+        "LABEL": "Body",
+        "PLACEHOLDER": "This will be parsed using Smarty."
+      },
+      "is_installable": {
+        "LABEL": "Installable"
+      }
+    }
+  }
+}

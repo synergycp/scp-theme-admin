@@ -10,103 +10,86 @@
     .module('app.layout.sidebar')
     .controller('SidebarController', SidebarController);
 
-  SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
+  /**
+   * @ngInject
+   */
+  function SidebarController($rootScope, $state, Sidebar, Utils, _) {
+    var sidebar = this;
 
-  function SidebarController($rootScope, $scope, $state, SidebarLoader, Utils) {
+    sidebar.items = Sidebar.items;
+
+    sidebar.isCollapsed = [];
+    sidebar.addCollapse = addCollapse;
+    sidebar.toggleCollapse = toggleCollapse;
+    sidebar.getMenuItemPropClasses = getMenuItemPropClasses;
 
     activate();
 
     ////////////////
 
     function activate() {
-      var collapseList = [];
+      closeAllBut(-1);
+    }
 
-      // demo: when switch from collapse to hover, close all items
-      $rootScope.$watch('app.layout.asideHover', function (oldVal, newVal) {
-        if (newVal === false && oldVal === true) {
-          closeAllBut(-1);
-        }
-      });
+    function getMenuItemPropClasses(item) {
+      return (item.options.heading ? 'nav-heading' : '') +
+        (isActive(item) ? ' active' : '');
+    }
 
 
-      // Load menu from json file
-      // -----------------------------------
+    function addCollapse($index, item) {
+      sidebar.isCollapsed[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
+    }
 
-      SidebarLoader.getMenu(sidebarReady);
 
-      function sidebarReady(items) {
-        $scope.menuItems = items;
-      }
+    function toggleCollapse($index, isParentItem) {
 
-      // Handle sidebar and collapse items
-      // ----------------------------------
-
-      $scope.getMenuItemPropClasses = function (item) {
-        return (item.heading ? 'nav-heading' : '') +
-          (isActive(item) ? ' active' : '');
-      };
-
-      $scope.addCollapse = function ($index, item) {
-        collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
-      };
-
-      $scope.isCollapse = function ($index) {
-        return (collapseList[$index]);
-      };
-
-      $scope.toggleCollapse = function ($index, isParentItem) {
-
-        // collapsed sidebar doesn't toggle drodopwn
-        if (Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover) return true;
-
-        // make sure the item index exists
-        if (angular.isDefined(collapseList[$index])) {
-          if (!$scope.lastEventFromChild) {
-            collapseList[$index] = !collapseList[$index];
-            closeAllBut($index);
-          }
-        } else if (isParentItem) {
-          closeAllBut(-1);
-        }
-
-        $scope.lastEventFromChild = isChild($index);
-
+      // collapsed sidebar doesn't toggle drodopwn
+      if (Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover) {
         return true;
-
-      };
-
-      // Controller helpers
-      // -----------------------------------
-
-      // Check item and children active state
-      function isActive(item) {
-
-        if (!item) return;
-
-        if (!item.sref || item.sref === '#') {
-          var foundActive = false;
-          angular.forEach(item.submenu, function (value) {
-            if (isActive(value)) foundActive = true;
-          });
-          return foundActive;
-        } else
-          return $state.is(item.sref) || $state.includes(item.sref);
       }
 
-      function closeAllBut(index) {
-        index += '';
-        for (var i in collapseList) {
-          if (index < 0 || index.indexOf(i) < 0)
-            collapseList[i] = true;
+      // make sure the item index exists
+      if (angular.isDefined(sidebar.isCollapsed[$index])) {
+        if (!sidebar.lastEventFromChild) {
+          sidebar.isCollapsed[$index] = !sidebar.isCollapsed[$index];
+          closeAllBut($index);
         }
+      } else if (isParentItem) {
+        closeAllBut(-1);
       }
 
-      function isChild($index) {
-        /*jshint -W018*/
-        return (typeof $index === 'string') && !($index.indexOf('-') < 0);
+      sidebar.lastEventFromChild = isChild($index);
+
+      return true;
+
+    }
+
+    // Check item and children active state
+    function isActive(item) {
+      if (!item) {
+        return;
       }
 
-    } // activate
+      if (!item.options.sref || item.options.sref === '#') {
+        return _.some(item.submenu, isActive);
+      }
+
+      return $state.is(item.options.sref) || $state.includes(item.options.sref);
+    }
+
+    function closeAllBut(index) {
+      index += '';
+      for (var i in sidebar.isCollapsed) {
+        if (index < 0 || index.indexOf(i) < 0)
+          sidebar.isCollapsed[i] = true;
+      }
+    }
+
+    function isChild($index) {
+      /*jshint -W018*/
+      return (typeof $index === 'string') && !($index.indexOf('-') < 0);
+    }
   }
 
 })();

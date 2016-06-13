@@ -13,7 +13,7 @@
   /**
    * @ngInject
    */
-  function RouteHelpersProvider(APP_REQUIRES, ApiProvider) {
+  function RouteHelpersProvider(APP_REQUIRES, ApiProvider, $stateProvider) {
     // provider access level
     var result = {
       basepath: basepath,
@@ -23,8 +23,17 @@
     };
 
     // controller access level
-    result.$get = function () {
-      return result;
+    result.$get = function ($sce) {
+      "ngInject";
+
+      var service = _.clone(result);
+      service.trusted = trustedAsset;
+
+      return service;
+
+      function trustedAsset(path) {
+        return $sce.trustAsResourceUrl(path);
+      }
     };
 
     return result;
@@ -43,9 +52,16 @@
 
       pkg.asset = asset;
       pkg.lang = lang;
+      pkg.state = state;
 
       function lang(language) {
         return 'lang:pkg:'+name+':'+language;
+      }
+
+      function state(stateName, opts) {
+        $stateProvider.state(stateName, opts);
+
+        return pkg;
       }
 
       function asset(path) {
@@ -58,7 +74,9 @@
     function resolveFor() {
       var _args = arguments;
       return {
-        deps: ['$ocLazyLoad', '$q', '$translateModuleLoader', '$translate', function ($ocLL, $q, $translateModuleLoader, $translate) {
+        deps: function ($ocLazyLoad, $q, $translateModuleLoader, $translate, $injector) {
+          "ngInject";
+
           // Creates a promise chain for each argument
           var promise = $q.when(1); // empty promise
           for (var i = 0, len = _args.length; i < len; i++) {
@@ -71,22 +89,27 @@
             // also support a function that returns a promise
             if (typeof _arg === 'function')
               return promise.then(_arg);
-            else
-              return promise.then(function () {
-                var split = _arg.split(':');
-                if (split.shift() == 'lang') {
-                  $translateModuleLoader.addPart(split.join(':'));
-                  $translate.refresh();
-                  return;
-                }
 
-                // if is a module, pass the name. If not, pass the array
-                var whatToLoad = getRequired(_arg);
-                // simple error check
-                if (!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
-                // finally, return a promise
-                return $ocLL.load(whatToLoad);
-              });
+            return promise.then(function () {
+              var split = _arg.split(':');
+              var type = split.shift();
+              var load = split.join(':');
+              switch(type) {
+              case 'lang':
+                $translateModuleLoader.addPart(load);
+                $translate.refresh();
+                return;
+              case 'inject':
+                return $injector.get(load);
+              }
+
+              // if is a module, pass the name. If not, pass the array
+              var whatToLoad = getRequired(_arg);
+              // simple error check
+              if (!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
+              // finally, return a promise
+              return $ocLazyLoad.load(whatToLoad);
+            });
           }
           // check and returns required data
           // analyze module items with the form [name: '', files: []]
@@ -98,8 +121,7 @@
                   return APP_REQUIRES.modules[m];
             return APP_REQUIRES.scripts && APP_REQUIRES.scripts[name];
           }
-
-        }]
+        }
       };
     }
   }

@@ -3,7 +3,7 @@
 
   angular
     .module('app.package')
-    .run(PackageLoader)
+    .factory('PackageLoader', PackageLoader)
     ;
 
   /**
@@ -13,19 +13,19 @@
     var loader = this;
     var $api = Api.all('package/angular');
 
-    activate();
+    return makeLoadPackagesPromise();
 
     ///////////
 
-    function activate() {
-      $api.getList()
-        .then(loadFiles);
+    function makeLoadPackagesPromise() {
+      return $api.getList()
+        .then(makeLoadFilesPromise);
     }
 
-    function loadFiles(packages) {
+    function makeLoadFilesPromise(packages) {
       var files = _(packages).map('files').flatten().value();
 
-      $ocLazyLoad.load(files);
+      return $ocLazyLoad.load(files);
     }
   }
 })();

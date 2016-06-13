@@ -3,7 +3,7 @@
 
   angular
     .module('app.core.mixins')
-    .run(LodashMixinConfig)
+    .config(LodashMixinConfig)
     ;
 
   /**

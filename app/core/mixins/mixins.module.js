@@ -3,5 +3,6 @@
 
   angular
     .module('app.core.mixins', [
+      'app.core.constants',
     ]);
 })();

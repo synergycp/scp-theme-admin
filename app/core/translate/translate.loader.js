@@ -250,8 +250,8 @@
      *
      * @throws {TypeError}
      */
-    this.$get = ['$rootScope', '$injector', '$q', '$http',
-    function($rootScope, $injector, $q, $http) {
+    this.$get = ['$rootScope', '$injector', '$q', '$http', '_',
+    function($rootScope, $injector, $q, $http, _) {
 
       /**
        * @ngdoc event
@@ -288,6 +288,8 @@
         var loaders = [],
             prioritizedParts = getPrioritizedParts();
 
+        var getPrefix = options.prefix || function(arg) { return arg; };
+
         angular.forEach(prioritizedParts, function(part) {
           loaders.push(
             part.getTable(options.key, $q, $http, options.$http, options.urlTemplate, errorHandler)
@@ -300,7 +302,16 @@
             var table = {};
             prioritizedParts = getPrioritizedParts();
             angular.forEach(prioritizedParts, function(part) {
-              table[part.name] = part.tables[options.key];
+              var pfx = getPrefix(part.name).split('.');
+              var last = pfx.pop();
+              var target = _.reduce(pfx, makeTarget, table);
+              target[last] = part.tables[options.key];
+
+              function makeTarget(carry, prefix) {
+                carry[prefix] = carry[prefix] || {};
+
+                return carry[prefix];
+              }
             });
             return table;
           }, function() {

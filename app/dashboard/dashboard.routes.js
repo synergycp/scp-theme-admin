@@ -15,7 +15,8 @@
         url: '/dashboard',
         title: 'Dashboard',
         controller: 'DashboardCtrl as dash',
-        templateUrl: helper.basepath('dashboard/dashboard.html')
+        templateUrl: helper.basepath('dashboard/dashboard.html'),
+        resolve: helper.resolveFor('lang:dashboard'),
       })
       ;
   }

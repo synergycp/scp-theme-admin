@@ -7,11 +7,9 @@ doctype html
   // START panel
   .panel.panel-inverse.panel-flat
     .panel-heading.text-center
-      .logo
-        | {{ 'app.title' | translate }}
+      .logo(data-translate="auth.login.TITLE")
     .panel-body
-      p.text-center.pv
-        | {{ 'auth.login.SIGNIN' | translate }}
+      p.text-center.pv(data-translate="auth.login.SIGNIN")
       form.form-validate.mb-lg(
         role='form'
         ng-submit="login.login()"

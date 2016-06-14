@@ -76,20 +76,23 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
     ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
     ng-click="$index ? serverForm.addOns.rem($index) : serverForm.addOns.add(addOn.selected)"
   )
-    ui-select(ng-model="addOn.selected")
-      ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
-        | {{ $select.selected.name }}
+    +input-with-btn("fa fa-times-circle")(
+      ng-click="addOn.selected = null"
+    )
+      ui-select(ng-model="addOn.selected")
+        ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
 
-      ui-select-choices(
-        repeat=
-          "choice in (" +
-            "addOn.items" +
-            "| filter: {name: $select.search}" +
-          ") track by choice.id"
-        refresh="addOn.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="choice.name | highlight: $select.search")
+        ui-select-choices(
+          repeat=
+            "choice in (" +
+              "addOn.items" +
+              "| filter: {name: $select.search}" +
+            ") track by choice.id"
+          refresh="addOn.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice.name | highlight: $select.search")
 
 hr
 
@@ -118,7 +121,7 @@ hr
         ng-model="serverForm.input.switch.port"
       )
     .col-xs-6
-      ui-select(ng-model="serverForm.input.switch.speed")
+      ui-select(ng-model="serverForm.switchSpeed.selected")
         ui-select-match
           | {{ $select.selected.name }}
 
@@ -134,7 +137,10 @@ hr
           span(ng-bind-html="switchSpeed.name | highlight: $select.search")
 
 +label("{{ 'hardware.server.form.group.LABEL' | translate }}")
-  ui-select(ng-model="serverForm.input.group")
+  ui-select(
+    ng-model="serverForm.group.selected"
+    ng-change="serverForm.group.fireChangeEvent()"
+  )
     ui-select-match(placeholder="{{ 'hardware.server.form.group.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
@@ -152,7 +158,9 @@ hr
 +label("{{ 'hardware.server.form.entities.LABEL' | translate }}")
   ui-select(
     multiple
+    sortable="true"
     ng-model="serverForm.entities.selected"
+    ng-change="serverForm.entities.fireChangeEvent()"
     close-on-select="false"
   )
     ui-select-match(placeholder="{{ 'hardware.server.form.entities.PLACEHOLDER' | translate }}")
@@ -163,6 +171,7 @@ hr
         "entity in (" +
           "serverForm.entities.items" +
           "| filter: {name: $select.search}" +
+          "| filter: serverForm.entities.notSelected" +
         ") track by entity.id"
       refresh="serverForm.entities.load($select.search)"
       refresh-delay="400"
@@ -217,9 +226,9 @@ hr
 
 +label("{{ 'hardware.server.form.client.LABEL' | translate }}")
   +input-with-btn("fa fa-times-circle")(
-    ng-click="serverForm.input.client = null"
+    ng-click="serverForm.client.selected = null"
   )
-    ui-select(ng-model="serverForm.input.client")
+    ui-select(ng-model="serverForm.client.selected")
       ui-select-match(placeholder="{{ 'hardware.server.form.client.PLACEHOLDER' | translate }}")
         | {{ $select.selected.name }}
 
@@ -242,13 +251,25 @@ hr
   ng-model="serverForm.input.billing.id"
 )
 
-+field(
++label(
   "{{ 'hardware.server.form.billing.date.LABEL' | translate }}",
   "billing.date"
-)(
-  placeholder="{{ 'hardware.server.form.billing.date.PLACEHOLDER' | translate }}"
-  ng-model="serverForm.input.billing.date"
 )
+  +input-with-btn("fa fa-calendar")(
+    ng-click="serverForm.billing.date.isOpen = !serverForm.billing.date.isOpen"
+  )
+    input.form-control(
+      type="text"
+      id="form-billing.date"
+      uib-datepicker-popup="yyyy-MM-dd"
+      ng-focus="serverForm.billing.date.isOpen = true"
+      datepicker-options="{}"
+      close-text="Close"
+      alt-input-formats="[]"
+      is-open="serverForm.billing.date.isOpen"
+      placeholder="{{ 'hardware.server.form.billing.date.PLACEHOLDER' | translate }}"
+      ng-model="serverForm.billing.date.value"
+    )
 
 +field(
   "{{ 'hardware.server.form.billing.max_bandwidth.LABEL' | translate }}",

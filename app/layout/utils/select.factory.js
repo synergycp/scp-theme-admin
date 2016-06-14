@@ -27,12 +27,13 @@
     select.isMulti = false;
 
     // Public methods
-    select.load = load;
+    select.load = _.debounce(load, 10);
     select.notSelected = notSelected;
     select.multi = multi;
     select.filter = setFilter;
     select.clearFilter = clearFilter;
     select.fireChangeEvent = fireChangeEvent;
+    select.getSelected = getSelected;
     event.bindTo(select);
 
     //////////
@@ -42,6 +43,10 @@
         .getList(_.assign({}, filter, { q: search }))
         .then(store)
         ;
+    }
+
+    function getSelected(attr) {
+      return (select.selected || {})[attr] || null;
     }
 
     function setFilter(newFilters) {

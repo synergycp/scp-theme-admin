@@ -53,6 +53,13 @@ mixin label(label, name)
     .col-md-9.col-sm-10
       block
 
+mixin icon-label(label, name)
+  .form-group
+    label.control-label.col-xs-1&attributes(attributes)
+    label.control-label.col-md-2.col-sm-1.col-xs-11(for="form-"+name)=label
+    .col-md-9.col-sm-10
+      block
+
 mixin input-with-btn(iconClass)
   .input-group
     block

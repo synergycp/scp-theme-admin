@@ -7,3 +7,13 @@
     }
   }
 }
+
+.fa {
+  &.form-control-feedback {
+    // font awesome overrides this line-height...
+    line-height: 35px;
+  }
+  &.control-label {
+    padding-top: 9px;
+  }
+}

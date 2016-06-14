@@ -1,8 +1,5 @@
 {
   "title": "Synergy",
-  "dashboard": {
-    "WELCOME": "Welcome to {{appName}}"
-  },
   "topbar": {
     "search": {
       "PLACEHOLDER": "Type to search..."

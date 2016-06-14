@@ -1,5 +1,8 @@
 {
   "install": {
+    "list": {
+      "EMPTY": "There are no PXE installations running right now"
+    },
     "progress": {
       "RELOADING": "This server's operating system is being reloaded.",
       "OS": "Operating System: {{ value }}",

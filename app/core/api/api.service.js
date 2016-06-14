@@ -65,10 +65,6 @@
         Restangular.addErrorInterceptor(apiErrorTranslator);
       }
 
-      function baseUrl() {
-        return provider.options.url;
-      }
-
       function apiUrl() {
         return baseUrl()+'/api';
       }

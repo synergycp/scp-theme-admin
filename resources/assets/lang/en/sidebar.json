@@ -1,0 +1,14 @@
+{
+  "DASH": "Dashboard",
+  "SYSTEM": "System",
+  "HARDWARE": "Hardware",
+  "USERS": "Users",
+  "network": {
+    "TITLE": "Network",
+    "ENTITIES": "IP Entities",
+    "GROUPS": "IP Groups"
+  },
+  "pxe": {
+    "TITLE": "OS Reloads"
+  }
+}

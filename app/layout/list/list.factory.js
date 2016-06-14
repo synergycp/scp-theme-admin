@@ -34,6 +34,7 @@
     list.clearSort = clearSort;
     list.filter = setFilter;
     list.refreshEvery = refreshEvery;
+    list.patch = patch;
 
     event.bindTo(list);
 
@@ -102,7 +103,6 @@
       return list.loader.during(
         getItems()
           .then(storeItems)
-          .then(fireChangeEvent)
       );
     }
 
@@ -112,12 +112,26 @@
       return $api.getList(query);
     }
 
-    function deleteItems(items, data) {
+    function deleteItems(data, items) {
+      return withAll('remove', data, items);
+    }
+
+    function withAll(func, data, items) {
+      if (!angular.isArray(items)) {
+        items = data;
+        data = null;
+      }
+
+      if (!angular.isArray(items)) {
+        throw new Error('Excepted array');
+      }
+
       var ids = _.map(items, 'id').join(',');
 
       return $api.all(ids)
-        .remove(data || {})
+        [func](data || {})
         .then(list.load)
+        .then(fireChangeEvent)
         ;
     }
 
@@ -161,6 +175,10 @@
       });
 
       list.pages.fromMeta(response.meta);
+    }
+
+    function patch(data, items) {
+      return withAll("patch", data, items);
     }
 
     function fireChangeEvent() {

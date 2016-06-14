@@ -16,7 +16,10 @@
         url: '',
         abstract: true,
         templateUrl: helper.basepath('core/app.html'),
-        resolve: helper.resolveFor('modernizr', 'icons', 'lang:app'),
+        resolve: helper.resolveFor(
+          'modernizr', 'icons',
+          'lang:app', 'lang:sidebar'
+        ),
       });
   }
 })();

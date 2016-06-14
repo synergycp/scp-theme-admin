@@ -10,13 +10,13 @@
    *
    * @ngInject
    */
-  function SelectFactory (Api, _) {
+  function SelectFactory (Api, EventEmitter, _) {
     return function (path) {
-        return new Select(Api.all(path), _);
+        return new Select(Api.all(path), EventEmitter(), _);
     };
   }
 
-  function Select ($api, _) {
+  function Select ($api, event, _) {
     // Private variables
     var select = this;
     var filter = {};
@@ -31,6 +31,9 @@
     select.notSelected = notSelected;
     select.multi = multi;
     select.filter = setFilter;
+    select.clearFilter = clearFilter;
+    select.fireChangeEvent = fireChangeEvent;
+    event.bindTo(select);
 
     //////////
 
@@ -43,6 +46,16 @@
 
     function setFilter(newFilters) {
       _.assign(filter, newFilters);
+
+      return select;
+    }
+
+    function fireChangeEvent() {
+      select.fire('change', select.selected);
+    }
+
+    function clearFilter(key) {
+      delete filter[key];
 
       return select;
     }

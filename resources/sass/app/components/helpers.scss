@@ -5,3 +5,19 @@
 .no-hover {
   cursor: default;
 }
+
+.scroller {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.fill-panel {
+  margin: -1px;
+  box-sizing: content-box;
+  width: 96%;
+  padding: 10px 2%;
+  position: relative;
+  z-index: 1;
+  border-radius: 0;
+}

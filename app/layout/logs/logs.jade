@@ -15,7 +15,7 @@ include /resources/jade/mixins/panel
       tbody
         tr(ng-repeat="log in logs.items")
           td
-            a(ng-sref="app.system.log.view({id: log.id})") {{ log.created_at }}
+            a(ui-sref="app.system.log.view({id: log.id})") {{ log.created_at }}
           td {{ log.admin.name }}
           td {{ log.desc }}
     .panel-footer.clearfix(

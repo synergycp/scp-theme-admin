@@ -16,7 +16,7 @@
       icon: "fa fa-server",
     }).item({
       text: "Servers",
-      sref: "app.hardware.server",
+      sref: "app.hardware.server.list",
     }).item({
       text: "Server Inventory",
       sref: "app.hardware.server.inventory",

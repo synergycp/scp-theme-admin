@@ -49,37 +49,47 @@ include /resources/jade/mixins/form
     )
       span(ng-bind-html="mem.name | highlight: $select.search")
 
-+label("{{ 'hardware.server.form.disk.LABEL' | translate }}")
-  ui-select(ng-model="serverForm.input.disks[0]")
-    ui-select-match(placeholder="{{ 'hardware.server.form.disk.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.name }}
+div(ng-repeat="disk in serverForm.disks.items track by $index")
+  +icon-label("{{ 'hardware.server.form.disk.LABEL' | translate }}")(
+    class="fa"
+    ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
+    ng-click="$index ? serverForm.disks.rem($index) : serverForm.disks.add(disk.selected)"
+  )
+    ui-select(ng-model="disk.selected")
+      ui-select-match(placeholder="{{ 'hardware.server.form.disk.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
 
-    ui-select-choices(
-      repeat=
-        "disk in (" +
-          "serverForm.disk.items" +
-          "| filter: {name: $select.search}" +
-        ") track by disk.id"
-      refresh="serverForm.disk.load($select.search)"
-      refresh-delay="400"
-    )
-      span(ng-bind-html="disk.name | highlight: $select.search")
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "disk.items" +
+            "| filter: {name: $select.search}" +
+          ") track by choice.id"
+        refresh="disk.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
 
-+label("{{ 'hardware.server.form.add-on.LABEL' | translate }}")
-  ui-select(ng-model="serverForm.input.addon")
-    ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.name }}
+div(ng-repeat="addOn in serverForm.addOns.items track by $index")
+  +icon-label("{{ 'hardware.server.form.add-on.LABEL' | translate }}")(
+    class="fa"
+    ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
+    ng-click="$index ? serverForm.addOns.rem($index) : serverForm.addOns.add(addOn.selected)"
+  )
+    ui-select(ng-model="addOn.selected")
+      ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
 
-    ui-select-choices(
-      repeat=
-        "addon in (" +
-          "serverForm.addon.items" +
-          "| filter: {name: $select.search}" +
-        ") track by addon.id"
-      refresh="serverForm.addon.load($select.search)"
-      refresh-delay="400"
-    )
-      span(ng-bind-html="addon.name | highlight: $select.search")
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "addOn.items" +
+            "| filter: {name: $select.search}" +
+          ") track by choice.id"
+        refresh="addOn.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
 
 hr
 

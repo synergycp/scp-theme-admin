@@ -1,5 +1,5 @@
 (function () {
-  angular.module('app.core.routes')
+  angular.module('app.network')
     .config(routeConfig);
 
   /**
@@ -12,6 +12,7 @@
         url: '/network',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:network'),
       })
       .state('app.network.entity', {
         url: '/entity',

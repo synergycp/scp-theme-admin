@@ -18,13 +18,10 @@
       },
     },
     switch: {
-      id: null,
       port: '',
-      speed: null,
     },
     billing: {
       id: '',
-      date: '',
       max_bandwidth: '',
     },
     access: {
@@ -52,7 +49,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Select) {
+  function ServerFormCtrl(_, Select, $rootScope, $stateParams) {
     var serverForm = this;
 
     serverForm.$onInit = init;
@@ -71,10 +68,22 @@
       rem: remAddOn,
     };
     serverForm.addOns.add();
-    serverForm.group = Select('group');
+    serverForm.group = Select('group').on('change', function () {
+      _.setContents(serverForm.entities.selected, []);
+      syncEntityFilter();
+    });
+    serverForm.billing = {
+      date: {
+        value: new Date(),
+        isOpen: false,
+      },
+    };
     serverForm.client = Select('client');
     serverForm.switchSpeed = Select('port-speed');
-    serverForm.entities = Select('entity').multi();
+    serverForm.entities = Select('entity').multi().filter({
+      available: true,
+      allow_server_id: $stateParams.id || undefined,
+    }).on('change', syncEntityToGroup);
 
     //////////
 
@@ -90,35 +99,61 @@
       serverForm.form.on(['load', 'change'], storeState);
     }
 
+    function syncEntityToGroup() {
+      serverForm.group.selected = serverForm.entity.selected;
+      serverForm.group.fireChangeEvent();
+    }
+
     function storeState(response) {
-      storeMulti(response.disks, serverForm.disks);
-      storeMulti(response.addons, serverForm.addOns);
-      _.setContents(serverForm.entities.selected, response.entities);
+      $rootScope.$evalAsync(function() {
+        storeMulti(response.disks, serverForm.disks);
+        storeMulti(response.addons, serverForm.addOns);
+        _.setContents(serverForm.entities.selected, response.entities);
+        syncEntityFilter();
+        serverForm.switch.selected = response.switch;
+        serverForm.switchSpeed.selected = response.switch.speed;
+        serverForm.group.selected = response.group;
+        serverForm.client.selected = response.client;
+        serverForm.billing.date.value = response.billing.date ? Date.parse(response.billing.date) : null;
+      });
+    }
+
+    function syncEntityFilter() {
+      serverForm.entities
+        .clearFilter('extra_for_id')
+        .clearFilter('ip_group')
+        .filter({
+          extra_for_id: (serverForm.entities.selected[0] || {}).id,
+          ip_group: (serverForm.group.selected || {}).id,
+        })
+        .load();
     }
 
     function storeMulti(items, target) {
-      target.items.splice(items.length-1);
-      _(items)
-        .filter(hasChanged)
-        .map(deleteCurrent)
-        .map(target.add)
-        .value()
-        ;
+      target.items.splice(items.length);
+      _.map(items, change);
 
-      function hasChanged (disk, key) {
+      // Always guarantee at least one input.
+      if (!items.length) {
+        target.add();
+      }
+
+      function change(item, key) {
+        if (!hasChanged(item, key)) {
+          return;
+        }
+
+        target.add(item, key);
+      }
+
+      function hasChanged (item, key) {
         var currentSelector = target.items[key];
         if (!currentSelector) {
           return true;
         }
 
         var selected = currentSelector.selected;
-        return !selected || selected.id != disk.id;
-      }
-
-      function deleteCurrent(item, key) {
-        target.rem(key);
-
-        return item;
+        return !selected || selected.id != item.id;
       }
     }
 
@@ -127,15 +162,29 @@
 
       data.disks = ids(serverForm.disks);
       data.addons = ids(serverForm.addOns);
-      data.entities = ids(serverForm.entities);
+      data.entities = _.map(serverForm.entities.selected, 'id');
+      data.switch.id = serverForm.switch.getSelected('id');
+      data.switch.speed = {
+        id: serverForm.switchSpeed.getSelected('id'),
+      };
+      data.group = {
+        id: serverForm.group.getSelected('id'),
+      };
+      data.client = {
+        id: serverForm.client.getSelected('id'),
+      };
+      data.billing.date = ""+serverForm.billing.date.value;
 
       return data;
     }
 
-    function addDisk(selected) {
+    function addDisk(selected, key) {
       var select = Select('part?part_type=disk');
       select.selected = selected || null;
-      serverForm.disks.items.push(select);
+      select.load();
+      key = typeof key === "undefined" ? serverForm.disks.items.length : key;
+      var del = serverForm.disks.items.length > key;
+      serverForm.disks.items.splice(key, del, select);
 
       return select;
     }
@@ -144,10 +193,13 @@
       serverForm.disks.items.splice($index, 1);
     }
 
-    function addAddOn(selected) {
+    function addAddOn(selected, key) {
       var select = Select('part?part_type=add-on');
       select.selected = selected || null;
-      serverForm.addOns.items.push(select);
+      select.load();
+      key = typeof key === "undefined" ? serverForm.addOns.items.length : key;
+      var del = serverForm.addOns.items.length > key;
+      serverForm.addOns.items.splice(key, del, select);
 
       return select;
     }

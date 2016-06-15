@@ -114,6 +114,10 @@
           "LABEL": "Switch Port",
           "PLACEHOLDER": "ex. Gi0/0/1"
         },
+        "speed": {
+          "LABEL": "Port Speed",
+          "PLACEHOLDER": "Type to search..."
+        },
         "PLACEHOLDER": "Type to search..."
       },
       "group": {
@@ -121,8 +125,8 @@
         "PLACEHOLDER": "Type to search..."
       },
       "entities": {
-        "LABEL": "IP Entity",
-        "PLACEHOLDER": "Assign an IP Entity"
+        "LABEL": "IP Entities",
+        "PLACEHOLDER": "Assign IP Entities"
       },
       "ipmi": {
         "ip": {
@@ -181,6 +185,31 @@
         "pxe": {
           "LABEL": "OS Reload"
         }
+      }
+    },
+    "provision": {
+      "TITLE": "Provision Server",
+      "SUBMIT": "Provision",
+      "server": {
+        "LABEL": "Server",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "profile": {
+        "LABEL": "Operating System",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "edition": {
+        "LABEL": "Edition",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "license_key": {
+        "LABEL": "License Key",
+        "PLACEHOLDER": "Optional",
+        "HELP": "Leave blank for trial"
+      },
+      "password": {
+        "LABEL": "Password",
+        "PLACEHOLDER": "Leave empty for random password."
       }
     }
   }

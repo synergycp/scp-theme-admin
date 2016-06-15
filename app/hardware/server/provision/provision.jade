@@ -1,0 +1,15 @@
+include /resources/jade/mixins/panel
+
+.row
+  .col-md-6
+    +panel("{{ 'hardware.server.provision.TITLE' | translate }}")
+      .panel-body
+        provision-form.form-horizontal(
+          input="vm.input"
+        )
+      .panel-footer.clearfix
+        .pull-right
+          button.btn.btn-primary(
+            type="submit"
+            data-translate="hardware.server.provision.SUBMIT"
+          )

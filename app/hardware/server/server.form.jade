@@ -124,7 +124,7 @@ hr
       )
     .col-xs-6
       ui-select(ng-model="serverForm.switchSpeed.selected")
-        ui-select-match
+        ui-select-match(placeholder="{{ 'hardware.server.form.switch.speed.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
 
         ui-select-choices(

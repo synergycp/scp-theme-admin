@@ -20,7 +20,7 @@
         template: helper.dummyTemplate,
       })
       .state('app.hardware.server.inventory', {
-        url: '/inventory',
+        url: '/inventory?switch&group',
         title: 'Server Inventory',
         controller: 'ServerInventoryCtrl as vm',
         templateUrl: helper.basepath('hardware/server/server.inventory.html'),
@@ -30,6 +30,12 @@
         title: 'Servers',
         controller: 'ServerListCtrl as vm',
         templateUrl: helper.basepath('hardware/server/server.index.html'),
+      })
+      .state('app.hardware.server.provision', {
+        url: '/provision?client',
+        title: 'Provision Server',
+        controller: 'ServerProvisionCtrl as vm',
+        templateUrl: helper.basepath('hardware/server/provision/provision.html'),
       })
       .state('app.hardware.server.view', {
         url: '/:id',

@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  var MAX_DISKS = 8;
   var INPUTS = {
     srv_id: '',
     mac: '',
@@ -50,26 +49,17 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Select, $rootScope, $stateParams) {
+  function ServerFormCtrl(_, Select, MultiInput, $rootScope, ServerConfig, $stateParams) {
     var serverForm = this;
 
     serverForm.$onInit = init;
     serverForm.switch = Select('switch');
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
-    serverForm.disks = {
-      items: [],
-      add: addDisk,
-      rem: remDisk,
-      max: MAX_DISKS,
-    };
-    serverForm.disks.add();
-    serverForm.addOns = {
-      items: [],
-      add: addAddOn,
-      rem: remAddOn,
-    };
-    serverForm.addOns.add();
+    serverForm.disks = MultiInput(DiskSelector)
+      .setMax(ServerConfig.MAX_DISKS)
+      .add();
+    serverForm.addOns = MultiInput(AddOnSelector).add();
     serverForm.group = Select('group').on('change', function () {
       _.setContents(serverForm.entities.selected, []);
       syncEntityFilter();
@@ -187,49 +177,28 @@
       return data;
     }
 
-    function addDisk(selected, key) {
-      var targetItems = serverForm.disks.items;
-      var length = targetItems.length;
-      if (typeof key === "undefined") {
-        key = length;
-        if (length >= serverForm.disks.max) {
-          return;
-        }
-      }
-      var del = length > key;
-      var select = Select('part?part_type=disk');
-      select.selected = selected || null;
-      select.load();
-      targetItems.splice(key, del, select);
-
-      return select;
-    }
-
-    function remDisk($index) {
-      serverForm.disks.items.splice($index, 1);
-    }
-
-    function addAddOn(selected, key) {
-      var select = Select('part?part_type=add-on');
-      select.selected = selected || null;
-      select.load();
-      key = typeof key === "undefined" ? serverForm.addOns.items.length : key;
-      var del = serverForm.addOns.items.length > key;
-      serverForm.addOns.items.splice(key, del, select);
-
-      return select;
-    }
-
-    function remAddOn($index) {
-      serverForm.addOns.items.splice($index, 1);
-    }
-
     function ids(multi) {
       return _(multi.items)
         .map('selected.id')
         .filter()
         .value()
         ;
+    }
+
+    function DiskSelector(selected) {
+      var select = Select('part?part_type=disk');
+      select.selected = selected || null;
+      select.load();
+
+      return select;
+    }
+
+    function AddOnSelector(selected) {
+      var select = Select('part?part_type=add-on');
+      select.selected = selected || null;
+      select.load();
+
+      return select;
     }
   }
 })();

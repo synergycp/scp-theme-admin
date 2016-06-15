@@ -52,7 +52,9 @@ include /resources/jade/mixins/form
 div(ng-repeat="disk in serverForm.disks.items track by $index")
   +icon-label("{{ 'hardware.server.form.disk.LABEL' | translate }}")(
     class="fa"
-    ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
+    ng-class=
+      "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
+      "+($index || serverForm.disks.items.length < serverForm.disks.max ? '' : 'disabled ')"
     ng-click="$index ? serverForm.disks.rem($index) : serverForm.disks.add(disk.selected)"
   )
     ui-select(ng-model="disk.selected")

@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+  var MAX_DISKS = 8;
   var INPUTS = {
     srv_id: '',
     mac: '',
@@ -60,6 +61,7 @@
       items: [],
       add: addDisk,
       rem: remDisk,
+      max: MAX_DISKS,
     };
     serverForm.disks.add();
     serverForm.addOns = {
@@ -74,7 +76,7 @@
     });
     serverForm.billing = {
       date: {
-        value: new Date(),
+        value: null,
         isOpen: false,
       },
     };
@@ -100,7 +102,14 @@
     }
 
     function syncEntityToGroup() {
-      serverForm.group.selected = serverForm.entity.selected;
+      var entityGroup = (serverForm.entities.selected[0] || {}).group || null;
+      var entityGroupId = (entityGroup || {}).id || null;
+      if (!entityGroup || serverForm.group.getSelected('id') == entityGroupId) {
+        syncEntityFilter();
+        return;
+      }
+
+      serverForm.group.selected = entityGroup;
       serverForm.group.fireChangeEvent();
     }
 
@@ -179,12 +188,19 @@
     }
 
     function addDisk(selected, key) {
+      var targetItems = serverForm.disks.items;
+      var length = targetItems.length;
+      if (typeof key === "undefined") {
+        key = length;
+        if (length >= serverForm.disks.max) {
+          return;
+        }
+      }
+      var del = length > key;
       var select = Select('part?part_type=disk');
       select.selected = selected || null;
       select.load();
-      key = typeof key === "undefined" ? serverForm.disks.items.length : key;
-      var del = serverForm.disks.items.length > key;
-      serverForm.disks.items.splice(key, del, select);
+      targetItems.splice(key, del, select);
 
       return select;
     }

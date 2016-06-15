@@ -17,3 +17,8 @@
     padding-top: 9px;
   }
 }
+
+.disabled {
+  color: $gray-light;
+  cursor: default;
+}

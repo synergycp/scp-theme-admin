@@ -77,6 +77,18 @@
         controller: 'SwitchViewCtrl as vm',
         templateUrl: helper.basepath('hardware/switch/switch.view.html'),
       })
+      .state('app.hardware.part', {
+        url: '/part',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.hardware.part.list', {
+        url: '?tab&search',
+        title: 'Part Inventory',
+        controller: 'PartIndexCtrl as vm',
+        templateUrl: helper.basepath('hardware/part/part.index.html'),
+        reloadOnSearch: false,
+      })
       ;
   }
 })();

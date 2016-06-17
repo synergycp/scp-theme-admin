@@ -1,0 +1,38 @@
+.row.form-horizontal
+  div.col-md-6(ng-repeat="item in tab.list.items")
+    .form-group
+      .col-xs-5
+        input.form-control(
+          type="text"
+          ng-model="item.name"
+          name="{{item.id}}.name"
+          placeholder="{{ 'hardware.part.input.name.PLACEHOLDER' | translate }}"
+        )
+      .col-xs-5
+        input.form-control(
+          type="text"
+          name="{{item.id}}.billing_id"
+          ng-model="item.billing_id"
+          placeholder="{{ 'hardware.part.input.billing.PLACEHOLDER' | translate }}"
+        )
+      .col-xs-2.text-center.actions
+        a.fa.fa-minus-circle(
+          ng-click="tab.list.delete([item])"
+        )
+
+
+div.alert.alert-info(
+  ng-if="!tab.list.items.length"
+  data-translate="hardware.part.list.EMPTY"
+)
+
+.clearfix
+  .pull-right
+    pagination.no-margin(pages="tab.list.pages")
+
+  .pull-left
+    button.btn.btn-default(
+      type="button"
+      ng-click="tab.list.add()"
+      data-translate="{{ tab.text }}.ADD"
+    )

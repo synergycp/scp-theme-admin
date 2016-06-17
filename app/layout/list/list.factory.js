@@ -118,8 +118,9 @@
 
     function withAll(func, data, items) {
       if (!angular.isArray(items)) {
+        var oldItems = items || null;
         items = data;
-        data = null;
+        data = oldItems;
       }
 
       if (!angular.isArray(items)) {
@@ -161,10 +162,17 @@
       return sortQuery;
     }
 
-    function create(item) {
-      return $api.post(item)
-        .then(list.load)
-        ;
+    function create(item, opts) {
+      var options = _.assign({
+        reload: true,
+      }, opts);
+      var promise = $api.post(item);
+
+      if (options.reload) {
+        promise.then(list.load);
+      }
+
+      return promise;
     }
 
     function storeItems(response) {

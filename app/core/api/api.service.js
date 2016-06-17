@@ -53,6 +53,11 @@
       var proxy = Restangular;
       proxy.baseUrl = baseUrl;
       proxy.apiUrl = apiUrl;
+      proxy.patch = request(Restangular.patch);
+      proxy.delete = request(Restangular.delete);
+      proxy.get = request(Restangular.get);
+      proxy.post = request(Restangular.post);
+      proxy.put = request(Restangular.put);
 
       activate();
 
@@ -61,7 +66,6 @@
       function activate() {
         Restangular.addErrorInterceptor(apiErrorInterceptor);
         Restangular.addFullRequestInterceptor(apiRequestAddApiKey);
-        Restangular.addResponseInterceptor(displayMessages);
         Restangular.addErrorInterceptor(apiErrorTranslator);
       }
 
@@ -92,8 +96,8 @@
         });
       }
 
-      function displayMessages(data, operation, what, url, response, deferred) {
-        angular.forEach(data.messages, displayMessage);
+      function displayMessages(response) {
+        angular.forEach(response.data.messages, displayMessage);
 
         return data;
       }
@@ -117,6 +121,13 @@
        */
       function getApiKey() {
         return ApiKey.get() || "";
+      }
+
+      function request(method) {
+        return function () {
+          return method.apply(proxy, arguments)
+            .then(displayMessages);
+        };
       }
     }
   }

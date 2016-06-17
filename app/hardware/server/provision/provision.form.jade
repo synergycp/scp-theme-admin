@@ -2,7 +2,7 @@ doctype html
 include /resources/jade/mixins/form
 
 +label("{{ 'hardware.server.form.client.LABEL' | translate }}")
-  ui-select(ng-model="provisionForm.client.selected")
+  ui-select(ng-model="provisionForm.client.selected", ng-change="provisionForm.client.fireChangeEvent()")
     ui-select-match(placeholder="{{ 'hardware.server.form.client.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
@@ -21,6 +21,7 @@ include /resources/jade/mixins/form
   ui-select(
     ng-model="provisionForm.group.selected"
     ng-change="provisionForm.group.fireChangeEvent()"
+    ng-disabled="!provisionForm.client.selected"
   )
     ui-select-match(placeholder="{{ 'hardware.server.form.group.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
@@ -37,7 +38,11 @@ include /resources/jade/mixins/form
       span(ng-bind-html="group.name | highlight: $select.search")
 
 +label("{{ 'hardware.server.form.cpu.LABEL' | translate }}")
-  ui-select(ng-model="provisionForm.input.cpu")
+  ui-select(
+    ng-model="provisionForm.cpu.selected"
+    ng-change="provisionForm.cpu.fireChangeEvent()"
+    ng-disabled="!provisionForm.group.selected"
+  )
     ui-select-match(placeholder="{{ 'hardware.server.form.cpu.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
@@ -53,7 +58,11 @@ include /resources/jade/mixins/form
       span(ng-bind-html="cpu.name | highlight: $select.search")
 
 +label("{{ 'hardware.server.form.mem.LABEL' | translate }}")
-  ui-select(ng-model="provisionForm.input.mem")
+  ui-select(
+    ng-model="provisionForm.mem.selected"
+    ng-change="provisionForm.mem.fireChangeEvent()"
+    ng-disabled="!provisionForm.cpu.selected"
+  )
     ui-select-match(placeholder="{{ 'hardware.server.form.mem.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
@@ -74,9 +83,13 @@ div(ng-repeat="disk in provisionForm.disks.items track by $index")
     ng-class=
       "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
       "+($index || provisionForm.disks.items.length < provisionForm.disks.max ? '' : 'disabled ')"
-    ng-click="$index ? provisionForm.disks.rem($index) : provisionForm.disks.add(disk.selected)"
+    ng-click="$index ? provisionForm.disks.rem($index) : provisionForm.disks.add()"
   )
-    ui-select(ng-model="disk.selected")
+    ui-select(
+      ng-model="disk.selected"
+      ng-change="disk.fireChangeEvent()"
+      ng-disabled="!(provisionForm.disks.items[$index-1] || provisionForm.mem).selected"
+    )
       ui-select-match(placeholder="{{ 'hardware.server.form.disk.PLACEHOLDER' | translate }}")
         | {{ $select.selected.name }}
 
@@ -95,12 +108,16 @@ div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
   +icon-label("{{ 'hardware.server.form.add-on.LABEL' | translate }}")(
     class="fa"
     ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
-    ng-click="$index ? provisionForm.addOns.rem($index) : provisionForm.addOns.add(addOn.selected)"
+    ng-click="$index ? provisionForm.addOns.rem($index) : provisionForm.addOns.add()"
   )
     +input-with-btn("fa fa-times-circle")(
       ng-click="addOn.selected = null"
     )
-      ui-select(ng-model="addOn.selected")
+      ui-select(
+        ng-model="addOn.selected"
+        ng-change="addOn.fireChangeEvent()"
+        ng-disabled="!(provisionForm.addOns.items[$index-1] || provisionForm.disks.items[0]).selected"
+      )
         ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
 
@@ -116,7 +133,10 @@ div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
           span(ng-bind-html="choice.name | highlight: $select.search")
 
 +label("{{ 'hardware.server.provision.server.LABEL' | translate }}")
-  ui-select(ng-model="provisionForm.server.selected")
+  ui-select(
+    ng-model="provisionForm.server.selected"
+    ng-change="provisionForm.server.fireChangeEvent()"
+  )
     ui-select-match(placeholder="{{ 'hardware.server.provision.server.PLACEHOLDER' | translate }}")
       | {{ $select.selected.nickname }} <{{ $select.selected.srv_id }}>
 
@@ -156,7 +176,10 @@ div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
         | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
 
 +label("{{ 'hardware.server.form.switch.speed.LABEL' | translate }}")
-  ui-select(ng-model="provisionForm.switchSpeed.selected")
+  ui-select(
+    ng-model="provisionForm.switchSpeed.selected"
+    ng-change="provisionForm.switchSpeed.fireChangeEvent()"
+  )
     ui-select-match(placeholder="{{ 'hardware.server.form.switch.speed.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
@@ -192,7 +215,10 @@ div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
 
 div(ng-if="provisionForm.profile.hasIso")
   +label("{{ 'hardware.server.provision.edition.LABEL' | translate }}")
-    ui-select(ng-model="provisionForm.edition.selected")
+    ui-select(
+      ng-model="provisionForm.edition.selected"
+      ng-change="provisionForm.edition.fireChangeEvent()"
+    )
       ui-select-match(placeholder="{{ 'hardware.server.provision.edition.PLACEHOLDER' | translate }}")
         | {{ $select.selected.name }}
 

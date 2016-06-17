@@ -1,13 +1,45 @@
 (function () {
   'use strict';
 
+  var FILTER = {
+    GROUP: {
+      inventory: true,
+    },
+    CPU: {
+      part_type: 'cpu',
+    },
+    MEM: {
+      part_type: 'mem',
+    },
+    DISK: {
+      part_type: 'disk',
+    },
+    ADDON: {
+      part_type: 'add-on',
+    },
+  };
+
+  var INPUT = {
+    billing: {
+      max_bandwidth: '',
+      id: '',
+    },
+    password: '',
+    nickname: '',
+    access: {
+      ipmi: true,
+      'switch': true,
+      pxe: true,
+    }
+  };
+
   angular
     .module('app.hardware.server')
     .component('provisionForm', {
       require: {
       },
       bindings: {
-        input: '=',
+        form: '=',
       },
       controller: 'ProvisionFormCtrl as provisionForm',
       transclude: true,
@@ -23,31 +55,45 @@
     var provisionForm = this;
 
     provisionForm.$onInit = init;
-    provisionForm.cpu = Select('part').filter({
-      part_type: 'cpu',
-    });
-    provisionForm.mem = Select('part').filter({
-      part_type: 'mem',
-    });
-    provisionForm.disks = MultiInput(DiskSelector).setMax(ServerConfig.MAX_DISKS).add();
-    provisionForm.addOns = MultiInput(AddOnSelector).add();
+    provisionForm.client = Select('client');
+    provisionForm.group = Select('group')
+      .filter(FILTER.GROUP)
+      .on('change', syncGroupToEntities)
+      .on('change', syncHardwareFilters)
+      ;
+    provisionForm.cpu = Select('part')
+      .filter(FILTER.CPU)
+      .on('change', syncHardwareFilters);
+    provisionForm.group.on('change', clear.bind(null, provisionForm.cpu));
+    provisionForm.mem = Select('part')
+      .filter(FILTER.MEM)
+      .on('change', syncHardwareFilters);
+    provisionForm.cpu.on('change', clear.bind(null, provisionForm.mem));
+    provisionForm.disks = MultiInput(DiskSelector)
+      .setMax(ServerConfig.MAX_DISKS)
+      .add()
+      .on('change', syncHardwareFilters)
+      ;
+    provisionForm.mem.on('change', clearMulti.bind(null, provisionForm.disks));
+    provisionForm.addOns = MultiInput(AddOnSelector)
+      .add()
+      .on('add', syncHardwareFilters)
+      ;
+    provisionForm.mem.on('change', clearMulti.bind(null, provisionForm.addOns));
     provisionForm.server = Select('server').filter({
       available: true,
     });
-    provisionForm.profile = Select('pxe/profile').on('change', checkPxeProfileForIso);
+    provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
+    provisionForm.profile = Select('pxe/profile')
+      .on('change', checkPxeProfileForIso);
     provisionForm.profile.hasIso = false;
-    provisionForm.group = Select('group').on('change', function () {
-      _.setContents(provisionForm.entities.selected, []);
-      syncEntityFilter();
-    });
     provisionForm.billing = {
       date: {
-        value: null,
+        value: new Date(),
         isOpen: false,
       },
     };
     provisionForm.edition = null;
-    provisionForm.client = Select('client');
     provisionForm.switchSpeed = Select('port-speed');
     provisionForm.entities = Select('entity').multi().filter({
       available: true,
@@ -56,6 +102,15 @@
     //////////
 
     function init() {
+      provisionForm.input = provisionForm.form.input || {};
+      _.assign(provisionForm.input, INPUT);
+
+      provisionForm.form.getData = getData;
+    }
+
+    function syncGroupToEntities() {
+      _.setContents(provisionForm.entities.selected, []);
+      syncEntityFilter();
     }
 
     function checkPxeProfileForIso() {
@@ -68,6 +123,46 @@
       }
 
       provisionForm.edition = Select('pxe/iso/'+iso.id+'/edition');
+    }
+
+    function syncHardwareFilters() {
+      var invFilter = {
+        cpu: provisionForm.cpu.getSelected('id') || undefined,
+        mem: provisionForm.mem.getSelected('id') || undefined,
+        ip_group: provisionForm.group.getSelected('id') || undefined,
+      };
+      var diskIds = _(provisionForm.disks.items).map(function(disk) {
+        return disk.getSelected('id');
+      }).filter().value();
+      provisionForm.server.filter(invFilter).filter({
+        'disks[]': diskIds,
+      }).load();
+      _.each([
+        provisionForm.cpu,
+        provisionForm.mem,
+      ], function (select) {
+        select.filter({
+          inventory: _.assign({}, invFilter, { disks: diskIds }),
+        }).load();
+      });
+
+      _.each({
+        disks: provisionForm.disks.items,
+        addOns: provisionForm.addOns.items,
+      }, function (selectItems, filterKey) {
+        _.reduce(selectItems, function (carry, select, key) {
+          var filter = {};
+          filter[filterKey] = _.clone(carry);
+          select.filter({
+            inventory: _.assign({}, invFilter, filter),
+          }).load();
+          var val = select.getSelected('id');
+          if (val) {
+            carry.push(val);
+          }
+          return carry;
+        }, []);
+      });
     }
 
     function syncEntityToGroup() {
@@ -84,6 +179,7 @@
       provisionForm.group.fireChangeEvent();
 
       _.setContents(provisionForm.entities.selected, selectedEntities);
+      syncEntityFilter();
     }
 
     function syncEntityFilter() {
@@ -100,12 +196,11 @@
     function getData() {
       var data = _.clone(provisionForm.input);
 
-      data.disks = ids(provisionForm.disks);
-      data.addons = ids(provisionForm.addOns);
       data.entities = _.map(provisionForm.entities.selected, 'id');
-      data.switch.id = provisionForm.switch.getSelected('id');
-      data.switch.speed = {
-        id: provisionForm.switchSpeed.getSelected('id'),
+      data.switch = {
+        speed: {
+          id: provisionForm.switchSpeed.getSelected('id'),
+        },
       };
       data.group = {
         id: provisionForm.group.getSelected('id'),
@@ -113,7 +208,16 @@
       data.client = {
         id: provisionForm.client.getSelected('id'),
       };
-      data.billing.date = ""+provisionForm.billing.date.value;
+      data.billing.date = provisionForm.billing.date.value ? provisionForm.billing.date.value.toUTCString() : null;
+      data.server = {
+        id: provisionForm.server.getSelected('id'),
+      };
+      data.profile = {
+        id: provisionForm.profile.getSelected('id'),
+      };
+      data.edition = provisionForm.profile.hasIso ? {
+        id: provisionForm.edition.getSelected('id'),
+      } : null;
 
       return data;
     }
@@ -127,9 +231,11 @@
     }
 
     function DiskSelector(selected) {
-      var select = Select('part').filter({
-        part_type: 'disk',
-      });
+      var select = Select('part')
+        .filter(FILTER.DISK)
+        .on('change', syncHardwareFilters)
+        ;
+
       select.selected = selected || null;
       select.load();
 
@@ -137,13 +243,28 @@
     }
 
     function AddOnSelector(selected) {
-      var select = Select('part').filter({
-        part_type: 'add-on',
-      });
+      var select = Select('part')
+        .filter(FILTER.ADDON)
+        .on('change', syncHardwareFilters)
+        ;
       select.selected = selected || null;
       select.load();
 
       return select;
+    }
+
+    function clear(select) {
+      var prev = select.selected;
+      select.selected = null;
+
+      if (select.selected != prev) {
+        select.fireChangeEvent();
+      }
+    }
+    function clearMulti(multi) {
+      _.each(multi.items, function (select) {
+        clear(select);
+      });
     }
   }
 })();

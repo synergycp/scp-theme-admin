@@ -3,6 +3,7 @@
 
   var INPUTS = {
     srv_id: '',
+    nickname: '',
     mac: '',
     cpu: null,
     mem: null,
@@ -113,7 +114,7 @@
         serverForm.switchSpeed.selected = response.switch.speed;
         serverForm.group.selected = response.group;
         serverForm.client.selected = response.client;
-        serverForm.billing.date.value = response.billing.date ? Date.parse(response.billing.date) : null;
+        serverForm.billing.date.value = response.billing.date ? new Date(Date.parse(response.billing.date)) : null;
       });
     }
 
@@ -172,7 +173,7 @@
       data.client = {
         id: serverForm.client.getSelected('id'),
       };
-      data.billing.date = ""+serverForm.billing.date.value;
+      data.billing.date = serverForm.billing.date.value ? serverForm.billing.date.value.toUTCString() : null;
 
       return data;
     }

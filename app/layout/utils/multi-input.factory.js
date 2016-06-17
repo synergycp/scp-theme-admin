@@ -10,13 +10,13 @@
    *
    * @ngInject
    */
-  function MultiInputFactory () {
+  function MultiInputFactory (EventEmitter) {
     return function (make) {
-        return new MultiInput(make);
+        return new MultiInput(make, EventEmitter());
     };
   }
 
-  function MultiInput (make) {
+  function MultiInput (make, event) {
     var multi = this;
 
     multi.max = null;
@@ -24,6 +24,10 @@
     multi.add = setIndex;
     multi.rem = delIndex;
     multi.setMax = setMax;
+    event.bindTo(multi);
+    event.on(['rem', 'set', 'add'], function () {
+      event.fire.bind(null, arguments)();
+    });
 
     //////////
 
@@ -44,12 +48,14 @@
       var del = length > key;
       var item = make(selected);
       multi.items.splice(key, del, item);
+      event.fire(del ? 'set' : 'add', item, key);
 
       return multi;
     }
 
     function delIndex($index) {
-      multi.items.splice($index, 1);
+      var items = multi.items.splice($index, 1);
+      event.fire('rem', items.pop());
 
       return multi;
     }

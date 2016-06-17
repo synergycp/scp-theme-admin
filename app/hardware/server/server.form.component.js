@@ -3,6 +3,7 @@
 
   var INPUTS = {
     srv_id: '',
+    nickname: '',
     mac: '',
     cpu: null,
     mem: null,
@@ -49,32 +50,24 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Select, $rootScope, $stateParams) {
+  function ServerFormCtrl(_, Select, MultiInput, $rootScope, ServerConfig, $stateParams) {
     var serverForm = this;
 
     serverForm.$onInit = init;
     serverForm.switch = Select('switch');
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
-    serverForm.disks = {
-      items: [],
-      add: addDisk,
-      rem: remDisk,
-    };
-    serverForm.disks.add();
-    serverForm.addOns = {
-      items: [],
-      add: addAddOn,
-      rem: remAddOn,
-    };
-    serverForm.addOns.add();
+    serverForm.disks = MultiInput(DiskSelector)
+      .setMax(ServerConfig.MAX_DISKS)
+      .add();
+    serverForm.addOns = MultiInput(AddOnSelector).add();
     serverForm.group = Select('group').on('change', function () {
       _.setContents(serverForm.entities.selected, []);
       syncEntityFilter();
     });
     serverForm.billing = {
       date: {
-        value: new Date(),
+        value: null,
         isOpen: false,
       },
     };
@@ -100,7 +93,14 @@
     }
 
     function syncEntityToGroup() {
-      serverForm.group.selected = serverForm.entity.selected;
+      var entityGroup = (serverForm.entities.selected[0] || {}).group || null;
+      var entityGroupId = (entityGroup || {}).id || null;
+      if (!entityGroup || serverForm.group.getSelected('id') == entityGroupId) {
+        syncEntityFilter();
+        return;
+      }
+
+      serverForm.group.selected = entityGroup;
       serverForm.group.fireChangeEvent();
     }
 
@@ -114,7 +114,7 @@
         serverForm.switchSpeed.selected = response.switch.speed;
         serverForm.group.selected = response.group;
         serverForm.client.selected = response.client;
-        serverForm.billing.date.value = response.billing.date ? Date.parse(response.billing.date) : null;
+        serverForm.billing.date.value = response.billing.date ? new Date(Date.parse(response.billing.date)) : null;
       });
     }
 
@@ -173,39 +173,9 @@
       data.client = {
         id: serverForm.client.getSelected('id'),
       };
-      data.billing.date = ""+serverForm.billing.date.value;
+      data.billing.date = serverForm.billing.date.value ? serverForm.billing.date.value.toUTCString() : null;
 
       return data;
-    }
-
-    function addDisk(selected, key) {
-      var select = Select('part?part_type=disk');
-      select.selected = selected || null;
-      select.load();
-      key = typeof key === "undefined" ? serverForm.disks.items.length : key;
-      var del = serverForm.disks.items.length > key;
-      serverForm.disks.items.splice(key, del, select);
-
-      return select;
-    }
-
-    function remDisk($index) {
-      serverForm.disks.items.splice($index, 1);
-    }
-
-    function addAddOn(selected, key) {
-      var select = Select('part?part_type=add-on');
-      select.selected = selected || null;
-      select.load();
-      key = typeof key === "undefined" ? serverForm.addOns.items.length : key;
-      var del = serverForm.addOns.items.length > key;
-      serverForm.addOns.items.splice(key, del, select);
-
-      return select;
-    }
-
-    function remAddOn($index) {
-      serverForm.addOns.items.splice($index, 1);
     }
 
     function ids(multi) {
@@ -214,6 +184,22 @@
         .filter()
         .value()
         ;
+    }
+
+    function DiskSelector(selected) {
+      var select = Select('part?part_type=disk');
+      select.selected = selected || null;
+      select.load();
+
+      return select;
+    }
+
+    function AddOnSelector(selected) {
+      var select = Select('part?part_type=add-on');
+      select.selected = selected || null;
+      select.load();
+
+      return select;
     }
   }
 })();

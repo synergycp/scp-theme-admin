@@ -1,0 +1,16 @@
+include /resources/jade/mixins/panel
+
+.row
+  .col-md-6
+    form(ng-submit="vm.submit()")
+      +panel("{{ 'hardware.server.provision.TITLE' | translate }}")
+        .panel-body
+          provision-form.form-horizontal(
+            form="vm.form"
+          )
+        .panel-footer.clearfix
+          .pull-right
+            button.btn.btn-primary(
+              type="submit"
+              data-translate="hardware.server.provision.SUBMIT"
+            )

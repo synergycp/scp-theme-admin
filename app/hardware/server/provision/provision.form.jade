@@ -1,0 +1,306 @@
+doctype html
+include /resources/jade/mixins/form
+
++label("{{ 'hardware.server.form.client.LABEL' | translate }}")
+  ui-select(ng-model="provisionForm.client.selected", ng-change="provisionForm.client.fireChangeEvent()")
+    ui-select-match(placeholder="{{ 'hardware.server.form.client.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "client in (" +
+          "provisionForm.client.items" +
+          "| filter: {name: $select.search}" +
+        ") track by client.id"
+      refresh="provisionForm.client.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="client.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.group.LABEL' | translate }}")
+  ui-select(
+    ng-model="provisionForm.group.selected"
+    ng-change="provisionForm.group.fireChangeEvent()"
+    ng-disabled="!provisionForm.client.selected"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.group.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "group in (" +
+          "provisionForm.group.items" +
+          "| filter: {name: $select.search}" +
+        ") track by group.id"
+      refresh="provisionForm.group.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="group.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.cpu.LABEL' | translate }}")
+  ui-select(
+    ng-model="provisionForm.cpu.selected"
+    ng-change="provisionForm.cpu.fireChangeEvent()"
+    ng-disabled="!provisionForm.group.selected"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.cpu.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "cpu in (" +
+          "provisionForm.cpu.items" +
+          "| filter: {name: $select.search}" +
+        ") track by cpu.id"
+      refresh="provisionForm.cpu.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="cpu.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.mem.LABEL' | translate }}")
+  ui-select(
+    ng-model="provisionForm.mem.selected"
+    ng-change="provisionForm.mem.fireChangeEvent()"
+    ng-disabled="!provisionForm.cpu.selected"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.mem.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "mem in (" +
+          "provisionForm.mem.items" +
+          "| filter: {name: $select.search}" +
+        ") track by mem.id"
+      refresh="provisionForm.mem.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="mem.name | highlight: $select.search")
+
+div(ng-repeat="disk in provisionForm.disks.items track by $index")
+  +icon-label("{{ 'hardware.server.form.disk.LABEL' | translate }}")(
+    class="fa"
+    ng-class=
+      "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
+      "+($index || provisionForm.disks.items.length < provisionForm.disks.max ? '' : 'disabled ')"
+    ng-click="$index ? provisionForm.disks.rem($index) : provisionForm.disks.add()"
+  )
+    ui-select(
+      ng-model="disk.selected"
+      ng-change="disk.fireChangeEvent()"
+      ng-disabled="!(provisionForm.disks.items[$index-1] || provisionForm.mem).selected"
+    )
+      ui-select-match(placeholder="{{ 'hardware.server.form.disk.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "disk.items" +
+            "| filter: {name: $select.search}" +
+          ") track by choice.id"
+        refresh="disk.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
+
+div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
+  +icon-label("{{ 'hardware.server.form.add-on.LABEL' | translate }}")(
+    class="fa"
+    ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
+    ng-click="$index ? provisionForm.addOns.rem($index) : provisionForm.addOns.add()"
+  )
+    +input-with-btn("fa fa-times-circle")(
+      ng-click="addOn.selected = null"
+    )
+      ui-select(
+        ng-model="addOn.selected"
+        ng-change="addOn.fireChangeEvent()"
+        ng-disabled="!(provisionForm.addOns.items[$index-1] || provisionForm.disks.items[0]).selected"
+      )
+        ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
+
+        ui-select-choices(
+          repeat=
+            "choice in (" +
+              "addOn.items" +
+              "| filter: {name: $select.search}" +
+            ") track by choice.id"
+          refresh="addOn.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice.name | highlight: $select.search")
+
++label("{{ 'hardware.server.provision.server.LABEL' | translate }}")
+  ui-select(
+    ng-model="provisionForm.server.selected"
+    ng-change="provisionForm.server.fireChangeEvent()"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.provision.server.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.nickname }} <{{ $select.selected.srv_id }}>
+
+    ui-select-choices(
+      repeat="choice in provisionForm.server.items track by choice.id"
+      refresh="provisionForm.server.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="choice.nickname | highlight: $select.search")
+      small(ng-bind-html="'&lt;'+(choice.srv_id | highlight: $select.search)+'&gt;'")
+
++label("{{ 'hardware.server.form.entities.LABEL' | translate }}")
+  ui-select(
+    multiple
+    sortable="true"
+    ng-model="provisionForm.entities.selected"
+    ng-change="provisionForm.entities.fireChangeEvent()"
+    close-on-select="false"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.entities.PLACEHOLDER' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+        "entity in (" +
+          "provisionForm.entities.items" +
+          "| filter: {name: $select.search}" +
+          "| filter: provisionForm.entities.notSelected" +
+        ") track by entity.id"
+      refresh="provisionForm.entities.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="entity.name | highlight: $select.search")
+      small
+        | (VLAN:
+        span(ng-bind-html="entity.vlan | highlight: $select.search")
+        | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
+
++label("{{ 'hardware.server.form.switch.speed.LABEL' | translate }}")
+  ui-select(
+    ng-model="provisionForm.switchSpeed.selected"
+    ng-change="provisionForm.switchSpeed.fireChangeEvent()"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.switch.speed.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "switchSpeed in (" +
+          "provisionForm.switchSpeed.items" +
+          "| filter: {name: $select.search}" +
+        ") track by switchSpeed.id"
+      refresh="provisionForm.switchSpeed.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="switchSpeed.name | highlight: $select.search")
+
++label("{{ 'hardware.server.provision.profile.LABEL' | translate }}")
+  ui-select(
+    ng-model="provisionForm.profile.selected"
+    ng-change="provisionForm.profile.fireChangeEvent()"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.provision.profile.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "choice in (" +
+          "provisionForm.profile.items" +
+          "| filter: {name: $select.search}" +
+        ") track by choice.id"
+      refresh="provisionForm.profile.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="choice.name | highlight: $select.search")
+
+div(ng-if="provisionForm.profile.hasIso")
+  +label("{{ 'hardware.server.provision.edition.LABEL' | translate }}")
+    ui-select(
+      ng-model="provisionForm.edition.selected"
+      ng-change="provisionForm.edition.fireChangeEvent()"
+    )
+      ui-select-match(placeholder="{{ 'hardware.server.provision.edition.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "provisionForm.edition.items" +
+            "| filter: {name: $select.search}" +
+          ") track by choice.id"
+        refresh="provisionForm.edition.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
+
+  +field(
+    "{{ 'hardware.server.provision.license_key.LABEL' | translate }}",
+    "license_key"
+  )(
+    placeholder="{{ 'hardware.server.provision.license_key.PLACEHOLDER' | translate }}"
+    ng-model="provisionForm.input.license_key"
+  )
+    p.help-block(data-translate="hardware.server.provision.license_key.HELP")
+
++field(
+  "{{ 'hardware.server.provision.password.LABEL' | translate }}",
+  "billing.id"
+)(
+  placeholder="{{ 'hardware.server.provision.password.PLACEHOLDER' | translate }}"
+  ng-model="provisionForm.input.password"
+)
+
++field(
+  "{{ 'hardware.server.form.billing.id.LABEL' | translate }}",
+  "billing.id"
+)(
+  placeholder="{{ 'hardware.server.form.billing.id.PLACEHOLDER' | translate }}"
+  ng-model="provisionForm.input.billing.id"
+)
+
++label(
+  "{{ 'hardware.server.form.billing.date.LABEL' | translate }}",
+  "billing.date"
+)
+  +input-with-btn("fa fa-calendar")(
+    ng-click="provisionForm.billing.date.isOpen = !provisionForm.billing.date.isOpen"
+  )
+    input.form-control(
+      type="text"
+      id="form-billing.date"
+      uib-datepicker-popup="yyyy-MM-dd"
+      ng-focus="provisionForm.billing.date.isOpen = true"
+      datepicker-options="{}"
+      close-text="Close"
+      alt-input-formats="[]"
+      is-open="provisionForm.billing.date.isOpen"
+      placeholder="{{ 'hardware.server.form.billing.date.PLACEHOLDER' | translate }}"
+      ng-model="provisionForm.billing.date.value"
+    )
+
++field(
+  "{{ 'hardware.server.form.billing.max_bandwidth.LABEL' | translate }}",
+  "billing.max_bandwidth"
+)(
+  placeholder="{{ 'hardware.server.form.billing.max_bandwidth.PLACEHOLDER' | translate }}"
+  ng-model="provisionForm.input.billing.max_bandwidth"
+)
+
++field(
+  "{{ 'hardware.server.form.nickname.LABEL' | translate }}",
+  "nickname"
+)(
+  placeholder="{{ 'hardware.server.form.nickname.PLACEHOLDER' | translate }}"
+  ng-model="provisionForm.input.nickname"
+)
+
++label("{{ 'hardware.server.form.access.LABEL' | translate }}")
+  +checkbox()(
+    ng-model="provisionForm.input.access.ipmi"
+  ) {{ 'hardware.server.form.access.ipmi.LABEL' | translate }}
+  +checkbox()(
+    ng-model="provisionForm.input.access.switch"
+  ) {{ 'hardware.server.form.access.switch.LABEL' | translate }}
+  +checkbox()(
+    ng-model="provisionForm.input.access.pxe"
+  ) {{ 'hardware.server.form.access.pxe.LABEL' | translate }}

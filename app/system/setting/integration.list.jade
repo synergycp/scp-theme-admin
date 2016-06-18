@@ -10,7 +10,7 @@ include /resources/jade/mixins/panel
             data-translate="system.integration.key.EMPTY"
             data-translate-value-name="{{integration.name}}"
           )
-          pre
+          pre(ng-if="integration.keys.length")
             div(
               ng-repeat="key in integration.keys track by key.id"
             )

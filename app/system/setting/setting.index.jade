@@ -1,0 +1,31 @@
+form(name="form", ng-submit="vm.submit()")
+  uib-tabset.full-size-lists(active='vm.tabs.active')
+    uib-tab(
+      ng-repeat="tab in vm.tabs.items"
+      index="$index"
+      select="vm.tabs.change($index)"
+      active="tab.active"
+      class="{{tab.visible ? '' : 'hidden'}}"
+    )
+      uib-tab-heading
+        span(ng-if="tab.trans", data-translate="{{tab.trans}}")
+        span(ng-if="tab.text", ng-bind="tab.text")
+      div(ng-include="tab.body")
+
+  br
+
+  .text-center
+    button.btn.btn-primary(
+      type="submit"
+      data-translate="system.setting.list.SUBMIT"
+    )
+
+br
+
+.row
+  .col-md-6
+    logs(
+      title="Setting Logs"
+      filter="vm.logs.filter"
+      listen-to="vm.list"
+    )

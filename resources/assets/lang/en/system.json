@@ -18,5 +18,17 @@
         "PLACEHOLDER": "Will be parsed using Smarty."
       }
     }
+  },
+  "setting": {
+    "list": {
+      "SUBMIT": "Save Changes"
+    }
+  },
+  "integration": {
+    "TITLE": "Integration",
+    "key": {
+      "EMPTY": "No API Keys created for {{ name }} yet.",
+      "ADD": "Add {{ name }} API Key"
+    }
   }
 }

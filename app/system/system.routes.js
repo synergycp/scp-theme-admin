@@ -48,6 +48,18 @@
         controller: 'LogViewCtrl as vm',
         templateUrl: helper.basepath('system/log/log.view.html'),
       })
+      .state('app.system.setting', {
+        url: '/setting',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.system.setting.list', {
+        url: '?tab',
+        title: 'Settings',
+        controller: 'SettingIndexCtrl as vm',
+        templateUrl: helper.basepath('system/setting/setting.index.html'),
+        reloadOnSearch: false,
+      })
       ;
   }
 })();

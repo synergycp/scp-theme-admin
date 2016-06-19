@@ -73,6 +73,13 @@
     },
     "logs": {
       "TITLE": "ISO Logs"
+    },
+    "edition": {
+      "TITLE": "{{ name }} Editions",
+      "SUBMIT": "Save Changes",
+      "license_key": {
+        "PLACEHOLDER": "Optional"
+      }
     }
   },
   "profile": {

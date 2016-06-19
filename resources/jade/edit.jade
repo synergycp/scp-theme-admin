@@ -2,25 +2,26 @@ doctype html
 
 .row
   .col-md-6
-    form.form-horizontal(ng-submit="vm.edit.submit()")
-      .panel.panel-default.relative(
-        ng-class="vm.edit.loader.class"
-      )
-        .loader
-        .panel-heading
-          h3.panel-title
-            block title
+    block left-side
+      form.form-horizontal(ng-submit="vm.edit.submit()")
+        .panel.panel-default.relative(
+          ng-class="vm.edit.loader.class"
+        )
+          .loader
+          .panel-heading
+            h3.panel-title
+              block title
 
-        .panel-body
-          block form
+          .panel-body
+            block form
 
-        .panel-footer.clearfix
-          .pull-right
-            input(
-              type="submit"
-              class="btn btn-default"
-              value="Save Changes"
-            )
+          .panel-footer.clearfix
+            .pull-right
+              input(
+                type="submit"
+                class="btn btn-default"
+                value="Save Changes"
+              )
 
   .col-md-6
     block right-side

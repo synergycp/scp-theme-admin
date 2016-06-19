@@ -131,8 +131,10 @@
 
       return $api.all(ids)
         [func](data || {})
-        .then(list.load)
-        .then(fireChangeEvent)
+        .branch()
+          .then(list.load)
+          .then(fireChangeEvent)
+        .unbranch()
         ;
     }
 

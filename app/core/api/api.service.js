@@ -50,14 +50,29 @@
      * @ngInject
      */
     function ApiService(ApiKey, Restangular, $state, Alert) {
-      var proxy = Restangular;
+      var proxy = wrapRestangular(Restangular);
       proxy.baseUrl = baseUrl;
       proxy.apiUrl = apiUrl;
-      proxy.patch = request(Restangular.patch);
-      proxy.delete = request(Restangular.delete);
-      proxy.get = request(Restangular.get);
-      proxy.post = request(Restangular.post);
-      proxy.put = request(Restangular.put);
+
+      function wrap(method) {
+        return function () {
+          var result = method.apply(Restangular, arguments);
+
+          return wrapRestangular(result);
+        };
+      }
+
+
+      function wrapRestangular(result) {
+        result.patch = request(result.patch);
+        result.delete = request(result.delete);
+        result.get = request(result.get);
+        result.post = request(result.post);
+        result.put = request(result.put);
+        result.all = wrap(result.all);
+
+        return result;
+      }
 
       activate();
 
@@ -97,9 +112,9 @@
       }
 
       function displayMessages(response) {
-        angular.forEach(response.data.messages, displayMessage);
+        angular.forEach(response.messages, displayMessage);
 
-        return data;
+        return response;
       }
 
       function displayMessage(message) {
@@ -112,7 +127,7 @@
         params.key = getApiKey();
 
         return {
-          params: params
+          params: params,
         };
       }
 

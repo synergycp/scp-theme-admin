@@ -8,3 +8,9 @@ block title
 
 block form
   iso-form(form="vm.edit")  
+
+block append left-side
+  edition-list(
+    iso-id="vm.edit.id"
+    iso-name="vm.edit.input.name"
+  )

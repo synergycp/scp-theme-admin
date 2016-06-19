@@ -16,6 +16,7 @@
 
     vm.edit = Edit('pxe/iso/'+$stateParams.id);
     vm.edit.submit = submit;
+    vm.edit.id = $stateParams.id;
 
     vm.logs = {
       filter: {

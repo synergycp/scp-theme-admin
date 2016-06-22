@@ -1,0 +1,25 @@
+extends /resources/pug/list-checkable
+
+block title
+  | Groups
+
+block headings
+  th.relative Name
+    sort(col="name")
+  th.relative Reserved 
+    sort(col="reserved")
+  th.relative IP Entities
+    sort(col="ip_entities")
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td
+    span.fa.fa-check.text-success(ng-if="row.reserved")
+  td
+    a(ui-sref="app.network.entity.list({group: row.id})")
+      | {{ row.entitiesCount }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.network.group.view({id: row.id})")
+        | {{ 'app.action.EDIT' | translate }}

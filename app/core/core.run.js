@@ -36,7 +36,6 @@
     // Hook not found
     $rootScope.$on('$stateNotFound',
       function (event, unfoundState /*, fromState, fromParams*/ ) {
-        console.log('hmm');
         console.error(unfoundState.to); // "lazy.state"
         console.error(unfoundState.toParams); // {a:1, b:2}
         console.error(unfoundState.options); // {inherit:false} + default options

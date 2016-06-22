@@ -1,0 +1,35 @@
+include /resources/pug/mixins/panel
+
++panel("{{ 'hardware.server.assign.TITLE' | translate }}")
+  table.table
+    thead
+      tr
+        th(translate="hardware.server.assign.ITEM")
+        th(translate="hardware.server.assign.ASSIGNED")
+
+    tbody
+      tr
+        td
+          strong(translate="hardware.server.assign.CLIENT")
+        td
+          a(
+            ng-if="assign.server.client"
+            ui-sref="app.users.clients.view(assign.server.client)"
+            ng-bind="assign.server.client.name"
+          )
+          span  (
+          a(
+            ng-click="assign.client.modal()"
+            translate="hardware.server.assign."+
+              "{{ assign.server.client ? 'REASSIGN' : 'ASSIGN' }}"
+          )
+          span )
+      tr(ng-repeat="entity in hardware.entities")
+        td
+          strong(translate="hardware.server.assign.CLIENT")
+        td(ng-bind="item.name")
+
+      tr
+        td(translate="hardware.server.hardware.MAC")
+        td(ng-bind="hardware.server.mac")
+        td(translate="hardware.server.hardware.NA")

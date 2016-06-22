@@ -58,8 +58,8 @@ var source = {
     paths.scripts + '**/*.js'
   ],
   templates: {
-    index: [paths.markup + 'index.jade'],
-    views: [paths.markup + '**/*.jade', '!' + paths.markup + 'index.jade']
+    index: [paths.markup + 'index.pug'],
+    views: [paths.markup + '**/*.pug', '!' + paths.markup + 'index.pug']
   },
   styles: {
     app: [paths.styles + '*.scss'],
@@ -95,7 +95,7 @@ var vendorUglifyOpts = {
   }
 };
 
-var jadeOptions = {
+var pugOptions = {
   doctype: 'html',
   basedir: __dirname
 };
@@ -120,7 +120,7 @@ var tplCacheOptions = {
   //standalone: true,
   module: 'app.core',
   base: function (file) {
-    return file.path.split('jade')[1];
+    return file.path.split('pug')[1];
   }
 };
 
@@ -282,7 +282,7 @@ gulp.task('templates:index', ['templates:views'], function () {
   });
   return gulp.src(source.templates.index)
     .pipe($.if(useCache, $.inject(tplscript, injectOptions))) // inject the templates.js into index
-    .pipe($.jade(jadeOptions))
+    .pipe($.pug(pugOptions))
     .on('error', handleError)
     .pipe($.htmlPrettify(prettifyOpts))
     .pipe(gulp.dest(build.templates.index))
@@ -298,7 +298,7 @@ gulp.task('templates:views', function () {
   if (useCache) {
 
     return gulp.src(source.templates.views)
-      .pipe($.jade(jadeOptions))
+      .pipe($.pug(pugOptions))
       .on('error', handleError)
       .pipe($.angularTemplatecache(tplCacheOptions))
       .pipe($.if(isProduction, $.uglify({
@@ -314,7 +314,7 @@ gulp.task('templates:views', function () {
       .pipe($.if(!isProduction, $.changed(build.templates.views, {
         extension: '.html'
       })))
-      .pipe($.jade(jadeOptions))
+      .pipe($.pug(pugOptions))
       .on('error', handleError)
       .pipe($.htmlPrettify(prettifyOpts))
       .pipe(gulp.dest(build.templates.views))

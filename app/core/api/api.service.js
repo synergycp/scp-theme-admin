@@ -62,7 +62,6 @@
         };
       }
 
-
       function wrapRestangular(result) {
         result.patch = request(result.patch);
         result.delete = request(result.delete);
@@ -70,6 +69,7 @@
         result.post = request(result.post);
         result.put = request(result.put);
         result.all = wrap(result.all);
+        result.one = wrap(result.one);
 
         return result;
       }

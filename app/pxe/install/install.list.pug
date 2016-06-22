@@ -1,0 +1,12 @@
+include /resources/pug/mixins/panel
+
+div(ng-if="!vm.list.items.length")
+  .alert.alert-info(data-translate="pxe.install.list.EMPTY")
+.row
+  .col-md-6(ng-repeat="install in vm.list.items")
+    +panel("{{ install.server.name }}")
+      .panel-body.pxe-install-status
+        install-progress(
+          install="install"
+          on-delete="vm.list.delete([install])"
+        )

@@ -1,0 +1,35 @@
+include /resources/pug/mixins/panel 
+
+form(
+  name="form"
+  ng-submit="editionList.submit()"
+)
+  +panel("{{ 'pxe.iso.edition.TITLE' | translate:{name: editionList.isoName} }}")
+    table.table.table-bordered.table-condensed.mid-aligned
+      thead
+        tr
+          th Name
+          th Enable
+          th License Key
+      tbody
+        tr(ng-repeat="item in editionList.list.items track by item.id")
+          td(ng-bind="item.name")
+          td.text-center
+            input(
+              type="checkbox"
+              name="{{item.id}}.is_enabled"
+              ng-model="item.is_enabled"
+            )
+          td
+            input.form-control.input-sm(
+              type="text"
+              name="{{item.id}}.key"
+              placeholder="{{ 'pxe.iso.edition.license_key.PLACEHOLDER' | translate }}"
+              ng-model="item.key"
+            )
+    .panel-footer.clearfix
+      .pull-right
+        button.btn.btn-primary(
+          type="submit"
+          translate="pxe.iso.edition.SUBMIT"
+        )

@@ -122,6 +122,37 @@
     }
   },
   "server": {
+    "list": {
+      "TITLE": "Servers"
+    },
+    "inventory": {
+      "TITLE": "Server Inventory"
+    },
+    "manage": {
+    },
+    "bandwidth": {
+      "TITLE": "Bandwidth"
+    },
+    "assign": {
+      "TITLE": "Server Assignments",
+      "ITEM": "Item",
+      "ASSIGNED": "Assigned To",
+      "CLIENT": "Client",
+      "REASSIGN": "Reassign",
+      "ASSIGN": "Assign"
+    },
+    "hardware": {
+      "TITLE": "Server Hardware",
+      "ITEM": "Hardare Item",
+      "VALUE": "Value",
+      "BILLING": "Billing ID",
+      "MAC": "MAC Address",
+      "CPU": "Processor",
+      "MEM": "Memory",
+      "DISK": "Disk",
+      "ADD-ON": "Add-On",
+      "NA": "N/A"
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ name }}",

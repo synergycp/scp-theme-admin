@@ -1,0 +1,34 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title Merge Port Speed
+
+  .modal-body.form-horizontal
+    +label("{{ 'hardware.speed.modal.merge.speed.LABEL' | translate }}")
+      ui-select(ng-model="modal.speed.selected")
+        ui-select-match(placeholder="{{ 'hardware.speed.modal.merge.speed.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
+
+        ui-select-choices(
+          repeat=
+            "speed in (" +
+              "modal.speed.items" +
+              "| filter: {name: $select.search}" +
+            ") track by speed.id"
+          refresh="modal.speed.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="speed.name | highlight: $select.search")
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) Cancel
+    button.btn.btn-primary(type="submit") Merge

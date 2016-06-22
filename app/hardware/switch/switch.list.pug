@@ -1,0 +1,23 @@
+extends /resources/pug/list-checkable
+
+block title
+  | Switches
+
+block headings
+  th.relative Name
+    sort(col="name")
+  th.relative Switch IP:Port 
+    sort(col="ip")
+  th Servers
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td {{ row.ip }}:{{ row.port }}
+  td
+    a(ui-sref="app.hardware.server.list({switch: row.id})")
+      | {{ row.serversCount }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.hardware.switch.view({id: row.id})")
+        | {{ 'app.action.EDIT' | translate }}

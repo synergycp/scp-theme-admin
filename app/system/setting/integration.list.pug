@@ -1,0 +1,27 @@
+include /resources/pug/mixins/panel
+
+.row
+  .col-md-6(ng-repeat="integration in tab.list.items")
+    +panel("{{integration.name}} Integration")
+      .panel-body
+        .col-md-8.col-md-offset-2.text-center
+          p(
+            ng-if="!integration.keys.length"
+            data-translate="system.integration.key.EMPTY"
+            data-translate-value-name="{{integration.name}}"
+          )
+          pre(ng-if="integration.keys.length")
+            div(
+              ng-repeat="key in integration.keys track by key.id"
+            )
+              span(ng-bind="key.key")
+              | 
+              a.fa.fa-minus-circle(
+                ng-click="tab.apiKey.del(key)"
+              )
+          button.btn.btn-default(
+            type="button"
+            ng-click="tab.apiKey.add(integration)"
+            translate="system.integration.key.ADD"
+            translate-value-name="{{integration.name}}"
+          )

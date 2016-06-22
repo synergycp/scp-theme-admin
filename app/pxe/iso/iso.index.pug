@@ -1,0 +1,19 @@
+extends /resources/pug/list-page
+include /resources/pug/mixins/list
+
+block list
+  include iso.list.jade
+
+block bottom-left
+  +create-form("{{ 'pxe.iso.form.title.ADD' | translate }}")
+    iso-form(
+      create="true"
+      form="vm.create"
+    )
+
+block bottom-right
+  logs(
+    title="{{ 'pxe.iso.logs.TITLE' | translate }}"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

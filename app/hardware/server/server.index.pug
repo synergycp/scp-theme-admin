@@ -1,0 +1,16 @@
+extends /resources/pug/list-page
+include /resources/pug/mixins/list
+
+block list
+  include server.list.jade
+
+block bottom-left
+  +create-form("{{ 'hardware.server.form.title.ADD' | translate }}")
+    server-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="Server Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

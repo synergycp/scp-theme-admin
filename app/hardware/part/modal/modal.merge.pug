@@ -1,0 +1,38 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(data-translate="hardware.part.modal.merge.TITLE")
+
+  .modal-body.form-horizontal
+    +label("{{ 'hardware.part.modal.merge.part.LABEL' | translate }}")
+      ui-select(ng-model="modal.part.selected")
+        ui-select-match(placeholder="{{ 'hardware.part.modal.merge.part.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
+
+        ui-select-choices(
+          repeat=
+            "choice in (" +
+              "modal.part.items" +
+              "| filter: {name: $select.search}" +
+            ") track by choice.id"
+          refresh="modal.part.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice.name | highlight: $select.search")
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+      data-translate="hardware.part.modal.merge.CANCEL"
+    )
+    button.btn.btn-primary(
+      type="submit"
+      data-translate="hardware.part.modal.merge.SUBMIT"
+    )

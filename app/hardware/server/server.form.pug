@@ -1,0 +1,301 @@
+doctype html
+include /resources/pug/mixins/form
+
++field(
+  "{{ 'hardware.server.form.id.LABEL' | translate }}",
+  "id"
+)(
+  placeholder="{{ 'hardware.server.form.id.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.srv_id"
+)
+
++field(
+  "{{ 'hardware.server.form.mac.LABEL' | translate }}",
+  "mac"
+)(
+  placeholder="{{ 'hardware.server.form.mac.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.mac"
+)
+
++label("{{ 'hardware.server.form.cpu.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.input.cpu")
+    ui-select-match(placeholder="{{ 'hardware.server.form.cpu.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "cpu in (" +
+          "serverForm.cpu.items" +
+          "| filter: {name: $select.search}" +
+        ") track by cpu.id"
+      refresh="serverForm.cpu.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="cpu.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.mem.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.input.mem")
+    ui-select-match(placeholder="{{ 'hardware.server.form.mem.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "mem in (" +
+          "serverForm.mem.items" +
+          "| filter: {name: $select.search}" +
+        ") track by mem.id"
+      refresh="serverForm.mem.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="mem.name | highlight: $select.search")
+
+div(ng-repeat="disk in serverForm.disks.items track by $index")
+  +icon-label("{{ 'hardware.server.form.disk.LABEL' | translate }}")(
+    class="fa"
+    ng-class=
+      "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
+      "+($index || serverForm.disks.items.length < serverForm.disks.max ? '' : 'disabled ')"
+    ng-click="$index ? serverForm.disks.rem($index) : serverForm.disks.add(disk.selected)"
+  )
+    ui-select(ng-model="disk.selected")
+      ui-select-match(placeholder="{{ 'hardware.server.form.disk.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "disk.items" +
+            "| filter: {name: $select.search}" +
+          ") track by choice.id"
+        refresh="disk.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
+
+div(ng-repeat="addOn in serverForm.addOns.items track by $index")
+  +icon-label("{{ 'hardware.server.form.add-on.LABEL' | translate }}")(
+    class="fa"
+    ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
+    ng-click="$index ? serverForm.addOns.rem($index) : serverForm.addOns.add(addOn.selected)"
+  )
+    +input-with-btn("fa fa-times-circle")(
+      ng-click="addOn.selected = null"
+    )
+      ui-select(ng-model="addOn.selected")
+        ui-select-match(placeholder="{{ 'hardware.server.form.add-on.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
+
+        ui-select-choices(
+          repeat=
+            "choice in (" +
+              "addOn.items" +
+              "| filter: {name: $select.search}" +
+            ") track by choice.id"
+          refresh="addOn.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice.name | highlight: $select.search")
+
+hr
+
++label("{{ 'hardware.server.form.switch.LABEL' | translate }}")
+  ui-select(ng-model="serverForm.switch.selected")
+    ui-select-match(placeholder="{{ 'hardware.server.form.switch.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "switch in (" +
+          "serverForm.switch.items" +
+          "| filter: {name: $select.search}" +
+        ") track by switch.id"
+      refresh="serverForm.switch.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="switch.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.switch.port.LABEL' | translate }}")
+  .row
+    .col-xs-6
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.switch.port.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.switch.port"
+      )
+    .col-xs-6
+      ui-select(ng-model="serverForm.switchSpeed.selected")
+        ui-select-match(placeholder="{{ 'hardware.server.form.switch.speed.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
+
+        ui-select-choices(
+          repeat=
+            "switchSpeed in (" +
+              "serverForm.switchSpeed.items" +
+              "| filter: {name: $select.search}" +
+            ") track by switchSpeed.id"
+          refresh="serverForm.switchSpeed.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="switchSpeed.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.group.LABEL' | translate }}")
+  ui-select(
+    ng-model="serverForm.group.selected"
+    ng-change="serverForm.group.fireChangeEvent()"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.group.PLACEHOLDER' | translate }}")
+      | {{ $select.selected.name }}
+
+    ui-select-choices(
+      repeat=
+        "group in (" +
+          "serverForm.group.items" +
+          "| filter: {name: $select.search}" +
+        ") track by group.id"
+      refresh="serverForm.group.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="group.name | highlight: $select.search")
+
++label("{{ 'hardware.server.form.entities.LABEL' | translate }}")
+  ui-select(
+    multiple
+    sortable="true"
+    ng-model="serverForm.entities.selected"
+    ng-change="serverForm.entities.fireChangeEvent()"
+    close-on-select="false"
+  )
+    ui-select-match(placeholder="{{ 'hardware.server.form.entities.PLACEHOLDER' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+        "entity in (" +
+          "serverForm.entities.items" +
+          "| filter: {name: $select.search}" +
+          "| filter: serverForm.entities.notSelected" +
+        ") track by entity.id"
+      refresh="serverForm.entities.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="entity.name | highlight: $select.search")
+      small
+        | (VLAN:
+        span(ng-bind-html="entity.vlan | highlight: $select.search")
+        | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
+
+hr
+
++field(
+  "{{ 'hardware.server.form.ipmi.ip.LABEL' | translate }}",
+  "ipmi.ip"
+)(
+  placeholder="{{ 'hardware.server.form.ipmi.ip.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.ipmi.ip"
+)
+
++label("{{ 'hardware.server.form.ipmi.admin.LABEL' | translate }}")
+  .row 
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.admin.username.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.admin.username"
+      )
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.admin.password.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.admin.password"
+      )
+
++label("{{ 'hardware.server.form.ipmi.client.LABEL' | translate }}")
+  .row 
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.client.username.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.client.username"
+      )
+    .col-xs-6 
+      input.form-control(
+        type="text"
+        placeholder="{{ 'hardware.server.form.ipmi.client.password.PLACEHOLDER' | translate }}"
+        ng-model="serverForm.input.ipmi.client.password"
+      )
+
+hr 
+
++label("{{ 'hardware.server.form.client.LABEL' | translate }}")
+  +input-with-btn("fa fa-times-circle")(
+    ng-click="serverForm.client.selected = null"
+  )
+    ui-select(ng-model="serverForm.client.selected")
+      ui-select-match(placeholder="{{ 'hardware.server.form.client.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "client in (" +
+            "serverForm.client.items" +
+            "| filter: {name: $select.search}" +
+          ") track by client.id"
+        refresh="serverForm.client.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="client.name | highlight: $select.search")
+
++field(
+  "{{ 'hardware.server.form.billing.id.LABEL' | translate }}",
+  "billing.id"
+)(
+  placeholder="{{ 'hardware.server.form.billing.id.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.billing.id"
+)
+
++label(
+  "{{ 'hardware.server.form.billing.date.LABEL' | translate }}",
+  "billing.date"
+)
+  +input-with-btn("fa fa-calendar")(
+    ng-click="serverForm.billing.date.isOpen = !serverForm.billing.date.isOpen"
+  )
+    input.form-control(
+      type="text"
+      id="form-billing.date"
+      uib-datepicker-popup="yyyy-MM-dd"
+      ng-focus="serverForm.billing.date.isOpen = true"
+      datepicker-options="{}"
+      close-text="Close"
+      alt-input-formats="[]"
+      is-open="serverForm.billing.date.isOpen"
+      placeholder="{{ 'hardware.server.form.billing.date.PLACEHOLDER' | translate }}"
+      ng-model="serverForm.billing.date.value"
+    )
+
++field(
+  "{{ 'hardware.server.form.billing.max_bandwidth.LABEL' | translate }}",
+  "billing.max_bandwidth"
+)(
+  placeholder="{{ 'hardware.server.form.billing.max_bandwidth.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.billing.max_bandwidth"
+)
+
++field(
+  "{{ 'hardware.server.form.nickname.LABEL' | translate }}",
+  "nickname"
+)(
+  placeholder="{{ 'hardware.server.form.nickname.PLACEHOLDER' | translate }}"
+  ng-model="serverForm.input.nickname"
+)
+
++label("{{ 'hardware.server.form.access.LABEL' | translate }}")
+  +checkbox()(
+    ng-model="serverForm.input.access.ipmi"
+  ) {{ 'hardware.server.form.access.ipmi.LABEL' | translate }}
+  +checkbox()(
+    ng-model="serverForm.input.access.switch"
+  ) {{ 'hardware.server.form.access.switch.LABEL' | translate }}
+  +checkbox()(
+    ng-model="serverForm.input.access.pxe"
+  ) {{ 'hardware.server.form.access.pxe.LABEL' | translate }}

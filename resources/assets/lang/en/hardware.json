@@ -122,6 +122,121 @@
     }
   },
   "server": {
+    "EDIT": "Edit Server",
+    "list": {
+      "TITLE": "Servers"
+    },
+    "logs": {
+      "TITLE": "Server Logs"
+    },
+    "inventory": {
+      "TITLE": "Server Inventory"
+    },
+    "manage": {
+    },
+    "bandwidth": {
+      "TITLE": "Bandwidth"
+    },
+    "switch": {
+      "TITLE": "Switch Controls",
+      "NOT_ENABLED": "This server has not been assigned a switch, port, and port speed yet.",
+      "NAME": "Switch Name",
+      "SYNC_VLAN": "Assign VLAN",
+      "SYNC_SPEED": "Set Port Speed",
+      "SPEED": "Port Speed",
+      "PORT": "Port Number",
+      "power": {
+        "DROPDOWN": "Port Power",
+        "ON": "Port Power On",
+        "OFF": "Port Power Off"
+      }
+    },
+    "ipmi": {
+      "TITLE": "IPMI Controls",
+      "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
+      "ADDRESS": "IPMI IP Address",
+      "BMC": "Reset BMC",
+      "PXE": "PXE Boot",
+      "client": {
+        "USER": "Client Username",
+        "PASS": "Client Password",
+        "EMPTY": "Not created",
+        "CREATE": "create",
+        "DELETE": "delete",
+        "dropdown": {
+          "TITLE": "Client User",
+          "CREATE": "Setup User",
+          "DELETE": "Delete User"
+        }
+      },
+      "power": {
+        "STATUS": "Power Status",
+        "CHECKED": "Last Checked",
+        "dropdown": {
+          "TITLE": "Power",
+          "ON": "Power On",
+          "CYCLE": "Power Reset",
+          "SOFT": "Soft Shutdown",
+          "OFF": "Power Off"
+        }
+      }
+    },
+    "assign": {
+      "TITLE": "Server Assignments",
+      "ITEM": "Item",
+      "ASSIGNED": "Assigned To",
+      "GROUP": "Group",
+      "client": {
+        "TITLE": "Client",
+        "NONE": "Unassigned",
+        "REASSIGN": "Reassign",
+        "ASSIGN": "Assign"
+      },
+      "entity": {
+        "TITLE": "IP Allocation",
+        "v4": {
+          "USABLE": " - Usable IP(s)",
+          "GATEWAY": " - Gateway IP",
+          "SUBNET": " - Subnet Mask"
+        },
+        "v6": {
+          "ADDRESS": " - IPv6 Address",
+          "GATEWAY": " - IPv6 Gateway"
+        }
+      }
+    },
+    "hardware": {
+      "TITLE": "Server Hardware",
+      "ITEM": "Hardare Item",
+      "VALUE": "Value",
+      "BILLING": "Billing ID",
+      "MAC": "MAC Address",
+      "CPU": "Processor",
+      "MEM": "Memory",
+      "DISK": "Disk",
+      "ADD-ON": "Add-On",
+      "NA": "N/A"
+    },
+    "notes": {
+      "TITLE": "Server Notes",
+      "CLIENT": "Client Notes",
+      "ADMIN": "Administrator Notes",
+      "SUBMIT": "Save Notes"
+    },
+    "modal": {
+      "servers": {
+        "LABEL": "Servers"
+      },
+      "client": {
+        "TITLE": "Assign Client",
+        "SUBMIT": "Assign",
+        "CANCEL": "Cancel",
+        "client": {
+          "LABEL": "Client",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ name }}",

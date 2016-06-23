@@ -58,8 +58,8 @@ var source = {
     paths.scripts + '**/*.js'
   ],
   templates: {
-    index: [paths.markup + 'index.jade'],
-    views: [paths.markup + '**/*.jade', '!' + paths.markup + 'index.jade']
+    index: [paths.markup + 'index.pug'],
+    views: [paths.markup + '**/*.pug', '!' + paths.markup + 'index.pug']
   },
   styles: {
     app: [paths.styles + '*.scss'],
@@ -83,21 +83,16 @@ var build = {
 
 // PLUGINS OPTIONS
 
-var prettifyOpts = {
-  indent_char: ' ',
-  indent_size: 3,
-  unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u', 'pre', 'code']
-};
-
 var vendorUglifyOpts = {
   mangle: {
     except: ['$super'] // rickshaw requires this
   }
 };
 
-var jadeOptions = {
+var pugOptions = {
   doctype: 'html',
-  basedir: __dirname
+  basedir: __dirname,
+  pretty: false,
 };
 
 var compassOpts = {
@@ -120,7 +115,7 @@ var tplCacheOptions = {
   //standalone: true,
   module: 'app.core',
   base: function (file) {
-    return file.path.split('jade')[1];
+    return file.path.split('pug')[1];
   }
 };
 
@@ -282,9 +277,8 @@ gulp.task('templates:index', ['templates:views'], function () {
   });
   return gulp.src(source.templates.index)
     .pipe($.if(useCache, $.inject(tplscript, injectOptions))) // inject the templates.js into index
-    .pipe($.jade(jadeOptions))
+    .pipe($.pug(pugOptions))
     .on('error', handleError)
-    .pipe($.htmlPrettify(prettifyOpts))
     .pipe(gulp.dest(build.templates.index))
     .pipe(reload({
       stream: true
@@ -298,7 +292,7 @@ gulp.task('templates:views', function () {
   if (useCache) {
 
     return gulp.src(source.templates.views)
-      .pipe($.jade(jadeOptions))
+      .pipe($.pug(pugOptions))
       .on('error', handleError)
       .pipe($.angularTemplatecache(tplCacheOptions))
       .pipe($.if(isProduction, $.uglify({
@@ -314,9 +308,8 @@ gulp.task('templates:views', function () {
       .pipe($.if(!isProduction, $.changed(build.templates.views, {
         extension: '.html'
       })))
-      .pipe($.jade(jadeOptions))
+      .pipe($.pug(pugOptions))
       .on('error', handleError)
-      .pipe($.htmlPrettify(prettifyOpts))
       .pipe(gulp.dest(build.templates.views))
       .pipe(reload({
         stream: true

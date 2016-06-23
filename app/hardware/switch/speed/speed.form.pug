@@ -1,0 +1,26 @@
+doctype html
+include /resources/pug/mixins/form
+
++field(
+  "{{ 'hardware.speed.form.name.LABEL' | translate }}",
+  "name"
+)(
+  placeholder="{{ 'hardware.speed.form.name.PLACEHOLDER' | translate }}"
+  ng-model="speedForm.input.name"
+)
+
++field(
+  "{{ 'hardware.speed.form.billing_id.LABEL' | translate }}",
+  "billing_id"
+)(
+  placeholder="{{ 'hardware.speed.form.billing_id.PLACEHOLDER' | translate }}"
+  ng-model="speedForm.input.billing_id"
+)
+
++field(
+  "{{ 'hardware.speed.form.speed.LABEL' | translate }}",
+  "speed"
+)(
+  placeholder="{{ 'hardware.speed.form.speed.PLACEHOLDER' | translate }}"
+  ng-model="speedForm.input.speed"
+)

@@ -39,9 +39,20 @@
       })
       .state('app.hardware.server.view', {
         url: '/:id',
-        title: 'View Server',
-        controller: 'ServerViewCtrl as vm',
-        templateUrl: helper.basepath('hardware/server/server.view.html'),
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.hardware.server.view.edit', {
+        url: '/edit',
+        title: 'Edit Server',
+        controller: 'ServerEditCtrl as vm',
+        templateUrl: helper.basepath('hardware/server/server.edit.html'),
+      })
+      .state('app.hardware.server.view.manage', {
+        url: '',
+        title: 'Manage Server',
+        controller: 'ServerManageCtrl as vm',
+        templateUrl: helper.basepath('hardware/server/manage/manage.html'),
       })
       .state('app.hardware.switch', {
         url: '/switch',

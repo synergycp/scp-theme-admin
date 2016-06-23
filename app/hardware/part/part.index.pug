@@ -1,0 +1,44 @@
+form(name="form", ng-submit="vm.submit()")
+  .row
+    .col-md-12
+      .pull-right.col-md-4
+        .row.input-group
+          input.form-control(
+            type="text"
+            ng-model="vm.search"
+            ng-change="vm.searchChange()"
+          )
+          span.input-group-btn
+            .btn.btn-default
+              i.fa.fa-search
+
+      uib-tabset.full-size-lists(active='vm.tabs.active')
+        uib-tab(
+          ng-repeat="tab in vm.tabs.items"
+          index="$index"
+          ng-init="list = tab.list"
+          select="vm.tabs.change($index)"
+          active="tab.active"
+        )
+          uib-tab-heading
+            span(data-translate="{{ tab.text }}.TITLE")
+            span.badge(ng-if="list.pages.total", ng-bind="list.pages.total")
+          include part.list.pug
+
+  br
+
+  .text-center
+    button.btn.btn-primary(
+      type="submit"
+      data-translate="hardware.part.list.SUBMIT"
+    )
+
+br
+
+.row
+  .col-md-6
+    logs(
+      title="Part Logs"
+      filter="vm.logs.filter"
+      listen-to="vm.list"
+    )

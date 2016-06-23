@@ -5,6 +5,18 @@
   }
 }
 
+.no-padding {
+  padding: 0 !important;
+}
+
+.pad-right {
+  padding-right: $grid-gutter-width/2 !important;
+}
+
+.v-mid {
+  vertical-align: middle;
+}
+
 .relative {
   position: relative;
 }

@@ -33,6 +33,7 @@
     "EDIT": "edit",
     "BULK": "With Selected:",
     "VIEW": "view",
+    "MANAGE": "manage",
     "DELETE": "delete"
   }
 }

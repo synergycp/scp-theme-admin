@@ -1,0 +1,10 @@
+extends /resources/pug/edit
+
+block title
+  span(
+    translate='pxe.profile.form.title.EDIT'
+    translate-value-name='{{vm.edit.input.name}}'
+  )
+
+block form
+  profile-form(form="vm.edit")

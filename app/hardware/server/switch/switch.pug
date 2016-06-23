@@ -1,0 +1,63 @@
+include /resources/pug/mixins/panel
+
++panel("{{ 'hardware.server.switch.TITLE' | translate }}")(
+  ng-class="switchControl.loader.class"
+)
+  .loader
+  .panel-body.text-center(ng-if="!switchControl.isEnabled")
+    p(translate="hardware.server.switch.NOT_ENABLED")
+    a.btn.btn-primary(
+      translate="hardware.server.EDIT"
+      ui-sref="app.hardware.server.view.edit(switchControl.server)"
+    )
+  table.table.table-condensed.table-bordered(ng-if="switchControl.isEnabled")
+    //- Show border
+    tr
+      td.no-padding(colspan="3")
+    tr.mid-aligned
+      td.shrink.pad-right
+        strong(translate="hardware.server.switch.NAME")
+      td
+        a(
+          ng-href="{{$state.href('app.hardware.switch.view', switchControl.server.switch)}}"
+          ng-bind="switchControl.server.switch.name"
+        )
+      td.text-right.shrink(rowspan="100")
+        //- Start Buttons
+        span.btn-group-vertical
+          a.btn.btn-default(
+            ng-click="switchControl.patch({ sync_vlan: true })"
+            translate="hardware.server.switch.SYNC_VLAN"
+          )
+          a.btn.btn-default(
+            ng-click="switchControl.patch({ sync_speed: true })"
+            translate="hardware.server.switch.SYNC_SPEED"
+          )
+          span.btn-group(uib-dropdown)
+            a.btn.btn-default(uib-dropdown-toggle)
+              span(translate="hardware.server.switch.power.DROPDOWN")
+              span &nbsp;
+              span.fa.fa-caret-down
+            ul.dropdown-menu(uib-dropdown-menu, role="menu")
+              li(role="menuitem")
+                a(
+                  ng-click="switchControl.patch({ power: 'on' })"
+                  translate="hardware.server.switch.power.ON"
+                )
+              li(role="menuitem")
+                a(
+                  ng-click="switchControl.patch({ power: 'off' })"
+                  translate="hardware.server.switch.power.OFF"
+                )
+        //- End Buttons
+    tr.mid-aligned
+      td.shrink.pad-right
+        strong(translate="hardware.server.switch.SPEED")
+      td(ng-bind="switchControl.server.switch.speed.name")
+    tr.mid-aligned
+      td.shrink.pad-right
+        strong(translate="hardware.server.switch.PORT")
+      td(ng-bind="switchControl.server.switch.port")
+
+  .panel-footer.clearfix(ng-class="switchControl.response ? '' : 'hidden'")
+    pre(ng-bind="switchControl.response")

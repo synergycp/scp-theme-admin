@@ -10,26 +10,68 @@ include /resources/pug/mixins/panel
     tbody
       tr
         td
-          strong(translate="hardware.server.assign.CLIENT")
+          strong(translate="hardware.server.assign.client.TITLE")
         td
           a(
             ng-if="assign.server.client"
             ui-sref="app.users.clients.view(assign.server.client)"
             ng-bind="assign.server.client.name"
           )
+          span(
+            ng-if="!assign.server.client"
+            translate="hardware.server.assign.client.NONE"
+          )
           span  (
           a(
             ng-click="assign.client.modal()"
-            translate="hardware.server.assign."+
-              "{{ assign.server.client ? 'REASSIGN' : 'ASSIGN' }}"
+            translate="hardware.server.assign.client.{{ assign.server.client ? 'REASSIGN' : 'ASSIGN' }}"
           )
           span )
-      tr(ng-repeat="entity in hardware.entities")
-        td
-          strong(translate="hardware.server.assign.CLIENT")
-        td(ng-bind="item.name")
-
       tr
-        td(translate="hardware.server.hardware.MAC")
-        td(ng-bind="hardware.server.mac")
-        td(translate="hardware.server.hardware.NA")
+        td
+          strong(translate="hardware.server.assign.GROUP")
+        td
+          a(
+            ng-if="assign.server.group"
+            ui-sref="app.network.group.view(assign.server.group)"
+            ng-bind="assign.server.group.name"
+          )
+      tr(ng-if="assign.entities.items.length")
+        td(colspan="2")
+
+      //- Start Entities
+      tr(ng-repeat-start="entity in assign.entities.items")
+        td
+          strong(translate="hardware.server.assign.entity.TITLE")
+        td
+          a(
+            ui-sref="app.network.entity.view(entity)"
+            ng-bind="entity.nickname"
+          )
+
+      //- Start IPv4
+      tr(ng-if-start="entity.v4")
+        td
+          span(translate="hardware.server.assign.entity.v4.USABLE")
+        td(ng-bind="entity.v4.full")
+      tr
+        td
+          span(translate="hardware.server.assign.entity.v4.GATEWAY")
+        td(ng-bind="entity.v4.gateway")
+      tr(ng-if-end)
+        td
+          span(translate="hardware.server.assign.entity.v4.SUBNET")
+        td(ng-bind="entity.v4.subnet_mask")
+      //- End IPv4
+
+      //- Start IPv6
+      tr(ng-if-start="entity.v6")
+        td
+          span(translate="hardware.server.assign.entity.v6.ADDRESS")
+        td(ng-bind="entity.v6.address")
+      tr(ng-if-end, ng-repeat-end)
+        td
+          span(translate="hardware.server.assign.entity.v6.GATEWAY")
+        td(ng-bind="entity.v6.gateway")
+      //- End IPv6
+      //- End Entities

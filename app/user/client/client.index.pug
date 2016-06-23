@@ -2,7 +2,7 @@ extends /resources/pug/list-page
 include /resources/pug/mixins/list
 
 block list
-  include client.list.jade
+  include client.list.pug
 
 block bottom-left
   +create-form("{{ 'user.client.form.title.ADD' | translate }}")

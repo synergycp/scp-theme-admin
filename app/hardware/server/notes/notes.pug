@@ -1,0 +1,35 @@
+include /resources/pug/mixins/form
+
+form.panel.panel-default(
+  ng-submit="notes.save()"
+  ng-class="notes.loader.class"
+)
+  .loader
+  .panel-heading(ng-click="notes.isExpanded = !notes.isExpanded")
+    .btn-group.btn-group-xs.pull-right
+      a.btn.btn-default
+        span.fa(ng-class="notes.isExpanded ? 'fa-minus' : 'fa-plus'")
+    h3.panel-title(translate="hardware.server.notes.TITLE")
+  .panel-body(ng-class="notes.isExpanded ? '' : 'hidden'")
+    .form-group
+      label.control-label(
+        for="form-client-notes"
+        translate="hardware.server.notes.CLIENT"
+      )
+      textarea.form-control(
+        ng-model="notes.server.notes.client"
+        id="form-client-notes"
+      )
+
+    .form-group
+      label.control-label(
+        for="form-admin-notes"
+        translate="hardware.server.notes.ADMIN"
+      )
+      textarea.form-control(
+        ng-model="notes.server.notes.admin"
+        id="form-admin-notes"
+      )
+  .panel-footer.clearfix(ng-class="notes.isExpanded ? '' : 'hidden'")
+    .pull-right
+      button.btn.btn-primary(translate="hardware.server.notes.SUBMIT")

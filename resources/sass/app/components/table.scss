@@ -6,9 +6,16 @@
       }
     }
   }
-  &.mid-aligned {
+  &.mid-aligned, tr.mid-aligned {
     td, th {
       vertical-align: middle;
     }
+  }
+}
+
+table {
+  td.shrink, th.shrink {
+    white-space: nowrap;
+    width: 1px;
   }
 }

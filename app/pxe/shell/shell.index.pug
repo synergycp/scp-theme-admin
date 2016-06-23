@@ -2,7 +2,7 @@ extends /resources/pug/list-page
 include /resources/pug/mixins/list
 
 block list
-  include shell.list.jade
+  include shell.list.pug
 
 block bottom-left
   +create-form("{{ 'pxe.shell.form.title.ADD' | translate }}")

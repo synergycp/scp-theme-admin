@@ -54,14 +54,6 @@
       proxy.baseUrl = baseUrl;
       proxy.apiUrl = apiUrl;
 
-      function wrap(method) {
-        return function () {
-          var result = method.apply(Restangular, arguments);
-
-          return wrapRestangular(result);
-        };
-      }
-
       function wrapRestangular(result) {
         result.patch = request(result.patch);
         result.delete = request(result.delete);
@@ -72,6 +64,21 @@
         result.one = wrap(result.one);
 
         return result;
+
+        function wrap(method) {
+          return function () {
+            var result = method.apply(result, arguments);
+
+            return wrapRestangular(result);
+          };
+        }
+
+        function request(method) {
+          return function () {
+            return method.apply(result, arguments)
+              .then(displayMessages);
+          };
+        }
       }
 
       activate();
@@ -80,8 +87,8 @@
 
       function activate() {
         Restangular.addErrorInterceptor(apiErrorInterceptor);
-        Restangular.addFullRequestInterceptor(apiRequestAddApiKey);
         Restangular.addErrorInterceptor(apiErrorTranslator);
+        Restangular.addFullRequestInterceptor(apiRequestAddApiKey);
       }
 
       function apiUrl() {
@@ -136,13 +143,6 @@
        */
       function getApiKey() {
         return ApiKey.get() || "";
-      }
-
-      function request(method) {
-        return function () {
-          return method.apply(proxy, arguments)
-            .then(displayMessages);
-        };
       }
     }
   }

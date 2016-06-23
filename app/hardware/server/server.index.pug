@@ -2,7 +2,7 @@ extends /resources/pug/list-page
 include /resources/pug/mixins/list
 
 block list
-  include server.list.jade
+  include server.list.pug
 
 block bottom-left
   +create-form("{{ 'hardware.server.form.title.ADD' | translate }}")

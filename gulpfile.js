@@ -83,12 +83,6 @@ var build = {
 
 // PLUGINS OPTIONS
 
-var prettifyOpts = {
-  indent_char: ' ',
-  indent_size: 3,
-  unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u', 'pre', 'code']
-};
-
 var vendorUglifyOpts = {
   mangle: {
     except: ['$super'] // rickshaw requires this
@@ -97,7 +91,8 @@ var vendorUglifyOpts = {
 
 var pugOptions = {
   doctype: 'html',
-  basedir: __dirname
+  basedir: __dirname,
+  pretty: false,
 };
 
 var compassOpts = {
@@ -284,7 +279,6 @@ gulp.task('templates:index', ['templates:views'], function () {
     .pipe($.if(useCache, $.inject(tplscript, injectOptions))) // inject the templates.js into index
     .pipe($.pug(pugOptions))
     .on('error', handleError)
-    .pipe($.htmlPrettify(prettifyOpts))
     .pipe(gulp.dest(build.templates.index))
     .pipe(reload({
       stream: true
@@ -316,7 +310,6 @@ gulp.task('templates:views', function () {
       })))
       .pipe($.pug(pugOptions))
       .on('error', handleError)
-      .pipe($.htmlPrettify(prettifyOpts))
       .pipe(gulp.dest(build.templates.views))
       .pipe(reload({
         stream: true

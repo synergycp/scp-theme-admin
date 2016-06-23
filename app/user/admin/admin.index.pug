@@ -2,7 +2,7 @@ extends /resources/pug/list-page
 include /resources/pug/mixins/list
 
 block list
-  include admin.list.jade
+  include admin.list.pug
 
 block bottom-left
   +create-form("{{ 'user.admin.form.title.ADD' | translate }}")

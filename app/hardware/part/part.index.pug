@@ -23,7 +23,7 @@ form(name="form", ng-submit="vm.submit()")
           uib-tab-heading
             span(data-translate="{{ tab.text }}.TITLE")
             span.badge(ng-if="list.pages.total", ng-bind="list.pages.total")
-          include part.list.jade
+          include part.list.pug
 
   br
 

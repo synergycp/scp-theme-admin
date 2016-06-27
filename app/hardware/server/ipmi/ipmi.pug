@@ -44,12 +44,12 @@ include /resources/pug/mixins/panel
             ul.dropdown-menu(uib-dropdown-menu, role="menu")
               li(role="menuitem")
                 a(
-                  ng-click="ipmiControl.patch({ add_user: true })"
+                  ng-click="ipmiControl.client.add()"
                   translate="hardware.server.ipmi.client.dropdown.CREATE"
                 )
               li(role="menuitem")
                 a(
-                  ng-click="ipmiControl.patch({ delete_user: true })"
+                  ng-click="ipmiControl.client.rem()"
                   translate="hardware.server.ipmi.client.dropdown.DELETE"
                 )
           span.btn-group(uib-dropdown)
@@ -90,11 +90,28 @@ include /resources/pug/mixins/panel
     tr.mid-aligned
       td.shrink.pad-right
         strong(translate="hardware.server.ipmi.client.USER")
-      td(ng-bind="ipmiControl.server.ipmi.client.username")
+      td
+        span(ng-bind="ipmiControl.client.username")
+        span(
+          ng-if="!ipmiControl.client.username"
+          translate="hardware.server.ipmi.client.EMPTY"
+        )
+        span &nbsp;(
+        a(
+          ng-click="ipmiControl.client.toggle()"
+          translate="hardware.server.ipmi.client."+
+            "{{ipmiControl.client.username ? 'DELETE' : 'CREATE'}}"
+        )
+        span )
     tr.mid-aligned
       td.shrink.pad-right
         strong(translate="hardware.server.ipmi.client.PASS")
-      td(ng-bind="ipmiControl.server.ipmi.client.password")
+      td
+        span(ng-bind="ipmiControl.client.password")
+        span(
+          ng-if="!ipmiControl.client.password"
+          translate="hardware.server.ipmi.client.EMPTY"
+        )
 
   .panel-footer.clearfix(ng-class="ipmiControl.response ? '' : 'hidden'")
     pre(ng-bind="ipmiControl.response")

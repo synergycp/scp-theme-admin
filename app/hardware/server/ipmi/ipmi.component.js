@@ -31,6 +31,13 @@
       load: loadPower,
       fresh: freshPower,
     };
+    ipmiControl.client = {
+      username: '',
+      password: '',
+      toggle: toggleClient,
+      add: patch.bind(null, { add_user: true }),
+      rem: patch.bind(null, { delete_user: true }),
+    };
 
     ipmiControl.patch = patch;
     ipmiControl.$onInit = init;
@@ -70,9 +77,15 @@
       return patch({ rf: true });
     }
 
+    function toggleClient() {
+      var act = ipmiControl.client.username ? 'rem' : 'add';
+
+      return ipmiControl.client[act]();
+    }
+
     function storePower(response) {
-      ipmiControl.server.ipmi.client.username = response.client_user;
-      ipmiControl.server.ipmi.client.password = response.client_pass;
+      ipmiControl.client.username = response.client_user;
+      ipmiControl.client.password = response.client_pass;
       ipmiControl.power.status = response.power_status_desc;
       ipmiControl.power.checked = Date.parse(response.checked_at.iso_8601);
 

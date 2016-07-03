@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function EntityListCtrl(List, $stateParams) {
+  function EntityListCtrl(List, Select, $stateParams) {
     var vm = this;
 
     vm.list = List('entity').filter({
@@ -26,12 +26,32 @@
       },
     };
 
+    vm.filters = {
+      visible: true,
+      group: Select('group')
+        .on('change', syncFilters),
+      server: Select('server')
+        .on('change', syncFilters)
+        .addItem({
+          id: 'none',
+          text: 'None'
+        }),
+      filter: {},
+    };
+
     activate();
 
     ////////////
 
     function activate() {
       vm.list.load();
+    }
+
+    function syncFilters() {
+      vm.list.filter({
+        group: vm.filters.group.getSelected('id'),
+        server: vm.filters.server.getSelected('id'),
+      }).load();
     }
 
     function create() {

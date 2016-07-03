@@ -18,7 +18,7 @@
       $translateProvider.preferredLanguage('en');
       $translateProvider.useLocalStorage();
       $translateProvider.usePostCompiling(true);
-      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+      $translateProvider.useSanitizeValueStrategy('escape');
 
       function urlTemplate(name, lang) {
         var split = name.split(':');

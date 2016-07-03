@@ -171,15 +171,15 @@
       data.disks = ids(serverForm.disks);
       data.addons = ids(serverForm.addOns);
       data.entities = _.map(serverForm.entities.selected, 'id');
-      data.switch.id = serverForm.switch.getSelected('id');
+      data.switch.id = serverForm.switch.getSelected('id') || null;
       data.switch.speed = {
-        id: serverForm.switchSpeed.getSelected('id'),
+        id: serverForm.switchSpeed.getSelected('id') || null,
       };
       data.group = {
-        id: serverForm.group.getSelected('id'),
+        id: serverForm.group.getSelected('id') || null,
       };
       data.client = {
-        id: serverForm.client.getSelected('id'),
+        id: serverForm.client.getSelected('id') || null,
       };
       data.billing.date = serverForm.billing.date.value ? serverForm.billing.date.value.toUTCString() : null;
 

@@ -59,6 +59,19 @@
           "PLACEHOLDER": "Optional"
         }
       }
+    },
+    "list": {
+      "TITLE": "Entities",
+      "filter": {
+        "group": {
+          "LABEL": "IP Group",
+          "PLACEHOLDER": "Type to search..."
+        },
+        "server": {
+          "LABEL": "Server",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
     }
   },
   "group": {

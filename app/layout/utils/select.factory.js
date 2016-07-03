@@ -20,10 +20,11 @@
     // Private variables
     var select = this;
     var filter = {};
+    var defaultItems = [];
 
     // Public variables
     select.items = [];
-    select.selected = null;
+    select.selected = undefined;
     select.isMulti = false;
 
     // Public methods
@@ -34,6 +35,8 @@
     select.clearFilter = clearFilter;
     select.fireChangeEvent = fireChangeEvent;
     select.getSelected = getSelected;
+    select.addItem = addItem;
+    select.clear = clear;
     event.bindTo(select);
 
     //////////
@@ -45,8 +48,25 @@
         ;
     }
 
+    function clear() {
+      var isChanged = !!select.selected;
+
+      select.selected = undefined;
+
+      if (isChanged) {
+        select.fireChangeEvent();
+      }
+    }
+
     function getSelected(attr) {
-      return (select.selected || {})[attr] || null;
+      return (select.selected || {})[attr] || undefined;
+    }
+
+    function addItem(item) {
+      defaultItems.push(item);
+      select.items.push(item);
+
+      return select;
     }
 
     function setFilter(newFilters) {
@@ -73,7 +93,8 @@
     }
 
     function store(items) {
-      _.setContents(select.items, items);
+      _.setContents(select.items, defaultItems);
+      _.each(items, _.ary(select.items.push.bind(select.items), 1));
     }
 
     function notSelected(item) {

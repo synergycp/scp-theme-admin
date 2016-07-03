@@ -6,6 +6,7 @@
       'ngCookies',
       'ngAnimate',
       'ngStorage',
+      'ngSanitize',
       'pascalprecht.translate',
       'ui.bootstrap',
       'ui.router',

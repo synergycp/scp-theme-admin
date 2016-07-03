@@ -27,7 +27,7 @@
     };
 
     vm.filters = {
-      visible: true,
+      visible: false,
       group: Select('group')
         .on('change', syncFilters),
       server: Select('server')

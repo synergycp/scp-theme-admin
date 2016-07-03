@@ -12,9 +12,7 @@ include /resources/pug/mixins/form
 )
 
 +label("{{ 'pxe.profile.form.preseed.LABEL' | translate }}")
-  +input-with-btn("fa fa-times-circle")(
-    ng-click="profileForm.input.preseed = null"
-  )
+  +input-with-btn("fa fa-times-circle")(ng-click="profileForm.input.preseed = null")
     ui-select(ng-model="profileForm.input.preseed")
       ui-select-match(placeholder="{{ 'pxe.profile.form.preseed.PLACEHOLDER' | translate }}")
         | {{ $select.selected.name }}
@@ -45,6 +43,23 @@ include /resources/pug/mixins/form
       refresh-delay="400"
     )
       span(ng-bind-html="bootScript.name | highlight: $select.search")
+
++label("{{ 'pxe.profile.form.email.LABEL' | translate }}")
+  +input-with-btn("fa fa-times-circle")(ng-click="profileForm.emailTemplate.clear()")
+    ui-select(ng-model="profileForm.emailTemplate.selected")
+      ui-select-match(placeholder="{{ 'pxe.profile.form.email.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "profileForm.emailTemplate.items" +
+            "| filter: {name: $select.search}" +
+          ") track by choice.id"
+        refresh="profileForm.emailTemplate.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
 
 +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
   +input-with-btn("fa fa-times-circle")(

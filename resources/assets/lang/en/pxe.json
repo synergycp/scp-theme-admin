@@ -108,6 +108,10 @@
           "PLACEHOLDER": "Type to search..."
         }
       },
+      "email": {
+        "LABEL": "Email",
+        "PLACEHOLDER": "Type to search..."
+      },
       "boot": {
         "LABEL": "Boot Script",
         "PLACEHOLDER": "Type to search..."

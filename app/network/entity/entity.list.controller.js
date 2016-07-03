@@ -34,7 +34,7 @@
         .on('change', syncFilters)
         .addItem({
           id: 'none',
-          text: 'None'
+          text: 'Unassigned'
         }),
       filter: {},
     };

@@ -99,7 +99,10 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
 hr
 
 +label("{{ 'hardware.server.form.switch.LABEL' | translate }}")
-  ui-select(ng-model="serverForm.switch.selected")
+  ui-select(
+    ng-model="serverForm.switch.selected"
+    ng-change="serverForm.switch.fireChangeEvent()"
+  )
     ui-select-match(placeholder="{{ 'hardware.server.form.switch.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
@@ -195,14 +198,14 @@ hr
 )
 
 +label("{{ 'hardware.server.form.ipmi.admin.LABEL' | translate }}")
-  .row 
-    .col-xs-6 
+  .row
+    .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'hardware.server.form.ipmi.admin.username.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.admin.username"
       )
-    .col-xs-6 
+    .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'hardware.server.form.ipmi.admin.password.PLACEHOLDER' | translate }}"
@@ -210,21 +213,21 @@ hr
       )
 
 +label("{{ 'hardware.server.form.ipmi.client.LABEL' | translate }}")
-  .row 
-    .col-xs-6 
+  .row
+    .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'hardware.server.form.ipmi.client.username.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.client.username"
       )
-    .col-xs-6 
+    .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'hardware.server.form.ipmi.client.password.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.client.password"
       )
 
-hr 
+hr
 
 +label("{{ 'hardware.server.form.client.LABEL' | translate }}")
   +input-with-btn("fa fa-times-circle")(

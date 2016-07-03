@@ -2,13 +2,11 @@ extends /resources/pug/list-page
 include /resources/pug/mixins/list
 
 block list
-  include entity.list.pug
+  div(ng-include="'app/network/entity/entity.list.html'")
 
 block bottom-left
   +create-form("{{ 'network.entity.form.title.ADD' | translate }}")
-    entity-form(
-      form="vm.create"
-    )
+    entity-form(form="vm.create")
 
 block bottom-right
   logs(

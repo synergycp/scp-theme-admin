@@ -69,9 +69,12 @@ mixin input-with-btn(iconClass)
       )&attributes(attributes)
         span(class=iconClass)
 
-mixin ui-select()
+mixin ui-select(select)
   table(style="width: 100%; table-layout: fixed !important; border: 0")
     tr
       td
-        ui-select&attributes(attributes)
+        ui-select(
+          ng-model=select+".selected"
+          ng-change=select+".fireChangeEvent()"
+        )&attributes(attributes)
           block

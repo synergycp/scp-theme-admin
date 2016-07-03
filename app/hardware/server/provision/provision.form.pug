@@ -146,6 +146,7 @@ div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
       refresh-delay="400"
     )
       span(ng-bind-html="choice.nickname | highlight: $select.search")
+      | &nbsp;
       small(ng-bind-html="'&lt;'+(choice.srv_id | highlight: $select.search)+'&gt;'")
 
 +label("{{ 'hardware.server.form.entities.LABEL' | translate }}")

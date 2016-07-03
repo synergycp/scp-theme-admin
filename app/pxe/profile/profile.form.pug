@@ -73,7 +73,7 @@ div(ng-if="profileForm.input.iso")
     +input-with-btn("fa fa-times-circle")(
       ng-click="profileForm.isos.selectedEdition = null"
     )
-      ui-select(ng-model="profileForm.isos.selectedEdition")
+      +ui-select()(ng-model="profileForm.isos.selectedEdition")
         ui-select-match(placeholder="{{ 'pxe.profile.form.iso.edition.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
 

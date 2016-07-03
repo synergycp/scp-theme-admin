@@ -68,3 +68,10 @@ mixin input-with-btn(iconClass)
         type="button"
       )&attributes(attributes)
         span(class=iconClass)
+
+mixin ui-select()
+  table(style="width: 100%; table-layout: fixed !important; border: 0")
+    tr
+      td
+        ui-select&attributes(attributes)
+          block

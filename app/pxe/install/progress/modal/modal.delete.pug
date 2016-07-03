@@ -1,0 +1,19 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.$close()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(translate="pxe.install.progress.delete.TITLE")
+
+  .modal-body(translate="pxe.install.progress.delete.BODY")
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) Cancel
+    button.btn.btn-primary(type="submit") Delete

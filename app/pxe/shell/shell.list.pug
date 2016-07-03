@@ -1,0 +1,17 @@
+extends /resources/pug/list-checkable
+
+block title
+ | Shell Scripts
+
+block headings
+  th Name
+  th Description
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td {{ row.description }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.pxe.shell.view({id: row.id})")
+        | {{ 'app.action.EDIT' | translate }}

@@ -1,0 +1,16 @@
+extends /resources/pug/list-page
+include /resources/pug/mixins/list
+
+block list
+  include speed.list.pug
+
+block bottom-left
+  +create-form("{{ 'hardware.speed.form.title.ADD' | translate }}")
+    speed-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="{{ 'hardware.speed.logs.TITLE' | translate }}"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

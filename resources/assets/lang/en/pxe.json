@@ -102,7 +102,11 @@
       },
       "iso": {
         "LABEL": "ISO",
-        "PLACEHOLDER": "Type to search..."
+        "PLACEHOLDER": "Type to search...",
+        "edition": {
+          "LABEL": "Default Edition",
+          "PLACEHOLDER": "Type to search..."
+        }
       },
       "boot": {
         "LABEL": "Boot Script",

@@ -6,5 +6,6 @@
       'app.layout.list',
       'app.core.api',
       'ui.select',
+      'app.hardware.server.manage',
     ]);
 })();

@@ -1,0 +1,19 @@
+include /resources/pug/mixins/panel
+
++panel("{{ 'hardware.server.hardware.TITLE' | translate }}")
+  table.table
+    thead
+      tr
+        th(translate="hardware.server.hardware.ITEM")
+        th(translate="hardware.server.hardware.VALUE")
+        th(translate="hardware.server.hardware.BILLING")
+    tbody
+      tr(ng-repeat="item in hardware.items")
+        td(translate="{{item.trans}}")
+        td(ng-bind="item.name")
+        td(ng-bind="item.billing_id")
+
+      tr
+        td(translate="hardware.server.hardware.MAC")
+        td(ng-bind="hardware.server.mac")
+        td(translate="hardware.server.hardware.NA")

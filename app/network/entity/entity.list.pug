@@ -1,0 +1,86 @@
+extends /resources/pug/list-checkable
+include /resources/pug/mixins/form
+
+mixin server-choice(select, highlight=false)
+  span(ng-bind=select+".text")
+  span(ng-if="!"+select+".text")
+    span(
+      ng-bind-html=select+".nickname | escape" +
+        (highlight ? "| highlight: " + highlight : "")
+    )
+    small
+      |  &lt;
+      span(
+        ng-bind-html=select+".srv_id | escape" +
+          (highlight ? "| highlight: " + highlight : "")
+      )
+      | &gt;
+
+block title
+  | Entities
+
+block btns
+  a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+    i.fa.fa-filter
+
+block above-table
+  .panel-body.form-horizontal(ng-show="vm.filters.visible")
+    .row
+      .col-md-6
+        +label("{{ 'network.entity.list.filter.group.LABEL' | translate }}")
+          +input-with-btn("fa fa-times-circle")(ng-click="vm.filters.group.clear()")
+            +ui-select("vm.filters.group")
+              ui-select-match(placeholder="{{ 'network.entity.list.filter.group.PLACEHOLDER' | translate }}")
+                | {{ $select.selected.name }}
+
+              ui-select-choices(
+                repeat=
+                  "choice in (" +
+                    "vm.filters.group.items" +
+                    "| multiFilter: $select.search" +
+                  ") track by choice.id"
+                refresh="vm.filters.group.load($select.search)"
+                refresh-delay="400"
+              )
+                span(ng-bind-html="choice.name | highlight: $select.search")
+      .col-md-6
+        +label("{{ 'network.entity.list.filter.server.LABEL' | translate }}")
+          +input-with-btn("fa fa-times-circle")(ng-click="vm.filters.server.clear()")
+            +ui-select("vm.filters.server")
+              ui-select-match(placeholder="{{ 'network.entity.list.filter.server.PLACEHOLDER' | translate }}")
+                +server-choice("$select.selected")
+
+              ui-select-choices(
+                repeat=
+                  "choice in (" +
+                    "vm.filters.server.items" +
+                    "| multiFilter: $select.search" +
+                  ") track by choice.id"
+                refresh="vm.filters.server.load($select.search)"
+                refresh-delay="400"
+              )
+                +server-choice("choice", "$select.search")
+
+block headings
+  th.relative Name
+    sort(col="nickname")
+  th.relative IP
+    sort(col="ip")
+  th.relative IP Group
+    sort(col="ip_group")
+  th.relative Server
+    sort(col="server")
+  th.relative VLAN
+    sort(col="vlan")
+  th Actions
+
+block columns
+  td {{ row.name }}
+  td {{ row.full_ip }}
+  td {{ row.group.name || '-' }}
+  td {{ row.server.name || '-' }}
+  td {{ row.vlan }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.network.entity.view({id: row.id})")
+        | {{ 'app.action.EDIT' | translate }}

@@ -1,0 +1,10 @@
+extends /resources/pug/edit
+
+block title
+  span(
+    translate='user.admin.form.title.EDIT'
+    translate-value-username='{{vm.edit.input.username}}'
+  )
+
+block form
+  admin-form(form="vm.edit")

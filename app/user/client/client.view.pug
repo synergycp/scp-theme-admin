@@ -1,0 +1,10 @@
+extends /resources/pug/edit
+
+block title
+  span(
+    translate='user.client.form.title.EDIT'
+    translate-value-email='{{vm.edit.input.email}}'
+  )
+
+block form
+  client-form(form="vm.edit")

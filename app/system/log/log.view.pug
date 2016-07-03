@@ -1,0 +1,49 @@
+include /resources/pug/mixins/panel
+
+.row
+  .col-md-6
+    +panel("Log Overview")
+      table.table
+        // Add top border
+        thead
+          tr
+            th.border-only(
+              colspan="2"
+            )
+        tbody
+          tr
+            th Date
+            td {{ vm.log.created_at }}
+          tr
+            th IP Address
+            td {{ vm.log.ip }}
+          tr
+            th URL
+            td {{ vm.log.url }}
+          tr
+            th User
+            td
+              log-user(log="vm.log")
+          tr
+            th Description
+            td {{ vm.log.desc }}
+          tr(ng-if="vm.log.target")
+            th {{ vm.log.target.singular }}
+            td {{ vm.log.target.name }}
+  .col-md-6
+    +panel("Log Data")(
+      ng-if="vm.log.data"
+    )
+      table.table
+        thead
+          tr
+            th.border-only(
+              colspan="2"
+            )
+          tr
+            th Key
+            th Data
+        tbody
+          tr(ng-repeat="(key, value) in vm.log.data")
+            td {{ key }}
+            td {{ value }}

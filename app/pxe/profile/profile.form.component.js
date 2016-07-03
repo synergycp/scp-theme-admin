@@ -28,13 +28,15 @@
   /**
    * @ngInject
    */
-  function ProfileFormCtrl(Select, _) {
+  function ProfileFormCtrl(Select, $scope, _) {
     var profileForm = this;
 
     profileForm.$onInit = init;
     profileForm.preseeds = Select('pxe/preseed');
     profileForm.bootScripts = Select('pxe/template');
     profileForm.isos = Select('pxe/iso');
+    profileForm.isos.on('change', onIsoChange);
+    profileForm.isos.selectedEdition = null;
     profileForm.shellScripts = Select('pxe/shell').multi();
     profileForm.drivers = Select('pxe/driver').multi();
 
@@ -50,10 +52,35 @@
       }
     }
 
+    function onIsoChange() {
+      setupIsoDefaults();
+      $scope.$evalAsync(function() {
+        profileForm.isos.selectedEdition = null;
+      });
+    }
+
+    function setupIsoDefaults() {
+      var iso = profileForm.input.iso;
+      if (!iso) {
+        profileForm.isos.editions = null;
+        return;
+      }
+
+      var url = 'pxe/iso/'+iso.id+'/edition';
+      $scope.$evalAsync(function() {
+        profileForm.isos.editions = Select(url).filter({
+          is_enabled: true,
+        });
+        profileForm.isos.editions.load();
+      });
+    }
+
     function subscribeTo(data) {
       data.on(['load', 'change'], function (response) {
         _.setContents(profileForm.shellScripts.selected, response.shell.after);
         _.setContents(profileForm.drivers.selected, response.drivers);
+        setupIsoDefaults(response.iso);
+        profileForm.isos.selectedEdition = response.iso ? response.iso.edition : null;
       });
     }
 
@@ -64,6 +91,12 @@
         after: _.map(profileForm.shellScripts.selected, 'id'),
       };
       data.drivers = _.map(profileForm.drivers.selected, 'id');
+      data.iso = profileForm.input.iso ? {
+        id: profileForm.input.iso.id,
+        edition: profileForm.isos.selectedEdition ? {
+          id: profileForm.isos.selectedEdition.id,
+        } : null,
+      } : null;
 
       return data;
     }

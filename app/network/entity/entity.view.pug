@@ -1,0 +1,12 @@
+extends /resources/pug/edit
+
+block title
+  span(
+    translate='network.entity.form.title.EDIT'
+    translate-value-nickname='{{vm.edit.input.nickname}}'
+  )
+
+block form
+  entity-form(
+    form="vm.edit"
+  )

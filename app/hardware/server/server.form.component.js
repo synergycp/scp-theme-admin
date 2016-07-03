@@ -54,7 +54,9 @@
     var serverForm = this;
 
     serverForm.$onInit = init;
-    serverForm.switch = Select('switch');
+    serverForm.switch = Select('switch').on('change', function () {
+      syncGroupFilter();
+    });
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
     serverForm.disks = MultiInput(DiskSelector)
@@ -102,6 +104,12 @@
 
       serverForm.group.selected = entityGroup;
       serverForm.group.fireChangeEvent();
+    }
+
+    function syncGroupFilter() {
+      serverForm.group.filter({
+        switch: serverForm.switch.getSelected('id'),
+      }).load();
     }
 
     function storeState(response) {

@@ -11,18 +11,21 @@
    *
    * @ngInject
    */
-  function InstallIndexCtrl(List) {
+  function InstallIndexCtrl(List, $scope) {
     var vm = this;
 
     vm.list = List('server/*/install');
-    vm.list.refreshEvery(10000);
 
     activate();
 
     //////////
 
     function activate() {
-      vm.list.load();
+      vm.list.refresh
+        .now()
+        .every(10000)
+        .limitScope($scope)
+        ;
     }
   }
 })();

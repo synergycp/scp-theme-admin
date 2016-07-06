@@ -13,5 +13,6 @@
       'app.hardware',
       'app.system',
       'app.package',
+      'app.util',
     ]);
 })();

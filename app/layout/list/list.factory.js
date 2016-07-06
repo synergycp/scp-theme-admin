@@ -10,16 +10,15 @@
    *
    * @ngInject
    */
-  function ListFactory(Api, Pages, WithSelected, EventEmitter, Loader, _) {
+  function ListFactory(Api, Pages, Refresh, WithSelected, EventEmitter, Loader, $interval, _) {
     return function (path) {
-      return new List(Api.all(path), Pages(), WithSelected(), EventEmitter(), Loader(), _);
+      return new List(Api.all(path), Pages(), WithSelected(), EventEmitter(), Loader(), Refresh, _);
     };
   }
 
-  function List($api, pages, bulk, event, loader, _) {
+  function List($api, pages, bulk, event, loader, Refresh, _) {
     var list = this;
     var filter = {};
-    var refreshInterval;
 
     list.items = [];
     list.sortQuery = {};
@@ -33,7 +32,7 @@
     list.sort = sort;
     list.clearSort = clearSort;
     list.filter = setFilter;
-    list.refreshEvery = refreshEvery;
+    list.refresh = Refresh(list.load);
     list.patch = patch;
 
     event.bindTo(list);
@@ -46,18 +45,6 @@
       list.pages.on('change', list.load);
 
       setBulkEvents();
-    }
-
-    function refreshEvery(interval) {
-      if (refreshInterval) {
-        clearInterval(refreshInterval);
-      }
-
-      if (interval) {
-        refreshInterval = setInterval(list.load, interval);
-      }
-
-      return list;
     }
 
     function setBulkEvents() {

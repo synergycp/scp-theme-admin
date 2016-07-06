@@ -100,7 +100,7 @@
       } : null;
       data.email = {
         template: {
-          id: profileForm.emailTemplate.getSelected('id'),
+          id: profileForm.emailTemplate.getSelected('id') || null,
         },
       };
 

@@ -39,7 +39,7 @@
       },
     };
 
-    activate();
+    vm.$onInit = activate;
 
     //////////
 

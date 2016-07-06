@@ -27,14 +27,14 @@
     };
 
     vm.filters = {
-      visible: true,
+      visible: false,
       group: Select('group')
         .on('change', syncFilters),
       server: Select('server')
         .on('change', syncFilters)
         .addItem({
           id: 'none',
-          text: 'None'
+          text: 'Unassigned'
         }),
       filter: {},
     };

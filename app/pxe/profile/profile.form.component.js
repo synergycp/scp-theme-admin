@@ -34,9 +34,9 @@
     profileForm.$onInit = init;
     profileForm.preseeds = Select('pxe/preseed');
     profileForm.bootScripts = Select('pxe/template');
-    profileForm.isos = Select('pxe/iso');
-    profileForm.isos.on('change', onIsoChange);
+    profileForm.isos = Select('pxe/iso').on('change', onIsoChange);
     profileForm.isos.selectedEdition = null;
+    profileForm.emailTemplate = Select('email/template');
     profileForm.shellScripts = Select('pxe/shell').multi();
     profileForm.drivers = Select('pxe/driver').multi();
 
@@ -81,6 +81,7 @@
         _.setContents(profileForm.drivers.selected, response.drivers);
         setupIsoDefaults(response.iso);
         profileForm.isos.selectedEdition = response.iso ? response.iso.edition : null;
+        profileForm.emailTemplate.selected = response.email.template;
       });
     }
 
@@ -97,6 +98,11 @@
           id: profileForm.isos.selectedEdition.id,
         } : null,
       } : null;
+      data.email = {
+        template: {
+          id: profileForm.emailTemplate.getSelected('id') || null,
+        },
+      };
 
       return data;
     }

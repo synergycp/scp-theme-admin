@@ -20,6 +20,9 @@ include /resources/pug/mixins/panel
           tr
             th URL
             td {{ vm.log.url }}
+          tr(ng-if="vm.log.referrer")
+            th Referrer
+            td {{ vm.log.referrer }}
           tr
             th User
             td

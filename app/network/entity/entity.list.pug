@@ -1,7 +1,7 @@
 extends /resources/pug/list-checkable
 include /resources/pug/mixins/form
 
-mixin server-choice(select, highlight=false)
+mixin server-choice(select, highlight)
   span(ng-bind=select+".text")
   span(ng-if="!"+select+".text")
     span(

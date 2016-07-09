@@ -39,7 +39,7 @@
       },
     };
 
-    vm.$onInit = activate;
+    setTimeout(activate, 1);
 
     //////////
 

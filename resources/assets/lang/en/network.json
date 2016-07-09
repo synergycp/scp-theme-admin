@@ -25,7 +25,7 @@
         "LABEL": "IP Type",
         "V4": "IPv4",
         "V6": "IPv6",
-        "BOTH": "IPv4 & IPv6"
+        "BOTH": "IPv4 and IPv6"
       },
       "v4": {
         "type": {

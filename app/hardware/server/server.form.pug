@@ -175,17 +175,19 @@ hr
       repeat=
         "entity in (" +
           "serverForm.entities.items" +
-          "| filter: {name: $select.search}" +
           "| filter: serverForm.entities.notSelected" +
         ") track by entity.id"
       refresh="serverForm.entities.load($select.search)"
       refresh-delay="400"
     )
       span(ng-bind-html="entity.name | highlight: $select.search")
+      | &nbsp;
       small
-        | (VLAN:
+        | (VLAN:&nbsp;
         span(ng-bind-html="entity.vlan | highlight: $select.search")
         | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
+      div(ng-if="entity.v6")
+        small(ng-bind="entity.v6.address")
 
 hr
 

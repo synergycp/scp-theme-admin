@@ -12,7 +12,7 @@
       "CANCEL": "Progress bar stopped?",
       "delete": {
         "TITLE": "Are you sure?",
-        "BODY": "This will stop tracking the installation and reboot the server via IPMI. If the server hasn't started overwriting the disk yet, then it will be left in its original state."
+        "BODY": "This will stop tracking the installation, but will not stop it from continuing."
       }
     }
   },

@@ -72,7 +72,7 @@
     provisionForm.disks = MultiInput(DiskSelector)
       .setMax(ServerConfig.MAX_DISKS)
       .add()
-      .on('change', syncHardwareFilters)
+      .on(['set', 'add', 'rem', 'change'], syncHardwareFilters)
       ;
     provisionForm.mem.on('change', clearMulti.bind(null, provisionForm.disks));
     provisionForm.addOns = MultiInput(AddOnSelector)

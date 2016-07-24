@@ -116,11 +116,15 @@
       $rootScope.$evalAsync(function() {
         storeMulti(response.disks, serverForm.disks);
         storeMulti(response.addons, serverForm.addOns);
-        _.setContents(serverForm.entities.selected, response.entities);
-        syncEntityFilter();
+
         serverForm.switch.selected = response.switch;
-        serverForm.switchSpeed.selected = response.switch.speed;
+        syncGroupFilter();
+
+        _.setContents(serverForm.entities.selected, response.entities);
         serverForm.group.selected = response.group;
+        syncEntityFilter();
+
+        serverForm.switchSpeed.selected = response.switch.speed;
         serverForm.client.selected = response.client;
         serverForm.billing.date.value = response.billing.date ? new Date(Date.parse(response.billing.date)) : null;
       });

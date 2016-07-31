@@ -10,7 +10,7 @@
    *
    * @ngInject
    */
-  function ListFactory(Api, Pages, Refresh, WithSelected, EventEmitter, Loader, $interval, _) {
+  function ListFactory(Api, Pages, Refresh, WithSelected, EventEmitter, Loader, _) {
     return function (path) {
       return new List(Api.all(path), Pages(), WithSelected(), EventEmitter(), Loader(), Refresh, _);
     };

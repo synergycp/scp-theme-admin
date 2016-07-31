@@ -11,12 +11,18 @@
    *
    * @ngInject
    */
-  function ServerAssignClientModalCtrl(Select, servers) {
+  function ServerAssignClientModalCtrl(Select, servers, access) {
     var modal = this;
+
+    modal.access = _.assign({
+      client: null,
+      pxe: true,
+      ipmi: true,
+      switch: true,
+    }, access || {});
 
     modal.servers = servers;
     modal.client = Select('client');
-    modal.client.selected = (_.find(modal.servers, 'client') || {}).client || null;
     modal.submit = submit;
 
     activate();
@@ -27,7 +33,14 @@
     }
 
     function submit() {
-      return modal.$close(modal.client.selected);
+      return modal.$close(!modal.access.client ? null : {
+        client: {
+          id: modal.access.client.id,
+        },
+        pxe: modal.access.pxe,
+        ipmi: modal.access.ipmi,
+        switch: modal.access.switch,
+      });
     }
   }
 })();

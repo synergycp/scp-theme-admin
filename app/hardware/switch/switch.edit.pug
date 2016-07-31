@@ -8,3 +8,9 @@ block title
 
 block form
   switch-form(form="vm.edit")
+
+block append right-side
+  switch-buttons(
+    show-edit="false"
+    switch="vm.target"
+  )

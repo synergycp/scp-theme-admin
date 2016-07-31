@@ -50,10 +50,10 @@ block columns
     td {{ row.entity.name || '-' }}
     td
       a(
-        ng-if="row.client"
-        ui-sref="app.users.clients.view({id: row.client.id})"
-      ) {{ row.client.name }}
-      span(ng-if="!row.client") -
+        ng-if="row.access"
+        ui-sref="app.users.clients.view({id: row.access.client.id})"
+      ) {{ row.access.client.name }}
+      span(ng-if="!row.access") -
     td {{ row.status_desc }}
     td {{ row.cpu.name }}
 

@@ -28,3 +28,7 @@
   color: $gray-light;
   cursor: default;
 }
+
+.form-horizontal .form-group p.help-block {
+  margin-bottom: 0;
+}

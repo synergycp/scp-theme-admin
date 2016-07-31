@@ -1,0 +1,30 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(translate="hardware.switch.modal.delete.TITLE")
+
+  .modal-body
+    p(translate="hardware.switch.modal.delete.BODY")
+
+    ul
+      li(
+        ng-repeat="target in modal.targets"
+        ng-bind="target.name"
+      )
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+      data-translate="hardware.switch.modal.delete.CANCEL"
+    )
+    button.btn.btn-danger(
+      type="submit"
+      data-translate="hardware.switch.modal.delete.SUBMIT"
+    )

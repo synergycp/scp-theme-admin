@@ -53,7 +53,7 @@
      * @return {Promise} Selected Client
      */
     function assignClientModal() {
-      return ServerAssignModal.client([assign.server]);
+      return ServerAssignModal.client([assign.server], assign.server.access);
     }
   }
 })();

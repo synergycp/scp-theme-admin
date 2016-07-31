@@ -1,0 +1,95 @@
+include /resources/pug/mixins/form
+
+div(style="margin-bottom: 15px")
+  .graph-wrapper
+    .graph-helper
+      .btn-group.btn-group-xs.pull-right.relative(style="z-index:2")
+        input.date-picker(
+          type="text"
+          style="visibility:hidden;width:0px;"
+          date-range-picker
+          ng-model="panel.filter.input"
+          options="panel.filter.opts"
+          min="panel.filter.min"
+          max="panel.filter.max"
+        )
+        a.btn.btn-default(
+          ng-if="panel.chart.isActive"
+          ng-click="panel.state.filtering()"
+        )
+          span
+            | {{ panel.filter.range }} &nbsp;
+          span.caret
+
+        a.btn.btn-default(
+          ng-if="panel.chart.hasFilteredData"
+          ng-click="panel.state.fullScreen = !panel.state.fullScreen"
+        )
+          span.glyphicon(
+            ng-class="panel.state.fullScreen ? 'glyphicon-resize-small' : 'glyphicon-resize-full'"
+          )
+
+      div.relative(
+        ng-class="panel.state.loader.class"
+      )
+        .loader
+        uib-tabset.relative.unpadded-content(
+          active="panel.tabs.active"
+        )
+          uib-tab(
+            ng-repeat="bandwidth in panel.bandwidth.ports"
+            index="$index"
+            select="panel.tabs.change(bandwidth)"
+            active="bandwidth.active"
+          )
+            uib-tab-heading
+              span(ng-bind="bandwidth.port.name")
+
+            .relative.hoverable
+              .loader(ng-class="bandwidth.loader.class")
+              .btn-group.btn-group-xs.floating-bar.float-right.show-hover
+                a.btn.btn-default(
+                  ng-click="panel.tabs.remove(bandwidth)"
+                )
+                  span.fa.fa-times-circle
+
+              bandwidth-graph(
+                target="panel.switch"
+                filter="panel.filter"
+                state="panel.state"
+                chart="bandwidth.chart"
+              )
+
+          uib-tab(
+            ng-init="tab = panel.tabs.add"
+            index="panel.bandwidth.ports.length"
+            select="panel.tabs.change(tab)"
+            active="tab.active"
+          )
+            uib-tab-heading
+              span.fa.fa-plus-circle
+
+            form.panel-body.text-center(
+              ng-submit="tab.submit()"
+            )
+              p(translate="hardware.switch.bandwidth.add.BODY")
+              .col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
+                +input-with-btn.btn-primary()(
+                  type="submit"
+                  translate="hardware.switch.bandwidth.add.SUBMIT"
+                )
+                  +ui-select("tab.port")
+                    ui-select-match(placeholder="{{ 'hardware.switch.bandwidth.add.port.PLACEHOLDER' | translate }}")
+                      | {{ $select.selected.name }}
+
+                    ui-select-choices(
+                      repeat=[
+                        "choice in (",
+                          "tab.port.items",
+                          "| multiFilter: $select.search",
+                        ") track by choice.id",
+                      ].join('')
+                      refresh="tab.port.load($select.search)"
+                      refresh-delay="400"
+                    )
+                      span(ng-bind-html="choice.name | highlight: $select.search")

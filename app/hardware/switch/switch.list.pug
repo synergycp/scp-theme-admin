@@ -6,7 +6,7 @@ block title
 block headings
   th.relative Name
     sort(col="name")
-  th.relative Switch IP:Port 
+  th.relative Switch IP:Port
     sort(col="ip")
   th Servers
   th Actions
@@ -19,5 +19,7 @@ block columns
       | {{ row.serversCount }}
   td
     .btn-group.btn-group-xs
-      a.btn.btn-default(ui-sref="app.hardware.switch.view({id: row.id})")
+      a.btn.btn-default(ui-sref="app.hardware.switch.view.edit({id: row.id})")
         | {{ 'app.action.EDIT' | translate }}
+      a.btn.btn-default(ui-sref="app.hardware.switch.view.manage({id: row.id})")
+        | {{ 'app.action.MANAGE' | translate }}

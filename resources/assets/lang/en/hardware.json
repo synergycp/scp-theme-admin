@@ -43,6 +43,21 @@
     }
   },
   "switch": {
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "SERVERS": "Servers",
+    "MANAGE": "Manage",
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Switches",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Switches:"
+      }
+    },
+    "logs": {
+      "TITLE": "Switch Logs"
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ name }}",
@@ -85,6 +100,15 @@
         "LABEL": "IP Groups",
         "PLACEHOLDER": "Select IP Group(s)..."
       }
+    },
+    "bandwidth": {
+      "add": {
+        "BODY": "Add a primary switch port:",
+        "SUBMIT": "Add Port",
+        "port": {
+          "PLACEHOLDER": "Type to search ports..."
+        }
+      }
     }
   },
   "speed": {
@@ -122,7 +146,14 @@
     }
   },
   "server": {
-    "EDIT": "Edit Server",
+    "EDIT": "Edit",
+    "VIEW_AS_CLIENT": "View As Client",
+    "SUSPEND": "Suspend",
+    "UNSUSPEND": "Activate",
+    "PROVISION": "Provision",
+    "WIPE": "Wipe",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
     "list": {
       "TITLE": "Servers"
     },
@@ -131,8 +162,6 @@
     },
     "inventory": {
       "TITLE": "Server Inventory"
-    },
-    "manage": {
     },
     "bandwidth": {
       "TITLE": "Bandwidth"
@@ -149,6 +178,38 @@
         "DROPDOWN": "Port Power",
         "ON": "Port Power On",
         "OFF": "Port Power Off"
+      }
+    },
+    "os-reload": {
+      "TITLE": "Operating System Reload",
+      "NOT_ENABLED": "This server must have a MAC address and be assigned an IP Entity to use OS Reload.",
+      "SUBMIT": "Reload Operating System",
+      "profile": {
+        "LABEL": "Profile",
+        "PLACEHOLDER": "Type to Search..."
+      },
+      "license-key": {
+        "LABEL": "License Key",
+        "PLACEHOLDER": "Optional",
+        "HELP": "Leave blank for trial"
+      },
+      "edition": {
+        "LABEL": "Edition",
+        "PLACEHOLDER": "Type to Search..."
+      },
+      "modal": {
+        "confirm": {
+          "TITLE": "Are you sure?",
+          "SUBMIT" : "Reload Operating System",
+          "CANCEL" : "Cancel",
+          "CONFIRM": "I understand that this will delete all data on the disk.",
+          "password": {
+            "LABEL": "Root Password",
+            "PLACEHOLDER": "Enter server password",
+            "GENERATE": "Generate Password",
+            "HELP": "This password will not be saved! Please copy it somewhere safe."
+          }
+        }
       }
     },
     "ipmi": {
@@ -234,7 +295,51 @@
         "client": {
           "LABEL": "Client",
           "PLACEHOLDER": "Type to search..."
+        },
+        "access": {
+          "LABEL": "Access",
+          "PXE": "PXE Controls",
+          "IPMI": "IPMI Controls",
+          "SWITCH": "Switch Controls"
         }
+      },
+      "delete": {
+        "TITLE": "Delete Server",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these servers:"
+      },
+      "suspend": {
+        "TITLE": "Suspend Server",
+        "SUBMIT": "Suspend",
+        "CANCEL": "Cancel",
+        "BODY": "Suspending a server does the following:",
+        "ACTIONS": [
+          "Unsassign all IP entities",
+          "Unassign client",
+          "Set nickname to EMPTY",
+          "Remove IPMI user",
+          "Turn server off via IPMI",
+          "Turn off server's switch port"
+        ],
+        "ACTION_COUNT": "6",
+        "CONFIRM": "Click \"Suspend\" to suspend these servers:"
+      },
+      "wipe": {
+        "TITLE": "Wipe Server",
+        "SUBMIT": "Wipe",
+        "CANCEL": "Cancel",
+        "BODY": "This action is irreversible. Wiping a server does the following:",
+        "ACTIONS": [
+          "Unsassign all IP entities",
+          "Unassign client",
+          "Set nickname to EMPTY",
+          "Remove IPMI user",
+          "Turn server off via IPMI",
+          "Turn off server's switch port"
+        ],
+        "ACTION_COUNT": "6",
+        "CONFIRM": "Click \"Wipe\" to wipe these servers:"
       }
     },
     "form": {

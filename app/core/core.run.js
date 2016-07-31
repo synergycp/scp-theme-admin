@@ -5,9 +5,12 @@
     .module('app.core')
     .run(appRun);
 
-  appRun.$inject = ['$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors'];
+  /**
+   * @ngInject
+   */
+  function appRun($rootScope, $state, $stateParams, $window, $templateCache, Colors, _) {
 
-  function appRun($rootScope, $state, $stateParams, $window, $templateCache, Colors) {
+    $rootScope._ = _;
 
     // Set reference to access them from any scope
     $rootScope.$state = $state;

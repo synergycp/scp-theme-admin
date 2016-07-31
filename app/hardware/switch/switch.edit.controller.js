@@ -3,20 +3,25 @@
 
   angular
     .module('app.hardware')
-    .controller('SwitchViewCtrl', SwitchViewCtrl)
+    .controller('SwitchEditCtrl', SwitchEditCtrl)
     ;
 
   /**
-   * View Switch Controller
+   * Edit Switch Controller
    *
    * @ngInject
    */
-  function SwitchViewCtrl(Edit, $stateParams) {
+  function SwitchEditCtrl(Edit, $stateParams) {
     var vm = this;
 
+    vm.target = {
+      id: $stateParams.id,
+    };
+
     vm.edit = Edit('switch/'+$stateParams.id);
-    vm.edit.input = {};
     vm.edit.submit = submit;
+    vm.edit.on('load', storeCurrent);
+
     vm.logs = {
       filter: {
         target_type: 'switch',
@@ -24,13 +29,16 @@
       },
     };
 
-
     activate();
 
     //////////
 
     function activate() {
       vm.edit.getCurrent(vm.edit.input);
+    }
+
+    function storeCurrent(response) {
+      _.assign(vm.target, response);
     }
 
     function submit() {

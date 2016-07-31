@@ -1,0 +1,20 @@
+{
+  "panel": {
+    "TITLE": "Bandwidth for {{ name }}"
+  },
+  "no-data-period": {
+    "TITLE": "No data found for that time period.",
+    "TEXT": "We don't have any bandwidth data recorded from {{ period }}."
+  },
+  "no-data": {
+    "TITLE": "Not enough data collected yet.",
+    "TEXT": "We haven't recorded enough bandwidth data on {{ name }} yet."
+  },
+  "not-enabled": {
+    "TITLE": "{{ name }}'s bandwidth is not enabled",
+    "TEXT": "This {{ type }} does not have bandwidth setup."
+  },
+  "billing": {
+    "USAGE": "You have used <strong>{{ billing.used }}</strong> out of <strong>{{ billing.max }}</strong> since {{ billing.cycleStart }}."
+  }
+}

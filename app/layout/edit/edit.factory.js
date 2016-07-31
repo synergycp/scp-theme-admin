@@ -58,10 +58,14 @@
 
     function fireLoadEvent(response) {
       event.fire('load', response);
+
+      return response;
     }
 
     function fireChangeEvent(response) {
       event.fire('change', response);
+
+      return response;
     }
   }
 })();

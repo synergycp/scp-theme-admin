@@ -7,5 +7,6 @@
       'app.core.api',
       'ui.select',
       'app.hardware.server.manage',
+      'app.hardware.server.bandwidth',
     ]);
 })();

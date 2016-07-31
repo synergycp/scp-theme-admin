@@ -10,6 +10,22 @@
       'mobile': 480
     })
     .constant('_', _)
+    .factory('moment', momentFactory)
+    .factory('numeral', numeralFactory)
     ;
+
+  /**
+   * @ngInject
+   */
+  function momentFactory($window) {
+    return $window.moment;
+  }
+
+  /**
+   * @ngInject
+   */
+  function numeralFactory($window) {
+    return $window.numeral;
+  }
 
 })();

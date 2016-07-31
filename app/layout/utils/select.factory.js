@@ -21,6 +21,7 @@
     var select = this;
     var filter = {};
     var defaultItems = [];
+    var lastSearch;
 
     // Public variables
     select.items = [];
@@ -29,6 +30,7 @@
 
     // Public methods
     select.load = _.debounce(load, 10);
+    select.refresh = refresh;
     select.notSelected = notSelected;
     select.multi = multi;
     select.filter = setFilter;
@@ -42,8 +44,14 @@
     //////////
 
     function load(search) {
+      lastSearch = search;
+
+      return refresh();
+    }
+
+    function refresh() {
       return $api
-        .getList(_.assign({}, filter, { q: search }))
+        .getList(_.assign({}, filter, { q: lastSearch }))
         .then(store)
         ;
     }

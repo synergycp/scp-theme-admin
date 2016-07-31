@@ -1,0 +1,38 @@
+.relative
+  .loader
+
+  .btn-group.btn-group-lg(
+    ng-init="server = buttons.server"
+    ng-class="buttons.loader.class"
+  )
+    a.btn.btn-default(
+      ui-sref="app.hardware.server.view.edit({ id: buttons.server.id })"
+      translate="hardware.server.EDIT"
+    )
+
+    a.btn.btn-primary(
+      ng-if="server.access.client"
+      ng-click="buttons.loginAsClient('/manage/'+buttons.server.id)"
+      translate="hardware.server.VIEW_AS_CLIENT"
+    )
+    a.btn(
+      ng-class="server.access.is_active ? 'btn-warning' : 'btn-success'"
+      ng-if="server.access.client"
+      ng-click="buttons.setActive(!server.access.is_active)"
+      translate="hardware.server.{{ server.access.is_active ? 'SUSPEND' : 'UNSUSPEND' }}"
+    )
+
+    a.btn.btn-info(
+      ng-if="!server.access"
+      ui-sref="app.hardware.server.provision({ serverId: buttons.server.id })"
+      translate="hardware.server.PROVISION"
+    )
+
+    a.btn.btn-danger(
+      ng-click="buttons.wipe()"
+      translate="hardware.server.WIPE"
+    )
+    a.btn.btn-danger(
+      ng-click="buttons.delete()"
+      translate="hardware.server.DELETE"
+    )

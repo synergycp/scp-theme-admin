@@ -13,18 +13,18 @@ include /resources/pug/mixins/panel
           strong(translate="hardware.server.assign.client.TITLE")
         td
           a(
-            ng-if="assign.server.client"
-            ui-sref="app.users.clients.view(assign.server.client)"
-            ng-bind="assign.server.client.name"
+            ng-if="assign.server.access"
+            ui-sref="app.users.clients.view(assign.server.access.client)"
+            ng-bind="assign.server.access.client.name"
           )
           span(
-            ng-if="!assign.server.client"
+            ng-if="!assign.server.access"
             translate="hardware.server.assign.client.NONE"
           )
           span  (
           a(
             ng-click="assign.client.modal()"
-            translate="hardware.server.assign.client.{{ assign.server.client ? 'REASSIGN' : 'ASSIGN' }}"
+            translate="hardware.server.assign.client.{{ assign.server.access ? 'REASSIGN' : 'ASSIGN' }}"
           )
           span )
       tr

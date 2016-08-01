@@ -41,5 +41,8 @@
     "prestart": "bower install",
     "start": "npm install",
     "poststart": "gulp"
+  },
+  "dependencies": {
+    "angular-chart.js": "^1.0.0"
   }
 }

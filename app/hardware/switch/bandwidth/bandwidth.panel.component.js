@@ -69,8 +69,8 @@
     function init() {
       panel.tabs.add = AddTabPanel(panel.switch).on('add', function (port) {
         panel.tabs.add.active = false;
-        var tab = panel.bandwidth.add(port);
         Api.wrap(port);
+        var tab = panel.bandwidth.add(port);
         tab.active = true;
         //panel.tabs.active = panel.bandwidth.ports.length - 1;
       });
@@ -79,7 +79,8 @@
         panel.bandwidth
           .refresh()
           .then(function () {
-            panel.tabs.active = 0;
+            var tab = panel.bandwidth.ports[0] || panel.tabs.add;
+            tab.active = true;
           })
       );
     }

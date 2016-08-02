@@ -6,21 +6,16 @@ nav.navbar.topnavbar(role='navigation')
     ul.nav.navbar-nav
       li
         // Button to show/hide the sidebar on mobile. Visible on mobile only.
-        a(href='', ng-click="app.asideToggled = !app.asideToggled", md-ink-ripple).visible-xs.sidebar-toggle
+        a(
+          href=''
+          ng-click="app.asideToggled = !app.asideToggled"
+          md-ink-ripple
+        ).visible-xs.sidebar-toggle
           em.fa.fa-navicon
       // Search icon
       li.search-wrapper
-        // START Search form
-        form.search-navbar(role='search', ui-sref='app.search')
-          em.fa.fa-search.search-icon
-          .form-group.has-feedback.search-form
-            input.search-input(
-              type='text',
-              placeholder="{{ 'app.topbar.search.PLACEHOLDER' | translate }}"
-            )
-            //.fa.fa-times.form-control-feedback(search-dismiss)
-          button.hidden.btn.btn-default(type='submit') Submit
-        // END Search form
+        top-nav-search
+
 
       // END Left navbar
 

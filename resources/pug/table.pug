@@ -1,0 +1,12 @@
+table.table.table-bordered.table-striped.table-condensed.table-hover.table-no-edge-border
+  thead
+    tr
+      block headings-pre
+      block headings
+  tbody
+    tr(
+      ng-repeat="row in table.list.list.items track by row.id"
+      ng-click="row.checked = !row.checked"
+    )
+      block columns-pre
+      block columns

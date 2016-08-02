@@ -55,6 +55,18 @@
         "BODY": "Click \"Delete\" to permanently delete these Switches:"
       }
     },
+    "heading": {
+      "SWITCH_ID": "Switch ID",
+      "IP": "Switch IP:Port",
+      "SERVER_COUNT": "Servers",
+      "ACTIONS": "Actions"
+    },
+    "list": {
+      "TITLE": "Switches"
+    },
+    "search": {
+      "TITLE": "Switches"
+    },
     "logs": {
       "TITLE": "Switch Logs"
     },
@@ -154,6 +166,21 @@
     "WIPE": "Wipe",
     "EDIT": "Edit",
     "DELETE": "Delete",
+    "search": {
+      "TITLE": "Servers"
+    },
+    "heading": {
+      "NICKNAME": "Nickname",
+      "IP": "Server IP",
+      "CLIENT": "Client",
+      "STATUS": "Status",
+      "CPU": "CPU",
+      "SWITCH": "Switch",
+      "GROUP": "IP Group",
+      "HDDS": "Hard Drives",
+      "RAM": "RAM",
+      "SRV_ID": "Server ID"
+    },
     "list": {
       "TITLE": "Servers"
     },

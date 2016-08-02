@@ -1,5 +1,16 @@
 {
   "entity": {
+    "heading": {
+      "NAME": "Name",
+      "ADDRESS": "IP",
+      "IP_GROUP": "IP Group",
+      "SERVER": "Server",
+      "VLAN": "VLAN",
+      "ACTIONS": "Actions"
+    },
+    "search": {
+      "TITLE": "Entities"
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ nickname }}",

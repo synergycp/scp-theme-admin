@@ -2,24 +2,24 @@
   'use strict';
 
   angular
-    .module('app.hardware')
-    .controller('ServerListCtrl', ServerListCtrl);
+    .module('app.network.entity')
+    .controller('EntityIndexCtrl', EntityIndexCtrl);
 
   /**
    * @ngInject
    */
-  function ServerListCtrl(ServerList) {
+  function EntityIndexCtrl(ListFilter, EntityList, Select) {
     var vm = this;
 
-    vm.list = ServerList();
+    vm.list = EntityList();
+    vm.filters = ListFilter(vm.list);
     vm.create = {
-      input: {},
       submit: create,
     };
 
     vm.logs = {
       filter: {
-        target_type: 'server',
+        target_type: 'entity',
       },
     };
 
@@ -28,7 +28,7 @@
     ////////////
 
     function activate() {
-      vm.list.load();
+      vm.filters.change();
     }
 
     function create() {

@@ -26,7 +26,7 @@
       .state('app.hardware.server.list', {
         url: '?switch&group&client',
         title: 'Servers',
-        controller: 'ServerListCtrl as vm',
+        controller: 'ServerIndexCtrl as vm',
         templateUrl: helper.basepath('hardware/server/server.index.html'),
       })
       .state('app.hardware.server.provision', {

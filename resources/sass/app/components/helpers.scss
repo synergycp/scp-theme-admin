@@ -88,3 +88,13 @@ $gutter: 15px;
 .unpadded-content .tab-content {
   padding: 0;
 }
+
+.panel {
+  display: block;
+}
+
+.border-top-table {
+  &.table, .table {
+    border-top: 1px solid #eee !important;
+  }
+}

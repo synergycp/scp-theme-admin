@@ -1,0 +1,42 @@
+extends /resources/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showSwitchId")
+    span(translate="hardware.switch.heading.SWITCH_ID")
+    sort(col="switch_id")
+  th.sortable(ng-if="table.showIp")
+    span(translate="hardware.switch.heading.IP")
+    sort(col="ip")
+  th(
+    ng-if="table.showServerCount"
+    translate="hardware.switch.heading.SERVER_COUNT"
+  )
+  th(
+    ng-if="table.showActions"
+    translate="hardware.switch.heading.ACTIONS"
+  )
+
+block columns
+  td(
+    ng-if="table.showSwitchId"
+    ng-bind="row.name"
+  )
+  td(
+    ng-if="table.showIp"
+    ng-bind="row.ip+':'+row.port"
+  )
+  td(ng-if="table.ServerCount")
+    a(
+      ui-sref="app.hardware.server.list({switch: row.id})"
+      ng-bind="row.serversCount"
+    )
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.hardware.switch.view.edit({id: row.id})"
+        translate="app.action.EDIT"
+      )
+      a.btn.btn-default(
+        ui-sref="app.hardware.switch.view.manage({id: row.id})"
+        translate="app.action.MANAGE"
+      )

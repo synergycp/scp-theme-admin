@@ -5,7 +5,7 @@
     .module('app.network.entity')
     .component('entityTable', {
       require: {
-        list: '^',
+        list: '\^list',
       },
       bindings: {
         showName: '=?',

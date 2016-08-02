@@ -5,7 +5,7 @@
     .module('app.hardware.server')
     .component('serverTable', {
       require: {
-        list: '^',
+        list: '\^list',
       },
       bindings: {
         showSrvId: '=?',

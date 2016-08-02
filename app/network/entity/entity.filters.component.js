@@ -5,7 +5,7 @@
     .module('app.network.entity')
     .component('entityFilters', {
       require: {
-        list: '^',
+        list: '\^list',
       },
       bindings: {
         show: '=',

@@ -5,7 +5,7 @@
     .module('app.hardware.switch')
     .component('switchTable', {
       require: {
-        list: '^',
+        list: '\^list',
       },
       bindings: {
         showSwitchId: '=?',

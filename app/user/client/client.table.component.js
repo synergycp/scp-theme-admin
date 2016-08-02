@@ -5,7 +5,7 @@
     .module('app.user.client')
     .component('clientTable', {
       require: {
-        list: '^',
+        list: '\^list',
       },
       bindings: {
         showName: '=?',

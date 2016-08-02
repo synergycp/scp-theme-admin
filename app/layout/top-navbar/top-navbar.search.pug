@@ -1,0 +1,14 @@
+form.search-navbar(
+  role="search"
+  ui-sref="app.search({ q: search.query })"
+)
+  em.fa.fa-search.search-icon
+  .form-group.has-feedback.search-form
+    input.search-input(
+      type="text"
+      ng-model="search.query"
+      ng-change="search.changed()"
+      placeholder="{{ 'app.topbar.search.PLACEHOLDER' | translate }}"
+    )
+    //.fa.fa-times.form-control-feedback(search-dismiss)
+  button.hidden.btn.btn-default(type='submit') Submit

@@ -2,7 +2,17 @@ extends /resources/pug/list-page
 include /resources/pug/mixins/list
 
 block list
-  div(ng-include="'app/network/entity/entity.list.html'")
+  list.panel.panel-default(list="vm.list")
+    list-header(text="network.entity.list.TITLE")
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    entity-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
+    entity-table.border-top-table
+    list-footer
 
 block bottom-left
   +create-form("{{ 'network.entity.form.title.ADD' | translate }}")

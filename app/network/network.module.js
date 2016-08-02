@@ -3,7 +3,7 @@
 
   angular
     .module('app.network', [
-      'app.layout.list',
-      'app.core.api',
+      'app.network.entity',
+      'app.network.group',
     ]);
 })();

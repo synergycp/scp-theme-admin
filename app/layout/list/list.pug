@@ -1,6 +1,6 @@
 doctype html
-.panel.panel-default.relative(
-  ng-class="listCtrl.list.loading ? 'loading' : ''"
-  ng-transclude
+.relative(
+  ng-class="listCtrl.list.loader.class"
 )
   .loader
+  div(ng-transclude)

@@ -1,0 +1,29 @@
+extends /resources/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showName")
+    span(translate="user.client.heading.NAME")
+    sort(col="last")
+  th.sortable(ng-if="table.showEmail")
+    span(translate="user.client.heading.EMAIL")
+    sort(col="email")
+  th(
+    ng-if="table.showActions"
+    translate="user.client.heading.ACTIONS"
+  )
+
+block columns
+  td(
+    ng-if="table.showName"
+    ng-bind="row.name"
+  )
+  td(
+    ng-if="table.showEmail"
+    ng-bind="row.email"
+  )
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.user.client.view.edit({id: row.id})"
+        translate="app.action.EDIT"
+      )

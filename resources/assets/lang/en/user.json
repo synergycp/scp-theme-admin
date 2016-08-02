@@ -32,6 +32,16 @@
     }
   },
   "client": {
+    "search": {
+      "TITLE": "Clients"
+    },
+    "list": {
+      "TITLE": "Clients"
+    },
+    "heading": {
+      "NAME": "Name",
+      "EMAIL": "E-Mail Address"
+    },
     "form": {
       "title": {
         "ADD": "Create Client",

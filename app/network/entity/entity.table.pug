@@ -1,0 +1,50 @@
+extends /resources/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showName")
+    span(translate="network.entity.heading.NAME")
+    sort(col="nickname")
+  th.sortable(ng-if="table.showAddr")
+    span(translate="network.entity.heading.ADDRESS")
+    sort(col="ip")
+  th.sortable(ng-if="table.showGroup")
+    span(translate="network.entity.heading.IP_GROUP")
+    sort(col="ip_group")
+  th.sortable(ng-if="table.showServerCount")
+    span(translate="network.entity.heading.SERVER")
+    sort(col="server")
+  th.sortable(ng-if="table.showVlan")
+    span(translate="network.entity.heading.VLAN")
+    sort(col="vlan")
+  th(
+    ng-if="table.showActions"
+    translate="network.entity.heading.ACTIONS"
+  )
+
+block columns
+  td(
+    ng-if="table.showName"
+    ng-bind="row.name"
+  )
+  td(
+    ng-if="table.showAddr"
+    ng-bind="row.full_ip"
+  )
+  td(
+    ng-if="table.showGroup"
+    ng-bind="row.group.name || '-'"
+  )
+  td(
+    ng-if="table.showServerCount"
+    ng-bind="row.server.name || '-'"
+  )
+  td(
+    ng-if="table.showVlan"
+    ng-bind="row.vlan"
+  )
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.network.entity.view.edit({id: row.id})"
+        translate="app.action.EDIT"
+      )

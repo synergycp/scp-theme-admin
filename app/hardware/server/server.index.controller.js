@@ -2,17 +2,19 @@
   'use strict';
 
   angular
-    .module('app.hardware')
-    .controller('SwitchListCtrl', SwitchListCtrl);
+    .module('app.hardware.server')
+    .controller('ServerIndexCtrl', ServerIndexCtrl)
+    ;
 
   /**
+   * ServerIndex Controller
+   *
    * @ngInject
    */
-  function SwitchListCtrl(SwitchList) {
+  function ServerIndexCtrl(ServerList) {
     var vm = this;
 
-    vm.list = SwitchList();
-
+    vm.list = ServerList();
     vm.create = {
       input: {},
       submit: create,
@@ -20,7 +22,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'switch',
+        target_type: 'server',
       },
     };
 

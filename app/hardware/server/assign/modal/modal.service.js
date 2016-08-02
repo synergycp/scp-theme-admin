@@ -109,7 +109,7 @@
           access: function () {
             return typeof access !== "undefined" ?
               access :
-              _.find(servers, 'access').access;
+              (_.find(servers, 'access') || {}).access;
           },
         },
       });

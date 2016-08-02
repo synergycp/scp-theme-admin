@@ -3,16 +3,15 @@
 
   angular
     .module('app.user')
-    .controller('ClientListCtrl', ClientListCtrl);
+    .controller('ClientIndexCtrl', ClientIndexCtrl);
 
   /**
    * @ngInject
    */
-  function ClientListCtrl(List) {
+  function ClientIndexCtrl(ClientList) {
     var vm = this;
 
-    vm.list = List('client');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = ClientList();
 
     vm.create = {
       input: {},

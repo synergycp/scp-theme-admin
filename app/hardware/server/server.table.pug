@@ -1,0 +1,62 @@
+extends /resources/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showSrvId")
+    span(translate="hardware.server.heading.SRV_ID")
+    sort(col="srv_id")
+  th.sortable(ng-if="table.showNickname")
+    span(translate="hardware.server.heading.NICKNAME")
+    sort(col="nickname")
+  th.sortable(ng-if="table.showIp")
+    span(translate="hardware.server.heading.IP")
+    sort(col="ip")
+  th.sortable(ng-if="table.showClient")
+    span(translate="hardware.server.heading.CLIENT")
+    sort(col="client")
+  th.sortable(ng-if="table.showStatus")
+    span(translate="hardware.server.heading.STATUS")
+    sort(col="status")
+  th.sortable(ng-if="table.showCpu")
+    span(translate="hardware.server.heading.CPU")
+    sort(col="cpu")
+  th.sortable(ng-if="table.showRam")
+    span(translate="hardware.server.heading.RAM")
+    sort(col="mem")
+  th.sortable(ng-if="table.showHdds")
+    span(translate="hardware.server.heading.HDDS")
+    sort(col="hdds")
+  th.sortable(ng-if="table.showSwitch")
+    span(translate="hardware.server.heading.SWITCH")
+    sort(col="hub")
+  th.sortable(ng-if="table.showGroup")
+    span(translate="hardware.server.heading.GROUP")
+    sort(col="group")
+  th Actions
+
+block columns
+  td(ng-if="table.showSrvId") {{ row.srv_id }}
+  td(ng-if="table.showNickname") {{ row.nickname }}
+  td(ng-if="table.showIp") {{ row.entity.name || '-' }}
+  td(ng-if="table.showClient")
+    a(
+      ng-if="row.access"
+      ui-sref="app.users.clients.view({id: row.access.client.id})"
+    ) {{ row.access.client.name }}
+    span(ng-if="!row.access") -
+  td(ng-if="table.showStatus") {{ row.status_desc }}
+  td(ng-if="table.showCpu") {{ row.cpu.name }}
+  td(ng-if="table.showRam") {{ row.mem.name }}
+  td(ng-if="table.showHdds")
+    span(ng-repeat="hdd in row.hdd_counts track by hdd.value")
+      span(ng-if="hdd.key > 1", ng-bind="hdd.key+'x '")
+      span(ng-bind="hdd.value + ($last ? '' : ',')")
+      br
+
+  td(ng-if="table.showSwitch") {{ row.hub.name }}
+  td(ng-if="table.showGroup") {{ row.group.name || '-' }}
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(ui-sref="app.hardware.server.view.edit({id: row.id})")
+        | {{ 'app.action.EDIT' | translate }}
+      a.btn.btn-default(ui-sref="app.hardware.server.view.manage({id: row.id})")
+        | {{ 'app.action.MANAGE' | translate }}

@@ -8,11 +8,10 @@
   /**
    * @ngInject
    */
-  function AdminListCtrl(List) {
+  function AdminListCtrl(AdminList) {
     var vm = this;
 
-    vm.list = List('admin');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = AdminList();
 
     vm.create = {
       input: {},

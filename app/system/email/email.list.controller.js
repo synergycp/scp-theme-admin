@@ -8,11 +8,10 @@
   /**
    * @ngInject
    */
-  function EmailListCtrl(List) {
+  function EmailListCtrl(EmailList) {
     var vm = this;
 
-    vm.list = List('email/template');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = EmailList();
 
     vm.create = {
       input: {},

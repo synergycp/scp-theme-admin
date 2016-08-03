@@ -28,7 +28,10 @@
       sref: "app.hardware.part",
     }).item({
       text: "Switches",
-      sref: "app.hardware.switch",
+      sref: "app.hardware.switch.list",
+    }).item({
+      text: "Switch Port Speeds",
+      sref: "app.hardware.switch.speed",
     });
   }
 })();

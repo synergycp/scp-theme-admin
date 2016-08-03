@@ -8,11 +8,10 @@
   /**
    * @ngInject
    */
-  function ProfileListCtrl(List) {
+  function ProfileListCtrl(PxeProfileList) {
     var vm = this;
 
-    vm.list = List('pxe/profile');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = PxeProfileList();
 
     vm.create = {
       input: {},

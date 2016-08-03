@@ -16,7 +16,7 @@
       .state('app.network.group.list', {
         url: '',
         title: 'Groups',
-        controller: 'GroupListCtrl as vm',
+        controller: 'GroupIndexCtrl as vm',
         templateUrl: helper.basepath('network/group/group.index.html'),
       })
       .state('app.network.group.view', {

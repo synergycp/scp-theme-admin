@@ -1,0 +1,43 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(data-translate="hardware.server.modal.billing.date.TITLE")
+
+  .modal-body.form-horizontal
+    +label("{{ 'hardware.server.modal.servers.LABEL' | translate }}")
+      p.form-control-static
+        span(ng-repeat="item in modal.items")
+          span(ng-bind="item.name")
+          br
+    +label("{{ 'hardware.server.modal.billing.date.date.LABEL' | translate }}")
+      +input-with-btn("fa fa-times-circle")(
+        ng-click="modal.input.date.value = ''"
+      )
+        input.form-control(
+          ng-model="modal.input.date.value"
+          placeholder="{{ 'hardware.server.modal.billing.date.date.PLACEHOLDER' | translate }}"
+          uib-datepicker-popup="yyyy-MM-dd"
+          ng-focus="modal.input.date.isOpen = true"
+          ng-click="modal.input.date.isOpen = true"
+          datepicker-options="{}"
+          close-text="Close"
+          alt-input-formats="[]"
+          is-open="modal.input.date.isOpen"
+        )
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+      data-translate="hardware.server.modal.billing.date.CANCEL"
+    )
+    button.btn.btn-primary(
+      type="submit"
+      data-translate="hardware.server.modal.billing.date.SUBMIT"
+    )

@@ -2,17 +2,16 @@
   'use strict';
 
   angular
-    .module('app.network')
-    .controller('GroupListCtrl', GroupListCtrl);
+    .module('app.pxe')
+    .controller('PreseedIndexCtrl', PreseedIndexCtrl);
 
   /**
    * @ngInject
    */
-  function GroupListCtrl(List) {
+  function PreseedIndexCtrl(PreseedList) {
     var vm = this;
 
-    vm.list = List('group');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = PreseedList();
 
     vm.create = {
       input: {},
@@ -21,7 +20,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'group',
+        target_type: 'pxe-preseed',
       },
     };
 

@@ -13,7 +13,7 @@
   function ServerListFactory (
     _,
     List,
-    ServerAssignModal,
+    ListConfirm,
     ServerAssign,
     $stateParams
   ) {
@@ -23,36 +23,35 @@
         group: $stateParams.group,
         client: $stateParams.client,
       });
+      var confirm = ListConfirm(list, 'hardware.server.modal.delete');
 
-      list.bulk.add('Assign Client', assignClient);
-      list.bulk.add('Suspend', confirmSuspend);
-      list.bulk.add('Unsuspend', unsuspend);
-      list.bulk.add('Delete', list.delete);
+      list.bulk.add('Assign Client', handler(ServerAssign.client));
+      list.bulk.add('Assign Group', handler(ServerAssign.group));
+      list.bulk.add('Assign Switch', handler(ServerAssign.switch));
+      list.bulk.add(
+        'Assign Bandwidth Limit',
+        handler(ServerAssign.billing.limits)
+      );
+      list.bulk.add(
+        'Assign Billing Date',
+        handler(ServerAssign.billing.date)
+      );
+      list.bulk.add('Suspend', handler(ServerAssign.suspend));
+      list.bulk.add('Unsuspend', handler(ServerAssign.unsuspend));
+      list.bulk.add('Delete', confirm.delete);
 
       return list;
 
-      function confirmSuspend(servers) {
-        return ServerAssignModal.suspend(servers)
-          .branch()
-            .then(list.refresh.now)
-          .unbranch()
-          ;
+      function handler(callback) {
+        return function () {
+          return callback.apply(null, arguments).then(fireChangeEvent);
+        };
       }
 
-      function unsuspend(servers) {
-        return ServerAssign.unsuspend(servers)
-          .branch()
-            .then(list.refresh.now)
-          .unbranch()
-          ;
-      }
+      function fireChangeEvent(arg) {
+        list.fire('change', arg);
 
-      function assignClient(servers) {
-        return ServerAssignModal.client(servers)
-          .branch()
-            .then(list.refresh.now)
-          .unbranch()
-          ;
+        return arg;
       }
     };
   }

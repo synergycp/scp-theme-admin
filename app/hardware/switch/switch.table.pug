@@ -25,7 +25,7 @@ block columns
     ng-if="table.showIp"
     ng-bind="row.ip+':'+row.port"
   )
-  td(ng-if="table.ServerCount")
+  td(ng-if="table.showServerCount")
     a(
       ui-sref="app.hardware.server.list({switch: row.id})"
       ng-bind="row.serversCount"

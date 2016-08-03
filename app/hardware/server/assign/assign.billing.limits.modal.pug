@@ -1,0 +1,36 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(data-translate="hardware.server.modal.billing.limits.TITLE")
+
+  .modal-body.form-horizontal
+    +label("{{ 'hardware.server.modal.servers.LABEL' | translate }}")
+      p.form-control-static
+        span(ng-repeat="item in modal.items")
+          span(ng-bind="item.name")
+          br
+    +label("{{ 'hardware.server.modal.billing.limits.bandwidth.LABEL' | translate }}")
+      +input-with-btn("fa fa-times-circle")(
+        ng-click="modal.input.limit = ''"
+      )
+        input.form-control(
+          ng-model="modal.input.limit"
+          placeholder="{{ 'hardware.server.modal.billing.limits.bandwidth.PLACEHOLDER' | translate }}"
+        )
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+      data-translate="hardware.server.modal.billing.limits.CANCEL"
+    )
+    button.btn.btn-primary(
+      type="submit"
+      data-translate="hardware.server.modal.billing.limits.SUBMIT"
+    )

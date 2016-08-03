@@ -10,13 +10,14 @@
    *
    * @ngInject
    */
-  function SpeedListFactory ($uibModal, List) {
+  function SpeedListFactory ($uibModal, List, ListConfirm) {
     return function () {
       var list = List('port-speed');
+      var confirm = ListConfirm(list, 'hardware.speed.modal.delete');
 
       var doDelete = list.delete;
       list.delete = proxyDelete;
-      list.bulk.add('Delete', list.delete);
+      list.bulk.add('Delete', confirm.delete);
 
       return list;
 

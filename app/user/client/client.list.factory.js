@@ -10,11 +10,12 @@
    *
    * @ngInject
    */
-  function ClientListFactory (List) {
+  function ClientListFactory (List, ListConfirm) {
     return function () {
       var list = List('client');
+      var confirm = ListConfirm(list, 'user.client.modal.delete');
 
-      list.bulk.add('Delete', list.delete);
+      list.bulk.add('Delete', confirm.delete);
 
       return list;
     };

@@ -11,6 +11,26 @@
     "search": {
       "TITLE": "Entities"
     },
+    "modal": {
+      "entities": {
+        "LABEL": "Entities"
+      },
+      "delete": {
+        "TITLE": "Delete IP Entities",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these IP Entities:"
+      },
+      "group": {
+        "CANCEL": "Cancel",
+        "SUBMIT": "Assign IP Group",
+        "TITLE": "Assign IP Group",
+        "group": {
+          "LABEL": "IP Group",
+          "PLACEHOLDER": "Type to search IP Groups..."
+        }
+      }
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ nickname }}",
@@ -86,6 +106,14 @@
     }
   },
   "group": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete IP Groups",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these IP Groups:"
+      }
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ name }}",

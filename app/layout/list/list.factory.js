@@ -12,7 +12,15 @@
    */
   function ListFactory(Api, Pages, Refresh, WithSelected, EventEmitter, Loader, _) {
     return function (path) {
-      return new List(Api.all(path), Pages(), WithSelected(), EventEmitter(), Loader(), Refresh, _);
+      return new List(
+        Api.all(path),
+        Pages(),
+        WithSelected(),
+        EventEmitter(),
+        Loader(),
+        Refresh,
+        _
+      );
     };
   }
 
@@ -42,6 +50,7 @@
     ///////////
 
     function activate() {
+      event.on('change', list.load);
       list.pages.on('change', list.load);
 
       setBulkEvents();
@@ -119,7 +128,6 @@
       return $api.all(ids)
         [func](data || {})
         .branch()
-          .then(list.load)
           .then(fireChangeEvent)
         .unbranch()
         ;

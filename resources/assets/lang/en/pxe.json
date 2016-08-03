@@ -17,6 +17,14 @@
     }
   },
   "shell": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Shell Scripts",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Shell Scripts:"
+      }
+    },
     "form": {
       "title": {
         "ADD": "Create PXE Shell Script",
@@ -37,6 +45,14 @@
     }
   },
   "boot": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Boot Scripts",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Boot Scripts:"
+      }
+    },
     "form": {
       "title": {
         "ADD": "Create Boot Script",
@@ -53,6 +69,14 @@
     }
   },
   "iso": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete ISOs",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these ISOs:"
+      }
+    },
     "form": {
       "title": {
         "ADD": "Create ISO",
@@ -83,6 +107,14 @@
     }
   },
   "profile": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete OS Reload Profiles",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these OS Reload Profiles:"
+      }
+    },
     "form": {
       "title": {
         "ADD": "Create OS Reload Profile",
@@ -130,6 +162,14 @@
     }
   },
   "preseed": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete PXE Preseeds",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these PXE Preseeds:"
+      }
+    },
     "form": {
       "title": {
         "ADD": "Create PXE Preseed Script",

@@ -10,11 +10,12 @@
    *
    * @ngInject
    */
-  function SwitchListFactory (List) {
+  function SwitchListFactory (List, ListConfirm) {
     return function () {
         var list = List('switch');
+        var confirm = ListConfirm(list, 'hardware.switch.modal.delete');
 
-        list.bulk.add('Delete', list.delete);
+        list.bulk.add('Delete', confirm.delete);
 
         return list;
     };

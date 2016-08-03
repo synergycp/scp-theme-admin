@@ -1,5 +1,13 @@
 {
   "email": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Email Templates",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Email Templates:"
+      }
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ name }}",

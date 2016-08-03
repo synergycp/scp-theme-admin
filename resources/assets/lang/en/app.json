@@ -5,6 +5,14 @@
       "PLACEHOLDER": "Type to search..."
     }
   },
+  "confirm": {
+    "delete": {
+      "TITLE": "Are you sure?",
+      "BODY": "This will permanently delete the following items:",
+      "CANCEL": "Cancel",
+      "SUBMIT": "Delete"
+    }
+  },
   "sidebar": {
     "WELCOME": "Welcome",
     "heading": {

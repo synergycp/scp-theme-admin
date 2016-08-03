@@ -50,7 +50,7 @@
       .state('app.pxe.preseed.list', {
         url: '',
         title: 'Preseeds',
-        controller: 'PreseedListCtrl as vm',
+        controller: 'PreseedIndexCtrl as vm',
         templateUrl: helper.basepath('pxe/preseed/preseed.index.html'),
       })
       .state('app.pxe.preseed.view', {

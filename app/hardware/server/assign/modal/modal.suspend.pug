@@ -1,0 +1,42 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(translate="hardware.server.modal.suspend.TITLE")
+
+  .modal-body
+    p(translate="hardware.server.modal.suspend.BODY")
+
+    ul(ng-init="items = _.range(0, 'hardware.server.modal.suspend.ACTION_COUNT' | translate)")
+      li(
+        ng-repeat="item in items track by $index"
+        translate="hardware.server.modal.suspend.ACTIONS.{{$index}}"
+      )
+    p(translate="hardware.server.modal.suspend.CONFIRM")
+
+    ul
+      li(
+        ng-repeat="server in modal.servers"
+        ng-class="server.access && server.access.is_active ? '' : 'disabled'"
+      )
+        span(ng-bind="server.name")
+        span(ng-if="!server.access")
+          | &nbsp; (no client)
+        span(ng-if="server.access && !server.access.is_active")
+          | &nbsp; (suspended)
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+      data-translate="hardware.server.modal.suspend.CANCEL"
+    )
+    button.btn.btn-warning(
+      type="submit"
+      data-translate="hardware.server.modal.suspend.SUBMIT"
+    )

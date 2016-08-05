@@ -13,7 +13,14 @@
    *
    * @ngInject
    */
-  function ServerManageCtrl(Api, EventEmitter, $stateParams, $scope, $q, _) {
+  function ServerManageCtrl(
+    Api,
+    EventEmitter,
+    $stateParams,
+    $scope,
+    $q,
+    _
+  ) {
     var vm = this;
     var $api = Api.all('server').one($stateParams.id);
     var panelContext = {};
@@ -21,6 +28,7 @@
     vm.server = {
       id: $stateParams.id,
       load: loadServer,
+      getAccesses: getServerAccesses,
     };
     EventEmitter().bindTo(vm.server);
     panelContext.server = vm.server;
@@ -48,17 +56,45 @@
         ;
     }
 
+    function getServerAccesses() {
+      if (typeof vm.server.accesses !== "undefined") {
+        return $q.when(vm.server.accesses);
+      }
+
+      return $api.all('access')
+        .getList()
+        .then(storeAccesses)
+        ;
+    }
+
+    function storeAccesses(response) {
+      vm.server.accesses = vm.server.accesses || [];
+
+      _.setContents(vm.server.accesses, response);
+
+      if (vm.server.accesses[0]) {
+        vm.server.access = vm.server.access || {};
+        _.assign(vm.server.access, vm.server.accesses[0]);
+      } else {
+        vm.server.access = null;
+      }
+
+      return response;
+    }
+
     function storeServer(response) {
       var defer = $q.defer();
 
       $scope.$evalAsync(function() {
         // TODO: fix this shit
-        _.assign(vm.server, response);
-        vm.server.get = $api.get;
-        vm.server.all = $api.all;
-        vm.server.one = $api.one;
-        vm.server.patch = patchServer;
-        vm.server.remove = $api.remove;
+        _.assign(vm.server, response, {
+          get: $api.get,
+          all: $api.all,
+          one: $api.one,
+          patch: patchServer,
+          remove: $api.remove,
+        });
+
         defer.resolve(vm.server);
       });
 
@@ -68,6 +104,7 @@
     function loadPanels() {
       _.setContents(vm.panels.top, [{
         templateUrl: PANELS+'/panel.bandwidth.html',
+        context: panelContext,
       }]);
 
       _.setContents(vm.panels.left, [{
@@ -99,13 +136,22 @@
       }, {
         templateUrl: PANELS+'/panel.os-reload.html',
         context: panelContext,
+      }, {
+        templateUrl: PANELS+'/panel.buttons.html',
+        context: panelContext,
       },]);
     }
 
     function patchServer() {
       return $api.patch.apply($api, arguments)
-        .then(vm.server.fire.bind(null, 'change', vm.server))
+        .then(fireChangeEvent)
         ;
+    }
+
+    function fireChangeEvent(arg) {
+      vm.server.fire('change', vm.server);
+
+      return arg;
     }
   }
 })();

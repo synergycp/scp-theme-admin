@@ -8,11 +8,10 @@
   /**
    * @ngInject
    */
-  function BootListCtrl(List) {
+  function BootListCtrl(PxeBootList) {
     var vm = this;
 
-    vm.list = List('pxe/template');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = PxeBootList();
 
     vm.create = {
       input: {},

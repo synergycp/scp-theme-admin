@@ -1,0 +1,53 @@
+include /resources/pug/mixins/form
+
+mixin server-choice(select, highlight)
+  span(ng-bind=select+".text")
+  span(ng-if="!"+select+".text")
+    span(
+      ng-bind-html=select+".nickname | escape" +
+        (highlight ? "| highlight: " + highlight : "")
+    )
+    small
+      |  &lt;
+      span(
+        ng-bind-html=select+".srv_id | escape" +
+          (highlight ? "| highlight: " + highlight : "")
+      )
+      | &gt;
+
+.panel-body.form-horizontal(ng-show="filters.show")
+  .row
+    .col-md-6
+      +label("{{ 'network.entity.list.filter.group.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
+          +ui-select("filters.group")
+            ui-select-match(placeholder="{{ 'network.entity.list.filter.group.PLACEHOLDER' | translate }}")
+              | {{ $select.selected.name }}
+
+            ui-select-choices(
+              repeat=
+                "choice in (" +
+                  "filters.group.items" +
+                  "| multiFilter: $select.search" +
+                ") track by choice.id"
+              refresh="filters.group.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")
+    .col-md-6
+      +label("{{ 'network.entity.list.filter.server.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.server.clear()")
+          +ui-select("filters.server")
+            ui-select-match(placeholder="{{ 'network.entity.list.filter.server.PLACEHOLDER' | translate }}")
+              +server-choice("$select.selected")
+
+            ui-select-choices(
+              repeat=
+                "choice in (" +
+                  "filters.server.items" +
+                  "| multiFilter: $select.search" +
+                ") track by choice.id"
+              refresh="filters.server.load($select.search)"
+              refresh-delay="400"
+            )
+              +server-choice("choice", "$select.search")

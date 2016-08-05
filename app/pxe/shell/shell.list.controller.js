@@ -8,11 +8,10 @@
   /**
    * @ngInject
    */
-  function ShellListCtrl(List) {
+  function ShellListCtrl(PxeShellList) {
     var vm = this;
 
-    vm.list = List('pxe/shell');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = PxeShellList();
 
     vm.create = {
       input: {},

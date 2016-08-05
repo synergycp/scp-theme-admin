@@ -2,7 +2,10 @@ extends /resources/pug/list-page
 include /resources/pug/mixins/list
 
 block list
-  include switch.list.pug
+  list.panel.panel-default(list="vm.list")
+    list-header(text="hardware.switch.list.TITLE")
+    switch-table
+    list-footer
 
 block bottom-left
   +create-form("{{ 'hardware.switch.form.title.ADD' | translate }}")

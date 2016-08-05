@@ -6,5 +6,10 @@
       'app.layout.list',
       'app.core.api',
       'app.pxe.install',
+      'app.pxe.preseed',
+      'app.pxe.profile',
+      'app.pxe.shell',
+      'app.pxe.boot',
+      'app.pxe.iso',
     ]);
 })();

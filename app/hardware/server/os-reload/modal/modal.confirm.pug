@@ -1,0 +1,52 @@
+include /resources/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(data-translate="hardware.server.os-reload.modal.confirm.TITLE")
+
+  .modal-body
+    .form-group
+      .clearfix
+        a.pull-right(
+          translate="hardware.server.os-reload.modal.confirm.password.GENERATE"
+          ng-click="modal.password.value = modal.password.generate()"
+        )
+        label.pull-left(
+          for="srv-pass"
+          translate="hardware.server.os-reload.modal.confirm.password.LABEL"
+        )
+      input.form-control(
+        type="text"
+        id="srv-pass"
+        ng-model="modal.password.value"
+        placeholder="{{ 'hardware.server.os-reload.modal.confirm.password.PLACEHOLDER' | translate }}"
+      )
+      p.help-block(
+        translate="hardware.server.os-reload.modal.confirm.password.HELP"
+      )
+    .form-group
+      .checkbox
+        label
+          input(
+            type="checkbox"
+            ng-model="modal.confirmed"
+          )
+          span(
+            translate="hardware.server.os-reload.modal.confirm.CONFIRM"
+          )
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+      data-translate="hardware.server.os-reload.modal.confirm.CANCEL"
+    )
+    button.btn.btn-primary(
+      type="submit"
+      data-translate="hardware.server.os-reload.modal.confirm.SUBMIT"
+    )

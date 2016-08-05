@@ -205,7 +205,7 @@ gulp.task('vendor:app', function () {
   });
 
   return gulp.src(vendor.app.source, {
-      base: 'bower_components'
+      base: './',
     })
     .pipe($.expectFile(vendor.app.source))
     .pipe(jsFilter)

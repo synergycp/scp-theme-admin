@@ -53,12 +53,14 @@
       var proxy = wrapRestangular(Restangular);
       proxy.baseUrl = baseUrl;
       proxy.apiUrl = apiUrl;
+      proxy.wrap = wrapRestangular;
 
       function wrapRestangular(result) {
+        result.getList = wrapList(result.getList);
+        result.remove = request(result.remove);
         result.patch = request(result.patch);
-        result.delete = request(result.delete);
-        result.get = request(result.get);
         result.post = request(result.post);
+        result.get = request(result.get);
         result.put = request(result.put);
         result.all = wrap(result.all);
         result.one = wrap(result.one);
@@ -67,9 +69,9 @@
 
         function wrap(method) {
           return function () {
-            var result = method.apply(result, arguments);
-
-            return wrapRestangular(result);
+            return wrapRestangular(
+              method.apply(result, arguments)
+            );
           };
         }
 
@@ -77,6 +79,20 @@
           return function () {
             return method.apply(result, arguments)
               .then(displayMessages);
+          };
+        }
+
+        function wrapList(oldMethod) {
+          return function() {
+            return request(oldMethod).apply(null, arguments)
+              .then(setRestangularOnList)
+              ;
+
+            function setRestangularOnList(list) {
+              _.each(list, wrapRestangular);
+
+              return list;
+            }
           };
         }
       }
@@ -131,7 +147,9 @@
       }
 
       function apiRequestAddApiKey(element, operation, what, url, headers, params) {
-        params.key = getApiKey();
+        params = _.assign({
+          key: getApiKey(),
+        }, params);
 
         return {
           params: params,

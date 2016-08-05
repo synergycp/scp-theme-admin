@@ -20,9 +20,14 @@
        */
       branch: function (promise) {
         var branch = promise.$q.defer();
+
         branch.promise.parent = promise;
 
-        promise.then(branch.resolve);
+        promise.then(function(result) {
+          branch.resolve(result);
+
+          return result;
+        });
 
         return branch.promise;
       },

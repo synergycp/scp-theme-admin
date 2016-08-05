@@ -1,0 +1,16 @@
+extends /resources/pug/edit
+
+block title
+  span(
+    translate='hardware.switch.form.title.EDIT'
+    translate-value-name='{{vm.edit.input.name}}'
+  )
+
+block form
+  switch-form(form="vm.edit")
+
+block append right-side
+  switch-buttons(
+    show-edit="false"
+    switch="vm.target"
+  )

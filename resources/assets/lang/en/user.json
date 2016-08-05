@@ -1,5 +1,13 @@
 {
   "admin": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Administrators",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Administrators:"
+      }
+    },
     "form": {
       "title": {
         "ADD": "Create Administrator",
@@ -22,7 +30,7 @@
       },
       "access": {
         "LABEL": "Access",
-        "admins": {
+        "admin": {
           "LABEL": "Edit Administrators"
         },
         "logs": {
@@ -32,6 +40,25 @@
     }
   },
   "client": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Clients",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Clients:"
+      }
+    },
+    "search": {
+      "TITLE": "Clients"
+    },
+    "list": {
+      "TITLE": "Clients"
+    },
+    "heading": {
+      "NAME": "Name",
+      "EMAIL": "E-Mail Address",
+      "ACTIONS": "Actions"
+    },
     "form": {
       "title": {
         "ADD": "Create Client",

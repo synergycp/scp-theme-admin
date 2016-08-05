@@ -1,8 +1,16 @@
 {
   "part": {
+    "input": {
+      "billing": {
+        "PLACEHOLDER": "Billing ID"
+      },
+      "name": {
+        "PLACEHOLDER": "Name"
+      }
+    },
     "list": {
-      "SUBMIT": "Save Changes",
       "EMPTY": "No matching parts found.",
+      "SUBMIT": "Save Changes",
       "tab": {
         "disk": {
           "TITLE": "Disk",
@@ -22,19 +30,11 @@
         }
       }
     },
-    "input": {
-      "name": {
-        "PLACEHOLDER": "Name"
-      },
-      "billing": {
-        "PLACEHOLDER": "Billing ID"
-      }
-    },
     "modal": {
       "merge": {
         "TITLE": "Merge Parts",
-        "SUBMIT" : "Submit",
-        "CANCEL" : "Cancel",
+        "SUBMIT": "Submit",
+        "CANCEL": "Cancel",
         "part": {
           "LABEL": "Part",
           "PLACEHOLDER": "Type to search..."
@@ -42,145 +42,14 @@
       }
     }
   },
-  "switch": {
-    "form": {
-      "title": {
-        "EDIT": "Edit {{ name }}",
-        "ADD": "Create Switch"
-      },
-      "name": {
-        "LABEL": "Switch ID",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "network": {
-        "LABEL": "IP/SSH Port",
-        "ip": {
-          "PLACEHOLDER": "IP"
-        },
-        "port": {
-          "PLACEHOLDER": "SSH Port"
-        }
-      },
-      "ssh": {
-        "LABEL": "SSH User/Pass",
-        "username": {
-          "PLACEHOLDER": "SSH Username"
-        },
-        "password": {
-          "PLACEHOLDER": "SSH Password"
-        }
-      },
-      "enable": {
-        "LABEL": "(En)able Pass",
-        "PLACEHOLDER": "Required"
-      },
-      "snmp": {
-        "LABEL": "SNMP Key",
-        "PLACEHOLDER": "SNMP Community / Key"
-      },
-      "type": {
-        "LABEL": "Type"
-      },
-      "group": {
-        "LABEL": "IP Groups",
-        "PLACEHOLDER": "Select IP Group(s)..."
-      }
-    }
-  },
-  "speed": {
-    "list": {
-      "TITLE": "Switch Speeds"
-    },
-    "logs": {
-      "TITLE": "Switch Speed Logs"
-    },
-    "modal": {
-      "merge": {
-        "speed": {
-          "LABEL": "Switch Port Speed",
-          "PLACEHOLDER": "Type to search..."
-        }
-      }
-    },
-    "form": {
-      "title": {
-        "EDIT": "Edit {{ name }}",
-        "ADD": "Create Switch Speed"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be alpha-numeric and unique"
-      },
-      "billing_id": {
-        "LABEL": "Billing ID",
-        "PLACEHOLDER": "Must be alpha-numeric and unique"
-      },
-      "speed": {
-        "LABEL": "Speed (mbps)",
-        "PLACEHOLDER": "Speed in mbps (numbers only)"
-      }
-    }
-  },
   "server": {
-    "EDIT": "Edit Server",
-    "list": {
-      "TITLE": "Servers"
-    },
-    "logs": {
-      "TITLE": "Server Logs"
-    },
-    "inventory": {
-      "TITLE": "Server Inventory"
-    },
-    "manage": {
-    },
-    "bandwidth": {
-      "TITLE": "Bandwidth"
-    },
-    "switch": {
-      "TITLE": "Switch Controls",
-      "NOT_ENABLED": "This server has not been assigned a switch, port, and port speed yet.",
-      "NAME": "Switch Name",
-      "SYNC_VLAN": "Assign VLAN",
-      "SYNC_SPEED": "Set Port Speed",
-      "SPEED": "Port Speed",
-      "PORT": "Port Number",
-      "power": {
-        "DROPDOWN": "Port Power",
-        "ON": "Port Power On",
-        "OFF": "Port Power Off"
-      }
-    },
-    "ipmi": {
-      "TITLE": "IPMI Controls",
-      "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
-      "ADDRESS": "IPMI IP Address",
-      "BMC": "Reset BMC",
-      "PXE": "PXE Boot",
-      "client": {
-        "USER": "Client Username",
-        "PASS": "Client Password",
-        "EMPTY": "Not created",
-        "CREATE": "create",
-        "DELETE": "delete",
-        "dropdown": {
-          "TITLE": "Client User",
-          "CREATE": "Setup User",
-          "DELETE": "Delete User"
-        }
-      },
-      "power": {
-        "STATUS": "Power Status",
-        "CHECKED": "Last Checked",
-        "dropdown": {
-          "TITLE": "Power",
-          "ON": "Power On",
-          "CYCLE": "Power Reset",
-          "SOFT": "Soft Shutdown",
-          "OFF": "Power Off"
-        }
-      }
-    },
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "PROVISION": "Provision",
+    "SUSPEND": "Suspend",
+    "UNSUSPEND": "Activate",
+    "VIEW_AS_CLIENT": "View As Client",
+    "WIPE": "Wipe",
     "assign": {
       "TITLE": "Server Assignments",
       "ITEM": "Item",
@@ -205,37 +74,8 @@
         }
       }
     },
-    "hardware": {
-      "TITLE": "Server Hardware",
-      "ITEM": "Hardare Item",
-      "VALUE": "Value",
-      "BILLING": "Billing ID",
-      "MAC": "MAC Address",
-      "CPU": "Processor",
-      "MEM": "Memory",
-      "DISK": "Disk",
-      "ADD-ON": "Add-On",
-      "NA": "N/A"
-    },
-    "notes": {
-      "TITLE": "Server Notes",
-      "CLIENT": "Client Notes",
-      "ADMIN": "Administrator Notes",
-      "SUBMIT": "Save Notes"
-    },
-    "modal": {
-      "servers": {
-        "LABEL": "Servers"
-      },
-      "client": {
-        "TITLE": "Assign Client",
-        "SUBMIT": "Assign",
-        "CANCEL": "Cancel",
-        "client": {
-          "LABEL": "Client",
-          "PLACEHOLDER": "Type to search..."
-        }
-      }
+    "bandwidth": {
+      "TITLE": "Bandwidth"
     },
     "form": {
       "title": {
@@ -345,6 +185,199 @@
         }
       }
     },
+    "hardware": {
+      "TITLE": "Server Hardware",
+      "ITEM": "Hardare Item",
+      "VALUE": "Value",
+      "BILLING": "Billing ID",
+      "MAC": "MAC Address",
+      "CPU": "Processor",
+      "MEM": "Memory",
+      "DISK": "Disk",
+      "ADD-ON": "Add-On",
+      "NA": "N/A"
+    },
+    "heading": {
+      "NICKNAME": "Nickname",
+      "IP": "Server IP",
+      "CLIENT": "Client",
+      "STATUS": "Status",
+      "CPU": "CPU",
+      "SWITCH": "Switch",
+      "GROUP": "IP Group",
+      "HDDS": "Hard Drives",
+      "RAM": "RAM",
+      "SRV_ID": "Server ID"
+    },
+    "inventory": {
+      "TITLE": "Server Inventory"
+    },
+    "ipmi": {
+      "TITLE": "IPMI Controls",
+      "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
+      "ADDRESS": "IPMI IP Address",
+      "BMC": "Reset BMC",
+      "PXE": "PXE Boot",
+      "client": {
+        "USER": "Client Username",
+        "PASS": "Client Password",
+        "EMPTY": "Not created",
+        "CREATE": "create",
+        "DELETE": "delete",
+        "dropdown": {
+          "TITLE": "Client User",
+          "CREATE": "Setup User",
+          "DELETE": "Delete User"
+        }
+      },
+      "power": {
+        "STATUS": "Power Status",
+        "CHECKED": "Last Checked",
+        "dropdown": {
+          "TITLE": "Power",
+          "ON": "Power On",
+          "CYCLE": "Power Reset",
+          "SOFT": "Soft Shutdown",
+          "OFF": "Power Off"
+        }
+      }
+    },
+    "list": {
+      "TITLE": "Servers"
+    },
+    "logs": {
+      "TITLE": "Server Logs"
+    },
+    "modal": {
+      "servers": {
+        "LABEL": "Servers"
+      },
+      "group": {
+        "CANCEL": "Cancel",
+        "SUBMIT": "Assign IP Group",
+        "TITLE": "Assign IP Group",
+        "group": {
+          "LABEL": "IP Group",
+          "PLACEHOLDER": "Type to search IP Groups..."
+        }
+      },
+      "switch": {
+        "CANCEL": "Cancel",
+        "SUBMIT": "Assign Switch",
+        "TITLE": "Assign Switch",
+        "switch": {
+          "LABEL": "Switch",
+          "PLACEHOLDER": "Type to search Switches..."
+        }
+      },
+      "billing": {
+        "limits": {
+          "CANCEL": "Cancel",
+          "SUBMIT": "Set Bandwidth Limit",
+          "TITLE": "Set Bandwidth Limit",
+          "bandwidth": {
+            "LABEL": "Bandwidth Limit",
+            "PLACEHOLDER": "e.g. 10TB. Leave blank for no limit."
+          }
+        },
+        "date": {
+          "CANCEL": "Cancel",
+          "SUBMIT": "Set Bandwidth Date",
+          "TITLE": "Set Bandwidth Date",
+          "date": {
+            "LABEL": "Date",
+            "PLACEHOLDER": "Bandwidth date before this data will be hidden"
+          }
+        }
+      },
+      "client": {
+        "TITLE": "Assign Client",
+        "SUBMIT": "Assign",
+        "CANCEL": "Cancel",
+        "client": {
+          "LABEL": "Client",
+          "PLACEHOLDER": "Type to search..."
+        },
+        "access": {
+          "LABEL": "Access",
+          "PXE": "PXE Controls",
+          "IPMI": "IPMI Controls",
+          "SWITCH": "Switch Controls"
+        }
+      },
+      "delete": {
+        "TITLE": "Delete Server",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these servers:"
+      },
+      "suspend": {
+        "TITLE": "Suspend Server",
+        "SUBMIT": "Suspend",
+        "CANCEL": "Cancel",
+        "BODY": "Suspending a server does the following:",
+        "ACTIONS": [
+          "Turn off server's switch port",
+          "Disable all client controls"
+        ],
+        "ACTION_COUNT": "2",
+        "CONFIRM": "Click \"Suspend\" to suspend these servers:"
+      },
+      "wipe": {
+        "TITLE": "Wipe Server",
+        "SUBMIT": "Wipe",
+        "CANCEL": "Cancel",
+        "BODY": "This action is irreversible. Wiping a server does the following:",
+        "ACTIONS": [
+          "Unsassign all IP entities",
+          "Unassign client",
+          "Set nickname to EMPTY",
+          "Remove IPMI user",
+          "Turn server off via IPMI",
+          "Turn off server's switch port"
+        ],
+        "ACTION_COUNT": "6",
+        "CONFIRM": "Click \"Wipe\" to wipe these servers:"
+      }
+    },
+    "notes": {
+      "TITLE": "Server Notes",
+      "CLIENT": "Client Notes",
+      "ADMIN": "Administrator Notes",
+      "SUBMIT": "Save Notes"
+    },
+    "os-reload": {
+      "TITLE": "Operating System Reload",
+      "NOT_ENABLED": "This server must have a MAC address and be assigned an IP Entity to use OS Reload.",
+      "SUBMIT": "Reload Operating System",
+      "profile": {
+        "LABEL": "Profile",
+        "PLACEHOLDER": "Type to Search..."
+      },
+      "license-key": {
+        "LABEL": "License Key",
+        "PLACEHOLDER": "Optional",
+        "HELP": "Leave blank for trial"
+      },
+      "edition": {
+        "LABEL": "Edition",
+        "PLACEHOLDER": "Type to Search..."
+      },
+      "modal": {
+        "confirm": {
+          "TITLE": "Are you sure?",
+          "SUBMIT": "Reload Operating System",
+          "CANCEL": "Cancel",
+          "CONFIRM": "I understand that this will delete all data on the disk.",
+          "password": {
+            "LABEL": "Root Password",
+            "PLACEHOLDER": "Enter server password",
+            "GENERATE": "Generate Password",
+            "HELP": "This password will not be saved! Please copy it somewhere safe."
+          }
+        }
+      }
+    },
     "provision": {
       "TITLE": "Provision Server",
       "SUBMIT": "Provision",
@@ -369,6 +402,144 @@
         "LABEL": "Password",
         "PLACEHOLDER": "Leave empty for random password."
       }
+    },
+    "search": {
+      "TITLE": "Servers"
+    },
+    "switch": {
+      "TITLE": "Switch Controls",
+      "NOT_ENABLED": "This server has not been assigned a switch, port, and port speed yet.",
+      "NAME": "Switch Name",
+      "SYNC_VLAN": "Assign VLAN",
+      "SYNC_SPEED": "Set Port Speed",
+      "SPEED": "Port Speed",
+      "PORT": "Port Number",
+      "power": {
+        "DROPDOWN": "Port Power",
+        "ON": "Port Power On",
+        "OFF": "Port Power Off"
+      }
+    }
+  },
+  "speed": {
+    "form": {
+      "title": {
+        "EDIT": "Edit {{ name }}",
+        "ADD": "Create Switch Speed"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be alpha-numeric and unique"
+      },
+      "billing_id": {
+        "LABEL": "Billing ID",
+        "PLACEHOLDER": "Must be alpha-numeric and unique"
+      },
+      "speed": {
+        "LABEL": "Speed (mbps)",
+        "PLACEHOLDER": "Speed in mbps (numbers only)"
+      }
+    },
+    "list": {
+      "TITLE": "Switch Speeds"
+    },
+    "logs": {
+      "TITLE": "Switch Speed Logs"
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Are you sure?",
+        "BODY": "This will permanently delete the following port speeds:",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Delete"
+      },
+      "merge": {
+        "speed": {
+          "LABEL": "Switch Port Speed",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    }
+  },
+  "switch": {
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "MANAGE": "Manage",
+    "SERVERS": "Servers",
+    "bandwidth": {
+      "add": {
+        "BODY": "Add a primary switch port:",
+        "SUBMIT": "Add Port",
+        "port": {
+          "PLACEHOLDER": "Type to search ports..."
+        }
+      }
+    },
+    "form": {
+      "title": {
+        "EDIT": "Edit {{ name }}",
+        "ADD": "Create Switch"
+      },
+      "name": {
+        "LABEL": "Switch ID",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "network": {
+        "LABEL": "IP/SSH Port",
+        "ip": {
+          "PLACEHOLDER": "IP"
+        },
+        "port": {
+          "PLACEHOLDER": "SSH Port"
+        }
+      },
+      "ssh": {
+        "LABEL": "SSH User/Pass",
+        "username": {
+          "PLACEHOLDER": "SSH Username"
+        },
+        "password": {
+          "PLACEHOLDER": "SSH Password"
+        }
+      },
+      "enable": {
+        "LABEL": "(En)able Pass",
+        "PLACEHOLDER": "Required"
+      },
+      "snmp": {
+        "LABEL": "SNMP Key",
+        "PLACEHOLDER": "SNMP Community / Key"
+      },
+      "type": {
+        "LABEL": "Type"
+      },
+      "group": {
+        "LABEL": "IP Groups",
+        "PLACEHOLDER": "Select IP Group(s)..."
+      }
+    },
+    "heading": {
+      "SWITCH_ID": "Switch ID",
+      "IP": "Switch IP:Port",
+      "SERVER_COUNT": "Servers",
+      "ACTIONS": "Actions"
+    },
+    "list": {
+      "TITLE": "Switches"
+    },
+    "logs": {
+      "TITLE": "Switch Logs"
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Switches",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Switches:"
+      }
+    },
+    "search": {
+      "TITLE": "Switches"
     }
   }
 }

@@ -8,11 +8,10 @@
   /**
    * @ngInject
    */
-  function IsoListCtrl(List) {
+  function IsoListCtrl(IsoList) {
     var vm = this;
 
-    vm.list = List('pxe/iso');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = IsoList();
 
     vm.create = {
       input: {},

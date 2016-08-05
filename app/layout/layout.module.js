@@ -8,5 +8,6 @@
       'app.layout.alert',
       'app.layout.utils',
       'app.layout.logs',
+      'app.search',
     ]);
 })();

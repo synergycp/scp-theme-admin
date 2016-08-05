@@ -7,5 +7,6 @@
       'app.core.api',
       'ui.select',
       'app.hardware.switch.speed',
+      'app.hardware.switch.manage',
     ]);
 })();

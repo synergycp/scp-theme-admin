@@ -1,0 +1,78 @@
+div(style="margin-bottom: 15px")
+  .graph-wrapper
+    .graph-helper
+      .btn-group.btn-group-xs.pull-right.relative(style="z-index:2")
+        input.date-picker(
+          type="text"
+          style="visibility:hidden;width:0px;"
+          date-range-picker
+          ng-model="panel.filter.input"
+          options="panel.filter.opts"
+          min="panel.filter.min"
+          max="panel.filter.max"
+        )
+        a.btn.btn-default(
+          ng-if="panel.chart.isActive"
+          ng-click="panel.state.filtering()"
+        )
+          span
+            | {{ panel.filter.range }} &nbsp;
+          span.caret
+
+        a.btn.btn-default(
+          ng-if="panel.chart.hasFilteredData"
+          ng-click="panel.state.fullScreen = !panel.state.fullScreen"
+        )
+          span.glyphicon(
+            ng-class="panel.state.fullScreen ? 'glyphicon-resize-small' : 'glyphicon-resize-full'"
+          )
+
+      div.relative(
+        ng-class="panel.state.loader.class"
+      )
+        .loader
+        uib-tabset(
+          active="panel.tabs.active"
+        )
+          uib-tab(
+            ng-repeat="bandwidth in panel.bandwidth.ports"
+            index="$index"
+            select="panel.tabs.change(bandwidth)"
+            active="bandwidth.active"
+          )
+            uib-tab-heading
+              span(ng-bind="bandwidth.port.name")
+
+            bandwidth-graph(
+              target="panel.server"
+              filter="panel.filter"
+              state="panel.state"
+              chart="bandwidth.chart"
+            )
+
+            .panel-body.bandwidth-stats(ng-if="bandwidth.chart.showStats")
+              .clearfix
+                .col-md-4(ng-foreach="stat in bandwidth.chart.stats")
+                  h3
+                    span.v-mid
+                      span(ng-bind="stat.label + ':'")
+                    span.square(style="background-color: {{ stat.color }}")
+                  ul
+                    li(
+                      ng-foreach="item in stat"
+                      ng-bind="item.key + ': ' + item.value"
+                    )
+
+              div(ng-if="bandwidth.billing.isActive")
+                uib-progressbar.progress-min-text(
+                  value="bandwidth.billing.percent"
+                  ng-class="bandwidth.billing.percent > 95 ? 'progress-bar-danger' : 'progress-bar-info'"
+                )
+                  | {{ bandwidth.billing.percent }}%
+
+                p.help-block(
+                  translate="bandwidth.billing.USAGE"
+                  translate-value-billing-max="{{ bandwidth.billing.max }}"
+                  translate-value-billing-used="{{ bandwidth.billing.used }}"
+                  translate-value-billing-cycle-start="{{ bandwidth.billing.cycle_start }}"
+                )

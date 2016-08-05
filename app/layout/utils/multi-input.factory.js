@@ -25,9 +25,9 @@
     multi.rem = delIndex;
     multi.setMax = setMax;
     event.bindTo(multi);
-    event.on(['rem', 'set', 'add'], function () {
+    /*event.on(['rem', 'set', 'add'], function () {
       event.fire.bind(null, arguments)();
-    });
+    });*/
 
     //////////
 

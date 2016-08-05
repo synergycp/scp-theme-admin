@@ -8,11 +8,10 @@
   /**
    * @ngInject
    */
-  function SwitchListCtrl(List) {
+  function SwitchListCtrl(SwitchList) {
     var vm = this;
 
-    vm.list = List('switch');
-    vm.list.bulk.add('Delete', vm.list.delete);
+    vm.list = SwitchList();
 
     vm.create = {
       input: {},

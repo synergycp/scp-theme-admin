@@ -6,5 +6,6 @@
       'app.layout.list',
       'app.core.api',
       'app.system.setting',
+      'app.system.email',
     ]);
 })();

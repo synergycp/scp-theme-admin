@@ -11,6 +11,19 @@
       vertical-align: middle;
     }
   }
+  &.table-no-edge-border {
+    td, th {
+      &:first-child {
+        border-left: none;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
 }
 
 table {
@@ -18,4 +31,9 @@ table {
     white-space: nowrap;
     width: 1px;
   }
+}
+
+.sortable {
+  position: relative;
+  padding-right: 8px;
 }

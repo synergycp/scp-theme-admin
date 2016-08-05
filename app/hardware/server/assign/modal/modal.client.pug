@@ -17,9 +17,9 @@ form(ng-submit="modal.submit()")
           br
     +label("{{ 'hardware.server.modal.client.client.LABEL' | translate }}")
       +input-with-btn("fa fa-times-circle")(
-        ng-click="modal.client.selected = null"
+        ng-click="modal.access.client = null"
       )
-        ui-select(ng-model="modal.client.selected")
+        ui-select(ng-model="modal.access.client")
           ui-select-match(placeholder="{{ 'hardware.server.modal.client.client.PLACEHOLDER' | translate }}")
             | {{ $select.selected.name }}
 
@@ -34,7 +34,30 @@ form(ng-submit="modal.submit()")
           )
             span(ng-bind-html="choice.name | highlight: $select.search")
             small(ng-bind-html="' ' + choice.email | highlight: $select.search")
+    +label("{{ 'hardware.server.modal.client.access.LABEL' | translate }}")
+      .checkbox
+        label
+          input(
+            type="checkbox"
+            ng-model="modal.access.pxe"
+          )
+          span(translate="hardware.server.modal.client.access.PXE")
 
+      .checkbox
+        label
+          input(
+            type="checkbox"
+            ng-model="modal.access.ipmi"
+          )
+          span(translate="hardware.server.modal.client.access.IPMI")
+
+      .checkbox
+        label
+          input(
+            type="checkbox"
+            ng-model="modal.access.switch"
+          )
+          span(translate="hardware.server.modal.client.access.SWITCH")
   .modal-footer
     button.btn.btn-secondary(
       type="button"

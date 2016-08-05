@@ -2,5 +2,12 @@
   "bower_components/modernizr/modernizr.custom.js",
   "bower_components/fontawesome/css/font-awesome.min.css",
   "bower_components/fontawesome/fonts/*",
-  "bower_components/angular-ui-map/ui-map.js"
+  "bower_components/angular-ui-map/ui-map.js",
+  "bower_components/moment/moment.js",
+  "bower_components/bootstrap-daterangepicker/daterangepicker.js",
+  "bower_components/angular-daterangepicker/js/angular-daterangepicker.js",
+  "bower_components/bootstrap-daterangepicker/daterangepicker.css",
+  "node_modules/chart.js/dist/Chart.min.js",
+  "node_modules/angular-chart.js/dist/angular-chart.min.js",
+  "bower_components/numeral/min/numeral.min.js"
 ]

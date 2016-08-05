@@ -38,8 +38,7 @@
     function patch(data) {
       return switchControl.loader.during(
         switchControl.server
-          .all('switch')
-          .one('1')
+          .one('switch/'+switchControl.server.hub.id)
           .patch(data)
           .then(showResponse)
           .then(fireChangeEvent)

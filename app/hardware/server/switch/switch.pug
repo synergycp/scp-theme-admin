@@ -8,7 +8,7 @@ include /resources/pug/mixins/panel
     p(translate="hardware.server.switch.NOT_ENABLED")
     a.btn.btn-primary(
       translate="hardware.server.EDIT"
-      ui-sref="app.hardware.server.view.edit(switchControl.server)"
+      ui-sref="app.hardware.server.view.edit({ id: switchControl.server.id })"
     )
   table.table.table-condensed.table-bordered(ng-if="switchControl.isEnabled")
     //- Show border

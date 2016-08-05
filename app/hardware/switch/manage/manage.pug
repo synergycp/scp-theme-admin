@@ -1,0 +1,15 @@
+load(
+  ng-repeat="panel in vm.panels.top"
+  from="panel"
+)
+.row
+  .col-md-6
+    load(
+      ng-repeat="panel in vm.panels.left"
+      from="panel"
+    )
+  .col-md-6
+    load(
+      ng-repeat="panel in vm.panels.right"
+      from="panel"
+    )

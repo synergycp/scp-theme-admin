@@ -23,12 +23,14 @@
   }
 }
 
-.loading .loader {
-  z-index: 100;
-  opacity: 1;
-  cursor: auto;
+.loading {
+  .loader, &.loader {
+    z-index: 100;
+    opacity: 1;
+    cursor: auto;
 
-  &:after {
-    top: 50%;
+    &:after {
+      top: 50%;
+    }
   }
 }

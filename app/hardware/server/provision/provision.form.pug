@@ -138,7 +138,7 @@ div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
     ng-change="provisionForm.server.fireChangeEvent()"
   )
     ui-select-match(placeholder="{{ 'hardware.server.provision.server.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.nickname }} <{{ $select.selected.srv_id }}>
+      | {{ $select.selected.nickname }} &lt;{{ $select.selected.srv_id }}&gt;
 
     ui-select-choices(
       repeat="choice in provisionForm.server.items track by choice.id"
@@ -172,7 +172,7 @@ div(ng-repeat="addOn in provisionForm.addOns.items track by $index")
     )
       span(ng-bind-html="entity.name | highlight: $select.search")
       small
-        | (VLAN:
+        | &nbsp;(VLAN:&nbsp;
         span(ng-bind-html="entity.vlan | highlight: $select.search")
         | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
 

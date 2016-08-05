@@ -38,7 +38,7 @@
     }
 
     function clearFromServerChoices(server) {
-      $state.go('app.hardware.server.view', {
+      $state.go('app.hardware.server.view.manage', {
         id: server.id,
       });
     }

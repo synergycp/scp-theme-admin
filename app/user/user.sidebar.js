@@ -16,10 +16,10 @@
       icon: "fa fa-user",
     }).item({
       text: "Clients",
-      sref: "app.users.clients",
+      sref: "app.user.client",
     }).item({
       text: "Administrators",
-      sref: "app.users.admins",
+      sref: "app.user.admin",
     });
   }
 })();

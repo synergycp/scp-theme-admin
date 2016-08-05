@@ -8,8 +8,8 @@
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
     $stateProvider
-      .state('app.users', {
-        url: '/users',
+      .state('app.user', {
+        url: '/user',
         abstract: true,
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:user'),

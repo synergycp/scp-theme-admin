@@ -40,7 +40,7 @@ block columns
   td(ng-if="table.showClient")
     a(
       ng-if="row.access"
-      ui-sref="app.users.clients.view({id: row.access.client.id})"
+      ui-sref="app.user.client.view({id: row.access.client.id})"
     ) {{ row.access.client.name }}
     span(ng-if="!row.access") -
   td(ng-if="table.showStatus") {{ row.status_desc }}

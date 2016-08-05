@@ -11,7 +11,7 @@ include /resources/pug/mixins/panel
     p(translate="hardware.server.ipmi.NOT_ENABLED")
     a.btn.btn-primary(
       translate="hardware.server.EDIT"
-      ui-sref="app.hardware.server.view.edit(ipmiControl.server)"
+      ui-sref="app.hardware.server.view.edit({ id: ipmiControl.server.id })"
     )
   table.table.table-condensed.table-bordered(ng-if="ipmiControl.isEnabled")
     //- Show border

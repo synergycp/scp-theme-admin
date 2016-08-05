@@ -10,6 +10,7 @@
       bindings: {
         showName: '=?',
         showEmail: '=?',
+        showActions: '=?',
       },
       controller: 'ClientTableCtrl as table',
       transclude: true,
@@ -32,6 +33,7 @@
       _.defaults(table, {
         showName: true,
         showEmail: true,
+        showActions: true,
       });
     }
   }

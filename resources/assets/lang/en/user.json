@@ -30,7 +30,7 @@
       },
       "access": {
         "LABEL": "Access",
-        "admins": {
+        "admin": {
           "LABEL": "Edit Administrators"
         },
         "logs": {
@@ -56,7 +56,8 @@
     },
     "heading": {
       "NAME": "Name",
-      "EMAIL": "E-Mail Address"
+      "EMAIL": "E-Mail Address",
+      "ACTIONS": "Actions"
     },
     "form": {
       "title": {

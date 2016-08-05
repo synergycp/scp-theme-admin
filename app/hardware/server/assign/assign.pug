@@ -14,7 +14,7 @@ include /resources/pug/mixins/panel
         td
           a(
             ng-if="assign.server.access"
-            ui-sref="app.users.clients.view(assign.server.access.client)"
+            ui-sref="app.user.client.view(assign.server.access.client)"
             ng-bind="assign.server.access.client.name"
           )
           span(

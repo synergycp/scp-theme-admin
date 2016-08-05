@@ -8,18 +8,18 @@
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
     $stateProvider
-      .state('app.users.clients', {
-        url: '/clients',
+      .state('app.user.client', {
+        url: '/client',
         abstract: true,
         template: helper.dummyTemplate,
       })
-      .state('app.users.clients.list', {
+      .state('app.user.client.list', {
         url: '',
         title: 'Clients',
         templateUrl: helper.basepath('user/client/client.index.html'),
         controller: 'ClientIndexCtrl as vm'
       })
-      .state('app.users.clients.view', {
+      .state('app.user.client.view', {
         url: '/:id',
         title: 'View Client',
         controller: 'ClientViewCtrl as vm',

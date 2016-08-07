@@ -1,4 +1,4 @@
-ul.pagination(ng-class="pagination.pages.max > pagination.pages.min ? '' : 'hidden'")
+ul.pagination.pull-right.margin-left(ng-class="pagination.pages.max > pagination.pages.min ? '' : 'hidden'")
   li(ng-if="pagination.pages.min < pagination.visible[0]")
     a(ng-click="pagination.pages.set(pagination.pages.min)")
       | {{ pagination.pages.min }}
@@ -15,3 +15,10 @@ ul.pagination(ng-class="pagination.pages.max > pagination.pages.min ? '' : 'hidd
   li(ng-if="pagination.pages.max > pagination.visible[pagination.visible.length-1]")
     a(ng-click="pagination.pages.set(pagination.pages.max)")
       | {{ pagination.pages.max }}
+
+div.per-page.pull-right
+  select.form-control(
+    ng-model="pagination.per.value"
+    ng-change="pagination.per.sync()"
+    ng-options="count for count in pagination.per.options"
+  )

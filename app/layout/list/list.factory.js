@@ -51,7 +51,7 @@
 
     function activate() {
       event.on('change', list.load);
-      list.pages.on('change', list.load);
+      list.pages.on(['change', 'change:per'], list.load);
 
       setBulkEvents();
     }
@@ -134,7 +134,9 @@
     }
 
     function buildQuery() {
-      return _.assign({}, buildFilterQuery(), buildSortQuery());
+      return _.assign({
+        per_page: list.pages.per,
+      }, buildFilterQuery(), buildSortQuery());
     }
 
     function setFilter(filters) {

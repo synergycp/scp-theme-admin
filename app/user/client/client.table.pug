@@ -8,6 +8,10 @@ block headings
     span(translate="user.client.heading.EMAIL")
     sort(col="email")
   th(
+    ng-if="table.showServerCount"
+    translate="user.client.heading.SERVER-COUNT"
+  )
+  th(
     ng-if="table.showActions"
     translate="user.client.heading.ACTIONS"
   )
@@ -21,9 +25,21 @@ block columns
     ng-if="table.showEmail"
     ng-bind="row.email"
   )
+  td(
+    ng-if="table.showServerCount"
+  )
+    span(
+      ng-if="!row.serversCount"
+      translate="user.client.list.NO-SERVERS"
+    )
+    a(
+      ui-sref="app.hardware.server.list({ client: row.id })"
+      ng-bind="row.serversCount"
+      ng-if="row.serversCount"
+    )
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(
-        ui-sref="app.user.client.view({id: row.id})"
+        ui-sref="app.user.client.view({ id: row.id })"
         translate="app.action.EDIT"
       )

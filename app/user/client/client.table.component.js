@@ -10,6 +10,7 @@
       bindings: {
         showName: '=?',
         showEmail: '=?',
+        showServerCount: '=?',
         showActions: '=?',
       },
       controller: 'ClientTableCtrl as table',
@@ -33,6 +34,7 @@
       _.defaults(table, {
         showName: true,
         showEmail: true,
+        showServerCount: true,
         showActions: true,
       });
     }

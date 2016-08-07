@@ -18,15 +18,31 @@
   function PaginationCtrl(_) {
     var pagination = this;
 
-    pagination.$onInit = init();
+    pagination.per = {
+      options: [
+        10,
+        20,
+        100,
+        500,
+        1000,
+        5000,
+      ],
+      value: 10,
+      sync: syncPerPage,
+    };
+    pagination.$onInit = init;
 
     //////////
+
+    function syncPerPage() {
+      pagination.pages.setPer(pagination.per.value);
+    }
 
     function init() {
       pagination.maxVisible = pagination.maxVisible || DEFAULTS.maxVisible;
 
-      pagination.pages.on('change', computeVisible);
-      pagination.pages.on('change:range', computeVisible);
+      pagination.per.value = pagination.pages.per;
+      pagination.pages.on(['change', 'change:range'], computeVisible);
 
       computeVisible();
     }

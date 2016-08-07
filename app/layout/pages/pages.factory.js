@@ -22,10 +22,18 @@
     pages.set = setPage;
     pages.setMax = setMax;
     pages.fromMeta = fromMeta;
+    pages.setPer = setPer;
 
     event.bindTo(pages);
 
     ////////////////
+
+    function setPer(perPage) {
+      pages.per = perPage;
+  
+      pages.set(pages.min);
+      pages.fire('change:per', pages.per);
+    }
 
     function setPage(page) {
       if (page === pages.current) {
@@ -59,7 +67,7 @@
     function fromMeta(meta) {
       pages.setMax(meta.last_page);
       pages.current = meta.current_page;
-      pages.per_page = meta.per_page;
+      pages.per = meta.per_page;
       pages.total = parseInt(meta.total);
     }
   }

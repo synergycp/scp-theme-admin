@@ -52,11 +52,13 @@
       "TITLE": "Clients"
     },
     "list": {
+      "NO-SERVERS": "-",
       "TITLE": "Clients"
     },
     "heading": {
       "NAME": "Name",
       "EMAIL": "E-Mail Address",
+      "SERVER-COUNT": "Servers",
       "ACTIONS": "Actions"
     },
     "form": {

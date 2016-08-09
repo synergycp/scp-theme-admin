@@ -91,6 +91,7 @@
 
       bandwidth.chart.setData(response.data);
       bandwidth.chart.setLabels(response.labels);
+      bandwidth.chart.stats.set(response.stats);
 
       return response;
     }

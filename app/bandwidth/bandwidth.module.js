@@ -3,5 +3,6 @@
 
   angular
     .module('app.bandwidth', [
+      'app.core.filters',
     ]);
 })();

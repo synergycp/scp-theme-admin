@@ -30,19 +30,28 @@
 
     function setPer(perPage) {
       pages.per = perPage;
-  
+
       pages.set(pages.min);
       pages.fire('change:per', pages.per);
     }
 
+    /**
+     * @return {bool} Whether or not a change occurred.
+     */
     function setPage(page) {
       if (page === pages.current) {
-        return;
+        return false;
       }
 
       pages.current = page;
 
+      if (forcePageInRange()) {
+        return true;
+      }
+
       pages.fire('change', pages.current);
+
+      return true;
     }
 
     function setMax(max) {
@@ -57,8 +66,11 @@
       pages.fire('change:range', [pages.min, pages.max]);
     }
 
+    /**
+     * @return {bool} Whether or not a change occurred.
+     */
     function forcePageInRange() {
-      setPage(Math.min(
+      return setPage(Math.min(
         Math.max(pages.current, pages.min),
         pages.max
       ));
@@ -69,6 +81,7 @@
       pages.current = meta.current_page;
       pages.per = meta.per_page;
       pages.total = parseInt(meta.total);
+      pages.fire('load');
     }
   }
 

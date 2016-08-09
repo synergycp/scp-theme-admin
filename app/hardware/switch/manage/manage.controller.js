@@ -16,7 +16,10 @@
   function SwitchManageCtrl(
     Api,
     EventEmitter,
+    BandwidthFilter,
+    date,
     $stateParams,
+    $state,
     $scope,
     $q,
     _
@@ -31,6 +34,14 @@
     };
     EventEmitter().bindTo(vm.switch);
     panelContext.switch = vm.switch;
+
+    var bandwidth = _.assign({
+      tab: {
+        active: 0,
+        change: onBandwidthTabChange,
+      },
+      filter: BandwidthFilter(),
+    }, panelContext);
 
     vm.panels = {
       top: [],
@@ -47,6 +58,11 @@
       // (causes issue with vm.switch properties missing)
       vm.switch.load()
         .then(loadPanels);
+
+      $scope.$on('$routeUpdate', syncStateToFilter);
+      $scope.$on('$routeUpdate', syncStateToTabs);
+
+      syncStateToTabs();
     }
 
     function loadSwitch() {
@@ -74,10 +90,43 @@
       return defer.promise;
     }
 
+    function syncStateToTabs() {
+      bandwidth.tab.active = $stateParams['bandwidth.tab'] || 0;
+    }
+
+    function syncStateToFilter() {
+      if (!$stateParams['bandwidth.start']) {
+        return;
+      }
+
+      bandwidth.filter.setRange(
+        moment($stateParams['bandwidth.start'], date.formatDateTime),
+        moment($stateParams['bandwidth.end'], date.formatDateTime)
+      );
+    }
+
+    function syncFilterToState() {
+      var filter = bandwidth.filter;
+      $state.go($state.current.name, {
+        'bandwidth.start': filter.start.format(date.formatDateTime),
+        'bandwidth.end': filter.end.format(date.formatDateTime),
+      });
+    }
+
+    function onBandwidthTabChange(index) {
+      $state.go($state.current.name, {
+        'bandwidth.tab': index,
+      });
+    }
+
     function loadPanels() {
+      syncStateToFilter();
+
+      bandwidth.filter.on('change', syncFilterToState);
+
       _.setContents(vm.panels.top, [{
         templateUrl: PANELS+'/panel.bandwidth.html',
-        context: panelContext,
+        context: bandwidth,
       }]);
 
       _.setContents(vm.panels.left, [{

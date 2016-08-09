@@ -27,7 +27,7 @@
         1000,
         5000,
       ],
-      value: 10,
+      value: undefined,
       sync: syncPerPage,
     };
     pagination.$onInit = init;
@@ -41,10 +41,17 @@
     function init() {
       pagination.maxVisible = pagination.maxVisible || DEFAULTS.maxVisible;
 
-      pagination.per.value = pagination.pages.per;
-      pagination.pages.on(['change', 'change:range'], computeVisible);
+      pagination.pages
+        .on('load', setPerPage)
+        .on(['change', 'change:range'], computeVisible)
+        ;
 
+      setPerPage();
       computeVisible();
+    }
+
+    function setPerPage() {
+      pagination.per.value = pagination.pages.per || pagination.per.options[0];
     }
 
     function computeVisible() {

@@ -12,23 +12,25 @@
    */
   function ServerBandwidthPortFactory (
     $q,
+    date,
     BandwidthChart,
     BandwidthFilter,
     ServerBandwidthBilling
   ) {
-    return function (server, port) {
+    return function (server, port, filter) {
         return new ServerBandwidthPort(
           server,
           port,
-          BandwidthFilter(),
+          filter || BandwidthFilter(),
           ServerBandwidthBilling(),
           BandwidthChart(),
+          date,
           $q
         );
     };
   }
 
-  function ServerBandwidthPort (server, port, filter, billing, chart, $q) {
+  function ServerBandwidthPort (server, port, filter, billing, chart, date, $q) {
     // Private variables
     var bandwidth = this;
     var $api = port.one('bandwidth');
@@ -68,9 +70,9 @@
       ]);
     }
 
-    function formatDateForServer(date) {
-      return typeof date === "undefined" ? undefined  :
-        date.utc().format('YYYY-MM-DD HH:mm');
+    function formatDateForServer(dateVal) {
+      return typeof dateVal === "undefined" ? undefined  :
+        dateVal.utc().format(date.formatServer);
     }
 
     function storeData(response) {
@@ -84,6 +86,7 @@
 
       bandwidth.chart.setData(response.data);
       bandwidth.chart.setLabels(response.labels);
+      bandwidth.chart.stats.set(response.stats);
 
       return response;
     }
@@ -98,7 +101,16 @@
     }
 
     function storeBilling(data) {
-      // TODO console.log(data);
+      var billing = bandwidth.billing;
+      billing.isActive = data && 'used' in data;
+      if (!billing.isActive) {
+        return false;
+      }
+
+      billing.max = data.max;
+      billing.used = data.used;
+      billing.cycleStart = data.cycle_start;
+      billing.percent = data.percent;
     }
   }
 })();

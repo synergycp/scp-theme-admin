@@ -22,7 +22,7 @@
     billing.isActive = false;
     billing.used = 0;
     billing.max = 0;
-    billing.cycleStart = 0;
+    billing.cycleStart = '';
     billing.percent = 0;
 
     //////////

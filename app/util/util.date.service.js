@@ -14,6 +14,8 @@
     var date = this;
 
     date.round = round;
+    date.formatDateTime = 'YYYY-MM-DD HH:mm';
+    date.formatServer = date.formatDateTime;
 
     //////////
 

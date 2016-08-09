@@ -19,7 +19,7 @@ div(style="margin-bottom: 15px")
             | {{ panel.filter.range }} &nbsp;
           span.caret
 
-        a.btn.btn-default(
+        a.btn.btn-default.hide(
           ng-if="panel.chart.hasFilteredData"
           ng-click="panel.state.fullScreen = !panel.state.fullScreen"
         )
@@ -52,27 +52,28 @@ div(style="margin-bottom: 15px")
 
             .panel-body.bandwidth-stats(ng-if="bandwidth.chart.showStats")
               .clearfix
-                .col-md-4(ng-foreach="stat in bandwidth.chart.stats")
+                .col-sm-4(ng-repeat="statCol in bandwidth.chart.stats.cols")
                   h3
                     span.v-mid
-                      span(ng-bind="stat.label + ':'")
+                      span(translate="bandwidth.stats.heading.{{ statCol.label }}")
+                      span :
                     span.square(style="background-color: {{ stat.color }}")
                   ul
-                    li(
-                      ng-foreach="item in stat"
-                      ng-bind="item.key + ': ' + item.value"
-                    )
+                    li(ng-repeat="item in statCol.items")
+                      span(translate="bandwidth.stats.{{ item.label }}")
+                      span(ng-bind="': ' + item.value")
 
-              div(ng-if="bandwidth.billing.isActive")
-                uib-progressbar.progress-min-text(
-                  value="bandwidth.billing.percent"
-                  ng-class="bandwidth.billing.percent > 95 ? 'progress-bar-danger' : 'progress-bar-info'"
-                )
-                  | {{ bandwidth.billing.percent }}%
+            div(ng-if="bandwidth.billing.isActive")
+              uib-progressbar.progress-min-text(
+                value="bandwidth.billing.percent"
+                ng-class="bandwidth.billing.percent > 95 ? 'progress-bar-danger' : 'progress-bar-info'"
+              )
+                | {{ bandwidth.billing.percent }}%
 
-                p.help-block(
-                  translate="bandwidth.billing.USAGE"
-                  translate-value-billing-max="{{ bandwidth.billing.max }}"
-                  translate-value-billing-used="{{ bandwidth.billing.used }}"
-                  translate-value-billing-cycle-start="{{ bandwidth.billing.cycle_start }}"
-                )
+              p.help-block(
+                ng-init="billing = bandwidth.billing"
+                translate="bandwidth.billing.USAGE"
+                translate-value-max="{{ billing.max | bitsToSize }}"
+                translate-value-used="{{ billing.used | bitsToSize }}"
+                translate-value-since="{{ bandwidth.billing.cycleStart }}"
+              )

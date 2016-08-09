@@ -40,18 +40,28 @@
       thirty_m,
       'floor'
     );
-
-    filter.options = options;
-    filter.range = filter.options.defaultRange;
-    filter.isSetup = false;
-    filter.input = {
-      startDate: null,
-      endDate: null,
+    var ranges = {
+      'Last Hour': [last_hour, now],
+      'Last 6 Hours': [
+        moment(now).subtract(6, 'hours'),
+        now
+      ],
+      'Last Day': [
+        moment(now).subtract(1, 'day'),
+        now
+      ],
+      'Last Week': [
+        moment(now).subtract(1, 'week'),
+        now
+      ],
+      'Last Month': [
+        moment(now).subtract(1, 'month'),
+        now
+      ]
     };
-    filter.min = undefined;
-    filter.max = moment().add(5, 'minutes').format('YYYY-DD-MM');
 
-    filter.setDate = setDate;
+    filter.setOptions = setOptions;
+    filter.setRange = setRange;
     filter.setMinTime = setMinTime;
     filter.setMaxTime = setMaxTime;
     filter.startTime = startTime;
@@ -65,11 +75,46 @@
 
     //////////
 
-    function activate() {
-      event.bindTo(filter);
+    function setOptions(options) {
+      _.assign(filter.opts, options);
 
-      filter.start = filter.defaultStartTime();
-      filter.end = filter.defaultEndTime();
+      return filter;
+    }
+
+    function activate() {
+      filter.options = options;
+      filter.range = filter.options.defaultRange;
+      filter.isSetup = false;
+      filter.input = {
+        startDate: filter.start = filter.defaultStartTime(),
+        endDate: filter.end = filter.defaultEndTime(),
+      };
+      filter.min = undefined;
+      filter.max = moment().add(5, 'minutes').format('YYYY-DD-MM');
+
+      filter.opts = {
+        ranges: ranges,
+        format: 'YYYY-DD-MM',
+        startDate: filter.start,
+        endDate: filter.end,
+        timePicker: true,
+        timePicker24Hour: true,
+        eventHandlers: {
+          'apply.daterangepicker': function () {
+            filter.setRange(
+              filter.input.startDate,
+              filter.input.endDate
+            );
+          },
+        },
+      };
+
+      event.bindTo(filter);
+      filter.on('change', setRangeLabel);
+    }
+
+    function setRangeLabel() {
+      filter.range = filter.getLabel();
     }
 
     /**
@@ -79,9 +124,12 @@
      * @param {moment} end
      * @param {string|null} label
      */
-    function setDate(start, end) {
-      filter.input.startDate = start;
-      filter.input.endDate = end;
+    function setRange(start, end) {
+      filter.fire(
+        'change',
+        filter.input.startDate = filter.start = moment(start),
+        filter.input.endDate = filter.end = moment(end)
+      );
     }
 
     /**
@@ -104,31 +152,6 @@
       filter.max = maxTime ? moment.unix(maxTime).format('YYYY-DD-MM') : undefined;
 
       return filter;
-    }
-
-    /**
-     * Setup the datepicker based on the API result.
-     *
-     * @param  {ApiResponse} response
-     * @return {boolean} whether or not there was an error while setting up
-     */
-    function setUp() {
-      var ranges = filter.getRanges();
-      var startTime = filter.defaultStartTime();
-      var endTime = filter.defaultEndTime();
-      var timeDiff = endTime - startTime;
-
-      filter.isSetup(true);
-
-      if (!maxTime.isBefore(startTime)) {
-        return true;
-      }
-
-      // trigger date choice change
-      endTime = endTime.max(maxTime);
-      startTime = moment(endTime - timeDiff).min(minTime);
-      filter.setDate(startTime, endTime);
-      return false;
     }
 
     /**
@@ -173,25 +196,7 @@
      * @return {object}
      */
     function getRanges() {
-      return {
-        'Last Hour': [last_hour, now],
-        'Last 6 Hours': [
-          moment(now).subtract(6, 'hours'),
-          now
-        ],
-        'Last Day': [
-          moment(now).subtract(1, 'day'),
-          now
-        ],
-        'Last Week': [
-          moment(now).subtract(1, 'week'),
-          now
-        ],
-        'Last Month': [
-          moment(now).subtract(1, 'month'),
-          now
-        ]
-      };
+      return ranges;
     }
 
     function getLabel() {
@@ -218,9 +223,9 @@
     }
 
     function makeLabel() {
-      return filter.input.startDate.format('M/DD HH:mm') +
+      return filter.start.format('M/DD HH:mm') +
              ' - ' +
-             filter.input.endDate.format('M/DD HH:mm')
+             filter.end.format('M/DD HH:mm')
              ;
     }
   }

@@ -54,9 +54,7 @@
     var serverForm = this;
 
     serverForm.$onInit = init;
-    serverForm.switch = Select('switch').on('change', function () {
-      syncGroupFilter();
-    });
+    serverForm.switch = Select('switch').on('change', syncGroupFilter);
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
     serverForm.disks = MultiInput(DiskSelector)
@@ -125,7 +123,7 @@
         syncEntityFilter();
 
         serverForm.switchSpeed.selected = response.switch.speed;
-        serverForm.client.selected = response.client;
+        serverForm.client.selected = (response.access || {}).client;
         serverForm.billing.date.value = response.billing.date ? new Date(Date.parse(response.billing.date)) : null;
       });
     }

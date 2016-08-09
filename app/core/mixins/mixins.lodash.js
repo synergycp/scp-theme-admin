@@ -12,7 +12,17 @@
     _.mixin({
       setContents: setContents,
       enhance: enhance,
+      makeArray: makeArray,
     });
+
+    function makeArray(length, value) {
+      var arr = [];
+      while (--length >= 0) {
+        arr[length] = value;
+      }
+
+      return arr;
+    }
 
     function setContents(dest, origin) {
       dest.length = 0;

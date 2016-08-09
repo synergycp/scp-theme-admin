@@ -16,7 +16,11 @@
   function ServerManageCtrl(
     Api,
     EventEmitter,
+    BandwidthFilter,
+    date,
+    moment,
     $stateParams,
+    $state,
     $scope,
     $q,
     _
@@ -33,6 +37,10 @@
     EventEmitter().bindTo(vm.server);
     panelContext.server = vm.server;
 
+    var bandwidth = _.assign({
+      filter: BandwidthFilter(),
+    }, panelContext);
+
     vm.panels = {
       top: [],
       left: [],
@@ -48,6 +56,9 @@
       // (causes issue with vm.server properties missing)
       vm.server.load()
         .then(loadPanels);
+
+      $scope.$on('$routeUpdate', syncStateToFilter);
+      bandwidth.filter.on('change', syncFilterToState);
     }
 
     function loadServer() {
@@ -102,9 +113,11 @@
     }
 
     function loadPanels() {
+      syncStateToFilter();
+
       _.setContents(vm.panels.top, [{
         templateUrl: PANELS+'/panel.bandwidth.html',
-        context: panelContext,
+        context: bandwidth,
       }]);
 
       _.setContents(vm.panels.left, [{
@@ -142,8 +155,28 @@
       },]);
     }
 
+    function syncStateToFilter() {
+      if (!$stateParams['bandwidth.start']) {
+        return;
+      }
+
+      bandwidth.filter.setRange(
+        moment($stateParams['bandwidth.start'], date.formatDateTime),
+        moment($stateParams['bandwidth.end'], date.formatDateTime)
+      );
+    }
+
+    function syncFilterToState() {
+      var filter = bandwidth.filter;
+      $state.go($state.current.name, _.assign($stateParams, {
+        'bandwidth.start': filter.start.format(date.formatDateTime),
+        'bandwidth.end': filter.end.format(date.formatDateTime),
+      }));
+    }
+
     function patchServer() {
-      return $api.patch.apply($api, arguments)
+      return $api.patch
+        .apply($api, arguments)
         .then(fireChangeEvent)
         ;
     }

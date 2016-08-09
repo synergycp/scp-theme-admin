@@ -53,8 +53,9 @@
         templateUrl: helper.basepath('hardware/switch/switch.edit.html'),
       })
       .state('app.hardware.switch.view.manage', {
-        url: '',
+        url: '?bandwidth.start&bandwidth.end&bandwidth.tab',
         title: 'Manage Switch',
+        reloadOnSearch: false,
         controller: 'SwitchManageCtrl as vm',
         templateUrl: helper.basepath('hardware/switch/manage/manage.html'),
         resolve: helper.resolveFor(

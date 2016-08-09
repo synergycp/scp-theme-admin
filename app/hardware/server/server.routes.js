@@ -48,8 +48,9 @@
         templateUrl: helper.basepath('hardware/server/server.edit.html'),
       })
       .state('app.hardware.server.view.manage', {
-        url: '',
+        url: '?bandwidth.start&bandwidth.end',
         title: 'Manage Server',
+        reloadOnSearch: false,
         controller: 'ServerManageCtrl as vm',
         templateUrl: helper.basepath('hardware/server/manage/manage.html'),
         resolve: helper.resolveFor(

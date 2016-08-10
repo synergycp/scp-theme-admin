@@ -21,7 +21,7 @@ div(style="margin-bottom: 15px")
             | {{ panel.filter.range }} &nbsp;
           span.caret
 
-        a.btn.btn-default(
+        a.btn.btn-default.hide(
           ng-if="panel.chart.hasFilteredData"
           ng-click="panel.state.fullScreen = !panel.state.fullScreen"
         )
@@ -39,7 +39,7 @@ div(style="margin-bottom: 15px")
           uib-tab(
             ng-repeat="bandwidth in panel.bandwidth.ports"
             index="$index"
-            select="panel.tabs.change(bandwidth)"
+            select="panel.tabs.change(bandwidth, $index)"
             active="bandwidth.active"
           )
             uib-tab-heading
@@ -63,7 +63,7 @@ div(style="margin-bottom: 15px")
           uib-tab(
             ng-init="tab = panel.tabs.add"
             index="panel.bandwidth.ports.length"
-            select="panel.tabs.change(tab)"
+            select="panel.tabs.change(tab, panel.bandwidth.ports.length)"
             active="tab.active"
           )
             uib-tab-heading

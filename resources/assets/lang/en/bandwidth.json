@@ -15,6 +15,18 @@
     "TEXT": "This {{ type }} does not have bandwidth setup."
   },
   "billing": {
-    "USAGE": "You have used <strong>{{ billing.used }}</strong> out of <strong>{{ billing.max }}</strong> since {{ billing.cycleStart }}."
+    "USAGE": "You have used {{ used }} out of {{ max }} since {{ since }}."
+  },
+  "stats": {
+    "MIN": "Min",
+    "MAX": "Max",
+    "TOP": "95%",
+    "TOTAL": "Total",
+    "TOP-MAX": "95% Max",
+    "heading": {
+      "IN": "In",
+      "OUT": "Out",
+      "TOTAL": "Total"
+    }
   }
 }

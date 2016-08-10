@@ -24,5 +24,6 @@
       'app.core.settings',
       'app.core.translate',
       'app.core.mixins',
+      'app.core.filters',
     ]);
 })();

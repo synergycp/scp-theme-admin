@@ -294,6 +294,10 @@
         "TITLE": "Assign Client",
         "SUBMIT": "Assign",
         "CANCEL": "Cancel",
+        "mode": {
+          "ADD": "Create Client",
+          "SEARCH": "Search Clients"
+        },
         "client": {
           "LABEL": "Client",
           "PLACEHOLDER": "Type to search..."

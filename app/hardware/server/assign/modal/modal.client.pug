@@ -15,25 +15,33 @@ form(ng-submit="modal.submit()")
         span(ng-repeat="server in modal.servers")
           span(ng-bind="server.name")
           br
-    +label("{{ 'hardware.server.modal.client.client.LABEL' | translate }}")
-      +input-with-btn("fa fa-times-circle")(
-        ng-click="modal.access.client = null"
-      )
-        ui-select(ng-model="modal.access.client")
-          ui-select-match(placeholder="{{ 'hardware.server.modal.client.client.PLACEHOLDER' | translate }}")
-            | {{ $select.selected.name }}
+    div(ng-if="modal.mode.value === modal.mode.SEARCH")
+      +label("{{ 'hardware.server.modal.client.client.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(
+          ng-click="modal.access.client = null"
+        )
+          ui-select(ng-model="modal.access.client")
+            ui-select-match(
+              placeholder="{{ 'hardware.server.modal.client.client.PLACEHOLDER' | translate }}"
+            )
+              span(ng-bind="$select.selected.name")
 
-          ui-select-choices(
-            repeat=
-              "choice in (" +
-                "modal.client.items" +
-                "| filter: {name: $select.search}" +
-              ") track by choice.id"
-            refresh="modal.client.load($select.search)"
-            refresh-delay="400"
-          )
-            span(ng-bind-html="choice.name | highlight: $select.search")
-            small(ng-bind-html="' ' + choice.email | highlight: $select.search")
+            ui-select-choices(
+              repeat=[
+                "choice in modal.client.items",
+                "track by choice.id",
+              ].join(' ')
+              refresh="modal.client.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")
+              small(ng-bind-html="' ' + choice.email | highlight: $select.search")
+
+    client-form(
+      ng-if="modal.mode.value === modal.mode.ADD"
+      form="modal.create"
+    )
+
     +label("{{ 'hardware.server.modal.client.access.LABEL' | translate }}")
       .checkbox
         label
@@ -59,6 +67,12 @@ form(ng-submit="modal.submit()")
           )
           span(translate="hardware.server.modal.client.access.SWITCH")
   .modal-footer
+    .pull-left
+      button.btn.btn-secondary(
+        type="button"
+        ng-click="modal.mode.value = +!modal.mode.value"
+        translate="hardware.server.modal.client.mode.{{ modal.mode.value === modal.mode.ADD ? 'SEARCH' : 'ADD' }}"
+      )
     button.btn.btn-secondary(
       type="button"
       ng-click="modal.$dismiss()"

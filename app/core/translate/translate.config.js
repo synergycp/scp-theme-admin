@@ -23,10 +23,13 @@
       function urlTemplate(name, lang) {
         var split = name.split(':');
         if (split.shift() == 'pkg' && split.length) {
-          var url = ApiProvider.baseUrl();
-          return url+'pkg/'+split.shift()+
-            '/assets/lang/'+lang+
-            '/'+split.join(':')+'.json';
+          var url = ApiProvider.baseUrl() + 'pkg/'+split.shift();
+          if (split.length > 1) {
+            url += '/' + split.shift();
+          }
+
+          return url+'/assets/lang/'+lang+
+                 '/'+split.join(':')+'.json';
         }
         return 'assets/lang/'+lang+'/'+name+'.json';
       }

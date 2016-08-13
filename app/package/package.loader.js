@@ -11,7 +11,7 @@
    */
   function PackageLoader(Api, $ocLazyLoad) {
     var loader = this;
-    var $api = Api.all('package/angular');
+    var $api = Api.all('package/angular-admin');
 
     return makeLoadPackagesPromise();
 

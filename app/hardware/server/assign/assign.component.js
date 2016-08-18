@@ -19,13 +19,14 @@
   /**
    * @ngInject
    */
-  function ServerAssignCtrl(Api, ServerAssignModal) {
+  function ServerAssignCtrl(Api, ServerAssignModal, _) {
     var assign = this;
+    var debouncedLoad = _.debounce(syncEntities, 15);
 
     assign.$onInit = init;
     assign.entities = {
       items: [],
-      load: syncEntities,
+      load: debouncedLoad,
     };
     assign.client = {
       modal: assignClientModal,
@@ -34,15 +35,18 @@
     //////////
 
     function init() {
-      assign.entities.load();
+      assign.server.on('change', debouncedLoad);
+      debouncedLoad();
     }
 
     function syncEntities() {
-      return Api.all('entity')
+      return Api
+        .all('entity')
         .getList({
           server: assign.server.id,
         })
-        .then(storeEntities);
+        .then(storeEntities)
+        ;
     }
 
     function storeEntities(entities) {

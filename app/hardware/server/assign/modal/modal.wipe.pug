@@ -9,10 +9,10 @@ form(ng-submit="modal.submit()")
 
     h4.modal-title(translate="hardware.server.modal.wipe.TITLE")
 
-  .modal-body
+  .modal-body(ng-init="itemCount = ('hardware.server.modal.suspend.ACTION_COUNT' | translate)")
     p(translate="hardware.server.modal.wipe.BODY")
 
-    ul(ng-init="items = _.range(0, 'hardware.server.modal.wipe.ACTION_COUNT' | translate)")
+    ul(ng-init="items = _.range(0, itemCount)")
       li(
         ng-repeat="item in items track by $index"
         translate="hardware.server.modal.wipe.ACTIONS.{{$index}}"

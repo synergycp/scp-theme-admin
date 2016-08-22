@@ -54,8 +54,9 @@
         controller: 'ServerManageCtrl as vm',
         templateUrl: helper.basepath('hardware/server/manage/manage.html'),
         resolve: helper.resolveFor(
-          'chart-js', 'ng-chart-js',
-          'moment', 'numeral', 'date-range-picker'
+          'chart-js', 'after:ng-chart-js',
+          'moment', 'after:date-range-picker',
+          'numeral'
         ),
       })
       ;

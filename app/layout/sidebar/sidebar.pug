@@ -15,8 +15,8 @@ div(ng-controller="SidebarController as sidebar")
         ng-bind="item.options.alert"
       )
       em(
-        ng-class="item.options.icon"
         ng-if="item.options.icon"
+        ng-class="item.options.icon"
       )
       span {{(item.options.translate | translate) || item.options.text}}
 

@@ -56,6 +56,11 @@
       proxy.wrap = wrapRestangular;
 
       function wrapRestangular(result) {
+        if (!result || result.isWrapped) {
+          return result;
+        }
+
+        result.isWrapped = true;
         result.getList = wrapList(result.getList);
         result.remove = request(result.remove);
         result.patch = request(result.patch);

@@ -23,16 +23,30 @@
     };
 
     // controller access level
+    /**
+     * @ngInject
+     */
     result.$get = function ($sce) {
-      "ngInject";
-
       var service = _.clone(result);
-      service.trusted = trustedAsset;
+      service.trusted = trusted;
+      service.package = wrappedPackage;
 
       return service;
 
-      function trustedAsset(path) {
+      function trusted(path) {
         return $sce.trustAsResourceUrl(path);
+      }
+
+      function wrappedPackage() {
+        var pkg = makePackage.apply(null, arguments);
+
+        pkg.trustedAsset = trustedAsset;
+
+        return pkg;
+
+        function trustedAsset(path) {
+          return trusted(pkg.asset(path));
+        }
       }
     };
 
@@ -49,13 +63,15 @@
 
     function Package(name) {
       var pkg = this;
+      var url = 'pkg/' + name + '/';
 
       pkg.asset = asset;
       pkg.lang = lang;
       pkg.state = state;
+      pkg.raw = raw;
 
       function lang(language) {
-        return 'lang:pkg:'+name+':'+language;
+        return 'lang:pkg:' + name + ':' + language;
       }
 
       function state(stateName, opts) {
@@ -65,7 +81,11 @@
       }
 
       function asset(path) {
-        return ApiProvider.baseUrl()+'pkg/'+name+'/'+path;
+        return ApiProvider.baseUrl() + url + path;
+      }
+
+      function raw(path) {
+        return 'raw:'+ asset(path);
       }
     }
 
@@ -73,56 +93,94 @@
     // previously configured in constant.APP_REQUIRES
     function resolveFor() {
       var _args = arguments;
+
       return {
-        deps: function ($ocLazyLoad, $q, $translateModuleLoader, $translate, $injector) {
-          "ngInject";
+        deps: resolveArgs,
+      };
 
-          // Creates a promise chain for each argument
-          var promise = $q.when(1); // empty promise
-          for (var i = 0, len = _args.length; i < len; i++) {
-            promise = andThen(_args[i]);
+      /**
+       * @ngInject
+       */
+      function resolveArgs(
+        $q,
+        $timeout,
+        $injector,
+        $translate,
+        $ocLazyLoad,
+        $translateModuleLoader
+      ) {
+        var lastPromise;
+
+        return $q.all(
+          _.map(_args, makePromise)
+        );
+
+        // creates promise to chain dynamically
+        function makePromise(_arg) {
+          var promise = $q.when(_arg);
+
+          // also support a function that returns a promise
+          if (typeof _arg === 'function') {
+            return promise.then(_arg);
           }
-          return promise;
 
-          // creates promise to chain dynamically
-          function andThen(_arg) {
-            // also support a function that returns a promise
-            if (typeof _arg === 'function')
-              return promise.then(_arg);
+          lastPromise = promise.then(loadArg.bind(null, _arg, lastPromise));
 
-            return promise.then(function () {
-              var split = _arg.split(':');
-              var type = split.shift();
-              var load = split.join(':');
-              switch(type) {
-              case 'lang':
-                $translateModuleLoader.addPart(load);
-                $translate.refresh();
-                return;
-              case 'inject':
-                return $injector.get(load);
-              }
+          return lastPromise;
+        }
 
-              // if is a module, pass the name. If not, pass the array
-              var whatToLoad = getRequired(_arg);
-              // simple error check
-              if (!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
-              // finally, return a promise
-              return $ocLazyLoad.load(whatToLoad);
+        function loadArg(_arg, lastPromise) {
+          var split = _arg.split(':');
+          var type = split.shift();
+          var load = split.join(':');
+
+          switch (type) {
+          case 'lang':
+            $translateModuleLoader.addPart(load);
+
+            return $translate.refresh();
+          case 'inject':
+            return $injector.get(load);
+          case 'raw':
+            return $ocLazyLoad.load(load);
+          case 'after':
+            return lastPromise.then(function() {
+              return loadArg(load);
             });
           }
-          // check and returns required data
-          // analyze module items with the form [name: '', files: []]
-          // and also simple array of script files (for not angular js)
-          function getRequired(name) {
-            if (APP_REQUIRES.modules)
-              for (var m in APP_REQUIRES.modules)
-                if (APP_REQUIRES.modules[m].name && APP_REQUIRES.modules[m].name === name)
-                  return APP_REQUIRES.modules[m];
-            return APP_REQUIRES.scripts && APP_REQUIRES.scripts[name];
+
+          // if is a module, pass the name. If not, pass the array
+          var whatToLoad = getRequired(_arg);
+
+          // simple error check
+          if (!whatToLoad) {
+            return $.error(
+              'Route resolve: Bad resource name [' + _arg + ']'
+            );
           }
+
+          // finally, return a promise
+          return $ocLazyLoad.load(whatToLoad);
         }
-      };
+
+        // check and returns required data
+        // analyze module items with the form [name: '', files: []]
+        // and also simple array of script files (for not angular js)
+        function getRequired(name) {
+          if (APP_REQUIRES.modules) {
+            for (var m in APP_REQUIRES.modules) {
+              if (APP_REQUIRES.modules[m].name &&
+                  APP_REQUIRES.modules[m].name === name
+              ) {
+                return APP_REQUIRES.modules[m];
+              }
+            }
+          }
+
+          return APP_REQUIRES.scripts &&
+                 APP_REQUIRES.scripts[name];
+        }
+      }
     }
   }
 })();

@@ -17,18 +17,21 @@
     };
     var groups = {};
 
-    SidebarProvider.$get = function ($rootScope) {
-      "ngInject";
-      return new SidebarService($rootScope);
-    };
+    SidebarProvider.$get = makeSidebarService;
 
     return SidebarProvider;
 
-    function SidebarService($rootScope) {
+    /**
+     * @ngInject
+     */
+    function makeSidebarService() {
+      return new SidebarService();
+    }
+
+    function SidebarService() {
       var Sidebar = this;
 
       Sidebar.items = items;
-
       Sidebar.group = getOrCreateGroup;
     }
 
@@ -66,32 +69,32 @@
         })
       );
     }
-  }
 
-  function Group(id) {
-    var group = this;
+    function Group(id) {
+      var group = this;
 
-    group.id = id;
-    group.options = {};
-    group.submenu = [];
+      group.id = id;
+      group.options = {};
+      group.submenu = [];
 
-    group.item = item;
-    group.config = config;
+      group.item = item;
+      group.config = config;
 
-    function config(opts) {
-      if (opts) {
-        _.assign(group.options, opts);
+      function config(opts) {
+        if (opts) {
+          _.assign(group.options, opts);
+        }
+
+        return group;
       }
 
-      return group;
-    }
+      function item(opts) {
+        group.submenu.push({
+          options: opts,
+        });
 
-    function item(opts) {
-      group.submenu.push({
-        options: opts,
-      });
-
-      return group;
+        return group;
+      }
     }
   }
 })();

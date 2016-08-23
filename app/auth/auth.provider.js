@@ -8,30 +8,65 @@
 
   function AuthProvider() {
     var authProvider = this;
+    var loginType;
+    var afterLoginState = 'app.dashboard';
     var internalApi = {
-      $get: getService
+      $get: getService,
+      setLoginType: setLoginType,
+      getLoginType: getLoginType,
+      setAfterLoginState: setAfterLoginState,
+      getAfterLoginState: getAfterLoginState,
     };
 
     return internalApi;
 
+    function setLoginType(type) {
+      loginType = type;
+
+      return internalApi;
+    }
+
+    function getLoginType() {
+      return loginType;
+    }
+
+    function setAfterLoginState(state) {
+      afterLoginState = state;
+
+      return internalApi;
+    }
+
+    function getAfterLoginState() {
+      return afterLoginState;
+    }
+
     /**
      * @ngInject
      */
-    function getService(Api, ApiKey, $state) {
-      return new Auth(Api, ApiKey, $state);
+    function getService(Api, ApiKey, $state, _) {
+      return new AuthService(Api, ApiKey, $state, _);
     }
 
     /**
      * Auth Service
      */
-    function Auth(Api, ApiKey, $state) {
-      var auth = this;
-      var keys = Api.all('key');
+    function AuthService(Api, ApiKey, $state, _) {
+      var Auth = this;
+      var $keys = Api.all('key');
 
-      auth.logout = logout;
-      auth.login = login;
+      Auth.logout = logout;
+      Auth.login = login;
+      Auth.user = user;
+      Auth.getLoginType = getLoginTypeOrFail;
 
       /////////////
+
+      function user() {
+        return Api
+          .all(Auth.getLoginType())
+          .one(''+ApiKey.owner().id)
+          ;
+      }
 
       /**
        * Revoke this API Key,
@@ -41,7 +76,9 @@
        * @return {promise}
        */
       function logout() {
-        return keys.one(""+ApiKey.id()).remove()
+        return $keys
+          .one(''+ApiKey.id())
+          .remove()
           .then(ApiKey.delete, ApiKey.delete)
           .then(transferToLogin, transferToLogin)
           ;
@@ -52,8 +89,12 @@
        * @param boolean remember
        */
       function login(credentials, remember) {
-        return keys
-          .post(credentials)
+        var data = _.assign({
+          type: getLoginTypeOrFail(),
+        }, credentials);
+
+        return $keys
+          .post(data)
           .then(handleResponse.bind(null, remember))
           .then(transferToApp)
           ;
@@ -65,11 +106,19 @@
 
       function transferToApp() {
         // TODO: attempted URL
-        $state.go('app.dashboard');
+        $state.go(afterLoginState);
       }
 
       function transferToLogin() {
         $state.go('auth.login');
+      }
+
+      function getLoginTypeOrFail() {
+        if (!loginType) {
+          throw new Error('Login type not configured on AuthProvider');
+        }
+
+        return loginType;
       }
     }
   }

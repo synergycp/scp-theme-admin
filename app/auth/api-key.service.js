@@ -10,7 +10,7 @@
    *
    * @ngInject
    */
-  function ApiKey ($localStorage) {
+  function ApiKey($localStorage) {
     var apiKey = this;
     var _apiKey = getApiKeyFromStorage();
 
@@ -18,9 +18,14 @@
     apiKey.set = setApiKey;
     apiKey.id = getApiKeyId;
     apiKey.delete = deleteApiKey;
+    apiKey.owner = getOwner;
 
     function getApiKey() {
       return _apiKey ? _apiKey.key : null;
+    }
+
+    function getOwner() {
+      return _apiKey ? _apiKey.owner : null;
     }
 
     function getApiKeyId() {
@@ -30,14 +35,18 @@
     function setApiKey(key, remember) {
       _apiKey = {
         id: key.id,
-        key: key.key
+        key: key.key,
+        owner: {
+          id: key.owner.id,
+          name: key.owner.name,
+        },
       };
 
-      $localStorage.apiKey = _apiKey;
+      storage().apiKey = _apiKey;
     }
 
     function getApiKeyFromStorage() {
-      return $localStorage.apiKey || null;
+      return storage().apiKey || null;
     }
 
     /**
@@ -45,7 +54,14 @@
      */
     function deleteApiKey() {
       _apiKey = null;
-      delete $localStorage.apiKey;
+
+      delete storage().apiKey;
+    }
+
+    function storage() {
+      $localStorage.admin = $localStorage.admin || {};
+
+      return $localStorage.admin;
     }
   }
 })();

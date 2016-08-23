@@ -1,0 +1,36 @@
+.panel.panel-inverse.panel-flat
+  .panel-heading.text-center
+    .logo(translate="auth.TITLE")
+  .panel-body
+    form.form-validate(
+      role="form"
+      name="forgot.form"
+      ng-submit="forgot.submit()"
+      novalidate=""
+    )
+      p.text-center.pv(translate="auth.reset.forgot.BODY")
+      .form-group.has-feedback
+        label.text-muted(
+          translate="auth.reset.forgot.email.LABEL"
+        )
+        input.form-control(
+          type="email"
+          name="email"
+          placeholder="Enter email"
+          autocomplete="off"
+          ng-model="forgot.email"
+          required=""
+        )
+        span.fa.fa-envelope.form-control-feedback.text-muted
+        span.text-danger(
+          ng-show="forgot.form.email.$dirty && forgot.form.email.$error.required"
+          translate="auth.reset.forgot.email.REQUIRED"
+        )
+        span.text-danger(
+          ng-show="forgot.form.email.$dirty && forgot.form.email.$error.email"
+          translate="auth.reset.forgot.email.INVALID"
+        )
+      button.btn.btn-danger.btn-block(
+        type="submit"
+        translate="auth.reset.forgot.SUBMIT"
+      )

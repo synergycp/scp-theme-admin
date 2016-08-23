@@ -1,0 +1,62 @@
+.panel.panel-inverse.panel-flat
+  .panel-heading.text-center
+    .logo(translate="auth.TITLE")
+  .panel-body
+    form.form-validate(
+      role="form"
+      name="reset.form"
+      ng-submit="reset.submit()"
+      novalidate
+    )
+      p.text-center.pv(translate="auth.reset.view.BODY")
+      .form-group.has-feedback
+        label.text-muted(
+          for="reset-password"
+          translate="auth.reset.view.password.LABEL"
+        )
+        input.form-control(
+          id="reset-password"
+          type="password"
+          name="password"
+          placeholder="{{ 'auth.reset.view.password.PLACEHOLDER' | translate }}"
+          autocomplete="off"
+          ng-model="reset.password"
+          required
+        )
+        span.fa.fa-lock.form-control-feedback.text-muted
+        span.text-danger(
+          ng-show="reset.form.password.$dirty && reset.form.password.$error.required"
+          translate="auth.reset.view.password.REQUIRED"
+        )
+        span.text-danger(
+          ng-show="reset.form.password.$dirty && reset.form.password.$error.password"
+          translate="auth.reset.view.password.INVALID"
+        )
+      .form-group.has-feedback
+        label.text-muted(
+          for="reset-confirm"
+          translate="auth.reset.view.confirm.LABEL"
+        )
+        input.form-control(
+          id="reset-confirm"
+          type="password"
+          name="confirm"
+          placeholder="{{ 'auth.reset.view.confirm.PLACEHOLDER' | translate }}"
+          autocomplete="off"
+          ng-model="reset.confirm"
+          same-as="reset.password"
+          required
+        )
+        span.fa.fa-lock.form-control-feedback.text-muted
+        span.text-danger(
+          ng-show="reset.form.confirm.$dirty && reset.form.confirm.$error.required"
+          translate="auth.reset.view.confirm.REQUIRED"
+        )
+        span.text-danger(
+          ng-show="reset.form.confirm.$dirty && reset.form.confirm.$error.sameAs"
+          translate="auth.reset.view.confirm.INVALID"
+        )
+      button.btn.btn-danger.btn-block(
+        type="submit"
+        translate="auth.reset.view.SUBMIT"
+      )

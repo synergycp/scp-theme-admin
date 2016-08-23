@@ -8,15 +8,13 @@
 
   angular
     .module('app.auth')
-    .controller('AuthLoginController', AuthLoginController);
+    .controller('AuthLoginCtrl', AuthLoginCtrl);
 
   /**
    * @ngInject
    */
-  function AuthLoginController(Auth, Alert) {
+  function AuthLoginCtrl(Auth, Alert) {
     var vm = this;
-
-    vm.type = 'admin';
 
     activate();
 
@@ -30,15 +28,10 @@
       };
       vm.loginForm = null;
 
-      // Error message
-      vm.authMsg = '';
-
       vm.login = handleLoginForm;
     }
 
     function handleLoginForm() {
-      vm.authMsg = '';
-
       if (!vm.loginForm.$valid) {
         // set as dirty if the user click directly to login,
         // so we show the validation messages.
@@ -51,13 +44,14 @@
 
       var remember = false; // TODO
 
-      Auth.login(credentials(), remember)
-        .catch(handleError);
+      return Auth
+        .login(credentials(), remember)
+        .catch(handleError)
+        ;
     }
 
     function credentials() {
       return {
-        type: vm.type,
         username: vm.account.username,
         password: vm.account.password
       };

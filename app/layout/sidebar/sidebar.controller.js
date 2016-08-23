@@ -8,12 +8,12 @@
 
   angular
     .module('app.layout.sidebar')
-    .controller('SidebarController', SidebarController);
+    .controller('SidebarCtrl', SidebarCtrl);
 
   /**
    * @ngInject
    */
-  function SidebarController($rootScope, $state, Sidebar, Utils, _) {
+  function SidebarCtrl($rootScope, $state, Sidebar, Utils, _) {
     var sidebar = this;
 
     sidebar.items = Sidebar.items;

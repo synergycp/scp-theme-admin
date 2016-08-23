@@ -3,10 +3,10 @@
 
   angular
     .module('app.layout.alert')
-    .controller('AlertController', AlertController);
+    .controller('AlertCtrl', AlertCtrl);
 
   /*ngInject*/
-  function AlertController(Alert) {
+  function AlertCtrl(Alert) {
     var alert = this;
 
     alert.items = Alert.alerts;

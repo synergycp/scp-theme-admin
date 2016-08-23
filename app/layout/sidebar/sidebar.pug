@@ -1,4 +1,4 @@
-div(ng-controller="SidebarController as sidebar")
+div(ng-controller="SidebarCtrl as sidebar")
   // Inline template with sidebar items markup and ng-directives
   script(type='text/ng-template', id="sidebar-renderer.html")
     span(ng-if="item.options.heading") {{(item.options.translate | translate) || item.options.text}}
@@ -15,8 +15,8 @@ div(ng-controller="SidebarController as sidebar")
         ng-bind="item.options.alert"
       )
       em(
-        ng-class="item.options.icon"
         ng-if="item.options.icon"
+        ng-class="item.options.icon"
       )
       span {{(item.options.translate | translate) || item.options.text}}
 

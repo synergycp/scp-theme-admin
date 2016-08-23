@@ -3,6 +3,7 @@
 
   angular
     .module('app.auth', [
-      'restangular'
+      'restangular',
+      'app.auth.reset',
     ]);
 })();

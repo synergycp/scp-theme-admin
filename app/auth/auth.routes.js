@@ -12,24 +12,36 @@
       .state('auth', {
         url: '/auth',
         abstract: true,
-        templateUrl: helper.basepath('auth/page.html'),
+        templateUrl: helper.basepath('auth/auth.page.html'),
         resolve: helper.resolveFor('icons', 'lang:auth'),
       })
       .state('auth.login', {
         url: '/login',
         title: 'Login',
-        templateUrl: helper.basepath('auth/login.html')
+        templateUrl: helper.basepath('auth/login/login.html'),
       })
       .state('auth.logout', {
         url: '/logout',
         title: 'Logout',
         template: '',
-        controller: 'LogoutCtrl'
+        controller: 'LogoutCtrl',
       })
-      .state('auth.recover', {
-        url: '/recover',
-        title: 'Recover',
-        templateUrl: helper.basepath('auth/recover.html')
+      .state('auth.reset', {
+        url: '/password-reset',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('auth.reset.forgot', {
+        url: '',
+        title: 'Recover Password',
+        templateUrl: helper.basepath('auth/reset/reset.forgot.html'),
+        controller: 'AuthResetForgotCtrl as forgot',
+      })
+      .state('auth.reset.view', {
+        url: '/:id?token',
+        title: 'Set Password',
+        templateUrl: helper.basepath('auth/reset/reset.view.html'),
+        controller: 'AuthResetViewCtrl as reset',
       })
       ;
   }

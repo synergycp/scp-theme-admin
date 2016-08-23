@@ -1,0 +1,22 @@
+.auth-page.ng-zoomBackDown.ng-fluid(
+  autoscroll='false'
+)
+  .block-center.mt-xl.wd-xl
+    .auth-alerts(
+      ng-controller="AlertCtrl as alert"
+    )
+      .alert(
+        ng-repeat="message in alert.items"
+        ng-class="'alert-'+message.type"
+        ng-bind="message.text"
+      )
+
+    div(ui-view)
+
+    .p-lg.text-center
+      span &copy;
+      span(ng-bind="app.year")
+      span &nbsp;-&nbsp;
+      span(ng-bind="app.name")
+      br
+      span(ng-bind="app.description")

@@ -13,7 +13,7 @@ section
   .content-wrapper(ui-view="", autoscroll="false", ng-class="app.viewAnimation")
 
 // Alerts section
-.alerts(ng-controller="AlertController as alert")
+.alerts(ng-controller="AlertCtrl as alert")
   .alert(
     ng-repeat="message in alert.items"
     ng-class="'alert-'+message.type"

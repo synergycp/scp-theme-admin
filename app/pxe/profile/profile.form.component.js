@@ -32,6 +32,7 @@
     var profileForm = this;
 
     profileForm.$onInit = init;
+    profileForm.input = _.clone(INPUTS);
     profileForm.preseeds = Select('pxe/preseed');
     profileForm.bootScripts = Select('pxe/template');
     profileForm.isos = Select('pxe/iso').on('change', onIsoChange);
@@ -44,12 +45,11 @@
 
     function init() {
       profileForm.form.getData = getData;
-      profileForm.input = profileForm.form.input = profileForm.form.input || {};
-      _.assign(profileForm.input, INPUTS);
-
-      if (profileForm.form.on) {
-        subscribeTo(profileForm.form);
+      if (profileForm.form.loader && !profileForm.form.loader.active) {
+        syncResponse(profileForm.form.input);
       }
+
+      (profileForm.form.on || function() {})(['change', 'load'], syncResponse);
     }
 
     function onIsoChange() {
@@ -75,14 +75,13 @@
       });
     }
 
-    function subscribeTo(data) {
-      data.on(['load', 'change'], function (response) {
-        _.setContents(profileForm.shellScripts.selected, response.shell.after);
-        _.setContents(profileForm.drivers.selected, response.drivers);
-        setupIsoDefaults(response.iso);
-        profileForm.isos.selectedEdition = response.iso ? response.iso.edition : null;
-        profileForm.emailTemplate.selected = response.email.template;
-      });
+    function syncResponse(response) {
+      _.overwrite(profileForm.input, profileForm.form.input);
+      _.setContents(profileForm.shellScripts.selected, response.shell.after);
+      _.setContents(profileForm.drivers.selected, response.drivers);
+      setupIsoDefaults(response.iso);
+      profileForm.isos.selectedEdition = response.iso ? response.iso.edition : null;
+      profileForm.emailTemplate.selected = response.email.template;
     }
 
     function getData() {

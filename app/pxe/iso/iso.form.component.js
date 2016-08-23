@@ -32,17 +32,23 @@
     isoForm.create = false;
 
     isoForm.$onInit = init;
+    isoForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
+      fillFormInputs();
+
       isoForm.form.getData = getData;
-      isoForm.input = isoForm.form.input = isoForm.form.input || {};
-      _.assign(isoForm.input, INPUTS);
+      (isoForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(isoForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(isoForm.input, isoForm.form.input);
     }
   }
 })();

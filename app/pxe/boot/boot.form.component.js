@@ -28,17 +28,23 @@
     var bootForm = this;
 
     bootForm.$onInit = init;
+    bootForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
+      fillFormInputs();
+
       bootForm.form.getData = getData;
-      bootForm.input = bootForm.form.input = bootForm.form.input || {};
-      _.assign(bootForm.input, INPUTS);
+      (bootForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(bootForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(bootForm.input, bootForm.form.input);
     }
   }
 })();

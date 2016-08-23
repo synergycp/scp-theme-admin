@@ -13,6 +13,7 @@
       setContents: setContents,
       enhance: enhance,
       makeArray: makeArray,
+      overwrite: overwrite,
     });
 
     function makeArray(length, value) {
@@ -34,6 +35,18 @@
       return _.map(list, function (element) {
         return _.extend({}, element, source);
       });
+    }
+
+    function overwrite(original, contents) {
+      if (!contents) {
+        return original;
+      }
+
+      _.forEach(original, function (value, key) {
+        original[key] = contents[key] || value;
+      });
+
+      return original;
     }
   }
 })();

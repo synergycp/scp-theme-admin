@@ -32,26 +32,24 @@
     // Private methods
     function patch(data) {
       return edit.loader.during(
-        $api.patch(data)
+        $api
+          .patch(data)
           .then(saveCurrent)
           .then(fireChangeEvent)
       );
     }
 
-    function getCurrent(obj) {
-      edit.input = obj || edit.input;
-
+    function getCurrent() {
       return edit.loader.during(
-        $api.get()
+        $api
+          .get()
           .then(saveCurrent)
           .then(fireLoadEvent)
       );
     }
 
     function saveCurrent(response) {
-      _.forEach(edit.input, function (value, key) {
-        edit.input[key] = response[key];
-      });
+      _.assign(edit.input, response);
 
       return response;
     }

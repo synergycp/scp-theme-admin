@@ -29,17 +29,23 @@
     var groupForm = this;
 
     groupForm.$onInit = init;
+    groupForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
+      fillFormInputs();
+
       groupForm.form.getData = getData;
-      groupForm.input = groupForm.form.input = groupForm.form.input || {};
-      _.assign(groupForm.input, INPUTS);
+      (groupForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(groupForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(groupForm.input, groupForm.form.input);
     }
   }
 })();

@@ -29,17 +29,23 @@
     var emailForm = this;
 
     emailForm.$onInit = init;
+    emailForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
       emailForm.form.getData = getData;
-      emailForm.input = emailForm.form.input = emailForm.form.input || {};
-      _.assign(emailForm.input, INPUTS);
+      fillFormInputs();
+
+      (emailForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(emailForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(emailForm.input, emailForm.form.input);
     }
   }
 })();

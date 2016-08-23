@@ -17,7 +17,7 @@
       },
       controller: 'SpeedFormCtrl as speedForm',
       transclude: true,
-      templateUrl: 'app/hardware/switch/speed/speed.form.html'
+      templateUrl: 'app/hardware/switch/speed/speed.form.html',
     })
     .controller('SpeedFormCtrl', SpeedFormCtrl)
     ;
@@ -25,21 +25,27 @@
   /**
    * @ngInject
    */
-  function SpeedFormCtrl(Select) {
+  function SpeedFormCtrl(Select, _) {
     var speedForm = this;
 
     speedForm.$onInit = init;
+    speedForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
       speedForm.form.getData = getData;
-      speedForm.input = speedForm.form.input = speedForm.form.input || {};
-      _.assign(speedForm.input, INPUTS);
+      fillFormInputs();
+
+      (speedForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(speedForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(speedForm.input, speedForm.form.input);
     }
   }
 })();

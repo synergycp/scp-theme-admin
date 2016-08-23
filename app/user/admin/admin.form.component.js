@@ -20,7 +20,7 @@
       },
       controller: 'AdminFormCtrl as adminForm',
       transclude: true,
-      templateUrl: 'app/user/admin/admin.form.html'
+      templateUrl: 'app/user/admin/admin.form.html',
     })
     .controller('AdminFormCtrl', AdminFormCtrl)
     ;
@@ -32,17 +32,23 @@
     var adminForm = this;
 
     adminForm.$onInit = init;
+    adminForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
       adminForm.form.getData = getData;
-      adminForm.input = adminForm.form.input = adminForm.form.input || {};
-      _.assign(adminForm.input, INPUTS);
+      fillFormInputs();
+
+      (adminForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(adminForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(adminForm.input, adminForm.form.input);
     }
   }
 })();

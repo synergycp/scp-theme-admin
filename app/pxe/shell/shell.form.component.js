@@ -29,17 +29,23 @@
     var shellForm = this;
 
     shellForm.$onInit = init;
+    shellForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
       shellForm.form.getData = getData;
-      shellForm.input = shellForm.form.input = shellForm.form.input || {};
-      _.assign(shellForm.input, INPUTS);
+      fillFormInputs();
+
+      (shellForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(shellForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(shellForm.input, shellForm.form.input);
     }
   }
 })();

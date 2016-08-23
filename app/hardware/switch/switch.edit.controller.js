@@ -34,7 +34,7 @@
     //////////
 
     function activate() {
-      vm.edit.getCurrent(vm.edit.input);
+      vm.edit.getCurrent();
     }
 
     function storeCurrent(response) {

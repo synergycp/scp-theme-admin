@@ -58,6 +58,7 @@
 
     entityForm.types = TYPES;
     entityForm.type = TYPE.V4;
+    entityForm.input = _.clone(INPUTS);
     entityForm.v4 = {
       type: TYPE_V4.SINGLE,
       types: TYPE_V4,
@@ -94,9 +95,8 @@
     }
 
     function init() {
+      fillFormInputs();
       entityForm.form.getData = getData;
-      entityForm.input = entityForm.form.input = entityForm.form.input || {};
-      _.assign(entityForm.input, INPUTS);
 
       if (entityForm.form.on) {
         entityForm.form
@@ -104,6 +104,10 @@
           .on('change', updateTypeFromInput)
           ;
       }
+    }
+
+    function fillFormInputs() {
+      _.overwrite(entityForm.input, entityForm.form.input);
     }
 
     function getData() {
@@ -153,6 +157,8 @@
     }
 
     function updateTypeFromInput() {
+      fillFormInputs();
+
       entityForm.type = getTypeFromInput();
       onTypeChange();
 
@@ -184,7 +190,8 @@
     }
 
     function loadGroups(search) {
-      $groups.getList({ q: search })
+      return $groups
+        .getList({ q: search })
         .then(storeGroups)
         ;
     }

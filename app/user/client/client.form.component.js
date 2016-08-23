@@ -19,7 +19,7 @@
       },
       controller: 'ClientFormCtrl as clientForm',
       transclude: true,
-      templateUrl: 'app/user/client/client.form.html'
+      templateUrl: 'app/user/client/client.form.html',
     })
     .controller('ClientFormCtrl', ClientFormCtrl)
     ;
@@ -31,17 +31,23 @@
     var clientForm = this;
 
     clientForm.$onInit = init;
+    clientForm.input = _.clone(INPUTS);
 
     //////////
 
     function init() {
       clientForm.form.getData = getData;
-      clientForm.input = clientForm.form.input = clientForm.form.input || {};
-      _.assign(clientForm.input, INPUTS);
+      fillFormInputs();
+
+      (clientForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
     function getData() {
       return _.clone(clientForm.input);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(clientForm.input, clientForm.form.input);
     }
   }
 })();

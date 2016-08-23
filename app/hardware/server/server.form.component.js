@@ -54,6 +54,7 @@
     var serverForm = this;
 
     serverForm.$onInit = init;
+    serverForm.input = _.clone(INPUTS);
     serverForm.switch = Select('switch').on('change', syncGroupFilter);
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
@@ -82,14 +83,17 @@
 
     function init() {
       serverForm.form.getData = getData;
-      serverForm.input = serverForm.form.input = serverForm.form.input || {};
-      _.assign(serverForm.input, INPUTS);
+      fillFormInputs();
 
       if (!serverForm.form.on) {
         return;
       }
 
       serverForm.form.on(['load', 'change'], storeState);
+    }
+
+    function fillFormInputs() {
+      _.overwrite(serverForm.input, serverForm.form.input);
     }
 
     function syncEntityToGroup() {
@@ -112,6 +116,8 @@
 
     function storeState(response) {
       $rootScope.$evalAsync(function() {
+        fillFormInputs();
+        
         storeMulti(response.disks, serverForm.disks);
         storeMulti(response.addons, serverForm.addOns);
 

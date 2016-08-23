@@ -55,6 +55,7 @@
     var provisionForm = this;
 
     provisionForm.$onInit = init;
+    provisionForm.input = _.clone(INPUT);
     provisionForm.client = Select('client');
     provisionForm.group = Select('group')
       .filter(FILTER.GROUP)
@@ -102,10 +103,13 @@
     //////////
 
     function init() {
-      provisionForm.input = provisionForm.form.input || {};
-      _.assign(provisionForm.input, INPUT);
+      fillFormInputs();
 
       provisionForm.form.getData = getData;
+    }
+
+    function fillFormInputs() {
+      _.overwrite(provisionForm.input, provisionForm.form.input);
     }
 
     function syncGroupToEntities() {

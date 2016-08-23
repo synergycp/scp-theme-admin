@@ -13,7 +13,7 @@
   /**
    * @ngInject
    */
-  function AuthResetForgotCtrl(PasswordReset, Alert, AuthProvider) {
+  function AuthResetForgotCtrl(PasswordReset, Alert, Auth) {
     var vm = this;
 
     activate();
@@ -45,7 +45,7 @@
 
     function formData() {
       return {
-        type: AuthProvider.getLoginType(),
+        type: Auth.getLoginType(),
         email: vm.email,
       };
     }

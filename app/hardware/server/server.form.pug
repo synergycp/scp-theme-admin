@@ -241,22 +241,18 @@ hr
 
 +label(
   "{{ 'server.form.billing.date.LABEL' | translate }}",
-  "billing.date"
+  "billing-date"
 )
-  +input-with-btn("fa fa-calendar")(
-    ng-click="serverForm.billing.date.isOpen = !serverForm.billing.date.isOpen"
+  +input-with-btn("fa fa-close")(
+    ng-click="serverForm.billing.date.value = ''"
   )
     input.form-control(
       type="text"
-      id="form-billing.date"
-      uib-datepicker-popup="yyyy-MM-dd"
-      ng-focus="serverForm.billing.date.isOpen = true"
-      datepicker-options="{}"
-      close-text="Close"
-      alt-input-formats="[]"
-      is-open="serverForm.billing.date.isOpen"
-      placeholder="{{ 'server.form.billing.date.PLACEHOLDER' | translate }}"
+      id="form-billing-date"
+      date-range-picker
+      options="serverForm.billing.date.options"
       ng-model="serverForm.billing.date.value"
+      placeholder="{{ 'server.form.billing.date.PLACEHOLDER' | translate }}"
     )
 
 +field(

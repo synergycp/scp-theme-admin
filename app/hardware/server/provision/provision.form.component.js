@@ -51,7 +51,7 @@
   /**
    * @ngInject
    */
-  function ProvisionFormCtrl(Select, MultiInput, _, $stateParams, ServerConfig) {
+  function ProvisionFormCtrl(Select, MultiInput, _, $stateParams, ServerConfig, moment) {
     var provisionForm = this;
 
     provisionForm.$onInit = init;
@@ -91,7 +91,21 @@
     provisionForm.billing = {
       date: {
         value: new Date(),
-        isOpen: false,
+        options: {
+          locale: {
+            format: 'MM/DD/YYYY h:mm A',
+            cancelLabel: 'Clear',
+          },
+          autoUpdateInput: false,
+          singleDatePicker: true,
+          timePicker: true,
+          timePickerIncrement: 30,
+          eventHandlers: {
+            'cancel.daterangepicker': function (ev, picker) {
+              provisionForm.billing.date.value = '';
+            },
+          }
+        },
       },
     };
     provisionForm.edition = null;
@@ -212,7 +226,7 @@
       data.client = {
         id: provisionForm.client.getSelected('id'),
       };
-      data.billing.date = provisionForm.billing.date.value ? provisionForm.billing.date.value.toUTCString() : null;
+      data.billing.date = provisionForm.billing.date.value ? moment(provisionForm.billing.date.value).toISOString() : null;
       data.server = {
         id: provisionForm.server.getSelected('id'),
       };

@@ -34,7 +34,7 @@
     var tab = this;
 
     tab.list = list;
-    tab.text = 'hardware.server.search.TITLE';
+    tab.text = 'server.search.TITLE';
     tab.results = {
       url: RouteHelpers.basepath('hardware/server/server.search.tab.html'),
     };

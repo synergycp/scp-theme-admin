@@ -6,11 +6,11 @@ include /resources/pug/mixins/panel
     .btn-group.btn-group-xs.pull-right
       button.btn.btn-default(ng-click="ipmiControl.power.fresh()")
         span.fa.fa-refresh
-    h3.panel-title(translate="hardware.server.ipmi.TITLE")
+    h3.panel-title(translate="server.ipmi.TITLE")
   .panel-body.text-center(ng-if="!ipmiControl.isEnabled")
-    p(translate="hardware.server.ipmi.NOT_ENABLED")
+    p(translate="server.ipmi.NOT_ENABLED")
     a.btn.btn-primary(
-      translate="hardware.server.EDIT"
+      translate="server.EDIT"
       ui-sref="app.hardware.server.view.edit({ id: ipmiControl.server.id })"
     )
   table.table.table-condensed.table-bordered(ng-if="ipmiControl.isEnabled")
@@ -19,7 +19,7 @@ include /resources/pug/mixins/panel
       td.no-padding(colspan="3")
     tr.mid-aligned
       td.shrink.pad-right
-        strong(translate="hardware.server.ipmi.ADDRESS")
+        strong(translate="server.ipmi.ADDRESS")
       td
         a(
           ng-href="http://{{ipmiControl.server.ipmi.ip}}"
@@ -30,87 +30,87 @@ include /resources/pug/mixins/panel
         span.btn-group-vertical
           a.btn.btn-default(
             ng-click="ipmiControl.patch({ reset_bmc: true })"
-            translate="hardware.server.ipmi.BMC"
+            translate="server.ipmi.BMC"
           )
           a.btn.btn-default(
             ng-click="ipmiControl.patch({ pxe_boot: true })"
-            translate="hardware.server.ipmi.PXE"
+            translate="server.ipmi.PXE"
           )
           span.btn-group(uib-dropdown)
             a.btn.btn-default(uib-dropdown-toggle)
-              span(translate="hardware.server.ipmi.client.dropdown.TITLE")
+              span(translate="server.ipmi.client.dropdown.TITLE")
               span &nbsp;
               span.fa.fa-caret-down
             ul.dropdown-menu(uib-dropdown-menu, role="menu")
               li(role="menuitem")
                 a(
                   ng-click="ipmiControl.client.add()"
-                  translate="hardware.server.ipmi.client.dropdown.CREATE"
+                  translate="server.ipmi.client.dropdown.CREATE"
                 )
               li(role="menuitem")
                 a(
                   ng-click="ipmiControl.client.rem()"
-                  translate="hardware.server.ipmi.client.dropdown.DELETE"
+                  translate="server.ipmi.client.dropdown.DELETE"
                 )
           span.btn-group(uib-dropdown)
             a.btn.btn-default(uib-dropdown-toggle)
-              span(translate="hardware.server.ipmi.power.dropdown.TITLE")
+              span(translate="server.ipmi.power.dropdown.TITLE")
               span &nbsp;
               span.fa.fa-caret-down
             ul.dropdown-menu(uib-dropdown-menu, role="menu")
               li(role="menuitem")
                 a(
                   ng-click="ipmiControl.patch({ power: 'on' })"
-                  translate="hardware.server.ipmi.power.dropdown.ON"
+                  translate="server.ipmi.power.dropdown.ON"
                 )
               li(role="menuitem")
                 a(
                   ng-click="ipmiControl.patch({ power: 'cycle' })"
-                  translate="hardware.server.ipmi.power.dropdown.CYCLE"
+                  translate="server.ipmi.power.dropdown.CYCLE"
                 )
               li(role="menuitem")
                 a(
                   ng-click="ipmiControl.patch({ power: 'soft' })"
-                  translate="hardware.server.ipmi.power.dropdown.SOFT"
+                  translate="server.ipmi.power.dropdown.SOFT"
                 )
               li(role="menuitem")
                 a(
                   ng-click="ipmiControl.patch({ power: 'off' })"
-                  translate="hardware.server.ipmi.power.dropdown.OFF"
+                  translate="server.ipmi.power.dropdown.OFF"
                 )
         //- End Buttons
     tr.mid-aligned
       td.shrink.pad-right
-        strong(translate="hardware.server.ipmi.power.STATUS")
+        strong(translate="server.ipmi.power.STATUS")
       td(ng-bind="ipmiControl.power.status")
     tr.mid-aligned
       td.shrink.pad-right
-        strong(translate="hardware.server.ipmi.power.CHECKED")
+        strong(translate="server.ipmi.power.CHECKED")
       td(ng-bind="ipmiControl.power.checked | date: 'medium'")
     tr.mid-aligned
       td.shrink.pad-right
-        strong(translate="hardware.server.ipmi.client.USER")
+        strong(translate="server.ipmi.client.USER")
       td
         span(ng-bind="ipmiControl.client.username")
         span(
           ng-if="!ipmiControl.client.username"
-          translate="hardware.server.ipmi.client.EMPTY"
+          translate="server.ipmi.client.EMPTY"
         )
         span &nbsp;(
         a(
           ng-click="ipmiControl.client.toggle()"
-          translate="hardware.server.ipmi.client."+
+          translate="server.ipmi.client."+
             "{{ipmiControl.client.username ? 'DELETE' : 'CREATE'}}"
         )
         span )
     tr.mid-aligned
       td.shrink.pad-right
-        strong(translate="hardware.server.ipmi.client.PASS")
+        strong(translate="server.ipmi.client.PASS")
       td
         span(ng-bind="ipmiControl.client.password")
         span(
           ng-if="!ipmiControl.client.password"
-          translate="hardware.server.ipmi.client.EMPTY"
+          translate="server.ipmi.client.EMPTY"
         )
 
   .panel-footer.clearfix(ng-class="ipmiControl.response ? '' : 'hidden'")

@@ -2,9 +2,15 @@ extends /resources/pug/edit
 
 block title
   span(
-    translate='hardware.server.form.title.EDIT'
-    translate-value-name='{{vm.edit.input.srv_id}}'
+    translate="server.form.title.EDIT"
+    translate-value-name="{{vm.edit.input.srv_id}}"
   )
 
 block form
   server-form(form="vm.edit")
+
+block append right-side
+  server-buttons(
+    server="vm.edit.input"
+    show-edit="false"
+  )

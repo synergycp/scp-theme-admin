@@ -25,11 +25,6 @@
       id: '',
       max_bandwidth: '',
     },
-    access: {
-      ipmi: false,
-      switch: false,
-      pxe: false,
-    },
   };
 
   angular
@@ -72,7 +67,6 @@
         isOpen: false,
       },
     };
-    serverForm.client = Select('client');
     serverForm.switchSpeed = Select('port-speed');
     serverForm.entities = Select('entity').multi().filter({
       available: true,
@@ -117,7 +111,7 @@
     function storeState(response) {
       $rootScope.$evalAsync(function() {
         fillFormInputs();
-        
+
         storeMulti(response.disks, serverForm.disks);
         storeMulti(response.addons, serverForm.addOns);
 
@@ -129,7 +123,6 @@
         syncEntityFilter();
 
         serverForm.switchSpeed.selected = response.switch.speed;
-        serverForm.client.selected = (response.access || {}).client;
         serverForm.billing.date.value = response.billing.date ? new Date(Date.parse(response.billing.date)) : null;
       });
     }
@@ -185,9 +178,6 @@
       };
       data.group = {
         id: serverForm.group.getSelected('id') || null,
-      };
-      data.client = {
-        id: serverForm.client.getSelected('id') || null,
       };
       data.billing.date = serverForm.billing.date.value ? serverForm.billing.date.value.toUTCString() : null;
 

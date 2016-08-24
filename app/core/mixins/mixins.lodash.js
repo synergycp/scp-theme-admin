@@ -14,6 +14,7 @@
       enhance: enhance,
       makeArray: makeArray,
       overwrite: overwrite,
+      return: wrappedReturn,
     });
 
     function makeArray(length, value) {
@@ -47,6 +48,12 @@
       });
 
       return original;
+    }
+
+    function wrappedReturn(result) {
+      return function () {
+        return result;
+      };
     }
   }
 })();

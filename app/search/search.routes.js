@@ -20,7 +20,7 @@
         reloadOnSearch: false,
         resolve: helper.resolveFor(
           'lang:hardware', 'lang:network',
-          'lang:user'
+          'lang:user', 'lang:server'
         ),
       })
       ;

@@ -16,24 +16,34 @@
         url: '/server',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:server'),
       })
       .state('app.hardware.server.inventory', {
         url: '/inventory?switch&group',
         title: 'Server Inventory',
         controller: 'ServerInventoryCtrl as vm',
         templateUrl: helper.basepath('hardware/server/server.inventory.html'),
+        resolve: helper.resolveFor(
+          'moment', 'after:date-range-picker'
+        ),
       })
       .state('app.hardware.server.list', {
         url: '?switch&group&client',
         title: 'Servers',
         controller: 'ServerIndexCtrl as vm',
         templateUrl: helper.basepath('hardware/server/server.index.html'),
+        resolve: helper.resolveFor(
+          'moment', 'after:date-range-picker'
+        ),
       })
       .state('app.hardware.server.provision', {
         url: '/provision?client',
         title: 'Provision Server',
         controller: 'ServerProvisionCtrl as vm',
         templateUrl: helper.basepath('hardware/server/provision/provision.html'),
+        resolve: helper.resolveFor(
+          'moment', 'after:date-range-picker'
+        ),
       })
       .state('app.hardware.server.view', {
         url: '/:id',
@@ -46,6 +56,9 @@
         title: 'Edit Server',
         controller: 'ServerEditCtrl as vm',
         templateUrl: helper.basepath('hardware/server/server.edit.html'),
+        resolve: helper.resolveFor(
+          'moment', 'after:date-range-picker'
+        ),
       })
       .state('app.hardware.server.view.manage', {
         url: '?bandwidth.start&bandwidth.end',

@@ -3,12 +3,12 @@ include /resources/pug/mixins/list
 
 block list
   list.panel.panel-default(list="vm.list")
-    list-header(text="hardware.server.list.TITLE")
+    list-header(text="server.list.TITLE")
     server-table
     list-footer
 
 block bottom-left
-  +create-form("{{ 'hardware.server.form.title.ADD' | translate }}")
+  +create-form("{{ 'server.form.title.ADD' | translate }}")
     server-form(form="vm.create")
 
 block bottom-right

@@ -7,10 +7,10 @@ form(ng-submit="modal.submit()")
       ng-click="modal.$dismiss()"
     ) &times;
 
-    h4.modal-title(translate="hardware.server.modal.delete.TITLE")
+    h4.modal-title(translate="server.modal.delete.TITLE")
 
   .modal-body
-    p(translate="hardware.server.modal.delete.BODY")
+    p(translate="server.modal.delete.BODY")
 
     ul
       li(
@@ -22,9 +22,9 @@ form(ng-submit="modal.submit()")
     button.btn.btn-secondary(
       type="button"
       ng-click="modal.$dismiss()"
-      data-translate="hardware.server.modal.delete.CANCEL"
+      data-translate="server.modal.delete.CANCEL"
     )
     button.btn.btn-danger(
       type="submit"
-      data-translate="hardware.server.modal.delete.SUBMIT"
+      data-translate="server.modal.delete.SUBMIT"
     )

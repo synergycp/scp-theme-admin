@@ -66,7 +66,8 @@
     }
 
     function loadSwitch() {
-      return $api.get()
+      return $api
+        .get()
         .then(storeSwitch)
         ;
     }
@@ -75,14 +76,7 @@
       var defer = $q.defer();
 
       $scope.$evalAsync(function() {
-        // TODO: fix this shit
-        _.assign(vm.switch, response, {
-          get: $api.get,
-          all: $api.all,
-          one: $api.one,
-          patch: patchSwitch,
-          remove: $api.remove,
-        });
+        _.assign(vm.switch, response);
 
         defer.resolve(vm.switch);
       });

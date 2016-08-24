@@ -2,8 +2,12 @@ include /resources/pug/mixins/panel
 
 .row
   .col-md-6
-    form(ng-submit="vm.submit()")
-      +panel("{{ 'hardware.server.provision.TITLE' | translate }}")
+    form(
+      ng-submit="vm.submit()"
+      ng-class="vm.loader.class"
+    )
+      .loader
+      +panel("{{ 'server.provision.TITLE' | translate }}")
         .panel-body
           provision-form.form-horizontal(
             form="vm.form"
@@ -12,5 +16,5 @@ include /resources/pug/mixins/panel
           .pull-right
             button.btn.btn-primary(
               type="submit"
-              data-translate="hardware.server.provision.SUBMIT"
+              data-translate="server.provision.SUBMIT"
             )

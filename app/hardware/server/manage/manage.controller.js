@@ -97,14 +97,7 @@
       var defer = $q.defer();
 
       $scope.$evalAsync(function() {
-        // TODO: fix this shit
-        _.assign(vm.server, response, {
-          get: $api.get,
-          all: $api.all,
-          one: $api.one,
-          patch: patchServer,
-          remove: $api.remove,
-        });
+        _.assign(vm.server, response);
 
         defer.resolve(vm.server);
       });

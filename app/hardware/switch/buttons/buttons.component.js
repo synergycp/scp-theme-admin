@@ -24,7 +24,8 @@
   function SwitchButtonsCtrl(
     SwitchModal,
     Loader,
-    $state
+    $state,
+    _
   ) {
     var buttons = this;
 

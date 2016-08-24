@@ -2,20 +2,20 @@ include /resources/pug/mixins/panel
 include /resources/pug/mixins/form
 
 form(ng-submit="reload.submit()", ng-class="{ hide: reload.list.items.length }")
-  +panel("{{ 'hardware.server.os-reload.TITLE' | translate }}")(
+  +panel("{{ 'server.os-reload.TITLE' | translate }}")(
     ng-class="reload.loader.class"
   )
     .loader
     .panel-body.text-center(ng-if="!reload.isEnabled")
-      p(translate="hardware.server.os-reload.NOT_ENABLED")
+      p(translate="server.os-reload.NOT_ENABLED")
       a.btn.btn-primary(
-        translate="hardware.server.EDIT"
+        translate="server.EDIT"
         ui-sref="app.hardware.server.view.edit({ id: reload.server.id })"
       )
     .panel-body.form-horizontal(ng-if-start="reload.isEnabled")
-      +label("{{ 'hardware.server.os-reload.profile.LABEL' | translate }}")
+      +label("{{ 'server.os-reload.profile.LABEL' | translate }}")
         +ui-select("reload.input.profile")
-          ui-select-match(placeholder="{{ 'hardware.server.os-reload.profile.PLACEHOLDER' | translate }}")
+          ui-select-match(placeholder="{{ 'server.os-reload.profile.PLACEHOLDER' | translate }}")
             | {{ $select.selected.name }}
 
           ui-select-choices(
@@ -31,9 +31,9 @@ form(ng-submit="reload.submit()", ng-class="{ hide: reload.list.items.length }")
             span(ng-bind-html="choice.name | highlight: $select.search")
 
       div(ng-if="reload.input.profile.selected.iso")
-        +label("{{ 'hardware.server.os-reload.edition.LABEL' | translate }}")
+        +label("{{ 'server.os-reload.edition.LABEL' | translate }}")
           +ui-select("reload.input.edition")
-            ui-select-match(placeholder="{{ 'hardware.server.os-reload.edition.PLACEHOLDER' | translate }}")
+            ui-select-match(placeholder="{{ 'server.os-reload.edition.PLACEHOLDER' | translate }}")
               | {{ $select.selected.name }}
 
             ui-select-choices(
@@ -48,20 +48,20 @@ form(ng-submit="reload.submit()", ng-class="{ hide: reload.list.items.length }")
             )
               span(ng-bind-html="choice.name | highlight: $select.search")
 
-        +field("{{ 'hardware.server.os-reload.license-key.LABEL' | translate }}")(
-          placeholder="{{ 'hardware.server.os-reload.license-key.PLACEHOLDER' | translate }}"
+        +field("{{ 'server.os-reload.license-key.LABEL' | translate }}")(
+          placeholder="{{ 'server.os-reload.license-key.PLACEHOLDER' | translate }}"
           ng-model="reload.input.licenseKey"
         )
-          p.help-block(translate="hardware.server.os-reload.license-key.HELP")
+          p.help-block(translate="server.os-reload.license-key.HELP")
 
     .panel-footer.clearfix(ng-if-end)
       .pull-right
         button.btn.btn-primary(
           type="submit"
-          translate="hardware.server.os-reload.SUBMIT"
+          translate="server.os-reload.SUBMIT"
         )
 div(ng-class="{ hide: !reload.list.items.length }")
-  +panel("{{ 'hardware.server.os-reload.TITLE' | translate }}")
+  +panel("{{ 'server.os-reload.TITLE' | translate }}")
     .panel-body.pxe-install-status(ng-if="reload.list.items.length")
       install-progress(
         install="reload.list.items[0]"

@@ -1,38 +1,54 @@
-.relative
+div(
+  ng-init="server = buttons.server"
+  ng-class="buttons.loader.class"
+)
   .loader
-
-  .btn-group.btn-group-lg(
-    ng-init="server = buttons.server"
-    ng-class="buttons.loader.class"
-  )
+  .btn-group.btn-group-lg
     a.btn.btn-default(
+      ng-if="buttons.showEdit"
       ui-sref="app.hardware.server.view.edit({ id: buttons.server.id })"
-      translate="hardware.server.EDIT"
+      translate="server.EDIT"
     )
 
-    a.btn.btn-primary(
-      ng-if="server.access.client"
-      ng-click="buttons.loginAsClient('/manage/'+buttons.server.id)"
-      translate="hardware.server.VIEW_AS_CLIENT"
-    )
-    a.btn(
-      ng-class="server.access.is_active ? 'btn-warning' : 'btn-success'"
-      ng-if="server.access.client"
-      ng-click="buttons.setActive(!server.access.is_active)"
-      translate="hardware.server.{{ server.access.is_active ? 'SUSPEND' : 'UNSUSPEND' }}"
+    a.btn.btn-default(
+      ng-if="buttons.showManage"
+      ui-sref="app.hardware.server.view.manage({ id: buttons.server.id })"
+      translate="server.MANAGE"
     )
 
-    a.btn.btn-info(
-      ng-if="!server.access"
-      ui-sref="app.hardware.server.provision({ serverId: buttons.server.id })"
-      translate="hardware.server.PROVISION"
-    )
+    .btn-group.btn-group-lg(uib-dropdown)
+      a.btn.btn-primary(uib-dropdown-toggle)
+        span(translate="server.CLIENT")
+        | &nbsp;
+        span.caret
+      ul.dropdown-menu(uib-dropdown-menu)
+        li
+          a(
+            ng-click="buttons.assign()"
+            translate="server.{{ server.access ? 'RE' : ''}}ASSIGN"
+          )
+        li(ng-if="server.access")
+          a(
+            ng-click="buttons.loginAsClient('/manage/'+buttons.server.id)"
+            translate="server.VIEW_AS_CLIENT"
+          )
+        li(ng-if="server.access")
+          a(
+            ng-class="server.access.is_active ? 'btn-warning' : 'btn-success'"
+            ng-click="buttons.setActive(!server.access.is_active)"
+            translate="server.{{ server.access.is_active ? 'SUSPEND' : 'UNSUSPEND' }}"
+          )
+        li(ng-if="!server.access")
+          a(
+            ui-sref="app.hardware.server.provision({ serverId: buttons.server.id })"
+            translate="server.PROVISION"
+          )
 
     a.btn.btn-danger(
       ng-click="buttons.wipe()"
-      translate="hardware.server.WIPE"
+      translate="server.WIPE"
     )
     a.btn.btn-danger(
       ng-click="buttons.delete()"
-      translate="hardware.server.DELETE"
+      translate="server.DELETE"
     )

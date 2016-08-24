@@ -25,11 +25,6 @@
       id: '',
       max_bandwidth: '',
     },
-    access: {
-      ipmi: false,
-      switch: false,
-      pxe: false,
-    },
   };
 
   angular
@@ -50,7 +45,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Select, MultiInput, $rootScope, ServerConfig, $stateParams) {
+  function ServerFormCtrl(_, Select, MultiInput, $rootScope, ServerConfig, $stateParams, moment) {
     var serverForm = this;
 
     serverForm.$onInit = init;
@@ -68,11 +63,24 @@
     });
     serverForm.billing = {
       date: {
-        value: null,
-        isOpen: false,
+        value: '',
+        options: {
+          locale: {
+            format: 'MM/DD/YYYY h:mm A',
+            cancelLabel: 'Clear',
+          },
+          autoUpdateInput: false,
+          singleDatePicker: true,
+          timePicker: true,
+          timePickerIncrement: 30,
+          eventHandlers: {
+            'cancel.daterangepicker': function (ev, picker) {
+              serverForm.billing.date.value = '';
+            },
+          }
+        },
       },
     };
-    serverForm.client = Select('client');
     serverForm.switchSpeed = Select('port-speed');
     serverForm.entities = Select('entity').multi().filter({
       available: true,
@@ -117,7 +125,7 @@
     function storeState(response) {
       $rootScope.$evalAsync(function() {
         fillFormInputs();
-        
+
         storeMulti(response.disks, serverForm.disks);
         storeMulti(response.addons, serverForm.addOns);
 
@@ -129,8 +137,8 @@
         syncEntityFilter();
 
         serverForm.switchSpeed.selected = response.switch.speed;
-        serverForm.client.selected = (response.access || {}).client;
-        serverForm.billing.date.value = response.billing.date ? new Date(Date.parse(response.billing.date)) : null;
+        serverForm.billing.date.value = response.billing.date ?
+          Date.parse(response.billing.date) : '';
       });
     }
 
@@ -186,10 +194,7 @@
       data.group = {
         id: serverForm.group.getSelected('id') || null,
       };
-      data.client = {
-        id: serverForm.client.getSelected('id') || null,
-      };
-      data.billing.date = serverForm.billing.date.value ? serverForm.billing.date.value.toUTCString() : null;
+      data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null;
 
       return data;
     }

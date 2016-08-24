@@ -14,7 +14,8 @@
     ServerAssign,
     Loader,
     Client,
-    $state
+    $state,
+    _
   ) {
     var buttons = this;
 
@@ -24,11 +25,24 @@
     buttons.loginAsClient = loginAsClient;
     buttons.wipe = confirmWipe;
     buttons.delete = confirmDelete;
+    buttons.assign = showAssignModal;
     buttons.$onInit = init;
 
     //////////
 
     function init() {
+      _.defaults(buttons, {
+        showEdit: true,
+        showManage: true,
+      });
+    }
+
+    function showAssignModal() {
+      return buttons.loader.during(
+        ServerAssignModal
+          .client([buttons.server])
+          .then(fireChangeEvent)
+      );
     }
 
     function setActive(active) {
@@ -81,7 +95,7 @@
     }
 
     function fireChangeEvent(arg) {
-      buttons.server.fire('change', buttons.server);
+      (buttons.server.fire || function(){})('change', buttons.server);
 
       return arg;
     }

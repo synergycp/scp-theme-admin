@@ -23,7 +23,7 @@
         group: $stateParams.group,
         client: $stateParams.client,
       });
-      var confirm = ListConfirm(list, 'hardware.server.modal.delete');
+      var confirm = ListConfirm(list, 'server.modal.delete');
 
       list.bulk.add('Assign Client', handler(ServerAssign.client));
       list.bulk.add('Assign Group', handler(ServerAssign.group));

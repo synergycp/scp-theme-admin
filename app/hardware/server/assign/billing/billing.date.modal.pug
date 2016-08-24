@@ -7,21 +7,21 @@ form(ng-submit="modal.submit()")
       ng-click="modal.$dismiss()"
     ) &times;
 
-    h4.modal-title(data-translate="hardware.server.modal.billing.date.TITLE")
+    h4.modal-title(data-translate="server.modal.billing.date.TITLE")
 
   .modal-body.form-horizontal
-    +label("{{ 'hardware.server.modal.servers.LABEL' | translate }}")
+    +label("{{ 'server.modal.servers.LABEL' | translate }}")
       p.form-control-static
         span(ng-repeat="item in modal.items")
           span(ng-bind="item.name")
           br
-    +label("{{ 'hardware.server.modal.billing.date.date.LABEL' | translate }}")
+    +label("{{ 'server.modal.billing.date.date.LABEL' | translate }}")
       +input-with-btn("fa fa-times-circle")(
         ng-click="modal.input.date.value = ''"
       )
         input.form-control(
           ng-model="modal.input.date.value"
-          placeholder="{{ 'hardware.server.modal.billing.date.date.PLACEHOLDER' | translate }}"
+          placeholder="{{ 'server.modal.billing.date.date.PLACEHOLDER' | translate }}"
           uib-datepicker-popup="yyyy-MM-dd"
           ng-focus="modal.input.date.isOpen = true"
           ng-click="modal.input.date.isOpen = true"
@@ -35,9 +35,9 @@ form(ng-submit="modal.submit()")
     button.btn.btn-secondary(
       type="button"
       ng-click="modal.$dismiss()"
-      data-translate="hardware.server.modal.billing.date.CANCEL"
+      data-translate="server.modal.billing.date.CANCEL"
     )
     button.btn.btn-primary(
       type="submit"
-      data-translate="hardware.server.modal.billing.date.SUBMIT"
+      data-translate="server.modal.billing.date.SUBMIT"
     )

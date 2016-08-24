@@ -7,22 +7,22 @@ form(ng-submit="modal.submit()")
       ng-click="modal.$dismiss()"
     ) &times;
 
-    h4.modal-title(data-translate="hardware.server.modal.client.TITLE")
+    h4.modal-title(data-translate="server.modal.client.TITLE")
 
   .modal-body.form-horizontal
-    +label("{{ 'hardware.server.modal.servers.LABEL' | translate }}")
+    +label("{{ 'server.modal.servers.LABEL' | translate }}")
       p.form-control-static
         span(ng-repeat="server in modal.servers")
           span(ng-bind="server.name")
           br
     div(ng-if="modal.mode.value === modal.mode.SEARCH")
-      +label("{{ 'hardware.server.modal.client.client.LABEL' | translate }}")
+      +label("{{ 'server.modal.client.client.LABEL' | translate }}")
         +input-with-btn("fa fa-times-circle")(
           ng-click="modal.access.client = null"
         )
           ui-select(ng-model="modal.access.client")
             ui-select-match(
-              placeholder="{{ 'hardware.server.modal.client.client.PLACEHOLDER' | translate }}"
+              placeholder="{{ 'server.modal.client.client.PLACEHOLDER' | translate }}"
             )
               span(ng-bind="$select.selected.name")
 
@@ -42,14 +42,14 @@ form(ng-submit="modal.submit()")
       form="modal.create"
     )
 
-    +label("{{ 'hardware.server.modal.client.access.LABEL' | translate }}")
+    +label("{{ 'server.modal.client.access.LABEL' | translate }}")
       .checkbox
         label
           input(
             type="checkbox"
             ng-model="modal.access.pxe"
           )
-          span(translate="hardware.server.modal.client.access.PXE")
+          span(translate="server.modal.client.access.PXE")
 
       .checkbox
         label
@@ -57,7 +57,7 @@ form(ng-submit="modal.submit()")
             type="checkbox"
             ng-model="modal.access.ipmi"
           )
-          span(translate="hardware.server.modal.client.access.IPMI")
+          span(translate="server.modal.client.access.IPMI")
 
       .checkbox
         label
@@ -65,20 +65,20 @@ form(ng-submit="modal.submit()")
             type="checkbox"
             ng-model="modal.access.switch"
           )
-          span(translate="hardware.server.modal.client.access.SWITCH")
+          span(translate="server.modal.client.access.SWITCH")
   .modal-footer
     .pull-left
       button.btn.btn-secondary(
         type="button"
         ng-click="modal.mode.value = +!modal.mode.value"
-        translate="hardware.server.modal.client.mode.{{ modal.mode.value === modal.mode.ADD ? 'SEARCH' : 'ADD' }}"
+        translate="server.modal.client.mode.{{ modal.mode.value === modal.mode.ADD ? 'SEARCH' : 'ADD' }}"
       )
     button.btn.btn-secondary(
       type="button"
       ng-click="modal.$dismiss()"
-      data-translate="hardware.server.modal.client.CANCEL"
+      data-translate="server.modal.client.CANCEL"
     )
     button.btn.btn-primary(
       type="submit"
-      data-translate="hardware.server.modal.client.SUBMIT"
+      data-translate="server.modal.client.SUBMIT"
     )

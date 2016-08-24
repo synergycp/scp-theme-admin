@@ -1,0 +1,371 @@
+{
+  "EDIT": "Edit",
+  "WIPE": "Wipe",
+  "DELETE": "Delete",
+  "MANAGE": "Manage",
+  "CLIENT": "Client",
+  "ASSIGN": "Assign Client",
+  "REASSIGN": "Reassign Client",
+  "SUSPEND": "Suspend",
+  "UNSUSPEND": "Activate",
+  "PROVISION": "Provision",
+  "VIEW_AS_CLIENT": "View As Client",
+  "assign": {
+    "TITLE": "Server Assignments",
+    "ITEM": "Item",
+    "ASSIGNED": "Assigned To",
+    "GROUP": "Group",
+    "client": {
+      "TITLE": "Client",
+      "NONE": "Unassigned",
+      "REASSIGN": "Reassign",
+      "ASSIGN": "Assign"
+    },
+    "entity": {
+      "TITLE": "IP Allocation",
+      "v4": {
+        "USABLE": " - Usable IP(s)",
+        "GATEWAY": " - Gateway IP",
+        "SUBNET": " - Subnet Mask"
+      },
+      "v6": {
+        "ADDRESS": " - IPv6 Address",
+        "GATEWAY": " - IPv6 Gateway"
+      }
+    }
+  },
+  "bandwidth": {
+    "TITLE": "Bandwidth"
+  },
+  "form": {
+    "title": {
+      "EDIT": "Edit {{ name }}",
+      "ADD": "Create Server"
+    },
+    "id": {
+      "LABEL": "Server ID",
+      "PLACEHOLDER": "Must be unique"
+    },
+    "mac": {
+      "LABEL": "MAC Address",
+      "PLACEHOLDER": "Required to enable PXE"
+    },
+    "cpu": {
+      "LABEL": "CPU",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "mem": {
+      "LABEL": "Memory",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "disk": {
+      "LABEL": "Disk",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "add-on": {
+      "LABEL": "Add-On",
+      "PLACEHOLDER": "None"
+    },
+    "switch": {
+      "LABEL": "Switch",
+      "port": {
+        "LABEL": "Switch Port",
+        "PLACEHOLDER": "ex. Gi0/0/1"
+      },
+      "speed": {
+        "LABEL": "Port Speed",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "PLACEHOLDER": "Type to search..."
+    },
+    "group": {
+      "LABEL": "IP Group",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "entities": {
+      "LABEL": "IP Entities",
+      "PLACEHOLDER": "Assign IP Entities"
+    },
+    "ipmi": {
+      "ip": {
+        "LABEL": "IPMI IP",
+        "PLACEHOLDER": "IPMI IP Address"
+      },
+      "admin": {
+        "LABEL": "IPMI Admin",
+        "username": {
+          "PLACEHOLDER": "IPMI Admin Username"
+        },
+        "password": {
+          "PLACEHOLDER": "IPMI Admin Password"
+        }
+      },
+      "client": {
+        "LABEL": "IPMI Client",
+        "username": {
+          "PLACEHOLDER": "IPMI Client Username"
+        },
+        "password": {
+          "PLACEHOLDER": "IPMI Client Password"
+        }
+      }
+    },
+    "billing": {
+      "id": {
+        "LABEL": "Billing ID",
+        "PLACEHOLDER": "Optional. Must be unique"
+      },
+      "date": {
+        "LABEL": "Billing Date",
+        "PLACEHOLDER": "Bandwidth data before this date will be hidden"
+      },
+      "max_bandwidth": {
+        "LABEL": "Max Bandwidth",
+        "PLACEHOLDER": "e.g. 10TB. Leave blank for no maximum"
+      }
+    },
+    "nickname": {
+      "LABEL": "Nickname",
+      "PLACEHOLDER": "Will be set as server hostname. Defaults to Server ID."
+    }
+  },
+  "hardware": {
+    "TITLE": "Server Hardware",
+    "ITEM": "Hardare Item",
+    "VALUE": "Value",
+    "BILLING": "Billing ID",
+    "MAC": "MAC Address",
+    "CPU": "Processor",
+    "MEM": "Memory",
+    "DISK": "Disk",
+    "ADD-ON": "Add-On",
+    "NA": "N/A"
+  },
+  "heading": {
+    "NICKNAME": "Nickname",
+    "IP": "Server IP",
+    "CLIENT": "Client",
+    "STATUS": "Status",
+    "CPU": "CPU",
+    "SWITCH": "Switch",
+    "GROUP": "IP Group",
+    "HDDS": "Hard Drives",
+    "RAM": "RAM",
+    "SRV_ID": "Server ID"
+  },
+  "inventory": {
+    "TITLE": "Server Inventory"
+  },
+  "ipmi": {
+    "TITLE": "IPMI Controls",
+    "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
+    "ADDRESS": "IPMI IP Address",
+    "BMC": "Reset BMC",
+    "PXE": "PXE Boot",
+    "client": {
+      "USER": "Client Username",
+      "PASS": "Client Password",
+      "EMPTY": "Not created",
+      "CREATE": "create",
+      "DELETE": "delete",
+      "dropdown": {
+        "TITLE": "Client User",
+        "CREATE": "Setup User",
+        "DELETE": "Delete User"
+      }
+    },
+    "power": {
+      "STATUS": "Power Status",
+      "CHECKED": "Last Checked",
+      "dropdown": {
+        "TITLE": "Power",
+        "ON": "Power On",
+        "CYCLE": "Power Reset",
+        "SOFT": "Soft Shutdown",
+        "OFF": "Power Off"
+      }
+    }
+  },
+  "list": {
+    "TITLE": "Servers"
+  },
+  "logs": {
+    "TITLE": "Server Logs"
+  },
+  "modal": {
+    "servers": {
+      "LABEL": "Servers"
+    },
+    "group": {
+      "CANCEL": "Cancel",
+      "SUBMIT": "Assign IP Group",
+      "TITLE": "Assign IP Group",
+      "group": {
+        "LABEL": "IP Group",
+        "PLACEHOLDER": "Type to search IP Groups..."
+      }
+    },
+    "switch": {
+      "CANCEL": "Cancel",
+      "SUBMIT": "Assign Switch",
+      "TITLE": "Assign Switch",
+      "switch": {
+        "LABEL": "Switch",
+        "PLACEHOLDER": "Type to search Switches..."
+      }
+    },
+    "billing": {
+      "limits": {
+        "CANCEL": "Cancel",
+        "SUBMIT": "Set Bandwidth Limit",
+        "TITLE": "Set Bandwidth Limit",
+        "bandwidth": {
+          "LABEL": "Bandwidth Limit",
+          "PLACEHOLDER": "e.g. 10TB. Leave blank for no limit."
+        }
+      },
+      "date": {
+        "CANCEL": "Cancel",
+        "SUBMIT": "Set Bandwidth Date",
+        "TITLE": "Set Bandwidth Date",
+        "date": {
+          "LABEL": "Date",
+          "PLACEHOLDER": "Bandwidth date before this data will be hidden"
+        }
+      }
+    },
+    "client": {
+      "TITLE": "Assign Client",
+      "SUBMIT": "Assign",
+      "CANCEL": "Cancel",
+      "mode": {
+        "ADD": "Create Client",
+        "SEARCH": "Search Clients"
+      },
+      "client": {
+        "LABEL": "Client",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "access": {
+        "LABEL": "Access",
+        "PXE": "OS Reload",
+        "IPMI": "IPMI Controls",
+        "SWITCH": "Switch Controls"
+      }
+    },
+    "delete": {
+      "TITLE": "Delete Server",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these servers:"
+    },
+    "suspend": {
+      "TITLE": "Suspend Server",
+      "SUBMIT": "Suspend",
+      "CANCEL": "Cancel",
+      "BODY": "Suspending a server does the following:",
+      "ACTIONS": [
+        "Turn off server's switch port",
+        "Disable all client controls"
+      ],
+      "ACTION_COUNT": "2",
+      "CONFIRM": "Click \"Suspend\" to suspend these servers:"
+    },
+    "wipe": {
+      "TITLE": "Wipe Server",
+      "SUBMIT": "Wipe",
+      "CANCEL": "Cancel",
+      "BODY": "This action is irreversible. Wiping a server does the following:",
+      "ACTIONS": [
+        "Unsassign all IP entities",
+        "Unassign client",
+        "Set nickname to EMPTY",
+        "Remove IPMI user",
+        "Turn server off via IPMI",
+        "Turn off server's switch port"
+      ],
+      "ACTION_COUNT": "6",
+      "CONFIRM": "Click \"Wipe\" to wipe these servers:"
+    }
+  },
+  "notes": {
+    "TITLE": "Server Notes",
+    "CLIENT": "Client Notes",
+    "ADMIN": "Administrator Notes",
+    "SUBMIT": "Save Notes"
+  },
+  "os-reload": {
+    "TITLE": "Operating System Reload",
+    "NOT_ENABLED": "This server must have a MAC address and be assigned an IP Entity to use OS Reload.",
+    "SUBMIT": "Reload Operating System",
+    "profile": {
+      "LABEL": "Profile",
+      "PLACEHOLDER": "Type to Search..."
+    },
+    "license-key": {
+      "LABEL": "License Key",
+      "PLACEHOLDER": "Optional",
+      "HELP": "Leave blank for trial"
+    },
+    "edition": {
+      "LABEL": "Edition",
+      "PLACEHOLDER": "Type to Search..."
+    },
+    "modal": {
+      "confirm": {
+        "TITLE": "Are you sure?",
+        "SUBMIT": "Reload Operating System",
+        "CANCEL": "Cancel",
+        "CONFIRM": "I understand that this will delete all data on the disk.",
+        "password": {
+          "LABEL": "Root Password",
+          "PLACEHOLDER": "Enter server password",
+          "GENERATE": "Generate Password",
+          "HELP": "This password will not be saved! Please copy it somewhere safe."
+        }
+      }
+    }
+  },
+  "provision": {
+    "TITLE": "Provision Server",
+    "SUBMIT": "Provision",
+    "server": {
+      "LABEL": "Server",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "profile": {
+      "LABEL": "Operating System",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "edition": {
+      "LABEL": "Edition",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "license_key": {
+      "LABEL": "License Key",
+      "PLACEHOLDER": "Optional",
+      "HELP": "Leave blank for trial"
+    },
+    "password": {
+      "LABEL": "Password",
+      "PLACEHOLDER": "Leave empty for random password."
+    }
+  },
+  "search": {
+    "TITLE": "Servers"
+  },
+  "switch": {
+    "TITLE": "Switch Controls",
+    "NOT_ENABLED": "This server has not been assigned a switch, port, and port speed yet.",
+    "NAME": "Switch Name",
+    "SYNC_VLAN": "Assign VLAN",
+    "SYNC_SPEED": "Set Port Speed",
+    "SPEED": "Port Speed",
+    "PORT": "Port Number",
+    "power": {
+      "DROPDOWN": "Port Power",
+      "ON": "Port Power On",
+      "OFF": "Port Power Off"
+    }
+  }
+}

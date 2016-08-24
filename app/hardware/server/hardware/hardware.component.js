@@ -41,7 +41,7 @@
 
       function trans(type) {
         return {
-          trans: 'hardware.server.hardware.'+type,
+          trans: 'server.hardware.'+type,
         };
       }
     }

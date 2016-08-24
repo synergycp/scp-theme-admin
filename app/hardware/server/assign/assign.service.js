@@ -1,9 +1,12 @@
 (function () {
   'use strict';
 
+  var DIR = 'app/hardware/server/assign';
+
   angular
     .module('app.hardware.server')
-    .service('ServerAssign', ServerAssignService);
+    .service('ServerAssign', ServerAssignService)
+    ;
 
   /**
    * ServerAssign Service
@@ -28,14 +31,12 @@
 
     function billingLimits(items) {
       var modal = $uibModal.open({
-        templateUrl: 'app/hardware/server/assign/assign.billing.limits.modal.html',
+        templateUrl: DIR+'/billing/billing.limits.modal.html',
         controller: 'ServerAssignBillingLimitModalCtrl',
-        bindToController: true,
         controllerAs: 'modal',
+        bindToController: true,
         resolve: {
-          items: function () {
-            return items;
-          },
+          items: _.return(items),
         },
       });
 
@@ -50,14 +51,12 @@
 
     function billingDate(items) {
       var modal = $uibModal.open({
-        templateUrl: 'app/hardware/server/assign/assign.billing.date.modal.html',
+        templateUrl: DIR+'/billing/billing.date.modal.html',
         controller: 'ServerAssignBillingDateModalCtrl',
-        bindToController: true,
         controllerAs: 'modal',
+        bindToController: true,
         resolve: {
-          items: function () {
-            return items;
-          },
+          items: _.return(items),
         },
       });
 
@@ -72,43 +71,43 @@
 
     function switchModal(items) {
       var modal = $uibModal.open({
-        templateUrl: 'app/hardware/server/assign/assign.switch.modal.html',
+        templateUrl: DIR+'/assign.switch.modal.html',
         controller: 'ServerAssignSwitchModalCtrl',
-        bindToController: true,
         controllerAs: 'modal',
+        bindToController: true,
         resolve: {
-          items: function () {
-            return items;
-          },
+          items: _.return(items),
         },
       });
 
       return modal.result.then(function (selected) {
-        return list.patch({
+        var data = {
           switch: !selected ? null : {
             id: selected.id,
           },
-        }, items);
+        };
+
+        return list.patch(data, items);
       });
     }
 
     function group(items) {
       var modal = $uibModal.open({
-        templateUrl: 'app/hardware/server/assign/assign.group.modal.html',
+        templateUrl: DIR+'/assign.group.modal.html',
         controller: 'ServerAssignGroupModalCtrl',
-        bindToController: true,
         controllerAs: 'modal',
+        bindToController: true,
         resolve: {
-          items: function () {
-            return items;
-          },
+          items: _.return(items),
         },
       });
 
       return modal.result.then(function (group) {
-        return list.patch({
+        var data = {
           group: group ? group.id : null,
-        }, items);
+        };
+
+        return list.patch(data, items);
       });
     }
 
@@ -129,7 +128,8 @@
         is_active: active,
       };
 
-      return server.one('access/'+access.id)
+      return server
+        .one('access/'+access.id)
         .patch(data)
         .then(saveResponse)
         ;

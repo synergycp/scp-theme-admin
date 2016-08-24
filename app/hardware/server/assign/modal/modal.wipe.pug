@@ -7,17 +7,17 @@ form(ng-submit="modal.submit()")
       ng-click="modal.$dismiss()"
     ) &times;
 
-    h4.modal-title(translate="hardware.server.modal.wipe.TITLE")
+    h4.modal-title(translate="server.modal.wipe.TITLE")
 
-  .modal-body(ng-init="itemCount = ('hardware.server.modal.suspend.ACTION_COUNT' | translate)")
-    p(translate="hardware.server.modal.wipe.BODY")
+  .modal-body(ng-init="itemCount = ('server.modal.suspend.ACTION_COUNT' | translate)")
+    p(translate="server.modal.wipe.BODY")
 
     ul(ng-init="items = _.range(0, itemCount)")
       li(
         ng-repeat="item in items track by $index"
-        translate="hardware.server.modal.wipe.ACTIONS.{{$index}}"
+        translate="server.modal.wipe.ACTIONS.{{$index}}"
       )
-    p(translate="hardware.server.modal.wipe.CONFIRM")
+    p(translate="server.modal.wipe.CONFIRM")
 
     ul
       li(
@@ -29,9 +29,9 @@ form(ng-submit="modal.submit()")
     button.btn.btn-secondary(
       type="button"
       ng-click="modal.$dismiss()"
-      data-translate="hardware.server.modal.wipe.CANCEL"
+      data-translate="server.modal.wipe.CANCEL"
     )
     button.btn.btn-danger(
       type="submit"
-      data-translate="hardware.server.modal.wipe.SUBMIT"
+      data-translate="server.modal.wipe.SUBMIT"
     )

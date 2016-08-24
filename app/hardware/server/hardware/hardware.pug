@@ -1,12 +1,12 @@
 include /resources/pug/mixins/panel
 
-+panel("{{ 'hardware.server.hardware.TITLE' | translate }}")
++panel("{{ 'server.hardware.TITLE' | translate }}")
   table.table
     thead
       tr
-        th(translate="hardware.server.hardware.ITEM")
-        th(translate="hardware.server.hardware.VALUE")
-        th(translate="hardware.server.hardware.BILLING")
+        th(translate="server.hardware.ITEM")
+        th(translate="server.hardware.VALUE")
+        th(translate="server.hardware.BILLING")
     tbody
       tr(ng-repeat="item in hardware.items")
         td(translate="{{item.trans}}")
@@ -14,6 +14,6 @@ include /resources/pug/mixins/panel
         td(ng-bind="item.billing_id")
 
       tr
-        td(translate="hardware.server.hardware.MAC")
-        td(ng-bind="hardware.server.mac")
-        td(translate="hardware.server.hardware.NA")
+        td(translate="server.hardware.MAC")
+        td(ng-bind="server.mac")
+        td(translate="server.hardware.NA")

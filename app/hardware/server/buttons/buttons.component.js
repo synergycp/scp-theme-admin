@@ -8,6 +8,8 @@
       },
       bindings: {
         server: '=',
+        showEdit: '=?',
+        showManage: '=?',
       },
       controller: 'ServerButtonsCtrl as buttons',
       transclude: true,

@@ -16,6 +16,7 @@
         url: '/server',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:server'),
       })
       .state('app.hardware.server.inventory', {
         url: '/inventory?switch&group',

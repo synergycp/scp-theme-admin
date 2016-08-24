@@ -1,9 +1,9 @@
 doctype html
 include /resources/pug/mixins/form
 
-+label("{{ 'server.form.client.LABEL' | translate }}")
++label("{{ 'server.modal.client.client.LABEL' | translate }}")
   ui-select(ng-model="provisionForm.client.selected", ng-change="provisionForm.client.fireChangeEvent()")
-    ui-select-match(placeholder="{{ 'server.form.client.PLACEHOLDER' | translate }}")
+    ui-select-match(placeholder="{{ 'server.modal.client.client.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
     ui-select-choices(
@@ -263,19 +263,15 @@ div(ng-if="provisionForm.profile.hasIso")
   "{{ 'server.form.billing.date.LABEL' | translate }}",
   "billing.date"
 )
-  +input-with-btn("fa fa-calendar")(
-    ng-click="provisionForm.billing.date.isOpen = !provisionForm.billing.date.isOpen"
+  +input-with-btn("fa fa-close")(
+    ng-click="provisionForm.billing.date.value = ''"
   )
     input.form-control(
       type="text"
       id="form-billing.date"
-      uib-datepicker-popup="yyyy-MM-dd"
-      ng-focus="provisionForm.billing.date.isOpen = true"
-      datepicker-options="{}"
-      close-text="Close"
-      alt-input-formats="[]"
-      is-open="provisionForm.billing.date.isOpen"
       placeholder="{{ 'server.form.billing.date.PLACEHOLDER' | translate }}"
+      date-range-picker
+      options="provisionForm.billing.date.options"
       ng-model="provisionForm.billing.date.value"
     )
 
@@ -295,13 +291,16 @@ div(ng-if="provisionForm.profile.hasIso")
   ng-model="provisionForm.input.nickname"
 )
 
-+label("{{ 'server.form.access.LABEL' | translate }}")
++label("{{ 'server.modal.client.access.LABEL' | translate }}")
   +checkbox()(
     ng-model="provisionForm.input.access.ipmi"
-  ) {{ 'server.form.access.ipmi.LABEL' | translate }}
+  )
+    span(translate="server.modal.client.access.IPMI")
   +checkbox()(
     ng-model="provisionForm.input.access.switch"
-  ) {{ 'server.form.access.switch.LABEL' | translate }}
+  )
+    span(translate="server.modal.client.access.SWITCH")
   +checkbox()(
     ng-model="provisionForm.input.access.pxe"
-  ) {{ 'server.form.access.pxe.LABEL' | translate }}
+  )
+    span(translate="server.modal.client.access.PXE")

@@ -45,7 +45,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Select, MultiInput, $rootScope, ServerConfig, $stateParams) {
+  function ServerFormCtrl(_, Select, MultiInput, $rootScope, ServerConfig, $stateParams, moment) {
     var serverForm = this;
 
     serverForm.$onInit = init;
@@ -63,8 +63,22 @@
     });
     serverForm.billing = {
       date: {
-        value: null,
-        isOpen: false,
+        value: '',
+        options: {
+          locale: {
+            format: 'MM/DD/YYYY h:mm A',
+            cancelLabel: 'Clear',
+          },
+          autoUpdateInput: false,
+          singleDatePicker: true,
+          timePicker: true,
+          timePickerIncrement: 30,
+          eventHandlers: {
+            'cancel.daterangepicker': function (ev, picker) {
+              serverForm.billing.date.value = '';
+            },
+          }
+        },
       },
     };
     serverForm.switchSpeed = Select('port-speed');
@@ -123,7 +137,8 @@
         syncEntityFilter();
 
         serverForm.switchSpeed.selected = response.switch.speed;
-        serverForm.billing.date.value = response.billing.date ? new Date(Date.parse(response.billing.date)) : null;
+        serverForm.billing.date.value = response.billing.date ?
+          Date.parse(response.billing.date) : '';
       });
     }
 
@@ -179,7 +194,7 @@
       data.group = {
         id: serverForm.group.getSelected('id') || null,
       };
-      data.billing.date = serverForm.billing.date.value ? serverForm.billing.date.value.toUTCString() : null;
+      data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null;
 
       return data;
     }

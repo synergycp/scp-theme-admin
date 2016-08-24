@@ -2,7 +2,6 @@
   "bower_components/modernizr/modernizr.custom.js",
   "bower_components/fontawesome/css/font-awesome.min.css",
   "bower_components/fontawesome/fonts/*",
-  "bower_components/angular-ui-map/ui-map.js",
   "bower_components/moment/moment.js",
   "bower_components/bootstrap-daterangepicker/daterangepicker.js",
   "bower_components/angular-daterangepicker/js/angular-daterangepicker.js",

@@ -11,10 +11,11 @@
    *
    * @ngInject
    */
-  function ServerProvisionCtrl(Api, $state) {
+  function ServerProvisionCtrl(Api, $state, Loader) {
     var vm = this;
     var $api = Api.all('server/provision');
 
+    vm.loader = Loader();
     vm.submit = submit;
     vm.form = {};
 
@@ -26,11 +27,13 @@
     }
 
     function submit() {
-      $api.post(vm.form.getData())
-        .then(getServerOffResponse)
-        .then(clearFromServerChoices)
-        .then(addToProvisionedServers)
-        ;
+      return vm.loader.during(
+        $api
+          .post(vm.form.getData())
+          .then(getServerOffResponse)
+          .then(clearFromServerChoices)
+          .then(addToProvisionedServers)
+      );
     }
 
     function getServerOffResponse(response) {

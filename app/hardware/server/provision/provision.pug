@@ -2,7 +2,11 @@ include /resources/pug/mixins/panel
 
 .row
   .col-md-6
-    form(ng-submit="vm.submit()")
+    form(
+      ng-submit="vm.submit()"
+      ng-class="vm.loader.class"
+    )
+      .loader
       +panel("{{ 'server.provision.TITLE' | translate }}")
         .panel-body
           provision-form.form-horizontal(

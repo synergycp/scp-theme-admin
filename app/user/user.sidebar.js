@@ -3,15 +3,15 @@
 
   angular
     .module('app.system')
-    .config(SystemSidebarConfig)
+    .config(SystemNavConfig)
     ;
 
   /**
    * @ngInject
    */
-  function SystemSidebarConfig(SidebarProvider) {
-    SidebarProvider.group('user', {
-      translate: "sidebar.USERS",
+  function SystemNavConfig(NavProvider) {
+    NavProvider.group('user', {
+      translate: "nav.USERS",
       sref: "#",
       icon: "fa fa-user",
     }).item({

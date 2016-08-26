@@ -18,7 +18,7 @@
         templateUrl: helper.basepath('core/app.html'),
         resolve: helper.resolveFor(
           'modernizr', 'icons',
-          'lang:app', 'lang:sidebar'
+          'lang:app', 'lang:nav'
         ),
       });
   }

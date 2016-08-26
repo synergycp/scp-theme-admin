@@ -186,10 +186,10 @@ $float-space: 15px;
         bottom: $float-space;
         left: inherit;
       }
-      .sidebar {
+      .nav {
         border: 1px solid $gray-light;
       }
-      .sidebar:after {
+      .nav:after {
         display: none;
       }
     }
@@ -216,7 +216,7 @@ $float-space: 15px;
   }
 
   &.aside-toggled .wrapper {
-    // small delay to add some effect to sidebar slide
+    // small delay to add some effect to nav slide
     > .aside {
       @include transition-delay(0.05s);
       .aside-inner {

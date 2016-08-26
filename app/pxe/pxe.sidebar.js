@@ -3,15 +3,15 @@
 
   angular
     .module('app.system')
-    .config(SystemSidebarConfig)
+    .config(SystemNavConfig)
     ;
 
   /**
    * @ngInject
    */
-  function SystemSidebarConfig(SidebarProvider) {
-    SidebarProvider.group('pxe', {
-      translate: "sidebar.pxe.TITLE",
+  function SystemNavConfig(NavProvider) {
+    NavProvider.group('pxe', {
+      translate: "nav.pxe.TITLE",
       sref: "app.pxe.install",
       icon: "fa fa-upload",
     }).item({

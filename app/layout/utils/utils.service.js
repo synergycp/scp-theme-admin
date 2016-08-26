@@ -116,11 +116,11 @@
         return $html.hasClass('touch');
       },
 
-      isSidebarCollapsed: function () {
+      isNavCollapsed: function () {
         return $body.hasClass('aside-collapsed');
       },
 
-      isSidebarToggled: function () {
+      isNavToggled: function () {
         return $body.hasClass('aside-toggled');
       },
 

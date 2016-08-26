@@ -1,34 +1,38 @@
 /* ========================================================================
-     Component: sidebar
+     Component: nav
  ========================================================================== */
- 
-$sidebar-bg:                      $aside-bg;
 
-$sidebar-item-color:              #515253;
-$sidebar-item-color-active:       $nav-top-bg;
-$sidebar-item-bg-active:          darken($sidebar-bg, 1%);
+$nav-bg:                      $aside-bg;
 
-$sidebar-icon-color:              inherits;
-$sidebar-icon-color-active:       $nav-top-bg;
+$nav-item-color:              #515253;
+$nav-item-color-active:       $nav-top-bg;
+$nav-item-bg-active:          darken($nav-bg, 1%);
 
-$sidebar-bullet-color:            rgba(0,0,0,.25);
-$sidebar-bullet-color-active:     $sidebar-icon-color-active;
+$nav-icon-color:              inherits;
+$nav-icon-color-active:       $nav-top-bg;
 
-$sidebar-heading-color:           #919DA8;
-$sidebar-label-color:             $sidebar-item-color;
+$nav-bullet-color:            rgba(0,0,0,.25);
+$nav-bullet-color-active:     $nav-icon-color-active;
 
-$submenu-header-hg:               40px;   // Submenu header when hover collapse sidebar
-$sidebar-item-border-wd:          3px;
+$nav-heading-color:           #919DA8;
+$nav-label-color:             $nav-item-color;
+
+$submenu-header-hg:               40px;   // Submenu header when hover collapse nav
+$nav-item-border-wd:          3px;
 $scrollbar-wd:                    17px;
+
+
+// Hides the scrollbar only on desktops
+$tablet-landscape: 1025px;
 
 .sidebar {
   height: 100%;
   padding-bottom: 20px;
-  background-color: $sidebar-bg; 
+  background-color: $nav-bg;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  
-  // draw a divider for the sidebar
+
+  // draw a divider for the nav
   &:after {
     content:"";
     background: rgba(0,0,0,.15);
@@ -43,7 +47,7 @@ $scrollbar-wd:                    17px;
 
   .nav-heading {
     padding: 12px 15px;
-    color: $sidebar-heading-color;
+    color: $nav-heading-color;
     font-size: 13px;
     letter-spacing: .035em;
     pointer-events: none;
@@ -55,19 +59,19 @@ $scrollbar-wd:                    17px;
   > .nav {
     position: relative;
 
-    // Only the first item in sidebar
+    // Only the first item in nav
     > .nav-heading:first-child {
       padding-top: 20px;
     }
 
     > li {
-      border-left: $sidebar-item-border-wd solid transparent;
+      border-left: $nav-item-border-wd solid transparent;
       @include transition(border-left-color 0.4s ease);
-      
+
       > a,
       > .nav-item {
         padding: 12px 24px;
-        color: $sidebar-item-color;
+        color: $nav-item-color;
         letter-spacing: .025em;
         font-weight: normal;
         cursor: pointer;
@@ -75,7 +79,7 @@ $scrollbar-wd:                    17px;
         &:focus, &:hover {
           text-decoration: none;
           outline: none;
-          color: $sidebar-item-color-active;
+          color: $nav-item-color-active;
         }
         // Item icon
         > em {
@@ -85,7 +89,7 @@ $scrollbar-wd:                    17px;
           font-weight: normal;
           line-height: 1;
           -webkit-font-smoothing: antialiased;
-          color: $sidebar-icon-color;
+          color: $nav-icon-color;
         }
       }
 
@@ -96,45 +100,48 @@ $scrollbar-wd:                    17px;
         > a,
         > .nav-item,
         .nav {
-          background-color: $sidebar-item-bg-active;
-          color: $sidebar-item-color-active;
+          background-color: $nav-item-bg-active;
+          color: $nav-item-color-active;
         }
         > .nav-item > em,
         > a > em {
-          color: $sidebar-icon-color-active;
-        }  
+          color: $nav-icon-color-active;
+        }
       }
 
       &.active {
-        border-left-color: $sidebar-item-color-active;
+        border-left-color: $nav-item-color-active;
       }
     }
     .label {
       display: block;
+
+      @media only screen and (min-width: $mq-tablet) {
+        margin: 2px 0 0 0;
+      }
+    }
+  }
+
+  @media only screen and (min-width: $tablet-landscape) {
+    &:not(.show-scrollbar) {
+      margin-right: -$scrollbar-wd;
+      overflow-y: scroll;
     }
   }
 }
 
-// Hides the scrollbar only on desktops
-$tablet-landscape: 1025px;
-@media only screen and (min-width: $tablet-landscape) {
-  .sidebar:not(.show-scrollbar) {
-    margin-right: -$scrollbar-wd;
-    overflow-y: scroll;
-  }
-}
 
 // Sub Levels
-.sidebar-subnav {
-  background-color: $sidebar-bg;
-  
-  > .sidebar-subnav-header {
-    color: $sidebar-item-color;
+.nav-subnav {
+  background-color: $nav-bg;
+
+  > .nav-subnav-header {
+    color: $nav-item-color;
     display: none;
     padding: 10px 20px;
     font-weight: bold;
   }
-  
+
   > li  {
     border-left: 0 !important;
     > a,
@@ -145,9 +152,9 @@ $tablet-landscape: 1025px;
       padding-left: 53px;
       font-weight: normal;
       background-color: transparent !important;
-      color: $sidebar-item-color;
+      color: $nav-item-color;
       &:focus, &:hover {
-        color: $sidebar-item-color-active;
+        color: $nav-item-color-active;
       }
       // submenu icons
       > em {
@@ -160,10 +167,10 @@ $tablet-landscape: 1025px;
     &.active {
       > a,
       > .nav-item {
-        color: $sidebar-icon-color-active;
+        color: $nav-icon-color-active;
         &:after {
-          border-color: $sidebar-bullet-color-active;
-          background-color: $sidebar-bullet-color-active;
+          border-color: $nav-bullet-color-active;
+          background-color: $nav-bullet-color-active;
         }
       }
     }
@@ -175,7 +182,7 @@ $tablet-landscape: 1025px;
 
   } // li
 
-  // This only happend when sidebar is collapsed and the submenu
+  // This only happend when nav is collapsed and the submenu
   // visibility is toggled via js
   &.nav-floating {
     border: 1px solid rgba(0,0,0,0.15);
@@ -187,13 +194,13 @@ $tablet-landscape: 1025px;
       display: block !important;
       visibility: visible !important;
     }
-    > .sidebar-subnav-header {
+    > .nav-subnav-header {
       display: block;
     }
-    // reduce padding when item is on sidebar collapsed
+    // reduce padding when item is on nav collapsed
     li > a,
     li > .nav-item {
-      padding-left: 20px;
+      padding: 10px 20px;
       // submenu icons
       em {
         margin-left: 0;
@@ -202,20 +209,6 @@ $tablet-landscape: 1025px;
   }
 }
 
-// Desktop styles
-// ---------------------------------
-
-@media only screen and (min-width: $mq-tablet) {
-  
-  .sidebar > .nav {
-
-    .label {
-      margin: 2px 0 0 0;
-    }
-  }
-  
-} // @media @desktop
-
 // Collapsed state styles
 .aside-collapsed {
 
@@ -223,8 +216,8 @@ $tablet-landscape: 1025px;
     overflow-x: hidden;
     // Applies to first level items
     > .nav {
-      
-      .nav, 
+
+      .nav,
       > .nav-heading,
       > li > .nav-item > span,
       > li > a > span {
@@ -234,7 +227,7 @@ $tablet-landscape: 1025px;
       > li {
         width: $aside-wd-collapsed - 1;
         > a, > .nav-item {
-          text-indent: -$sidebar-item-border-wd;
+          text-indent: -$nav-item-border-wd;
           padding: 20px 0;
           text-align: center;
           > em {
@@ -243,8 +236,8 @@ $tablet-landscape: 1025px;
           }
           &:focus { // accessibility
             background-color: transparent;
-            > em { 
-              color: inherit; 
+            > em {
+              color: inherit;
             }
           }
         }
@@ -255,13 +248,11 @@ $tablet-landscape: 1025px;
     .nav {
       .label {
         position: absolute;
-        top: 10px; 
+        top: 10px;
         right: 5px;
         text-indent: 0;
       }
     }
 
-  } // .sidebar
+  } // .nav
 } // .aside-collapsed
-
-

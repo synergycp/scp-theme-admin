@@ -13,7 +13,7 @@
       "SUBMIT": "Delete"
     }
   },
-  "sidebar": {
+  "nav": {
     "WELCOME": "Welcome",
     "heading": {
       "HEADER": "Navigation"

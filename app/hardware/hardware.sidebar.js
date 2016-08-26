@@ -3,15 +3,15 @@
 
   angular
     .module('app.system')
-    .config(SystemSidebarConfig)
+    .config(SystemNavConfig)
     ;
 
   /**
    * @ngInject
    */
-  function SystemSidebarConfig(SidebarProvider) {
-    SidebarProvider.group('hardware', {
-      translate: "sidebar.HARDWARE",
+  function SystemNavConfig(NavProvider) {
+    NavProvider.group('hardware', {
+      translate: "nav.HARDWARE",
       sref: "#",
       icon: "fa fa-server",
     }).item({

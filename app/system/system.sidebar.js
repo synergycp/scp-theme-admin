@@ -3,15 +3,15 @@
 
   angular
     .module('app.system')
-    .config(SystemSidebarConfig)
+    .config(SystemNavConfig)
     ;
 
   /**
    * @ngInject
    */
-  function SystemSidebarConfig(SidebarProvider) {
-    SidebarProvider.group('system', {
-      translate: "sidebar.SYSTEM",
+  function SystemNavConfig(NavProvider) {
+    NavProvider.group('system', {
+      translate: "nav.SYSTEM",
       sref: "app.system.setting",
       icon: "fa fa-wrench",
     }).item({

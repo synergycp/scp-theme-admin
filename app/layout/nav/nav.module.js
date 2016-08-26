@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.layout.sidebar', [
+    .module('app.layout.nav', [
       'app.core.mixins',
     ]);
 })();

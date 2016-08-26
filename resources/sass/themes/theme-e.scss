@@ -29,20 +29,20 @@ $nav-top-item-desktop-active:   darken($nav-top-item-desktop, 20%);
 
 // SIDEBAR
 
-$sidebar-bg:                      $aside-bg;
+$nav-bg:                      $aside-bg;
 
-$sidebar-item-color:              #515253;
-$sidebar-item-color-active:       $nav-top-bg;
-$sidebar-item-bg-active:          darken($sidebar-bg, 1%);
+$nav-item-color:              #515253;
+$nav-item-color-active:       $nav-top-bg;
+$nav-item-bg-active:          darken($nav-bg, 1%);
 
-$sidebar-icon-color:              inherits;
-$sidebar-icon-color-active:       $nav-top-bg;
+$nav-icon-color:              inherits;
+$nav-icon-color-active:       $nav-top-bg;
 
-$sidebar-bullet-color:            rgba(0,0,0,.25);
-$sidebar-bullet-color-active:     $sidebar-icon-color-active;
+$nav-bullet-color:            rgba(0,0,0,.25);
+$nav-bullet-color-active:     $nav-icon-color-active;
 
-$sidebar-heading-color:           #919DA8;
-$sidebar-label-color:             $sidebar-item-color;
+$nav-heading-color:           #919DA8;
+$nav-label-color:             $nav-item-color;
 
 // OFFSIDEBAR
 
@@ -136,14 +136,14 @@ body,
 }
 
 /* ========================================================================
-   Component: sidebar
+   Component: nav
  ========================================================================== */
 
-.sidebar {
-  background-color: $sidebar-bg; 
+.nav {
+  background-color: $nav-bg; 
 
   .nav-heading {
-    color: $sidebar-heading-color;
+    color: $nav-heading-color;
   }
 
   // Items
@@ -151,13 +151,13 @@ body,
     > li {
       > a,
       > .nav-item {
-        color: $sidebar-item-color;
+        color: $nav-item-color;
         &:focus, &:hover {
-          color: $sidebar-item-color-active;
+          color: $nav-item-color-active;
         }
         // Item icon
         > em {
-          color: $sidebar-icon-color;
+          color: $nav-icon-color;
         }
       }
 
@@ -167,41 +167,41 @@ body,
         &,
         > a,
         .nav {
-          background-color: $sidebar-item-bg-active;
-          color: $sidebar-item-color-active;
+          background-color: $nav-item-bg-active;
+          color: $nav-item-color-active;
         }
         > a > em {
-          color: $sidebar-icon-color-active;
+          color: $nav-icon-color-active;
         }  
       }
       &.active {
-        border-left-color: $sidebar-item-color-active;
+        border-left-color: $nav-item-color-active;
       }
     }
   }
 }
 
-.sidebar-subnav {
-  background-color: $sidebar-bg;
-  > .sidebar-subnav-header {
-    color: $sidebar-item-color;
+.nav-subnav {
+  background-color: $nav-bg;
+  > .nav-subnav-header {
+    color: $nav-item-color;
   }
   > li  {
     > a,
     > .nav-item {
-      color: $sidebar-item-color;
+      color: $nav-item-color;
       &:focus, &:hover {
-        color: $sidebar-item-color-active;
+        color: $nav-item-color-active;
       }
     }
 
     &.active {
       > a,
       > .nav-item {
-        color: $sidebar-icon-color-active;
+        color: $nav-icon-color-active;
         &:after {
-          border-color: $sidebar-bullet-color-active;
-          background-color: $sidebar-bullet-color-active;
+          border-color: $nav-bullet-color-active;
+          background-color: $nav-bullet-color-active;
         }
       }
     }

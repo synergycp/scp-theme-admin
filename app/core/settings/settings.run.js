@@ -30,12 +30,12 @@
     };
 
     /**
-     * Close submenu when sidebar change from collapsed to normal
+     * Close submenu when nav change from collapsed to normal
      */
     this.watchCollapse = function () {
       $rootScope.$watch('app.layout.isCollapsed', function (newValue) {
         if (newValue === false)
-          $rootScope.$broadcast('closeSidebarMenu');
+          $rootScope.$broadcast('closeNavMenu');
       });
     };
 

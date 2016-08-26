@@ -3,15 +3,15 @@
 
   angular
     .module('app.dashboard')
-    .config(SidebarConfig)
+    .config(NavConfig)
     ;
 
   /**
    * @ngInject
    */
-  function SidebarConfig(SidebarProvider) {
-    SidebarProvider.group('dashboard', {
-      translate: "sidebar.DASH",
+  function NavConfig(NavProvider) {
+    NavProvider.group('dashboard', {
+      translate: "nav.DASH",
       sref: "app.dashboard",
       icon: "fa fa-home",
       alert: 1,

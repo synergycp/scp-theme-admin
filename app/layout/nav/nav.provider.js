@@ -2,37 +2,37 @@
   'use strict';
 
   angular
-    .module('app.layout.sidebar')
-    .provider('Sidebar', makeSidebarProvider);
+    .module('app.layout.nav')
+    .provider('Nav', makeNavProvider);
 
   /**
    * @ngInject
    */
-  function makeSidebarProvider(_) {
+  function makeNavProvider(_) {
     var items = [];
     var order = [];
-    var SidebarProvider = {
+    var NavProvider = {
       group: getOrCreateGroup,
       order: setOrder,
     };
     var groups = {};
 
-    SidebarProvider.$get = makeSidebarService;
+    NavProvider.$get = makeNavService;
 
-    return SidebarProvider;
+    return NavProvider;
 
     /**
      * @ngInject
      */
-    function makeSidebarService() {
-      return new SidebarService();
+    function makeNavService() {
+      return new NavService();
     }
 
-    function SidebarService() {
-      var Sidebar = this;
+    function NavService() {
+      var Nav = this;
 
-      Sidebar.items = items;
-      Sidebar.group = getOrCreateGroup;
+      Nav.items = items;
+      Nav.group = getOrCreateGroup;
     }
 
     function getOrCreateGroup(id, config) {

@@ -8,7 +8,7 @@
 
 @media print {
   
-  .sidebar,
+  .nav,
   .topnavbar,
   .offsidebar,
   .btn {
@@ -20,7 +20,7 @@
   .wrapper,
   .wrapper > section,
   .content-wrapper {
-    margin: 0 !important; /* remove margin used for sidebar and expand the content */
+    margin: 0 !important; /* remove margin used for nav and expand the content */
     padding: 0 !important;
     width: 100% !important;
   }

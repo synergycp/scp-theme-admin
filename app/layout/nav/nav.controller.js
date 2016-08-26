@@ -1,27 +1,27 @@
 /**=========================================================
- * Module: sidebar-menu.js
- * Handle sidebar collapsible elements
+ * Module: nav-menu.js
+ * Handle nav collapsible elements
  =========================================================*/
 
 (function () {
   'use strict';
 
   angular
-    .module('app.layout.sidebar')
-    .controller('SidebarCtrl', SidebarCtrl);
+    .module('app.layout.nav')
+    .controller('NavCtrl', NavCtrl);
 
   /**
    * @ngInject
    */
-  function SidebarCtrl($rootScope, $state, Sidebar, Utils, _) {
-    var sidebar = this;
+  function NavCtrl($rootScope, $state, Nav, Utils, _) {
+    var nav = this;
 
-    sidebar.items = Sidebar.items;
+    nav.items = Nav.items;
 
-    sidebar.isCollapsed = [];
-    sidebar.addCollapse = addCollapse;
-    sidebar.toggleCollapse = toggleCollapse;
-    sidebar.getMenuItemPropClasses = getMenuItemPropClasses;
+    nav.isCollapsed = [];
+    nav.addCollapse = addCollapse;
+    nav.toggleCollapse = toggleCollapse;
+    nav.getMenuItemPropClasses = getMenuItemPropClasses;
 
     activate();
 
@@ -38,28 +38,27 @@
 
 
     function addCollapse($index, item) {
-      sidebar.isCollapsed[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
+      nav.isCollapsed[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
     }
 
 
     function toggleCollapse($index, isParentItem) {
-
-      // collapsed sidebar doesn't toggle drodopwn
-      if (Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover) {
+      // collapsed nav doesn't toggle drodopwn
+      if (Utils.isNavCollapsed() || $rootScope.app.layout.asideHover) {
         return true;
       }
 
       // make sure the item index exists
-      if (angular.isDefined(sidebar.isCollapsed[$index])) {
-        if (!sidebar.lastEventFromChild) {
-          sidebar.isCollapsed[$index] = !sidebar.isCollapsed[$index];
+      if (angular.isDefined(nav.isCollapsed[$index])) {
+        if (!nav.lastEventFromChild) {
+          nav.isCollapsed[$index] = !nav.isCollapsed[$index];
           closeAllBut($index);
         }
       } else if (isParentItem) {
         closeAllBut(-1);
       }
 
-      sidebar.lastEventFromChild = isChild($index);
+      nav.lastEventFromChild = isChild($index);
 
       return true;
 
@@ -80,9 +79,9 @@
 
     function closeAllBut(index) {
       index += '';
-      for (var i in sidebar.isCollapsed) {
+      for (var i in nav.isCollapsed) {
         if (index < 0 || index.indexOf(i) < 0)
-          sidebar.isCollapsed[i] = true;
+          nav.isCollapsed[i] = true;
       }
     }
 

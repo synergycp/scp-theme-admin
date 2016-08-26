@@ -4,7 +4,7 @@
   angular
     .module('app.layout', [
       'app.layout.loadingbar',
-      'app.layout.sidebar',
+      'app.layout.nav',
       'app.layout.alert',
       'app.layout.utils',
       'app.layout.logs',

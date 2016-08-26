@@ -3,7 +3,7 @@
  ========================================================================== */
 
 //
-// A sidebar in offcanvas mode
+// A nav in offcanvas mode
 // Open status toggled via JS
 // -----------------------------------------
 
@@ -18,7 +18,7 @@ $offsidebar-wd:           $aside-wd + 15px;      // match the width with the mai
   bottom: 0;
   right: 0;
   width: $offsidebar-wd;
-  margin-top: ($navbar-height) * 2;
+  margin-top: $navbar-height;
   border-left: 1px solid $offsidebar-border-color;
   background-color: $offsidebar-bg;
   color: $offsidebar-color;

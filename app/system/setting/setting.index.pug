@@ -1,7 +1,7 @@
 form(name="form", ng-submit="vm.submit()")
   uib-tabset.full-size-lists(active='vm.tabs.active')
     uib-tab(
-      ng-repeat="tab in vm.tabs.items"
+      ng-repeat="tab in vm.tabs.items track by $index"
       index="$index"
       select="vm.tabs.change($index)"
       active="tab.active"

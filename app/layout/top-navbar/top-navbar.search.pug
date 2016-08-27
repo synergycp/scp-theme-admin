@@ -2,7 +2,6 @@ form.search-navbar(
   role="search"
   ui-sref="app.search({ q: search.query })"
 )
-  em.fa.fa-search.search-icon
   .form-group.has-feedback.search-form
     input.search-input(
       type="text"
@@ -11,4 +10,5 @@ form.search-navbar(
       placeholder="{{ 'app.topbar.search.PLACEHOLDER' | translate }}"
     )
     //.fa.fa-times.form-control-feedback(search-dismiss)
-  button.hidden.btn.btn-default(type='submit') Submit
+  em.fa.fa-search.search-icon
+  button.hidden(type="submit")

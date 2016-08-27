@@ -130,7 +130,6 @@ $tablet-landscape: 1025px;
   }
 }
 
-
 // Sub Levels
 .nav-subnav {
   background-color: $nav-bg;
@@ -256,3 +255,22 @@ $tablet-landscape: 1025px;
 
   } // .nav
 } // .aside-collapsed
+
+.nav .navbar-nav {
+  .dropdown-menu {
+    top: 41px;
+
+    li a {
+      padding: 10px 20px;
+      line-height: 15px;
+      height: auto;
+      color: $nav-item-color;
+      box-shadow: none;
+
+      &:hover, &:focus {
+        color: $nav-item-color-active;
+        box-shadow: none;
+      }
+    }
+  }
+}

@@ -22,11 +22,11 @@ $nav-top-bg-start: $nav-top-bg;
 $nav-top-bg-end: $brand-info-light;
 $nav-header-bg: transparent;
 
-$nav-top-item-desktop: #ddd;
-$nav-top-item-desktop-active: lighten($nav-top-item-desktop, 20%);
+$nav-top-item-desktop: #e3e3e3;
+$nav-top-item-desktop-active: #fff;
 
 $nav-top-item-mobile: $nav-top-item-desktop;
-$nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
+$nav-top-item-mobile-active: $nav-top-item-desktop-active;
 
 // Navbar top layout
 .topnavbar {
@@ -41,6 +41,10 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
   background-color: $nav-top-bg;
   @include gradient-vertical($nav-top-bg-end, $nav-top-bg-start);
   @include material-shadow();
+
+  .navbar-text {
+    color: #ccc;
+  }
 
   .navbar-header {
     background-color: $nav-header-bg;
@@ -78,11 +82,11 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
   }
 
   .navbar-nav {
-    > li {
+    li {
       position: relative;
     }
-    > .open > a,
-    > li > a {
+    .open a,
+    li a {
       color: $nav-top-item-mobile;
 
       &:focus,
@@ -93,7 +97,7 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
       &.ico-link {
         line-height: 23px;
         text-align: center;
-        padding: 12px 5px;
+        padding: 12px 5px 0;
 
         .ico {
           font-size: 1.5em;
@@ -114,79 +118,13 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
     }
 
     // Navbar link active style
-    > .active > a,
-    > .open > a {
+    .active a,
+    .open a {
       &,
       &:focus,
       &:hover {
         background-color: transparent;
       }
-    }
-
-    // the button to toggle search
-    > li > [data-toggle='navbar-search'] {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 20;
-      font-size: 16px;
-      line-height: $navbar-height;
-      color: #fff;
-      padding-top: 0;
-      padding-bottom: 0;
-      @include transition(color .3s ease);
-      @media only screen and (min-width: $mq-tablet) {
-        color: $nav-top-item-desktop;
-      }
-    }
-  }
-
-  // Search:
-  .navbar-form {
-    position: absolute;
-    top: -100%;
-    left: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-    height: $navbar-height;
-    z-index: 9001;
-    @include transition(all .3s);
-    border: 0;
-    border-bottom: 1px solid #e1e2e3;
-
-    .form-group {
-      height: 100%;
-      width: 100%;
-    }
-
-    .form-control {
-      height: 100%;
-      border: 0;
-      border-radius: 0;
-      width: 100%;
-    }
-
-    &.open {
-      top: 0;
-    }
-
-    // re locate and center feedback
-    .has-feedback .form-control-feedback {
-      height: 30px;
-      cursor: pointer;
-      top: 50%;
-      margin-top: -15px;
-      line-height: 30px;
-      margin-right: 10px;
-      color: #c1c2c3;
-      font-size: 1.5em;
-      pointer-events: auto; // make icon clickable
-    }
-  }
-  @media only screen and (min-width: $mq-tablet) {
-    .navbar-form {
-      left: $nav-header-wd;
     }
   }
 
@@ -298,17 +236,8 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
       @include transition(all .2s);
     }
 
-    .navbar-nav > .open > a {
-      &,
-      &:focus,
-      &:hover {
-        box-shadow: 0 -3px 0 $brand-primary inset;
-        @include transition(all .2s);
-      }
-    }
-
-    .navbar-nav > .open > a,
-    .navbar-nav > li > a {
+    .navbar-nav .open a,
+    .navbar-nav li a {
       color: $nav-top-item-desktop;
 
       &:focus,
@@ -316,12 +245,6 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
         color: $nav-top-item-desktop-active;
       }
     }
-
-    // relocate search toggle button
-    .navbar-nav > li > [data-toggle='navbar-search'] {
-      position: static;
-    }
-
   }
   // .topnavbar
 
@@ -332,7 +255,7 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
     z-index: 10;
 
     // restore nav items positions
-    .nav > li {
+    .nav li {
       position: relative;
     }
 
@@ -370,4 +293,8 @@ $nav-top-item-mobile-active: lighten($nav-top-item-mobile, 20%);
       }
     }
   }
+}
+
+.nav-subnav.nav-floating.topnav-dropdown {
+  margin-left: -$gutter;
 }

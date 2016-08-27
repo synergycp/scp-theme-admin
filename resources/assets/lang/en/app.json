@@ -3,6 +3,15 @@
   "topbar": {
     "search": {
       "PLACEHOLDER": "Type to search..."
+    },
+    "account": {
+      "LOGGED-IN": "Logged in as:",
+      "dropdown": {
+        "TITLE": "My Account",
+        "SETTINGS": "Account Settings",
+        "LAYOUT": "Theme Settings",
+        "LOGOUT": "Logout"
+      }
     }
   },
   "confirm": {

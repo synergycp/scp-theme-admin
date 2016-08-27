@@ -1,6 +1,8 @@
 (function () {
-  angular.module('app.user.client')
-    .config(routeConfig);
+  angular
+    .module('app.user.client')
+    .config(routeConfig)
+    ;
 
   /**
    * @ngInject

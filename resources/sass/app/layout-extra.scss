@@ -150,16 +150,12 @@
     > section {
       margin-top: 0;
     }
-    > .offsidebar {
-      margin-top: $navbar-hg;
-    }
     > footer {
       margin: 0;
     }
   }
   &.layout-fixed .wrapper {
-    > section,
-    > .offsidebar {
+    > section {
       margin-top: $navbar-hg;
     }
   }

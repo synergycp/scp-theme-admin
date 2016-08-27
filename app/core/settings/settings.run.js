@@ -33,7 +33,7 @@
      * Close submenu when nav change from collapsed to normal
      */
     this.watchCollapse = function () {
-      $rootScope.$watch('app.layout.isCollapsed', function (newValue) {
+      $rootScope.$watch('app.layout.nav.isCollapsed', function (newValue) {
         if (newValue === false)
           $rootScope.$broadcast('closeNavMenu');
       });
@@ -46,20 +46,22 @@
         year: this.getYear(),
         layout: {
           isFixed: true,
-          isCollapsed: false,
           isBoxed: false,
           isRTL: false,
           horizontal: false,
           isFloat: false,
           asideHover: false,
           theme: null,
-          asideScrollbar: false
+          asideScrollbar: false,
+          nav: {
+            position: 'left',
+            isCollapsed: false,
+          },
         },
         useFullLayout: false,
         hiddenFooter: false,
-        offsidebarOpen: false,
         asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
+        viewAnimation: 'ng-fadeInUp',
       };
     };
 

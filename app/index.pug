@@ -23,7 +23,17 @@ html(lang="en", data-ng-app="app")
     // Themes
     link(rel='stylesheet', ng-href='{{app.layout.theme}}', data-ng-if="app.layout.theme")
 
-  body(data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.layout.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'layout-fs': app.useFullLayout, 'hidden-footer': app.hiddenFooter, 'layout-h': app.layout.horizontal, 'aside-float': app.layout.isFloat, 'offsidebar-open': app.offsidebarOpen, 'aside-toggled': app.asideToggled}")
+  body(data-ng-class="{"+[
+    "'layout-fixed': app.layout.isFixed",
+    "'aside-collapsed': app.layout.nav.isCollapsed",
+    "'sidebar-left': app.layout.nav.position == 'left'",
+    "'sidebar-top': app.layout.nav.position == 'top'",
+    "'layout-boxed': app.layout.isBoxed",
+    "'layout-fs': app.useFullLayout",
+    "'hidden-footer': app.hiddenFooter",
+    "'aside-float': app.layout.isFloat",
+    "'aside-toggled': app.asideToggled",
+  ].join(',')+"}")
 
     div(data-preloader)
 

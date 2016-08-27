@@ -2,15 +2,14 @@
      Component: print
  ========================================================================== */
 
-// 
-// Put here all rules required to style the print view 
-// 
+//
+// Put here all rules required to style the print view
+//
 
 @media print {
-  
+
   .nav,
   .topnavbar,
-  .offsidebar,
   .btn {
     display: none !important;
     width: 0 !important;
@@ -25,7 +24,7 @@
     width: 100% !important;
   }
 
-  
+
   .content-wrapper {
     overflow: hidden !important;
   }

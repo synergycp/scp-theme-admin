@@ -4,6 +4,7 @@ script(type="text/ng-template", id="nav-renderer.html")
     ng-if="item.options.heading"
     ng-bind="(item.options.translate | translate) || item.options.text"
   )
+
   a(
     ng-if="!item.options.heading"
     ng-href="{{$state.href(item.options.sref, item.options.params)}}"
@@ -24,7 +25,7 @@ script(type="text/ng-template", id="nav-renderer.html")
     )
 
   ul.nav.nav-subnav(
-    ng-if="item.submenu"
+    ng-if="item.submenu && item.submenu.length"
     uib-collapse="nav.isCollapsed[pIndex]"
     ng-init="nav.addCollapse(pIndex, item)"
   )

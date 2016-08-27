@@ -1,0 +1,17 @@
+ul.nav.navbar-nav(ng-controller="NavCtrl as nav")
+  li
+    // Button to show/hide the sidebar on mobile. Visible on mobile only.
+    a(
+      href=''
+      ng-click="app.asideToggled = !app.asideToggled"
+      md-ink-ripple
+    ).visible-xs.sidebar-toggle
+      em.fa.fa-navicon
+  // Iterates over all nav items
+  li(
+    ng-class="nav.getMenuItemPropClasses(item)"
+    ng-repeat="item in nav.items"
+    ng-init="pIndex = $index"
+    ng-include="'top-nav-renderer.html'"
+    ng-click="nav.toggleCollapse(pIndex, true)"
+  )

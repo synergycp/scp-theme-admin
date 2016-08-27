@@ -1,0 +1,27 @@
+uib-dropdown
+  p.navbar-text(
+    translate="app.topbar.account.LOGGED-IN"
+  )
+  a.link(uib-dropdown-toggle)
+    span(ng-bind="account.user.name")
+    | &nbsp;
+    em.fa.fa-lg.fa-angle-down
+  ul(uib-dropdown-menu)
+    li.dropdown-header(
+      translate="app.topbar.account.dropdown.TITLE"
+    )
+    li
+      a(
+        ui-sref="app.user.account.settings"
+        translate="app.topbar.account.dropdown.SETTINGS"
+      )
+      a(
+        ui-sref="app.user.account.layout"
+        translate="app.topbar.account.dropdown.LAYOUT"
+      )
+    li.divider(role="separator")
+    li
+      a(
+        ui-sref="auth.logout"
+        translate="app.topbar.account.dropdown.LOGOUT"
+      )

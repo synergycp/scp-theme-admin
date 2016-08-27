@@ -12,31 +12,31 @@
   function SystemNavConfig(NavProvider) {
     NavProvider.group('pxe', {
       translate: "nav.pxe.TITLE",
-      sref: "app.pxe.install",
+      sref: "app.pxe.install.list",
       icon: "fa fa-upload",
     }).item({
       text: "Installs",
-      sref: "app.pxe.install",
+      sref: "app.pxe.install.list",
     })
     .item({
       text: "Preseeds",
-      sref: "app.pxe.preseed",
+      sref: "app.pxe.preseed.list",
     })
     .item({
       text: "Profiles",
-      sref: "app.pxe.profile",
+      sref: "app.pxe.profile.list",
     })
     .item({
       text: "Shell Scripts",
-      sref: "app.pxe.shell",
+      sref: "app.pxe.shell.list",
     })
     .item({
       text: "Boot Scripts",
-      sref: "app.pxe.boot",
+      sref: "app.pxe.boot.list",
     })
     .item({
       text: "ISO Manager",
-      sref: "app.pxe.iso",
+      sref: "app.pxe.iso.list",
     })
     ;
   }

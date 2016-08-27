@@ -125,16 +125,22 @@
 
         var itemTop = $position.top + mar - $nav.scrollTop();
         var vwHeight = $win.height();
-        var itemLeft = $position.left;
+        var css = {
+          position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
+          top: itemTop,
+          left: 'auto',
+          bottom: (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto',
+        };
+
+        if (ul.hasClass('opens-left')) {
+          css.right = $win.width() - $position.left - $listItem.outerWidth();
+        } else {
+          css.left = $position.left;
+        }
 
         subNav
           .addClass(floatClass)
-          .css({
-            position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
-            top: itemTop,
-            left: itemLeft,
-            bottom: (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto',
-          });
+          .css(css);
 
         subNav.on('mouseleave', function () {
           toggleTouchItem($listItem);

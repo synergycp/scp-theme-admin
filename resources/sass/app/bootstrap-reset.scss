@@ -271,10 +271,13 @@ fieldset {
 .navbar-nav {
   margin: 0 -15px;
 
-  > li > a {
+  li a.link,
+  p.navbar-text {
     height: 65px;
     line-height: 65px;
     padding: 0 15px;
+    margin: 0;
+    text-decoration: none;
   }
 
   @media only screen and (min-width: $mq-tablet) {
@@ -309,7 +312,7 @@ fieldset {
 }
 
 // Angular UI.Bootstrap
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.pagination, .carousel, .panel-title a { cursor: pointer; }
 
 .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus {
   border-bottom: 0;

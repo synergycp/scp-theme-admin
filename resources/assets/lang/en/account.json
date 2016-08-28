@@ -1,0 +1,14 @@
+{
+  "layout": {
+    "HEADING": "Theme Settings",
+    "nav": {
+      "TITLE": "Navigation Settings",
+      "COLLAPSE": "Collapse Navigation",
+      "position": {
+        "LABEL": "Position",
+        "LEFT": "Left",
+        "TOP": "Top"
+      }
+    }
+  }
+}

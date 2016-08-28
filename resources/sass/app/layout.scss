@@ -46,6 +46,12 @@ html, body {
   background-color: $content-bg;
 }
 
+.sidebar-left {
+  .wrapper > .aside {
+    left: 0;
+  }
+}
+
 // Main wrapper
 // -----------------------------
 .wrapper {
@@ -63,8 +69,9 @@ html, body {
     // visibility: hidden;
     position: absolute;
     width: $aside-wd;
+    left: -$aside-wd;
 
-    top: 0; left: 0;
+    top: 0;
     bottom: 0;
     z-index: $z-index-main-section + 5;
     // @include transition(visibility 0s linear .3s);
@@ -189,31 +196,30 @@ html, body {
 // -----------------------------
 
 @media only screen and (min-width: $mq-tablet) {
-
   body {
     min-height: 100%;
   }
 
   .wrapper {
-
     > .aside {
       .aside-inner {
         padding-top: $navbar-hg;
       }
     }
+  }
 
-    > section,
-    > footer {
-      margin-left: $aside-wd;
-    }
+  .sidebar-left {
+    .wrapper {
+      > section,
+      > footer {
+        margin-left: $aside-wd;
+      }
 
-    > section {
-      // with just a margin we can make the
-      // right nav always visible
-      &.has-nav-right {
-        margin-right: $aside-wd + 20;
-        + .offsidebar {
-          z-index: 1;
+      > section {
+        // with just a margin we can make the
+        // right nav always visible
+        &.has-nav-right {
+          margin-right: $aside-wd + 20;
         }
       }
     }
@@ -227,20 +233,22 @@ html, body {
 
 
 @media only screen and (max-width: $mq-up-to-tablet) {
-  .wrapper {
-    > .aside {
-      margin-left: -$aside-wd;
-    }
-  }
-  .aside-toggled {
+  .sidebar-left {
     .wrapper {
-      > section,
-      > footer {
-        margin-left: $aside-wd;
-      }
-
       > .aside {
-        margin-left: 0;
+        margin-left: -$aside-wd;
+      }
+    }
+    .aside-toggled {
+      .wrapper {
+        > section,
+        > footer {
+          margin-left: $aside-wd;
+        }
+
+        > .aside {
+          margin-left: 0;
+        }
       }
     }
   }
@@ -283,21 +291,23 @@ html, body {
 
 @media only screen and (max-width: $mq-up-to-tablet) {
 
-  .aside-collapsed .wrapper {
-    > .aside {
-      margin-left: -$aside-wd-collapsed;
-    }
-  }
-
-  .aside-collapsed.aside-toggled {
+  .sidebar-left.aside-collapsed {
     .wrapper {
-      > section,
-      > footer {
-        margin-left: $aside-wd-collapsed;
-      }
-
       > .aside {
-        margin-left: 0;
+        margin-left: -$aside-wd-collapsed;
+      }
+    }
+
+    &.aside-toggled {
+      .wrapper {
+        > section,
+        > footer {
+          margin-left: $aside-wd-collapsed;
+        }
+
+        > .aside {
+          margin-left: 0;
+        }
       }
     }
   }
@@ -359,7 +369,7 @@ html, body {
 // Margin only exists above tablet
 @media only screen and (min-width: $mq-tablet) {
   // Aside status toggled via JS
-  .aside-collapsed {
+  .sidebar-left.aside-collapsed {
     .wrapper {
       > section,
       > footer {
@@ -384,8 +394,7 @@ html, body {
 .layout-fixed {
 
   @media (max-width: $boxed-max-width) {
-    &.aside-toggled,
-    &.offsidebar-open {
+    &.aside-toggled {
       overflow-y: hidden;
     }
   }
@@ -434,10 +443,6 @@ _:-ms-lang(x), .layout-fixed .wrapper > .aside .aside-inner {
       margin: 0 auto;
       overflow: hidden;
       box-shadow: 0 0 13px rgba(0,0,0,.25);
-
-      .offsidebar {
-        position: absolute !important;
-      }
 
       > .aside {
         left: inherit;

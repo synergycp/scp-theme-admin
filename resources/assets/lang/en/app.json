@@ -35,17 +35,6 @@
       }
     }
   },
-  "right-sidebar": {
-    "user": {
-      "TITLE": "User Controls",
-      "links": {
-        "LOGOUT": "Logout"
-      }
-    },
-    "layout": {
-      "TITLE": "Layout Controls"
-    }
-  },
   "action": {
     "EDIT": "edit",
     "BULK": "With Selected:",

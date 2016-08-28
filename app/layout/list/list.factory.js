@@ -10,7 +10,7 @@
    *
    * @ngInject
    */
-  function ListFactory(Api, Pages, Refresh, WithSelected, EventEmitter, Loader, _) {
+  function ListFactory(Api, Pages, Refresh, WithSelected, EventEmitter, Loader, $debounce, _) {
     return function (path) {
       return new List(
         Api.all(path),
@@ -19,18 +19,19 @@
         EventEmitter(),
         Loader(),
         Refresh,
+        $debounce,
         _
       );
     };
   }
 
-  function List($api, pages, bulk, event, loader, Refresh, _) {
+  function List($api, pages, bulk, event, loader, Refresh, $debounce, _) {
     var list = this;
     var filter = {};
 
     list.items = [];
     list.sortQuery = {};
-    list.load = _.debounce(forceLoad, 5);
+    list.load = $debounce(forceLoad, 5);
     list.loader = loader;
 
     list.pages = pages;

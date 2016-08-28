@@ -117,7 +117,8 @@
       },
 
       isNavCollapsed: function () {
-        return $body.hasClass('aside-collapsed');
+        return $body.hasClass('aside-collapsed') ||
+               $body.hasClass('sidebar-top');
       },
 
       isNavToggled: function () {

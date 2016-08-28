@@ -46,12 +46,14 @@
     }
 
     function showResponse(response) {
-      switchControl.response = response.data;
+      switchControl.response = response.data.output;
+
       return response;
     }
 
     function fireChangeEvent(response) {
       switchControl.server.fire('change');
+
       return response;
     }
   }

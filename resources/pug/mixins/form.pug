@@ -37,7 +37,7 @@ mixin checkbox(label, name)
         type="checkbox"
         name=name
       )&attributes(attributes)
-      =label
+      span(translate=label)
       block
 
 mixin select(label, name)
@@ -49,7 +49,10 @@ mixin select(label, name)
 
 mixin label(label, name)
   .form-group
-    label.control-label.col-md-3.col-sm-2(for="form-"+name)=label
+    label.control-label.col-md-3.col-sm-2(
+      for="form-"+name
+      translate=label
+    )
     .col-md-9.col-sm-10
       block
 

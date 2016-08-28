@@ -7,5 +7,6 @@
       'app.core.api',
       'app.user.client',
       'app.user.admin',
+      'app.user.account',
     ]);
 })();

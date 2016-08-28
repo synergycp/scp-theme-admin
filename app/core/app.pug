@@ -4,13 +4,14 @@ header.topnavbar-wrapper(ng-include="'app/layout/top-navbar/top-navbar.html'")
 // nav
 aside.aside(ng-include="'app/layout/nav/nav.html'")
 
-// offsidebar
-aside.offsidebar(ng-include="'app/layout/right-sidebar/right-sidebar.html'")
-
 // Main section
 section
   // Page content
-  .content-wrapper(ui-view="", autoscroll="false", ng-class="app.viewAnimation")
+  .content-wrapper(
+    ui-view
+    autoscroll="false"
+    ng-class="app.viewAnimation"
+  )
 
 // Alerts section
 .alerts(ng-controller="AlertCtrl as alert")
@@ -24,7 +25,7 @@ section
       ng-click="message.remove()"
     )
       span(aria-hidden="true") &times;
-    | {{message.text}}
+    span(ng-bind="message.text")
 
 // Page footer
 footer(ng-include="'app/layout/footer/footer.html'")

@@ -46,6 +46,12 @@ $nav-top-item-mobile-active: $nav-top-item-desktop-active;
     color: #ccc;
   }
 
+  .top-nav-links {
+    position: absolute;
+    top: -65px;
+    transition: top .5s ease;
+  }
+
   .navbar-header {
     background-color: $nav-header-bg;
     position: relative;
@@ -194,6 +200,10 @@ $nav-top-item-mobile-active: $nav-top-item-desktop-active;
   }
 }
 
+.sidebar-top .top-nav-links {
+  top: 0;
+}
+
 // contains elements below header
 .nav-wrapper {
   padding: 0 15px;
@@ -293,8 +303,4 @@ $nav-top-item-mobile-active: $nav-top-item-desktop-active;
       }
     }
   }
-}
-
-.nav-subnav.nav-floating.topnav-dropdown {
-  margin-left: -$gutter;
 }

@@ -43,13 +43,6 @@ $nav-bullet-color-active:     $nav-icon-color-active;
 $nav-heading-color:           #919DA8;
 $nav-label-color:             $nav-item-color;
 
-// OFFSIDEBAR
-
-$offsidebar-bg:           #fff;
-$offsidebar-border-color: greyscale(darken($offsidebar-bg, 20%));
-$offsidebar-color:        $text-color;
-
-
 /* ========================================================================
    Component: layout
  ========================================================================== */
@@ -205,14 +198,4 @@ body,
       }
     }
   } // li
-}
-
-/* ========================================================================
-   Component: offsidebar
- ========================================================================== */
-
-.offsidebar {
-  border-left: 1px solid $offsidebar-border-color;
-  background-color: $offsidebar-bg;
-  color: $offsidebar-color;
 }

@@ -46,7 +46,7 @@
     }
 
     function showResponse(response) {
-      switchControl.response = response.data.output;
+      switchControl.response = response.output;
 
       return response;
     }

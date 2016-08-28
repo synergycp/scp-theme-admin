@@ -72,12 +72,6 @@ $gutter: 15px;
     margin-left: 0;
     margin-right: $gutter;
   }
-
-  &.show-hover {
-    opacity: 0;
-    z-index: -1;
-    transition: opacity .5s ease, z-index .5s ease;
-  }
 }
 
 .no-margin {
@@ -87,6 +81,23 @@ $gutter: 15px;
 .hoverable:hover .show-hover {
   opacity: 1;
   z-index: 999;
+}
+
+.show-hover {
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .5s ease, z-index .5s ease;
+}
+
+.editable {
+  position: relative;
+}
+
+.editable .show-hover {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .unpadded-content .tab-content {

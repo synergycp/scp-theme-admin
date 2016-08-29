@@ -12,14 +12,13 @@
   function SystemNavConfig(NavProvider) {
     NavProvider.group('network', {
       translate: "nav.network.TITLE",
-      sref: "#",
       icon: "fa fa-sitemap",
     }).item({
       translate: "nav.network.ENTITIES",
-      sref: "app.network.entity",
+      sref: "app.network.entity.list",
     }).item({
       translate: "nav.network.GROUPS",
-      sref: "app.network.group",
+      sref: "app.network.group.list",
     });
   }
 })();

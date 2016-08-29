@@ -12,14 +12,14 @@
   function SystemNavConfig(NavProvider) {
     NavProvider.group('user', {
       translate: "nav.USERS",
-      sref: "#",
+      sref: "app.user.client.list",
       icon: "fa fa-user",
     }).item({
       text: "Clients",
-      sref: "app.user.client",
+      sref: "app.user.client.list",
     }).item({
       text: "Administrators",
-      sref: "app.user.admin",
+      sref: "app.user.admin.list",
     });
   }
 })();

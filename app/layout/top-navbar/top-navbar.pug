@@ -1,55 +1,8 @@
-// Inline template with nav items markup and ng-directives
-script(type="text/ng-template", id="top-nav-renderer.html")
-  a.relative(
-    ng-if="!item.options.heading && item.options.sref"
-    ng-class="{ 'ico-link': !!item.options.icon }"
-    ng-include="'top-nav-link.html'"
-    title="{{item.options.text}}"
-    ui-sref="{{item.options.sref}}(item.options.params)"
-    md-ink-ripple
-  )
-
-  a.relative(
-    ng-if="!item.options.heading && !item.options.sref"
-    ng-class="{ 'ico-link': !!item.options.icon }"
-    ng-include="'top-nav-link.html'"
-    title="{{item.options.text}}"
-  )
-
-  ul.nav.nav-subnav.collapse(
-    ng-if="item.submenu && item.submenu.length"
-  )
-    li.nav-subnav-header(
-      ng-bind="(item.options.translate | translate) || item.options.text"
-    )
-    li(
-      ng-repeat="item in item.submenu"
-      ng-include="'top-nav-renderer.html'"
-      ng-class="nav.getMenuItemPropClasses(item)"
-      ng-init="pIndex=(pIndex+'-'+$index); inSubmenu = true"
-    )
-
-script(type="text/ng-template", id="top-nav-link.html")
-  b(
-    ng-if="item.options.alert"
-    ng-class="item.options.label || 'label label-success'"
-    ng-bind="item.options.alert"
-  )
-  em.ico(
-    ng-if="item.options.icon"
-    ng-class="item.options.icon"
-  )
-  span.link-text(
-    ng-bind="(item.options.translate | translate) || item.options.text"
-  )
-
-// START Top Navbar
 nav.navbar.topnavbar(
   navbar
   dropdown-class="topnav-dropdown"
   role='navigation'
 )
-  // START Nav wrapper
   .nav-wrapper
     top-nav-links
 

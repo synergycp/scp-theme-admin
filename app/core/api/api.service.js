@@ -22,14 +22,7 @@
     ApiProvider.baseUrl = baseUrl;
     ApiProvider.setUrl = setUrl;
     ApiProvider.addResponseInterceptor = RestangularProvider.addResponseInterceptor;
-    ApiProvider.$get = makeApiService;
-
-    /**
-     * @ngInject
-     */
-    function makeApiService (ApiKey, Restangular, $state, Alert) {
-      return new ApiService(ApiKey, Restangular, $state, Alert);
-    }
+    ApiProvider.$get = ApiService;
 
     function setUrl(url) {
       ApiProvider.options.url = url;
@@ -46,10 +39,9 @@
      *
      * Responsibilities:
      * 	 - Handle API Error Responses
-     *
      * @ngInject
      */
-    function ApiService(ApiKey, Restangular, $state, Alert) {
+    function ApiService(ApiKey, Restangular, $state, Alert, $injector) {
       var proxy = wrapRestangular(Restangular);
       proxy.baseUrl = baseUrl;
       proxy.apiUrl = apiUrl;
@@ -141,7 +133,7 @@
       }
 
       function sendToLogin() {
-        $state.go('auth.login');
+        $injector.get('Auth').logout();
       }
 
       function apiErrorTranslator(response, deferred, responseHandler) {

@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function LogoutCtrl(Auth) {
+  function LogoutCtrl(Auth, $previousState, $state) {
     var vm = this;
 
     activate();
@@ -19,7 +19,22 @@
     //////////
 
     function activate() {
-      Auth.logout();
+      var previous = $previousState.get();
+
+      Auth.logout().then(transferToLogin);
+
+      function transferToLogin() {
+        $state.go('auth.login', {
+          next: getNextUrl(),
+        });
+      }
+
+      function getNextUrl() {
+        return $state
+          .href(previous.state, previous.params)
+          .substr(1)
+          ;
+      }
     }
   }
 })();

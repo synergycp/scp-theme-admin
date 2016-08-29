@@ -140,7 +140,7 @@
 
             return $translate.refresh();
           case 'inject':
-            return $injector.get(load);
+            return $injector.get(load)();
           case 'raw':
             return $ocLazyLoad.load(load);
           case 'after':

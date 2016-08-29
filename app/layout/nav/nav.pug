@@ -1,3 +1,23 @@
+script(type="text/ng-template", id="side-nav-link.html")
+  b.label.side-label(
+    ng-repeat="alert in item.alerts"
+    class="label-{{alert.type}}"
+    ng-if="alert.count"
+    ng-bind="alert.count"
+  )
+  b.label.side-label(
+    ng-if="item.options.alert"
+    class="label-{{item.options.alertType || 'success'}}"
+    ng-bind="item.options.alert"
+  )
+  em.ico(
+    ng-if="item.options.icon"
+    ng-class="item.options.icon"
+  )
+  span.link-text(
+    ng-bind="(item.options.translate | translate) || item.options.text"
+  )
+
 // Inline template with nav items markup and ng-directives
 script(type="text/ng-template", id="nav-renderer.html")
   span(
@@ -5,24 +25,21 @@ script(type="text/ng-template", id="nav-renderer.html")
     ng-bind="(item.options.translate | translate) || item.options.text"
   )
 
-  a(
-    ng-if="!item.options.heading"
-    ng-href="{{$state.href(item.options.sref, item.options.params)}}"
+  a.relative(
+    ng-if="!item.options.heading && item.options.sref"
+    ng-class="{ 'ico-link': !!item.options.icon }"
+    ng-include="'side-nav-link.html'"
     title="{{item.options.text}}"
+    ui-sref="{{item.options.sref}}(item.options.params)"
     md-ink-ripple
   )
-    .pull-right(
-      ng-if="item.options.alert"
-      ng-class="item.options.label || 'label label-success'"
-      ng-bind="item.options.alert"
-    )
-    em(
-      ng-if="item.options.icon"
-      ng-class="item.options.icon"
-    )
-    span(
-      ng-bind="(item.options.translate | translate) || item.options.text"
-    )
+
+  a.relative(
+    ng-if="!item.options.heading && !item.options.sref"
+    ng-class="{ 'ico-link': !!item.options.icon }"
+    ng-include="'side-nav-link.html'"
+    title="{{item.options.text}}"
+  )
 
   ul.nav.nav-subnav(
     ng-if="item.submenu && item.submenu.length"

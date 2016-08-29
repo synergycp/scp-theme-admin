@@ -25,13 +25,13 @@
       sref: "app.hardware.server.provision",
     }).item({
       text: "Part Inventory",
-      sref: "app.hardware.part",
+      sref: "app.hardware.part.list",
     }).item({
       text: "Switches",
       sref: "app.hardware.switch.list",
     }).item({
       text: "Switch Port Speeds",
-      sref: "app.hardware.switch.speed",
+      sref: "app.hardware.switch.speed.list",
     });
   }
 })();

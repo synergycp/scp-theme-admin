@@ -83,6 +83,7 @@
     provisionForm.mem.on('change', clearMulti.bind(null, provisionForm.addOns));
     provisionForm.server = Select('server').filter({
       available: true,
+      'parts[exact]': true,
     });
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
     provisionForm.profile = Select('pxe/profile')

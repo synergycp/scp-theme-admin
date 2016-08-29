@@ -1,6 +1,9 @@
 (function () {
-  angular.module('app.core.routes')
-    .config(routeConfig);
+  angular
+    .module('app.core.routes')
+    .config(routeConfig)
+    .factory('checkLoginMiddleware', checkLoginMiddleware)
+    ;
 
   /**
    * @ngInject
@@ -17,9 +20,23 @@
         abstract: true,
         templateUrl: helper.basepath('core/app.html'),
         resolve: helper.resolveFor(
+          'inject:checkLoginMiddleware',
           'modernizr', 'icons',
           'lang:app', 'lang:nav'
         ),
       });
+  }
+
+  /**
+   * @ngInject
+   */
+  function checkLoginMiddleware(ApiKey, Auth) {
+    return function () {
+      if (!ApiKey.id()) {
+        Auth.logout();
+
+        throw new Error('Not logged in');
+      }
+    };
   }
 })();

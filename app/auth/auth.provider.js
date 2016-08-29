@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  var LOGIN_STATE = 'auth.login';
+
   angular
     .module('app.auth')
     .provider('Auth', AuthProvider)
@@ -11,7 +13,7 @@
     var loginType;
     var afterLoginState = 'app.dashboard';
     var internalApi = {
-      $get: getService,
+      $get: AuthService,
       setLoginType: setLoginType,
       getLoginType: getLoginType,
       setAfterLoginState: setAfterLoginState,
@@ -41,16 +43,11 @@
     }
 
     /**
+     * Auth Service
+     *
      * @ngInject
      */
-    function getService(Api, ApiKey, $state, _) {
-      return new AuthService(Api, ApiKey, $state, _);
-    }
-
-    /**
-     * Auth Service
-     */
-    function AuthService(Api, ApiKey, $state, _) {
+    function AuthService(Api, ApiKey, $state, $location, $q, _) {
       var Auth = this;
       var $keys = Api.all('key');
 
@@ -58,6 +55,8 @@
       Auth.login = login;
       Auth.user = user;
       Auth.getLoginType = getLoginTypeOrFail;
+
+      return Auth;
 
       /////////////
 
@@ -76,9 +75,18 @@
        * @return {promise}
        */
       function logout() {
-        return $keys
-          .one(''+ApiKey.id())
-          .remove()
+        var promise = $q.when(0);
+
+        if (ApiKey.id()) {
+          promise.then(function() {
+            return $keys
+              .one(''+ApiKey.id())
+              .remove()
+              ;
+          });
+        }
+
+        return promise
           .then(ApiKey.delete, ApiKey.delete)
           .then(transferToLogin, transferToLogin)
           ;
@@ -105,12 +113,17 @@
       }
 
       function transferToApp() {
-        // TODO: attempted URL
-        $state.go(afterLoginState);
+        $location.url($state.params.next || '/');
       }
 
       function transferToLogin() {
-        $state.go('auth.login');
+        if ($state.current.name == LOGIN_STATE) {
+          return;
+        }
+
+        $state.go(LOGIN_STATE, {
+          next: $location.url(),
+        });
       }
 
       function getLoginTypeOrFail() {

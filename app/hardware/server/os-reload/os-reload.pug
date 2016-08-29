@@ -42,7 +42,7 @@ form(ng-submit="reload.submit()", ng-class="{ hide: reload.list.items.length }")
                   "reload.input.edition.items",
                   "| multiFilter: $select.search",
                 ") track by choice.id",
-              ]
+              ].join('')
               refresh="reload.input.edition.load($select.search)"
               refresh-delay="400"
             )

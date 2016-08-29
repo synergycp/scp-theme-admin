@@ -16,7 +16,7 @@
         resolve: helper.resolveFor('icons', 'lang:auth'),
       })
       .state('auth.login', {
-        url: '/login',
+        url: '/login?next',
         title: 'Login',
         templateUrl: helper.basepath('auth/login/login.html'),
       })

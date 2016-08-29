@@ -23,6 +23,7 @@
    */
   function LogCtrl(_, Loader, Api, Pages) {
     var logs = this;
+    // TODO: use List instead of Api
     var $api = Api.all('log');
 
     logs.items = [];
@@ -37,7 +38,7 @@
     function init() {
       logs.filter = logs.filter || {};
       logs.refresh();
-      logs.pages.on('change', logs.refresh);
+      logs.pages.on(['change', 'change:per'], logs.refresh);
 
       if (logs.listenTo) {
         logs.listenTo.on('change', logs.refresh);
@@ -70,6 +71,7 @@
     function getQuery() {
       return _.assign({}, logs.filter, {
         page: logs.pages.current,
+        per_page: logs.pages.per,
       });
     }
   }

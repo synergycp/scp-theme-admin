@@ -247,7 +247,7 @@ $tablet-landscape: 1025px;
     .nav {
       .label {
         position: absolute;
-        top: 10px;
+        bottom: 8px;
         right: 5px;
         text-indent: 0;
       }
@@ -273,4 +273,24 @@ $tablet-landscape: 1025px;
       }
     }
   }
+}
+
+.nav-floating {
+  .label {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    right: 20px;
+  }
+}
+
+.side-label {
+  float: right;
+}
+
+.side-label, .nav-floating .label {
+  height: 1.4em;
+  line-height: 1.2em;
 }

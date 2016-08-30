@@ -47,7 +47,7 @@
      *
      * @ngInject
      */
-    function AuthService(Api, ApiKey, $state, $location, $q, _) {
+    function AuthService(Api, EventEmitter, ApiKey, $state, $location, $q, _) {
       var Auth = this;
       var $keys = Api.all('key');
 
@@ -55,10 +55,27 @@
       Auth.login = login;
       Auth.user = user;
       Auth.getLoginType = getLoginTypeOrFail;
+      Auth.whileLoggedIn = whileLoggedIn;
+      Auth.isLoggedIn = isLoggedIn;
+
+      EventEmitter().bindTo(Auth);
 
       return Auth;
 
       /////////////
+
+      function isLoggedIn() {
+        return !!ApiKey.id();
+      }
+
+      function whileLoggedIn(start, stop) {
+        Auth.on('login', start);
+        Auth.on('logout', stop);
+
+        if (Auth.isLoggedIn()) {
+          start();
+        }
+      }
 
       function user() {
         return Api
@@ -88,8 +105,17 @@
 
         return promise
           .then(ApiKey.delete, ApiKey.delete)
+          .then(fireLogout, fireLogout)
           .then(transferToLogin, transferToLogin)
           ;
+      }
+
+      function fireLogout() {
+        Auth.fire('logout');
+      }
+
+      function fireLogin() {
+        Auth.fire('login');
       }
 
       /**
@@ -104,6 +130,7 @@
         return $keys
           .post(data)
           .then(handleResponse.bind(null, remember))
+          .then(fireLogin)
           .then(transferToApp)
           ;
       }

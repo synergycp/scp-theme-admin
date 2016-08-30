@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.system')
+    .module('app.pxe.install')
     .constant('PxeInstallNav', {
       text: "Installs",
       sref: "app.pxe.install.list",
@@ -16,11 +16,26 @@
   /**
    * @ngInject
    */
-  function PxeInstallNavRefresher(PxeInstallNav, $interval, Api) {
+  function PxeInstallNavRefresher(PxeInstallNav, $interval, Api, Auth) {
     var $installs = Api.all('server/*/install');
+    var interval;
 
-    $interval(load, PxeInstallNav.refreshInterval);
-    load();
+    Auth.whileLoggedIn(startChecking, stopChecking);
+
+    ///////////
+
+    function startChecking() {
+      stopChecking();
+      load();
+
+      interval = $interval(load, PxeInstallNav.refreshInterval);
+    }
+
+    function stopChecking() {
+      if (interval) {
+        $interval.cancel(interval);
+      }
+    }
 
     function load() {
       return $installs

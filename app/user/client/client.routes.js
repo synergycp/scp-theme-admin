@@ -14,6 +14,7 @@
         url: '/client',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:client'),
       })
       .state('app.user.client.list', {
         url: '',

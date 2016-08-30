@@ -14,7 +14,6 @@
       translate: "nav.DASH",
       sref: "app.dashboard",
       icon: "fa fa-home",
-      alert: 1,
       order: 0,
     });
   }

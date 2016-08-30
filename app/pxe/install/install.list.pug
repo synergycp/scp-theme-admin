@@ -3,8 +3,14 @@ include /resources/pug/mixins/panel
 div(ng-if="!vm.list.items.length")
   .alert.alert-info(data-translate="pxe.install.list.EMPTY")
 .row
-  .col-md-6(ng-repeat="install in vm.list.items")
-    +panel("{{ install.server.name }}")
+  .col-md-6(ng-repeat="install in vm.list.items track by install.id")
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title
+          a(
+            ui-sref="app.hardware.server.view.manage({ id: install.server.id })"
+            ng-bind="install.server.name"
+          )
       .panel-body.pxe-install-status
         install-progress(
           install="install"

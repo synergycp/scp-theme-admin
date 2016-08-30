@@ -7,7 +7,8 @@
 
   angular
     .module('app.pxe.install')
-    .factory('InstallList', InstallListFactory);
+    .factory('InstallList', InstallListFactory)
+    ;
 
   /**
    * InstallList Factory

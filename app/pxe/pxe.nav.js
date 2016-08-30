@@ -9,35 +9,34 @@
   /**
    * @ngInject
    */
-  function SystemNavConfig(NavProvider) {
-    NavProvider.group('pxe', {
-      translate: "nav.pxe.TITLE",
-      sref: "app.pxe.install.list",
-      icon: "fa fa-upload",
-    }).item({
-      text: "Installs",
-      sref: "app.pxe.install.list",
-    })
-    .item({
-      text: "Preseeds",
-      sref: "app.pxe.preseed.list",
-    })
-    .item({
-      text: "Profiles",
-      sref: "app.pxe.profile.list",
-    })
-    .item({
-      text: "Shell Scripts",
-      sref: "app.pxe.shell.list",
-    })
-    .item({
-      text: "Boot Scripts",
-      sref: "app.pxe.boot.list",
-    })
-    .item({
-      text: "ISO Manager",
-      sref: "app.pxe.iso.list",
-    })
-    ;
+  function SystemNavConfig(NavProvider, PxeInstallNav) {
+    NavProvider
+      .group('pxe', {
+        translate: "nav.pxe.TITLE",
+        sref: "app.pxe.install.list",
+        icon: "fa fa-upload",
+      })
+      .item(PxeInstallNav)
+      .item({
+        text: "Preseeds",
+        sref: "app.pxe.preseed.list",
+      })
+      .item({
+        text: "Profiles",
+        sref: "app.pxe.profile.list",
+      })
+      .item({
+        text: "Shell Scripts",
+        sref: "app.pxe.shell.list",
+      })
+      .item({
+        text: "Boot Scripts",
+        sref: "app.pxe.boot.list",
+      })
+      .item({
+        text: "ISO Manager",
+        sref: "app.pxe.iso.list",
+      })
+      ;
   }
 })();

@@ -41,10 +41,8 @@ div(style="margin-bottom: 15px")
             index="$index"
             select="panel.tabs.change(bandwidth, $index)"
             active="bandwidth.active"
+            heading="{{bandwidth.port.name}}"
           )
-            uib-tab-heading
-              span(ng-bind="bandwidth.port.name")
-
             .relative.hoverable
               .loader(ng-class="bandwidth.loader.class")
               .btn-group.btn-group-xs.floating-bar.float-right.show-hover
@@ -58,12 +56,13 @@ div(style="margin-bottom: 15px")
                 filter="panel.filter"
                 state="panel.state"
                 chart="bandwidth.chart"
+                type="Switch"
               )
 
           uib-tab(
             ng-if="panel.state.loader.hasLoaded"
-            index="panel.bandwidth.ports.length"
-            select="panel.tabs.change(panel.tabs.add, panel.bandwidth.ports.length)"
+            index="'add'"
+            select="panel.tabs.change(panel.tabs.add, 'add')"
             active="panel.tabs.add.active"
           )
             uib-tab-heading

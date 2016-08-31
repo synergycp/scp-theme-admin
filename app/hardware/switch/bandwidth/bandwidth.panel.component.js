@@ -27,6 +27,7 @@
     Loader,
     SwitchBandwidth,
     BandwidthFilter,
+    $timeout,
     $stateParams,
     SwitchManageAddTab
   ) {
@@ -63,20 +64,22 @@
       panel.state.loader.during(
         panel.bandwidth
           .refresh()
-          .then(function () {
-            var active = panel.tabs.active = parseInt(panel.tabActive);
-            var tab = panel.bandwidth.ports[active] || panel.tabs.add;
-            tab.active = true;
-          })
+          .then(setupActiveTab)
       );
     }
 
-    function onAddTab(port) {
-      panel.tabs.add.active = false;
-      Api.wrap(port);
-      var tab = panel.bandwidth.add(port);
+    function setupActiveTab() {
+      var active = panel.tabs.active =
+        parseInt(panel.tabActive) == panel.tabActive ?
+        parseInt(panel.tabActive) : panel.tabActive;
+      var tab = panel.bandwidth.ports[active] || panel.tabs.add;
       tab.active = true;
-      //panel.tabs.active = panel.bandwidth.ports.length - 1;
+    }
+
+    function onAddTab(port) {
+      Api.wrap(port);
+      panel.bandwidth.add(port).active = true;
+      $timeout(setActiveTab.bind(null, panel.bandwidth.ports.length - 1));
     }
 
     function tabRemove(tab) {

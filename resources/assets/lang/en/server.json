@@ -80,6 +80,7 @@
     },
     "group": {
       "LABEL": "IP Group",
+      "HELP": "Must be controlled by ",
       "PLACEHOLDER": "Type to search..."
     },
     "entities": {

@@ -123,10 +123,14 @@ hr
       input.form-control(
         type="text"
         placeholder="{{ 'server.form.switch.port.PLACEHOLDER' | translate }}"
+        ng-disabled="!serverForm.switch.selected"
         ng-model="serverForm.input.switch.port"
       )
     .col-xs-6
-      ui-select(ng-model="serverForm.switchSpeed.selected")
+      ui-select(
+        ng-model="serverForm.switchSpeed.selected"
+        ng-disabled="!serverForm.switch.selected"
+      )
         ui-select-match(placeholder="{{ 'server.form.switch.speed.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
 
@@ -145,6 +149,7 @@ hr
   ui-select(
     ng-model="serverForm.group.selected"
     ng-change="serverForm.group.fireChangeEvent()"
+    ng-disabled="!serverForm.switch.selected"
   )
     ui-select-match(placeholder="{{ 'server.form.group.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
@@ -160,34 +165,42 @@ hr
     )
       span(ng-bind-html="group.name | highlight: $select.search")
 
-+label("{{ 'server.form.entities.LABEL' | translate }}")
-  ui-select(
-    multiple
-    sortable="true"
-    ng-model="serverForm.entities.selected"
-    ng-change="serverForm.entities.fireChangeEvent()"
-    close-on-select="false"
-  )
-    ui-select-match(placeholder="{{ 'server.form.entities.PLACEHOLDER' | translate }}")
-      | {{ $item.name }}
-
-    ui-select-choices(
-      repeat=
-        "entity in (" +
-          "serverForm.entities.items" +
-          "| filter: serverForm.entities.notSelected" +
-        ") track by entity.id"
-      refresh="serverForm.entities.load($select.search)"
-      refresh-delay="400"
+  p.help-block(ng-if="serverForm.switch.selected")
+    span(translate="server.form.group.HELP")
+    a(
+      ng-bind="serverForm.switch.selected.name"
+      ui-sref="app.hardware.switch.view.manage({ id: serverForm.switch.selected.id })"
     )
-      span(ng-bind-html="entity.name | highlight: $select.search")
-      | &nbsp;
-      small
-        | (VLAN:&nbsp;
-        span(ng-bind-html="entity.vlan | highlight: $select.search")
-        | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
-      div(ng-if="entity.v6")
-        small(ng-bind="entity.v6.address")
+
+div(ng-if="serverForm.group.selected")
+  +label("{{ 'server.form.entities.LABEL' | translate }}")
+    ui-select(
+      multiple
+      sortable="true"
+      ng-model="serverForm.entities.selected"
+      ng-change="serverForm.entities.fireChangeEvent()"
+      close-on-select="false"
+    )
+      ui-select-match(placeholder="{{ 'server.form.entities.PLACEHOLDER' | translate }}")
+        | {{ $item.name }}
+
+      ui-select-choices(
+        repeat=
+          "entity in (" +
+            "serverForm.entities.items" +
+            "| filter: serverForm.entities.notSelected" +
+          ") track by entity.id"
+        refresh="serverForm.entities.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="entity.name | highlight: $select.search")
+        | &nbsp;
+        small
+          | (VLAN:&nbsp;
+          span(ng-bind-html="entity.vlan | highlight: $select.search")
+          | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
+        div(ng-if="entity.v6")
+          small(ng-bind="entity.v6.address")
 
 hr
 

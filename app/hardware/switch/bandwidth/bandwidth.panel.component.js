@@ -31,7 +31,6 @@
     SwitchManageAddTab
   ) {
     var panel = this;
-    var hasLoaded = false;
 
     panel.$onInit = init;
     panel.tabs = {
@@ -65,8 +64,7 @@
         panel.bandwidth
           .refresh()
           .then(function () {
-            hasLoaded = true;
-            var active = panel.tabs.active = panel.tabActive;
+            var active = panel.tabs.active = parseInt(panel.tabActive);
             var tab = panel.bandwidth.ports[active] || panel.tabs.add;
             tab.active = true;
           })
@@ -93,19 +91,39 @@
     }
 
     function tabChange(tab, index) {
-      if (!hasLoaded) {
+      if (!panel.state.loader.hasLoaded) {
         return false;
       }
 
       panel.chart = tab.chart;
+      setActiveTab(index);
+
+      if (panel.chart) {
+        panel.chart.load();
+      }
+    }
+
+    function setActiveTab(index) {
+      var bandwidthTabs = panel.bandwidth.ports;
+      /*
+      if (panel.tabs.active !== null) {
+        if (panel.tabs.active === panel.tabs.active.length) {
+          panel.
+        }
+
+        bandwidthTabs[panel.tabs.active].active = false;
+      }
+      */
+
       panel.tabs.active = panel.tabActive = index;
       (panel.onTabChange || function(){})({
         index: panel.tabs.active,
       });
 
-      if (panel.chart) {
-        panel.chart.load();
-      }
+      /*if (panel.tabs.active < panel.bandwidth.ports.length) {
+        bandwidthTabs[panel.tabs.active].active = true;
+
+      }*/
     }
   }
 })();

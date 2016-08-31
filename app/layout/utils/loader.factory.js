@@ -29,6 +29,7 @@
     // Public variables
     loader.active = false;
     loader.class = CLASS.start;
+    loader.hasLoaded = false;
 
     // Public methods
     loader.during = during;
@@ -51,6 +52,7 @@
     function loaded() {
       loader.active = false;
       loader.class = CLASS.loaded;
+      loader.hasLoaded = true;
     }
   }
 })();

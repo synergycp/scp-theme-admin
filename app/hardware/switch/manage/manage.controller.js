@@ -141,7 +141,8 @@
     }
 
     function patchSwitch() {
-      return $api.patch.apply($api, arguments)
+      return $api.patch
+        .apply($api, arguments)
         .then(fireChangeEvent)
         ;
     }

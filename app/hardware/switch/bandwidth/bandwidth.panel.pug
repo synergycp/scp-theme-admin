@@ -61,16 +61,16 @@ div(style="margin-bottom: 15px")
               )
 
           uib-tab(
-            ng-init="tab = panel.tabs.add"
+            ng-if="panel.state.loader.hasLoaded"
             index="panel.bandwidth.ports.length"
-            select="panel.tabs.change(tab, panel.bandwidth.ports.length)"
-            active="tab.active"
+            select="panel.tabs.change(panel.tabs.add, panel.bandwidth.ports.length)"
+            active="panel.tabs.add.active"
           )
             uib-tab-heading
               span.fa.fa-plus-circle
 
             form.panel-body.text-center(
-              ng-submit="tab.submit()"
+              ng-submit="panel.tabs.add.submit()"
             )
               p(translate="hardware.switch.bandwidth.add.BODY")
               .col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
@@ -78,18 +78,18 @@ div(style="margin-bottom: 15px")
                   type="submit"
                   translate="hardware.switch.bandwidth.add.SUBMIT"
                 )
-                  +ui-select("tab.port")
+                  +ui-select("panel.tabs.add.port")
                     ui-select-match(placeholder="{{ 'hardware.switch.bandwidth.add.port.PLACEHOLDER' | translate }}")
                       | {{ $select.selected.name }}
 
                     ui-select-choices(
                       repeat=[
                         "choice in (",
-                          "tab.port.items",
+                          "panel.tabs.add.port.items",
                           "| multiFilter: $select.search",
                         ") track by choice.id",
                       ].join('')
-                      refresh="tab.port.load($select.search)"
+                      refresh="panel.tabs.add.port.load($select.search)"
                       refresh-delay="400"
                     )
                       span(ng-bind-html="choice.name | highlight: $select.search")

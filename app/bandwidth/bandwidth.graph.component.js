@@ -11,6 +11,7 @@
         filter: '=',
         state: '=',
         chart: '=',
+        type: '@',
       },
       controller: 'BandwidthGraphCtrl as bandwidth',
       transclude: true,

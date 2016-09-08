@@ -1,6 +1,8 @@
 (function () {
-  angular.module('app.core.routes')
-    .config(routeConfig);
+  angular
+    .module('app.system')
+    .config(routeConfig)
+    ;
 
   /**
    * @ngInject

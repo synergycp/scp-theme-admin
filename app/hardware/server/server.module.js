@@ -3,8 +3,8 @@
 
   angular
     .module('app.hardware.server', [
-      'app.layout.list',
-      'app.core.api',
+      'scp.angle.layout.list',
+      'scp.core.api',
       'ui.select',
       'app.hardware.server.assign',
       'app.hardware.server.bandwidth',

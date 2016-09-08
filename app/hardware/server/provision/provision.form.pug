@@ -1,5 +1,5 @@
 doctype html
-include /resources/pug/mixins/form
+include /resources/angle/pug/mixins/form
 
 +label("{{ 'server.modal.client.client.LABEL' | translate }}")
   ui-select(ng-model="provisionForm.client.selected", ng-change="provisionForm.client.fireChangeEvent()")

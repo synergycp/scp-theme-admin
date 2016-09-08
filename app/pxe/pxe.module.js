@@ -3,8 +3,8 @@
 
   angular
     .module('app.pxe', [
-      'app.layout.list',
-      'app.core.api',
+      'scp.angle.layout.list',
+      'scp.core.api',
       'app.pxe.install',
       'app.pxe.preseed',
       'app.pxe.profile',

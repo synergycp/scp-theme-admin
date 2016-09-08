@@ -1,5 +1,5 @@
 doctype html
-include /resources/pug/mixins/form
+include /resources/angle/pug/mixins/form
 
 +field(
   "{{ 'server.form.id.LABEL' | translate }}",
@@ -167,10 +167,13 @@ hr
 
   p.help-block(ng-if="serverForm.switch.selected")
     span(translate="server.form.group.HELP")
+    | &nbsp;
     a(
       ng-bind="serverForm.switch.selected.name"
       ui-sref="app.hardware.switch.view.manage({ id: serverForm.switch.selected.id })"
     )
+    | &nbsp;
+    span(translate="server.form.group.HELP_SUFFIX")
 
 div(ng-if="serverForm.group.selected")
   +label("{{ 'server.form.entities.LABEL' | translate }}")

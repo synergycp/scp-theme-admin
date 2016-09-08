@@ -206,15 +206,16 @@ gulp.task('vendor:exports', function () {
     exp = exported[i];
     var jsFilter = filter.js();
     var cssFilter = filter.css();
+    var opts = {
+      cwd: exp.dirname,
+      base: exp.dirname,
+      follow: true,
+    };
 
     tasks.push(
       gulp
-        .src(exp.files, {
-          cwd: exp.basedir,
-          base: exp.basedir,
-          follow: true,
-        })
-        .pipe($.expectFile(exp.files))
+        .src(exp.files, opts)
+        .pipe($.expectFile(opts, exp.files))
         .pipe($.rename(addPrefixFolder.bind(null, exp.name)))
         .pipe(jsFilter)
         .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))

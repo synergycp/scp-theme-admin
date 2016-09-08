@@ -1,5 +1,5 @@
-include /resources/pug/mixins/panel
-include /resources/pug/mixins/form
+include /resources/angle/pug/mixins/panel
+include /resources/angle/pug/mixins/form
 
 form(ng-submit="reload.submit()", ng-class="{ hide: reload.list.items.length }")
   +panel("{{ 'server.os-reload.TITLE' | translate }}")(

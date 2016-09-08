@@ -80,7 +80,8 @@
     },
     "group": {
       "LABEL": "IP Group",
-      "HELP": "Must be controlled by ",
+      "HELP": "Only IP groups assigned to",
+      "HELP_SUFFIX": "can be used",
       "PLACEHOLDER": "Type to search..."
     },
     "entities": {

@@ -3,8 +3,8 @@
 
   angular
     .module('app.hardware.switch.speed', [
-      'app.layout.list',
-      'app.core.api',
+      'scp.angle.layout.list',
+      'scp.core.api',
       'ui.bootstrap',
     ]);
 })();

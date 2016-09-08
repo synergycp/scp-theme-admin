@@ -9,22 +9,13 @@
   /**
    * @ngInject
    */
-   function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider) {
-    var core = angular.module('app.core');
-    // registering components after bootstrap
-    core.controller = $controllerProvider.register;
-    core.directive = $compileProvider.directive;
-    core.filter = $filterProvider.register;
-    core.factory = $provide.factory;
-    core.service = $provide.service;
-    core.constant = $provide.constant;
-    core.value = $provide.value;
-
-    // Disables animation on items with class .ng-no-animation
-    $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
-
+   function coreConfig($compileProvider, $animateProvider, $locationProvider) {
     // Disable debug info for performance boost.
     $compileProvider.debugInfoEnabled(false);
+
+    // Set the following to true to enable the HTML5 Mode
+    // You may have to set <base> tag in index and a routing configuration in your server
+    $locationProvider.html5Mode(false);
   }
 
 })();

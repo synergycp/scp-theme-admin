@@ -1,4 +1,4 @@
-var args = require('yargs').argv,
+var
   path = require('path'),
   gulp = require('gulp'),
   $ = require('gulp-load-plugins')(),
@@ -13,10 +13,6 @@ var isProduction = false;
 // styles sourcemaps
 var useSourceMaps = false;
 
-// Angular template cache
-// Example:
-//    gulp --nocache
-var useCache = !args.nocache;
 
 // ignore everything that begins with underscore
 var hidden_files = '**/_*.*';
@@ -50,6 +46,7 @@ var vendor = {
 
 // SOURCES CONFIG
 var source = {
+  index: 'node_modules/scp-angle/dist/index.html',
   scripts: [
     paths.scripts + 'app.module.js',
 
@@ -58,13 +55,7 @@ var source = {
     paths.scripts + '**/*.js'
   ],
   templates: {
-    index: [paths.markup + 'index.pug'],
-    views: [paths.markup + '**/*.pug', '!' + paths.markup + 'index.pug']
-  },
-  styles: {
-    app: [paths.styles + '*.scss'],
-    themes: [paths.styles + 'themes/*.scss'],
-    watch: [paths.styles + '**/*.scss', '!' + paths.styles + 'themes/*.scss']
+    views: [paths.markup + '**/*.pug']
   },
   assets: [paths.assets + '**/*']
 };
@@ -75,10 +66,8 @@ var build = {
   styles: paths.app + 'css',
   assets: paths.public + 'assets',
   templates: {
-    index: paths.public,
     views: paths.app,
-    cache: paths.app + 'js/' + 'templates.js',
-  }
+  },
 };
 
 // PLUGINS OPTIONS
@@ -102,13 +91,6 @@ var compassOpts = {
   image: 'public/assets/img'
 };
 
-var compassOptsThemes = {
-  project: __dirname,
-  css: 'public/app/css',
-  sass: paths.styles + 'themes/',
-  image: 'public/assets/img'
-};
-
 var tplCacheOptions = {
   root: 'app',
   filename: 'templates.js',
@@ -119,13 +101,9 @@ var tplCacheOptions = {
   }
 };
 
-var injectOptions = {
-  name: 'templates',
-  transform: function (filepath) {
-    return 'script(src=\'' +
-      filepath.substr(filepath.indexOf('app')) +
-      '\')';
-  }
+var filter = {
+  js: makeJsFilter,
+  css: makeCssFilter,
 };
 
 var cssnanoOpts = {
@@ -163,24 +141,24 @@ gulp.task('scripts:app', function () {
 
 
 // VENDOR BUILD
-gulp.task('vendor', gulpsync.sync(['vendor:base', 'vendor:app']));
+gulp.task('vendor', ['vendor:base', 'vendor:app', 'vendor:exports'], function(done) {
+  done();
+});
 
 // Build the base script to start the application from vendor assets
 gulp.task('vendor:base', function () {
   log('Copying base vendor assets..');
+  var jsFilter = filter.js();
+  var cssFilter = filter.css();
 
-  var jsFilter = $.filter('**/*.js', {
-    restore: true
-  });
-  var cssFilter = $.filter('**/*.css', {
-    restore: true
-  });
-
-  return gulp.src(vendor.base.source)
+  return gulp
+    .src(vendor.base.source, { follow: true })
     .pipe($.expectFile(vendor.base.source))
     .pipe(jsFilter)
     .pipe($.concat(vendor.base.js))
-    .pipe($.if(isProduction, $.uglify()))
+    .pipe($.if(isProduction, $.uglify({
+      preserveComments: 'none',
+    })))
     .pipe(gulp.dest(build.scripts))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
@@ -196,16 +174,13 @@ gulp.task('vendor:base', function () {
 // copy file from bower folder into the app vendor folder
 gulp.task('vendor:app', function () {
   log('Copying vendor assets..');
+  var jsFilter = filter.js();
+  var cssFilter = filter.css();
 
-  var jsFilter = $.filter('**/*.js', {
-    restore: true
-  });
-  var cssFilter = $.filter('**/*.css', {
-    restore: true
-  });
-
-  return gulp.src(vendor.app.source, {
+  return gulp
+    .src(vendor.app.source, {
       base: './',
+      follow: true,
     })
     .pipe($.expectFile(vendor.app.source))
     .pipe(jsFilter)
@@ -221,100 +196,71 @@ gulp.task('vendor:app', function () {
 
 });
 
-// APP LESS
-gulp.task('styles:app', function () {
-  log('Building application styles..');
-  return gulp.src(source.styles.app)
-    .pipe($.if(useSourceMaps, $.sourcemaps.init()))
-    .pipe($.compass(compassOpts))
-    .on('error', handleError)
-    .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
-    .pipe($.if(useSourceMaps, $.sourcemaps.write()))
-    .pipe(gulp.dest(build.styles))
-    .pipe(reload({
-      stream: true
-    }));
+gulp.task('vendor:exports', function () {
+  log('Copying vendor exports..');
+  var exported = require('./exports');
+  var tasks = [];
+  var exp;
+
+  for (var i in exported) {
+    exp = exported[i];
+    var jsFilter = filter.js();
+    var cssFilter = filter.css();
+
+    tasks.push(
+      gulp
+        .src(exp.files, {
+          cwd: exp.basedir,
+          base: exp.basedir,
+          follow: true,
+        })
+        .pipe($.expectFile(exp.files))
+        .pipe($.rename(addPrefixFolder.bind(null, exp.name)))
+        .pipe(jsFilter)
+        .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
+        .pipe(jsFilter.restore())
+        .pipe(cssFilter)
+        .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
+        .pipe(cssFilter.restore())
+        .pipe(gulp.dest(vendor.app.dest))
+        .pipe(reload({
+          stream: true
+        }))
+    );
+  }
+
+  return $.merge.apply($.merge, tasks);
 });
 
-// APP RTL
-gulp.task('styles:app:rtl', function () {
-  log('Building application RTL styles..');
-  return gulp.src(source.styles.app)
-    .pipe($.if(useSourceMaps, $.sourcemaps.init()))
-    .pipe($.compass(compassOpts))
-    .on('error', handleError)
-    .pipe($.rtlcss()) /* RTL Magic ! */
-    .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
-    .pipe($.if(useSourceMaps, $.sourcemaps.write()))
-    .pipe($.rename(function (path) {
-      path.basename += "-rtl";
-      return path;
-    }))
-    .pipe(gulp.dest(build.styles))
-    .pipe(reload({
-      stream: true
-    }));
-});
+function addPrefixFolder (folder, file) {
+  file.dirname = folder + '/' + file.dirname;
 
-// LESS THEMES
-gulp.task('styles:themes', function () {
-  log('Building application theme styles..');
-  return gulp.src(source.styles.themes)
-    .pipe($.compass(compassOptsThemes))
-    .on('error', handleError)
-    .pipe(gulp.dest(build.styles))
-    .pipe(reload({
-      stream: true
-    }));
-});
-
-// JADE
-gulp.task('templates:index', ['templates:views'], function () {
-  log('Building index..');
-
-  var tplscript = gulp.src(build.templates.cache, {
-    read: false
-  });
-  return gulp.src(source.templates.index)
-    .pipe($.if(useCache, $.inject(tplscript, injectOptions))) // inject the templates.js into index
-    .pipe($.pug(pugOptions))
-    .on('error', handleError)
-    .pipe(gulp.dest(build.templates.index))
-    .pipe(reload({
-      stream: true
-    }));
-});
+  return file;
+}
 
 // JADE
 gulp.task('templates:views', function () {
-  log('Building views.. ' + (useCache ? 'using cache' : ''));
+  log('Building views.. ');
 
-  if (useCache) {
+  return gulp.src(source.templates.views)
+    .pipe($.if(!isProduction, $.changed(build.templates.views, {
+      extension: '.html'
+    })))
+    .pipe($.pug(pugOptions))
+    .on('error', handleError)
+    .pipe(gulp.dest(build.templates.views))
+    .pipe(reload({
+      stream: true
+    }));
+});
 
-    return gulp.src(source.templates.views)
-      .pipe($.pug(pugOptions))
-      .on('error', handleError)
-      .pipe($.angularTemplatecache(tplCacheOptions))
-      .pipe($.if(isProduction, $.uglify({
-        preserveComments: 'some'
-      })))
-      .pipe(gulp.dest(build.scripts))
-      .pipe(reload({
-        stream: true
-      }));
-  } else {
+gulp.task('templates:index', function () {
+  log('Copying index...');
 
-    return gulp.src(source.templates.views)
-      .pipe($.if(!isProduction, $.changed(build.templates.views, {
-        extension: '.html'
-      })))
-      .pipe($.pug(pugOptions))
-      .on('error', handleError)
-      .pipe(gulp.dest(build.templates.views))
-      .pipe(reload({
-        stream: true
-      }));
-  }
+  return gulp
+    .src(source.index)
+    .pipe(gulp.dest(paths.public))
+    ;
 });
 
 gulp.task('assets:raw', function () {
@@ -335,10 +281,7 @@ gulp.task('watch', function () {
   log('Watching source files..');
 
   gulp.watch(source.scripts, ['scripts:app']);
-  gulp.watch(source.styles.watch, ['styles:app', 'styles:app:rtl']);
-  gulp.watch(source.styles.themes, ['styles:themes']);
   gulp.watch(source.templates.views, ['templates:views']);
-  gulp.watch(source.templates.index, ['templates:index']);
   gulp.watch(source.assets, ['assets:raw']);
 
 });
@@ -357,23 +300,11 @@ gulp.task('browsersync', function () {
 
 });
 
-// lint javascript
-gulp.task('lint', function () {
-  return gulp
-    .src(source.scripts)
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish', {
-      verbose: true
-    }))
-    .pipe($.jshint.reporter('fail'));
-});
-
 // Remove all files from the build paths
 gulp.task('clean', function (done) {
   var delconfig = [].concat(
     build.styles,
     build.scripts,
-    build.templates.index + 'index.html',
     build.templates.views + 'views',
     build.templates.views + 'pages',
     vendor.app.dest
@@ -429,11 +360,8 @@ gulp.task('default', gulpsync.sync([
 
 gulp.task('assets', [
   'scripts:app',
-  'styles:app',
-  'styles:app:rtl',
-  'styles:themes',
-  'templates:index',
   'templates:views',
+  'templates:index',
   'assets:raw'
 ]);
 
@@ -455,4 +383,16 @@ function handleError(err) {
 // log to console using
 function log(msg) {
   $.util.log($.util.colors.blue(msg));
+}
+
+function makeJsFilter() {
+  return $.filter('**/*.js', {
+    restore: true
+  });
+}
+
+function makeCssFilter() {
+  return $.filter('**/*.css', {
+    restore: true
+  });
 }

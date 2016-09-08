@@ -3,7 +3,7 @@
 
   angular
     .module('app.network.group', [
-      'app.layout.list',
-      'app.core.api',
+      'scp.angle.layout.list',
+      'scp.core.api',
     ]);
 })();

@@ -8,6 +8,10 @@ var
   PluginError = $.util.PluginError,
   del = require('del');
 
+var Q = require('q');
+var _ = require('lodash');
+var streamToPromise = require('stream-to-promise');
+
 // production mode (see build task)
 var isProduction = false;
 // styles sourcemaps
@@ -196,24 +200,40 @@ gulp.task('vendor:app', function () {
 
 });
 
-gulp.task('vendor:exports', function () {
+gulp.task('vendor:exports', function (done) {
   log('Copying vendor exports..');
-  var exported = require('./exports');
-  var tasks = [];
-  var exp;
+  var Exports = require('./exports');
 
-  for (var i in exported) {
-    exp = exported[i];
-    var jsFilter = filter.js();
-    var cssFilter = filter.css();
-    var opts = {
-      cwd: exp.dirname,
-      base: exp.dirname,
-      follow: true,
-    };
+  Q.all(
+    _.map(Exports, resolve)
+  ).then(done.bind(done, null), done);
 
-    tasks.push(
-      gulp
+  function resolve(Export) {
+    return Export
+      .all()
+      .then(makeTasks)
+      ;
+
+
+    function makeTasks(exported) {
+      return Q.all(
+        _(exported)
+          .map(makeTask)
+          .map(streamToPromise)
+          .value()
+      );
+    }
+
+    function makeTask(exp) {
+      var jsFilter = filter.js();
+      var cssFilter = filter.css();
+      var opts = {
+        cwd: exp.dirname,
+        base: exp.dirname,
+        follow: true,
+      };
+
+      return gulp
         .src(exp.files, opts)
         .pipe($.expectFile(opts, exp.files))
         .pipe($.rename(addPrefixFolder.bind(null, exp.name)))
@@ -227,10 +247,9 @@ gulp.task('vendor:exports', function () {
         .pipe(reload({
           stream: true
         }))
-    );
+        ;
+    }
   }
-
-  return $.merge.apply($.merge, tasks);
 });
 
 function addPrefixFolder (folder, file) {

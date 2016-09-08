@@ -1,10 +1,9 @@
-module.exports = [];
+var Util = require('scp-ng-util');
 
-addImports('scp-angle');
-
-function addImports(name) {
-  var exported = require(name + '/exports.js');
-  for (var i in exported) {
-    module.exports.push(exported[i]);
-  }
-}
+module.exports = [
+  Util
+    .export('scp-angle-admin', __dirname)
+    .include([
+      'scp-angle',
+    ]),
+];

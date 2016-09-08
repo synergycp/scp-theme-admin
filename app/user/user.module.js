@@ -3,8 +3,8 @@
 
   angular
     .module('app.user', [
-      'app.layout.list',
-      'app.core.api',
+      'scp.angle.layout.list',
+      'scp.core.api',
       'app.user.client',
       'app.user.admin',
       'app.user.account',

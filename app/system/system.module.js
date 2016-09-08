@@ -3,8 +3,8 @@
 
   angular
     .module('app.system', [
-      'app.layout.list',
-      'app.core.api',
+      'scp.angle.layout.list',
+      'scp.core.api',
       'app.system.setting',
       'app.system.email',
     ]);

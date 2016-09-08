@@ -3,6 +3,6 @@
 
   angular
     .module('app.hardware.switch.bandwidth', [
-      'app.bandwidth',
+      'scp.bandwidth',
     ]);
 })();

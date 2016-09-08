@@ -1,6 +1,8 @@
 (function () {
-  angular.module('app.core.routes')
-    .config(routeConfig);
+  angular
+    .module('app.dashboard')
+    .config(routeConfig)
+    ;
 
   /**
    * @ngInject
@@ -17,7 +19,6 @@
         controller: 'DashboardCtrl as dash',
         templateUrl: helper.basepath('dashboard/dashboard.html'),
         resolve: helper.resolveFor('lang:dashboard'),
-      })
-      ;
+      });
   }
 })();

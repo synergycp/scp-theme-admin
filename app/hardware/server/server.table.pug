@@ -34,29 +34,67 @@ block headings
   th Actions
 
 block columns
-  td(ng-if="table.showSrvId") {{ row.srv_id }}
-  td(ng-if="table.showNickname") {{ row.nickname }}
-  td(ng-if="table.showIp") {{ row.entity.name || '-' }}
+  td(
+    ng-if="table.showSrvId"
+    ng-bind="row.srv_id"
+  )
+  td(
+    ng-if="table.showNickname"
+    ng-bind="row.nickname"
+  )
+  td(
+    ng-if="table.showIp"
+    ng-bind="row.entity.name || '-'"
+  )
   td(ng-if="table.showClient")
     a(
       ng-if="row.access"
       ui-sref="app.user.client.view({id: row.access.client.id})"
-    ) {{ row.access.client.name }}
+      ng-bind="row.access.client.name"
+    )
     span(ng-if="!row.access") -
-  td(ng-if="table.showStatus") {{ row.status_desc }}
-  td(ng-if="table.showCpu") {{ row.cpu.name }}
-  td(ng-if="table.showRam") {{ row.mem.name }}
+  td(
+    ng-if="table.showStatus"
+    ng-bind="row.status_desc"
+  )
+  td(
+    ng-if="table.showCpu"
+    ng-bind="row.cpu.name"
+  )
+  td(
+    ng-if="table.showRam"
+    ng-bind="row.mem.name"
+  )
   td(ng-if="table.showHdds")
     span(ng-repeat="hdd in row.hdd_counts track by hdd.value")
       span(ng-if="hdd.key > 1", ng-bind="hdd.key+'x '")
       span(ng-bind="hdd.value + ($last ? '' : ',')")
       br
 
-  td(ng-if="table.showSwitch") {{ row.hub.name }}
-  td(ng-if="table.showGroup") {{ row.group.name || '-' }}
+  td(
+    ng-if="table.showSwitch"
+    ng-bind="row.hub.name"
+  )
+  td(
+    ng-if="table.showGroup"
+    ng-bind="row.group.name || '-'"
+  )
   td
     .btn-group.btn-group-xs
-      a.btn.btn-default(ui-sref="app.hardware.server.view.edit({id: row.id})")
-        | {{ 'app.action.EDIT' | translate }}
-      a.btn.btn-default(ui-sref="app.hardware.server.view.manage({id: row.id})")
-        | {{ 'app.action.MANAGE' | translate }}
+      a.btn.btn-default(
+        ui-sref="app.hardware.server.view.edit({id: row.id})"
+      )
+        i.fa.fa-pencil
+
+      a.btn.btn-default(
+        ui-sref="app.hardware.server.view.manage({id: row.id})"
+      )
+        | &nbsp;
+        span(translate="server.table-action.MANAGE")
+        | &nbsp;
+
+      a.btn.btn-default(
+        ng-if="!row.access"
+        ui-sref="app.hardware.server.provision({ 'server.id': row.id })"
+      )
+        i.fa.fa-download

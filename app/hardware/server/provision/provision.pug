@@ -11,6 +11,8 @@ include /resources/angle/pug/mixins/panel
         .panel-body
           provision-form.form-horizontal(
             form="vm.form"
+            server-id="vm.input.serverId"
+            client-id="vm.input.clientId"
           )
         .panel-footer.clearfix
           .pull-right

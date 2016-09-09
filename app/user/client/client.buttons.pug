@@ -1,4 +1,4 @@
-.btn-group.btn-group-xl
+.btn-group.btn-group-lg
   a.btn.btn-default(
     ng-if="buttons.client.serversCount"
     ui-sref="app.hardware.server.list({ client: buttons.client.id })"
@@ -6,6 +6,10 @@
     span(translate="client.buttons.SERVERS")
     | &nbsp;
     span.badge(ng-bind="buttons.client.serversCount")
+  a.btn.btn-success(
+    ui-sref="app.hardware.server.provision({ 'client.id': buttons.client.id })"
+  )
+    span(translate="client.buttons.PROVISION")
   a.btn.btn-info(
     ng-click="buttons.loginAs()"
     translate="client.buttons.LOGIN-AS"

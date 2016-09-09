@@ -18,13 +18,12 @@
     vm.loader = Loader();
     vm.submit = submit;
     vm.form = {};
-
-    activate();
+    vm.input = {
+      serverId: $state.params['server.id'],
+      clientId: $state.params['client.id'],
+    };
 
     //////////
-
-    function activate() {
-    }
 
     function submit() {
       return vm.loader.during(

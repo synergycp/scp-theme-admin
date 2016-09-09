@@ -40,7 +40,7 @@ div(
           )
         li(ng-if="!server.access")
           a(
-            ui-sref="app.hardware.server.provision({ serverId: buttons.server.id })"
+            ui-sref="app.hardware.server.provision({ 'server.id': buttons.server.id })"
             translate="server.PROVISION"
           )
 

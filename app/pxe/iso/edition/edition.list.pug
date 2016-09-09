@@ -1,11 +1,11 @@
-include /resources/angle/pug/mixins/panel 
+include /resources/angle/pug/mixins/panel
 
 form(
   name="form"
   ng-submit="editionList.submit()"
 )
   +panel("{{ 'pxe.iso.edition.TITLE' | translate:{name: editionList.isoName} }}")
-    table.table.table-bordered.table-condensed.mid-aligned
+    table.table.table-bordered.table-extra-condensed.mid-aligned
       thead
         tr
           th Name

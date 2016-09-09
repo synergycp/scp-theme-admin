@@ -10,6 +10,9 @@
   "UNSUSPEND": "Activate",
   "PROVISION": "Provision",
   "VIEW_AS_CLIENT": "View As Client",
+  "table-action": {
+    "MANAGE": "manage"
+  },
   "assign": {
     "TITLE": "Server Assignments",
     "ITEM": "Item",

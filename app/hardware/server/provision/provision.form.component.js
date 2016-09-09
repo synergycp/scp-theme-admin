@@ -40,6 +40,8 @@
       },
       bindings: {
         form: '=',
+        serverId: '=',
+        clientId: '=',
       },
       controller: 'ProvisionFormCtrl as provisionForm',
       transclude: true,
@@ -84,7 +86,7 @@
     provisionForm.server = Select('server').filter({
       available: true,
       'parts[exact]': true,
-    });
+    }).on('change', syncServer);
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
     provisionForm.profile = Select('pxe/profile')
       .on('change', checkPxeProfileForIso);
@@ -118,9 +120,20 @@
     //////////
 
     function init() {
+      provisionForm.client.setSelectedId($stateParams['client.id']);
+      provisionForm.server.setSelectedId($stateParams['server.id']);
+
       fillFormInputs();
 
       provisionForm.form.getData = getData;
+    }
+
+    function syncServer(server) {
+      if (!server) {
+        return;
+      }
+
+      provisionForm.group.setSelectedId(server.group.id);
     }
 
     function fillFormInputs() {

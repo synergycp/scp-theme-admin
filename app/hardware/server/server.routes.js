@@ -37,7 +37,7 @@
         ),
       })
       .state('app.hardware.server.provision', {
-        url: '/provision?client',
+        url: '/provision?client.id&server.id',
         title: 'Provision Server',
         controller: 'ServerProvisionCtrl as vm',
         templateUrl: helper.basepath('hardware/server/provision/provision.html'),

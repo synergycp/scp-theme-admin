@@ -160,9 +160,7 @@ gulp.task('vendor:base', function () {
     .pipe($.expectFile(vendor.base.source))
     .pipe(jsFilter)
     .pipe($.concat(vendor.base.js))
-    .pipe($.if(isProduction, $.uglify({
-      preserveComments: 'none',
-    })))
+    //TODO (breaks) .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
     .pipe(gulp.dest(build.scripts))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)

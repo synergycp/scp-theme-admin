@@ -33,6 +33,7 @@
   function SwitchSearchTab (list, RouteHelpers) {
     var tab = this;
 
+    tab.name = 'switches';
     tab.list = list;
     tab.text = 'hardware.switch.search.TITLE';
     tab.results = {

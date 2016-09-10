@@ -35,6 +35,7 @@
   function EntitySearchTab (list, filter, RouteHelpers) {
     var tab = this;
 
+    tab.name = 'entities';
     tab.list = list;
     tab.filter = filter;
     tab.text = 'network.entity.search.TITLE';

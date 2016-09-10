@@ -173,7 +173,7 @@ gulp.task('vendor:base', function () {
     }));
 });
 
-// copy file from bower folder into the app vendor folder
+// copy files from vendor folder into the app vendor folder
 gulp.task('vendor:app', function () {
   log('Copying vendor assets..');
   var jsFilter = filter.js();

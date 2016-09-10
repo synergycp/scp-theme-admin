@@ -5,7 +5,6 @@ Synergy Default Theme
 
 ```
 npm install
-bower install
 gulp
 ```
 

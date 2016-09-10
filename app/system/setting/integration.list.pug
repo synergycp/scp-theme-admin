@@ -15,10 +15,9 @@ include /resources/angle/pug/mixins/panel
               ng-repeat="key in integration.keys track by key.id"
             )
               span(ng-bind="key.key")
-              | 
-              a.fa.fa-minus-circle(
-                ng-click="tab.apiKey.del(key)"
-              )
+              | &nbsp;
+              a(ng-click="tab.apiKey.del(key)")
+                span.fa.fa-minus-circle
           button.btn.btn-default(
             type="button"
             ng-click="tab.apiKey.add(integration)"

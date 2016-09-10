@@ -34,6 +34,14 @@
   },
   "integration": {
     "TITLE": "Integration",
+    "modal": {
+      "delete": {
+        "TITLE": "Delete API Key?",
+        "BODY": "Deleting this API Key will permanently block any integrations using it from accessing the Synergy API. This action cannot be undone.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Delete"
+      }
+    },
     "key": {
       "EMPTY": "No API Keys created for {{ name }} yet.",
       "ADD": "Add {{ name }} API Key"

@@ -106,6 +106,15 @@
     }
   },
   "group": {
+    "list": {
+      "heading": {
+        "NAME": "Name",
+        "RESERVED": "Reserved",
+        "ENTITIES": "IP Entities",
+        "SERVERS": "Servers",
+        "ACTIONS": "Actions"
+      }
+    },
     "modal": {
       "delete": {
         "TITLE": "Delete IP Groups",

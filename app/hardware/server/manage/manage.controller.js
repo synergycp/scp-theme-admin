@@ -134,6 +134,9 @@
       },]);
 
       _.setContents(vm.panels.right, [{
+        templateUrl: PANELS+'/panel.alerts.html',
+        context: panelContext,
+      }, {
         templateUrl: PANELS+'/panel.control.switch.html',
         context: panelContext,
       }, {

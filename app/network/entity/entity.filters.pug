@@ -1,19 +1,19 @@
 include /resources/angle/pug/mixins/form
 
 mixin server-choice(select, highlight)
-  span(ng-bind=select+".text")
-  span(ng-if="!"+select+".text")
-    span(
+  font(ng-bind=select+".text")
+  font(ng-if="!"+select+".text")
+    font(
       ng-bind-html=select+".nickname | escape" +
         (highlight ? "| highlight: " + highlight : "")
     )
     small
-      |  &lt;
-      span(
+      font  &lt;
+      font(
         ng-bind-html=select+".srv_id | escape" +
           (highlight ? "| highlight: " + highlight : "")
       )
-      | &gt;
+      font &gt;
 
 .panel-body.form-horizontal(ng-show="filters.show")
   .row
@@ -22,14 +22,10 @@ mixin server-choice(select, highlight)
         +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
           +ui-select("filters.group")
             ui-select-match(placeholder="{{ 'network.entity.list.filter.group.PLACEHOLDER' | translate }}")
-              | {{ $select.selected.name }}
+              span(ng-bind="$select.selected.name")
 
             ui-select-choices(
-              repeat=
-                "choice in (" +
-                  "filters.group.items" +
-                  "| multiFilter: $select.search" +
-                ") track by choice.id"
+              repeat="choice in filters.group.items track by choice.id"
               refresh="filters.group.load($select.search)"
               refresh-delay="400"
             )
@@ -42,11 +38,7 @@ mixin server-choice(select, highlight)
               +server-choice("$select.selected")
 
             ui-select-choices(
-              repeat=
-                "choice in (" +
-                  "filters.server.items" +
-                  "| multiFilter: $select.search" +
-                ") track by choice.id"
+              repeat="choice in filters.server.items track by choice.id"
               refresh="filters.server.load($select.search)"
               refresh-delay="400"
             )

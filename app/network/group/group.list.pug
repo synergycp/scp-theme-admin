@@ -4,22 +4,39 @@ block title
   | Groups
 
 block headings
-  th.relative Name
+  th.relative
+    span(translate="network.group.list.heading.NAME")
     sort(col="name")
-  th.relative Reserved 
+  th.relative
+    span(translate="network.group.list.heading.RESERVED")
     sort(col="reserved")
-  th.relative IP Entities
+  th.relative
+    span(translate="network.group.list.heading.ENTITIES")
     sort(col="ip_entities")
-  th Actions
+  th.relative
+    span(translate="network.group.list.heading.SERVERS")
+    sort(col="servers")
+  th
+    span(translate="network.group.list.heading.ACTIONS")
 
 block columns
-  td {{ row.name }}
+  td(ng-bind="row.name")
   td
     span.fa.fa-check.text-success(ng-if="row.reserved")
+    span.text-muted(ng-if="!row.reserved") -
   td
-    a(ui-sref="app.network.entity.list({group: row.id})")
-      | {{ row.entitiesCount }}
+    a(
+      ui-sref="app.network.entity.list({'group.id': row.id})"
+      ng-bind="row.entities.count"
+    )
+  td
+    a(
+      ui-sref="app.hardware.server.list({group: row.id})"
+      ng-bind="row.servers.count"
+    )
   td
     .btn-group.btn-group-xs
-      a.btn.btn-default(ui-sref="app.network.group.view({id: row.id})")
-        | {{ 'app.action.EDIT' | translate }}
+      a.btn.btn-default(
+        ui-sref="app.network.group.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

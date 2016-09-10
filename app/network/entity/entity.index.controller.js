@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function EntityIndexCtrl(ListFilter, EntityList, Select) {
+  function EntityIndexCtrl(ListFilter, EntityList) {
     var vm = this;
 
     vm.list = EntityList();

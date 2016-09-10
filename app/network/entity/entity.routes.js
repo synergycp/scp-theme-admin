@@ -14,10 +14,11 @@
         template: helper.dummyTemplate,
       })
       .state('app.network.entity.list', {
-        url: '?group&server',
+        url: '?group.id&server.id',
         title: 'Entities',
         controller: 'EntityIndexCtrl as vm',
         templateUrl: helper.basepath('network/entity/entity.index.html'),
+        reloadOnSearch: false,
       })
       .state('app.network.entity.view', {
         url: '/:id',

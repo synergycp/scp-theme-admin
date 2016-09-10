@@ -7,7 +7,7 @@
     ;
 
   /**
-   * SpeedModalMerge Controller
+   * PartModalMerge Controller
    *
    * @ngInject
    */

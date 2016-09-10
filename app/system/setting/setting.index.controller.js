@@ -21,8 +21,8 @@
   function SettingIndexCtrl(_, $scope, $state, $stateParams, $uibModal, $q, List, Loader, Alert, EventEmitter, Api, $timeout) {
     var vm = this;
     var $api = Api.all(API.SETTING);
-    var $groupApi = Api.all(API.SETTING_GROUP);
-    var $apiKeyApi = Api.all(API.API_KEY);
+    var $groups = Api.all(API.SETTING_GROUP);
+    var $apiKeys = Api.all(API.API_KEY);
 
     vm.list = EventEmitter();
     vm.loader = Loader();
@@ -60,7 +60,8 @@
     }
 
     function loadSettingsTabs() {
-      return $groupApi.getList()
+      return $groups
+        .getList()
         .then(function (groups) {
           _.each(groups.reverse(), addSettingTab);
         });
@@ -219,14 +220,31 @@
       }
 
       function addApiKey(integration) {
-        return $apiKeyApi.post({
+        return $apiKeys.post({
           type: 'integration',
           id: integration.id,
         }).then(tab.list.load);
       }
 
       function delApiKey(key) {
-        return $apiKeyApi.one(''+key.id).remove().then(tab.list.load);
+        var modal = $uibModal.open({
+          templateUrl: 'app/system/integration/integration.delete.modal.html',
+          controller: 'ModalCtrl',
+          bindToController: true,
+          controllerAs: 'modal',
+        });
+
+        return modal.result.then(function () {
+          return doDelete(key);
+        });
+      }
+
+      function doDelete(key) {
+        return $apiKeys
+          .one(''+key.id)
+          .remove()
+          .then(tab.list.load)
+          ;
       }
     }
   }

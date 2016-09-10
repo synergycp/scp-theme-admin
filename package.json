@@ -30,7 +30,6 @@
     "stream-to-promise": "^2.2.0"
   },
   "scripts": {
-    "prestart": "bower install",
     "start": "npm install",
     "poststart": "gulp"
   },

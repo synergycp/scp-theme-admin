@@ -35,6 +35,7 @@
   function ClientSearchTab (list, filter, RouteHelpers) {
     var tab = this;
 
+    tab.name = 'clients';
     tab.list = list;
     tab.filter = filter;
     tab.text = 'user.client.search.TITLE';

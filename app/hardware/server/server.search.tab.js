@@ -33,6 +33,7 @@
   function ServerSearchTab (list, RouteHelpers) {
     var tab = this;
 
+    tab.name = 'servers';
     tab.list = list;
     tab.text = 'server.search.TITLE';
     tab.results = {

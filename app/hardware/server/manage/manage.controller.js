@@ -37,9 +37,9 @@
     EventEmitter().bindTo(vm.server);
     panelContext.server = vm.server;
 
-    var bandwidth = _.assign({
+    var bandwidth = _.assign({}, panelContext, {
       filter: BandwidthFilter(),
-    }, panelContext);
+    });
 
     vm.panels = {
       top: [],
@@ -52,17 +52,18 @@
     //////////
 
     function activate() {
-      // TODO: load panels while vm.server is loading
-      // (causes issue with vm.server properties missing)
-      vm.server.load()
-        .then(loadPanels);
+      vm.server
+        .load()
+        .then(loadPanels)
+        ;
 
       $scope.$on('$routeUpdate', syncStateToFilter);
       bandwidth.filter.on('change', syncFilterToState);
     }
 
     function loadServer() {
-      return $api.get()
+      return $api
+        .get()
         .then(storeServer)
         ;
     }
@@ -72,7 +73,8 @@
         return $q.when(vm.server.accesses);
       }
 
-      return $api.all('access')
+      return $api
+        .all('access')
         .getList()
         .then(storeAccesses)
         ;

@@ -25,6 +25,7 @@
   function SwitchBandwidthPanelCtrl(
     Api,
     Loader,
+    Config,
     SwitchBandwidth,
     BandwidthFilter,
     $timeout,
@@ -62,10 +63,22 @@
         .on('add', onAddTab);
       panel.bandwidth = SwitchBandwidth(panel.switch, panel.filter);
       panel.state.loader.during(
-        panel.bandwidth
-          .refresh()
-          .then(setupActiveTab)
+        Config
+          .getSwitchBandwidthRange()
+          .then(setFilterRange)
+          .then(refreshBandwidth)
       );
+    }
+
+    function setFilterRange(range) {
+      panel.filter.setRangeByLabel(range);
+    }
+
+    function refreshBandwidth() {
+      return panel.bandwidth
+        .refresh()
+        .then(setupActiveTab)
+        ;
     }
 
     function setupActiveTab() {

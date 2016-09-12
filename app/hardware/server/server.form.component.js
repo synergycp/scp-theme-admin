@@ -5,8 +5,6 @@
     srv_id: '',
     nickname: '',
     mac: '',
-    cpu: null,
-    mem: null,
     ipmi: {
       ip: '',
       admin: {
@@ -136,6 +134,9 @@
         serverForm.group.selected = response.group;
         syncEntityFilter();
 
+        serverForm.cpu.selected = response.cpu;
+        serverForm.mem.selected = response.mem;
+
         serverForm.switchSpeed.selected = response.switch.speed;
         serverForm.billing.date.value = response.billing.date ?
           Date.parse(response.billing.date) : '';
@@ -194,6 +195,8 @@
       data.group = {
         id: serverForm.group.getSelected('id') || null,
       };
+      data.cpu = serverForm.cpu.getSelected('id') || null;
+      data.mem = serverForm.mem.getSelected('id') || null;
       data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null;
 
       return data;

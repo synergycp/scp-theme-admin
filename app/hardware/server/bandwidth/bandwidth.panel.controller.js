@@ -9,7 +9,12 @@
   /**
    * @ngInject
    */
-  function ServerBandwidthPanelCtrl(Loader, ServerBandwidth, BandwidthFilter) {
+  function ServerBandwidthPanelCtrl(
+    Loader,
+    ServerBandwidth,
+    BandwidthFilter,
+    Config
+  ) {
     var panel = this;
 
     panel.$onInit = init;
@@ -21,6 +26,7 @@
       fullScreen: false,
       loader: Loader(),
       filtering: function () {
+        // TODO: fix
         $('.date-picker').click();
       },
     };
@@ -39,12 +45,26 @@
 
       panel.bandwidth = ServerBandwidth(panel.server, panel.filter);
       panel.state.loader.during(
-        panel.bandwidth
-          .refresh()
-          .then(function () {
-            panel.tabs.active = 0;
-          })
+        Config
+          .getServerBandwidthRange()
+          .then(setFilterRange)
+          .then(refreshBandwidth)
       );
+    }
+
+    function setFilterRange(range) {
+      panel.filter.setRangeByLabel(range);
+    }
+
+    function refreshBandwidth() {
+      return panel.bandwidth
+        .refresh()
+        .then(setActiveTab)
+        ;
+    }
+
+    function setActiveTab() {
+      panel.tabs.active = 0;
     }
 
     function tabChange(tab) {

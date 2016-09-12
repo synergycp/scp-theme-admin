@@ -212,7 +212,6 @@ gulp.task('vendor:exports', function (done) {
       .then(makeTasks)
       ;
 
-
     function makeTasks(exported) {
       return Q.all(
         _(exported)

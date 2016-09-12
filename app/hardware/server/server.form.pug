@@ -18,32 +18,24 @@ include /resources/angle/pug/mixins/form
 )
 
 +label("{{ 'server.form.cpu.LABEL' | translate }}")
-  ui-select(ng-model="serverForm.input.cpu")
+  +ui-select("serverForm.cpu")
     ui-select-match(placeholder="{{ 'server.form.cpu.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.name }}
+      span(ng-bind="$select.selected.name")
 
     ui-select-choices(
-      repeat=
-        "cpu in (" +
-          "serverForm.cpu.items" +
-          "| filter: {name: $select.search}" +
-        ") track by cpu.id"
+      repeat="cpu in serverForm.cpu.items track by cpu.id"
       refresh="serverForm.cpu.load($select.search)"
       refresh-delay="400"
     )
       span(ng-bind-html="cpu.name | highlight: $select.search")
 
 +label("{{ 'server.form.mem.LABEL' | translate }}")
-  ui-select(ng-model="serverForm.input.mem")
+  +ui-select("serverForm.mem")
     ui-select-match(placeholder="{{ 'server.form.mem.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.name }}
+      span(ng-bind="$select.selected.name")
 
     ui-select-choices(
-      repeat=
-        "mem in (" +
-          "serverForm.mem.items" +
-          "| filter: {name: $select.search}" +
-        ") track by mem.id"
+      repeat="mem in serverForm.mem.items track by mem.id"
       refresh="serverForm.mem.load($select.search)"
       refresh-delay="400"
     )
@@ -57,16 +49,12 @@ div(ng-repeat="disk in serverForm.disks.items track by $index")
       "+($index || serverForm.disks.items.length < serverForm.disks.max ? '' : 'disabled ')"
     ng-click="$index ? serverForm.disks.rem($index) : serverForm.disks.add(disk.selected)"
   )
-    ui-select(ng-model="disk.selected")
+    +ui-select("disk")
       ui-select-match(placeholder="{{ 'server.form.disk.PLACEHOLDER' | translate }}")
-        | {{ $select.selected.name }}
+        span(ng-bind="$select.selected.name")
 
       ui-select-choices(
-        repeat=
-          "choice in (" +
-            "disk.items" +
-            "| filter: {name: $select.search}" +
-          ") track by choice.id"
+        repeat="choice in disk.items track by choice.id"
         refresh="disk.load($select.search)"
         refresh-delay="400"
       )
@@ -81,16 +69,12 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
     +input-with-btn("fa fa-times-circle")(
       ng-click="addOn.selected = null"
     )
-      ui-select(ng-model="addOn.selected")
+      +ui-select("addOn")
         ui-select-match(placeholder="{{ 'server.form.add-on.PLACEHOLDER' | translate }}")
-          | {{ $select.selected.name }}
+          span(ng-bind="$select.selected.name")
 
         ui-select-choices(
-          repeat=
-            "choice in (" +
-              "addOn.items" +
-              "| filter: {name: $select.search}" +
-            ") track by choice.id"
+          repeat="choice in addOn.items track by choice.id"
           refresh="addOn.load($select.search)"
           refresh-delay="400"
         )
@@ -99,19 +83,12 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
 hr
 
 +label("{{ 'server.form.switch.LABEL' | translate }}")
-  ui-select(
-    ng-model="serverForm.switch.selected"
-    ng-change="serverForm.switch.fireChangeEvent()"
-  )
+  +ui-select("serverForm.switch")
     ui-select-match(placeholder="{{ 'server.form.switch.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.name }}
+      span(ng-bind="$select.selected.name")
 
     ui-select-choices(
-      repeat=
-        "switch in (" +
-          "serverForm.switch.items" +
-          "| filter: {name: $select.search}" +
-        ") track by switch.id"
+      repeat="switch in serverForm.switch.items track by switch.id"
       refresh="serverForm.switch.load($select.search)"
       refresh-delay="400"
     )
@@ -127,39 +104,28 @@ hr
         ng-model="serverForm.input.switch.port"
       )
     .col-xs-6
-      ui-select(
-        ng-model="serverForm.switchSpeed.selected"
+      +ui-select("serverForm.switchSpeed")(
         ng-disabled="!serverForm.switch.selected"
       )
         ui-select-match(placeholder="{{ 'server.form.switch.speed.PLACEHOLDER' | translate }}")
-          | {{ $select.selected.name }}
+          span(ng-bind="$select.selected.name")
 
         ui-select-choices(
-          repeat=
-            "switchSpeed in (" +
-              "serverForm.switchSpeed.items" +
-              "| filter: {name: $select.search}" +
-            ") track by switchSpeed.id"
+          repeat="switchSpeed in serverForm.switchSpeed.items track by switchSpeed.id"
           refresh="serverForm.switchSpeed.load($select.search)"
           refresh-delay="400"
         )
           span(ng-bind-html="switchSpeed.name | highlight: $select.search")
 
 +label("{{ 'server.form.group.LABEL' | translate }}")
-  ui-select(
-    ng-model="serverForm.group.selected"
-    ng-change="serverForm.group.fireChangeEvent()"
+  +ui-select("serverForm.group")(
     ng-disabled="!serverForm.switch.selected"
   )
     ui-select-match(placeholder="{{ 'server.form.group.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.name }}
+      span(ng-bind="$select.selected.name")
 
     ui-select-choices(
-      repeat=
-        "group in (" +
-          "serverForm.group.items" +
-          "| filter: {name: $select.search}" +
-        ") track by group.id"
+      repeat="group in serverForm.group.items track by group.id"
       refresh="serverForm.group.load($select.search)"
       refresh-delay="400"
     )
@@ -177,22 +143,16 @@ hr
 
 div(ng-if="serverForm.group.selected")
   +label("{{ 'server.form.entities.LABEL' | translate }}")
-    ui-select(
+    +ui-select("serverForm.entities")(
       multiple
       sortable="true"
-      ng-model="serverForm.entities.selected"
-      ng-change="serverForm.entities.fireChangeEvent()"
       close-on-select="false"
     )
       ui-select-match(placeholder="{{ 'server.form.entities.PLACEHOLDER' | translate }}")
-        | {{ $item.name }}
+        span(ng-bind="$item.name")
 
       ui-select-choices(
-        repeat=
-          "entity in (" +
-            "serverForm.entities.items" +
-            "| filter: serverForm.entities.notSelected" +
-          ") track by entity.id"
+        repeat="entity in serverForm.entities.items track by entity.id"
         refresh="serverForm.entities.load($select.search)"
         refresh-delay="400"
       )

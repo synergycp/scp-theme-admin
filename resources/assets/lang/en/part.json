@@ -1,0 +1,43 @@
+{
+  "input": {
+    "billing": {
+      "PLACEHOLDER": "Billing ID"
+    },
+    "name": {
+      "PLACEHOLDER": "Name"
+    }
+  },
+  "list": {
+    "EMPTY": "No matching parts found.",
+    "SUBMIT": "Save Changes",
+    "tab": {
+      "disk": {
+        "TITLE": "Disk",
+        "ADD": "Add Disk"
+      },
+      "cpu": {
+        "TITLE": "CPU",
+        "ADD": "Add CPU"
+      },
+      "mem": {
+        "TITLE": "Memory",
+        "ADD": "Add Memory"
+      },
+      "add-on": {
+        "TITLE": "Add-On",
+        "ADD": "Add Add-On"
+      }
+    }
+  },
+  "modal": {
+    "merge": {
+      "TITLE": "Merge Parts",
+      "SUBMIT": "Submit",
+      "CANCEL": "Cancel",
+      "part": {
+        "LABEL": "Part",
+        "PLACEHOLDER": "Type to search..."
+      }
+    }
+  }
+}

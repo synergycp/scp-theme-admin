@@ -14,7 +14,6 @@
         url: '/user',
         abstract: true,
         template: helper.dummyTemplate,
-        resolve: helper.resolveFor('lang:user'),
       })
       ;
   }

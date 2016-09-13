@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.hardware.server')
+    .module('app.hardware.server.search')
     .factory('ServerSearchTab', ServerSearchTabFactory)
     .run(addServerSearchTab)
     ;
@@ -21,26 +21,38 @@
    *
    * @ngInject
    */
-  function ServerSearchTabFactory (ServerList, RouteHelpers) {
+  function ServerSearchTabFactory ($state, ServerList, RouteHelpers) {
     return function () {
         return new ServerSearchTab(
           ServerList(),
+          $state,
           RouteHelpers
         );
     };
   }
 
-  function ServerSearchTab (list, RouteHelpers) {
+  function ServerSearchTab (list, $state, RouteHelpers) {
     var tab = this;
 
     tab.name = 'servers';
     tab.list = list;
     tab.text = 'server.search.TITLE';
+    tab.lang = 'server';
+    tab.select = onSelect;
     tab.results = {
-      url: RouteHelpers.basepath('hardware/server/server.search.tab.html'),
+      url: RouteHelpers.basepath('hardware/server/search/search.tab.html'),
     };
+    tab.typeaheadTemplateUrl = RouteHelpers.basepath(
+      'hardware/server/search/search.item.html'
+    );
 
     //////////
+
+    function onSelect($item) {
+      $state.go('app.hardware.server.view.manage', {
+        id: $item.id,
+      });
+    }
 
 
   }

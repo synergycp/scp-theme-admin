@@ -14,7 +14,7 @@
     return function () {
       var list = List('client');
 
-      list.confirm = ListConfirm(list, 'user.client.modal.delete');
+      list.confirm = ListConfirm(list, 'client.modal.delete');
       list.bulk.add('Delete', list.confirm.delete);
 
       return list;

@@ -2,22 +2,22 @@ doctype html
 include /resources/angle/pug/mixins/form
 
 +field(
-  "{{ 'network.group.form.name.LABEL' | translate }}",
+  "{{ 'group.form.name.LABEL' | translate }}",
   "name"
 )(
-  placeholder="{{ 'network.group.form.name.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'group.form.name.PLACEHOLDER' | translate }}"
   ng-model="groupForm.input.name"
 )
 
 +field(
-  "{{ 'network.group.form.billing_id.LABEL' | translate }}",
+  "{{ 'group.form.billing_id.LABEL' | translate }}",
   "billing_id"
 )(
-  placeholder="{{ 'network.group.form.billing_id.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'group.form.billing_id.PLACEHOLDER' | translate }}"
   ng-model="groupForm.input.billing_id"
 )
 
-+label("{{ 'network.group.form.options.LABEL' | translate }}")
++label("{{ 'group.form.options.LABEL' | translate }}")
   +checkbox()(
     ng-model="groupForm.input.reserved"
-  ) {{ 'network.group.form.options.reserved.LABEL' | translate }}
+  ) {{ 'group.form.options.reserved.LABEL' | translate }}

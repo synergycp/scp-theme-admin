@@ -1,8 +1,49 @@
 {
+  "modal": {
+    "delete": {
+      "TITLE": "Delete Clients",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these Clients:"
+    }
+  },
   "buttons": {
     "LOGIN-AS": "Login As Client",
     "SERVERS": "Servers",
     "PROVISION": "Provision Server",
     "DELETE": "Delete"
+  },
+  "search": {
+    "TITLE": "Clients",
+    "SERVERS": "{{ servers }} Server{{ servers == '1' ? '' : 's' }}"
+  },
+  "list": {
+    "NO-SERVERS": "-",
+    "TITLE": "Clients"
+  },
+  "heading": {
+    "NAME": "Name",
+    "EMAIL": "E-Mail Address",
+    "SERVER-COUNT": "Servers",
+    "ACTIONS": "Actions"
+  },
+  "form": {
+    "title": {
+      "ADD": "Create Client",
+      "EDIT": "Edit {{ email }}"
+    },
+    "email": {
+      "LABEL": "Email"
+    },
+    "password": {
+      "LABEL": "Password",
+      "PLACEHOLDER": "Enter a password to set"
+    },
+    "billing_id": {
+      "LABEL": "Billing ID"
+    },
+    "name": {
+      "LABEL": "Name"
+    }
   }
 }

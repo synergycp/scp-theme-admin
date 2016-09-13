@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.hardware.switch')
+    .module('app.hardware.switch.search')
     .factory('SwitchSearchTab', SwitchSearchTabFactory)
     .run(addSwitchSearchTab)
     ;
@@ -21,26 +21,39 @@
    *
    * @ngInject
    */
-  function SwitchSearchTabFactory (SwitchList, RouteHelpers) {
+  function SwitchSearchTabFactory ($state, SwitchList, RouteHelpers) {
     return function () {
         return new SwitchSearchTab(
           SwitchList(),
+          $state,
           RouteHelpers
         );
     };
   }
 
-  function SwitchSearchTab (list, RouteHelpers) {
+  function SwitchSearchTab (list, $state, RouteHelpers) {
     var tab = this;
 
     tab.name = 'switches';
+    tab.lang = 'switch';
+    tab.text = 'switch.search.TITLE';
     tab.list = list;
-    tab.text = 'hardware.switch.search.TITLE';
+    tab.select = onSelect;
     tab.results = {
-      url: RouteHelpers.basepath('hardware/switch/switch.search.tab.html'),
+      url: RouteHelpers.basepath('hardware/switch/search/search.tab.html'),
     };
 
+    tab.typeaheadTemplateUrl = RouteHelpers.basepath(
+      'hardware/switch/search/search.item.html'
+    );
+
     //////////
+
+    function onSelect($item) {
+      $state.go('app.hardware.switch.view.manage', {
+        id: $item.id,
+      });
+    }
 
 
   }

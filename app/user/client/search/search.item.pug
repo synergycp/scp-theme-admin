@@ -1,0 +1,13 @@
+div.client
+  span(ng-bind="match.label.name")
+  | &nbsp;
+  small
+    | &lt;
+    span(ng-bind="match.label.email")
+    | &gt;
+  br
+  small
+    span.text-muted(
+      translate="client.search.SERVERS"
+      translate-value-servers="{{ match.label.serversCount }}"
+    )

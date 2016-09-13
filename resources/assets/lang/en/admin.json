@@ -1,0 +1,40 @@
+{
+  "modal": {
+    "delete": {
+      "TITLE": "Delete Administrators",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these Administrators:"
+    }
+  },
+  "form": {
+    "title": {
+      "ADD": "Create Administrator",
+      "EDIT": "Edit {{ username }}"
+    },
+    "email": {
+      "LABEL": "Email",
+      "PLACEHOLDER": "Optional"
+    },
+    "password": {
+      "LABEL": "Password",
+      "PLACEHOLDER": "Enter a password to set"
+    },
+    "username": {
+      "LABEL": "Username",
+      "PLACEHOLDER": "Required. Must be alphanumeric and unique"
+    },
+    "receive_copies": {
+      "LABEL": "Receive All Emails"
+    },
+    "access": {
+      "LABEL": "Access",
+      "admin": {
+        "LABEL": "Edit Administrators"
+      },
+      "logs": {
+        "LABEL": "View Logs"
+      }
+    }
+  }
+}

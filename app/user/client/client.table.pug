@@ -2,18 +2,18 @@ extends /resources/angle/pug/table-checkable
 
 block headings
   th.sortable(ng-if="table.showName")
-    span(translate="user.client.heading.NAME")
+    span(translate="client.heading.NAME")
     sort(col="last")
   th.sortable(ng-if="table.showEmail")
-    span(translate="user.client.heading.EMAIL")
+    span(translate="client.heading.EMAIL")
     sort(col="email")
   th(
     ng-if="table.showServerCount"
-    translate="user.client.heading.SERVER-COUNT"
+    translate="client.heading.SERVER-COUNT"
   )
   th(
     ng-if="table.showActions"
-    translate="user.client.heading.ACTIONS"
+    translate="client.heading.ACTIONS"
   )
 
 block columns
@@ -30,7 +30,7 @@ block columns
   )
     span(
       ng-if="!row.serversCount"
-      translate="user.client.list.NO-SERVERS"
+      translate="client.list.NO-SERVERS"
     )
     a(
       ui-sref="app.hardware.server.list({ client: row.id })"

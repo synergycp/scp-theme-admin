@@ -7,20 +7,20 @@ form(ng-submit="modal.submit()")
       ng-click="modal.$dismiss()"
     ) &times;
 
-    h4.modal-title(data-translate="network.entity.modal.group.TITLE")
+    h4.modal-title(data-translate="entity.modal.group.TITLE")
 
   .modal-body.form-horizontal
-    +label("{{ 'network.entity.modal.entities.LABEL' | translate }}")
+    +label("{{ 'entity.modal.entities.LABEL' | translate }}")
       p.form-control-static
         span(ng-repeat="item in modal.items")
           span(ng-bind="item.name")
           br
-    +label("{{ 'network.entity.modal.group.group.LABEL' | translate }}")
+    +label("{{ 'entity.modal.group.group.LABEL' | translate }}")
       +input-with-btn("fa fa-times-circle")(
         ng-click="modal.group.selected = null"
       )
         ui-select(ng-model="modal.group.selected")
-          ui-select-match(placeholder="{{ 'network.entity.modal.group.group.PLACEHOLDER' | translate }}")
+          ui-select-match(placeholder="{{ 'entity.modal.group.group.PLACEHOLDER' | translate }}")
             | {{ $select.selected.name }}
 
           ui-select-choices(
@@ -39,9 +39,9 @@ form(ng-submit="modal.submit()")
     button.btn.btn-secondary(
       type="button"
       ng-click="modal.$dismiss()"
-      data-translate="network.entity.modal.group.CANCEL"
+      data-translate="entity.modal.group.CANCEL"
     )
     button.btn.btn-primary(
       type="submit"
-      data-translate="network.entity.modal.group.SUBMIT"
+      data-translate="entity.modal.group.SUBMIT"
     )

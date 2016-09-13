@@ -3,12 +3,12 @@ include /resources/angle/pug/mixins/list
 
 block list
   list.panel.panel-default(list="vm.list")
-    list-header(text="user.client.list.TITLE")
+    list-header(text="client.list.TITLE")
     client-table
     list-footer
 
 block bottom-left
-  +create-form("{{ 'user.client.form.title.ADD' | translate }}")
+  +create-form("{{ 'client.form.title.ADD' | translate }}")
     client-form(form="vm.create")
 
 block bottom-right

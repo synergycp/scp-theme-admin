@@ -13,7 +13,7 @@
   function SpeedListFactory ($uibModal, List, ListConfirm) {
     return function () {
       var list = List('port-speed');
-      var confirm = ListConfirm(list, 'hardware.speed.modal.delete');
+      var confirm = ListConfirm(list, 'speed.modal.delete');
 
       var doDelete = list.delete;
       list.delete = proxyDelete;

@@ -1,0 +1,31 @@
+div.server(
+  ng-class="{{match.label.status}} {{ match.label.pxe_status ? 'installing' : '' }}"
+)
+  //-
+    i.glyphicon.glyphicon-ok.active-icon
+    i.glyphicon.glyphicon-lock.suspended-icon
+    i.glyphicon.glyphicon-download-alt.installing-icon
+    i.glyphicon.glyphicon-minus.unassigned-icon
+
+  .info
+    span(ng-bind="match.label.srv_id")
+    | &nbsp;
+    span(ng-if="match.label.nickname")
+      | (
+      span(ng-bind="match.label.nickname")
+      | )
+    br
+    small
+      span(ng-if="match.label.group.name")
+        span(ng-bind="match.label.group.name")
+        | : &nbsp;&nbsp;
+      span.text-muted(
+        ng-if="!match.label.access.client && !match.label.ip"
+        translate="server.search.EMPTY"
+      )
+      span(
+        ng-bind="match.label.access.client.name"
+      )
+      span(ng-if="match.label.entity")
+        span(ng-if="match.label.access.client") &nbsp;-&nbsp;
+        span(ng-bind="match.label.entity.name || match.label.entity.full_ip")

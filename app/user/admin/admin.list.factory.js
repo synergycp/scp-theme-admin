@@ -13,7 +13,7 @@
   function AdminListFactory (List, ListConfirm) {
     return function () {
       var list = List('admin');
-      var confirm = ListConfirm(list, 'user.admin.modal.delete');
+      var confirm = ListConfirm(list, 'admin.modal.delete');
 
       list.bulk.add('Delete', confirm.delete);
 

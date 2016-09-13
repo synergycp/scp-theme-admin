@@ -2,76 +2,76 @@ doctype html
 include /resources/angle/pug/mixins/form
 
 +field(
-  "{{ 'hardware.switch.form.name.LABEL' | translate }}",
+  "{{ 'switch.form.name.LABEL' | translate }}",
   "name"
 )(
-  placeholder="{{ 'hardware.switch.form.name.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'switch.form.name.PLACEHOLDER' | translate }}"
   ng-model="switchForm.input.name"
 )
 
 +select(
-  "{{ 'hardware.switch.form.type.LABEL' | translate }}",
+  "{{ 'switch.form.type.LABEL' | translate }}",
   "type"
 )(
-  placeholder="{{ 'hardware.switch.form.type.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'switch.form.type.PLACEHOLDER' | translate }}"
   ng-model="switchForm.input.type"
   ng-options="key*1 as value for (key, value) in switchForm.switchTypes"
 )
 
-+label("{{ 'hardware.switch.form.network.LABEL' | translate }}")
++label("{{ 'switch.form.network.LABEL' | translate }}")
   .row 
     .col-xs-8 
       input.form-control(
         type="text"
-        placeholder="{{ 'hardware.switch.form.network.ip.PLACEHOLDER' | translate }}"
+        placeholder="{{ 'switch.form.network.ip.PLACEHOLDER' | translate }}"
         ng-model="switchForm.input.ip"
       )
     .col-xs-4 
       input.form-control(
         type="text"
-        placeholder="{{ 'hardware.switch.form.network.port.PLACEHOLDER' | translate }}"
+        placeholder="{{ 'switch.form.network.port.PLACEHOLDER' | translate }}"
         ng-model="switchForm.input.port"
       )
 
-+label("{{ 'hardware.switch.form.ssh.LABEL' | translate }}")
++label("{{ 'switch.form.ssh.LABEL' | translate }}")
   .row 
     .col-xs-6
       input.form-control(
         type="text"
-        placeholder="{{ 'hardware.switch.form.ssh.username.PLACEHOLDER' | translate }}"
+        placeholder="{{ 'switch.form.ssh.username.PLACEHOLDER' | translate }}"
         ng-model="switchForm.input.ssh_user"
       )
     .col-xs-6 
       input.form-control(
         type="text"
-        placeholder="{{ 'hardware.switch.form.ssh.password.PLACEHOLDER' | translate }}"
+        placeholder="{{ 'switch.form.ssh.password.PLACEHOLDER' | translate }}"
         ng-model="switchForm.input.ssh_pass"
       )
 
 +field(
-  "{{ 'hardware.switch.form.enable.LABEL' | translate }}",
+  "{{ 'switch.form.enable.LABEL' | translate }}",
   "enable"
 )(
-  placeholder="{{ 'hardware.switch.form.enable.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'switch.form.enable.PLACEHOLDER' | translate }}"
   ng-model="switchForm.input.ssh_en_pass"
 )
 
 +field(
-  "{{ 'hardware.switch.form.snmp.LABEL' | translate }}",
+  "{{ 'switch.form.snmp.LABEL' | translate }}",
   "snmp"
 )(
-  placeholder="{{ 'hardware.switch.form.snmp.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'switch.form.snmp.PLACEHOLDER' | translate }}"
   ng-model="switchForm.input.snmp_pass"
 )
 
-+label("{{ 'hardware.switch.form.group.LABEL' | translate }}")
++label("{{ 'switch.form.group.LABEL' | translate }}")
   ui-select(
     multiple
     ng-model="switchForm.groups.selected"
     theme="bootstrap"
     close-on-select="false"
   )
-    ui-select-match(placeholder="{{ 'hardware.switch.form.group.LABEL' | translate }}")
+    ui-select-match(placeholder="{{ 'switch.form.group.LABEL' | translate }}")
       | {{ $item.name }}
 
     ui-select-choices(

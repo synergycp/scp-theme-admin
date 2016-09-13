@@ -12,6 +12,7 @@
         url: '/group',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:group'),
       })
       .state('app.network.group.list', {
         url: '',

@@ -1,0 +1,8 @@
+div.switch
+  span(ng-bind="match.label.name")
+  br
+  small
+    span.text-muted(
+      translate="switch.search.SERVERS"
+      translate-value-servers="{{ match.label.serversCount }}"
+    )

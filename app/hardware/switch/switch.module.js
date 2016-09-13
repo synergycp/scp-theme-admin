@@ -8,5 +8,6 @@
       'ui.select',
       'app.hardware.switch.speed',
       'app.hardware.switch.manage',
+      'app.hardware.switch.search',
     ]);
 })();

@@ -13,7 +13,7 @@
   function SwitchListFactory (List, ListConfirm) {
     return function () {
         var list = List('switch');
-        var confirm = ListConfirm(list, 'hardware.switch.modal.delete');
+        var confirm = ListConfirm(list, 'switch.modal.delete');
 
         list.bulk.add('Delete', confirm.delete);
 

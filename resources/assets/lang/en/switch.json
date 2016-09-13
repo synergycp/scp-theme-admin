@@ -1,0 +1,82 @@
+{
+  "DELETE": "Delete",
+  "EDIT": "Edit",
+  "MANAGE": "Manage",
+  "SERVERS": "Servers",
+  "bandwidth": {
+    "add": {
+      "BODY": "Add a primary switch port:",
+      "SUBMIT": "Add Port",
+      "port": {
+        "PLACEHOLDER": "Type to search ports..."
+      }
+    }
+  },
+  "form": {
+    "title": {
+      "EDIT": "Edit {{ name }}",
+      "ADD": "Create Switch"
+    },
+    "name": {
+      "LABEL": "Switch ID",
+      "PLACEHOLDER": "Must be unique"
+    },
+    "network": {
+      "LABEL": "IP/SSH Port",
+      "ip": {
+        "PLACEHOLDER": "IP"
+      },
+      "port": {
+        "PLACEHOLDER": "SSH Port"
+      }
+    },
+    "ssh": {
+      "LABEL": "SSH User/Pass",
+      "username": {
+        "PLACEHOLDER": "SSH Username"
+      },
+      "password": {
+        "PLACEHOLDER": "SSH Password"
+      }
+    },
+    "enable": {
+      "LABEL": "(En)able Pass",
+      "PLACEHOLDER": "Required"
+    },
+    "snmp": {
+      "LABEL": "SNMP Key",
+      "PLACEHOLDER": "SNMP Community / Key"
+    },
+    "type": {
+      "LABEL": "Type"
+    },
+    "group": {
+      "LABEL": "IP Groups",
+      "PLACEHOLDER": "Select IP Group(s)..."
+    }
+  },
+  "heading": {
+    "SWITCH_ID": "Switch ID",
+    "IP": "Switch IP:Port",
+    "SERVER_COUNT": "Servers",
+    "ACTIONS": "Actions"
+  },
+  "list": {
+    "TITLE": "Switches"
+  },
+  "logs": {
+    "TITLE": "Switch Logs"
+  },
+  "modal": {
+    "delete": {
+      "TITLE": "Delete Switches",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these Switches:"
+    }
+  },
+  "search": {
+    "TITLE": "Switches",
+    "SERVERS": "{{ servers }} Server{{ servers == '1' ? '' : 's' }}"
+  }
+}

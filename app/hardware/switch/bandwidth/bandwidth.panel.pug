@@ -71,14 +71,14 @@ div(style="margin-bottom: 15px")
             form.panel-body.text-center(
               ng-submit="panel.tabs.add.submit()"
             )
-              p(translate="hardware.switch.bandwidth.add.BODY")
+              p(translate="switch.bandwidth.add.BODY")
               .col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
                 +input-with-btn().btn-primary(
                   type="submit"
-                  translate="hardware.switch.bandwidth.add.SUBMIT"
+                  translate="switch.bandwidth.add.SUBMIT"
                 )
                   +ui-select("panel.tabs.add.port")
-                    ui-select-match(placeholder="{{ 'hardware.switch.bandwidth.add.port.PLACEHOLDER' | translate }}")
+                    ui-select-match(placeholder="{{ 'switch.bandwidth.add.port.PLACEHOLDER' | translate }}")
                       | {{ $select.selected.name }}
 
                     ui-select-choices(

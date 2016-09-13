@@ -1,0 +1,18 @@
+div.ip-group
+  span(ng-bind="match.label.name")
+  | &nbsp;
+  small.text-muted(
+    ng-if="match.label.reserved"
+    translate="group.search.RESERVED"
+  )
+  br
+  small
+    span.text-muted(
+      translate="group.search.ENTITIES"
+      translate-value-count="{{ match.label.entities.count }}"
+    )
+    span.text-muted , &nbsp;
+    span.text-muted(
+      translate="group.search.SERVERS"
+      translate-value-count="{{ match.label.servers.count }}"
+    )

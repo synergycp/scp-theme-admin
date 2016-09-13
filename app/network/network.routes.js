@@ -1,6 +1,8 @@
 (function () {
-  angular.module('app.network')
-    .config(routeConfig);
+  angular
+    .module('app.network')
+    .config(routeConfig)
+    ;
 
   /**
    * @ngInject
@@ -12,7 +14,6 @@
         url: '/network',
         abstract: true,
         template: helper.dummyTemplate,
-        resolve: helper.resolveFor('lang:network'),
       })
       ;
   }

@@ -8,23 +8,23 @@
     a.btn.btn-default(
       ng-if="buttons.showEdit"
       ui-sref="app.hardware.switch.view.edit({ id: buttons.switch.id })"
-      translate="hardware.switch.EDIT"
+      translate="switch.EDIT"
     )
 
     a.btn.btn-default(
       ng-if="buttons.showManage"
       ui-sref="app.hardware.switch.view.manage({ id: buttons.switch.id })"
-      translate="hardware.switch.MANAGE"
+      translate="switch.MANAGE"
     )
 
     a.btn.btn-info(
       ui-sref="app.hardware.server.list({ switch: buttons.switch.id })"
     )
-      span(translate="hardware.switch.SERVERS")
+      span(translate="switch.SERVERS")
       | &nbsp;
       span.badge(ng-bind="buttons.switch.serversCount")
 
     a.btn.btn-danger(
       ng-click="buttons.delete()"
-      translate="hardware.switch.DELETE"
+      translate="switch.DELETE"
     )

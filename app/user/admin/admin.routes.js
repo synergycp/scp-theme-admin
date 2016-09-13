@@ -12,6 +12,7 @@
         url: '/admin',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:admin'),
       })
       .state('app.user.admin.list', {
         url: '',

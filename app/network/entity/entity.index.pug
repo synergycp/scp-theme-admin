@@ -3,7 +3,7 @@ include /resources/angle/pug/mixins/list
 
 block list
   list.panel.panel-default(list="vm.list")
-    list-header(text="network.entity.list.TITLE")
+    list-header(text="entity.list.TITLE")
       a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
         i.fa.fa-filter
     entity-filters(
@@ -15,7 +15,7 @@ block list
     list-footer
 
 block bottom-left
-  +create-form("{{ 'network.entity.form.title.ADD' | translate }}")
+  +create-form("{{ 'entity.form.title.ADD' | translate }}")
     entity-form(form="vm.create")
 
 block bottom-right

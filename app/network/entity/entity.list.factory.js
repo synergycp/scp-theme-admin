@@ -13,7 +13,7 @@
   function EntityListFactory (List, ListConfirm, EntityAssign) {
     return function () {
       var list = List('entity');
-      var confirm = ListConfirm(list, 'network.entity.modal.delete');
+      var confirm = ListConfirm(list, 'entity.modal.delete');
 
       list.bulk.add('Assign IP Group', wrapChangeEvent(EntityAssign.group));
       list.bulk.add('Delete', confirm.delete);

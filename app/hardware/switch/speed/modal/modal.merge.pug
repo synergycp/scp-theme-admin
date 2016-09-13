@@ -10,9 +10,9 @@ form(ng-submit="modal.submit()")
     h4.modal-title Merge Port Speed
 
   .modal-body.form-horizontal
-    +label("{{ 'hardware.speed.modal.merge.speed.LABEL' | translate }}")
+    +label("{{ 'speed.modal.merge.speed.LABEL' | translate }}")
       ui-select(ng-model="modal.speed.selected")
-        ui-select-match(placeholder="{{ 'hardware.speed.modal.merge.speed.PLACEHOLDER' | translate }}")
+        ui-select-match(placeholder="{{ 'speed.modal.merge.speed.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
 
         ui-select-choices(

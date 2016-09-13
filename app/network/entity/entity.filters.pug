@@ -18,10 +18,10 @@ mixin server-choice(select, highlight)
 .panel-body.form-horizontal(ng-show="filters.show")
   .row
     .col-md-6
-      +label("{{ 'network.entity.list.filter.group.LABEL' | translate }}")
+      +label("{{ 'entity.list.filter.group.LABEL' | translate }}")
         +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
           +ui-select("filters.group")
-            ui-select-match(placeholder="{{ 'network.entity.list.filter.group.PLACEHOLDER' | translate }}")
+            ui-select-match(placeholder="{{ 'entity.list.filter.group.PLACEHOLDER' | translate }}")
               span(ng-bind="$select.selected.name")
 
             ui-select-choices(
@@ -31,10 +31,10 @@ mixin server-choice(select, highlight)
             )
               span(ng-bind-html="choice.name | highlight: $select.search")
     .col-md-6
-      +label("{{ 'network.entity.list.filter.server.LABEL' | translate }}")
+      +label("{{ 'entity.list.filter.server.LABEL' | translate }}")
         +input-with-btn("fa fa-times-circle")(ng-click="filters.server.clear()")
           +ui-select("filters.server")
-            ui-select-match(placeholder="{{ 'network.entity.list.filter.server.PLACEHOLDER' | translate }}")
+            ui-select-match(placeholder="{{ 'entity.list.filter.server.PLACEHOLDER' | translate }}")
               +server-choice("$select.selected")
 
             ui-select-choices(

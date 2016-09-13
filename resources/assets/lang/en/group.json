@@ -1,0 +1,45 @@
+{
+  "list": {
+    "heading": {
+      "NAME": "Name",
+      "RESERVED": "Reserved",
+      "ENTITIES": "IP Entities",
+      "SERVERS": "Servers",
+      "ACTIONS": "Actions"
+    }
+  },
+  "search": {
+    "TITLE": "Groups",
+    "RESERVED": "(reserved)",
+    "SERVERS": "{{ count }} Server{{ count == '1' ? '' : 's' }}",
+    "ENTITIES": "{{ count }} IP Entit{{ count == '1' ? 'y' : 'ies' }}"
+  },
+  "modal": {
+    "delete": {
+      "TITLE": "Delete IP Groups",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these IP Groups:"
+    }
+  },
+  "form": {
+    "title": {
+      "EDIT": "Edit {{ name }}",
+      "ADD": "Create IP Group"
+    },
+    "name": {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Must be alphanumeric and unique"
+    },
+    "billing_id": {
+      "LABEL": "Billing ID",
+      "PLACEHOLDER": "Optional. Must be alphanumeric and unique"
+    },
+    "options": {
+      "LABEL": "Options",
+      "reserved": {
+        "LABEL": "Reserved"
+      }
+    }
+  }
+}

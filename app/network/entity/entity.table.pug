@@ -2,23 +2,23 @@ extends /resources/angle/pug/table-checkable
 
 block headings
   th.sortable(ng-if="table.showName")
-    span(translate="network.entity.heading.NAME")
+    span(translate="entity.heading.NAME")
     sort(col="nickname")
   th.sortable(ng-if="table.showAddr")
-    span(translate="network.entity.heading.ADDRESS")
+    span(translate="entity.heading.ADDRESS")
     sort(col="ip")
   th.sortable(ng-if="table.showGroup")
-    span(translate="network.entity.heading.IP_GROUP")
+    span(translate="entity.heading.IP_GROUP")
     sort(col="ip_group")
   th.sortable(ng-if="table.showServerCount")
-    span(translate="network.entity.heading.SERVER")
+    span(translate="entity.heading.SERVER")
     sort(col="server")
   th.sortable(ng-if="table.showVlan")
-    span(translate="network.entity.heading.VLAN")
+    span(translate="entity.heading.VLAN")
     sort(col="vlan")
   th(
     ng-if="table.showActions"
-    translate="network.entity.heading.ACTIONS"
+    translate="entity.heading.ACTIONS"
   )
 
 block columns

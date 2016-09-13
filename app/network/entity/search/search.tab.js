@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.network.entity')
+    .module('app.network.entity.search')
     .factory('EntitySearchTab', EntitySearchTabFactory)
     .run(addEntitySearchTab)
     ;
@@ -21,29 +21,46 @@
    *
    * @ngInject
    */
-  function EntitySearchTabFactory (EntityList, ListFilter, RouteHelpers) {
+  function EntitySearchTabFactory (
+    $state,
+    EntityList,
+    ListFilter,
+    RouteHelpers
+  ) {
     return function () {
         var list = EntityList();
         return new EntitySearchTab(
           list,
+          $state,
           ListFilter(list),
           RouteHelpers
         );
     };
   }
 
-  function EntitySearchTab (list, filter, RouteHelpers) {
+  function EntitySearchTab (list, $state, filter, RouteHelpers) {
     var tab = this;
 
     tab.name = 'entities';
+    tab.lang = 'entity';
+    tab.text = 'entity.search.TITLE';
     tab.list = list;
     tab.filter = filter;
-    tab.text = 'network.entity.search.TITLE';
+    tab.select = onSelect;
     tab.results = {
-      url: RouteHelpers.basepath('network/entity/entity.search.tab.html'),
+      url: RouteHelpers.basepath('network/entity/search/search.tab.html'),
     };
+    tab.typeaheadTemplateUrl = RouteHelpers.basepath(
+      'network/entity/search/search.item.html'
+    );
 
     //////////
+
+    function onSelect($item) {
+      $state.go('app.network.entity.view', {
+        id: $item.id,
+      });
+    }
 
 
   }

@@ -16,23 +16,7 @@
         url: '/switch',
         abstract: true,
         template: helper.dummyTemplate,
-      })
-      .state('app.hardware.switch.speed', {
-        url: '/speed',
-        abstract: true,
-        template: helper.dummyTemplate,
-      })
-      .state('app.hardware.switch.speed.list', {
-        url: '',
-        title: 'Switch Speeds',
-        controller: 'SpeedListCtrl as vm',
-        templateUrl: helper.basepath('hardware/switch/speed/speed.index.html'),
-      })
-      .state('app.hardware.switch.speed.view', {
-        url: '/:id',
-        title: 'View Switch Speed',
-        controller: 'SpeedViewCtrl as vm',
-        templateUrl: helper.basepath('hardware/switch/speed/speed.view.html'),
+        resolve: helper.resolveFor('lang:switch'),
       })
       .state('app.hardware.switch.list', {
         url: '',

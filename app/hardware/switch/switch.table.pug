@@ -2,18 +2,18 @@ extends /resources/angle/pug/table-checkable
 
 block headings
   th.sortable(ng-if="table.showSwitchId")
-    span(translate="hardware.switch.heading.SWITCH_ID")
+    span(translate="switch.heading.SWITCH_ID")
     sort(col="switch_id")
   th.sortable(ng-if="table.showIp")
-    span(translate="hardware.switch.heading.IP")
+    span(translate="switch.heading.IP")
     sort(col="ip")
   th(
     ng-if="table.showServerCount"
-    translate="hardware.switch.heading.SERVER_COUNT"
+    translate="switch.heading.SERVER_COUNT"
   )
   th(
     ng-if="table.showActions"
-    translate="hardware.switch.heading.ACTIONS"
+    translate="switch.heading.ACTIONS"
   )
 
 block columns

@@ -12,6 +12,7 @@
         url: '/entity',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:entity'),
       })
       .state('app.network.entity.list', {
         url: '?group.id&server.id',

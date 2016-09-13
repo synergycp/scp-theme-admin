@@ -20,7 +20,7 @@
     var tab = this;
 
     // Public variables
-    tab.text = 'hardware.part.list.tab.' + type;
+    tab.text = 'part.list.tab.' + type;
     tab.list = list.filter({
       part_type: type,
     });

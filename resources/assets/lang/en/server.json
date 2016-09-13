@@ -360,7 +360,8 @@
     }
   },
   "search": {
-    "TITLE": "Servers"
+    "TITLE": "Servers",
+    "EMPTY": "No Client or IP assigned"
   },
   "switch": {
     "TITLE": "Switch Controls",

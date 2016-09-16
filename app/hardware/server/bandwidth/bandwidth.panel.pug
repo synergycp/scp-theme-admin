@@ -2,22 +2,10 @@ div(style="margin-bottom: 15px")
   .graph-wrapper
     .graph-helper
       .btn-group.btn-group-xs.pull-right.relative(style="z-index:2")
-        input.date-picker(
-          type="text"
-          style="visibility:hidden;width:0px;"
-          date-range-picker
-          ng-model="panel.filter.input"
-          options="panel.filter.opts"
-          min="panel.filter.min"
-          max="panel.filter.max"
-        )
-        a.btn.btn-default(
+        bandwidth-date-range-picker.btn-group.btn-group-xs(
+          bandwidth="panel"
           ng-if="panel.chart.isActive"
-          ng-click="panel.state.filtering()"
         )
-          span
-            | {{ panel.filter.range }} &nbsp;
-          span.caret
 
         a.btn.btn-default.hide(
           ng-if="panel.chart.hasFilteredData"

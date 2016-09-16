@@ -19,13 +19,15 @@ block headings
 block columns
   td
     log-user(log="vm.log")
-  td {{ row.ip }}
-  td {{ row.desc }}
+  td(ng-bind="row.ip")
+  td(ng-bind="row.desc")
   td
     span(ng-if="row.target") {{ row.target.name }} ({{row.target.singular}})
     span(ng-if="!row.target") -
-  td {{ row.created_at }}
+  td(ng-bind="row.created_at")
   td
     .btn-group.btn-group-xs
-      a.btn.btn-default(ui-sref="app.system.log.view({id: row.id})")
-        | {{ 'app.action.VIEW' | translate }}
+      a.btn.btn-default(
+        ui-sref="app.system.log.view({id: row.id})"
+        translate="app.action.VIEW"
+      )

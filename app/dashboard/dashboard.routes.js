@@ -18,7 +18,12 @@
         title: 'Dashboard',
         controller: 'DashboardCtrl as dash',
         templateUrl: helper.basepath('dashboard/dashboard.html'),
-        resolve: helper.resolveFor('lang:dashboard'),
+        resolve: helper.resolveFor(
+          'lang:dashboard', 'lang:bandwidth',
+          'chart-js', 'after:ng-chart-js',
+          'moment', 'after:date-range-picker',
+          'numeral'
+        ),
       });
   }
 })();

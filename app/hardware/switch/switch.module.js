@@ -9,5 +9,6 @@
       'app.hardware.switch.speed',
       'app.hardware.switch.manage',
       'app.hardware.switch.search',
+      'app.hardware.switch.dashboard',
     ]);
 })();

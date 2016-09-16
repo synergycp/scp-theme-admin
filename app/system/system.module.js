@@ -3,9 +3,11 @@
 
   angular
     .module('app.system', [
-      'scp.angle.layout.list',
       'scp.core.api',
-      'app.system.setting',
+      'scp.angle.layout.list',
+
       'app.system.email',
+      'app.system.setting',
+      'app.system.log',
     ]);
 })();

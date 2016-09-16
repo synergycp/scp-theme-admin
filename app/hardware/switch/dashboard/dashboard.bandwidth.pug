@@ -1,0 +1,49 @@
+include /resources/angle/pug/mixins/panel
+include /resources/angle/pug/mixins/form
+
+.graph-wrapper
+  .graph-helper
+    .panel.panel-default
+      .panel-heading
+        .btn-group.btn-group-xs.pull-right.relative(style="z-index:2")
+          bandwidth-date-range-picker.btn-group.btn-group-xs(
+            bandwidth="panel.bandwidth"
+            ng-if="panel.bandwidth.chart.isActive"
+          )
+
+          a.btn.btn-default.hide(
+            ng-if="panel.chart.hasFilteredData"
+            ng-click="panel.state.fullScreen = !panel.state.fullScreen"
+          )
+            span.glyphicon(
+              ng-class="panel.state.fullScreen ? 'glyphicon-resize-small' : 'glyphicon-resize-full'"
+            )
+
+          a.btn.btn-default(
+            ng-click="panel.delete()"
+          )
+            span.fa.fa-times
+
+        h3.panel-title(
+          translate="switch.dashboard.bandwidth.TITLE"
+          translate-value-name="{{ panel.homeSwitch.switch.name }}"
+        )
+
+      div.relative(
+        ng-class="panel.state.loader.class"
+      )
+        .loader
+        div(style="padding: 0 5px")
+          bandwidth-graph(
+            target="panel.homeSwitch.switch"
+            filter="panel.bandwidth.filter"
+            state="panel.bandwidth.state"
+            chart="panel.bandwidth.chart"
+            type="Home Switch"
+          )
+        .panel-footer.clearfix(ng-show="panel.showFooter")
+          .pull-right
+            button.btn.btn-primary(
+              type="submit"
+              translate="switch.dashboard.add.SUBMIT"
+            )

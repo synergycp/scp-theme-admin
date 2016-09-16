@@ -1,0 +1,40 @@
+include /resources/angle/pug/mixins/panel
+include /resources/angle/pug/mixins/form
+
+form.form-horizontal(
+  ng-class="panel.loader.class"
+  ng-submit="panel.submit()"
+)
+  .loader
+  +panel("{{ 'switch.dashboard.add.TITLE' | translate }}")
+    .panel-body
+      +label("switch.dashboard.add.switch.LABEL")
+        +ui-select("panel.switch")
+          ui-select-match(placeholder="{{ 'switch.dashboard.add.switch.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.name")
+
+          ui-select-choices(
+            repeat="choice in panel.switch.items track by choice.id"
+            refresh="panel.switch.load($select.search)"
+            refresh-delay="400"
+          )
+            span(ng-bind-html="choice.name | highlight: $select.search")
+
+      +label("switch.dashboard.add.port.LABEL")
+        +ui-select("panel.port")(ng-disabled="!panel.switch.selected")
+          ui-select-match(placeholder="{{ 'switch.dashboard.add.port.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.name")
+
+          ui-select-choices(
+            repeat="choice in panel.port.items track by choice.id"
+            refresh="panel.port.load($select.search)"
+            refresh-delay="400"
+          )
+            span(ng-bind-html="choice.name | highlight: $select.search")
+
+    .panel-footer.clearfix
+      .pull-right
+        button.btn.btn-primary(
+          type="submit"
+          translate="switch.dashboard.add.SUBMIT"
+        )

@@ -3,6 +3,23 @@
   "EDIT": "Edit",
   "MANAGE": "Manage",
   "SERVERS": "Servers",
+  "dashboard": {
+    "add": {
+      "TITLE": "Add Switch to Dashboard",
+      "SUBMIT": "Add Switch",
+      "switch": {
+        "LABEL": "Switch",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "port": {
+        "LABEL": "Port",
+        "PLACEHOLDER": "Type to search..."
+      }
+    },
+    "bandwidth": {
+      "TITLE": "{{ name }} Bandwidth"
+    }
+  },
   "bandwidth": {
     "add": {
       "BODY": "Add a primary switch port:",

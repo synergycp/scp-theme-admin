@@ -1,9 +1,7 @@
-
-.md-welcome
-  .md-welcome-msg
-    .container.container-md
-      h1.animated.fadeInDown.anim-delay-10 Synergy2
-      h2.animated.fadeInLeft.anim-delay-15 (Dashboard not yet built)
-  
-
-div(ng-controller="DashboardSwitchesCtrl as switches")
+.row
+  .col-md-6(ng-repeat="panels in dash.cols")
+    load(
+      ng-repeat="panel in panels"
+      from="panel"
+      as="panel"
+    )

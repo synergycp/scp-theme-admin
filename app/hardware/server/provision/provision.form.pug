@@ -118,30 +118,10 @@ div(ng-if="!provisionForm.serverId")
       span(ng-bind-html="choice.srv_id | highlight: $select.search")
 
 +label("{{ 'server.form.entities.LABEL' | translate }}")
-  +ui-select("provisionForm.entities")(
-    multiple
-    sortable="true"
-    close-on-select="false"
+  entity-multi-select(
+    placeholder="server.form.entities.PLACEHOLDER"
+    select="provisionForm.entities"
   )
-    ui-select-match(placeholder="{{ 'server.form.entities.PLACEHOLDER' | translate }}")
-      span(ng-bind="$item.name")
-
-    ui-select-choices(
-      repeat=[
-        "entity in (",
-          "provisionForm.entities.items",
-          "| filter: provisionForm.entities.notSelected",
-        ") track by entity.id",
-      ].join('')
-      refresh="provisionForm.entities.load($select.search)"
-      refresh-delay="400"
-    )
-      span(ng-bind-html="entity.name | highlight: $select.search")
-      small
-        | &nbsp;(VLAN:&nbsp;
-        span(ng-bind-html="entity.vlan | highlight: $select.search")
-        span(ng-bind="entity.siblings_count ? ' +'+entity.siblings_count : ''")
-        | )
 
 +label("{{ 'server.form.switch.speed.LABEL' | translate }}")
   +ui-select("provisionForm.switchSpeed")

@@ -143,27 +143,10 @@ hr
 
 div(ng-if="serverForm.group.selected")
   +label("{{ 'server.form.entities.LABEL' | translate }}")
-    +ui-select("serverForm.entities")(
-      multiple
-      sortable="true"
-      close-on-select="false"
+    entity-multi-select(
+      placeholder="server.form.entities.PLACEHOLDER"
+      select="serverForm.entities"
     )
-      ui-select-match(placeholder="{{ 'server.form.entities.PLACEHOLDER' | translate }}")
-        span(ng-bind="$item.name")
-
-      ui-select-choices(
-        repeat="entity in serverForm.entities.items track by entity.id"
-        refresh="serverForm.entities.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="entity.name | highlight: $select.search")
-        | &nbsp;
-        small
-          | (VLAN:&nbsp;
-          span(ng-bind-html="entity.vlan | highlight: $select.search")
-          | {{ entity.siblings_count ? ' +'+entity.siblings_count : '' }})
-        div(ng-if="entity.v6")
-          small(ng-bind="entity.v6.address")
 
 hr
 

@@ -84,6 +84,10 @@
     }
 
     function storePower(response) {
+      if (!response.checked_at) {
+        return response;
+      }
+
       ipmiControl.client.username = response.client_user;
       ipmiControl.client.password = response.client_pass;
       ipmiControl.power.status = response.power_status_desc;

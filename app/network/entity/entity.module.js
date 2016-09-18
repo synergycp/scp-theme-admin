@@ -7,5 +7,6 @@
       'scp.core.api',
       'app.network.entity.assign',
       'app.network.entity.search',
+      'app.network.entity.filters',
     ]);
 })();

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.network.entity')
+    .module('app.network.entity.filters')
     .component('entityFilters', {
       require: {
         list: '\^list',

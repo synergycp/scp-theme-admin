@@ -44,6 +44,7 @@
     tab.name = 'entities';
     tab.lang = 'entity';
     tab.text = 'entity.search.TITLE';
+    tab.order = 15;
     tab.list = list;
     tab.filter = filter;
     tab.select = onSelect;

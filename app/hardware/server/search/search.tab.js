@@ -38,6 +38,7 @@
     tab.list = list;
     tab.text = 'server.search.TITLE';
     tab.lang = 'server';
+    tab.order = 10;
     tab.select = onSelect;
     tab.results = {
       url: RouteHelpers.basepath('hardware/server/search/search.tab.html'),

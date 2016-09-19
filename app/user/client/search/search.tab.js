@@ -42,6 +42,7 @@
     tab.lang = 'client';
     tab.text = 'client.search.TITLE';
     tab.select = onSelect;
+    tab.order = 5;
     tab.results = {
       url: RouteHelpers.basepath('user/client/search/search.tab.html'),
     };

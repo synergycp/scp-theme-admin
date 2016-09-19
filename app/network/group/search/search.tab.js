@@ -42,6 +42,7 @@
     tab.list = list;
     tab.filter = filter;
     tab.select = onSelect;
+    tab.order = 25;
     tab.results = {
       url: RouteHelpers.basepath('network/group/search/search.tab.html'),
     };

@@ -39,6 +39,7 @@
     tab.text = 'switch.search.TITLE';
     tab.list = list;
     tab.select = onSelect;
+    tab.order = 20;
     tab.results = {
       url: RouteHelpers.basepath('hardware/switch/search/search.tab.html'),
     };

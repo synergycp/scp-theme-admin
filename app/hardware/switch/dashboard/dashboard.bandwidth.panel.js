@@ -50,7 +50,9 @@
     _
   ) {
     var panel = this;
-    var filter = BandwidthFilter();
+    var filter = BandwidthFilter().setOptions({
+      opens: 'left',
+    });
     _.extend(
       homeSwitch.switch,
       Api

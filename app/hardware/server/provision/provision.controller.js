@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.hardware.server')
+    .module('app.hardware.server.provision')
     .controller('ServerProvisionCtrl', ServerProvisionCtrl)
     ;
 

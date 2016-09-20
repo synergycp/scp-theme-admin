@@ -1,0 +1,22 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="system.email.list.TITLE")
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    email-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
+    email-table.border-top-table
+    list-footer
+
+block bottom-left
+  logs(
+    title="Email Template Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

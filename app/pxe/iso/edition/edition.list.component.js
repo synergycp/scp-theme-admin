@@ -14,17 +14,17 @@
         isoId: '=',
         isoName: '=',
       },
-      controller: 'EditionListCtrl as editionList',
+      controller: 'EditionIndexCtrl as editionList',
       transclude: true,
       templateUrl: 'app/pxe/iso/edition/edition.list.html',
     })
-    .controller('EditionListCtrl', EditionListCtrl)
+    .controller('EditionIndexCtrl', EditionIndexCtrl)
     ;
 
   /**
    * @ngInject
    */
-  function EditionListCtrl(List, $scope, $q) {
+  function EditionIndexCtrl(List, $scope, $q) {
     var editionList = this;
 
     editionList.$onInit = init;

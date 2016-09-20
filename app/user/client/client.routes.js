@@ -16,18 +16,6 @@
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:client'),
       })
-      .state('app.user.client.list', {
-        url: '',
-        title: 'Clients',
-        templateUrl: helper.basepath('user/client/client.index.html'),
-        controller: 'ClientIndexCtrl as vm'
-      })
-      .state('app.user.client.view', {
-        url: '/:id',
-        title: 'View Client',
-        controller: 'ClientViewCtrl as vm',
-        templateUrl: helper.basepath('user/client/client.view.html'),
-      })
       ;
   }
 })();

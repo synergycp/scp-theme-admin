@@ -3,5 +3,6 @@
 
   angular
     .module('app.pxe.preseed', [
+      'app.pxe.preseed.list',
     ]);
 })();

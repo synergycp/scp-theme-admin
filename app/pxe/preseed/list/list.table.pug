@@ -1,0 +1,19 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th Name
+  th Description
+  th Installable
+  th(ng-if="table.showActions") Actions
+
+block columns
+  td(ng-bind="row.name")
+  td(ng-bind="row.description") 
+  td
+    span.fa.fa-check.text-success(ng-if="row.is_installable")
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.pxe.preseed.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

@@ -1,0 +1,45 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showName")
+    span(translate="client.heading.NAME")
+    sort(col="last")
+  th.sortable(ng-if="table.showEmail")
+    span(translate="client.heading.EMAIL")
+    sort(col="email")
+  th(
+    ng-if="table.showServerCount"
+    translate="client.heading.SERVER-COUNT"
+  )
+  th(
+    ng-if="table.showActions"
+    translate="client.heading.ACTIONS"
+  )
+
+block columns
+  td(
+    ng-if="table.showName"
+    ng-bind="row.name"
+  )
+  td(
+    ng-if="table.showEmail"
+    ng-bind="row.email"
+  )
+  td(
+    ng-if="table.showServerCount"
+  )
+    span(
+      ng-if="!row.serversCount"
+      translate="client.list.NO-SERVERS"
+    )
+    a(
+      ui-sref="app.hardware.server.list({ client: row.id })"
+      ng-bind="row.serversCount"
+      ng-if="row.serversCount"
+    )
+  td(ng-if="table.showActions")
+    .btn-client.btn-client-xs
+      a.btn.btn-default(
+        ui-sref="app.user.client.view({ id: row.id })"
+        translate="app.action.EDIT"
+      )

@@ -1,0 +1,42 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showName")
+    span(translate="group.list.heading.NAME")
+    sort(col="name")
+  th.sortable(ng-if="table.showReserved")
+    span(translate="group.list.heading.RESERVED")
+    sort(col="reserved")
+  th.sortable(ng-if="table.showIpEntities")
+    span(translate="group.list.heading.ENTITIES")
+    sort(col="ip_entities")
+  th.sortable(ng-if="table.showServers")
+    span(translate="group.list.heading.SERVERS")
+    sort(col="servers")
+  th(ng-if="table.showActions")
+    span(translate="group.list.heading.ACTIONS")
+
+block columns
+  td(
+    ng-if="table.showName"
+    ng-bind="row.name"
+  )
+  td(ng-if="table.showReserved")
+    span.fa.fa-check.text-success(ng-if="row.reserved")
+    span.text-muted(ng-if="!row.reserved") -
+  td(ng-if="table.showIpEntities")
+    a(
+      ui-sref="app.network.entity.list({'group.id': row.id})"
+      ng-bind="row.entities.count"
+    )
+  td(ng-if="table.showServers")
+    a(
+      ui-sref="app.hardware.server.list({group: row.id})"
+      ng-bind="row.servers.count"
+    )
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.network.group.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

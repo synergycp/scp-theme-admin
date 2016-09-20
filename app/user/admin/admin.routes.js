@@ -14,12 +14,6 @@
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:admin'),
       })
-      .state('app.user.admin.list', {
-        url: '',
-        title: 'Administrators',
-        controller: 'AdminListCtrl as vm',
-        templateUrl: helper.basepath('user/admin/admin.index.html'),
-      })
       .state('app.user.admin.view', {
         url: '/:id',
         title: 'View Administrator',

@@ -6,5 +6,6 @@
       'scp.angle.layout.list',
       'scp.core.api',
       'ui.bootstrap',
+      'app.hardware.switch.speed.list',
     ]);
 })();

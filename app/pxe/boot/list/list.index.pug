@@ -1,0 +1,26 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="pxe.boot.list.TITLE")
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    boot-script-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
+    boot-script-table.border-top-table
+    list-footer
+
+block bottom-left
+  +create-form("{{ 'pxe.boot.form.title.ADD' | translate }}")
+    boot-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="PXE Boot Script Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

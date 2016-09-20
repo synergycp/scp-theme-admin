@@ -1,0 +1,19 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th Name
+  th Billing ID
+  th Client Access
+  th(ng-if="table.showActions") Actions
+
+block columns
+  td {{ row.name }}
+  td {{ row.billing_id }}
+  td
+    span.fa.fa-check.text-success(ng-if="row.access_client")
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.pxe.profile.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

@@ -1,0 +1,20 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.relative Name
+    sort(col="name")
+  th Status
+  th.relative Uploaded
+    sort(col="created_at")
+  th Actions
+
+block columns
+  td(ng-bind="row.name")
+  td(ng-bind="row.status")
+  td(ng-bind="row.created_at")
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.pxe.iso.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

@@ -34,7 +34,7 @@
   };
 
   angular
-    .module('app.hardware.server')
+    .module('app.hardware.server.provision')
     .component('provisionForm', {
       require: {
       },

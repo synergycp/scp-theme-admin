@@ -195,7 +195,17 @@
     }
   },
   "list": {
-    "TITLE": "Servers"
+    "TITLE": "Servers",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "group": {
+        "LABEL": "IP Group",
+        "PLACEHOLDER": "Type to search..."
+      }
+    }
   },
   "logs": {
     "TITLE": "Server Logs"

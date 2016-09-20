@@ -19,7 +19,13 @@
   },
   "list": {
     "NO-SERVERS": "-",
-    "TITLE": "Clients"
+    "TITLE": "Clients",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      }
+    }
   },
   "heading": {
     "NAME": "Name",

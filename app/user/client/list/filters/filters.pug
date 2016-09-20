@@ -1,0 +1,12 @@
+include /resources/angle/pug/mixins/form
+
+.panel-body.form-horizontal(ng-show="filters.show")
+  .row
+    .col-md-6
+      +label("{{ 'client.list.filter.search.LABEL' | translate }}")
+        +search-field()(
+          ng-model="filters.current.q"
+          ng-change="filters.fireChangeEvent()"
+          placeholder="{{ 'client.list.filter.search.PLACEHOLDER' | translate }}"
+          observable-focus="filters.searchFocus"
+        )

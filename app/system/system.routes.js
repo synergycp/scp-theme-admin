@@ -16,52 +16,6 @@
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:system'),
       })
-      .state('app.system.email', {
-        url: '/email',
-        abstract: true,
-        template: helper.dummyTemplate,
-      })
-      .state('app.system.email.list', {
-        url: '',
-        title: 'Emails',
-        controller: 'EmailListCtrl as vm',
-        templateUrl: helper.basepath('system/email/email.index.html'),
-      })
-      .state('app.system.email.view', {
-        url: '/:id',
-        title: 'View Email',
-        controller: 'EmailViewCtrl as vm',
-        templateUrl: helper.basepath('system/email/email.view.html'),
-      })
-      .state('app.system.log', {
-        url: '/log',
-        abstract: true,
-        template: helper.dummyTemplate,
-      })
-      .state('app.system.log.list', {
-        url: '',
-        title: 'Logs',
-        controller: 'LogListCtrl as vm',
-        templateUrl: helper.basepath('system/log/log.index.html'),
-      })
-      .state('app.system.log.view', {
-        url: '/:id',
-        title: 'View Log',
-        controller: 'LogViewCtrl as vm',
-        templateUrl: helper.basepath('system/log/log.view.html'),
-      })
-      .state('app.system.setting', {
-        url: '/setting',
-        abstract: true,
-        template: helper.dummyTemplate,
-      })
-      .state('app.system.setting.list', {
-        url: '?tab',
-        title: 'Settings',
-        controller: 'SettingIndexCtrl as vm',
-        templateUrl: helper.basepath('system/setting/setting.index.html'),
-        reloadOnSearch: false,
-      })
       ;
   }
 })();

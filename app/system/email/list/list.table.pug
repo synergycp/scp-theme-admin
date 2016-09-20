@@ -1,0 +1,16 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th Name
+  th Subject
+  th(ng-if="table.showActions") Actions
+
+block columns
+  td(ng-bind="row.name")
+  td(ng-bind="row.subject")
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.system.email.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

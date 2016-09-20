@@ -1,0 +1,16 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th Name
+  th Description
+  th Actions
+
+block columns
+  td(ng-bind="row.name")
+  td(ng-bind="row.description")
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.pxe.shell.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

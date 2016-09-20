@@ -18,36 +18,6 @@
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:switch'),
       })
-      .state('app.hardware.switch.list', {
-        url: '',
-        title: 'Switches',
-        controller: 'SwitchListCtrl as vm',
-        templateUrl: helper.basepath('hardware/switch/switch.index.html'),
-      })
-      .state('app.hardware.switch.view', {
-        url: '/:id',
-        abstract: true,
-        template: helper.dummyTemplate,
-        resolve: helper.resolveFor('lang:bandwidth'),
-      })
-      .state('app.hardware.switch.view.edit', {
-        url: '/edit',
-        title: 'Edit Switch',
-        controller: 'SwitchEditCtrl as vm',
-        templateUrl: helper.basepath('hardware/switch/switch.edit.html'),
-      })
-      .state('app.hardware.switch.view.manage', {
-        url: '?bandwidth.start&bandwidth.end&bandwidth.tab',
-        title: 'Manage Switch',
-        reloadOnSearch: false,
-        controller: 'SwitchManageCtrl as vm',
-        templateUrl: helper.basepath('hardware/switch/manage/manage.html'),
-        resolve: helper.resolveFor(
-          'chart-js', 'after:ng-chart-js',
-          'moment', 'after:date-range-picker',
-          'numeral'
-        ),
-      })
       ;
   }
 })();

@@ -17,6 +17,15 @@
     }
   },
   "shell": {
+    "list": {
+      "TITLE": "OS Reload Shell Scripts",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
     "modal": {
       "delete": {
         "TITLE": "Delete Shell Scripts",
@@ -45,6 +54,15 @@
     }
   },
   "boot": {
+    "list": {
+      "TITLE": "PXE Boot Scripts",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
     "modal": {
       "delete": {
         "TITLE": "Delete Boot Scripts",
@@ -69,6 +87,15 @@
     }
   },
   "iso": {
+    "list": {
+      "TITLE": "ISO Manager",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
     "modal": {
       "delete": {
         "TITLE": "Delete ISOs",
@@ -107,6 +134,15 @@
     }
   },
   "profile": {
+    "list": {
+      "TITLE": "OS Reload Profiles",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
     "modal": {
       "delete": {
         "TITLE": "Delete OS Reload Profiles",
@@ -162,6 +198,15 @@
     }
   },
   "preseed": {
+    "list": {
+      "TITLE": "OS Reload Preseed Configurations",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
     "modal": {
       "delete": {
         "TITLE": "Delete PXE Preseeds",

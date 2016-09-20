@@ -1,5 +1,12 @@
 {
   "list": {
+    "TITLE": "IP Groups",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      }
+    },
     "heading": {
       "NAME": "Name",
       "RESERVED": "Reserved",

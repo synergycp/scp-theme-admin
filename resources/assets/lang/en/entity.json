@@ -95,6 +95,10 @@
   "list": {
     "TITLE": "Entities",
     "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      },
       "group": {
         "LABEL": "IP Group",
         "PLACEHOLDER": "Type to search..."

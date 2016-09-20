@@ -1,0 +1,44 @@
+include /resources/angle/pug/mixins/form
+
+mixin server-choice(select, highlight)
+  font(ng-bind=select+".text")
+  font(ng-if="!"+select+".text")
+    font(
+      ng-bind-html=select+".nickname | escape" +
+        (highlight ? "| highlight: " + highlight : "")
+    )
+    small
+      font  &lt;
+      font(
+        ng-bind-html=select+".srv_id | escape" +
+          (highlight ? "| highlight: " + highlight : "")
+      )
+      font &gt;
+
+.panel-body.form-horizontal(ng-show="filters.show")
+  .row
+    .col-md-6
+      +label("{{ 'entity.list.filter.search.LABEL' | translate }}")
+        +search-field()(
+          ng-model="filters.current.q"
+          ng-change="filters.fireChangeEvent()"
+          placeholder="{{ 'entity.list.filter.search.PLACEHOLDER' | translate }}"
+          observable-focus="filters.searchFocus"
+        )
+      +label("{{ 'entity.list.filter.server.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.server.clear()")
+          +ui-select("filters.server")
+            ui-select-match(placeholder="{{ 'entity.list.filter.server.PLACEHOLDER' | translate }}")
+              +server-choice("$select.selected")
+
+            +ui-select-choices("filters.server")
+              +server-choice("choice", "$select.search")
+    .col-md-6
+      +label("{{ 'entity.list.filter.group.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
+          +ui-select("filters.group")
+            ui-select-match(placeholder="{{ 'entity.list.filter.group.PLACEHOLDER' | translate }}")
+              span(ng-bind="$select.selected.name")
+
+            +ui-select-choices("filters.group")
+              span(ng-bind-html="choice.name | highlight: $select.search")

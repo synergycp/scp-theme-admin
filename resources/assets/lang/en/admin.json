@@ -7,6 +7,15 @@
       "BODY": "Click \"Delete\" to permanently delete these Administrators:"
     }
   },
+  "list": {
+    "TITLE": "Administrators",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      }
+    }
+  },
   "form": {
     "title": {
       "ADD": "Create Administrator",

@@ -8,6 +8,15 @@
         "BODY": "Click \"Delete\" to permanently delete these Email Templates:"
       }
     },
+    "list": {
+      "TITLE": "Email Templates",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
     "form": {
       "title": {
         "EDIT": "Edit {{ name }}",
@@ -24,6 +33,17 @@
       "body": {
         "LABEL": "Template",
         "PLACEHOLDER": "Will be parsed using Smarty."
+      }
+    }
+  },
+  "log": {
+    "list": {
+      "TITLE": "Logs",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
       }
     }
   },

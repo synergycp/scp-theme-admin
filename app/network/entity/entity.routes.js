@@ -1,6 +1,8 @@
 (function () {
-  angular.module('app.network.entity')
-    .config(routeConfig);
+  angular
+    .module('app.network.entity')
+    .config(routeConfig)
+    ;
 
   /**
    * @ngInject
@@ -13,13 +15,6 @@
         abstract: true,
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:entity'),
-      })
-      .state('app.network.entity.list', {
-        url: '?group.id&server.id',
-        title: 'Entities',
-        controller: 'EntityIndexCtrl as vm',
-        templateUrl: helper.basepath('network/entity/entity.index.html'),
-        reloadOnSearch: false,
       })
       .state('app.network.entity.view', {
         url: '/:id',

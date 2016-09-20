@@ -18,12 +18,6 @@
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:speed'),
       })
-      .state('app.hardware.switch.speed.list', {
-        url: '',
-        title: 'Switch Speeds',
-        controller: 'SpeedListCtrl as vm',
-        templateUrl: helper.basepath('hardware/switch/speed/speed.index.html'),
-      })
       .state('app.hardware.switch.speed.view', {
         url: '/:id',
         title: 'View Switch Speed',

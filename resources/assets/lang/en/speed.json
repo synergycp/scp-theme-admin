@@ -18,7 +18,13 @@
     }
   },
   "list": {
-    "TITLE": "Switch Speeds"
+    "TITLE": "Switch Port Speeds",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      }
+    }
   },
   "logs": {
     "TITLE": "Switch Speed Logs"

@@ -3,5 +3,6 @@
 
   angular
     .module('app.pxe.profile', [
+      'app.pxe.profile.list',
     ]);
 })();

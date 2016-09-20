@@ -6,5 +6,6 @@
       'scp.angle.layout.list',
       'scp.core.api',
       'app.network.group.search',
+      'app.network.group.list',
     ]);
 })();

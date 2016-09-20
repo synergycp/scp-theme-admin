@@ -1,6 +1,8 @@
 (function () {
-  angular.module('app.network.group')
-    .config(routeConfig);
+  angular
+    .module('app.network.group')
+    .config(routeConfig)
+    ;
 
   /**
    * @ngInject
@@ -13,12 +15,6 @@
         abstract: true,
         template: helper.dummyTemplate,
         resolve: helper.resolveFor('lang:group'),
-      })
-      .state('app.network.group.list', {
-        url: '',
-        title: 'Groups',
-        controller: 'GroupIndexCtrl as vm',
-        templateUrl: helper.basepath('network/group/group.index.html'),
       })
       .state('app.network.group.view', {
         url: '/:id',

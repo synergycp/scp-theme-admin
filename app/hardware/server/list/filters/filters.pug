@@ -1,0 +1,25 @@
+include /resources/angle/pug/mixins/form
+
+.panel-body.form-horizontal(ng-show="filters.show")
+  .row
+    .col-md-6
+      +label("{{ 'server.list.filter.search.LABEL' | translate }}")
+        +search-field()(
+          ng-model="filters.current.q"
+          placeholder="{{ 'server.list.filter.search.PLACEHOLDER' | translate }}"
+          ng-change="filters.fireChangeEvent()"
+          observable-focus="filters.searchFocus"
+        )
+    .col-md-6
+      +label("{{ 'server.list.filter.group.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
+          +ui-select("filters.group")
+            ui-select-match(placeholder="{{ 'server.list.filter.group.PLACEHOLDER' | translate }}")
+              span(ng-bind="$select.selected.name")
+
+            ui-select-choices(
+              repeat="choice in filters.group.items track by choice.id"
+              refresh="filters.group.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")

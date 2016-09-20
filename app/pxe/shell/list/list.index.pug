@@ -1,0 +1,26 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="pxe.shell.list.TITLE")
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    shell-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
+    shell-table.border-top-table
+    list-footer
+
+block bottom-left
+  +create-form("{{ 'pxe.shell.form.title.ADD' | translate }}")
+    shell-form(form="vm.create")
+
+block bottom-right
+  logs(
+    title="PXE Shell Script Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

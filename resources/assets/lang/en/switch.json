@@ -79,7 +79,13 @@
     "ACTIONS": "Actions"
   },
   "list": {
-    "TITLE": "Switches"
+    "TITLE": "Switches",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      }
+    }
   },
   "logs": {
     "TITLE": "Switch Logs"

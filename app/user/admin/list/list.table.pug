@@ -1,0 +1,18 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.relative Username
+    sort(col="username")
+  th.relative Email
+    sort(col="email")
+  th Actions
+
+block columns
+  td(ng-bind="row.username")
+  td(ng-bind="row.email")
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.user.admin.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

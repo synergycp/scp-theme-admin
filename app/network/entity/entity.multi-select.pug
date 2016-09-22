@@ -7,6 +7,9 @@ include /resources/angle/pug/mixins/form
 )
   ui-select-match(placeholder="{{ select.placeholder | translate }}")
     span(ng-bind="$item.name")
+    span(ng-if="$item.v6")
+      span(ng-if="$item.v4") &nbsp;+&nbsp;
+      span(ng-bind="$item.v6.address")
 
   ui-select-choices(
     repeat=[

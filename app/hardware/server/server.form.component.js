@@ -43,8 +43,9 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Select, MultiInput, $rootScope, ServerConfig, $stateParams, moment) {
+  function ServerFormCtrl(_, Api, Select, MultiInput, $rootScope, ServerConfig, $stateParams, moment) {
     var serverForm = this;
+    var $entities = Api.all('entity');
 
     serverForm.$onInit = init;
     serverForm.input = _.clone(INPUTS);
@@ -130,10 +131,7 @@
         serverForm.switch.selected = response.switch;
         syncGroupFilter();
 
-        _.setContents(serverForm.entities.selected, response.entities);
         serverForm.group.selected = response.group;
-        syncEntityFilter();
-
         serverForm.cpu.selected = response.cpu;
         serverForm.mem.selected = response.mem;
 
@@ -141,6 +139,17 @@
         serverForm.billing.date.value = response.billing.date ?
           Date.parse(response.billing.date) : '';
       });
+
+      $entities
+        .getList({ server: response.id })
+        .then(storeEntities)
+        ;
+    }
+
+    function storeEntities(response) {
+      _.setContents(serverForm.entities.selected, response);
+
+      syncEntityFilter();
     }
 
     function syncEntityFilter() {

@@ -20,6 +20,7 @@
         title: 'PXE Installs',
         controller: 'InstallIndexCtrl as vm',
         templateUrl: helper.basepath('pxe/install/install.index.html'),
+        resolve: helper.resolveFor('lang:os-reload'),
       })
       ;
   }

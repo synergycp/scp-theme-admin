@@ -16,7 +16,7 @@
         url: '/:id',
         abstract: true,
         template: helper.dummyTemplate,
-        resolve: helper.resolveFor('lang:pxe', 'lang:bandwidth'),
+        resolve: helper.resolveFor('lang:bandwidth'),
       })
       .state('app.hardware.server.view.edit', {
         url: '/edit',

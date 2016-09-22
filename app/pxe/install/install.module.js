@@ -3,5 +3,6 @@
 
   angular
     .module('app.pxe.install', [
+      'scp.angle.os-reload',
     ]);
 })();

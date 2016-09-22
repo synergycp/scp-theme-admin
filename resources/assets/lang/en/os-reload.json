@@ -1,0 +1,53 @@
+{
+  "list": {
+    "EMPTY": "There are no PXE installations running right now"
+  },
+  "progress": {
+    "RELOADING": "This server's operating system is being reloaded.",
+    "OS": "Operating System: {{ value }}",
+    "STATUS": "Status: {{ value }}",
+    "UPDATED": "Last Updated: {{ value }}",
+    "STARTED": "Install Started: {{ value }}",
+    "CANCEL": "Progress bar stopped?"
+  },
+  "delete": {
+    "confirm": {
+      "TITLE": "Cancel Operating System Reload?",
+      "BODY": "This will stop tracking the installation, but will not stop it from continuing.",
+      "CANCEL": "Cancel",
+      "SUBMIT": "Stop Tracking"
+    }
+  },
+  "server": {
+    "TITLE": "Operating System Reload",
+    "NOT_ENABLED": "This server must have a MAC address and be assigned an IP Entity to use OS Reload.",
+    "SUBMIT": "Reload Operating System",
+    "profile": {
+      "LABEL": "Profile",
+      "PLACEHOLDER": "Type to Search..."
+    },
+    "license-key": {
+      "LABEL": "License Key",
+      "PLACEHOLDER": "Optional",
+      "HELP": "Leave blank for trial"
+    },
+    "edition": {
+      "LABEL": "Edition",
+      "PLACEHOLDER": "Type to Search..."
+    },
+    "modal": {
+      "confirm": {
+        "TITLE": "Are you sure?",
+        "SUBMIT": "Reload Operating System",
+        "CANCEL": "Cancel",
+        "CONFIRM": "I understand that this will delete all data on the disk.",
+        "password": {
+          "LABEL": "Root Password",
+          "PLACEHOLDER": "Enter server password",
+          "GENERATE": "Generate Password",
+          "HELP": "This password will not be saved! Please copy it somewhere safe."
+        }
+      }
+    }
+  }
+}

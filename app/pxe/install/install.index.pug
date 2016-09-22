@@ -1,1 +1,10 @@
-include install.list.pug
+div(ng-if="!vm.list.items.length")
+  .alert.alert-info(data-translate="os-reload.list.EMPTY")
+.row
+  .col-md-6(
+    ng-repeat="install in vm.list.items track by install.id"
+  )
+    os-reload-panel(
+      install="install"
+      on-delete="vm.list.delete([install])"
+    )

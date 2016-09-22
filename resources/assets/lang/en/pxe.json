@@ -1,21 +1,4 @@
 {
-  "install": {
-    "list": {
-      "EMPTY": "There are no PXE installations running right now"
-    },
-    "progress": {
-      "RELOADING": "This server's operating system is being reloaded.",
-      "OS": "Operating System: {{ value }}",
-      "STATUS": "Status: {{ value }}",
-      "UPDATED": "Last Updated: {{ value }}",
-      "STARTED": "Install Started: {{ value }}",
-      "CANCEL": "Progress bar stopped?",
-      "delete": {
-        "TITLE": "Are you sure?",
-        "BODY": "This will stop tracking the installation, but will not stop it from continuing."
-      }
-    }
-  },
   "shell": {
     "list": {
       "TITLE": "OS Reload Shell Scripts",

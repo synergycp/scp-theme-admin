@@ -21,7 +21,8 @@
         resolve: helper.resolveFor(
           'chart-js', 'after:ng-chart-js',
           'moment', 'after:date-range-picker',
-          'numeral'
+          'numeral',
+          'lang:os-reload'
         ),
       })
       ;

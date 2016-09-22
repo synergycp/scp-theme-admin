@@ -376,38 +376,6 @@
     "ADMIN": "Administrator Notes",
     "SUBMIT": "Save Notes"
   },
-  "os-reload": {
-    "TITLE": "Operating System Reload",
-    "NOT_ENABLED": "This server must have a MAC address and be assigned an IP Entity to use OS Reload.",
-    "SUBMIT": "Reload Operating System",
-    "profile": {
-      "LABEL": "Profile",
-      "PLACEHOLDER": "Type to Search..."
-    },
-    "license-key": {
-      "LABEL": "License Key",
-      "PLACEHOLDER": "Optional",
-      "HELP": "Leave blank for trial"
-    },
-    "edition": {
-      "LABEL": "Edition",
-      "PLACEHOLDER": "Type to Search..."
-    },
-    "modal": {
-      "confirm": {
-        "TITLE": "Are you sure?",
-        "SUBMIT": "Reload Operating System",
-        "CANCEL": "Cancel",
-        "CONFIRM": "I understand that this will delete all data on the disk.",
-        "password": {
-          "LABEL": "Root Password",
-          "PLACEHOLDER": "Enter server password",
-          "GENERATE": "Generate Password",
-          "HELP": "This password will not be saved! Please copy it somewhere safe."
-        }
-      }
-    }
-  },
   "provision": {
     "TITLE": "Provision Server",
     "SUBMIT": "Provision",

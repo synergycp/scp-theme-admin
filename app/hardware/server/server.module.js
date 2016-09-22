@@ -11,5 +11,7 @@
       'app.hardware.server.provision',
       'app.hardware.server.search',
       'app.hardware.server.view',
+
+      'scp.angle.hardware.server.ipmi',
     ]);
 })();

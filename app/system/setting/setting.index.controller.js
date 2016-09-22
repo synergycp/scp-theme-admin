@@ -18,7 +18,7 @@
    *
    * @ngInject
    */
-  function SettingIndexCtrl(_, $scope, $state, $stateParams, $uibModal, $q, List, Loader, Alert, EventEmitter, Api, $timeout) {
+  function SettingIndexCtrl(_, $scope, $state, $stateParams, Modal, $q, List, Loader, Alert, EventEmitter, Api, $timeout) {
     var vm = this;
     var $api = Api.all(API.SETTING);
     var $groups = Api.all(API.SETTING_GROUP);
@@ -227,16 +227,12 @@
       }
 
       function delApiKey(key) {
-        var modal = $uibModal.open({
-          templateUrl: 'app/system/integration/integration.delete.modal.html',
-          controller: 'ModalCtrl',
-          bindToController: true,
-          controllerAs: 'modal',
-        });
-
-        return modal.result.then(function () {
-          return doDelete(key);
-        });
+        Modal
+          .confirm([key], 'system.integration.modal.delete')
+          .result
+          .then(function () {
+            return doDelete(key);
+          });
       }
 
       function doDelete(key) {

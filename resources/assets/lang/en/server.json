@@ -169,7 +169,6 @@
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
     "ADDRESS": "IPMI IP Address",
     "BMC": "Reset BMC",
-    "PXE": "PXE Boot",
     "client": {
       "USER": "Client Username",
       "PASS": "Client Password",
@@ -180,17 +179,82 @@
         "TITLE": "Client User",
         "CREATE": "Setup User",
         "DELETE": "Delete User"
+      },
+      "modal": {
+        "delete": {
+          "TITLE": "Delete Client IPMI User?",
+          "BODY": "This will revoke client access to IPMI until another client IPMI user is created.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Delete User"
+        }
+      }
+    },
+    "boot": {
+      "TITLE": "Boot Device",
+      "pxe": {
+        "BTN": "PXE",
+        "confirm": {
+          "TITLE": "Set Boot Device to PXE?",
+          "BODY": "This will make the server boot from the network for {{ persist ? 'all future boots' : 'the next boot' }}.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Set Boot Device",
+          "PERSIST": "Make Persistent"
+        }
+      },
+      "disk": {
+        "BTN": "Disk",
+        "confirm": {
+          "TITLE": "Set Boot Device to Disk?",
+          "BODY": "This will make the server boot from its Hard Disk for {{ persist ? 'all future boots' : 'the next boot' }}.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Set Boot Device",
+          "PERSIST": "Make Persistent"
+        }
+      },
+      "bios": {
+        "BTN": "BIOS",
+        "confirm": {
+          "TITLE": "Set Boot Device to BIOS?",
+          "BODY": "This will make the server boot into BIOS for {{ persist ? 'all future boots' : 'the next boot' }}.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Set Boot Device",
+          "PERSIST": "Make Persistent"
+        }
       }
     },
     "power": {
       "STATUS": "Power Status",
       "CHECKED": "Last Checked",
-      "dropdown": {
-        "TITLE": "Power",
-        "ON": "Power On",
-        "CYCLE": "Power Reset",
-        "SOFT": "Soft Shutdown",
-        "OFF": "Power Off"
+      "BTN": "Power",
+      "on": {
+        "BTN": "Power On"
+      },
+      "off": {
+        "BTN": "Hard Power Off",
+        "confirm": {
+          "TITLE": "Set Power to Off?",
+          "BODY": "This will perform a hard power off on the server, the same as if the power plug were pulled.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Hard Power Off"
+        }
+      },
+      "cycle": {
+        "BTN": "Cold Reboot",
+        "confirm": {
+          "TITLE": "Set Power to Cycle?",
+          "BODY": "This will perform a soft power off on the server, then power it back on.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Reboot Server"
+        }
+      },
+      "soft": {
+        "BTN": "Soft Power Off",
+        "confirm": {
+          "TITLE": "Set Power to Off?",
+          "BODY": "This will perform a soft power off on the server, the same as if the power off button were pressed once. The server may decide not to power off if there is a process that refuses to shut down.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Soft Power Off"
+        }
       }
     }
   },
@@ -382,9 +446,19 @@
     "SPEED": "Port Speed",
     "PORT": "Port Number",
     "power": {
-      "DROPDOWN": "Port Power",
-      "ON": "Port Power On",
-      "OFF": "Port Power Off"
+      "BTN": "Port Power",
+      "on": {
+        "BTN": "Port Power On"
+      },
+      "off": {
+        "BTN": "Port Power Off",
+        "confirm": {
+          "TITLE": "Set Port Power to Off?",
+          "BODY": "This will turn off power for port {{ port }} on {{ switch }}.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Power Off Port"
+        }
+      }
     }
   }
 }

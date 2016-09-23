@@ -36,8 +36,11 @@ block headings
 block columns
   td(
     ng-if="table.showSrvId"
-    ng-bind="row.srv_id"
   )
+    a(
+      ui-sref="app.hardware.server.view.manage({id: row.id})"
+      ng-bind="row.srv_id"
+    )
   td(
     ng-if="table.showNickname"
     ng-bind="row.nickname"

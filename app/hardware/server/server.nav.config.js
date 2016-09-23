@@ -21,7 +21,7 @@
    * @ngInject
    */
   function navRefresher(ServerInventoryNav, $interval, Api, Auth) {
-    var $inventory = Api.all('server?available');
+    var $inventory = Api.all('server');
     var interval;
 
     Auth.whileLoggedIn(startChecking, stopChecking);
@@ -45,6 +45,7 @@
       return $inventory
         .getList({
           per_page: 1,
+          available: true,
         })
         .then(function(items) {
           ServerInventoryNav.alert = items.meta.total;

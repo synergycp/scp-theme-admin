@@ -8,7 +8,7 @@
       },
       bindings: {
         switch: '=',
-        filter: '=?',
+        filter: '=',
         tabActive: '=',
         onTabChange: '&?',
       },
@@ -33,6 +33,9 @@
     SwitchManageAddTab
   ) {
     var panel = this;
+    var filterOptions = {
+      opens: 'left',
+    };
 
     panel.$onInit = init;
     panel.tabs = {
@@ -43,42 +46,28 @@
     panel.state = {
       fullScreen: false,
       loader: Loader(),
-      filtering: function () {
-        $('.date-picker').click();
-      },
     };
 
     //////////
 
     function init() {
-      panel.filter = panel.filter || BandwidthFilter();
-      panel.filter.setOptions({
-        opens: 'left',
-      }).on('change', function () {
-        if (panel.chart) {
-          panel.chart.refresh();
-        }
-      });
-      panel.tabs.add = SwitchManageAddTab(panel.switch)
-        .on('add', onAddTab);
-      panel.bandwidth = SwitchBandwidth(panel.switch, panel.filter);
-      panel.state.loader.during(
-        Config
-          .getSwitchBandwidthRange()
-          .then(setFilterRange)
-          .then(refreshBandwidth)
-      );
-    }
-
-    function setFilterRange(range) {
-      panel.filter.setRangeByLabel(range);
-    }
-
-    function refreshBandwidth() {
-      return panel.bandwidth
-        .refresh()
-        .then(setupActiveTab)
+      panel.filter
+        .setOptions(filterOptions)
+        .on('change', filterChange)
         ;
+
+      panel.bandwidth = SwitchBandwidth(panel.switch, panel.filter);
+      panel.state.loader.loading();
+
+      if (panel.filter.input.startDate) {
+        filterChange();
+      }
+    }
+
+    function filterChange() {
+      panel.state.loader.during(
+        (panel.chart || panel.bandwidth).refresh()
+      );
     }
 
     function setupActiveTab() {

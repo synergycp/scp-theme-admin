@@ -11,11 +11,12 @@
    */
   function ServerBandwidthPanelCtrl(
     Loader,
-    ServerBandwidth,
-    BandwidthFilter,
-    Config
+    ServerBandwidth
   ) {
     var panel = this;
+    var filterOptions = {
+      opens: 'left',
+    };
 
     panel.$onInit = init;
     panel.tabs = {
@@ -25,46 +26,28 @@
     panel.state = {
       fullScreen: false,
       loader: Loader(),
-      filtering: function () {
-        // TODO: fix
-        $('.date-picker').click();
-      },
     };
 
     //////////
 
     function init() {
-      panel.filter = panel.filter || BandwidthFilter();
-      panel.filter.setOptions({
-        opens: 'left',
-      }).on('change', function () {
-        if (panel.chart) {
-          panel.chart.refresh();
-        }
-      });
+      panel.filter
+        .setOptions(filterOptions)
+        .on('change', filterChange)
+        ;
 
       panel.bandwidth = ServerBandwidth(panel.server, panel.filter);
+      panel.state.loader.loading();
+
+      if (panel.filter.input.startDate) {
+        filterChange();
+      }
+    }
+
+    function filterChange() {
       panel.state.loader.during(
-        Config
-          .getServerBandwidthRange()
-          .then(setFilterRange)
-          .then(refreshBandwidth)
+        (panel.chart || panel.bandwidth).refresh()
       );
-    }
-
-    function setFilterRange(range) {
-      panel.filter.setRangeByLabel(range);
-    }
-
-    function refreshBandwidth() {
-      return panel.bandwidth
-        .refresh()
-        .then(setActiveTab)
-        ;
-    }
-
-    function setActiveTab() {
-      panel.tabs.active = 0;
     }
 
     function tabChange(tab) {

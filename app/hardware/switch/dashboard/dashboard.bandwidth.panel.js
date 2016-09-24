@@ -20,6 +20,7 @@
     BandwidthFilter,
     BandwidthState,
     SwitchBandwidthPort,
+    Config,
     Api,
     _
   ) {
@@ -32,6 +33,7 @@
           BandwidthFilter,
           BandwidthState,
           SwitchBandwidthPort,
+          Config,
           Api,
           _
         );
@@ -46,6 +48,7 @@
     BandwidthFilter,
     BandwidthState,
     SwitchBandwidthPort,
+    Config,
     Api,
     _
   ) {
@@ -53,6 +56,11 @@
     var filter = BandwidthFilter().setOptions({
       opens: 'left',
     });
+    Config
+      .getSwitchBandwidthRange()
+      .then(filter.setRangeByLabel)
+      ;
+
     _.extend(
       homeSwitch.switch,
       Api
@@ -67,7 +75,9 @@
         .one(''+homeSwitch.id)
     );
 
-    panel.templateUrl = RouteHelpers.basepath(DIR+'dashboard.bandwidth.html');
+    panel.templateUrl = RouteHelpers.basepath(
+      DIR+'dashboard.bandwidth.html'
+    );
     panel.context = {
       homeSwitch: homeSwitch,
       showFooter: false,
@@ -88,7 +98,6 @@
     panel.context.bandwidth.chart.width = 800;
     panel.context.bandwidth.chart.height = 240;
 
-    panel.context.bandwidth.chart.refresh();
     panel.context.filter.on(
       'change',
       panel.context.bandwidth.chart.refresh

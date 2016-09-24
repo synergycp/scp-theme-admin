@@ -6,7 +6,7 @@
     .component('serverBandwidthPanel', {
       bindings: {
         server: '=',
-        filter: '=?',
+        filter: '=',
       },
       controller: 'ServerBandwidthPanelCtrl as panel',
       templateUrl: 'app/hardware/server/bandwidth/bandwidth.panel.html'

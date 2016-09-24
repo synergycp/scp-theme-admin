@@ -16,7 +16,7 @@
   function ServerManageCtrl(
     Api,
     EventEmitter,
-    BandwidthFilter,
+    ServerManagePanelBandwidth,
     date,
     moment,
     $stateParams,
@@ -37,10 +37,6 @@
     EventEmitter().bindTo(vm.server);
     panelContext.server = vm.server;
 
-    var bandwidth = _.assign({}, panelContext, {
-      filter: BandwidthFilter(),
-    });
-
     vm.panels = {
       top: [],
       left: [],
@@ -56,9 +52,6 @@
         .load()
         .then(loadPanels)
         ;
-
-      $scope.$on('$routeUpdate', syncStateToFilter);
-      bandwidth.filter.on('change', syncFilterToState);
     }
 
     function loadServer() {
@@ -108,12 +101,9 @@
     }
 
     function loadPanels() {
-      syncStateToFilter();
-
-      _.setContents(vm.panels.top, [{
-        templateUrl: PANELS+'/panel.bandwidth.html',
-        context: bandwidth,
-      }]);
+      _.setContents(vm.panels.top, [
+        ServerManagePanelBandwidth(vm.server, $scope),
+      ]);
 
       _.setContents(vm.panels.left, [{
         templateUrl: PANELS+'/panel.hardware.html',
@@ -151,25 +141,6 @@
         templateUrl: PANELS+'/panel.buttons.html',
         context: panelContext,
       },]);
-    }
-
-    function syncStateToFilter() {
-      if (!$stateParams['bandwidth.start']) {
-        return;
-      }
-
-      bandwidth.filter.setRange(
-        moment($stateParams['bandwidth.start'], date.formatDateTime),
-        moment($stateParams['bandwidth.end'], date.formatDateTime)
-      );
-    }
-
-    function syncFilterToState() {
-      var filter = bandwidth.filter;
-      $state.go($state.current.name, _.assign($stateParams, {
-        'bandwidth.start': filter.start.format(date.formatDateTime),
-        'bandwidth.end': filter.end.format(date.formatDateTime),
-      }));
     }
 
     function patchServer() {

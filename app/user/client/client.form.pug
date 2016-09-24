@@ -25,9 +25,20 @@ include /resources/angle/pug/mixins/form
   }
 )
 
+hr
+
 +field(
-  "{{ 'client.form.billing_id.LABEL' | translate }}",
+  "{{ 'client.form.billing.id.LABEL' | translate }}",
   "billing_id"
 )(
-  ng-model="clientForm.input.billing_id"
+  ng-model="clientForm.input.billing.id"
 )
+
++label(
+  "{{ 'client.form.billing.vip.LABEL' | translate }}",
+  "billing-ignoreAutoSuspend"
+)
+  +checkbox()(
+    ng-model="clientForm.input.billing.ignoreAutoSuspend"
+  )
+    span(translate="client.form.billing.vip.IGNORE_AUTO_SUSPEND")

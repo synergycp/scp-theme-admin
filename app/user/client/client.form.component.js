@@ -6,7 +6,10 @@
     password: '',
     first: '',
     last: '',
-    billing_id: '',
+    billing: {
+      id: '',
+      ignoreAutoSuspend: false,
+    },
   };
 
   angular

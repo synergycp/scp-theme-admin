@@ -45,8 +45,14 @@
       "LABEL": "Password",
       "PLACEHOLDER": "Enter a password to set"
     },
-    "billing_id": {
-      "LABEL": "Billing ID"
+    "billing": {
+      "id": {
+        "LABEL": "Billing ID"
+      },
+      "vip": {
+        "LABEL": "VIP Permissions",
+        "IGNORE_AUTO_SUSPEND": "Ignore Auto Suspend/Terminate"
+      }
     },
     "name": {
       "LABEL": "Name"

@@ -20,10 +20,19 @@
       })
       .state('app.hardware.switch.speed.view', {
         url: '/:id',
+        abstract: true,
+        template: helper.dummyTemplate,
+      })
+      .state('app.hardware.switch.speed.view.edit', {
+        url: '',
         title: 'View Switch Speed',
         controller: 'SpeedViewCtrl as vm',
         templateUrl: helper.basepath('hardware/switch/speed/speed.view.html'),
       })
       ;
+
+    helper.url('port-speed/?([0-9]*)', function (id) {
+      return 'hardware/switch/speed'+(id && '/'+id);
+    });
   }
 })();

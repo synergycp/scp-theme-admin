@@ -19,5 +19,9 @@
         resolve: helper.resolveFor('lang:server'),
       })
       ;
+
+    helper.url('server/?([0-9]*)', function (id) {
+      return 'hardware/server'+(id && '/'+id);
+    });
   }
 })();

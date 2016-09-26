@@ -8,11 +8,11 @@
         list: '\^list',
       },
       bindings: {
-        showName: '=?',
-        showReserved: '=?',
-        showIpEntities: '=?',
-        showServers: '=?',
-        showActions: '=?',
+        showUser: '=?',
+        showIpAddress: '=?',
+        showDescription: '=?',
+        showType: '=?',
+        showDate: '=?',
       },
       controller: 'LogTableCtrl as table',
       transclude: true,
@@ -24,7 +24,7 @@
   /**
    * @ngInject
    */
-  function LogTableCtrl() {
+  function LogTableCtrl(Url) {
     var table = this;
 
     table.$onInit = init;
@@ -33,11 +33,21 @@
 
     function init() {
       _.defaults(table, {
-        showName: true,
-        showReserved: true,
-        showIpEntities: true,
-        showServers: true,
-        showActions: true,
+        showUser: true,
+        showIpAddress: true,
+        showDescription: true,
+        showType: true,
+        showDate: true,
+      });
+
+      table.list.list.on('load', function (items) {
+        _.map(items, function (row) {
+          if (!row.target) {
+            return;
+          }
+
+          row.target.href = Url.get(row.target.url);
+        });
       });
     }
   }

@@ -22,5 +22,9 @@
         templateUrl: helper.basepath('system/email/email.view.html'),
       })
       ;
+
+    helper.url('email/template/?([0-9]*)', function (id) {
+      return 'system/email'+(id && '/'+id);
+    });
   }
 })();

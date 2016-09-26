@@ -19,5 +19,9 @@
         resolve: helper.resolveFor('lang:switch'),
       })
       ;
+
+    helper.url('switch/?([0-9]*)', function (id) {
+      return 'hardware/switch'+(id && '/'+id);
+    });
   }
 })();

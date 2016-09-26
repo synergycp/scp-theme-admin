@@ -23,5 +23,9 @@
         templateUrl: helper.basepath('network/entity/entity.view.html'),
       })
       ;
+
+    helper.url('entity/?([0-9]*)', function (id) {
+      return 'network/entity'+(id && '/'+id);
+    });
   }
 })();

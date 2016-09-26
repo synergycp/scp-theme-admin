@@ -1,6 +1,8 @@
 (function () {
-  angular.module('app.user.admin')
-    .config(routeConfig);
+  angular
+    .module('app.user.admin')
+    .config(routeConfig)
+    ;
 
   /**
    * @ngInject
@@ -21,5 +23,9 @@
         templateUrl: helper.basepath('user/admin/admin.view.html'),
       })
       ;
+
+    helper.url('admin/?([0-9]*)', function (id) {
+      return 'user/admin'+(id && '/'+id);
+    });
   }
 })();

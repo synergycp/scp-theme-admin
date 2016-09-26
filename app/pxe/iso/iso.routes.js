@@ -22,5 +22,9 @@
         templateUrl: helper.basepath('pxe/iso/iso.view.html'),
       })
       ;
+
+    helper.url('pxe/iso/?([0-9]*)', function (id) {
+      return 'pxe/iso'+(id && '/'+id);
+    });
   }
 })();

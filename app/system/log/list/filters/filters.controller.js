@@ -9,15 +9,12 @@
   /**
    * @ngInject
    */
-  function LogFiltersCtrl(Select, Observable, $state, $q, $timeout) {
+  function LogFiltersCtrl(Select, Observable, $q, $timeout) {
     var filters = this;
 
     filters.$onInit = init;
     filters.$onChanges = $onChanges;
 
-    filters.current = {
-      q: $state.params.q,
-    };
     filters.searchFocus = Observable(false);
 
     filters.fireChangeEvent = fireChangeEvent;
@@ -25,6 +22,8 @@
     //////////
 
     function init() {
+      filters.current = filters.current || {};
+
       var promises = [
         $timeout(),
         // filters.log.setSelectedId($state.params['log']),
@@ -43,11 +42,6 @@
     function fireChangeEvent() {
       _.assign(filters.current, {
         // log: filters.log.getSelected('id'),
-      });
-
-      $state.go($state.current.name, {
-        // 'log': filters.current.log,
-        'q': filters.current.q,
       });
 
       if (filters.change) {

@@ -22,5 +22,9 @@
         templateUrl: helper.basepath('pxe/shell/shell.view.html'),
       })
       ;
+
+    helper.url('pxe/shell/?([0-9]*)', function (id) {
+      return 'pxe/shell'+(id && '/'+id);
+    });
   }
 })();

@@ -23,5 +23,9 @@
         templateUrl: helper.basepath('network/group/group.view.html'),
       })
       ;
+
+    helper.url('group/?([0-9]*)', function (id) {
+      return 'network/group'+(id && '/'+id);
+    });
   }
 })();

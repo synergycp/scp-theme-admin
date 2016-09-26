@@ -1,0 +1,18 @@
+include /resources/angle/pug/mixins/panel
+
+list.panel.panel-default(
+  ng-show="logs.list.items.length && !angular.empty(logs.filters.current)"
+  list="logs.list"
+)
+  list-header(text="{{ logs.title }}")
+    a.btn.btn-default(ng-click="logs.filters.visible = !logs.filters.visible")
+      i.fa.fa-filter
+  log-filters(
+    show="logs.filters.visible"
+    current="logs.filters.current"
+    change="logs.filters.change()"
+  )
+  log-table(
+    show-type="logs.showType"
+  ).border-top-table
+  list-footer

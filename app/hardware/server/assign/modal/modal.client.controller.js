@@ -48,7 +48,7 @@
     //////////
 
     function activate() {
-      $translateModuleLoader.addPart('user');
+      $translateModuleLoader.addPart('client');
       $translate.refresh();
     }
 

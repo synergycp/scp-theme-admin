@@ -22,5 +22,9 @@
         templateUrl: helper.basepath('pxe/profile/profile.view.html'),
       })
       ;
+
+    helper.url('pxe/profile/?([0-9]*)', function (id) {
+      return 'pxe/profile'+(id && '/'+id);
+    });
   }
 })();

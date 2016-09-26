@@ -29,5 +29,9 @@
         templateUrl: helper.basepath('pxe/boot/boot.view.html'),
       })
       ;
+
+    helper.url('pxe/template/?([0-9]*)', function (id) {
+      return 'pxe/boot'+(id && '/'+id);
+    });
   }
 })();

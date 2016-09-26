@@ -1,31 +1,43 @@
 extends /resources/angle/pug/table-checkable
 
 block headings
-  th.relative User
+  th(ng-if="table.showUser").relative User
     sort(col="user")
-  th.relative IP Address
+  th(ng-if="table.showIpAddress").relative IP Address
     sort(col="ip")
-  th.relative Description
+  th(ng-if="table.showDescription").relative Description
     sort(col="desc")
-  th.relative Type
+  th(ng-if="table.showType").relative Type
     sort(col="type")
-  th.relative Date
+  th(ng-if="table.showDate").relative Date
     sort(col="created_at")
-  th Actions
 
 block columns
-  td
-    log-user(log="vm.log")
-  td(ng-bind="row.ip")
-  td(ng-bind="row.desc")
-  td
+  td(ng-if="table.showUser")
+    log-user(log="row")
+  td(
+    ng-bind="row.ip"
+    ng-if="table.showIpAddress"
+  )
+  td(
+    ng-bind="row.desc"
+    ng-if="table.showDescription"
+  )
+  td(ng-if="table.showType")
     span(ng-if="row.target")
-      | {{ row.target.name }} ({{row.target.singular}})
-    span(ng-if="!row.target") -
-  td(ng-bind="row.created_at")
-  td(ng-if="table.showActions")
-    .btn-group.btn-group-xs
-      a.btn.btn-default(
-        ui-sref="app.system.log.view({id: row.id})"
-        translate="app.action.EDIT"
+      a(
+        ng-if="row.target.href"
+        ng-href="{{ row.target.href }}"
+        ng-bind="row.target.name"
       )
+      span(
+        ng-if="!row.target.href"
+        ng-bind="row.target.name"
+      )
+      |  ({{row.target.singular}})
+    span(ng-if="!row.target") -
+  td(ng-if="table.showDate")
+    a(
+      ui-sref="app.system.log.view({id: row.id})"
+      ng-bind="row.created_at"
+    )

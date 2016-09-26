@@ -17,5 +17,9 @@
         resolve: helper.resolveFor('lang:client'),
       })
       ;
+
+    helper.url('client/?([0-9]*)', function (id) {
+      return 'user/client'+(id && '/'+id);
+    });
   }
 })();

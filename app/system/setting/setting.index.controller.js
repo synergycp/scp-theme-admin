@@ -229,10 +229,12 @@
       function delApiKey(key) {
         Modal
           .confirm([key], 'system.integration.modal.delete')
+          .open()
           .result
           .then(function () {
             return doDelete(key);
-          });
+          })
+          ;
       }
 
       function doDelete(key) {

@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function routeConfig($stateProvider, RouteHelpersProvider) {
+  function routeConfig($stateProvider, RouteHelpersProvider, SsoUrlProvider) {
     var helper = RouteHelpersProvider;
     $stateProvider
       .state('app.hardware.server', {
@@ -20,8 +20,13 @@
       })
       ;
 
-    helper.url('server/?([0-9]*)', function (id) {
-      return 'hardware/server'+(id && '/'+id);
+    helper.url('server/?([0-9]*)', mapServerUrl);
+    SsoUrlProvider.map('server', function (options) {
+      return mapServerUrl(options.id);
     });
+
+    function mapServerUrl (id) {
+      return 'hardware/server'+(id && '/'+id);
+    }
   }
 })();

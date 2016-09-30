@@ -56,32 +56,40 @@
         .on('change', filterChange)
         ;
 
+      panel.tabs.add = SwitchManageAddTab(panel.switch)
+        .on('add', onAddTab)
+        ;
       panel.bandwidth = SwitchBandwidth(panel.switch, panel.filter);
       panel.state.loader.loading();
 
       if (panel.filter.input.startDate) {
-        filterChange();
+        filterChange().then(setupActiveTab);
       }
     }
 
     function filterChange() {
-      panel.state.loader.during(
+      return panel.state.loader.during(
         (panel.chart || panel.bandwidth).refresh()
       );
     }
 
     function setupActiveTab() {
-      var active = panel.tabs.active =
+      var active =
         parseInt(panel.tabActive) == panel.tabActive ?
-        parseInt(panel.tabActive) : panel.tabActive;
+        parseInt(panel.tabActive) : panel.tabActive
+        ;
       var tab = panel.bandwidth.ports[active] || panel.tabs.add;
+      panel.tabs.active = tab === panel.tabs.add ? 'add' : active;
       tab.active = true;
     }
 
     function onAddTab(port) {
       Api.wrap(port);
       panel.bandwidth.add(port).active = true;
-      $timeout(setActiveTab.bind(null, panel.bandwidth.ports.length - 1));
+
+      $timeout(
+        setActiveTab.bind(null, panel.bandwidth.ports.length - 1)
+      );
     }
 
     function tabRemove(tab) {

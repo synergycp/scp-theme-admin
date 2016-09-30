@@ -2,6 +2,9 @@
   'use strict';
 
   var PANELS = 'app/hardware/switch/view/manage/panel';
+  var TAB = {
+    DEFAULT: 0,
+  };
 
   angular
     .module('app.hardware.switch.view.manage')
@@ -37,7 +40,7 @@
 
     var bandwidth = _.assign({
       tab: {
-        active: 0,
+        active: TAB.DEFAULT,
         change: onBandwidthTabChange,
       },
       filter: BandwidthFilter(),
@@ -85,18 +88,16 @@
     }
 
     function syncStateToTabs() {
-      bandwidth.tab.active = $stateParams['bandwidth.tab'] || 0;
+      bandwidth.tab.active = $stateParams['bandwidth.tab'] || TAB.DEFAULT;
     }
 
     function syncStateToFilter() {
-      if (!$stateParams['bandwidth.start']) {
-        return;
+      if ($stateParams['bandwidth.start']) {
+        bandwidth.filter.setRange(
+          moment($stateParams['bandwidth.start'], date.formatDateTime),
+          moment($stateParams['bandwidth.end'], date.formatDateTime)
+        );
       }
-
-      bandwidth.filter.setRange(
-        moment($stateParams['bandwidth.start'], date.formatDateTime),
-        moment($stateParams['bandwidth.end'], date.formatDateTime)
-      );
     }
 
     function syncFilterToState() {
@@ -138,13 +139,6 @@
         templateUrl: PANELS+'/panel.buttons.html',
         context: panelContext,
       },]);
-    }
-
-    function patchSwitch() {
-      return $api.patch
-        .apply($api, arguments)
-        .then(fireChangeEvent)
-        ;
     }
 
     function fireChangeEvent(arg) {

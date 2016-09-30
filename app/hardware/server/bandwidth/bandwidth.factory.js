@@ -3,7 +3,8 @@
 
   angular
     .module('app.hardware.server.bandwidth')
-    .factory('ServerBandwidth', ServerBandwidthFactory);
+    .factory('ServerBandwidth', ServerBandwidthFactory)
+    ;
 
   /**
    * ServerBandwidth Factory

@@ -42,7 +42,7 @@
     //////////
 
     function init() {
-      _.assign(logs, {
+      _.defaults(logs, {
         showType: true,
       });
 
@@ -51,7 +51,7 @@
       logs.filter = logs.filter || {};
 
       if (logs.listenTo) {
-        logs.listenTo.on('change', logs.list.refresh);
+        logs.listenTo.on('change', logs.list.load);
       }
     }
   }

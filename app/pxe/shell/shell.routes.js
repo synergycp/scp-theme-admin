@@ -23,7 +23,7 @@
       })
       ;
 
-    helper.url('pxe/shell/?([0-9]*)', function (id) {
+    helper.url.map('pxe/shell/?([0-9]*)', function (id) {
       return 'pxe/shell'+(id && '/'+id);
     });
   }

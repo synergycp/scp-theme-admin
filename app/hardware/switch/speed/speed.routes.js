@@ -31,7 +31,7 @@
       })
       ;
 
-    helper.url('port-speed/?([0-9]*)', function (id) {
+    helper.url.map('port-speed/?([0-9]*)', function (id) {
       return 'hardware/switch/speed'+(id && '/'+id);
     });
   }

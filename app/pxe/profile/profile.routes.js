@@ -23,7 +23,7 @@
       })
       ;
 
-    helper.url('pxe/profile/?([0-9]*)', function (id) {
+    helper.url.map('pxe/profile/?([0-9]*)', function (id) {
       return 'pxe/profile'+(id && '/'+id);
     });
   }

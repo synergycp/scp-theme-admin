@@ -30,7 +30,7 @@
       })
       ;
 
-    helper.url('pxe/template/?([0-9]*)', function (id) {
+    helper.url.map('pxe/template/?([0-9]*)', function (id) {
       return 'pxe/boot'+(id && '/'+id);
     });
   }

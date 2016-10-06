@@ -17,7 +17,7 @@ include /resources/angle/pug/mixins/form
 +textarea(
   "{{ 'system.email.form.body.LABEL' | translate }}",
   "body"
-)(
+).code(
   placeholder="{{ 'system.email.form.body.PLACEHOLDER' | translate }}"
   ng-model="emailForm.input.body"
   rows="20"

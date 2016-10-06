@@ -23,7 +23,7 @@
       })
       ;
 
-    helper.url('email/template/?([0-9]*)', function (id) {
+    helper.url.map('email/template/?([0-9]*)', function (id) {
       return 'system/email'+(id && '/'+id);
     });
   }

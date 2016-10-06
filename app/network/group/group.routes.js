@@ -24,7 +24,7 @@
       })
       ;
 
-    helper.url('group/?([0-9]*)', function (id) {
+    helper.url.map('group/?([0-9]*)', function (id) {
       return 'network/group'+(id && '/'+id);
     });
   }

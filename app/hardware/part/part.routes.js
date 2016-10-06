@@ -25,7 +25,7 @@
       })
       ;
 
-    helper.url('part/?([0-9]*)', function (id) {
+    helper.url.map('part/?([0-9]*)', function (id) {
       return 'hardware/part'+(id&&'?id='+id);
     });
   }

@@ -20,13 +20,20 @@
       })
       ;
 
-    helper.url('server/?([0-9]*)', mapServerUrl);
-    SsoUrlProvider.map('server', function (options) {
-      return mapServerUrl(options.id);
+    helper.url.map('server/?([0-9]*)', mapServerUrl);
+    helper.sso.map('server', function ($state, options) {
+      return mapServerUrl($state, options.id);
     });
 
-    function mapServerUrl (id) {
-      return 'hardware/server'+(id && '/'+id);
+    function mapServerUrl ($state, id) {
+      var params = {
+        id: id,
+      };
+
+      return $state.href(
+        'app.hardware.server.' + (id ? 'view' : 'list'),
+        params
+      );
     }
   }
 })();

@@ -24,8 +24,15 @@
       })
       ;
 
-    helper.url('entity/?([0-9]*)', function (id) {
-      return 'network/entity'+(id && '/'+id);
+    helper.url.map('entity/?([0-9]*)', function ($state, id) {
+      var params = {
+        id: id,
+      };
+
+      return $state.href(
+        'app.network.entity.' + (id ? 'view' : 'list'),
+        params
+      );
     });
   }
 })();

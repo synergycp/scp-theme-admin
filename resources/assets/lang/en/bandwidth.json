@@ -3,8 +3,9 @@
     "TITLE": "Bandwidth for {{ name }}"
   },
   "no-data-period": {
+    "TEXT": "We don't have any bandwidth data recorded from {{ period }}.",
     "TITLE": "No data found for that time period.",
-    "TEXT": "We don't have any bandwidth data recorded from {{ period }}."
+    "LATEST": "Jump to Latest"
   },
   "no-data": {
     "TITLE": "Not enough data collected yet.",

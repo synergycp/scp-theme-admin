@@ -19,7 +19,7 @@
     vm.edit.submit = submit;
     vm.logs = {
       filter: {
-        target_type: 'pxe-profile',
+        target_type: 'pxe.profile',
         target_id: $stateParams.id,
       },
     };

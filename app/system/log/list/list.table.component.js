@@ -39,16 +39,6 @@
         showType: true,
         showDate: true,
       });
-
-      table.list.list.on('load', function (items) {
-        _.map(items, function (row) {
-          if (!row.target) {
-            return;
-          }
-
-          row.target.href = Url.get(row.target.url);
-        });
-      });
     }
   }
 })();

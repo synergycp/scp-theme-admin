@@ -13,6 +13,7 @@
       bindings: {
         isoId: '=',
         isoName: '=',
+        onChange: '&?',
       },
       controller: 'EditionIndexCtrl as editionList',
       transclude: true,
@@ -45,7 +46,11 @@
           .filter(isDirty)
           .map(patchChanges)
           .value()
-      ).then();
+      ).then(fireChangeEvent);
+    }
+
+    function fireChangeEvent() {
+      (editionList.onChange || angular.noop)();
     }
 
     function isDirty(edition) {

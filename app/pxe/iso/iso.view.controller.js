@@ -23,6 +23,7 @@
         target_type: 'iso',
         target_id: $stateParams.id,
       },
+      reload: fireLogChangeEvent,
     };
 
     activate();
@@ -31,6 +32,10 @@
 
     function activate() {
       vm.edit.getCurrent();
+    }
+
+    function fireLogChangeEvent() {
+      vm.edit.fire('change', vm.edit.input);
     }
 
     function submit() {

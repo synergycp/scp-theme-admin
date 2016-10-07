@@ -9,7 +9,7 @@ form(ng-submit="modal.submit()")
 
     h4.modal-title(translate="server.modal.wipe.TITLE")
 
-  .modal-body(ng-init="itemCount = ('server.modal.suspend.ACTION_COUNT' | translate)")
+  .modal-body(ng-init="itemCount = ('server.modal.wipe.ACTION_COUNT' | translate)")
     p(translate="server.modal.wipe.BODY")
 
     ul(ng-init="items = _.range(0, itemCount)")

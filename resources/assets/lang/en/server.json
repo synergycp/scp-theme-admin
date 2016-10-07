@@ -359,7 +359,7 @@
       "CANCEL": "Cancel",
       "BODY": "This action is irreversible. Wiping a server does the following:",
       "ACTIONS": [
-        "Unsassign all IP entities",
+        "Unassign all IP entities",
         "Unassign client",
         "Set nickname to EMPTY",
         "Remove IPMI user",

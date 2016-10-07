@@ -24,18 +24,7 @@ block columns
     ng-if="table.showDescription"
   )
   td(ng-if="table.showType")
-    span(ng-if="row.target")
-      a(
-        ng-if="row.target.href"
-        ng-href="{{ row.target.href }}"
-        ng-bind="row.target.name"
-      )
-      span(
-        ng-if="!row.target.href"
-        ng-bind="row.target.name"
-      )
-      |  ({{row.target.singular}})
-    span(ng-if="!row.target") -
+    log-target(log="row")
   td(ng-if="table.showDate")
     a(
       ui-sref="app.system.log.view({id: row.id})"

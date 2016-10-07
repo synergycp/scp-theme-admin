@@ -23,7 +23,7 @@
       })
       ;
 
-    helper.url.map('pxe/iso/?([0-9]*)', function (id) {
+    helper.url.map('pxe/iso/?([0-9]*)', function ($state, id) {
       return 'pxe/iso'+(id && '/'+id);
     });
   }

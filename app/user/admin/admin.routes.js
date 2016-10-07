@@ -24,7 +24,7 @@
       })
       ;
 
-    helper.url.map('admin/?([0-9]*)', function (id) {
+    helper.url.map('admin/?([0-9]*)', function ($state, id) {
       return 'user/admin'+(id && '/'+id);
     });
   }

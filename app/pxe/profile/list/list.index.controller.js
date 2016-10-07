@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe-profile',
+        target_type: 'pxe.profile',
       },
     };
 

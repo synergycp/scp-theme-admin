@@ -13,26 +13,30 @@ include /resources/angle/pug/mixins/panel
         tbody
           tr
             th Date
-            td {{ vm.log.created_at }}
-          tr
-            th IP Address
-            td {{ vm.log.ip }}
-          tr
-            th URL
-            td {{ vm.log.url }}
-          tr(ng-if="vm.log.referrer")
-            th Referrer
-            td {{ vm.log.referrer }}
+            td(ng-bind="vm.log.created_at")
           tr
             th User
             td
               log-user(log="vm.log")
           tr
+            th Target
+            td
+              log-target(log="vm.log")
+          tr
+            th IP Address
+            td(ng-bind="vm.log.ip")
+          tr
+            th URL
+            td(ng-bind="vm.log.url")
+          tr(ng-if="vm.log.referrer")
+            th Referrer
+            td(ng-bind="vm.log.referrer")
+          tr
             th Description
-            td {{ vm.log.desc }}
+            td(ng-bind="vm.log.desc")
           tr(ng-if="vm.log.target")
-            th {{ vm.log.target.singular }}
-            td {{ vm.log.target.name }}
+            th(ng-bind="vm.log.target.singular")
+            td(ng-bind="vm.log.target.name")
   .col-md-6
     +panel("Log Data")(
       ng-if="vm.log.data"
@@ -48,5 +52,5 @@ include /resources/angle/pug/mixins/panel
             th Data
         tbody
           tr(ng-repeat="(key, value) in vm.log.data")
-            td {{ key }}
-            td {{ value }}
+            td(ng-bind="key")
+            td(ng-bind="value")

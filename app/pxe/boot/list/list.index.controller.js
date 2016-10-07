@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe-boot-script',
+        target_type: 'pxe.boot-script',
       },
     };
 

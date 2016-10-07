@@ -1,0 +1,12 @@
+span(ng-if="logTarget.log.target", ng-init="logTarget.getHref()")
+  a(
+    ng-if="logTarget.log.target.href"
+    ng-href="{{ logTarget.log.target.href }}"
+    ng-bind="logTarget.log.target.name"
+  )
+  span(
+    ng-if="!logTarget.log.target.href"
+    ng-bind="logTarget.log.target.name"
+  )
+  |  ({{logTarget.log.target.singular}})
+span(ng-if="!logTarget.log.target") -

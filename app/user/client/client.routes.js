@@ -18,7 +18,7 @@
       })
       ;
 
-    helper.url.map('client/?([0-9]*)', function (id) {
+    helper.url.map('client/?([0-9]*)', function ($state, id) {
       return 'user/client'+(id && '/'+id);
     });
   }

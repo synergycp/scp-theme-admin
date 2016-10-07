@@ -19,7 +19,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe-shell-script',
+        target_type: 'pxe.shell-script',
         target_id: $stateParams.id,
       },
     };

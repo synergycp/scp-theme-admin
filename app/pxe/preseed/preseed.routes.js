@@ -23,7 +23,7 @@
       })
       ;
 
-    helper.url.map('pxe/preseed/?([0-9]*)', function (id) {
+    helper.url.map('pxe/preseed/?([0-9]*)', function ($state, id) {
       return 'pxe/preseed'+(id && '/'+id);
     });
   }

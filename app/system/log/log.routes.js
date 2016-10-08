@@ -14,6 +14,7 @@
         url: '/log',
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor('lang:log'),
       })
       .state('app.system.log.view', {
         url: '/:id',

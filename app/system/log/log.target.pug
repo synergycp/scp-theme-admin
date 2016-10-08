@@ -1,12 +1,17 @@
-span(ng-if="logTarget.log.target", ng-init="logTarget.getHref()")
+span(
+  ng-repeat="target in logTarget.log.targets track by $index"
+  ng-init="logTarget.getHref(target)"
+)
   a(
-    ng-if="logTarget.log.target.href"
-    ng-href="{{ logTarget.log.target.href }}"
-    ng-bind="logTarget.log.target.name"
+    ng-if="target.href"
+    ng-href="{{ target.href }}"
+    ng-bind="target.name"
   )
   span(
-    ng-if="!logTarget.log.target.href"
-    ng-bind="logTarget.log.target.name"
+    ng-if="!target.href"
+    ng-bind="target.name"
   )
-  |  ({{logTarget.log.target.singular}})
-span(ng-if="!logTarget.log.target") -
+  |  ({{target.singular}})
+  br
+
+span(ng-if="!logTarget.log.targets.length") -

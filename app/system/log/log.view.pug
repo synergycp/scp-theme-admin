@@ -2,7 +2,7 @@ include /resources/angle/pug/mixins/panel
 
 .row
   .col-md-6
-    +panel("Log Overview")
+    +panel("{{ 'log.overview.TITLE' | translate }}")
       table.table
         // Add top border
         thead
@@ -12,27 +12,30 @@ include /resources/angle/pug/mixins/panel
             )
         tbody
           tr
-            th Date
+            th(translate="log.overview.DATE")
             td(ng-bind="vm.log.created_at")
           tr
-            th User
+            th(translate="log.overview.USER")
             td
               log-user(log="vm.log")
           tr
-            th Target
+            th(
+              translate="log.overview.TARGETS"
+              translate-value-count="{{ vm.log.targets.length }}"
+            )
             td
               log-target(log="vm.log")
           tr
-            th IP Address
+            th(translate="log.overview.IP")
             td(ng-bind="vm.log.ip")
           tr
-            th URL
+            th(translate="log.overview.URL")
             td(ng-bind="vm.log.url")
           tr(ng-if="vm.log.referrer")
-            th Referrer
+            th(translate="log.overview.REFERRER")
             td(ng-bind="vm.log.referrer")
           tr
-            th Description
+            th(translate="log.overview.DESC")
             td(ng-bind="vm.log.desc")
           tr(ng-if="vm.log.target")
             th(ng-bind="vm.log.target.singular")

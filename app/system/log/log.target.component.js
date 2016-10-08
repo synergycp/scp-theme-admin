@@ -27,11 +27,9 @@
 
     //////////
 
-    function getHref() {
-      logTarget.log.target.href =
-        logTarget.log.target ?
-          logTarget.log.target.href || Url.get(logTarget.log.target.url) :
-          null
+    function getHref(target) {
+      target.href = target.href ||
+        Url.get(target.url)
         ;
     }
 

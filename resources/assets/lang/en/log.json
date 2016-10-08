@@ -1,5 +1,15 @@
 {
   "dashboard": {
     "TITLE": "Recent Logs"
+  },
+  "overview": {
+    "IP": "IP Address",
+    "URL": "URL",
+    "DATE": "Date",
+    "USER": "User",
+    "DESC": "Description",
+    "TITLE": "Log Overview",
+    "TARGETS": "Target{{ count === '1' ? '' : 's'}}",
+    "REFERRER": "Referrer"
   }
 }

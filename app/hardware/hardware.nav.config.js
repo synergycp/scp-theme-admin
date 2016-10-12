@@ -13,7 +13,7 @@
     NavProvider
       .group('hardware', {
         translate: "nav.HARDWARE",
-        sref: "#",
+        sref: "app.hardware.server.list",
         icon: "fa fa-server",
       })
       .item(ServerListNav)
@@ -26,13 +26,6 @@
         text: "Part Inventory",
         sref: "app.hardware.part.list",
       })
-      .item({
-        text: "Switches",
-        sref: "app.hardware.switch.list",
-      })
-      .item({
-        text: "Switch Port Speeds",
-        sref: "app.hardware.switch.speed.list",
-      });
+      ;
   }
 })();

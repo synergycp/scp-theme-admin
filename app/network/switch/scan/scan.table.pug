@@ -1,0 +1,24 @@
+extends /resources/angle/pug/table
+
+block headings
+  th.sortable(ng-if="table.showStarted")
+    span(translate="switch.scan.list.heading.STARTED")
+    sort(col="id")
+  th.sortable(ng-if="table.showStatus")
+    span(translate="switch.scan.list.heading.STATUS")
+    sort(col="status")
+  th(ng-if="table.showActions")
+    span(translate="switch.scan.list.heading.ACTIONS")
+
+block columns
+  td(ng-if="table.showStarted")
+    span(ng-bind="row.created_at.iso_8601 | date: 'short'")
+  td(ng-if="table.showStatus")
+    switch-scan-status(scan="row")
+  td(ng-if="table.showActions")
+    span.btn-group.btn-group-xs
+      a.btn.btn-default(
+        ng-disabled="row.done"
+        ng-click="row.done || table.list.list.delete([row])"
+        translate="switch.scan.CANCEL"
+      )

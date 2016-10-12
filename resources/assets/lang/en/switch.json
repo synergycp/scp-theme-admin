@@ -76,14 +76,35 @@
     "SWITCH_ID": "Switch ID",
     "IP": "Switch IP:Port",
     "SERVER_COUNT": "Servers",
+    "SCAN": "Scan Status",
     "ACTIONS": "Actions"
   },
   "list": {
     "TITLE": "Switches",
+    "scan": {
+      "NONE": "Not Scanned"
+    },
     "filter": {
       "search": {
         "LABEL": "Search",
         "PLACEHOLDER": "Type to search..."
+      }
+    }
+  },
+  "scan": {
+    "CANCEL": "cancel",
+    "FAILED": "Failed",
+    "COMPLETED": "Completed",
+    "list": {
+      "TITLE": "Switch Port Scans",
+      "heading": {
+        "ACTIONS": "Actions",
+        "STARTED": "Started",
+        "STATUS": "Status"
+      },
+      "empty": {
+        "BODY": "We have not scanned this switch for ports yet.\n\nScanning a switch enables the bandwidth functionality.",
+        "CREATE": "Scan Switch Ports"
       }
     }
   },

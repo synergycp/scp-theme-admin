@@ -1,0 +1,13 @@
+span.text-danger(
+  ng-if="status.scan.failed"
+  translate="switch.scan.FAILED"
+)
+span.text-success(
+  ng-if="status.scan.finished"
+  translate="switch.scan.COMPLETED"
+  translate-value-date="{{ status.scan.finished }}"
+)
+span(
+  ng-if="!status.scan.finished && !status.scan.failed"
+  ng-bind="status.scan.status"
+)

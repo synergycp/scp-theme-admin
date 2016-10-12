@@ -4,7 +4,7 @@
   angular
     .module('app.hardware', [
       'app.hardware.server',
-      'app.hardware.switch',
+      'app.network.switch',
       'app.hardware.part',
     ]);
 })();

@@ -34,7 +34,7 @@
     "poststart": "gulp"
   },
   "dependencies": {
-    "scp-angle": "git+ssh://git@github.com/cabloo/scp-angle.git#0.0.1",
-    "scp-ng-util": "git+ssh://git@github.com/cabloo/scp-ng-util.git#0.0.1"
+    "scp-angle": "git+ssh://git@github.com/cabloo/scp-angle.git",
+    "scp-ng-util": "git+ssh://git@github.com/cabloo/scp-ng-util.git"
   }
 }

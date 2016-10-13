@@ -15,7 +15,7 @@
       },
       controller: 'ClientTableCtrl as table',
       transclude: true,
-      templateUrl: 'app/user/client/client.table.html'
+      templateUrl: 'app/user/client/list/client.table.html'
     })
     .controller('ClientTableCtrl', ClientTableCtrl)
     ;

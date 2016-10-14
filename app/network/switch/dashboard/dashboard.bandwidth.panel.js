@@ -53,9 +53,13 @@
     _
   ) {
     var panel = this;
-    var filter = BandwidthFilter().setOptions({
-      opens: 'left',
-    });
+    var filter = BandwidthFilter()
+      .setOptions({
+        opens: 'left',
+      })
+      .on('change', refreshChart)
+      ;
+
     Config
       .getSwitchBandwidthRange()
       .then(filter.setRangeByLabel)
@@ -98,16 +102,15 @@
     panel.context.bandwidth.chart.width = 800;
     panel.context.bandwidth.chart.height = 240;
 
-    panel.context.filter.on(
-      'change',
-      panel.context.bandwidth.chart.refresh
-    );
-
     //////////
 
     function onDelete() {
       homeSwitch.remove();
       panel.fire('delete');
+    }
+
+    function refreshChart() {
+      panel.context.bandwidth.chart.refresh();
     }
   }
 })();

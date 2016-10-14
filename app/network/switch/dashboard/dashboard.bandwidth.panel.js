@@ -60,11 +60,6 @@
       .on('change', refreshChart)
       ;
 
-    Config
-      .getSwitchBandwidthRange()
-      .then(filter.setRangeByLabel)
-      ;
-
     _.extend(
       homeSwitch.switch,
       Api
@@ -102,7 +97,17 @@
     panel.context.bandwidth.chart.width = 800;
     panel.context.bandwidth.chart.height = 240;
 
+    activate();
+
     //////////
+
+    function activate() {
+      Config
+        .getSwitchBandwidthRange()
+        .then(filter.setRangeByLabel)
+        .then(console.log.bind(console, 'range set'))
+        ;
+    }
 
     function onDelete() {
       homeSwitch.remove();
@@ -111,6 +116,7 @@
 
     function refreshChart() {
       panel.context.bandwidth.chart.refresh();
+      console.log('refreshed');
     }
   }
 })();

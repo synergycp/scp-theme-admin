@@ -13,14 +13,13 @@
   function SwitchBandwidthPortFactory (
     $q,
     Loader,
-    BandwidthChart,
-    BandwidthFilter
+    BandwidthChart
   ) {
     return function (target, port, filter) {
         return new SwitchBandwidthPort(
           target,
           port,
-          filter || BandwidthFilter(),
+          filter,
           Loader(),
           BandwidthChart(),
           $q

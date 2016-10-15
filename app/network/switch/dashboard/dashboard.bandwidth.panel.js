@@ -103,9 +103,8 @@
 
     function activate() {
       Config
-        .getSwitchBandwidthRange()
+        .getHomeBandwidthRange()
         .then(filter.setRangeByLabel)
-        .then(console.log.bind(console, 'range set'))
         ;
     }
 
@@ -116,7 +115,6 @@
 
     function refreshChart() {
       panel.context.bandwidth.chart.refresh();
-      console.log('refreshed');
     }
   }
 })();

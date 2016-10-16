@@ -94,8 +94,14 @@
     function syncStateToFilter() {
       if ($stateParams['bandwidth.start']) {
         bandwidth.filter.setRange(
-          moment($stateParams['bandwidth.start'], date.formatDateTime),
-          moment($stateParams['bandwidth.end'], date.formatDateTime)
+          moment.utc(
+            $state.params['bandwidth.start'],
+            date.formatDateTime
+          ).local(),
+          moment.utc(
+            $state.params['bandwidth.end'],
+            date.formatDateTime
+          ).local()
         );
       }
     }
@@ -103,8 +109,8 @@
     function syncFilterToState() {
       var filter = bandwidth.filter;
       $state.go($state.current.name, {
-        'bandwidth.start': filter.start.format(date.formatDateTime),
-        'bandwidth.end': filter.end.format(date.formatDateTime),
+        'bandwidth.start': filter.start.utc().format(date.formatDateTime),
+        'bandwidth.end': filter.end.utc().format(date.formatDateTime),
       });
     }
 

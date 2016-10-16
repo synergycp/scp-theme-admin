@@ -63,8 +63,13 @@
       panel.state.loader.loading();
 
       if (panel.filter.input.startDate) {
-        filterChange().then(setupActiveTab);
+        return filterChange().then(setupActiveTab);
       }
+
+      return Config
+        .getSwitchBandwidthRange()
+        .then(panel.filter.setRangeByLabel)
+        ;
     }
 
     function filterChange() {

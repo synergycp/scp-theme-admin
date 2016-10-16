@@ -55,16 +55,22 @@
       }
 
       panel.context.filter.setRange(
-        moment($state.params['bandwidth.start'], date.formatDateTime),
-        moment($state.params['bandwidth.end'], date.formatDateTime)
+        moment.utc(
+          $state.params['bandwidth.start'],
+          date.formatDateTime
+        ).local(),
+        moment.utc(
+          $state.params['bandwidth.end'],
+          date.formatDateTime
+        ).local()
       );
     }
 
     function syncFilterToState() {
       var filter = panel.context.filter;
       $state.go($state.current.name, _.assign($state.params, {
-        'bandwidth.start': filter.start.format(date.formatDateTime),
-        'bandwidth.end': filter.end.format(date.formatDateTime),
+        'bandwidth.start': filter.start.utc().format(date.formatDateTime),
+        'bandwidth.end': filter.end.utc().format(date.formatDateTime),
       }));
     }
   }

@@ -38,7 +38,7 @@ block columns
       ng-if="row.serversCount"
     )
   td(ng-if="table.showActions")
-    .btn-client.btn-client-xs
+    .btn-group.btn-group-xs
       a.btn.btn-default(
         ui-sref="app.user.client.view({ id: row.id })"
         translate="app.action.EDIT"

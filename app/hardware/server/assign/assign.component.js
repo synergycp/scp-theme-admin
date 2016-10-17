@@ -31,8 +31,22 @@
     assign.client = {
       modal: assignClientModal,
     };
+    assign.saveNickname = saveNickname;
+    assign.saveServerId = saveServerId;
 
     //////////
+
+    function saveNickname() {
+      return assign.server.patch({
+        nickname: assign.server.nickname,
+      });
+    }
+
+    function saveServerId() {
+      return assign.server.patch({
+        srv_id: assign.server.srv_id,
+      });
+    }
 
     function init() {
       assign.server.on('change', debouncedLoad);

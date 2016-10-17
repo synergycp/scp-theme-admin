@@ -9,8 +9,21 @@ include /resources/angle/pug/mixins/panel
 
     tbody
       tr
+        th.v-mid.shrink(translate="server.assign.NICKNAME")
         td
-          strong(translate="server.assign.client.TITLE")
+          editable(
+            value="assign.server.nickname"
+            on-save="assign.saveNickname()"
+          )
+      tr
+        th.v-mid.shrink(translate="server.assign.SRV_ID")
+        td
+          editable(
+            value="assign.server.srv_id"
+            on-save="assign.saveServerId()"
+          )
+      tr
+        th.v-mid.shrink(translate="server.assign.client.TITLE")
         td
           a(
             ng-if="assign.server.access"
@@ -28,8 +41,7 @@ include /resources/angle/pug/mixins/panel
           )
           span )
       tr
-        td
-          strong(translate="server.assign.GROUP")
+        th.v-mid.shrink(translate="server.assign.GROUP")
         td
           a(
             ng-if="assign.server.group"
@@ -41,8 +53,7 @@ include /resources/angle/pug/mixins/panel
 
       //- Start Entities
       tr(ng-repeat-start="entity in assign.entities.items")
-        td
-          strong(translate="server.assign.entity.TITLE")
+        th.v-mid.shrink(translate="server.assign.entity.TITLE")
         td
           a(
             ui-sref="app.network.entity.view(entity)"
@@ -51,26 +62,26 @@ include /resources/angle/pug/mixins/panel
 
       //- Start IPv4
       tr(ng-if-start="entity.v4")
-        td
+        td.shrink
           span(translate="server.assign.entity.v4.USABLE")
         td(ng-bind="entity.v4.full")
       tr
-        td
+        td.shrink
           span(translate="server.assign.entity.v4.GATEWAY")
         td(ng-bind="entity.v4.gateway")
       tr(ng-if-end)
-        td
+        td.shrink
           span(translate="server.assign.entity.v4.SUBNET")
         td(ng-bind="entity.v4.subnet_mask")
       //- End IPv4
 
       //- Start IPv6
       tr(ng-if-start="entity.v6")
-        td
+        td.shrink
           span(translate="server.assign.entity.v6.ADDRESS")
         td(ng-bind="entity.v6.address")
       tr(ng-if-end, ng-repeat-end)
-        td
+        td.shrink
           span(translate="server.assign.entity.v6.GATEWAY")
         td(ng-bind="entity.v6.gateway")
       //- End IPv6

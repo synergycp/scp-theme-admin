@@ -18,6 +18,8 @@
     "ITEM": "Item",
     "ASSIGNED": "Assigned To",
     "GROUP": "Group",
+    "NICKNAME": "Nickname",
+    "SRV_ID": "Server ID",
     "client": {
       "TITLE": "Client",
       "NONE": "Unassigned",

@@ -10,5 +10,57 @@
         "TOP": "Top"
       }
     }
+  },
+  "settings": {
+    "overview": {
+      "TITLE": "Account Overview",
+      "info": {
+        "TITLE": "Account Information",
+        "EMAIL": "E-Mail Address",
+        "SIGNUP": "Signup Date"
+      }
+    },
+    "security": {
+      "TITLE": "Account Security",
+      "password": {
+        "TITLE": "Change Password",
+        "SUBMIT": "Change Password",
+        "password": {
+          "LABEL": "Password",
+          "PLACEHOLDER": "Must be at least 6 characters."
+        },
+        "confirm": {
+          "LABEL": "Confirm",
+          "PLACEHOLDER": "Must match the password above."
+        }
+      },
+      "verify": {
+        "TITLE": "Two Factor Authentication",
+        "CANCEL": "Cancel",
+        "INSECURE": "Your account is not secured with Two Factor Authentication.",
+        "START": "Secure Account",
+        "SUBMIT": "Verify",
+        "REQUIRE": "Require Two Factor Authentication",
+        "NONE-VERIFIED": "Please verify a Two Factor Authentication below in order to use it.",
+        "method": {
+          "LABEL": "Method",
+          "PLACEHOLDER": "Type to filter..."
+        },
+        "heading": {
+          "METHOD": "Method",
+          "VALUE": "Value",
+          "ACTIONS": "Actions"
+        },
+        "modal": {
+          "verify": {
+            "TITLE": "Verify Two Factor Authentication",
+            "BODY": "We have sent an {{ type }} to {{ value }}. Please input the code you received here:",
+            "CANCEL": "Cancel",
+            "SUBMIT": "Verify",
+            "CODE": "Code"
+          }
+        }
+      }
+    }
   }
 }

@@ -7,7 +7,11 @@ block headings
   th(ng-if="table.showActions") Actions
 
 block columns
-  td(ng-bind="row.name")
+  td
+    a(
+      ui-sref="app.pxe.preseed.view({id: row.id})"
+      ng-bind="row.name"
+    )
   td(ng-bind="row.description") 
   td
     span.fa.fa-check.text-success(ng-if="row.is_installable")

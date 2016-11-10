@@ -5,7 +5,11 @@ block headings
   th Actions
 
 block columns
-  td(ng-bind="row.name")
+  td
+    a(
+      ui-sref="app.pxe.boot.view({id: row.id})"
+      ng-bind="row.name"
+    )
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(

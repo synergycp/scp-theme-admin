@@ -9,7 +9,11 @@ block headings
   th Actions
 
 block columns
-  td(ng-bind="row.name")
+  td
+    a(
+      ui-sref="app.pxe.iso.view({id: row.id})"
+      ng-bind="row.name"
+    )
   td(ng-bind="row.status")
   td(ng-bind="row.created_at")
   td

@@ -7,8 +7,12 @@ block headings
   th(ng-if="table.showActions") Actions
 
 block columns
-  td {{ row.name }}
-  td {{ row.billing_id }}
+  td
+    a(
+      ui-sref="app.pxe.profile.view({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(ng-bind="row.billing_id")
   td
     span.fa.fa-check.text-success(ng-if="row.access_client")
   td(ng-if="table.showActions")

@@ -34,7 +34,7 @@
     function init() {
       _.defaults(table, {
         showUser: true,
-        showIpAddress: true,
+        showIpAddress: false,
         showDescription: true,
         showType: true,
         showDate: true,

@@ -8,7 +8,11 @@ block headings
   th Actions
 
 block columns
-  td(ng-bind="row.username")
+  td
+    a(
+      ui-sref="app.user.admin.view({ id: row.id })"
+      ng-bind="row.username"
+    )
   td(ng-bind="row.email")
   td
     .btn-group.btn-group-xs

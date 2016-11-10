@@ -24,8 +24,11 @@ block headings
 block columns
   td(
     ng-if="table.showName"
-    ng-bind="row.name"
   )
+    a(
+      ui-sref="app.network.entity.view({id: row.id})"
+      ng-bind="row.name"
+    )
   td(
     ng-if="table.showAddr"
     ng-bind="row.full_ip"

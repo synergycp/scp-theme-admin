@@ -19,14 +19,13 @@ block headings
   )
 
 block columns
-  td(
-    ng-if="table.showSwitchId"
-    ng-bind="row.name"
-  )
-  td(
-    ng-if="table.showIp"
-    ng-bind="row.ip+':'+row.port"
-  )
+  td(ng-if="table.showSwitchId")
+    a(
+      ui-sref="app.network.switch.view.manage({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(ng-if="table.showIp")
+    span(ng-bind="row.ip+':'+row.port")
   td(ng-if="table.showScanStatus")
     span(
       ng-if="!row.scan"

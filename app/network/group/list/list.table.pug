@@ -17,10 +17,11 @@ block headings
     span(translate="group.list.heading.ACTIONS")
 
 block columns
-  td(
-    ng-if="table.showName"
-    ng-bind="row.name"
-  )
+  td(ng-if="table.showName")
+    a(
+      ui-sref="app.network.group.view({id: row.id})"
+      ng-bind="row.name"
+    )
   td(ng-if="table.showReserved")
     span.fa.fa-check.text-success(ng-if="row.reserved")
     span.text-muted(ng-if="!row.reserved") -

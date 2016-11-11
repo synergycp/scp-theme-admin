@@ -14,9 +14,6 @@
     "MANAGE": "manage"
   },
   "assign": {
-    "TITLE": "Server Assignments",
-    "ITEM": "Item",
-    "ASSIGNED": "Assigned To",
     "GROUP": "Group",
     "NICKNAME": "Nickname",
     "SRV_ID": "Server ID",
@@ -41,9 +38,6 @@
   },
   "alert": {
     "SUSPENDED": "This server is currently suspended so the client does not have access to any controls."
-  },
-  "bandwidth": {
-    "TITLE": "Bandwidth"
   },
   "form": {
     "title": {
@@ -140,8 +134,7 @@
     }
   },
   "hardware": {
-    "TITLE": "Server Hardware",
-    "ITEM": "Hardare Item",
+    "ITEM": "Hardare",
     "VALUE": "Value",
     "BILLING": "Billing ID",
     "MAC": "MAC Address",

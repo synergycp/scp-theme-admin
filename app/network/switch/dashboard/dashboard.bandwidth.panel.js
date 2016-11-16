@@ -94,7 +94,7 @@
     };
     EventEmitter().bindTo(panel);
 
-    panel.content.bandwidth.chart.noAnimation();
+    panel.context.bandwidth.chart.noAnimation();
     panel.context.bandwidth.chart.width = 800;
     panel.context.bandwidth.chart.height = 240;
 

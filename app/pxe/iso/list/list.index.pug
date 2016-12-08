@@ -4,6 +4,8 @@ include /resources/angle/pug/mixins/list
 block list
   list.panel.panel-default(list="vm.list")
     list-header(text="pxe.iso.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
       a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
         i.fa.fa-filter
     iso-filters(

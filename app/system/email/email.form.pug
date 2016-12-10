@@ -2,7 +2,7 @@ doctype html
 include /resources/angle/pug/mixins/form
 
 div(  
-  ng-if="emailForm.isCreationMode"
+  ng-if="!emailForm.isCreationMode"
 )
   +label(
     "{{ 'system.email.form.name.LABEL' | translate }}"

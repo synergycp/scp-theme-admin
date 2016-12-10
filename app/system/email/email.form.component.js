@@ -14,6 +14,7 @@
       },
       bindings: {
         form: '=',
+        isCreationMode: '@'
       },
       controller: 'EmailFormCtrl as emailForm',
       transclude: true,

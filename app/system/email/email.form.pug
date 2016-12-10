@@ -1,10 +1,23 @@
 doctype html
 include /resources/angle/pug/mixins/form
 
-+label(
-  "{{ 'system.email.form.name.LABEL' | translate }}"
+div(  
+  ng-if="!emailForm.isCreationMode"
 )
-  p.form-control-static {{ emailForm.input.name }}
+  +label(
+    "{{ 'system.email.form.name.LABEL' | translate }}"
+  )
+    p.form-control-static {{ emailForm.input.name }}
+
+div(  
+  ng-if="emailForm.isCreationMode"
+)
+  +field(
+    "{{ 'system.email.form.name.LABEL' | translate }}"
+  )(
+    placeholder="{{ 'system.email.form.name.PLACEHOLDER' | translate }}"
+    ng-model="emailForm.input.name"
+  )
 
 +field(
   "{{ 'system.email.form.subject.LABEL' | translate }}",

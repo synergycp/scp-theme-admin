@@ -2,7 +2,8 @@
   "title": "Synergy",
   "topbar": {
     "search": {
-      "PLACEHOLDER": "Type to search..."
+      "PLACEHOLDER": "Type to search...",
+      "NO-RESULTS": "No results"
     },
     "account": {
       "LOGGED-IN": "Logged in as:",

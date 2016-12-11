@@ -7,6 +7,8 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 curl -L https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
+
+rvm autolibs fail
 rvm install 2.1.2
 rvm use 2.1.2 --default
 ruby -v

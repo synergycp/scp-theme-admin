@@ -17,6 +17,14 @@ block list
     list-footer
 
 block bottom-left
+  +create-form("{{ 'system.email.form.title.ADD' | translate }}")
+    email-form(
+      form="vm.create"
+      is-creation-mode="true"
+    )
+
+
+block bottom-right
   logs(
     title="Email Template Logs"
     filter="vm.logs.filter"

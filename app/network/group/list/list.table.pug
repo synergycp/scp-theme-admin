@@ -33,6 +33,11 @@ block columns
   td(ng-if="table.showServers")
     a(
       ui-sref="app.hardware.server.list({group: row.id})"
+      ng-bind="row.servers.inventory"
+    )
+    span /
+    a(
+      ui-sref="app.hardware.server.list({group: row.id})"
       ng-bind="row.servers.count"
     )
   td(ng-if="table.showActions")

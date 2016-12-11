@@ -32,7 +32,7 @@ block columns
     )
   td(ng-if="table.showServers")
     a(
-      ui-sref="app.hardware.server.list({group: row.id})"
+      ui-sref="app.hardware.server.inventory({group: row.id})"
       ng-bind="row.servers.inventory"
     )
     span /

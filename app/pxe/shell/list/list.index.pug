@@ -4,6 +4,8 @@ include /resources/angle/pug/mixins/list
 block list
   list.panel.panel-default(list="vm.list")
     list-header(text="pxe.shell.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('shell-edit-form')")
+        i.fa.fa-plus
       a.btn.btn-default(ng-click="vm.list.refresh.now()")
         i.fa.fa-refresh
       a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
@@ -17,7 +19,7 @@ block list
     list-footer
 
 block bottom-left
-  +create-form("{{ 'pxe.shell.form.title.ADD' | translate }}")
+  +create-form("{{ 'pxe.shell.form.title.ADD' | translate }}", 'shell-edit-form')
     shell-form(form="vm.create")
 
 block bottom-right

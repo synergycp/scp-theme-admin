@@ -4,7 +4,7 @@ include /resources/angle/pug/mixins/list
 block list
   list.panel.panel-default(list="vm.list")
     list-header(text="entity.list.TITLE")
-      a.btn.btn-default(ng-click="vm.goToEditForm()")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('entity-edit-form')")
         i.fa.fa-plus
       a.btn.btn-default(ng-click="vm.list.refresh.now()")
         i.fa.fa-refresh

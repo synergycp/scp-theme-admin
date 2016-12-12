@@ -8,12 +8,11 @@
   /**
    * @ngInject
    */
-  function EntityIndexCtrl(ListFilter, EntityList, scroll) {
+  function EntityIndexCtrl(ListFilter, EntityList) {
     var vm = this;
 
     vm.list = EntityList();
     vm.filters = ListFilter(vm.list);
-    vm.goToEditForm = scrollToEdit;
     vm.create = {
       submit: create,
     };
@@ -33,10 +32,6 @@
 
     function create() {
       vm.list.create(vm.create.getData());
-    }
-
-    function scrollToEdit() {
-      scroll.scrollToAnchor('entity-edit-form');
     }
   }
 })();

@@ -20,21 +20,26 @@ include /resources/angle/pug/mixins/panel
       tr
         th.v-mid.shrink(translate="server.assign.client.TITLE")
         td
-          a(
-            ng-if="assign.server.access"
-            ui-sref="app.user.client.view(assign.server.access.client)"
-            ng-bind="assign.server.access.client.name"
+          span(            
+            class="editable"
           )
-          span(
-            ng-if="!assign.server.access"
-            translate="server.assign.client.NONE"
-          )
-          span  (
-          a(
-            ng-click="assign.client.modal()"
-            translate="server.assign.client.{{ assign.server.access ? 'REASSIGN' : 'ASSIGN' }}"
-          )
-          span )
+            a(
+              ng-if="assign.server.access"
+              ui-sref="app.user.client.view(assign.server.access.client)"
+              ng-bind="assign.server.access.client.name"
+            )
+            span(
+              ng-if="!assign.server.access"
+              translate="server.assign.client.NONE"
+            )
+            div(
+              class="btn btn-default btn-xs editable-floater"
+              ng-class="{'show-hover': editable.hoverable}"
+              ng-click="assign.client.modal()"
+            )
+              span(
+                class="fa fa-pencil"
+              )
       tr
         th.v-mid.shrink(translate="server.assign.GROUP")
         td

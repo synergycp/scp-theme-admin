@@ -3,5 +3,6 @@
 
   angular
     .module('app.user.admin.buttons', [
+    	'scp.angle.layout.modal'
     ]);
 })();

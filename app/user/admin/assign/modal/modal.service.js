@@ -12,7 +12,7 @@
    */
   function AdminAssignModal ($uibModal, $q, Api) {
     var AdminAssignModal = this;
-    var $api = Api.all('server');
+    var $api = Api.all('admin');
 
     AdminAssignModal.delete = remove;
 
@@ -21,12 +21,21 @@
     function remove(admins) {
       var modal = $uibModal.open({
         templateUrl: 'app/user/admin/assign/modal/modal.delete.html',
-        controller: 'AdminAssignDeleteModalCtrl',
+        controller: 'ModalConfirmCtrl',
         bindToController: true,
         controllerAs: 'modal',
         resolve: {
-          admins: function () {
+          items: function () {
             return admins;
+          },
+          lang: function () {
+            return "admin.modal.delete";
+          },
+          inputs: function () { 
+            return function(){}; // refactor this. What is actually 'inputs'?
+          },
+          data: function () {
+            return function(){};
           },
         },
       });

@@ -14,7 +14,7 @@
       return new SwitchManageAddTab(
         hub,
         EventEmitter(),
-        Select('switch/'+hub.id+'/port').filter({ is_primary: false }),
+        Select('switch/'+hub.id+'/port').filter({ is_switch_primary: false }),
         Alert
       );
     };
@@ -40,12 +40,12 @@
         return Alert.warning('Please select a port to add.');
       }
 
-      if (port.is_primary) {
+      if (port.is_switch_primary) {
         return Alert.warning('That port is already a primary port.');
       }
 
       return port
-        .patch({ is_primary: true })
+        .patch({ is_switch_primary: true })
         .then(fireAddEvent)
         .branch()
           .then(refresh)

@@ -71,7 +71,7 @@
         target
           .all('port')
           .getList({
-            is_primary: true,
+            is_switch_primary: true,
           })
           .then(storePorts)
       );

@@ -4,6 +4,8 @@ include /resources/angle/pug/mixins/list
 block list
   list.panel.panel-default(list="vm.list")
     list-header(text="system.email.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('email-edit-form')")
+        i.fa.fa-plus
       a.btn.btn-default(ng-click="vm.list.refresh.now()")
         i.fa.fa-refresh
       a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
@@ -17,7 +19,7 @@ block list
     list-footer
 
 block bottom-left
-  +create-form("{{ 'system.email.form.title.ADD' | translate }}")
+  +create-form("{{ 'system.email.form.title.ADD' | translate }}", 'email-edit-form')
     email-form(
       form="vm.create"
       is-creation-mode="true"

@@ -101,7 +101,7 @@
       _.remove(panel.bandwidth.ports, tab);
 
       return tab.port
-        .patch({ is_primary: false })
+        .patch({ is_switch_primary: false })
         .branch()
           .then(panel.tabs.add.port.refresh)
         .unbranch()

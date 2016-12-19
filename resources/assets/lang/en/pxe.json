@@ -218,6 +218,9 @@
       "is_installable": {
         "LABEL": "Installable"
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   }
 }

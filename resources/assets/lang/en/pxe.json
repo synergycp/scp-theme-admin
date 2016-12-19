@@ -178,6 +178,9 @@
       "client_access": {
         "LABEL": "Client Access"
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   },
   "preseed": {

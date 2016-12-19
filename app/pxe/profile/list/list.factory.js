@@ -13,9 +13,9 @@
   function PxeProfileListFactory (List, ListConfirm) {
     return function () {
       var list = List('pxe/profile');
-      var confirm = ListConfirm(list, 'pxe.profile.modal.delete');
+      list.confirm = ListConfirm(list, 'pxe.profile.modal.delete');
 
-      list.bulk.add('Delete', confirm.delete);
+      list.bulk.add('Delete', list.confirm.delete);
 
       return list;
     };

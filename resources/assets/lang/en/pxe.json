@@ -70,6 +70,9 @@
         "LABEL": "Body",
         "PLACEHOLDER": "This will be parsed using Smarty."
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   },
   "iso": {
@@ -117,6 +120,9 @@
       "license_key": {
         "PLACEHOLDER": "Optional"
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   },
   "profile": {

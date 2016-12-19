@@ -32,6 +32,9 @@
       }
     }
   },
+  "buttons": {
+    "DELETE": "Delete"
+  },
   "form": {
     "title": {
       "EDIT": "Edit {{ nickname }}",

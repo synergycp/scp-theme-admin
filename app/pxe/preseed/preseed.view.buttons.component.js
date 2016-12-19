@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.user.client.view')
+    .module('app.pxe.preseed')
     .component('preseedButtons', {
       require: {},
       bindings: {

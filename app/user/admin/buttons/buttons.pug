@@ -1,0 +1,10 @@
+div(
+  ng-init="admin = buttons.admin"
+  ng-class="buttons.loader.class"
+)
+  .loader
+  .btn-group.btn-group-lg
+    a.btn.btn-danger(
+      ng-click="buttons.delete()"
+      translate="admin.modal.delete.SUBMIT"
+    )

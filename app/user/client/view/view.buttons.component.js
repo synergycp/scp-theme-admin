@@ -37,7 +37,7 @@
         ClientList()
           .confirm
           .delete([buttons.client])
-          .then(transferToList)
+          .result.then(transferToList)
       );
     }
 

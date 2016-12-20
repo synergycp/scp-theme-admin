@@ -13,7 +13,7 @@
   function GroupListFactory(ListConfirm, List) {
     return function () {
       var list = List('group');
-      var confirm = ListConfirm(list, 'group.modal.delete');
+      list.confirm = ListConfirm(list, 'group.modal.delete');
 
       list.bulk.add(
         'Reserve',
@@ -29,7 +29,7 @@
         })
       );
 
-      list.bulk.add('Delete', confirm.delete);
+      list.bulk.add('Delete', list.confirm.delete);
 
       return list;
     };

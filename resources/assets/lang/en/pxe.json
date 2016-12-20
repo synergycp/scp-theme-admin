@@ -34,6 +34,9 @@
         "LABEL": "Body",
         "PLACEHOLDER": "This will be parsed using Smarty."
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   },
   "boot": {
@@ -67,6 +70,9 @@
         "LABEL": "Body",
         "PLACEHOLDER": "This will be parsed using Smarty."
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   },
   "iso": {
@@ -114,6 +120,9 @@
       "license_key": {
         "PLACEHOLDER": "Optional"
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   },
   "profile": {
@@ -178,6 +187,9 @@
       "client_access": {
         "LABEL": "Client Access"
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   },
   "preseed": {
@@ -218,6 +230,9 @@
       "is_installable": {
         "LABEL": "Installable"
       }
+    },
+    "buttons": {
+      "DELETE": "Delete"
     }
   }
 }

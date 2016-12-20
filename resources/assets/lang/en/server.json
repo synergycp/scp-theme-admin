@@ -131,6 +131,15 @@
     "nickname": {
       "LABEL": "Nickname",
       "PLACEHOLDER": "Will be set as server hostname. Defaults to Server ID."
+    },
+    "port": {
+      "ADD": "Add Port",
+      "remove": {
+        "TITLE": "Remove Server Port",
+        "BODY": "This will make any entities on this port available again.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Remove Port"
+      }
     }
   },
   "hardware": {

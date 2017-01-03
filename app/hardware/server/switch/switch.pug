@@ -1,66 +1,36 @@
 include /resources/angle/pug/mixins/panel
 
-+panel("{{ 'server.switch.TITLE' | translate }}")(
+div(
   ng-class="switchControl.loader.class"
 )
   .loader
-  .panel-body.text-center(ng-if="!switchControl.isEnabled")
-    p(translate="server.switch.NOT_ENABLED")
-    a.btn.btn-primary(
-      translate="server.EDIT"
-      ui-sref="app.hardware.server.view.edit({ id: switchControl.server.id })"
+  uib-tabset(
+    active="switchControl.tabs.active"
+    ng-if="switchControl.ports.length"
+    style="margin-bottom: 15px"
+  )
+    uib-tab(
+      ng-repeat="port in switchControl.ports"
+      index="$index"
+      select="switchControl.tabs.change(bandwidth)"
+      active="bandwidth.active"
     )
-  table.table.table-condensed.table-bordered(ng-if="switchControl.isEnabled")
-    //- Show border
-    tr
-      td.no-padding(colspan="3")
-    tr.mid-aligned
-      td.shrink.pad-right
-        strong(translate="server.switch.NAME")
-      td
-        a(
-          ng-href="{{$state.href('app.network.switch.view', switchControl.server.switch)}}"
-          ng-bind="switchControl.server.switch.name"
-        )
-      td.text-right.shrink(rowspan="100")
-        //- Start Buttons
-        span.btn-group-vertical
-          a.btn.btn-default(
-            ng-click="switchControl.patch({ sync_vlan: true })"
-            translate="server.switch.SYNC_VLAN"
-          )
-          a.btn.btn-default(
-            ng-click="switchControl.patch({ sync_speed: true })"
-            translate="server.switch.SYNC_SPEED"
-          )
-          span.btn-group(uib-dropdown="")
-            a.btn.btn-default(uib-dropdown-toggle="")
-              span(translate="server.switch.power.BTN")
-              span &nbsp;
-              span.fa.fa-caret-down
-            ul.dropdown-menu.dropdown-menu-right(
-              uib-dropdown-menu=""
-              role="menu"
-            )
-              li(role="menuitem")
-                a(
-                  ng-click="switchControl.power.on()"
-                  translate="server.switch.power.on.BTN"
-                )
-              li(role="menuitem")
-                a(
-                  ng-click="switchControl.power.off()"
-                  translate="server.switch.power.off.BTN"
-                )
-        //- End Buttons
-    tr.mid-aligned
-      td.shrink.pad-right
-        strong(translate="server.switch.SPEED")
-      td(ng-bind="switchControl.server.switch.speed.name")
-    tr.mid-aligned
-      td.shrink.pad-right
-        strong(translate="server.switch.PORT")
-      td(ng-bind="switchControl.server.switch.port")
+      uib-tab-heading
+        span(ng-bind="port.switch.port.name")
 
-  .panel-footer.clearfix(ng-class="switchControl.response ? '' : 'hidden'")
-    pre(ng-bind="switchControl.response")
+      div(style="margin: -11px -21px")
+        server-switch-port-control(
+          server="switchControl.server"
+          port="port"
+        )
+
+  .panel.panel-default(
+    ng-if="!switchControl.ports.length"
+  )
+    .panel-body.text-center
+      p(translate="server.switch.NOT_ENABLED")
+      a.btn.btn-primary(
+        translate="server.EDIT"
+        ui-sref="app.hardware.server.view.edit({ id: switchControl.server.id })"
+      )
+

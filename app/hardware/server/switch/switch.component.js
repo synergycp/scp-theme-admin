@@ -23,57 +23,35 @@
     $scope.$state = $state;
 
     switchControl.loader = Loader();
-    switchControl.isEnabled = false;
-    switchControl.response = "";
 
-    switchControl.patch = patch;
     switchControl.$onInit = init;
-
-    switchControl.power = {
-      on: patch.bind(null, {
-        power: 'on',
-      }),
-      off: confirmPowerOff,
+    switchControl.ports = [];
+    switchControl.tabs = {
+      active: 0,
+      change: changeTab,
     };
+
+    switchControl.refreshPorts = refreshPorts;
 
     //////////
 
     function init() {
-      switchControl.isEnabled = switchControl.server.is_switch_ready;
+      switchControl.refreshPorts();
     }
 
-    function confirmPowerOff() {
-      var patchData = {
-        power: 'off',
-      };
-
-      return switchControl.loader.during(
-        Modal
-          .confirm([switchControl.server], 'server.switch.power.off.confirm')
-          .data({
-            port: switchControl.server.switch.port,
-            switch: switchControl.server.switch.name,
-          })
-          .open()
-          .result
-          .then(patch.bind(null, patchData))
-      );
+    function changeTab(tab) {
     }
 
-    function patch(data) {
-      return switchControl.loader.during(
-        switchControl.server
-          .one('switch/'+switchControl.server.switch.id)
-          .patch(data)
-          .then(showResponse)
-          .then(fireChangeEvent)
-      );
+    function refreshPorts() {
+      switchControl.server
+        .all('port')
+        .getList()
+        .then(storePorts)
+        ;
     }
 
-    function showResponse(response) {
-      switchControl.response = response.output;
-
-      return response;
+    function storePorts(response) {
+      _.setContents(switchControl.ports, response);
     }
 
     function fireChangeEvent(response) {

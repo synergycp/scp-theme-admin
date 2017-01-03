@@ -410,7 +410,6 @@
     "EMPTY": "No Client or IP assigned"
   },
   "switch": {
-    "TITLE": "Switch Controls",
     "NOT_ENABLED": "This server has not been assigned a switch, port, and port speed yet.",
     "NAME": "Switch Name",
     "SYNC_VLAN": "Assign VLAN",

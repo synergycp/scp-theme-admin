@@ -15,7 +15,7 @@
           ng-model="item.billing_id"
           placeholder="{{ 'part.input.billing.PLACEHOLDER' | translate }}"
         )
-      .col-xs-2.text-center.actions
+      .col-xs-2.actions
         a.fa.fa-minus-circle(
           ng-click="tab.list.delete([item])"
         )
@@ -26,13 +26,17 @@ div.alert.alert-info(
   data-translate="part.list.EMPTY"
 )
 
-.clearfix
-  .pull-right
-    pagination.no-margin(pages="tab.list.pages")
+.panel-footer.pb0
+  .row
+    div.col-md-4
+      button.btn.btn-primary(
+        type="button"
+        ng-click="tab.list.add()"
+        data-translate="{{ tab.text }}.ADD"
+      )
+      button.btn.btn-primary.ml(
+        type="submit"
+        data-translate="part.list.SUBMIT"
+      )
+    pagination.text-right.block(pages="tab.list.pages")
 
-  .pull-left
-    button.btn.btn-default(
-      type="button"
-      ng-click="tab.list.add()"
-      data-translate="{{ tab.text }}.ADD"
-    )

@@ -5,13 +5,13 @@ block headings
     sort(col="name")
   th.relative Billing ID
     sort(col="billing_id")
-  th Servers
+  th Ports
   th(ng-if="table.showActions") Actions
 
 block columns
   td(ng-bind="row.name")
   td(ng-bind="row.billing_id")
-  td(ng-bind="row.server_count")
+  td(ng-bind="row.switchPortCount")
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(

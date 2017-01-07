@@ -174,7 +174,7 @@
         provisionForm.mem,
       ], function (select) {
         select.filter({
-          inventory: _.assign({}, invFilter, { disks: diskIds }),
+          inventory: _.assign({}, invFilter),
         }).load();
       });
 

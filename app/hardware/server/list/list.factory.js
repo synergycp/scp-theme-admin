@@ -19,15 +19,13 @@
   ) {
     return function () {
       var list = List('server').filter({
-        hub: $stateParams.switch,
         group: $stateParams.group,
+        switch: $stateParams.switch,
         client: $stateParams.client,
       });
       var confirm = ListConfirm(list, 'server.modal.delete');
 
       list.bulk.add('Assign Client', handler(ServerAssign.client));
-      list.bulk.add('Assign Group', handler(ServerAssign.group));
-      list.bulk.add('Assign Switch', handler(ServerAssign.switch));
       list.bulk.add(
         'Assign Bandwidth Limit',
         handler(ServerAssign.billing.limits)

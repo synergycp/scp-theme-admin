@@ -146,7 +146,6 @@
     "ITEM": "Hardware",
     "VALUE": "Value",
     "BILLING": "Billing ID",
-    "MAC": "MAC Address",
     "CPU": "Processor",
     "MEM": "Memory",
     "DISK": "Disk",
@@ -416,6 +415,7 @@
     "SYNC_SPEED": "Set Port Speed",
     "SPEED": "Port Speed",
     "PORT": "Port Number",
+    "MAC": "MAC Address",
     "power": {
       "BTN": "Port Power",
       "on": {

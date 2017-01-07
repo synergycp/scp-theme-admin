@@ -19,19 +19,11 @@ form(ng-submit="modal.submit()")
       +input-with-btn("fa fa-times-circle")(
         ng-click="modal.group.selected = null"
       )
-        ui-select(ng-model="modal.group.selected")
+        +ui-select("modal.group")
           ui-select-match(placeholder="{{ 'entity.modal.group.group.PLACEHOLDER' | translate }}")
             | {{ $select.selected.name }}
 
-          ui-select-choices(
-            repeat=
-              "choice in (" +
-                "modal.group.items" +
-                "| filter: {name: $select.search}" +
-              ") track by choice.id"
-            refresh="modal.group.load($select.search)"
-            refresh-delay="400"
-          )
+          +ui-select-choices("modal.group")
             span(ng-bind-html="choice.name | highlight: $select.search")
             small(ng-bind-html="' ' + choice.email | highlight: $select.search")
 

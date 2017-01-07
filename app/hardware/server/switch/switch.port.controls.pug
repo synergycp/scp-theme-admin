@@ -49,6 +49,10 @@ table.table.table-condensed.table-bordered(style="margin-bottom: 0")
     td.shrink.pad-right
       strong(translate="server.switch.PORT")
     td(ng-bind="portControl.port.switch.port.name")
-    
+  tr.mid-aligned
+    td.shrink.pad-right
+      strong(translate="server.switch.MAC")
+    td(ng-bind="portControl.port.mac")
+
 .panel-footer.clearfix(ng-class="portControl.response ? '' : 'hidden'")
   pre(ng-bind="portControl.response")

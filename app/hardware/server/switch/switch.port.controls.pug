@@ -1,0 +1,58 @@
+table.table.table-condensed.table-bordered(style="margin-bottom: 0")
+  //- Show border
+  tr
+    td.no-padding(colspan="3")
+  tr.mid-aligned
+    td.shrink.pad-right
+      strong(translate="server.switch.NAME")
+    td
+      a(
+        ui-sref="app.network.switch.view(portControl.port.switch.id)"
+        ng-bind="portControl.port.switch.name"
+      )
+    td.text-right.shrink(rowspan="100")
+      //- Start Buttons
+      span.btn-group-vertical
+        a.btn.btn-default(
+          ng-click="portControl.patch({ sync_vlan: true })"
+          translate="server.switch.SYNC_VLAN"
+        )
+        a.btn.btn-default(
+          ng-click="portControl.patch({ sync_speed: true })"
+          translate="server.switch.SYNC_SPEED"
+        )
+        span.btn-group(uib-dropdown="")
+          a.btn.btn-default(uib-dropdown-toggle="")
+            span(translate="server.switch.power.BTN")
+            span &nbsp;
+            span.fa.fa-caret-down
+          ul.dropdown-menu.dropdown-menu-right(
+            uib-dropdown-menu=""
+            role="menu"
+          )
+            li(role="menuitem")
+              a(
+                ng-click="portControl.power.on()"
+                translate="server.switch.power.on.BTN"
+              )
+            li(role="menuitem")
+              a(
+                ng-click="portControl.power.off()"
+                translate="server.switch.power.off.BTN"
+              )
+      //- End Buttons
+  tr.mid-aligned
+    td.shrink.pad-right
+      strong(translate="server.switch.SPEED")
+    td(ng-bind="portControl.port.switch.port.speed.name")
+  tr.mid-aligned
+    td.shrink.pad-right
+      strong(translate="server.switch.PORT")
+    td(ng-bind="portControl.port.switch.port.name")
+  tr.mid-aligned
+    td.shrink.pad-right
+      strong(translate="server.switch.MAC")
+    td(ng-bind="portControl.port.mac")
+
+.panel-footer.clearfix(ng-class="portControl.response ? '' : 'hidden'")
+  pre(ng-bind="portControl.response")

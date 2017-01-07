@@ -11,20 +11,12 @@ form(ng-submit="modal.submit()")
 
   .modal-body.form-horizontal
     +label("{{ 'speed.modal.merge.speed.LABEL' | translate }}")
-      ui-select(ng-model="modal.speed.selected")
+      +ui-select("modal.speed")
         ui-select-match(placeholder="{{ 'speed.modal.merge.speed.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
 
-        ui-select-choices(
-          repeat=
-            "speed in (" +
-              "modal.speed.items" +
-              "| filter: {name: $select.search}" +
-            ") track by speed.id"
-          refresh="modal.speed.load($select.search)"
-          refresh-delay="400"
-        )
-          span(ng-bind-html="speed.name | highlight: $select.search")
+        +ui-select-choices("modal.speed")
+          span(ng-bind-html="choice.name | highlight: $select.search")
 
   .modal-footer
     button.btn.btn-secondary(

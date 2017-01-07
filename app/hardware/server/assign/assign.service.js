@@ -18,8 +18,6 @@
     var list = List('server');
 
     ServerAssign.unsuspend = unsuspend;
-    ServerAssign.switch = switchModal;
-    ServerAssign.group = group;
     ServerAssign.client = ServerAssignModal.client;
     ServerAssign.suspend = ServerAssignModal.suspend;
     ServerAssign.billing = {
@@ -66,48 +64,6 @@
             date: input.date,
           },
         }, items);
-      });
-    }
-
-    function switchModal(items) {
-      var modal = $uibModal.open({
-        templateUrl: DIR+'/assign.switch.modal.html',
-        controller: 'ServerAssignSwitchModalCtrl',
-        controllerAs: 'modal',
-        bindToController: true,
-        resolve: {
-          items: _.return(items),
-        },
-      });
-
-      return modal.result.then(function (selected) {
-        var data = {
-          switch: !selected ? null : {
-            id: selected.id,
-          },
-        };
-
-        return list.patch(data, items);
-      });
-    }
-
-    function group(items) {
-      var modal = $uibModal.open({
-        templateUrl: DIR+'/assign.group.modal.html',
-        controller: 'ServerAssignGroupModalCtrl',
-        controllerAs: 'modal',
-        bindToController: true,
-        resolve: {
-          items: _.return(items),
-        },
-      });
-
-      return modal.result.then(function (group) {
-        var data = {
-          group: group ? group.id : null,
-        };
-
-        return list.patch(data, items);
       });
     }
 

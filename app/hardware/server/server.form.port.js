@@ -92,12 +92,11 @@
       port.billing.start.value = response.billing.start ?
         date.parse(response.billing.start) : '';
 
-      return $q.all([
-        Api
-          .all('entity')
-          .getList({'switch_port_id': response.switch.port.id})
-          .then(storeEntities),
-      ]);
+      return Api
+        .all('entity')
+        .getList({'server_port_id': port.id})
+        .then(storeEntities)
+        ;
     }
 
     function storeEntities(response) {
@@ -151,7 +150,7 @@
         switch: {
           id: port.switch.getSelected('id'),
           port: {
-            id: port.switch.port.getSelected('id') || null,
+            id: port.switch.port ? port.switch.port.getSelected('id') || null : null,
           },
           speed: {
             id: port.switch.speed.getSelected('id') || null,

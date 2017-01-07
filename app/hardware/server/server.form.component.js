@@ -75,7 +75,7 @@
       }
 
       function removeFromDatabase() {
-        return port.original.remove();
+        return $ports.one(''+port.id).remove();
       }
 
       function removeFromList() {
@@ -188,9 +188,10 @@
       };
 
       return $q.all([
-        updateEntities(),
         updateSwitchPort(),
-      ]).then(updateServerPort);
+        updateServerPort()
+          .then(updateEntities),
+      ]);
 
       function updateSwitchPort() {
         return Api
@@ -201,23 +202,38 @@
           ;
       }
 
-      function updateEntities() {
+      function updateEntities(response) {
+        port.id = response.id;
+
+        // Remove entities first so that VLANs don't conflict.
         if (formData.entities.remove.length) {
           return Api
             .one('entity/' + formData.entities.remove.join(','))
             .patch({
-              switch_port_id: null,
+              server_port_id: null,
             })
+            .then(addEntities)
           ;
         }
 
-        if (formData.entities.add.length) {
-          return Api
-            .one('entity/' + formData.entities.add.join(','))
-            .patch({
-              switch_port_id: formData.switch.port.id,
-            })
-            ;
+        return addEntities();
+
+        function addEntities() {
+          if (formData.entities.add.length) {
+            return Api
+              .one('entity/' + formData.entities.add.join(','))
+              .patch({
+                server_port_id: port.id,
+              })
+              .then(updateExisting)
+              ;
+          }
+
+          return updateExisting();
+        }
+
+        function updateExisting() {
+          port.fromExisting(response);
         }
       }
 
@@ -226,18 +242,12 @@
           return $ports
             .one(''+formData.id)
             .patch(serverData)
-            .then(updateExisting)
             ;
         }
 
         return $ports
           .post(serverData)
-          .then(updateExisting)
           ;
-
-        function updateExisting(response) {
-          port.fromExisting(response);
-        }
       }
     }
 

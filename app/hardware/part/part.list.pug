@@ -26,7 +26,9 @@ div.alert.alert-info(
   data-translate="part.list.EMPTY"
 )
 
-.panel-footer.pb0
+.panel-footer.pb0(
+  style="margin:0 -20px"
+)
   .row
     div.col-md-4
       button.btn.btn-primary(
@@ -38,5 +40,5 @@ div.alert.alert-info(
         type="submit"
         data-translate="part.list.SUBMIT"
       )
-    pagination.text-right.block(pages="tab.list.pages")
+    pagination.text-right.block.mr(pages="tab.list.pages")
 

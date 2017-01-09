@@ -7,18 +7,18 @@ table.table.table-condensed.table-bordered(style="margin-bottom: 0")
       strong(translate="server.switch.NAME")
     td
       a(
-        ui-sref="app.network.switch.view(portControl.port.switch.id)"
+        ui-sref="app.network.switch.view.manage({ id: portControl.port.switch.id })"
         ng-bind="portControl.port.switch.name"
       )
     td.text-right.shrink(rowspan="100")
       //- Start Buttons
       span.btn-group-vertical
         a.btn.btn-default(
-          ng-click="portControl.patch({ sync_vlan: true })"
+          ng-click="portControl.syncVlan()"
           translate="server.switch.SYNC_VLAN"
         )
         a.btn.btn-default(
-          ng-click="portControl.patch({ sync_speed: true })"
+          ng-click="portControl.syncSpeed()"
           translate="server.switch.SYNC_SPEED"
         )
         span.btn-group(uib-dropdown="")
@@ -54,5 +54,8 @@ table.table.table-condensed.table-bordered(style="margin-bottom: 0")
       strong(translate="server.switch.MAC")
     td(ng-bind="portControl.port.mac")
 
-.panel-footer.clearfix(ng-class="portControl.response ? '' : 'hidden'")
-  pre(ng-bind="portControl.response")
+.panel-footer.clearfix(ng-class="portControl.response.loader.class + ' ' + (portControl.response.show ? '' : 'hidden')")
+  .loader
+  pre(ng-if="portControl.response.output || portControl.response.errors")
+    div(ng-bind="portControl.response.output")
+    div(ng-bind="portControl.response.errors")

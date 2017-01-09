@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  var INTERVAL_CHECK_STATUS = 5 * 1000;
+
   angular
     .module('app.hardware.server')
     .component('serverSwitchPortControl', {
@@ -18,58 +20,89 @@
   /**
    * @ngInject
    */
-  function ServerSwitchPortControlCtrl(Loader, Modal) {
+  function ServerSwitchPortControlCtrl(Loader, Modal, Api) {
     var portControl = this;
+    var $command;
 
     portControl.loader = Loader();
-    portControl.response = "";
+    portControl.response = {
+      show: false,
+      output: '',
+      errors: '',
+      loader: Loader(),
+    };
 
-    portControl.patch = patch;
     portControl.$onInit = init;
-
+    portControl.syncVlan = command.bind(null, 'sync-vlan');
+    portControl.syncSpeed = command.bind(null, 'sync-speed');
     portControl.power = {
-      on: patch.bind(null, {
-        power: 'on',
-      }),
+      on: command.bind(null, 'power-on'),
       off: confirmPowerOff,
     };
 
     //////////
 
     function init() {
+      $command = portControl.port
+        .all('command')
+        ;
     }
 
     function confirmPowerOff() {
-      var patchData = {
-        power: 'off',
-      };
-
       return portControl.loader.during(
         Modal
           .confirm([portControl.server], 'server.switch.power.off.confirm')
           .data({
-            port: portControl.server.switch.port,
+            port: portControl.server.switch.port.name,
             switch: portControl.server.switch.name,
           })
           .open()
           .result
-          .then(patch.bind(null, patchData))
+          .then(command.bind(null, 'power-off'))
       );
     }
 
-    function patch(data) {
+    function command(cmd) {
       return portControl.loader.during(
-        portControl.port
-          .patch(data)
-          .then(showResponse)
+        $command
+          .post({
+            'command': cmd,
+          })
+          .then(listenForResponse)
           .then(fireChangeEvent)
       );
     }
 
-    function showResponse(response) {
-      portControl.response = response.output;
+    function listenForResponse(response) {
+      portControl.response.show = true;
+      portControl.response.loader.loading();
+
+      var interval = setInterval(checkCommandStatus, INTERVAL_CHECK_STATUS);
+      var $cmd = Api.one(
+        'switch/'+response.command.switch.id+'/command/'+response.command.id
+      );
 
       return response;
+
+      function updateCommandStatus(response) {
+        if (response.status != 'Queued' && response.status != 'Running') {
+          portControl.response.errors = response.errors;
+          portControl.response.output = response.output;
+          finish();
+        }
+      }
+
+      function finish() {
+        clearInterval(interval);
+        portControl.response.loader.loaded();
+      }
+
+      function checkCommandStatus() {
+        $cmd
+          .get()
+          .then(updateCommandStatus)
+        ;
+      }
     }
 
     function fireChangeEvent(response) {

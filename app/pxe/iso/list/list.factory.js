@@ -13,9 +13,9 @@
   function IsoListFactory (List, ListConfirm) {
     return function () {
       var list = List('pxe/iso');
-      var confirm = ListConfirm(list, 'pxe.iso.modal.delete');
+      list.confirm = ListConfirm(list, 'pxe.iso.modal.delete');
 
-      list.bulk.add('Delete', confirm.delete);
+      list.bulk.add('Delete', list.confirm.delete);
 
       return list;
     };

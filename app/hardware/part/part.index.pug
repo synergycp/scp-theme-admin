@@ -25,20 +25,13 @@ form(name="form", ng-submit="vm.submit()")
             span.badge(ng-if="list.pages.total", ng-bind="list.pages.total")
           include part.list.pug
 
-  br
-
-  .text-center
-    button.btn.btn-primary(
-      type="submit"
-      data-translate="part.list.SUBMIT"
-    )
 
 br
 
 .row
   .col-md-6
     logs(
-      title="Part Logs"
+      heading="Part Logs"
       filter="vm.logs.filter"
       listen-to="vm.list"
     )

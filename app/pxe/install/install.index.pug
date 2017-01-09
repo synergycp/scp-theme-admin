@@ -6,5 +6,5 @@ div(ng-if="!vm.list.items.length")
   )
     os-reload-panel(
       install="install"
-      on-delete="vm.list.delete([install])"
+      on-delete="vm.list.delete([install], restart)"
     )

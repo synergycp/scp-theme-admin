@@ -13,9 +13,9 @@
   function PreseedListFactory (List, ListConfirm) {
     return function () {
       var list = List('pxe/preseed');
-      var confirm = ListConfirm(list, 'pxe.preseed.modal.delete');
+      list.confirm = ListConfirm(list, 'pxe.preseed.modal.delete');
 
-      list.bulk.add('Delete', confirm.delete);
+      list.bulk.add('Delete', list.confirm.delete);
 
       return list;
     };

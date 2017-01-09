@@ -12,8 +12,9 @@
   },
   "delete": {
     "confirm": {
-      "TITLE": "Cancel Operating System Reload?",
+      "TITLE": "Stop Tracking Operating System Reload?",
       "BODY": "This will stop tracking the installation, but will not stop it from continuing.",
+      "RESTART": "Restart the installation",
       "CANCEL": "Cancel",
       "SUBMIT": "Stop Tracking"
     }
@@ -24,6 +25,10 @@
     "SUBMIT": "Reload Operating System",
     "profile": {
       "LABEL": "Profile",
+      "PLACEHOLDER": "Type to Search..."
+    },
+    "raid": {
+      "LABEL": "RAID",
       "PLACEHOLDER": "Type to Search..."
     },
     "license-key": {

@@ -42,5 +42,8 @@
         "PLACEHOLDER": "Type to search..."
       }
     }
+  },
+  "buttons": {
+    "DELETE": "Delete"
   }
 }

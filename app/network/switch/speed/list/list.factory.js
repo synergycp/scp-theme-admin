@@ -13,11 +13,11 @@
   function SwitchSpeedListFactory ($uibModal, List, ListConfirm) {
     return function () {
       var list = List('port-speed');
-      var confirm = ListConfirm(list, 'speed.modal.delete');
+      list.confirm = ListConfirm(list, 'speed.modal.delete');
 
       var doDelete = list.delete;
       list.delete = proxyDelete;
-      list.bulk.add('Delete', confirm.delete);
+      list.bulk.add('Delete', list.confirm.delete);
 
       return list;
 

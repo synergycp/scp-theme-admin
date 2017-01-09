@@ -13,9 +13,9 @@
   function PxeShellListFactory (List, ListConfirm) {
     return function () {
       var list = List('pxe/shell');
-      var confirm = ListConfirm(list, 'pxe.shell.modal.delete');
+      list.confirm = ListConfirm(list, 'pxe.shell.modal.delete');
 
-      list.bulk.add('Delete', confirm.delete);
+      list.bulk.add('Delete', list.confirm.delete);
 
       return list;
     };

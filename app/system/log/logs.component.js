@@ -7,7 +7,7 @@
       require: {
       },
       bindings: {
-        title: '@',
+        heading: '@',
         filter: '=?',
         listenTo: '=?',
         showType: '=?',

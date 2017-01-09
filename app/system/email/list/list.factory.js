@@ -13,9 +13,9 @@
   function EmailListFactory (List, ListConfirm) {
     return function () {
       var list = List('email/template');
-      var confirm = ListConfirm(list, 'system.email.modal.delete');
+      list.confirm = ListConfirm(list, 'system.email.modal.delete');
 
-      list.bulk.add('Delete', confirm.delete);
+      list.bulk.add('Delete', list.confirm.delete);
 
       return list;
     };

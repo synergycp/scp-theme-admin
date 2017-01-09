@@ -12,8 +12,9 @@
   },
   "delete": {
     "confirm": {
-      "TITLE": "Cancel Operating System Reload?",
+      "TITLE": "Stop Tracking Operating System Reload?",
       "BODY": "This will stop tracking the installation, but will not stop it from continuing.",
+      "RESTART": "Restart the installation",
       "CANCEL": "Cancel",
       "SUBMIT": "Stop Tracking"
     }

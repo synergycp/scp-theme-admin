@@ -27,6 +27,10 @@
       "LABEL": "Profile",
       "PLACEHOLDER": "Type to Search..."
     },
+    "raid": {
+      "LABEL": "RAID",
+      "PLACEHOLDER": "Type to Search..."
+    },
     "license-key": {
       "LABEL": "License Key",
       "PLACEHOLDER": "Optional",

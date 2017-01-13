@@ -17,7 +17,7 @@
   /**
    * @ngInject
    */
-  function ServerSwitchControlCtrl(Api, Loader, Modal, $scope, $state) {
+  function ServerSwitchControlCtrl(Loader, $scope, $state) {
     var switchControl = this;
 
     $scope.$state = $state;
@@ -52,12 +52,6 @@
 
     function storePorts(response) {
       _.setContents(switchControl.ports, response);
-    }
-
-    function fireChangeEvent(response) {
-      switchControl.server.fire('change');
-
-      return response;
     }
   }
 })();

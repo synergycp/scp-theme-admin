@@ -25,7 +25,7 @@
         ),
       })
       .state('app.hardware.server.list', {
-        url: '?switch&group&client&q',
+        url: '?switch&group&disks&cpu&mem&client&q',
         title: 'Servers',
         controller: 'ServerIndexCtrl as vm',
         templateUrl: helper.basepath(DIR+'list.index.html'),

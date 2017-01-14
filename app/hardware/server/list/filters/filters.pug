@@ -13,9 +13,9 @@ include /resources/angle/pug/mixins/form
     .col-md-6
       +label("{{ 'server.list.filter.group.LABEL' | translate }}")
         +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
-          +ui-select("filters.group")
+          +ui-select("filters.group")(multiple)
             ui-select-match(placeholder="{{ 'server.list.filter.group.PLACEHOLDER' | translate }}")
-              span(ng-bind="$select.selected.name")
+              span(ng-bind="$item.name" class="ui-select-match-item")
 
             ui-select-choices(
               repeat="choice in filters.group.items track by choice.id"
@@ -23,3 +23,76 @@ include /resources/angle/pug/mixins/form
               refresh-delay="400"
             )
               span(ng-bind-html="choice.name | highlight: $select.search")
+    .col-md-6
+      +label("{{ 'server.list.filter.client.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.client.clear()")
+          +ui-select("filters.client")(multiple)
+            ui-select-match(placeholder="{{ 'server.list.filter.client.PLACEHOLDER' | translate }}")
+              span(ng-bind="$item.name")
+
+            ui-select-choices(
+              repeat="choice in filters.client.items track by choice.id"
+              refresh="filters.client.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")
+    .col-md-6
+      +label("{{ 'server.list.filter.switch.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.switch.clear()")
+          +ui-select("filters.switch")(multiple)
+            ui-select-match(placeholder="{{ 'server.list.filter.switch.PLACEHOLDER' | translate }}")
+              span(ng-bind="$item.name")
+
+            ui-select-choices(
+              repeat="choice in filters.switch.items track by choice.id"
+              refresh="filters.switch.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")
+    .col-md-6
+      +label("{{ 'server.list.filter.cpu.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.cpu.clear()")
+          +ui-select("filters.cpu")(multiple)
+            ui-select-match(placeholder="{{ 'server.list.filter.cpu.PLACEHOLDER' | translate }}")
+              span(ng-bind="$item.name")
+
+            ui-select-choices(
+              repeat="choice in filters.cpu.items track by choice.id"
+              refresh="filters.cpu.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")
+
+    .col-md-6
+      +label("{{ 'server.list.filter.mem.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.mem.clear()")
+          +ui-select("filters.mem")(multiple)
+            ui-select-match(placeholder="{{ 'server.list.filter.mem.PLACEHOLDER' | translate }}")
+              span(ng-bind="$item.name")
+
+            ui-select-choices(
+              repeat="choice in filters.mem.items track by choice.id"
+              refresh="filters.mem.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")
+
+
+    //- .col-md-6(ng-repeat="disk in filters.disks.items track by $index")
+    //-   +icon-label("{{ 'server.form.disk.LABEL' | translate }}")(
+    //-     class="fa"
+    //-     ng-class=
+    //-       "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
+    //-       "+($index || filters.disks.items.length < filters.disks.max ? '' : 'disabled ')"
+    //-     ng-click="$index ? filters.disks.rem($index) : filters.disks.add(disk.selected)"
+    //-   )
+    //-     +ui-select("disk")
+    //-       ui-select-match(placeholder="{{ 'server.form.disk.PLACEHOLDER' | translate }}")
+    //-         span(ng-bind="$select.selected.name")
+
+    //-       ui-select-choices(
+    //-         repeat="choice in disk.items track by choice.id"
+    //-         refresh="disk.load($select.search)"
+    //-         refresh-delay="400"
+    //-       )
+    //-         span(ng-bind-html="choice.name | highlight: $select.search")

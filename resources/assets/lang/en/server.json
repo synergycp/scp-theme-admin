@@ -263,6 +263,26 @@
       "group": {
         "LABEL": "IP Group",
         "PLACEHOLDER": "Type to search..."
+      },
+      "switch": {
+        "LABEL": "Switch",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "client": {
+        "LABEL": "Client",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "switch": {
+        "LABEL": "Switch",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "mem": {
+        "LABEL": "Memory",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "cpu": {
+        "LABEL": "CPU",
+        "PLACEHOLDER": "Type to search..."
       }
     }
   },

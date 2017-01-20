@@ -45,7 +45,7 @@ block columns
   td(ng-if="table.showServerCount")
     a(
       ui-sref="app.hardware.server.list({switch: row.id})"
-      ng-bind="row.serversCount"
+      ng-bind="row.serverPortsCount"
     )
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs

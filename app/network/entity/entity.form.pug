@@ -27,20 +27,12 @@ include /resources/angle/pug/mixins/form
 
 +label("{{ 'entity.form.group.LABEL' | translate }}")
   .input-group
-    ui-select(ng-model="entityForm.input.group")
+    +ui-select("entityForm.groups")(ng-model="entityForm.input.group")
       ui-select-match(placeholder="{{ 'entity.form.group.PLACEHOLDER' | translate }}")
         | {{ $select.selected.name }}
 
-      ui-select-choices(
-        repeat=
-          "group in (" +
-            "entityForm.groups.items" +
-            "| filter: {name: $select.search}" +
-          ") track by group.id"
-        refresh="entityForm.groups.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="group.name | highlight: $select.search")
+      +ui-select-choices("entityForm.groups")
+        span(ng-bind-html="choice.name | highlight: $select.search")
     span.input-group-btn
       button.btn.btn-default(
         type="button"

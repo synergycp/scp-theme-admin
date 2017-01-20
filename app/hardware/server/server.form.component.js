@@ -43,50 +43,53 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Api, Select, MultiInput, $rootScope, ServerConfig, $stateParams, moment) {
+  function ServerFormCtrl(_, Api, Select, Modal, ServerFormPort, MultiInput, $rootScope, ServerConfig, $stateParams, $q) {
     var serverForm = this;
-    var $entities = Api.all('entity');
+    var $ports;
 
     serverForm.$onInit = init;
     serverForm.input = _.clone(INPUTS);
-    serverForm.switch = Select('switch').on('change', syncGroupFilter);
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
     serverForm.disks = MultiInput(DiskSelector)
       .setMax(ServerConfig.MAX_DISKS)
       .add();
     serverForm.addOns = MultiInput(AddOnSelector).add();
-    serverForm.group = Select('group').on('change', function () {
-      _.setContents(serverForm.entities.selected, []);
-      syncEntityFilter();
-    });
-    serverForm.billing = {
-      date: {
-        value: '',
-        options: {
-          locale: {
-            format: 'MM/DD/YYYY h:mm A',
-            cancelLabel: 'Clear',
-          },
-          autoUpdateInput: false,
-          singleDatePicker: true,
-          timePicker: true,
-          timePickerIncrement: 30,
-          eventHandlers: {
-            'cancel.daterangepicker': function (ev, picker) {
-              serverForm.billing.date.value = '';
-            },
-          }
-        },
-      },
-    };
-    serverForm.switchSpeed = Select('port-speed');
-    serverForm.entities = Select('entity').multi().filter({
-      available: true,
-      allow_server_id: $stateParams.id || undefined,
-    }).on('change', syncEntityToGroup);
+    serverForm.ports = [];
+    serverForm.ports.add = addPort;
+    serverForm.ports.remove = removePort;
+    serverForm.ports.removed = [];
 
     //////////
+
+    function addPort() {
+      serverForm.ports.push(ServerFormPort());
+    }
+
+    function removePort(port) {
+      if (port.id) {
+        return confirmRemove(port)
+          .then(removeFromList)
+          .then(removeFromDatabase)
+        ;
+      }
+
+      function removeFromDatabase() {
+        return $ports.one(''+port.id).remove();
+      }
+
+      function removeFromList() {
+        _.remove(serverForm.ports, port);
+      }
+    }
+
+    function confirmRemove(port) {
+      return Modal
+        .confirm([port.original], 'server.form.port.remove')
+        .open()
+        .result
+        ;
+    }
 
     function init() {
       serverForm.form.getData = getData;
@@ -97,28 +100,26 @@
       }
 
       serverForm.form.on(['load', 'change'], storeState);
+      serverForm.form.on(['saving', 'created'], savePorts);
+
+      $ports = Api.all('server/'+$stateParams.id+'/port');
+      $ports
+        .getList()
+        .then(storePorts)
+      ;
+    }
+
+    function storePorts(response) {
+      _.each(response, function (portData) {
+        var port = ServerFormPort();
+
+        port.fromExisting(portData);
+        serverForm.ports.push(port);
+      });
     }
 
     function fillFormInputs() {
       _.overwrite(serverForm.input, serverForm.form.input);
-    }
-
-    function syncEntityToGroup() {
-      var entityGroup = (serverForm.entities.selected[0] || {}).group || null;
-      var entityGroupId = (entityGroup || {}).id || null;
-      if (!entityGroup || serverForm.group.getSelected('id') == entityGroupId) {
-        syncEntityFilter();
-        return;
-      }
-
-      serverForm.group.selected = entityGroup;
-      serverForm.group.fireChangeEvent();
-    }
-
-    function syncGroupFilter() {
-      serverForm.group.filter({
-        switch: serverForm.switch.getSelected('id'),
-      }).load();
     }
 
     function storeState(response) {
@@ -128,39 +129,9 @@
         storeMulti(response.disks, serverForm.disks);
         storeMulti(response.addons, serverForm.addOns);
 
-        serverForm.switch.selected = response.switch;
-        syncGroupFilter();
-
-        serverForm.group.selected = response.group;
         serverForm.cpu.selected = response.cpu;
         serverForm.mem.selected = response.mem;
-
-        serverForm.switchSpeed.selected = response.switch.speed;
-        serverForm.billing.date.value = response.billing.date ?
-          Date.parse(response.billing.date) : '';
       });
-
-      $entities
-        .getList({ server: response.id })
-        .then(storeEntities)
-        ;
-    }
-
-    function storeEntities(response) {
-      _.setContents(serverForm.entities.selected, response);
-
-      syncEntityFilter();
-    }
-
-    function syncEntityFilter() {
-      serverForm.entities
-        .clearFilter('extra_for_id')
-        .clearFilter('ip_group')
-        .filter({
-          extra_for_id: (serverForm.entities.selected[0] || {}).id,
-          ip_group: (serverForm.group.selected || {}).id,
-        })
-        .load();
     }
 
     function storeMulti(items, target) {
@@ -196,19 +167,88 @@
 
       data.disks = ids(serverForm.disks);
       data.addons = ids(serverForm.addOns);
-      data.entities = _.map(serverForm.entities.selected, 'id');
-      data.switch.id = serverForm.switch.getSelected('id') || null;
-      data.switch.speed = {
-        id: serverForm.switchSpeed.getSelected('id') || null,
-      };
-      data.group = {
-        id: serverForm.group.getSelected('id') || null,
-      };
       data.cpu = serverForm.cpu.getSelected('id') || null;
       data.mem = serverForm.mem.getSelected('id') || null;
-      data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null;
 
       return data;
+    }
+
+    function savePorts() {
+      return $q.all(
+        _.map(serverForm.ports, savePortChanges)
+      );
+    }
+
+    function savePortChanges(port) {
+      var formData = port.data();
+      var serverData = {
+        mac: formData.mac,
+        group_id: formData.group.id,
+        switch_port_id: formData.switch.port.id,
+      };
+
+      return $q.all([
+        updateSwitchPort(),
+        updateServerPort()
+          .then(updateEntities),
+      ]);
+
+      function updateSwitchPort() {
+        return Api
+          .one('switch/'+formData.switch.id+'/port/'+formData.switch.port.id)
+          .patch({
+            port_speed_id: formData.switch.speed.id,
+          })
+          ;
+      }
+
+      function updateEntities(response) {
+        port.id = response.id;
+
+        // Remove entities first so that VLANs don't conflict.
+        if (formData.entities.remove.length) {
+          return Api
+            .one('entity/' + formData.entities.remove.join(','))
+            .patch({
+              server_port_id: null,
+            })
+            .then(addEntities)
+          ;
+        }
+
+        return addEntities();
+
+        function addEntities() {
+          if (formData.entities.add.length) {
+            return Api
+              .one('entity/' + formData.entities.add.join(','))
+              .patch({
+                server_port_id: port.id,
+              })
+              .then(updateExisting)
+              ;
+          }
+
+          return updateExisting();
+        }
+
+        function updateExisting() {
+          port.fromExisting(response);
+        }
+      }
+
+      function updateServerPort() {
+        if (formData.id) {
+          return $ports
+            .one(''+formData.id)
+            .patch(serverData)
+            ;
+        }
+
+        return $ports
+          .post(serverData)
+          ;
+      }
     }
 
     function ids(multi) {

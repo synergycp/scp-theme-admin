@@ -27,7 +27,7 @@ block headings
     sort(col="hdds")
   th.sortable(ng-if="table.showSwitch")
     span(translate="server.heading.SWITCH")
-    sort(col="hub")
+    sort(col="switch")
   th.sortable(ng-if="table.showGroup")
     span(translate="server.heading.GROUP")
     sort(col="group")
@@ -74,7 +74,7 @@ block columns
 
   td(
     ng-if="table.showSwitch"
-    ng-bind="row.hub.name"
+    ng-bind="row.switch.name || '-'"
   )
   td(
     ng-if="table.showGroup"

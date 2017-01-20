@@ -75,7 +75,7 @@
   "heading": {
     "SWITCH_ID": "Switch ID",
     "IP": "Switch IP:Port",
-    "SERVER_COUNT": "Servers",
+    "SERVER_COUNT": "Ports In Use",
     "SCAN": "Scan Status",
     "ACTIONS": "Actions"
   },

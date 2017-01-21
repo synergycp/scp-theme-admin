@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function routeConfig($stateProvider, RouteHelpersProvider, SsoUrlProvider) {
+  function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
     $stateProvider
       .state('app.hardware.server', {

@@ -15,7 +15,7 @@
     var vm = this;
 
     vm.list = ServerList().filter({
-      available: 1,
+      inventory: 1,
     });
     vm.filters = ListFilter(vm.list);
     vm.create = {

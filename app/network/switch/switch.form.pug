@@ -65,9 +65,8 @@ include /resources/angle/pug/mixins/form
 )
 
 +label("{{ 'switch.form.group.LABEL' | translate }}")
-  ui-select(
+  +ui-select("switchForm.groups")(
     multiple
-    ng-model="switchForm.groups.selected"
     theme="bootstrap"
     close-on-select="false"
   )

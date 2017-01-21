@@ -3,7 +3,7 @@ include /resources/angle/pug/mixins/form
 
 +field(
   "{{ 'server.form.id.LABEL' | translate }}",
-  "id"
+  "srv_id"
 )(
   placeholder="{{ 'server.form.id.PLACEHOLDER' | translate }}"
   ng-model="serverForm.input.srv_id"
@@ -102,6 +102,7 @@ hr
         placeholder="{{ 'server.form.switch.port.PLACEHOLDER' | translate }}"
         ng-disabled="!serverForm.switch.selected"
         ng-model="serverForm.input.switch.port"
+        name="switch.port"
       )
     .col-xs-6
       +ui-select("serverForm.switchSpeed")(
@@ -165,12 +166,14 @@ hr
         type="text"
         placeholder="{{ 'server.form.ipmi.admin.username.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.admin.username"
+        name="ipmi.admin.username"
       )
     .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'server.form.ipmi.admin.password.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.admin.password"
+        name="ipmi.admin.password"
       )
 
 +label("{{ 'server.form.ipmi.client.LABEL' | translate }}")
@@ -180,12 +183,14 @@ hr
         type="text"
         placeholder="{{ 'server.form.ipmi.client.username.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.client.username"
+        name="ipmi.client.username"
       )
     .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'server.form.ipmi.client.password.PLACEHOLDER' | translate }}"
         ng-model="serverForm.input.ipmi.client.password"
+        name="ipmi.client.password"
       )
 
 hr
@@ -200,7 +205,7 @@ hr
 
 +label(
   "{{ 'server.form.billing.date.LABEL' | translate }}",
-  "billing-date"
+  "billing.date"
 )
   +input-with-btn("fa fa-close")(
     ng-click="serverForm.billing.date.value = ''"
@@ -212,6 +217,7 @@ hr
       options="serverForm.billing.date.options"
       ng-model="serverForm.billing.date.value"
       placeholder="{{ 'server.form.billing.date.PLACEHOLDER' | translate }}"
+      name="billing.date"
     )
 
 +field(

@@ -135,7 +135,7 @@
         serverForm.cpu.selected = response.cpu;
         serverForm.mem.selected = response.mem;
 
-        serverForm.switchSpeed.selected = response.switch.speed;
+        serverForm.switchSpeed.selected = response.switch && response.switch.speed;
         serverForm.billing.date.value = response.billing.date ?
           Date.parse(response.billing.date) : '';
       });
@@ -171,6 +171,7 @@
       if (!items.length) {
         target.add();
       }
+      target.$dirty = false;
 
       function change(item, key) {
         if (!hasChanged(item, key)) {
@@ -192,23 +193,46 @@
     }
 
     function getData() {
-      var data = _.clone(serverForm.input);
-
-      data.disks = ids(serverForm.disks);
-      data.addons = ids(serverForm.addOns);
-      data.entities = _.map(serverForm.entities.selected, 'id');
-      data.switch.id = serverForm.switch.getSelected('id') || null;
-      data.switch.speed = {
-        id: serverForm.switchSpeed.getSelected('id') || null,
-      };
-      data.group = {
+      var data = cloneInputs(serverForm.input);
+      serverForm.disks.$dirty && (data.disks = ids(serverForm.disks));
+      serverForm.addOns.$dirty && (data.addons = ids(serverForm.addOns));
+      
+      serverForm.entities.$dirty && (data.entities = _.map(serverForm.entities.selected, 'id'));
+      
+      if(serverForm.switch.$dirty) {
+        if(!data.switch) data.switch = {};
+        data.switch.id = (serverForm.switch.getSelected('id') || null);
+      }
+      data.switch && serverForm.switchSpeed.$dirty && (data.switch.speed = {
+          id: serverForm.switchSpeed.getSelected('id') || null,
+        });
+      serverForm.group.$dirty && (data.group = {
         id: serverForm.group.getSelected('id') || null,
-      };
-      data.cpu = serverForm.cpu.getSelected('id') || null;
-      data.mem = serverForm.mem.getSelected('id') || null;
-      data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null;
-
+      });
+      serverForm.cpu.$dirty && (data.cpu = serverForm.cpu.getSelected('id') || null);
+      serverForm.mem.$dirty && (data.mem = serverForm.mem.getSelected('id') || null);
+      serverForm.billing.date.value && (data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null);
       return data;
+    }
+
+    function cloneInputs(input, keyPrefix) {
+      var resObj = {};
+      _.forOwn(input, function(value, key) {
+        var keyWithPrefix = keyPrefix ? (keyPrefix+"."+key) : key;
+        try { // throw error in console if input is not named properly
+          if(_.isObject(value)) {
+            var tmp = cloneInputs(value, keyWithPrefix);
+            !_.isEmpty(tmp) && (resObj[key] = tmp);
+          } else {
+            if(serverForm.form.form[keyWithPrefix].$dirty) {
+              resObj[key] = value
+            }
+          }
+        } catch(e) {
+          console.error('Error. Input field "'+keyWithPrefix+'" is not named properly inside form. Each input should have name attribute set. Use dot notation names for fields that are inside of nested objects in INPUTS object.');
+        }
+      })
+      return resObj;
     }
 
     function ids(multi) {

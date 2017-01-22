@@ -103,7 +103,11 @@ div(ng-if="profileForm.input.windows")
           span(ng-bind-html="choice.name | highlight: $select.search")
 
   +label("{{ 'pxe.profile.form.driver.LABEL' | translate }}")
-    +ui-select("profileForm.drivers")(multiple sortable="true")
+    +ui-select("profileForm.drivers")(
+      multiple 
+      sortable="true"
+      ng-disabled="!profileForm.input.iso"
+    )
       ui-select-match(placeholder="{{ 'pxe.profile.form.driver.PLACEHOLDER' | translate }}")
         | {{ $item.name }}
 

@@ -10,3 +10,7 @@ include /resources/angle/pug/mixins/form
   placeholder="{{ 'pxe.driver.form.path.PLACEHOLDER' | translate }}"
   ng-model="pxeDriverForm.input.path"
 )
+
+button(type="file" ngf-select="pxeDriverForm.uploadFiles($file, $invalidFiles)"
+          ngf-max-height="1000" ngf-max-size="1MB")
+	| Select File

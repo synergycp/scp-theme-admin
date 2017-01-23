@@ -24,11 +24,40 @@
   /**
    * @ngInject
    */
-  function PxeDriverFormCtrl(Select, $scope, _) {
+  function PxeDriverFormCtrl(Select, $scope, _, Upload, $timeout, Api, ApiKey) {
     var pxeDriverForm = this;
 
     pxeDriverForm.$onInit = init;
     pxeDriverForm.input = _.clone(INPUTS);
+
+    pxeDriverForm.uploadFiles = function(file, errFiles) {
+      // var api = Api('pxe/driver');
+      $scope.f = file;
+      $scope.errFile = errFiles && errFiles[0];
+      if (file) {
+          file.upload = Upload.upload({
+              url: Api.baseUrl()+'api/pxe/driver?key='+ApiKey.get(),
+              method: 'post',
+              data: {
+                driver: file,
+                name: "Test",
+                path: 'localhost'
+              }
+          });
+
+          file.upload.then(function (response) {
+              $timeout(function () {
+                  file.result = response.data;
+              });
+          }, function (response) {
+              if (response.status > 0)
+                  $scope.errorMsg = response.status + ': ' + response.data;
+          }, function (evt) {
+              file.progress = Math.min(100, parseInt(100.0 * 
+                                       evt.loaded / evt.total));
+          });
+      }   
+    }
 
     //////////
 

@@ -6,7 +6,8 @@ var
   browserSync = require('browser-sync').create(),
   reload = browserSync.reload,
   PluginError = $.util.PluginError,
-  del = require('del');
+  del = require('del'),
+  fs = require('fs');
 
 var Q = require('q');
 var _ = require('lodash');
@@ -289,6 +290,50 @@ gulp.task('assets:raw', function () {
     }));
 });
 
+gulp.task('create-versions:manifest', function () {
+  // gets MD5 for each js and css files in /public and writes it into rev-manifest.json file
+  gulp
+    .src(["./public/**/*.js", "./public/**/*.css"])
+    .pipe($.revAll.revision({
+      fileNameManifest: './js-css-versions-manifest.json',
+      transformFilename: function (file, hash) {
+        var ext = path.extname(file.path);
+        return path.basename(file.path, ext) + ext + '__'+hash.substr(0, 10);
+      }
+    }))
+    .pipe($.revAll.manifestFile()) // creates manifest json file
+    .pipe(gulp.dest('./'));
+
+  // creates versions manifest for html and json files
+  return gulp
+    .src(["./public/**/*.html", "./public/**/*.json"])
+    .pipe($.revAll.revision({
+      includeFilesInManifest: ['.html', '.json'],
+      fileNameManifest: './html-versions-manifest.json',
+      transformFilename: function (file, hash) {
+        var ext = path.extname(file.path);
+        return path.basename(file.path, ext) + ext + '__'+hash.substr(0, 10);
+      }
+    }))
+    .pipe($.revAll.manifestFile())
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('create-versions:implement', ['create-versions:manifest'], function () {
+  // replaces all references to files from manifest with according hashed names
+  gulp.src("./public/index.html")
+    .pipe($.revReplace({manifest: gulp.src("./js-css-versions-manifest.json")}))
+    .pipe(gulp.dest('./public/', {overwrite: true}));
+
+
+  // writes manifest json file (for html) inline into index.html 
+  var versions = '<script>window.FILES_VERSIONS='+fs.readFileSync('./html-versions-manifest.json')+'</script>';
+  return gulp.src(["./public/index.html"])
+    .pipe($.stringReplace('<!-- FILES_VERSIONS_JSON-->', versions, {logs:{enabled:false}}))
+    .pipe(gulp.dest('./public'))
+})
+
+gulp.task('create-versions', ['create-versions:manifest', 'create-versions:implement']);
 //---------------
 // WATCH
 //---------------
@@ -353,7 +398,8 @@ gulp.task('prod', function () {
 // Server for development
 gulp.task('serve', gulpsync.sync([
   'default',
-  'browsersync'
+  'browsersync',
+  'create-versions'
 ]), done);
 
 // Server for production

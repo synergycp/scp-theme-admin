@@ -17,7 +17,7 @@
   /**
    * @ngInject
    */
-  function PxeDriverButtonsCtrl(PxeProfileList, Loader, $state) {
+  function PxeDriverButtonsCtrl(PxeDriverList, Loader, $state) {
     var buttons = this;
 
     buttons.loader = Loader();

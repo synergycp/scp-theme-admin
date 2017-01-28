@@ -186,6 +186,9 @@
       },
       "client_access": {
         "LABEL": "Client Access"
+      },
+      "windows": {
+        "LABEL": "Windows"
       }
     },
     "buttons": {

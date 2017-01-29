@@ -49,10 +49,10 @@
 
     //////////
 
-    function onSelect($item) {
-      $state.go('app.hardware.server.view.manage', {
-        id: $item.id,
-      });
+    function onSelect($item, shouldOpenInNewTab, openSelected) {
+      openSelected('app.hardware.server.view.manage', {
+          id: $item.id,
+        }, shouldOpenInNewTab);
     }
 
 

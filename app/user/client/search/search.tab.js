@@ -52,10 +52,10 @@
 
     //////////
 
-    function onSelect($item) {
-      $state.go('app.user.client.view', {
-        id: $item.id,
-      });
+    function onSelect($item, shouldOpenInNewTab, openSelected) {
+      openSelected('app.user.client.view', {
+          id: $item.id,
+        }, shouldOpenInNewTab);
     }
   }
 })();

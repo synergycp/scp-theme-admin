@@ -194,8 +194,11 @@
 
     function getData() {
       var data = cloneInputs(serverForm.input);
-      serverForm.disks.$dirty && (data.disks = ids(serverForm.disks));
-      serverForm.addOns.$dirty && (data.addons = ids(serverForm.addOns));
+      var $partsDirty = serverForm.disks.$dirty || serverForm.addOns.$dirty || serverForm.cpu.$dirty || serverForm.mem.$dirty;
+      $partsDirty && (data.disks = ids(serverForm.disks));
+      $partsDirty && (data.addons = ids(serverForm.addOns));
+      $partsDirty && (data.cpu = serverForm.cpu.getSelected('id') || null);
+      $partsDirty && (data.mem = serverForm.mem.getSelected('id') || null);
       
       serverForm.entities.$dirty && (data.entities = _.map(serverForm.entities.selected, 'id'));
       
@@ -209,8 +212,6 @@
       serverForm.group.$dirty && (data.group = {
         id: serverForm.group.getSelected('id') || null,
       });
-      serverForm.cpu.$dirty && (data.cpu = serverForm.cpu.getSelected('id') || null);
-      serverForm.mem.$dirty && (data.mem = serverForm.mem.getSelected('id') || null);
       serverForm.billing.date.value && (data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null);
       return data;
     }

@@ -312,7 +312,7 @@ gulp.task('browsersync', function () {
     server: {
       baseDir: 'public/',
     },
-    port: 8080,
+    port: 8001,
   });
 
 });

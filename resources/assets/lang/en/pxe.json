@@ -222,6 +222,10 @@
       "path": {
         "LABEL": "Path",
         "PLACEHOLDER": "Must be unique"
+      },
+      "driver": {
+        "LABEL": "Driver",
+        "HELP": "Can be .zip, .tar.gz, etc."
       }
     },
     "buttons": {

@@ -37,54 +37,6 @@ include /resources/angle/pug/mixins/form
       +ui-select-choices("profileForm.emailTemplate")
         span(ng-bind-html="choice.name | highlight: $select.search")
 
-+label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
-  +input-with-btn("fa fa-times-circle")(
-    ng-click="profileForm.input.iso = null"
-  )
-    +ui-select("profileForm.isos")(ng-model="profileForm.input.iso")
-      ui-select-match(placeholder="{{ 'pxe.profile.form.iso.PLACEHOLDER' | translate }}")
-        | {{ $select.selected.name }}
-
-      +ui-select-choices("profileForm.isos")
-        span(ng-bind-html="choice.name | highlight: $select.search")
-
-div(ng-if="profileForm.input.iso")
-  +label("{{ 'pxe.profile.form.iso.edition.LABEL' | translate }}")
-    +input-with-btn("fa fa-times-circle")(
-      ng-click="profileForm.isos.selectedEdition = null"
-    )
-      +ui-select()(ng-model="profileForm.isos.selectedEdition")
-        ui-select-match(placeholder="{{ 'pxe.profile.form.iso.edition.PLACEHOLDER' | translate }}")
-          | {{ $select.selected.name }}
-
-        ui-select-choices(
-          repeat=
-            "choice in (" +
-              "profileForm.isos.editions.items" +
-              "| multiFilter: $select.search" +
-            ") track by choice.id"
-          refresh="profileForm.isos.editions.load($select.search)"
-          refresh-delay="400"
-        )
-          span(ng-bind-html="choice.name | highlight: $select.search")
-
-  +label("{{ 'pxe.profile.form.driver.LABEL' | translate }}")
-    +ui-select("profileForm.drivers")(multiple sortable="true")
-      ui-select-match(placeholder="{{ 'pxe.profile.form.driver.PLACEHOLDER' | translate }}")
-        | {{ $item.name }}
-
-      ui-select-choices(
-        repeat=
-          "choice in (" +
-            "profileForm.drivers.items" +
-            "| multiFilter: $select.search" +
-            "| filter: profileForm.drivers.notSelected" +
-          ") track by choice.id"
-        refresh="profileForm.drivers.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="choice.name | highlight: $select.search")
-
 +label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
   +ui-select("profileForm.shellScripts")(multiple, sortable="true")
     ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
@@ -104,7 +56,69 @@ div(ng-if="profileForm.input.iso")
       br
       small(ng-bind-html="choice.description | highlight: $select.search")
 
-+label("{{ 'pxe.profile.form.client_access.LABEL' | translate }}")
++label()
   +checkbox()(
     ng-model="profileForm.input.access_client"
   )
+    span(translate="pxe.profile.form.client_access.LABEL")
++label()
+  +checkbox()(
+    ng-model="profileForm.input.windows"
+  )
+    span(translate="pxe.profile.form.windows.LABEL")
+
+
+div(ng-if="profileForm.input.windows")
+  +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
+    +input-with-btn("fa fa-times-circle")(
+      ng-click="profileForm.input.iso = null"
+    )
+      +ui-select("profileForm.isos")(ng-model="profileForm.input.iso")
+        ui-select-match(placeholder="{{ 'pxe.profile.form.iso.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
+
+        +ui-select-choices("profileForm.isos")
+          span(ng-bind-html="choice.name | highlight: $select.search")
+
+  +label("{{ 'pxe.profile.form.iso.edition.LABEL' | translate }}")
+    +input-with-btn("fa fa-times-circle")(
+      ng-click="profileForm.isos.selectedEdition = null"
+    )
+      +ui-select()(
+        ng-model="profileForm.isos.selectedEdition"
+        ng-disabled="!profileForm.input.iso"
+      )
+        ui-select-match(placeholder="{{ 'pxe.profile.form.iso.edition.PLACEHOLDER' | translate }}")
+          | {{ $select.selected.name }}
+
+        ui-select-choices(
+          repeat=
+            "choice in (" +
+              "profileForm.isos.editions.items" +
+              "| multiFilter: $select.search" +
+            ") track by choice.id"
+          refresh="profileForm.isos.editions.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice.name | highlight: $select.search")
+
+  +label("{{ 'pxe.profile.form.driver.LABEL' | translate }}")
+    +ui-select("profileForm.drivers")(
+      multiple 
+      sortable="true"
+      ng-disabled="!profileForm.input.iso"
+    )
+      ui-select-match(placeholder="{{ 'pxe.profile.form.driver.PLACEHOLDER' | translate }}")
+        | {{ $item.name }}
+
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "profileForm.drivers.items" +
+            "| multiFilter: $select.search" +
+            "| filter: profileForm.drivers.notSelected" +
+          ") track by choice.id"
+        refresh="profileForm.drivers.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")

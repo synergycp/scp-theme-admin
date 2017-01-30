@@ -37,6 +37,10 @@
         text: "ISO Manager",
         sref: "app.pxe.iso.list",
       })
+      .item({
+        text: "PXE Drivers",
+        sref: "app.pxe.driver.list",
+      })
       ;
   }
 })();

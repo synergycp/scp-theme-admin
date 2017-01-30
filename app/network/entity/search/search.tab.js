@@ -56,11 +56,11 @@
     );
 
     //////////
-
-    function onSelect($item) {
-      $state.go('app.network.entity.view', {
-        id: $item.id,
-      });
+    
+    function onSelect($item, shouldOpenInNewTab, openSelected) {
+      openSelected('app.network.entity.view', {
+          id: $item.id,
+        }, shouldOpenInNewTab);
     }
 
 

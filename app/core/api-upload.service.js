@@ -3,50 +3,44 @@
 
   angular
     .module('app.core')
-    .service('ApiUpload', ApiUploadService)
-    ;
+    .service('ApiUpload', ApiUpload)
+  ;
 
   /**
-   * @ngInject
+   * @ngInject-
    */
-  function ApiUploadService(Upload, $timeout) {
-    var ApiUploadService = this;
+  function ApiUpload(Api, ApiKey, Upload, $timeout) {
+    var ApiUpload = this;
 
-    ApiUploadService.post = post;
-    ApiUploadService.patch = patch;
-    ApiUploadService.delete = del;
+    ApiUpload.post = upload.bind(null, 'POST');
+    ApiUpload.patch = upload.bind(null, 'PATCH');
+    ApiUpload.delete = upload.bind(null, 'DELETE');
 
     //////////
 
-    function post(url, file, data) {
-      return upload(url, file, data, 'POST');
-    }
-
-    function patch() {
-      return upload(url, file, data, 'PATCH');      
-    }
-
-    function del() {
-      return upload(url, file, data, 'DELETE');
-    }
-
-    function upload(url, file, data, method) {   
+    function upload(method, url, file, data) {
+      url = Api.baseUrl() + 'api/' + url + '?key=' + ApiKey.get();
+      data._method = method; // Laravel bug handling multipart/form-data w/ PATCH
       file.upload = Upload.upload({
-          url: url,
-          method: method,
-          data: data
+        url: url,
+        method: 'POST',
+        data: data,
+        headers: {
+        //  'Content-Type': 'application/x-www-form-urlencoded',
+        },
       });
 
       return file.upload.then(function (response) {
-          $timeout(function () {
-              file.result = response.data;
-          });
+        $timeout(function () {
+          file.result = response.data;
+        });
       }, function (response) {
-          if (response.status > 0)
-              console.error('err', response)
+        if (response.status > 0) {
+          console.error('err', response)
+        }
       }, function (evt) {
-          file.progress = Math.min(100, parseInt(100.0 * 
-                                   evt.loaded / evt.total));
+        file.progress = Math.min(100, parseInt(100.0 *
+          evt.loaded / evt.total));
       });
     }
   }

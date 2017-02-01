@@ -10,7 +10,7 @@
    *
    * @ngInject
    */
-  function PxeDriverListFactory (List, ListConfirm, Api, ApiKey, ApiUpload) {
+  function PxeDriverListFactory (List, ListConfirm, ApiUpload) {
     return function () {
       var list = List('pxe/driver');
       list.confirm = ListConfirm(list, 'pxe.driver.modal.delete');
@@ -19,12 +19,10 @@
 
       list.create = function(data) {
         if(data.driver) {
-          var url = Api.baseUrl()+'api/pxe/driver?key='+ApiKey.get();
-          ApiUpload.post(url, data.driver, data).then(function() {
+          ApiUpload.post('pxe/driver', data.driver, data).then(function() {
             list.load();
-          })
-
-        } 
+          });
+        }
       }
 
       return list;

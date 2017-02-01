@@ -3,7 +3,6 @@
 
   var INPUTS = {
     name: '',
-    path: '',
   };
 
   angular

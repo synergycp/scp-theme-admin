@@ -11,5 +11,6 @@
       'app.pxe.shell',
       'app.pxe.boot',
       'app.pxe.iso',
+      'app.pxe.driver',
     ]);
 })();

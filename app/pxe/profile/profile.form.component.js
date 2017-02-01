@@ -7,7 +7,7 @@
     preseed: null,
     boot_script: null,
     iso: null,
-    access_client: false,
+    access_client: false
   };
 
   angular
@@ -33,6 +33,7 @@
 
     profileForm.$onInit = init;
     profileForm.input = _.clone(INPUTS);
+    profileForm.windows = false;
     profileForm.preseeds = Select('pxe/preseed');
     profileForm.bootScripts = Select('pxe/template');
     profileForm.isos = Select('pxe/iso').on('change', onIsoChange);

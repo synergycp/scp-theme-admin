@@ -3,28 +3,28 @@ include /resources/angle/pug/mixins/list
 
 block list
   list.panel.panel-default(list="vm.list")
-    list-header(text="server.list.TITLE")
-      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('server-edit-form')")
+    list-header(text="pxe.driver.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('pxe-driver-edit-form')")
         i.fa.fa-plus
       a.btn.btn-default(ng-click="vm.list.refresh.now()")
         i.fa.fa-refresh
       a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
         i.fa.fa-filter
-    server-filters(
+    pxe-driver-filters(
       show="vm.filters.visible"
       current="vm.filters.current"
       change="vm.filters.change()"
     )
-    server-table.border-top-table
+    pxe-driver-table.border-top-table
     list-footer
 
 block bottom-left
-  +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-create-form', "vm.create.form")
-    server-form(form="vm.create")
+  +create-form("{{ 'pxe.driver.form.title.ADD' | translate }}", 'pxe-driver-edit-form')
+    pxe-driver-form(form="vm.create")
 
 block bottom-right
   logs(
-    heading="Server Logs"
+    heading="PXE Driver Logs"
     filter="vm.logs.filter"
     listen-to="vm.list"
   )

@@ -52,10 +52,10 @@
 
     //////////
 
-    function onSelect($item) {
-      $state.go('app.network.group.view', {
-        id: $item.id,
-      });
+    function onSelect($item, shouldOpenInNewTab, openSelected) {
+      openSelected('app.network.group.view', {
+          id: $item.id,
+        }, shouldOpenInNewTab);
     }
 
 

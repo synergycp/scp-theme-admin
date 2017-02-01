@@ -11,6 +11,6 @@ include /resources/angle/pug/mixins/form
   ng-model="pxeDriverForm.input.path"
 )
 
-+label('label', 'driver')
++label("{{ 'pxe.driver.form.driver.LABEL' | translate }}", 'driver')
 	+file-upload("pxeDriverForm.driver")
-	span Can be .zip, .tar.gz, etc.
+	span {{ 'pxe.driver.form.driver.HELP' | translate }}

@@ -36,10 +36,10 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData())
-        .then(function (item) {
-          vm.create.fire('created', item);
-        })
+      vm.list
+        .create(vm.create.getData())
+        .then(vm.create.fire.bind(null, 'created'))
+      ;
     }
   }
 })();

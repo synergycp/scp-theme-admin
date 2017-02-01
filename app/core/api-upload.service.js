@@ -20,10 +20,10 @@
 
     function upload(method, url, file, data) {
       url = Api.baseUrl() + 'api/' + url + '?key=' + ApiKey.get();
-      data._method = method; // Laravel bug handling multipart/form-data w/ PATCH
+      //data._method = method; // Laravel bug handling multipart/form-data w/ PATCH
       file.upload = Upload.upload({
         url: url,
-        method: 'POST',
+        method: method,
         data: data,
         headers: {
         //  'Content-Type': 'application/x-www-form-urlencoded',

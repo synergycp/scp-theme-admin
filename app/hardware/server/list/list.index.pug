@@ -19,7 +19,7 @@ block list
     list-footer
 
 block bottom-left
-  +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-edit-form')
+  +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-create-form', "vm.create.form")
     server-form(form="vm.create")
 
 block bottom-right

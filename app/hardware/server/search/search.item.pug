@@ -20,7 +20,7 @@ div.server(
         span(ng-bind="match.label.group.name")
         | : &nbsp;&nbsp;
       span.text-muted(
-        ng-if="!match.label.access.client && !match.label.ip"
+        ng-if="!match.label.access.client && !match.label.entity"
         translate="server.search.EMPTY"
       )
       span(

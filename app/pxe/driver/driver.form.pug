@@ -6,11 +6,6 @@ include /resources/angle/pug/mixins/form
   ng-model="pxeDriverForm.input.name"
 )
 
-+field("{{ 'pxe.driver.form.path.LABEL' | translate }}", "path")(
-  placeholder="{{ 'pxe.driver.form.path.PLACEHOLDER' | translate }}"
-  ng-model="pxeDriverForm.input.path"
-)
-
 +label("{{ 'pxe.driver.form.driver.LABEL' | translate }}", 'driver')
-	+file-upload("pxeDriverForm.driver")
-	span {{ 'pxe.driver.form.driver.HELP' | translate }}
+  +file-upload("pxeDriverForm.driver")
+  span {{ 'pxe.driver.form.driver.HELP' | translate }}

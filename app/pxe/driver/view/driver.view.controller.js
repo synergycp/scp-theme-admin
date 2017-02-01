@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function PxeDriverViewCtrl(Edit, $stateParams) {
+  function PxeDriverViewCtrl(Edit, $stateParams, ApiUpload) {
     var vm = this;
 
     vm.edit = Edit('pxe/driver/'+$stateParams.id);
@@ -33,7 +33,14 @@
     }
 
     function submit() {
-      vm.edit.patch(vm.edit.getData());
+      var data = vm.edit.getData();
+      vm.edit.loader.during(
+        ApiUpload.patch(
+          'pxe/driver/'+$stateParams.id,
+          data.driver,
+          data
+        )
+      );
     }
   }
 })();

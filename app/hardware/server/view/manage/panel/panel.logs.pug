@@ -1,6 +1,6 @@
 logs(
   heading="{{ 'server.logs.TITLE' | translate }}"
-  filter="filter"
+  filter="{ target_type: 'server', target_id: server.id }"
   listen-to="server"
   show-type="false"
 )

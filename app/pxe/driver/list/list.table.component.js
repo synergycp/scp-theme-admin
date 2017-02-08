@@ -9,9 +9,6 @@
       },
       bindings: {
         showName: '=?',
-        showReserved: '=?',
-        showIpEntities: '=?',
-        showServers: '=?',
         showActions: '=?',
       },
       controller: 'PxeDriverTableCtrl as table',
@@ -34,9 +31,6 @@
     function init() {
       _.defaults(table, {
         showName: true,
-        showReserved: true,
-        showIpEntities: true,
-        showServers: true,
         showActions: true,
       });
     }

@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  var PANELS = 'app/hardware/server/view/manage/panel';
 
   angular
     .module('app.hardware.server.view.manage')
@@ -16,18 +15,14 @@
   function ServerManageCtrl(
     Api,
     EventEmitter,
-    ServerManagePanelBandwidth,
-    date,
-    moment,
     $stateParams,
-    $state,
+    ServerManage,
     $scope,
     $q,
     _
   ) {
     var vm = this;
     var $api = Api.all('server').one($stateParams.id);
-    var panelContext = {};
 
     vm.server = {
       id: $stateParams.id,
@@ -35,13 +30,8 @@
       getAccesses: getServerAccesses,
     };
     EventEmitter().bindTo(vm.server);
-    panelContext.server = vm.server;
 
-    vm.panels = {
-      top: [],
-      left: [],
-      right: [],
-    };
+    vm.panels = ServerManage.renderedPanels;
 
     activate();
 
@@ -102,46 +92,7 @@
     }
 
     function loadPanels() {
-      _.setContents(vm.panels.top, [
-        ServerManagePanelBandwidth(vm.server, $scope),
-      ]);
-
-      _.setContents(vm.panels.left, [{
-        templateUrl: PANELS+'/panel.hardware.html',
-        context: panelContext,
-      }, {
-        templateUrl: PANELS+'/panel.assign.html',
-        context: panelContext,
-      }, {
-        templateUrl: PANELS+'/panel.notes.html',
-        context: panelContext,
-      }, {
-        templateUrl: PANELS+'/panel.logs.html',
-        context: {
-          server: vm.server,
-          filter: {
-            target_type: 'server',
-            target_id: vm.server.id,
-          },
-        },
-      },]);
-
-      _.setContents(vm.panels.right, [{
-        templateUrl: PANELS+'/panel.alerts.html',
-        context: panelContext,
-      }, {
-        templateUrl: PANELS+'/panel.control.switch.html',
-        context: panelContext,
-      }, {
-        templateUrl: PANELS+'/panel.control.ipmi.html',
-        context: panelContext,
-      }, {
-        templateUrl: PANELS+'/panel.os-reload.html',
-        context: panelContext,
-      }, {
-        templateUrl: PANELS+'/panel.buttons.html',
-        context: panelContext,
-      },]);
+      ServerManage.init(vm.server, $scope);
     }
 
     function patchServer() {

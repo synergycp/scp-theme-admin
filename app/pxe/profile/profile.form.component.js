@@ -54,16 +54,15 @@
     }
 
     function onIsoChange() {
-      setupIsoDefaults();
+      syncIso();
       $scope.$evalAsync(function() {
         profileForm.isos.selectedEdition = null;
       });
     }
 
-    function setupIsoDefaults() {
-      var iso = profileForm.input.iso;
+    function syncIso() {
+      var iso = profileForm.isos.selected;
       if (!iso) {
-        profileForm.isos.editions = null;
         return;
       }
 
@@ -76,12 +75,21 @@
       });
     }
 
+    function setupIsoDefaults(iso) {
+      profileForm.windows = !!iso;
+      if (!iso) {
+        profileForm.isos.editions = null;
+        return;
+      }
+      profileForm.isos.selected = iso;
+      profileForm.isos.selectedEdition = iso ? iso.edition : null;
+    }
+
     function syncResponse(response) {
       _.overwrite(profileForm.input, profileForm.form.input);
       _.setContents(profileForm.shellScripts.selected, response.shell.after);
       _.setContents(profileForm.drivers.selected, response.drivers);
       setupIsoDefaults(response.iso);
-      profileForm.isos.selectedEdition = response.iso ? response.iso.edition : null;
       profileForm.emailTemplate.selected = response.email.template;
     }
 
@@ -92,7 +100,7 @@
         after: _.map(profileForm.shellScripts.selected, 'id'),
       };
       data.drivers = _.map(profileForm.drivers.selected, 'id');
-      data.iso = profileForm.input.iso ? {
+      data.iso = profileForm.windows && profileForm.input.iso ? {
         id: profileForm.input.iso.id,
         edition: profileForm.isos.selectedEdition ? {
           id: profileForm.isos.selectedEdition.id,

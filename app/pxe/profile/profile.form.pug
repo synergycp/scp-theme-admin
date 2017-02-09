@@ -63,12 +63,12 @@ include /resources/angle/pug/mixins/form
     span(translate="pxe.profile.form.client_access.LABEL")
 +label()
   +checkbox()(
-    ng-model="profileForm.input.windows"
+    ng-model="profileForm.windows"
   )
     span(translate="pxe.profile.form.windows.LABEL")
 
 
-div(ng-if="profileForm.input.windows")
+div(ng-if="profileForm.windows")
   +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
     +input-with-btn("fa fa-times-circle")(
       ng-click="profileForm.input.iso = null"

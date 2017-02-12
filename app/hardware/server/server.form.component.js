@@ -28,6 +28,7 @@
       require: {
       },
       bindings: {
+        alwaysDirty: '=',
         form: '=',
       },
       controller: 'ServerFormCtrl as serverForm',
@@ -120,6 +121,9 @@
     }
 
     function init() {
+      _.defaults(serverForm, {
+        alwaysDirty: false,
+      });
       serverForm.form.getData = getData;
       fillFormInputs();
 

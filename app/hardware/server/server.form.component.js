@@ -263,14 +263,16 @@
         return addEntities();
 
         function addEntities() {
-          if (formData.entities.add.length) {
-            return Api
-              .one('entity/' + formData.entities.add.join(','))
-              .patch({
-                server_port_id: port.id,
-              })
-              ;
+          if (!formData.entities.add.length) {
+            return $q.when();
           }
+
+          return Api
+            .one('entity/' + formData.entities.add.join(','))
+            .patch({
+                server_port_id: port.id,
+            })
+            ;
         }
       }
 
@@ -311,10 +313,12 @@
         serverForm.addOns.$dirty ||
         serverForm.cpu.$dirty ||
         serverForm.mem.$dirty;
-      $partsDirty && (data.disks = ids(serverForm.disks));
-      $partsDirty && (data.addons = ids(serverForm.addOns));
-      $partsDirty && (data.cpu = serverForm.cpu.getSelected('id') || null);
-      $partsDirty && (data.mem = serverForm.mem.getSelected('id') || null);
+      if ($partsDirty) {
+        data.disks = ids(serverForm.disks);
+        data.addons = ids(serverForm.addOns);
+        data.cpu = serverForm.cpu.getSelected('id') || null;
+        data.mem = serverForm.mem.getSelected('id') || null;
+      }
 
       if (typeof (data.billing || {}).date !== "undefined") {
         data.billing.date = serverForm.billing.date.value ?

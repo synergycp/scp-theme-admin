@@ -20,7 +20,10 @@ block list
 
 block bottom-left
   +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-create-form', "vm.create.form")
-    server-form(form="vm.create")
+    server-form(
+      form="vm.create"
+      always-dirty="true"
+    )
 
 block bottom-right
   logs(

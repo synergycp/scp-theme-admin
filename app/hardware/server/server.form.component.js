@@ -226,17 +226,24 @@
       ]).then(port.$setPristine);
 
       function updateSwitchPort() {
-        if (!port.switch.$dirty && !port.switch.port.$dirty && !port.switch.speed.$dirty) {
+        if (!serverForm.alwaysDirty && !port.switch.$dirty && !port.switch.port.$dirty && !port.switch.speed.$dirty) {
+          return $q.when();
+        }
+
+        var switchId = port.switch.getSelected('id');
+        var switchPortId = port.switch.port.getSelected('id');
+        var speedId = port.switch.speed.getSelected('id');
+
+        if (!switchId || !switchPortId || !speedId) {
           return $q.when();
         }
 
         return Api
           .one(
-            'switch/' + port.switch.getSelected('id') +
-            '/port/' + port.switch.port.getSelected('id')
+            'switch/' + switchId + '/port/' + switchPortId
           )
           .patch({
-            port_speed_id: port.switch.speed.getSelected('id'),
+            port_speed_id: speedId,
           })
           ;
       }
@@ -269,9 +276,9 @@
 
       function updateServerPort() {
         var data = {
-          mac: serverForm.form.form[portPrefix+'mac'].$dirty ? port.input.mac : undefined,
-          group_id: port.group.$dirty ? port.group.getSelected('id') : undefined,
-          switch_port_id: port.switch.port.$dirty ? port.switch.port.getSelected('id') : undefined,
+          mac: serverForm.alwaysDirty || serverForm.form.form[portPrefix+'mac'].$dirty ? port.input.mac : undefined,
+          group_id: serverForm.alwaysDirty || port.group.$dirty ? port.group.getSelected('id') : undefined,
+          switch_port_id: serverForm.alwaysDirty || port.switch.port.$dirty ? port.switch.port.getSelected('id') : undefined,
         };
 
         if (!_(data).values().reject(isUndefined).value().length) {
@@ -299,7 +306,8 @@
 
     function getData() {
       var data = cloneInputs(serverForm.input);
-      var $partsDirty = serverForm.disks.$dirty ||
+      var $partsDirty = serverForm.alwaysDirty ||
+        serverForm.disks.$dirty ||
         serverForm.addOns.$dirty ||
         serverForm.cpu.$dirty ||
         serverForm.mem.$dirty;
@@ -327,7 +335,7 @@
             var tmp = cloneInputs(value, keyWithPrefix);
             !_.isEmpty(tmp) && (resObj[key] = tmp);
           } else {
-            if(serverForm.form.form[keyWithPrefix].$dirty) {
+            if(serverForm.alwaysDirty || serverForm.form.form[keyWithPrefix].$dirty) {
               resObj[key] = value;
             }
           }

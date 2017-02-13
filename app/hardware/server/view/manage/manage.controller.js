@@ -22,10 +22,9 @@
     _
   ) {
     var vm = this;
-    var $api = Api.all('server').one($stateParams.id);
+    var $api;
 
     vm.server = {
-      id: $stateParams.id,
       load: loadServer,
       getAccesses: getServerAccesses,
     };
@@ -33,11 +32,14 @@
 
     vm.panels = ServerManage.renderedPanels;
 
-    activate();
+    vm.$onInit = activate;
 
     //////////
 
     function activate() {
+      vm.server.id = $stateParams.id;
+      $api = Api.all('server').one(vm.server.id);
+
       vm.server
         .load()
         .then(loadPanels)

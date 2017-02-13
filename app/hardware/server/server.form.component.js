@@ -28,7 +28,8 @@
       require: {
       },
       bindings: {
-        alwaysDirty: '=',
+        isCreating: '=?',
+        alwaysDirty: '=?',
         form: '=',
       },
       controller: 'ServerFormCtrl as serverForm',
@@ -123,6 +124,7 @@
     function init() {
       _.defaults(serverForm, {
         alwaysDirty: false,
+        isCreating: false,
       });
       serverForm.form.getData = getData;
       fillFormInputs();
@@ -212,6 +214,7 @@
         serverForm.form.form.$setPristine();
         serverForm.disks.$dirty = serverForm.addOns.$dirty = serverForm.cpu.$dirty = serverForm.mem.$dirty =
           false;
+        serverForm.form.fire('created.relations');
       });
     }
 
@@ -301,7 +304,9 @@
           ;
 
         function updateExisting(response) {
-          port.fromExisting(response, true);
+          if (!serverForm.isCreating) {
+            port.fromExisting(response, true);
+          }
         }
       }
     }

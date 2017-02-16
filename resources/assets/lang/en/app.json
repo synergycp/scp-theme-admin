@@ -3,7 +3,8 @@
   "topbar": {
     "search": {
       "PLACEHOLDER": "Type to search...",
-      "NO-RESULTS": "No results"
+      "NO-RESULTS": "No results",
+      "ALL-RESULTS": "All results"
     },
     "account": {
       "LOGGED-IN": "Logged in as:",

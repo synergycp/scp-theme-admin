@@ -60,7 +60,9 @@
     //////////
 
     function syncSwitch(sw) {
-      panel.context.port = Select('switch/' + sw.id + '/port');
+      panel.context.port = Select('switch/' + sw.id + '/port')
+        .filter({ 'sort[]': '-primary' })
+      ;
       panel.context.port.load();
     }
 

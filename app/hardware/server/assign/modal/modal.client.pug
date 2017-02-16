@@ -20,20 +20,13 @@ form(ng-submit="modal.submit()")
         +input-with-btn("fa fa-times-circle")(
           ng-click="modal.access.client = null"
         )
-          ui-select(ng-model="modal.access.client")
+          +ui-select("modal.client")(ng-model="modal.access.client")
             ui-select-match(
               placeholder="{{ 'server.modal.client.client.PLACEHOLDER' | translate }}"
             )
               span(ng-bind="$select.selected.name")
 
-            ui-select-choices(
-              repeat=[
-                "choice in modal.client.items",
-                "track by choice.id",
-              ].join(' ')
-              refresh="modal.client.load($select.search)"
-              refresh-delay="400"
-            )
+            +ui-select-choices("modal.client")
               span(ng-bind-html="choice.name | highlight: $select.search")
               small(ng-bind-html="' ' + choice.email | highlight: $select.search")
 

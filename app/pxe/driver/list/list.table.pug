@@ -1,0 +1,18 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th(ng-if="table.showName") Name
+  th(ng-if="table.showActions") Actions
+
+block columns
+  td(ng-if="table.showName")
+    a(
+      ui-sref="app.pxe.driver.view({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.pxe.driver.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

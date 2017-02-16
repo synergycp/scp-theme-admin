@@ -4,7 +4,6 @@
   var INPUTS = {
     srv_id: '',
     nickname: '',
-    mac: '',
     ipmi: {
       ip: '',
       admin: {
@@ -16,12 +15,10 @@
         password: '',
       },
     },
-    switch: {
-      port: '',
-    },
     billing: {
       id: '',
       max_bandwidth: '',
+      date: '',
     },
   };
 
@@ -31,6 +28,7 @@
       require: {
       },
       bindings: {
+        alwaysDirty: '=',
         form: '=',
       },
       controller: 'ServerFormCtrl as serverForm',
@@ -43,23 +41,22 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Api, Select, MultiInput, $rootScope, ServerConfig, $stateParams, moment) {
+  function ServerFormCtrl(_, Api, Select, Modal, ServerFormPort, MultiInput, $rootScope, ServerConfig, $stateParams, $q) {
     var serverForm = this;
-    var $entities = Api.all('entity');
+    var $ports;
 
     serverForm.$onInit = init;
     serverForm.input = _.clone(INPUTS);
-    serverForm.switch = Select('switch').on('change', syncGroupFilter);
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
     serverForm.disks = MultiInput(DiskSelector)
       .setMax(ServerConfig.MAX_DISKS)
       .add();
     serverForm.addOns = MultiInput(AddOnSelector).add();
-    serverForm.group = Select('group').on('change', function () {
-      _.setContents(serverForm.entities.selected, []);
-      syncEntityFilter();
-    });
+    serverForm.ports = [];
+    serverForm.ports.add = addPort;
+    serverForm.ports.remove = removePort;
+    serverForm.ports.removed = [];
     serverForm.billing = {
       date: {
         value: '',
@@ -73,22 +70,60 @@
           timePicker: true,
           timePickerIncrement: 30,
           eventHandlers: {
+            'apply.daterangepicker': function (ev, picker) {
+              serverForm.form.form['billing.date'].$dirty = true;
+            },
             'cancel.daterangepicker': function (ev, picker) {
               serverForm.billing.date.value = '';
             },
-          }
+          },
         },
+        empty: emptyBillingDate,
       },
     };
-    serverForm.switchSpeed = Select('port-speed');
-    serverForm.entities = Select('entity').multi().filter({
-      available: true,
-      allow_server_id: $stateParams.id || undefined,
-    }).on('change', syncEntityToGroup);
 
     //////////
 
+    function emptyBillingDate() {
+      serverForm.form.form['billing.date'].$dirty = serverForm.billing.date.value != '';
+      serverForm.billing.date.value = '';
+    }
+
+    function addPort() {
+      serverForm.ports.push(ServerFormPort());
+    }
+
+    function removePort(port) {
+      if (port.id) {
+        return confirmRemove(port)
+          .then(removeFromList)
+          .then(removeFromDatabase)
+        ;
+      }
+
+      removeFromList();
+
+      function removeFromDatabase() {
+        return $ports.one(''+port.id).remove();
+      }
+
+      function removeFromList() {
+        _.remove(serverForm.ports, port);
+      }
+    }
+
+    function confirmRemove(port) {
+      return Modal
+        .confirm([port.original], 'server.form.port.remove')
+        .open()
+        .result
+        ;
+    }
+
     function init() {
+      _.defaults(serverForm, {
+        alwaysDirty: false,
+      });
       serverForm.form.getData = getData;
       fillFormInputs();
 
@@ -96,71 +131,49 @@
         return;
       }
 
-      serverForm.form.on(['load', 'change'], storeState);
+      serverForm.form
+        .on(['load', 'change', 'created'], storeState)
+        .on(['saving', 'created'], savePorts)
+      ;
+
+      if ($stateParams.id) {
+        $ports = Api.all('server/'+$stateParams.id+'/port');
+        $ports
+          .getList()
+          .then(storePorts)
+        ;
+      }
+    }
+
+    function storePorts(response) {
+      _.each(response, function (portData) {
+        var port = ServerFormPort();
+
+        port.fromExisting(portData);
+        port.loadEntities();
+        serverForm.ports.push(port);
+      });
     }
 
     function fillFormInputs() {
       _.overwrite(serverForm.input, serverForm.form.input);
     }
 
-    function syncEntityToGroup() {
-      var entityGroup = (serverForm.entities.selected[0] || {}).group || null;
-      var entityGroupId = (entityGroup || {}).id || null;
-      if (!entityGroup || serverForm.group.getSelected('id') == entityGroupId) {
-        syncEntityFilter();
-        return;
-      }
-
-      serverForm.group.selected = entityGroup;
-      serverForm.group.fireChangeEvent();
-    }
-
-    function syncGroupFilter() {
-      serverForm.group.filter({
-        switch: serverForm.switch.getSelected('id'),
-      }).load();
-    }
-
     function storeState(response) {
+      $ports = Api.all('server/'+response.id+'/port');
+
       $rootScope.$evalAsync(function() {
         fillFormInputs();
 
         storeMulti(response.disks, serverForm.disks);
         storeMulti(response.addons, serverForm.addOns);
 
-        serverForm.switch.selected = response.switch;
-        syncGroupFilter();
-
-        serverForm.group.selected = response.group;
         serverForm.cpu.selected = response.cpu;
         serverForm.mem.selected = response.mem;
 
-        serverForm.switchSpeed.selected = response.switch.speed;
         serverForm.billing.date.value = response.billing.date ?
           Date.parse(response.billing.date) : '';
       });
-
-      $entities
-        .getList({ server: response.id })
-        .then(storeEntities)
-        ;
-    }
-
-    function storeEntities(response) {
-      _.setContents(serverForm.entities.selected, response);
-
-      syncEntityFilter();
-    }
-
-    function syncEntityFilter() {
-      serverForm.entities
-        .clearFilter('extra_for_id')
-        .clearFilter('ip_group')
-        .filter({
-          extra_for_id: (serverForm.entities.selected[0] || {}).id,
-          ip_group: (serverForm.group.selected || {}).id,
-        })
-        .load();
     }
 
     function storeMulti(items, target) {
@@ -171,6 +184,7 @@
       if (!items.length) {
         target.add();
       }
+      target.$dirty = false;
 
       function change(item, key) {
         if (!hasChanged(item, key)) {
@@ -191,24 +205,149 @@
       }
     }
 
-    function getData() {
-      var data = _.clone(serverForm.input);
+    function savePorts() {
+      return $q.all(
+        _.map(serverForm.ports, savePortChanges)
+      ).then(function () {
+        serverForm.form.form.$setPristine();
+        serverForm.disks.$dirty = serverForm.addOns.$dirty = serverForm.cpu.$dirty = serverForm.mem.$dirty =
+          false;
+      });
+    }
 
-      data.disks = ids(serverForm.disks);
-      data.addons = ids(serverForm.addOns);
-      data.entities = _.map(serverForm.entities.selected, 'id');
-      data.switch.id = serverForm.switch.getSelected('id') || null;
-      data.switch.speed = {
-        id: serverForm.switchSpeed.getSelected('id') || null,
-      };
-      data.group = {
-        id: serverForm.group.getSelected('id') || null,
-      };
-      data.cpu = serverForm.cpu.getSelected('id') || null;
-      data.mem = serverForm.mem.getSelected('id') || null;
-      data.billing.date = serverForm.billing.date.value ? moment(serverForm.billing.date.value).toISOString() : null;
+    function savePortChanges(port, portIndex) {
+      var formData = port.data();
+      var portPrefix = 'port-'+portIndex+'.';
+
+      return $q.all([
+        updateSwitchPort()
+          .then(updateServerPort)
+          .then(updateEntities),
+      ]).then(port.$setPristine);
+
+      function updateSwitchPort() {
+        if (!serverForm.alwaysDirty && !port.switch.$dirty && !port.switch.port.$dirty && !port.switch.speed.$dirty) {
+          return $q.when();
+        }
+
+        var switchId = port.switch.getSelected('id');
+        var switchPortId = port.switch.port.getSelected('id');
+        var speedId = port.switch.speed.getSelected('id');
+
+        if (!switchId || !switchPortId || !speedId) {
+          return $q.when();
+        }
+
+        return Api
+          .one(
+            'switch/' + switchId + '/port/' + switchPortId
+          )
+          .patch({
+            port_speed_id: speedId,
+          })
+          ;
+      }
+
+      function updateEntities() {
+        // Remove entities first so that VLANs don't conflict.
+        if (formData.entities.remove.length) {
+          return Api
+            .one('entity/' + formData.entities.remove.join(','))
+            .patch({
+              server_port_id: null,
+            })
+            .then(addEntities)
+            ;
+        }
+
+        return addEntities();
+
+        function addEntities() {
+          if (!formData.entities.add.length) {
+            return $q.when();
+          }
+
+          return Api
+            .one('entity/' + formData.entities.add.join(','))
+            .patch({
+                server_port_id: port.id,
+            })
+            ;
+        }
+      }
+
+      function updateServerPort() {
+        var data = {
+          mac: serverForm.alwaysDirty || serverForm.form.form[portPrefix+'mac'].$dirty ? port.input.mac : undefined,
+          group_id: serverForm.alwaysDirty || port.group.$dirty ? port.group.getSelected('id') : undefined,
+          switch_port_id: serverForm.alwaysDirty || port.switch.port.$dirty ? port.switch.port.getSelected('id') : undefined,
+        };
+
+        if (!_(data).values().reject(isUndefined).value().length) {
+          return $q.when();
+        }
+
+        if (formData.id) {
+          return $ports
+            .one('' + formData.id)
+            .patch(data)
+            .then(updateExisting)
+            ;
+        }
+
+        return $ports
+          .post(data)
+          .then(updateExisting)
+          ;
+
+        function updateExisting(response) {
+          port.fromExisting(response, true);
+        }
+      }
+    }
+
+    function getData() {
+      var data = cloneInputs(serverForm.input);
+      var $partsDirty = serverForm.alwaysDirty ||
+        serverForm.disks.$dirty ||
+        serverForm.addOns.$dirty ||
+        serverForm.cpu.$dirty ||
+        serverForm.mem.$dirty;
+      if ($partsDirty) {
+        data.disks = ids(serverForm.disks);
+        data.addons = ids(serverForm.addOns);
+        data.cpu = serverForm.cpu.getSelected('id') || null;
+        data.mem = serverForm.mem.getSelected('id') || null;
+      }
+
+      if (typeof (data.billing || {}).date !== "undefined") {
+        data.billing.date = serverForm.billing.date.value ?
+          moment(serverForm.billing.date.value)
+            .toISOString() :
+          null;
+      }
 
       return data;
+    }
+
+    function cloneInputs(input, keyPrefix) {
+      var resObj = {};
+      _.forOwn(input, function(value, key) {
+        var keyWithPrefix = keyPrefix ? (keyPrefix+"."+key) : key;
+        try { // throw error in console if input is not named properly
+          if(_.isObject(value)) {
+            var tmp = cloneInputs(value, keyWithPrefix);
+            !_.isEmpty(tmp) && (resObj[key] = tmp);
+          } else {
+            if(serverForm.alwaysDirty || serverForm.form.form[keyWithPrefix].$dirty) {
+              resObj[key] = value;
+            }
+          }
+        } catch(e) {
+          console.error('Error. Input field "'+keyWithPrefix+'" is not named properly inside form. Each input should have name attribute set. Use dot notation names for fields that are inside of nested objects in INPUTS object.');
+        }
+      });
+      return resObj;
     }
 
     function ids(multi) {
@@ -234,5 +373,9 @@
 
       return select;
     }
+  }
+
+  function isUndefined(val) {
+    return typeof val === 'undefined';
   }
 })();

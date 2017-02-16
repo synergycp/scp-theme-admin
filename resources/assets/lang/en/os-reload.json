@@ -29,7 +29,10 @@
     },
     "raid": {
       "LABEL": "RAID",
-      "PLACEHOLDER": "Type to Search..."
+      "PLACEHOLDER": "Type to Search...",
+      "NONE": "None",
+      "ZERO": "0",
+      "ONE": "1"
     },
     "license-key": {
       "LABEL": "License Key",

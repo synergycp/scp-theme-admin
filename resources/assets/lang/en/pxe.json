@@ -186,6 +186,49 @@
       },
       "client_access": {
         "LABEL": "Client Access"
+      },
+      "windows": {
+        "LABEL": "Windows"
+      }
+    },
+    "buttons": {
+      "DELETE": "Delete"
+    }
+  },
+  "driver": {
+    "list": {
+      "TITLE": "PXE Drivers",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete PXE Drivers",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these PXE Drivers:"
+      }
+    },
+    "form": {
+      "title": {
+        "ADD": "Create PXE Driver",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "path": {
+        "LABEL": "Path",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "driver": {
+        "LABEL": "Driver",
+        "HELP": "Can be .zip, .tar.gz, etc."
       }
     },
     "buttons": {

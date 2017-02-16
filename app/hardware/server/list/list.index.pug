@@ -4,7 +4,7 @@ include /resources/angle/pug/mixins/list
 block list
   list.panel.panel-default(list="vm.list")
     list-header(text="server.list.TITLE")
-      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('server-edit-form')")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('server-create-form')")
         i.fa.fa-plus
       a.btn.btn-default(ng-click="vm.list.refresh.now()")
         i.fa.fa-refresh
@@ -19,8 +19,11 @@ block list
     list-footer
 
 block bottom-left
-  +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-edit-form')
-    server-form(form="vm.create")
+  +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-create-form', "vm.create.form")
+    server-form(
+      form="vm.create"
+      always-dirty="true"
+    )
 
 block bottom-right
   logs(

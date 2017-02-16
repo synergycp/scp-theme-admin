@@ -10,17 +10,17 @@
    * @ngInject
    */
   function SwitchManageAddTabFactory(Select, EventEmitter, Alert) {
-    return function(hub) {
+    return function(sw) {
       return new SwitchManageAddTab(
-        hub,
+        sw,
         EventEmitter(),
-        Select('switch/'+hub.id+'/port').filter({ is_switch_primary: false }),
+        Select('switch/'+sw.id+'/port').filter({ is_switch_primary: false }),
         Alert
       );
     };
   }
 
-  function SwitchManageAddTab(hub, event, selectPort, Alert) {
+  function SwitchManageAddTab(sw, event, selectPort, Alert) {
     // Private variables
     var tab = this;
 

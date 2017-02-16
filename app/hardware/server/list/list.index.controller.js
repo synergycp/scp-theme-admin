@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerIndexCtrl(ServerList, ListFilter) {
+  function ServerIndexCtrl(ServerList, ListFilter, EventEmitter) {
     var vm = this;
 
     vm.list = ServerList();
@@ -20,6 +20,7 @@
       input: {},
       submit: create,
     };
+    EventEmitter().bindTo(vm.create);
 
     vm.logs = {
       filter: {
@@ -35,7 +36,10 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list
+        .create(vm.create.getData())
+        .then(vm.create.fire.bind(null, 'created'))
+      ;
     }
   }
 })();

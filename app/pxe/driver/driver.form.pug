@@ -1,0 +1,11 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field("{{ 'pxe.driver.form.name.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.driver.form.name.PLACEHOLDER' | translate }}"
+  ng-model="pxeDriverForm.input.name"
+)
+
++label("{{ 'pxe.driver.form.driver.LABEL' | translate }}", 'driver')
+  +file-upload("pxeDriverForm.driver")
+  span {{ 'pxe.driver.form.driver.HELP' | translate }}

@@ -85,7 +85,7 @@
       }
 
       bandwidth.chart.setData(response.data);
-      bandwidth.chart.setLabels(response.labels);
+      bandwidth.chart.setLabels(response.from_time, response.to_time);
       bandwidth.chart.stats.set(response.stats);
 
       return response;

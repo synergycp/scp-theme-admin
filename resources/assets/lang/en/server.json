@@ -131,13 +131,21 @@
     "nickname": {
       "LABEL": "Nickname",
       "PLACEHOLDER": "Will be set as server hostname. Defaults to Server ID."
+    },
+    "port": {
+      "ADD": "Add Port",
+      "remove": {
+        "TITLE": "Remove Server Port",
+        "BODY": "This will make any entities on this port available again.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Remove Port"
+      }
     }
   },
   "hardware": {
     "ITEM": "Hardware",
     "VALUE": "Value",
     "BILLING": "Billing ID",
-    "MAC": "MAC Address",
     "CPU": "Processor",
     "MEM": "Memory",
     "DISK": "Disk",
@@ -421,13 +429,13 @@
     "EMPTY": "No Client or IP assigned"
   },
   "switch": {
-    "TITLE": "Switch Controls",
     "NOT_ENABLED": "This server has not been assigned a switch, port, and port speed yet.",
     "NAME": "Switch Name",
     "SYNC_VLAN": "Assign VLAN",
     "SYNC_SPEED": "Set Port Speed",
     "SPEED": "Port Speed",
     "PORT": "Port Number",
+    "MAC": "MAC Address",
     "power": {
       "BTN": "Port Power",
       "on": {

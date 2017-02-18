@@ -285,12 +285,20 @@
         "PLACEHOLDER": "Type to search..."
       },
       "mem": {
-        "LABEL": "Memory",
+        "LABEL": "RAM",
         "PLACEHOLDER": "Type to search..."
       },
       "cpu": {
         "LABEL": "CPU",
         "PLACEHOLDER": "Type to search..."
+      },
+      "hdd": {
+        "LABEL": "HDD",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "bw": {
+        "LABEL": "Bandwidth Usage",
+        "PLACEHOLDER": "e.g. 1TB"
       }
     }
   },

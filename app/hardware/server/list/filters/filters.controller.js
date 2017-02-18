@@ -21,8 +21,8 @@
     filters.group = Select('group').multi();
     filters.client = Select('client').multi();
     filters.switch = Select('switch').multi();
-    filters.cpu = Select('part?part_type=cpu').multi();
-    filters.mem = Select('part?part_type=mem').multi();
+    filters.cpu = Select('part').filter({'part_type':'cpu'}).multi();
+    filters.mem = Select('part').filter({'part_type':'mem'}).multi();
     // filters.disks = MultiInput(DiskSelector)
     //   .add();
     filters.searchFocus = Observable(false);
@@ -58,7 +58,6 @@
     }
 
     function fireChangeEvent() {
-      console.log('group', filters.group, (filters.group.selected || []))
       _.assign(filters.current, {
         group: (filters.group.selected || []).map(getObjId).join(','),
         client: (filters.client.selected || []).map(getObjId).join(','),
@@ -94,13 +93,13 @@
       }
     }
 
-    // function DiskSelector(selected) {
-    //   var select = Select('part?part_type=disk');
-    //   select.selected = selected || null;
-    //   select.load();
+    function DiskSelector(selected) {
+      var select = Select('part').filter({'part_type':'disk'});
+      select.selected = selected || null;
+      select.load();
 
-    //   return select;
-    // }
+      return select;
+    }
 
     function getObjId(obj) {
       return obj.id;

@@ -1,0 +1,14 @@
+list.panel.panel-default(
+  ng-if="ports.list"
+  list="ports.list"
+)
+  list-header(text="switch.port.list.TITLE")
+  switch-port-table.border-top-table(
+    ng-if="ports.list.items.length"
+  )
+  .panel-body.text-center(
+    ng-if="!ports.list.items.length"
+  )
+    p(translate="switch.port.list.empty.BODY")
+
+  list-footer

@@ -25,6 +25,10 @@
     filters.mem = Select('part').filter({'part_type':'mem'}).multi();
     filters.disks = MultiInput(DiskSelector)
       .add();
+    filters.bw = {
+      min: null,
+      max: null
+    };
     filters.searchFocus = Observable(false);
 
     filters.fireChangeEvent = fireChangeEvent;
@@ -41,6 +45,8 @@
         filters.mem.setSelectedId($state.params['mem']),
         filters.disks.setSelectedId($state.params['disks']),
       ];
+      filters.bw.min = $state.params['bw_min'] || null;
+      filters.bw.max = $state.params['bw_max'] || null;
 
       $q.all(promises)
         .then(listenForChanges)
@@ -67,6 +73,8 @@
         disks: (filters.disks.items || []).map(function(select){
           return select.selected && select.selected.id
         }).join(','),
+        bw_min: filters.bw.min,
+        bw_max: filters.bw.max,
       });
 
       $state.go($state.current.name, {
@@ -77,6 +85,8 @@
         'mem': filters.current.mem,
         'disks': filters.current.disks,
         'q': filters.current.q,
+        'bw_min': filters.current.bw_min,
+        'bw_max': filters.current.bw_max,
       });
 
       if (filters.change) {

@@ -100,3 +100,21 @@ include /resources/angle/pug/mixins/form
                 refresh-delay="400"
               )
                 span(ng-bind-html="choice.name | highlight: $select.search")
+    
+    .col-md-6
+      +label("{{ 'server.list.filter.bw.LABEL' | translate }}")
+        .row
+          .col-xs-6
+            input.form-control(
+              type="text"
+              placeholder="{{ 'server.list.filter.bw.PLACEHOLDER' | translate }}"
+              ng-model="filters.bw.min"
+              ng-change="filters.fireChangeEvent()"
+            )
+          .col-xs-6
+            input.form-control(
+              type="text"
+              placeholder="{{ 'server.list.filter.bw.PLACEHOLDER' | translate }}"
+              ng-model="filters.bw.max"
+              ng-change="filters.fireChangeEvent()"
+            )

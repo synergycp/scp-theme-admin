@@ -80,7 +80,7 @@ include /resources/angle/pug/mixins/form
 
     .col-md-6
       div(ng-repeat="disk in filters.disks.items track by $index")
-        +icon-label("{{ 'server.form.disk.LABEL' | translate }}")(
+        +icon-label("{{ 'server.list.filter.hdd.LABEL' | translate }}")(
           class="fa"
           ng-class=
             "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
@@ -91,7 +91,7 @@ include /resources/angle/pug/mixins/form
             ng-click="$index ? filters.disks.rem($index) : disk.clear()"
           )
             +ui-select("disk")
-              ui-select-match(placeholder="{{ 'server.form.disk.PLACEHOLDER' | translate }}")
+              ui-select-match(placeholder="{{ 'server.list.filter.hdd.PLACEHOLDER' | translate }}")
                 span(ng-bind="$select.selected.name")
 
               ui-select-choices(

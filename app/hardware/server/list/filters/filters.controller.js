@@ -23,8 +23,8 @@
     filters.switch = Select('switch').multi();
     filters.cpu = Select('part').filter({'part_type':'cpu'}).multi();
     filters.mem = Select('part').filter({'part_type':'mem'}).multi();
-    // filters.disks = MultiInput(DiskSelector)
-    //   .add();
+    filters.disks = MultiInput(DiskSelector)
+      .add();
     filters.searchFocus = Observable(false);
 
     filters.fireChangeEvent = fireChangeEvent;
@@ -39,6 +39,7 @@
         filters.switch.setSelectedId($state.params['switch']),
         filters.cpu.setSelectedId($state.params['cpu']),
         filters.mem.setSelectedId($state.params['mem']),
+        filters.disks.setSelectedId($state.params['disks']),
       ];
 
       $q.all(promises)
@@ -53,8 +54,7 @@
       filters.switch.on('change', fireChangeEvent);
       filters.cpu.on('change', fireChangeEvent);
       filters.mem.on('change', fireChangeEvent);
-      // filters.disks.items[0].on('change', fireChangeEvent);
-      // filters.disks.on('add', multiInputBindChangeEvent.bind(null, filters.disks));
+      filters.disks.on('rem', fireChangeEvent); // on 'add' event will be fired by Select
     }
 
     function fireChangeEvent() {
@@ -64,7 +64,9 @@
         switch: (filters.switch.selected || []).map(getObjId).join(','),
         cpu: (filters.cpu.selected || []).map(getObjId).join(','),
         mem: (filters.mem.selected || []).map(getObjId).join(','),
-        // disks: (filters.disks.selected || []).map(getObjId).join(','),
+        disks: (filters.disks.items || []).map(function(select){
+          return select.selected && select.selected.id
+        }).join(','),
       });
 
       $state.go($state.current.name, {
@@ -73,17 +75,13 @@
         'switch': filters.current.switch,
         'cpu': filters.current.cpu,
         'mem': filters.current.mem,
-        // 'disks': filters.current.disks,
+        'disks': filters.current.disks,
         'q': filters.current.q,
       });
 
       if (filters.change) {
         filters.change();
       }
-    }
-
-    function multiInputBindChangeEvent(multiInput, item) {
-      item.on('change', fireChangeEvent);
     }
 
     function $onChanges(changes) {
@@ -95,8 +93,8 @@
 
     function DiskSelector(selected) {
       var select = Select('part').filter({'part_type':'disk'});
-      select.selected = selected || null;
-      select.load();
+      select.setSelectedId( selected && (_.isString(selected) ? selected : selected.id) || null);
+      select.on('change', fireChangeEvent);
 
       return select;
     }

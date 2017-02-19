@@ -87,13 +87,16 @@ include /resources/angle/pug/mixins/form
             "+($index || filters.disks.items.length < filters.disks.max ? '' : 'disabled ')"
           ng-click="$index ? filters.disks.rem($index) : filters.disks.add(disk.selected)"
         )
-          +ui-select("disk")
-            ui-select-match(placeholder="{{ 'server.form.disk.PLACEHOLDER' | translate }}")
-              span(ng-bind="$select.selected.name")
+          +input-with-btn("fa fa-times-circle")(
+            ng-click="$index ? filters.disks.rem($index) : disk.clear()"
+          )
+            +ui-select("disk")
+              ui-select-match(placeholder="{{ 'server.form.disk.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.name")
 
-            ui-select-choices(
-              repeat="choice in disk.items track by choice.id"
-              refresh="disk.load($select.search)"
-              refresh-delay="400"
-            )
-              span(ng-bind-html="choice.name | highlight: $select.search")
+              ui-select-choices(
+                repeat="choice in disk.items track by choice.id"
+                refresh="disk.load($select.search)"
+                refresh-delay="400"
+              )
+                span(ng-bind-html="choice.name | highlight: $select.search")

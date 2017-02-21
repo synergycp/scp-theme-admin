@@ -45,8 +45,8 @@
         filters.mem.setSelectedId($state.params['mem']),
         filters.disks.setSelectedId($state.params['disks']),
       ];
-      filters.bw.min = $state.params['bw_min'] || null;
-      filters.bw.max = $state.params['bw_max'] || null;
+      filters.bw.min = $state.params['bw.min'] || null;
+      filters.bw.max = $state.params['bw.max'] || null;
 
       $q.all(promises)
         .then(listenForChanges)
@@ -73,8 +73,8 @@
         disks: (filters.disks.items || []).map(function(select){
           return select.selected && select.selected.id
         }).join(','),
-        'bw[min]': filters.bw.min,
-        'bw[max]': filters.bw.max
+        'bw.min': filters.bw.min, 
+        'bw.max': filters.bw.max, 
       });
 
       $state.go($state.current.name, {
@@ -85,8 +85,8 @@
         'mem': filters.current.mem,
         'disks': filters.current.disks,
         'q': filters.current.q,
-        'bw_min': filters.current['bw[min]'],
-        'bw_max': filters.current['bw[max]'],
+        'bw.min': filters.current['bw.min'],
+        'bw.max': filters.current['bw.max'],
       });
 
       if (filters.change) {

@@ -25,7 +25,7 @@
         ),
       })
       .state('app.hardware.server.list', {
-        url: '?switch&group&disks&cpu&mem&client&bw_min&bw_max&q',
+        url: '?switch&group&disks&cpu&mem&client&bw.min&bw.max&q',
         title: 'Servers',
         controller: 'ServerIndexCtrl as vm',
         templateUrl: helper.basepath(DIR+'list.index.html'),

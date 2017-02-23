@@ -1,0 +1,21 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th(ng-if="table.showName") Name
+  th(ng-if="table.showKey") API Key
+  th(ng-if="table.showActions") Actions
+
+block columns
+  td(ng-if="table.showName")
+    a(
+      ui-sref="{{ table.viewState({ row: row }) }}"
+      ng-bind="row.name"
+    )
+  td(ng-if="table.showKey")
+    span.code(ng-bind="row.key")
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="{{ table.viewState({ row: row }) }}"
+        translate="app.action.EDIT"
+      )

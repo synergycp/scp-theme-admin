@@ -1,0 +1,20 @@
+extends /resources/angle/pug/table
+
+block headings
+  th.sortable
+    span(translate="switch.port.list.heading.PORT")
+    sort(col="port")
+  th.sortable
+    span(translate="switch.port.list.heading.OWNER")
+    sort(col="owner")
+  th.sortable
+    span(translate="switch.port.list.heading.SPEED")
+    sort(col="speed")
+
+block columns
+  td
+    span(ng-bind="row.port")
+  td
+    span(ng-bind="row.owner")
+  td
+    span(ng-bind="row.speed")

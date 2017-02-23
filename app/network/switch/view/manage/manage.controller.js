@@ -145,9 +145,12 @@
         templateUrl: PANELS+'/panel.scans.html',
         context: panelContext,
       }, {
+        templateUrl: PANELS+'/panel.ports.html',
+        context: panelContext,
+      }, {
         templateUrl: PANELS+'/panel.buttons.html',
         context: panelContext,
-      },]);
+      }]);
     }
 
     function fireChangeEvent(arg) {

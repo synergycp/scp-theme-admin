@@ -32,7 +32,7 @@
     }
 
     function storeMap(response) {
-      _.merge(vm.map, response.data());
+      _.merge(vm.map, response.getOriginalData());
       PermissionLang.load(vm.map);
     }
 

@@ -1,28 +1,73 @@
 (function () {
   'use strict';
 
+  var LOGS = {
+    text: "Logs",
+    sref: "app.system.log.list",
+  };
+
+  var SETTINGS = {
+    text: "Settings",
+    sref: "app.system.setting.list",
+  };
+
+  var INTEGRATIONS = {
+    text: "Integrations",
+    sref: "app.system.integration.list",
+  };
+
+  var EMAILS = {
+    text: "Emails",
+    sref: "app.system.email.list",
+  };
+
   angular
     .module('app.system')
-    .config(SystemNavConfig)
-    ;
+    .run(SystemNavConfig)
+  ;
 
   /**
    * @ngInject
    */
-  function SystemNavConfig(NavProvider) {
-    NavProvider.group('system', {
+  function SystemNavConfig(Auth, Nav, Permission) {
+    var group = Nav.group('system', {
       translate: "nav.SYSTEM",
       sref: "app.system.setting.list",
       icon: "fa fa-wrench",
-    }).item({
-      text: "Settings",
-      sref: "app.system.setting.list",
-    }).item({
-      text: "Emails",
-      sref: "app.system.email.list",
-    }).item({
-      text: "Logs",
-      sref: "app.system.log.list",
     });
+
+    Auth.whileLoggedIn(show, hide);
+
+    function show() {
+      Permission
+        .map()
+        .then(showPermitted)
+      ;
+    }
+
+    function showPermitted(map) {
+      if (map.system.logs.read) {
+        group.item(LOGS);
+      }
+
+      if (map.system.settings.read) {
+        group.item(SETTINGS);
+      }
+
+      if (map.system.integrations.read) {
+        group.item(INTEGRATIONS);
+      }
+
+      if (map.system.emails.read) {
+        group.item(EMAILS);
+      }
+    }
+
+    function hide() {
+      group.remove(LOGS);
+      group.remove(SETTINGS);
+      group.remove(INTEGRATIONS);
+      group.remove(EMAILS);
+    }
   }
 })();

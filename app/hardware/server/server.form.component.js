@@ -59,6 +59,7 @@
     serverForm.ports.remove = removePort;
     serverForm.ports.removed = [];
     serverForm.billing = {
+      integration: Select('integration'),
       date: {
         value: '',
         options: {
@@ -172,6 +173,7 @@
 
         serverForm.cpu.selected = response.cpu;
         serverForm.mem.selected = response.mem;
+        serverForm.billing.integration.selected = response.billing.integration;
 
         serverForm.billing.date.value = response.billing.date ?
           Date.parse(response.billing.date) : '';
@@ -324,8 +326,19 @@
         data.cpu = serverForm.cpu.getSelected('id') || null;
         data.mem = serverForm.mem.getSelected('id') || null;
       }
+      data.billing = data.billing || {};
+      var integration = serverForm.billing.integration;
+      if (integration.$dirty) {
+        data.billing.integration = {
+          id: integration.getSelected('id') || null,
+        };
 
-      if (typeof (data.billing || {}).date !== "undefined") {
+        if (!data.billing.integration.id) {
+          data.billing.id = null;
+        }
+      }
+
+      if (typeof data.billing.date !== "undefined") {
         data.billing.date = serverForm.billing.date.value ?
           moment(serverForm.billing.date.value)
             .toISOString() :

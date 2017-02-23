@@ -30,11 +30,14 @@
   /**
    * @ngInject
    */
-  function ClientFormCtrl() {
+  function ClientFormCtrl(Select) {
     var clientForm = this;
 
     clientForm.$onInit = init;
     clientForm.input = _.clone(INPUTS);
+    clientForm.billing = {
+      integration: Select('integration'),
+    };
 
     //////////
 
@@ -46,7 +49,21 @@
     }
 
     function getData() {
-      return _.clone(clientForm.input);
+      var data = _.clone(clientForm.input);
+
+      data.billing = data.billing || {};
+      var integration = clientForm.billing.integration;
+      if (integration.$dirty) {
+        data.billing.integration = {
+          id: integration.getSelected('id') || null,
+        };
+
+        if (!data.billing.integration.id) {
+          data.billing.id = null;
+        }
+      }
+
+      return data;
     }
 
     function fillFormInputs() {

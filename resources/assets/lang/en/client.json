@@ -47,11 +47,15 @@
     },
     "billing": {
       "id": {
-        "LABEL": "Billing ID"
+        "LABEL": "Billing ID",
+        "PLACEHOLDER": "Optional. Must be unique."
       },
       "vip": {
         "LABEL": "VIP Permissions",
         "IGNORE_AUTO_SUSPEND": "Ignore Auto Suspend/Terminate"
+      },
+      "integration": {
+        "PLACEHOLDER": "Integration"
       }
     },
     "name": {

@@ -9,6 +9,7 @@
       'app.pxe',
       'app.network',
       'app.hardware',
+      'app.permission',
       'app.system',
     ]);
 })();

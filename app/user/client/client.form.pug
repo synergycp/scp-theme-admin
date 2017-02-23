@@ -27,12 +27,26 @@ include /resources/angle/pug/mixins/form
 
 hr
 
-+field(
-  "{{ 'client.form.billing.id.LABEL' | translate }}",
-  "billing_id"
-)(
-  ng-model="clientForm.input.billing.id"
-)
++label("client.form.billing.id.LABEL")
+  .row
+    .col-sm-6
+      +input-with-btn("fa fa-close", "clientForm.billing.integration.selected")(
+        ng-click="clientForm.billing.integration.clear()"
+      )
+        +ui-select("clientForm.billing.integration")
+          ui-select-match(placeholder="{{ 'client.form.billing.integration.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.name")
+
+          +ui-select-choices("clientForm.billing.integration")
+            span(ng-bind-html="choice.name | highlight: $select.search")
+    .col-sm-6
+      input.form-control(
+        type="text"
+        name="billing.id"
+        translate-attr="{ 'placeholder': 'client.form.billing.id.PLACEHOLDER' }"
+        ng-model="clientForm.input.billing.id"
+        ng-disabled="!clientForm.billing.integration.selected"
+      )
 
 +label(
   "{{ 'client.form.billing.vip.LABEL' | translate }}",

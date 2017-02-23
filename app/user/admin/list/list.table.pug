@@ -10,13 +10,13 @@ block headings
 block columns
   td
     a(
-      ui-sref="app.user.admin.view({ id: row.id })"
+      ui-sref="app.user.admin.view.edit({ id: row.id })"
       ng-bind="row.username"
     )
   td(ng-bind="row.email")
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(
-        ui-sref="app.user.admin.view({id: row.id})"
+        ui-sref="app.user.admin.view.edit({id: row.id})"
         translate="app.action.EDIT"
       )

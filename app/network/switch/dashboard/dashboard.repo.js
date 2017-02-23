@@ -4,14 +4,24 @@
   angular
     .module('app.network.switch.dashboard')
     .service('SwitchDashboardRepo', SwitchDashboardRepo)
-    .config(addSwitchDashboardRepo)
+    .run(addSwitchDashboardRepo)
     ;
 
   /**
    * @ngInject
    */
-  function addSwitchDashboardRepo(DashboardProvider) {
-    DashboardProvider.add('SwitchDashboardRepo');
+  function addSwitchDashboardRepo(Dashboard, Permission, Auth) {
+    var show = Dashboard.add.bind(null, 'SwitchDashboardRepo');
+    var hide = Dashboard.remove.bind(null, 'SwitchDashboardRepo');
+
+    Auth.whileLoggedIn(checkPerms, hide);
+
+    function checkPerms() {
+      Permission
+        .ifHas('network.switches.read')
+        .then(show)
+      ;
+    }
   }
 
   /**
@@ -22,7 +32,6 @@
   function SwitchDashboardRepo(
     Api,
     EventEmitter,
-    RouteHelpers,
     DashboardAddPanel,
     DashboardBandwidthPanel,
     _

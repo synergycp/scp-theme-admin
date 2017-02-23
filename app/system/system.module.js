@@ -7,6 +7,7 @@
       'scp.angle.layout.list',
 
       'app.system.email',
+      'app.system.integration',
       'app.system.setting',
       'app.system.log',
     ]);

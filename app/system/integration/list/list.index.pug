@@ -1,0 +1,37 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="system.integration.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('integration-create-form')")
+        i.fa.fa-plus
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    integration-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
+    integration-table.border-top-table
+    list-footer
+
+block bottom-left
+  +create-form(
+    "system.integration.form.title.ADD",
+    "integration-create-form"
+  )
+    integration-form(
+      form="vm.create"
+      is-creation-mode="true"
+    )
+
+
+block bottom-right
+  logs(
+    heading="Integration Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

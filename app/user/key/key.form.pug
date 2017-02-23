@@ -1,0 +1,7 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field("{{apiKeyForm.lang}}.name.LABEL", "name")(
+  translate-attr="{ 'placeholder': apiKeyForm.lang+'.name.PLACEHOLDER' }"
+  ng-model="apiKeyForm.input.name"
+)

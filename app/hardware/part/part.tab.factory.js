@@ -62,8 +62,7 @@
       if (!_.some(formElems, '$dirty')) {
         return;
       }
-
-      return item.patch(formData).then(cleanForm);
+      return tab.list.patch(formData, [item]).then(cleanForm);
     }
 
     function getFormElems(id) {

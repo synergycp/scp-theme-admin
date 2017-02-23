@@ -45,7 +45,7 @@
       clientForm.form.getData = getData;
       fillFormInputs();
 
-      (clientForm.form.on || function() {})(['change', 'load'], fillFormInputs);
+      (clientForm.form.on || function() {})(['change', 'load'], storeState);
     }
 
     function getData() {
@@ -68,6 +68,11 @@
 
     function fillFormInputs() {
       _.overwrite(clientForm.input, clientForm.form.input);
+    }
+
+    function storeState(response) {
+      fillFormInputs();
+      clientForm.billing.integration.selected = response.integration;
     }
   }
 })();

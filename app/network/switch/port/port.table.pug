@@ -13,8 +13,15 @@ block headings
 
 block columns
   td
-    span(ng-bind="row.port")
+    span(ng-bind="row.name")
   td
-    span(ng-bind="row.owner")
+    a(
+      ng-if="row.owner"
+      ng-bind="row.owner.name"
+      ui-sref="app.hardware.server.view({ id: row.owner.id })"
+    )
+    span.text-muted(ng-if="!row.owner") -
   td
-    span(ng-bind="row.speed")
+    span(ng-bind="row.speed.name")
+    span.text-muted(ng-if="!row.speed") -
+

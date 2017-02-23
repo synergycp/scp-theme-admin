@@ -1,0 +1,9 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field(
+  "{{ 'system.integration.form.name.LABEL' | translate }}"
+)(
+  placeholder="{{ 'system.integration.form.name.PLACEHOLDER' | translate }}"
+  ng-model="integrationForm.input.name"
+)

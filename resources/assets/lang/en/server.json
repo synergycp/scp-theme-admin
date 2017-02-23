@@ -119,6 +119,9 @@
         "LABEL": "Billing ID",
         "PLACEHOLDER": "Optional. Must be unique"
       },
+      "integration": {
+        "PLACEHOLDER": "Integration"
+      },
       "date": {
         "LABEL": "Billing Date",
         "PLACEHOLDER": "Bandwidth data before this date will be hidden"

@@ -2,14 +2,14 @@ doctype html
 include /resources/angle/pug/mixins/form
 
 +field(
-  "{{ 'server.form.id.LABEL' | translate }}",
+  "server.form.id.LABEL",
   "srv_id"
 )(
-  placeholder="{{ 'server.form.id.PLACEHOLDER' | translate }}"
+  translate-attr="{ 'placeholder': 'server.form.id.PLACEHOLDER' }"
   ng-model="serverForm.input.srv_id"
 )
 
-+label("{{ 'server.form.cpu.LABEL' | translate }}")
++label("server.form.cpu.LABEL")
   +ui-select("serverForm.cpu")
     ui-select-match(placeholder="{{ 'server.form.cpu.PLACEHOLDER' | translate }}")
       span(ng-bind="$select.selected.name")
@@ -21,7 +21,7 @@ include /resources/angle/pug/mixins/form
     )
       span(ng-bind-html="cpu.name | highlight: $select.search")
 
-+label("{{ 'server.form.mem.LABEL' | translate }}")
++label("server.form.mem.LABEL")
   +ui-select("serverForm.mem")
     ui-select-match(placeholder="{{ 'server.form.mem.PLACEHOLDER' | translate }}")
       span(ng-bind="$select.selected.name")
@@ -34,11 +34,11 @@ include /resources/angle/pug/mixins/form
       span(ng-bind-html="mem.name | highlight: $select.search")
 
 div(ng-repeat="disk in serverForm.disks.items track by $index")
-  +icon-label("{{ 'server.form.disk.LABEL' | translate }}")(
-    class="fa"
-    ng-class=
-      "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
-      "+($index || serverForm.disks.items.length < serverForm.disks.max ? '' : 'disabled ')"
+  +icon-label("server.form.disk.LABEL").fa(
+    ng-class=[
+      "'fa-'+($index ? 'minus' : 'plus')+'-circle '",
+      "($index || serverForm.disks.items.length < serverForm.disks.max ? '' : 'disabled ')",
+    ].join('+')
     ng-click="$index ? serverForm.disks.rem($index) : serverForm.disks.add(disk.selected)"
   )
     +ui-select("disk")
@@ -53,12 +53,12 @@ div(ng-repeat="disk in serverForm.disks.items track by $index")
         span(ng-bind-html="choice.name | highlight: $select.search")
 
 div(ng-repeat="addOn in serverForm.addOns.items track by $index")
-  +icon-label("{{ 'server.form.add-on.LABEL' | translate }}").fa(
+  +icon-label("server.form.add-on.LABEL").fa(
     ng-class="'fa-'+($index ? 'minus' : 'plus')+'-circle'"
     ng-click="$index ? serverForm.addOns.rem($index) : serverForm.addOns.add(addOn.selected)"
   )
-    +input-with-btn("fa fa-times-circle")(
-      ng-click="addOn.selected = null"
+    +input-with-btn("fa fa-times-circle", "addOn.selected")(
+      ng-click="addOn.clear()"
     )
       +ui-select("addOn")
         ui-select-match(placeholder="{{ 'server.form.add-on.PLACEHOLDER' | translate }}")
@@ -76,17 +76,17 @@ hr
 div.relative(
   ng-repeat="(portIndex, port) in serverForm.ports"
 )
-  +icon-label("{{ 'server.form.mac.LABEL' | translate }}").fa.fa-times-circle(
+  +icon-label("server.form.mac.LABEL").fa.fa-times-circle(
     ng-click="serverForm.ports.remove(port)"
   )
     input.form-control(
       type="text"
       ng-model="port.input.mac"
       name="port-{{ portIndex }}.mac"
-      placeholder="{{ 'server.form.mac.PLACEHOLDER' | translate }}"
+      translate-attr="{ 'placeholder': 'server.form.mac.PLACEHOLDER' }"
     )
 
-  +label("{{ 'server.form.group.LABEL' | translate }}")
+  +label("server.form.group.LABEL")
     +ui-select("port.group")
       ui-select-match(placeholder="{{ 'server.form.group.PLACEHOLDER' | translate }}")
         span(ng-bind="$select.selected.name")
@@ -98,7 +98,7 @@ div.relative(
       )
         span(ng-bind-html="group.name | highlight: $select.search")
 
-  +label("{{ 'server.form.switch.LABEL' | translate }}")
+  +label("server.form.switch.LABEL")
     +ui-select("port.switch")(
       ng-disabled="!port.group.selected"
     )
@@ -112,7 +112,7 @@ div.relative(
       )
         span(ng-bind-html="switch.name | highlight: $select.search")
 
-  +label("{{ 'server.form.switch.port.LABEL' | translate }}")
+  +label("server.form.switch.port.LABEL")
     .row
       .col-xs-6
         +ui-select("port.switch.port")(
@@ -134,7 +134,7 @@ div.relative(
             span(ng-bind-html="choice.name | highlight: $select.search")
 
   div(ng-if="port.group.selected")
-    +label("{{ 'server.form.entities.LABEL' | translate }}")
+    +label("server.form.entities.LABEL")
       entity-multi-select(
         placeholder="server.form.entities.PLACEHOLDER"
         select="port.entities"
@@ -148,62 +148,75 @@ div.big-add-button(
 hr
 
 +field(
-  "{{ 'server.form.ipmi.ip.LABEL' | translate }}",
+  "server.form.ipmi.ip.LABEL",
   "ipmi.ip"
 )(
-  placeholder="{{ 'server.form.ipmi.ip.PLACEHOLDER' | translate }}"
+  translate-attr="{ 'placeholder': 'server.form.ipmi.ip.PLACEHOLDER' }"
   ng-model="serverForm.input.ipmi.ip"
 )
 
-+label("{{ 'server.form.ipmi.admin.LABEL' | translate }}")
++label("server.form.ipmi.admin.LABEL")
   .row
     .col-xs-6
       input.form-control(
         type="text"
-        placeholder="{{ 'server.form.ipmi.admin.username.PLACEHOLDER' | translate }}"
+        translate-attr="{ 'placeholder': 'server.form.ipmi.admin.username.PLACEHOLDER' }"
         ng-model="serverForm.input.ipmi.admin.username"
         name="ipmi.admin.username"
       )
     .col-xs-6
       input.form-control(
         type="text"
-        placeholder="{{ 'server.form.ipmi.admin.password.PLACEHOLDER' | translate }}"
+        translate-attr="{ 'placeholder': 'server.form.ipmi.admin.password.PLACEHOLDER' }"
         ng-model="serverForm.input.ipmi.admin.password"
         name="ipmi.admin.password"
       )
 
-+label("{{ 'server.form.ipmi.client.LABEL' | translate }}")
++label("server.form.ipmi.client.LABEL")
   .row
     .col-xs-6
       input.form-control(
         type="text"
-        placeholder="{{ 'server.form.ipmi.client.username.PLACEHOLDER' | translate }}"
+        translate-attr="{ 'placeholder': 'server.form.ipmi.client.username.PLACEHOLDER' }"
         ng-model="serverForm.input.ipmi.client.username"
         name="ipmi.client.username"
       )
     .col-xs-6
       input.form-control(
         type="text"
-        placeholder="{{ 'server.form.ipmi.client.password.PLACEHOLDER' | translate }}"
+        translate-attr="{ 'placeholder': 'server.form.ipmi.client.password.PLACEHOLDER' }"
         ng-model="serverForm.input.ipmi.client.password"
         name="ipmi.client.password"
       )
 
 hr
 
-+field(
-  "{{ 'server.form.billing.id.LABEL' | translate }}",
-  "billing.id"
-)(
-  placeholder="{{ 'server.form.billing.id.PLACEHOLDER' | translate }}"
-  ng-model="serverForm.input.billing.id"
-)
++label("server.form.billing.id.LABEL")
+  .row
+    .col-sm-6
+      +input-with-btn("fa fa-close", "serverForm.billing.integration.selected")(
+        ng-click="serverForm.billing.integration.clear()"
+      )
+        +ui-select("serverForm.billing.integration")
+          ui-select-match(placeholder="{{ 'server.form.billing.integration.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.name")
+
+          +ui-select-choices("serverForm.billing.integration")
+            span(ng-bind-html="choice.name | highlight: $select.search")
+    .col-sm-6
+      input.form-control(
+        type="text"
+        name="billing.id"
+        translate-attr="{ 'placeholder': 'server.form.billing.id.PLACEHOLDER' }"
+        ng-model="serverForm.input.billing.id"
+        ng-disabled="!serverForm.billing.integration.selected"
+      )
 
 +label(
-  "{{ 'server.form.billing.date.LABEL' | translate }}",
+  "server.form.billing.date.LABEL",
   "billing.date"
 )
-  +input-with-btn("fa fa-close")(
+  +input-with-btn("fa fa-close", "serverForm.billing.date.value")(
     ng-click="serverForm.billing.date.empty()"
   )
     input.form-control(
@@ -212,22 +225,22 @@ hr
       date-range-picker=""
       options="serverForm.billing.date.options"
       ng-model="serverForm.billing.date.value"
-      placeholder="{{ 'server.form.billing.date.PLACEHOLDER' | translate }}"
+      translate-attr="{ 'placeholder': 'server.form.billing.date.PLACEHOLDER' }"
       name="billing.date"
     )
 
 +field(
-  "{{ 'server.form.billing.max_bandwidth.LABEL' | translate }}",
+  "server.form.billing.max_bandwidth.LABEL",
   "billing.max_bandwidth"
 )(
-  placeholder="{{ 'server.form.billing.max_bandwidth.PLACEHOLDER' | translate }}"
+  translate-attr="{ 'placeholder': 'server.form.billing.max_bandwidth.PLACEHOLDER' }"
   ng-model="serverForm.input.billing.max_bandwidth"
 )
 
 +field(
-  "{{ 'server.form.nickname.LABEL' | translate }}",
+  "server.form.nickname.LABEL",
   "nickname"
 )(
-  placeholder="{{ 'server.form.nickname.PLACEHOLDER' | translate }}"
+  translate-attr="{ 'placeholder': 'server.form.nickname.PLACEHOLDER' }"
   ng-model="serverForm.input.nickname"
 )

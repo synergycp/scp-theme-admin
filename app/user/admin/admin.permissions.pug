@@ -1,0 +1,12 @@
+include /resources/angle/pug/mixins/panel
+
+.row
+  .col-md-6
+    form(ng-submit="vm.submit()")
+      +panel("admin.permissions.TITLE")(loader="vm.loader")
+        .panel-body
+          permissions(map="vm.map")
+        .panel-footer.clearfix
+          .pull-right
+            input.btn.btn-primary(type="submit")
+

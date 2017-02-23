@@ -1,7 +1,8 @@
 include /resources/angle/pug/mixins/panel
 
 list.panel.panel-default(
-  ng-show="logs.list.items.length && !angular.empty(logs.filters.current)"
+  ng-if="logs.list"
+  ng-show="logs.show()"
   list="logs.list"
 )
   list-header(text="{{ logs.heading }}")

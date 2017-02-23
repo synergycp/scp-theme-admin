@@ -1,0 +1,10 @@
+include /resources/angle/pug/mixins/form
+
+.form-horizontal
+  div(ng-repeat="(key, section) in perms.map")
+    +label("permissions.{{key}}.TITLE")
+      permission-section(
+        prefix="key == 'pkg' ? key : 'permissions.'+key"
+        map="section"
+        has-columns="true"
+      )

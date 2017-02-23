@@ -20,11 +20,18 @@
   /**
    * @ngInject
    */
-  function navRefresher(ServerInventoryNav, $interval, Api, Auth) {
+  function navRefresher(ServerInventoryNav, Permission, $interval, Api, Auth) {
     var $inventory = Api.all('server');
     var interval;
 
-    Auth.whileLoggedIn(startChecking, stopChecking);
+    Auth.whileLoggedIn(checkPerms, stopChecking);
+
+    function checkPerms() {
+      Permission
+        .ifHas('server.in_inventory.read')
+        .then(startChecking)
+      ;
+    }
 
     ///////////
 

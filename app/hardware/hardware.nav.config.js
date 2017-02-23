@@ -2,30 +2,62 @@
   'use strict';
 
   angular
-    .module('app.system')
-    .config(SystemNavConfig)
-    ;
+    .module('app.hardware')
+    .run(NavConfig)
+  ;
+
+  var PARTS = {
+    text: "Part Inventory",
+    sref: "app.hardware.part.list",
+  };
+
+  var PROVISION = {
+    text: "Provision",
+    sref: "app.hardware.server.provision",
+  };
 
   /**
    * @ngInject
    */
-  function SystemNavConfig(NavProvider, ServerInventoryNav, ServerListNav) {
-    NavProvider
-      .group('hardware', {
-        translate: "nav.HARDWARE",
-        sref: "app.hardware.server.list",
-        icon: "fa fa-server",
-      })
-      .item(ServerListNav)
-      .item(ServerInventoryNav)
-      .item({
-        text: "Provision",
-        sref: "app.hardware.server.provision",
-      })
-      .item({
-        text: "Part Inventory",
-        sref: "app.hardware.part.list",
-      })
+  function NavConfig(Auth, Nav, Permission, ServerInventoryNav, ServerListNav) {
+    var group = Nav.group('hardware', {
+      translate: "nav.HARDWARE",
+      sref: "app.hardware.server.list",
+      icon: "fa fa-server",
+    });
+
+    Auth.whileLoggedIn(show, hide);
+
+    function show() {
+      Permission
+        .map()
+        .then(showPermitted)
       ;
+    }
+
+    function showPermitted(map) {
+      if (map.server.in_use.read || map.server.in_inventory.read) {
+        group.item(ServerListNav);
+      }
+
+      if (map.server.in_inventory.read) {
+        group.item(ServerInventoryNav);
+      }
+
+      if (map.server.in_inventory.write) {
+        group.item(PROVISION);
+      }
+
+      if (map.server.settings.read) {
+        group.item(PARTS);
+      }
+    }
+
+    function hide() {
+      group.remove(PROVISION);
+      group.remove(PARTS);
+      group.remove(ServerListNav);
+      group.remove(ServerInventoryNav);
+    }
   }
 })();

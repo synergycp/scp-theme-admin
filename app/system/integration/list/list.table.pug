@@ -1,0 +1,36 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th(ng-if="table.showName") Name
+  th(ng-if="table.showKeys") API Keys
+  th(ng-if="table.showPermissions") Permissions
+  th(ng-if="table.showClients") Clients
+  th(ng-if="table.showServers") Servers
+  th(ng-if="table.showActions") Actions
+
+block columns
+  td(ng-if="table.showName")
+    a(
+      ui-sref="app.system.integration.view.edit({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(ng-if="table.showKeys")
+    a(
+      ui-sref="app.system.integration.view.key.list({id: row.id})"
+      ng-bind="row.keys"
+    )
+  td(ng-if="table.showPermissions")
+    a(
+      ui-sref="app.system.integration.view.permissions({id: row.id})"
+      ng-bind="row.permissions"
+    )
+  td(ng-if="table.showClients")
+    span(ng-bind="row.clients")
+  td(ng-if="table.showServers")
+    span(ng-bind="row.servers")
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.system.integration.view.edit({id: row.id})"
+        translate="app.action.EDIT"
+      )

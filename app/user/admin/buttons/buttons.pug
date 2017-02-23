@@ -8,3 +8,8 @@ div(
       ng-click="buttons.delete()"
       translate="admin.modal.delete.SUBMIT"
     )
+    a.btn.btn-default(
+      ui-sref="app.user.admin.view.permissions({id: admin.id})"
+      translate="admin.buttons.PERMISSIONS"
+    )
+

@@ -93,6 +93,7 @@
       .on('change', checkPxeProfileForIso);
     provisionForm.profile.hasIso = false;
     provisionForm.billing = {
+      integration: Select('integration'),
       date: {
         value: new Date(),
         options: {
@@ -258,6 +259,9 @@
       };
       data.client = {
         id: provisionForm.client.getSelected('id'),
+      };
+      data.billing.integration = {
+        id: provisionForm.billing.integration.getSelected('id') || null,
       };
       data.billing.date = provisionForm.billing.date.value ? moment(provisionForm.billing.date.value)
         .toISOString() : null;

@@ -6,12 +6,10 @@
     password: '',
     email: '',
     receive_copies: '',
-    access_admins: '',
-    access_logs: '',
   };
 
   angular
-    .module('app.user')
+    .module('app.user.admin')
     .component('adminForm', {
       require: {
       },

@@ -117,7 +117,7 @@
         "SPEED": "Speed"
       },
       "empty": {
-        "BODY": "This switch doesn't have ports so far."
+        "BODY": "We haven't discovered any ports on this switch yet."
       }
     }
   },

@@ -177,13 +177,26 @@ div(ng-if="provisionForm.profile.hasIso")
   ng-model="provisionForm.input.password"
 )
 
-+field(
-  "{{ 'server.form.billing.id.LABEL' | translate }}",
-  "billing.id"
-)(
-  placeholder="{{ 'server.form.billing.id.PLACEHOLDER' | translate }}"
-  ng-model="provisionForm.input.billing.id"
-)
++label("server.form.billing.id.LABEL")
+  .row
+    .col-sm-6
+      +input-with-btn("fa fa-close", "provisionForm.billing.integration.selected")(
+        ng-click="provisionForm.billing.integration.clear()"
+      )
+        +ui-select("provisionForm.billing.integration")
+          ui-select-match(placeholder="{{ 'server.form.billing.integration.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.name")
+
+          +ui-select-choices("provisionForm.billing.integration")
+            span(ng-bind-html="choice.name | highlight: $select.search")
+    .col-sm-6
+      input.form-control(
+        type="text"
+        name="billing.id"
+        translate-attr="{ 'placeholder': 'server.form.billing.id.PLACEHOLDER' }"
+        ng-model="provisionForm.input.billing.id"
+        ng-disabled="!provisionForm.billing.integration.selected"
+      )
 
 +label(
   "{{ 'server.form.billing.date.LABEL' | translate }}",

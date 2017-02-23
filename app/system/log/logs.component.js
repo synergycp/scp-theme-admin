@@ -29,30 +29,48 @@
   /**
    * @ngInject
    */
-  function LogCtrl(List, ListFilter, RouteHelpers) {
+  function LogCtrl(List, ListFilter, RouteHelpers, Permission) {
     var logs = this;
 
-    logs.list = List('log').filter({
-    });
-    logs.filters = ListFilter(logs.list);
-    logs.filters.current = logs.filter;
+    logs.list = null;
+    logs.show = show;
 
     logs.$onInit = init;
+
 
     //////////
 
     function init() {
       _.defaults(logs, {
         showType: true,
+        filter: {},
       });
+
+      Permission
+        .ifHas('system.logs.read')
+        .then(showLogs)
+      ;
+    }
+
+    function showLogs() {
+      logs.list = List('log').filter({
+      });
+      logs.filters = ListFilter(logs.list);
+      logs.filters.current = {};
 
       RouteHelpers.loadLang('system');
 
-      logs.filter = logs.filter || {};
+      _.assign(logs.filters.current, logs.filter);
 
       if (logs.listenTo) {
         logs.listenTo.on('change', logs.list.load);
       }
+    }
+
+    function show() {
+      return logs.list.items.length ||
+          !angular.equals({}, logs.filters.current)
+      ;
     }
   }
 })();

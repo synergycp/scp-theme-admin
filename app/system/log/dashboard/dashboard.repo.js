@@ -4,14 +4,24 @@
   angular
     .module('app.system.log.dashboard')
     .service('LogDashboardRepo', LogDashboardRepo)
-    .config(addLogDashboardRepo)
+    .run(addLogDashboardRepo)
     ;
 
   /**
    * @ngInject
    */
-  function addLogDashboardRepo(DashboardProvider) {
-    DashboardProvider.add('LogDashboardRepo');
+  function addLogDashboardRepo(Dashboard, Permission, Auth) {
+    var show = Dashboard.add.bind(null, 'LogDashboardRepo');
+    var hide = Dashboard.remove.bind(null, 'LogDashboardRepo');
+
+    Auth.whileLoggedIn(checkPerms, hide);
+
+    function checkPerms() {
+      Permission
+        .ifHas('system.logs.read')
+        .then(show)
+      ;
+    }
   }
 
   /**

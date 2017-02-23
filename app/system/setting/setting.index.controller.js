@@ -18,11 +18,10 @@
    *
    * @ngInject
    */
-  function SettingIndexCtrl(_, $scope, $state, $stateParams, Modal, $q, List, Loader, Alert, EventEmitter, Api, $timeout) {
+  function SettingIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, Api, $timeout) {
     var vm = this;
     var $api = Api.all(API.SETTING);
     var $groups = Api.all(API.SETTING_GROUP);
-    var $apiKeys = Api.all(API.API_KEY);
 
     vm.list = EventEmitter();
     vm.loader = Loader();
@@ -46,7 +45,6 @@
     function activate() {
       $q.all([
         loadSettingsTabs(),
-        loadIntegrationTabs(),
       ]).then(setActive);
     }
 
@@ -70,12 +68,6 @@
     function addSettingTab(group) {
       vm.tabs.items.unshift(
         new SettingsTab(group.name, group.settings, group.parent)
-      );
-    }
-
-    function loadIntegrationTabs() {
-      vm.tabs.items.push(
-        new IntegrationTab()
       );
     }
 
@@ -195,54 +187,6 @@
         return [
           $scope.form[id + '.value'],
         ];
-      }
-    }
-
-    function IntegrationTab() {
-      var tab = this;
-
-      tab.trans = "system.integration.TITLE";
-      tab.active = false;
-      tab.visible = true;
-      tab.body = 'app/system/setting/integration.list.html';
-      tab.list = List(API.INTEGRATION);
-      tab.apiKey = {
-        add: addApiKey,
-        del: delApiKey,
-      };
-
-      activate();
-
-      //////////////
-
-      function activate() {
-        tab.list.load();
-      }
-
-      function addApiKey(integration) {
-        return $apiKeys.post({
-          type: 'integration',
-          id: integration.id,
-        }).then(tab.list.load);
-      }
-
-      function delApiKey(key) {
-        Modal
-          .confirm([key], 'system.integration.modal.delete')
-          .open()
-          .result
-          .then(function () {
-            return doDelete(key);
-          })
-          ;
-      }
-
-      function doDelete(key) {
-        return $apiKeys
-          .one(''+key.id)
-          .remove()
-          .then(tab.list.load)
-          ;
       }
     }
   }

@@ -16,6 +16,9 @@
       }
     }
   },
+  "permissions": {
+    "TITLE": "Edit Administrator Permissions"
+  },
   "form": {
     "title": {
       "ADD": "Create Administrator",
@@ -35,15 +38,9 @@
     },
     "receive_copies": {
       "LABEL": "Receive All Emails"
-    },
-    "access": {
-      "LABEL": "Access",
-      "admin": {
-        "LABEL": "Edit Administrators"
-      },
-      "logs": {
-        "LABEL": "View Logs"
-      }
     }
+  },
+  "buttons": {
+    "PERMISSIONS": "Edit Permissions"
   }
 }

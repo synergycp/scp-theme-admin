@@ -17,10 +17,21 @@
         resolve: helper.resolveFor('lang:admin'),
       })
       .state('app.user.admin.view', {
+        abstract: true,
         url: '/:id',
-        title: 'View Administrator',
+        template: helper.dummyTemplate,
+      })
+      .state('app.user.admin.view.edit', {
+        url: '',
+        title: 'Edit Administrator',
         controller: 'AdminViewCtrl as vm',
         templateUrl: helper.basepath('user/admin/admin.view.html'),
+      })
+      .state('app.user.admin.view.permissions', {
+        url: '/permissions',
+        title: 'Administrator Permissions',
+        controller: 'AdminPermissionsCtrl as vm',
+        templateUrl: helper.basepath('user/admin/admin.permissions.html'),
       })
       ;
 

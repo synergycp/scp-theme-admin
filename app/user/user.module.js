@@ -8,5 +8,6 @@
       'app.user.client',
       'app.user.admin',
       'app.user.admin.buttons',
+      'app.user.key',
     ]);
 })();

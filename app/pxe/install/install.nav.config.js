@@ -16,13 +16,20 @@
   /**
    * @ngInject
    */
-  function PxeInstallNavRefresher(PxeInstallNav, $interval, Api, Auth) {
+  function PxeInstallNavRefresher(PxeInstallNav, Permission, $interval, Api, Auth) {
     var $installs = Api.all('server/*/install');
     var interval;
 
-    Auth.whileLoggedIn(startChecking, stopChecking);
+    Auth.whileLoggedIn(checkPerms, stopChecking);
 
     ///////////
+
+    function checkPerms() {
+      Permission
+        .ifHas('pxe.installs.read')
+        .then(startChecking)
+      ;
+    }
 
     function startChecking() {
       stopChecking();

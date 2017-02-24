@@ -18,10 +18,9 @@ block columns
     a(
       ng-if="row.owner"
       ng-bind="row.owner.name"
-      ui-sref="app.hardware.server.view({ id: row.owner.id })"
+      ui-sref="app.hardware.server.view.manage({ id: row.owner.id })"
     )
     span.text-muted(ng-if="!row.owner") -
   td
     span(ng-bind="row.speed.name")
     span.text-muted(ng-if="!row.speed") -
-

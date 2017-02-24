@@ -17,7 +17,7 @@ block columns
   td
     a(
       ng-if="row.owner"
-      ng-bind="row.owner.name"
+      ng-bind="row.owner.server.name"
       ui-sref="app.hardware.server.view.manage({ id: row.owner.server.id })"
     )
     span.text-muted(ng-if="!row.owner") -

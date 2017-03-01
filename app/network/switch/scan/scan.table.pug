@@ -12,7 +12,7 @@ block headings
 
 block columns
   td(ng-if="table.showStarted")
-    span(ng-bind="row.created_at.iso_8601 | date: 'short'")
+    span(date="row.created_at")
   td(ng-if="table.showStatus")
     switch-scan-status(scan="row")
   td(ng-if="table.showActions")

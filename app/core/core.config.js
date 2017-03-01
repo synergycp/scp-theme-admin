@@ -25,15 +25,12 @@
    */
    function httpConfig($httpProvider) {
     var regex = (/\.(html|json)$/i);
-    var versions = window.FILES_VERSIONS;
+    var versions = window.FILES_VERSIONS || {};
     $httpProvider.interceptors.push(function($q) {
       return {
        'request': function(config) {
            if(versions[config.url]) {
-            // console.log('req', config.url)
-            // config.url = versions[config.url]
-           } else {
-            console.log('NOT', config.url)
+            config.url = versions[config.url]
            }
            return config;
         }

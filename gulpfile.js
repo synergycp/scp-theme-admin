@@ -398,7 +398,9 @@ gulp.task('build', gulpsync.sync([
   'prod',
   'vendor',
   'assets'
-]));
+]), function() {
+  if (isProduction) gulp.start('create-versions');
+});
 
 gulp.task('prod', function () {
   log('Starting production build...');
@@ -414,7 +416,6 @@ gulp.task('serve', gulpsync.sync([
 // Server for production
 gulp.task('serve-prod', gulpsync.sync([
   'build',
-  'create-versions',
   'browsersync'
 ]), done);
 

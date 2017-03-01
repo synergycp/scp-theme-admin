@@ -30,11 +30,14 @@
   /**
    * @ngInject
    */
-  function ClientFormCtrl() {
+  function ClientFormCtrl(Select) {
     var clientForm = this;
 
     clientForm.$onInit = init;
     clientForm.input = _.clone(INPUTS);
+    clientForm.billing = {
+      integration: Select('integration'),
+    };
 
     //////////
 
@@ -42,15 +45,34 @@
       clientForm.form.getData = getData;
       fillFormInputs();
 
-      (clientForm.form.on || function() {})(['change', 'load'], fillFormInputs);
+      (clientForm.form.on || function() {})(['change', 'load'], storeState);
     }
 
     function getData() {
-      return _.clone(clientForm.input);
+      var data = _.clone(clientForm.input);
+
+      data.billing = data.billing || {};
+      var integration = clientForm.billing.integration;
+      if (integration.$dirty) {
+        data.billing.integration = {
+          id: integration.getSelected('id') || null,
+        };
+
+        if (!data.billing.integration.id) {
+          data.billing.id = null;
+        }
+      }
+
+      return data;
     }
 
     function fillFormInputs() {
       _.overwrite(clientForm.input, clientForm.form.input);
+    }
+
+    function storeState(response) {
+      fillFormInputs();
+      clientForm.billing.integration.selected = response.integration;
     }
   }
 })();

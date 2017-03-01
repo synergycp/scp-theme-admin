@@ -10,7 +10,7 @@
    *
    * @ngInject
    */
-  function ServerAssignModalService ($uibModal, $q, Api) {
+  function ServerAssignModalService ($uibModal, $q, Api, RouteHelpers) {
     var ServerAssignModal = this;
     var $api = Api.all('server');
 
@@ -97,6 +97,8 @@
      * @return {Promise} Selected Client
      */
     function client(servers, access) {
+      RouteHelpers.loadLang('client');
+
       var modal = $uibModal.open({
         templateUrl: 'app/hardware/server/assign/modal/modal.client.html',
         controller: 'ServerAssignClientModalCtrl',

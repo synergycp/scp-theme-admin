@@ -187,7 +187,7 @@ gulp.task('vendor:app', function () {
     })
     .pipe($.expectFile(vendor.app.source))
     .pipe(jsFilter)
-    .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
+  //  .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
@@ -236,10 +236,10 @@ gulp.task('vendor:exports', function (done) {
         .pipe($.expectFile(opts, exp.files))
         .pipe($.rename(addPrefixFolder.bind(null, exp.name)))
         .pipe(jsFilter)
-        .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
+      //  .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
         .pipe(jsFilter.restore())
         .pipe(cssFilter)
-        .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
+      //  .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
         .pipe(cssFilter.restore())
         .pipe(gulp.dest(vendor.app.dest))
         .pipe(reload({
@@ -357,7 +357,7 @@ gulp.task('browsersync', function () {
     server: {
       baseDir: 'public/',
     },
-    port: 8080,
+    port: 8001,
   });
 
 });

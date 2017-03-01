@@ -1,0 +1,13 @@
+extends /resources/angle/pug/edit
+
+block title
+  span(
+    translate='pxe.driver.form.title.EDIT'
+    translate-value-name='{{vm.edit.input.name}}'
+  )
+
+block form
+  pxe-driver-form(form="vm.edit")
+
+block append right-side
+  pxe-driver-buttons(driver="vm.edit.input")

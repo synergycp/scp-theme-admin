@@ -13,5 +13,6 @@
       'app.network.switch.list',
       'app.network.switch.view',
       'app.network.switch.scan',
+      'app.network.switch.port',
     ]);
 })();

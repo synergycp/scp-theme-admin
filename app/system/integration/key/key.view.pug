@@ -1,0 +1,20 @@
+extends /resources/angle/pug/edit
+
+block title
+  span(
+    translate='system.integration.key.form.title.EDIT'
+    translate-value-name='{{vm.edit.input.name}}'
+  )
+
+block form
+  api-key-form(
+    form="vm.edit"
+    lang="system.integration.key.form"
+  )
+
+block append right-side
+  .btn-group.btn-group-lg
+    a.btn.btn-default(
+      translate="system.integration.key.buttons.PARENT"
+      ui-sref="app.system.integration.view.key.list({id: vm.integrationId})"
+    )

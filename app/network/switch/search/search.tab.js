@@ -50,12 +50,11 @@
 
     //////////
 
-    function onSelect($item) {
-      $state.go('app.network.switch.view.manage', {
-        id: $item.id,
-      });
+    function onSelect($item, shouldOpenInNewTab, openSelected) {
+      openSelected('app.network.switch.view.manage', {
+          id: $item.id,
+        }, shouldOpenInNewTab);
     }
-
 
   }
 })();

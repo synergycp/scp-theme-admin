@@ -33,7 +33,6 @@
       .multi()
       .filter({
         available: true,
-        allow_server_id: $stateParams.id || undefined,
       })
       .on('change', syncEntityFilter)
     ;
@@ -59,8 +58,23 @@
       },
     };
 
+    port.loadEntities = loadEntities;
+    port.$setPristine = $setPristine;
     port.data = data;
     port.fromExisting = fromExisting;
+
+    function $setPristine() {
+      port.switch.port.$dirty =
+        port.switch.speed.$dirty =
+        port.entities.$dirty =
+        port.group.$dirty =
+        port.switch.$dirty =
+        false;
+      _.setContents(
+        port.entities.original,
+        port.entities.selected
+      );
+    }
 
     function syncGroupFilter() {
       _.setContents(port.entities.selected, []);
@@ -78,8 +92,10 @@
       port.original = response;
       port.input.mac = response.mac;
 
-      port.group.selected = response.group;
-      syncGroupFilter();
+      if (port.group.getSelected('id') != response.group.id) {
+        port.group.selected = response.group;
+        syncGroupFilter();
+      }
 
       if (response.switch) {
         port.switch.selected = response.switch;
@@ -91,7 +107,9 @@
 
       port.billing.start.value = response.billing.start ?
         date.parse(response.billing.start) : '';
+    }
 
+    function loadEntities() {
       return Api
         .all('entity')
         .getList({'server_port_id': port.id})
@@ -113,6 +131,7 @@
         .filter({
           extra_for_id: (port.entities.selected[0] || {}).id,
           ip_group: (port.group.selected || {}).id,
+          allow_server_port_id: port.id,
         })
         .load()
       ;
@@ -136,6 +155,9 @@
             port.original.switch.port.id :
             undefined,
         })
+        .on('change', function () {
+          port.entities.original
+        })
       ;
       port.switch.port.switchId = port.switch.selected.id;
       port.switch.port.load();
@@ -143,6 +165,7 @@
 
     function data() {
       var currentEntityIds = _.map(port.entities.selected, 'id');
+      var originalEntityIds = _.map(port.entities.original, 'id');
 
       return {
         id: port.id,
@@ -166,9 +189,12 @@
           id: port.group.getSelected('id') || null,
         },
         entities: {
-          add: currentEntityIds,
+          add: _.difference(
+            currentEntityIds,
+            originalEntityIds
+          ),
           remove: _.difference(
-            _.map(port.entities.original, 'id'),
+            originalEntityIds,
             currentEntityIds
           ),
         },

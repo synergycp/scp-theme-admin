@@ -108,6 +108,19 @@
       }
     }
   },
+  "port": {
+    "list": {
+      "TITLE": "Switch Ports",
+      "heading": {
+        "PORT": "Port",
+        "OWNER": "Owner",
+        "SPEED": "Speed"
+      },
+      "empty": {
+        "BODY": "We haven't discovered any ports on this switch yet."
+      }
+    }
+  },
   "logs": {
     "TITLE": "Switch Logs"
   },

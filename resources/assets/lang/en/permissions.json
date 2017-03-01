@@ -1,0 +1,147 @@
+{
+  "users": {
+    "TITLE": "Users",
+    "admins": {
+      "TITLE": "Administrators",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "clients": {
+      "TITLE": "Clients",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    }
+  },
+  "system": {
+    "TITLE": "System",
+    "emails": {
+      "TITLE": "Email Templates",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "settings": {
+      "TITLE": "Settings",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "integrations": {
+      "TITLE": "Integrations",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "logs": {
+      "TITLE": "Logs",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    }
+  },
+  "pxe": {
+    "TITLE": "OS Reloads",
+    "installs": {
+      "TITLE": "Installs",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "settings": {
+      "TITLE": "OS Reload Settings",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    }
+  },
+  "server": {
+    "TITLE": "Servers",
+    "in_use": {
+      "TITLE": "Servers In Use",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "in_inventory": {
+      "TITLE": "Servers In Inventory",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "settings": {
+      "TITLE": "Server Settings",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      },
+      "DESCRIPTION": "Grants access to the Part Inventory"
+    }
+  },
+  "network": {
+    "TITLE": "Network",
+    "entities": {
+      "TITLE": "IP Entities",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "groups": {
+      "TITLE": "IP Groups",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
+    "switches": {
+      "TITLE": "Switches",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    }
+  },
+  "pkg": {
+    "TITLE": "Packages"
+  }
+}

@@ -56,18 +56,68 @@
     }
   },
   "integration": {
-    "TITLE": "Integration",
+    "permissions": {
+      "TITLE": "Integration Permissions"
+    },
+    "list": {
+      "TITLE": "Integrations",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
+    "buttons": {
+      "KEYS": "API Keys",
+      "PERMISSIONS": "Permissions",
+      "DELETE": "Delete"
+    },
+    "form": {
+      "title": {
+        "ADD": "Add Integration",
+        "EDIT": "Edit Integration"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "What program is integrating with the API? e.g. WHMCS"
+      }
+    },
     "modal": {
       "delete": {
-        "TITLE": "Delete API Key?",
-        "BODY": "Deleting this API Key will permanently block any integrations using it from accessing the Synergy API. This action cannot be undone.",
+        "TITLE": "Delete Integration?",
+        "BODY": "Deleting this Integration will permanently block any API Keys using it from accessing the Synergy API. Also, it will remove the billing IDs for any clients or servers in use by this integration. This action cannot be undone.",
         "CANCEL": "Cancel",
         "SUBMIT": "Delete"
       }
     },
     "key": {
       "EMPTY": "No API Keys created for {{ name }} yet.",
-      "ADD": "Add {{ name }} API Key"
+      "ADD": "Add {{ name }} API Key",
+      "list": {
+        "TITLE": "Integration API Keys"
+      },
+      "buttons": {
+        "PARENT": "« Back to Integration API Keys"
+      },
+      "form": {
+        "title": {
+          "ADD": "Add Integration API Key",
+          "EDIT": "Edit Integration API Key"
+        },
+        "name": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "A memorable name for this API Key, e.g. the hostname of the application using it."
+        }
+      },
+      "modal": {
+        "delete": {
+          "TITLE": "Delete API Key?",
+          "BODY": "Deleting this API Key will permanently block any integrations using it from accessing the Synergy API. This action cannot be undone.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Delete"
+        }
+      }
     }
   }
 }

@@ -1,0 +1,22 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th Name
+  th Parent
+  th Host
+
+block columns
+  td
+    a(
+      ui-sref="app.pxe.server.view({id: row.id})"
+      ng-bind="row.name"
+    )
+  td
+    a(
+      ui-sref="app.pxe.server.view({id: row.parent.id})"
+      ng-bind="row.parent.name"
+    )
+  td(
+    ng-bind="'http'+(row.http.use_https ? 's' : '')+'://'+row.http.host+':'+ row.http.port"
+  )
+    

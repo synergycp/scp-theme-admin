@@ -1,0 +1,26 @@
+extends /resources/angle/pug/table
+
+block headings
+  th.sortable
+    span(translate="switch.port.list.heading.PORT")
+    sort(col="port")
+  th.sortable
+    span(translate="switch.port.list.heading.OWNER")
+    sort(col="owner")
+  th.sortable
+    span(translate="switch.port.list.heading.SPEED")
+    sort(col="speed")
+
+block columns
+  td
+    span(ng-bind="row.name")
+  td
+    a(
+      ng-if="row.owner"
+      ng-bind="row.owner.server.name"
+      ui-sref="app.hardware.server.view.manage({ id: row.owner.server.id })"
+    )
+    span.text-muted(ng-if="!row.owner") -
+  td
+    span(ng-bind="row.speed.name")
+    span.text-muted(ng-if="!row.speed") -

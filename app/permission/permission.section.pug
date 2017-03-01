@@ -1,0 +1,32 @@
+include /resources/angle/pug/mixins/form
+
+div(ng-class="{'row': section.hasColumns}")
+  div(
+    ng-class="{'col-md-4': section.hasColumns}"
+    ng-repeat="(key, sub) in section.map"
+    ng-init="pfx = [section.prefix, key].join('.') + (section.prefix == 'pkg' ? '.admin.permissions' : '')"
+  )
+    div(
+      ng-if="!section.hasSub(sub)"
+      ng-init="desc = [pfx, 'DESCRIPTION'].join('.')"
+    )
+      +checkbox("{{pfx}}.LABEL")(
+        ng-model="section.map[key]"
+      )
+      p.help-block(
+        ng-if="(desc | translate) !== desc"
+        translate="{{desc}}"
+      )
+
+    div(
+      ng-if="section.hasSub(sub)"
+      ng-init="title = [pfx, 'TITLE'].join('.')"
+    )
+      h5.check-separator.first(
+        ng-if="(title | translate) !== title"
+        translate="{{title}}"
+      )
+      permission-section(
+        prefix="pfx"
+        map="sub"
+      )

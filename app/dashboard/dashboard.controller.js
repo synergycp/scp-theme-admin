@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function DashboardCtrl(Dashboard) {
+  function DashboardCtrl(Dashboard, $rootScope) {
     var dash = this;
     var cols = {
       items: [],
@@ -33,6 +33,7 @@
       }
 
       _.map(Dashboard.get(), addRepo);
+      $rootScope.$broadcast('viewContentReadyEvent'); // hide preloader screen (fixes preloader showing too long when a lot of items are on Dashboard)
     }
 
     function addRepo(repo) {

@@ -301,8 +301,8 @@ gulp.task('create-versions:html-json-manifest', function () {
       includeFilesInManifest: ['.html', '.json'],
       fileNameManifest: './html-versions-manifest.js',
       transformFilename: function (file, hash) {
-        var ext = path.extname(file.path);
-        return path.basename(file.path, ext) + ext + '__' + hash.substr(0, 10);
+        file.path = '/'; // to removepath and leave only hash (transformPath() not working)
+        return hash.substr(0, 10);
       }
     }))
     .pipe($.revAll.manifestFile())
@@ -321,7 +321,7 @@ gulp.task('create-versions:implement-html-json-manigest', ['create-versions:html
 
 gulp.task('create-versions:js-css-manifest', ['create-versions:implement-html-json-manigest'],function () {
   // get MD5 for each js and css files in /public and write it into js-css-manifest json file
-  gulp
+  return gulp
     .src(["./public/**/*.js", "./public/**/*.css"])
     .pipe($.revAll.revision({
       fileNameManifest: './js-css-versions-manifest.json',
@@ -337,7 +337,7 @@ gulp.task('create-versions:js-css-manifest', ['create-versions:implement-html-js
 
 gulp.task('create-versions:replace-js-css', ['create-versions:js-css-manifest'], function () {
   // replaces all references to files from manifest with according hashed names
-  gulp.src("./public/index.html")
+  return gulp.src("./public/index.html")
     .pipe($.revReplace({ manifest: gulp.src("./js-css-versions-manifest.json") }))
     .pipe(gulp.dest('./public/', { overwrite: true }));
 })

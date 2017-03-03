@@ -30,7 +30,7 @@
       return {
        'request': function(config) {
            if(versions[config.url]) {
-            config.url = versions[config.url]
+             config.url = config.url + "__" + versions[config.url]
            }
            return config;
         }

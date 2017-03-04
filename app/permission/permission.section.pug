@@ -12,6 +12,7 @@ div(ng-class="{'row': section.hasColumns}")
     )
       +checkbox("{{pfx}}.LABEL")(
         ng-model="section.map[key]"
+        ng-change="section.onChange()"
       )
       p.help-block(
         ng-if="(desc | translate) !== desc"

@@ -33,6 +33,9 @@
       }
 
       _.map(Dashboard.get(), addRepo);
+      Dashboard.provider.on('repo:add', function(name) {
+        addRepo(Dashboard.provider.getRepo(name));
+      });
     }
 
     function addRepo(repo) {

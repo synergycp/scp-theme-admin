@@ -7,4 +7,10 @@ include /resources/angle/pug/mixins/form
         prefix="key == 'pkg' ? key : 'permissions.'+key"
         map="section"
         has-columns="true"
+        on-change="perms.areAllSelected()"
       )
+  div.pull-right
+    +checkbox("permissions.all.TITLE")(
+      ng-model="perms.allSelected"
+      ng-change="perms.toggleAllCheckboxes()"
+    )

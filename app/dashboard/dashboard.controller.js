@@ -33,7 +33,13 @@
       }
 
       _.map(Dashboard.get(), addRepo);
-      $rootScope.$broadcast('viewContentReadyEvent'); // hide preloader screen (fixes preloader showing too long when a lot of items are on Dashboard)
+      
+      Dashboard.provider.on('repo:add', function(name) {
+        addRepo(Dashboard.provider.getRepo(name));
+      });
+      
+      // hide preloader screen (fixes preloader showing too long when a lot of items are on Dashboard)
+      $rootScope.$broadcast('viewContentReadyEvent');
     }
 
     function addRepo(repo) {

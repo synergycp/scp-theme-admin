@@ -1,0 +1,49 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field("{{ 'pxe.server.form.name.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.server.form.name.PLACEHOLDER' | translate }}"
+  ng-model="pxeServerForm.input.name"
+)
+
++label("{{ 'pxe.server.form.parent.LABEL' | translate }}")
+  +input-with-btn("fa fa-times-circle")(
+    ng-click="pxeServerForm.parentServers.selected = null"
+  )
+    +ui-select("pxeServerForm.parentServers")
+      ui-select-match(placeholder="{{ 'pxe.server.form.parent.PLACEHOLDER' | translate }}")
+        span(ng-bind="$select.selected.name")
+
+      ui-select-choices(
+        repeat="parent in pxeServerForm.parentServers.items track by parent.id"
+        refresh="pxeServerForm.parentServers.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="parent.name | highlight: $select.search")
+
++field("{{ 'pxe.server.form.max_installs.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.server.form.max_installs.PLACEHOLDER' | translate }}"
+  ng-model="pxeServerForm.input.install_max_concurrent"
+)
+
+hr
+
++field("{{ 'pxe.server.form.host.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.server.form.host.PLACEHOLDER' | translate }}"
+  ng-model="pxeServerForm.input.http.host"
+)
+
++field("{{ 'pxe.server.form.port.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.server.form.port.PLACEHOLDER' | translate }}"
+  ng-model="pxeServerForm.input.http.port"
+)
+
++label("{{ 'pxe.server.form.https.LABEL' | translate }}")
+  +checkbox()(
+    ng-model="pxeServerForm.input.http.use_https"
+  )
+
++field("{{ 'pxe.server.form.api_key.LABEL' | translate }}", "name")(
+  ng-model="pxeServerForm.input.http.api_key"
+)
+

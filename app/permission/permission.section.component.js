@@ -8,6 +8,7 @@
         prefix: '=',
         map: '=',
         hasColumns: '=?',
+        onChange: '='
       },
       controller: 'PermissionSectionCtrl as section',
       templateUrl: 'app/permission/permission.section.html'

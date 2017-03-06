@@ -7,6 +7,8 @@ list.panel.panel-default(
       ng-click="scans.list.create()"
     )
       i.fa.fa-plus
+    a.btn.btn-default(ng-click="scans.list.refresh.now()")
+      i.fa.fa-refresh
   switch-scan-table.border-top-table(
     ng-if="scans.list.items.length"
   )

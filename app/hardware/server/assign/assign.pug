@@ -20,9 +20,7 @@ include /resources/angle/pug/mixins/panel
       tr
         th.v-mid.shrink(translate="server.assign.client.TITLE")
         td
-          span(            
-            class="editable"
-          )
+          span.editable
             a(
               ng-if="assign.server.access"
               ui-sref="app.user.client.view(assign.server.access.client)"
@@ -32,14 +30,10 @@ include /resources/angle/pug/mixins/panel
               ng-if="!assign.server.access"
               translate="server.assign.client.NONE"
             )
-            div(
-              class="btn btn-default btn-xs editable-floater"
-              ng-class="{'show-hover': editable.hoverable}"
+            .btn.btn-default.btn-xs.editable-floater(
               ng-click="assign.client.modal()"
             )
-              span(
-                class="fa fa-pencil"
-              )
+              span.fa.fa-pencil
       tr
         th.v-mid.shrink(translate="server.assign.GROUP")
         td

@@ -1,13 +1,14 @@
 var
   path = require('path'),
   gulp = require('gulp'),
+  ngGulp = require('scp-ng-gulp')(require('gulp'))
   $ = require('gulp-load-plugins')(),
   gulpsync = $.sync(gulp),
   browserSync = require('browser-sync').create(),
   reload = browserSync.reload,
-  PluginError = $.util.PluginError,
-  del = require('del'),
-  fs = require('fs');
+  PluginError = $.util.PluginError;
+
+var createVersions = ngGulp.require('create-versions')();
 
 var Q = require('q');
 var _ = require('lodash');
@@ -291,59 +292,6 @@ gulp.task('assets:raw', function () {
 });
 
 
-
-
-gulp.task('create-versions:html-json-manifest', function () {
-  // create versions manifest for html and json files
-  return gulp
-    .src(["!./public/index.html", "./public/**/*.html", "./public/**/*.json"])
-    .pipe($.revAll.revision({
-      includeFilesInManifest: ['.html', '.json'],
-      fileNameManifest: './html-versions-manifest.js',
-      transformFilename: function (file, hash) {
-        file.path = '/'; // to removepath and leave only hash (transformPath() not working)
-        return hash.substr(0, 10);
-      }
-    }))
-    .pipe($.revAll.manifestFile())
-    .pipe($.insert.prepend('window.FILES_VERSIONS = '))
-    .pipe($.insert.append(';'))
-    .pipe(gulp.dest('./'));
-});
-
-
-gulp.task('create-versions:implement-html-json-manigest', ['create-versions:html-json-manifest'], function () {
-  // concat html-json manifest with app.js
-  return gulp.src(['./html-versions-manifest.js', build.scripts + '/app.js'])
-    .pipe($.concat(build.scripts + '/app.js'))
-    .pipe(gulp.dest('./', { overwrite: true }));
-})
-
-gulp.task('create-versions:js-css-manifest', ['create-versions:implement-html-json-manigest'],function () {
-  // get MD5 for each js and css files in /public and write it into js-css-manifest json file
-  return gulp
-    .src(["./public/**/*.js", "./public/**/*.css"])
-    .pipe($.revAll.revision({
-      fileNameManifest: './js-css-versions-manifest.json',
-      transformFilename: function (file, hash) {
-        var ext = path.extname(file.path);
-        return path.basename(file.path, ext) + ext + '__'+hash.substr(0, 10);
-      }
-    }))
-    .pipe($.revAll.manifestFile())
-    .pipe(gulp.dest('./'));
-
-});
-
-gulp.task('create-versions:replace-js-css', ['create-versions:js-css-manifest'], function () {
-  // replaces all references to files from manifest with according hashed names
-  return gulp.src("./public/index.html")
-    .pipe($.revReplace({ manifest: gulp.src("./js-css-versions-manifest.json") }))
-    .pipe(gulp.dest('./public/', { overwrite: true }));
-})
-
-gulp.task('create-versions', ['create-versions:html-json-manifest', 'create-versions:implement-html-json-manigest', 'create-versions:js-css-manifest', 'create-versions:replace-js-css']);
-
 //---------------
 // WATCH
 //---------------
@@ -389,6 +337,8 @@ gulp.task('clean', function (done) {
   }, done);
 });
 
+gulp.task('create-versions', createVersions);
+
 //---------------
 // MAIN TASKS
 //---------------
@@ -410,8 +360,8 @@ gulp.task('prod', function () {
 // Server for development
 gulp.task('serve', gulpsync.sync([
   'default',
-  'browsersync'
-]), done);
+  'create-versions',
+  'browsersync']), done);
 
 // Server for production
 gulp.task('serve-prod', gulpsync.sync([

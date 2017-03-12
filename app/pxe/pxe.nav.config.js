@@ -77,6 +77,7 @@
     }
 
     function hide() {
+      group.remove(PxeInstallNav);
       group.remove(PRESEEDS);
       group.remove(PROFILES);
       group.remove(SHELL_SCRIPTS);

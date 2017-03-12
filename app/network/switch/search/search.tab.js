@@ -21,23 +21,26 @@
    *
    * @ngInject
    */
-  function SwitchSearchTabFactory ($state, SwitchList, RouteHelpers) {
+  function SwitchSearchTabFactory($state, SwitchList, ListFilter, RouteHelpers) {
     return function () {
-        return new SwitchSearchTab(
-          SwitchList(),
-          $state,
-          RouteHelpers
-        );
+      var list = SwitchList();
+      return new SwitchSearchTab(
+        list,
+        $state,
+        ListFilter(list),
+        RouteHelpers
+      );
     };
   }
 
-  function SwitchSearchTab (list, $state, RouteHelpers) {
+  function SwitchSearchTab (list, $state, filter, RouteHelpers) {
     var tab = this;
 
     tab.name = 'switches';
     tab.lang = 'switch';
     tab.text = 'switch.search.TITLE';
     tab.list = list;
+    tab.filter = filter;
     tab.select = onSelect;
     tab.order = 20;
     tab.results = {

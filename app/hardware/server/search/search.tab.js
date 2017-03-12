@@ -21,17 +21,19 @@
    *
    * @ngInject
    */
-  function ServerSearchTabFactory ($state, ServerList, RouteHelpers) {
+  function ServerSearchTabFactory($state, ServerList, RouteHelpers, ListFilter) {
     return function () {
+        var list = ServerList();
         return new ServerSearchTab(
-          ServerList(),
+          list,
           $state,
+          ListFilter(list),
           RouteHelpers
         );
     };
   }
 
-  function ServerSearchTab (list, $state, RouteHelpers) {
+  function ServerSearchTab(list, $state, filter, RouteHelpers) {
     var tab = this;
 
     tab.name = 'servers';
@@ -39,6 +41,7 @@
     tab.text = 'server.search.TITLE';
     tab.lang = 'server';
     tab.order = 10;
+    tab.filter = filter;
     tab.select = onSelect;
     tab.results = {
       url: RouteHelpers.basepath('hardware/server/search/search.tab.html'),

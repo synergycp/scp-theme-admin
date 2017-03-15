@@ -39,8 +39,11 @@ block columns
   )
   td(
     ng-if="table.showServerCount"
-    ng-bind="row.owner.server.name || '-'"
   )
+    a(
+      ui-sref="app.hardware.server.view.manage({id: row.owner.server.id})"
+      ng-bind="row.owner.server.name || '-'"
+    )
   td(
     ng-if="table.showVlan"
     ng-bind="row.vlan"

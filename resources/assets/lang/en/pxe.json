@@ -195,6 +195,60 @@
       "DELETE": "Delete"
     }
   },
+  "server": {
+    "list": {
+      "TITLE": "Deploy Servers",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete OS Reload Servers",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these OS Reload Servers:"
+      }
+    },
+    "form": {
+      "title": {
+        "ADD": "Create PXE Server",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "parent": {
+        "LABEL": "Parent PXE server",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "max_installs": {
+        "LABEL": "Max Installs",
+        "PLACEHOLDER": ""
+      },
+      "host": {
+        "LABEL": "Host",
+        "PLACEHOLDER": "localhost"
+      },
+      "port": {
+        "LABEL": "Port",
+        "PLACEHOLDER": "3000"
+      },
+      "https": {
+        "LABEL": "Use HTTPS"
+      },
+      "api_key": {
+        "LABEL": "API Key"
+      }
+    },
+    "buttons": {
+      "DELETE": "Delete"
+    }
+  },
   "driver": {
     "list": {
       "TITLE": "PXE Drivers",

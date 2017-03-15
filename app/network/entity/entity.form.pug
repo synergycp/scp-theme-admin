@@ -40,6 +40,15 @@ include /resources/angle/pug/mixins/form
       )
         span.fa.fa-times-circle
 
++label("{{ 'entity.form.server.LABEL' | translate }}")(
+  ng-if="entityForm.form.input.owner.server"
+)
+  p.form-control-static
+    a(
+      ui-sref="app.hardware.server.view.manage({id: entityForm.form.input.owner.server.id})"
+      ng-bind="entityForm.form.input.owner.server.name || '-'"
+    )
+
 +select(
   "{{ 'entity.form.type.LABEL' | translate }}",
   "type"

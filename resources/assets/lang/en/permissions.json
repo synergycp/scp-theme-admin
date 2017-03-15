@@ -143,5 +143,9 @@
   },
   "pkg": {
     "TITLE": "Packages"
+  },
+  "all": {
+    "TITLE": "Enable All",
+    "TEXT": "Click here to enable/disable all permissions"
   }
 }

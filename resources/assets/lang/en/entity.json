@@ -56,6 +56,9 @@
       "LABEL": "VLAN",
       "PLACEHOLDER": "1"
     },
+    "server": {
+      "LABEL": "Server"
+    },
     "type": {
       "LABEL": "IP Type",
       "V4": "IPv4",

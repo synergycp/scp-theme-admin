@@ -36,6 +36,11 @@
     sref: "app.pxe.driver.list",
   }
 
+  var DEPLOY_SERVERS = {
+    text: "Deploy Servers",
+    sref: "app.pxe.server.list",
+  }
+
   /**
    * @ngInject
    */
@@ -67,16 +72,19 @@
         group.item(BOOT_SCRIPTS);
         group.item(ISOS);
         group.item(DRIVERS);
+        group.item(DEPLOY_SERVERS);
       }
     }
 
     function hide() {
+      group.remove(PxeInstallNav);
       group.remove(PRESEEDS);
       group.remove(PROFILES);
       group.remove(SHELL_SCRIPTS);
       group.remove(BOOT_SCRIPTS);
       group.remove(ISOS);
       group.remove(DRIVERS);
+      group.remove(DEPLOY_SERVERS);
     }
   }
 })();

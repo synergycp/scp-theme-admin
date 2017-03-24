@@ -6,9 +6,9 @@ form(ng-submit="pxeInstallForm.submit()")
     ng-class="pxeInstallForm.loader.class"
   )
     .panel-body.form-horizontal
-      +label("server.form.cpu.LABEL")
+      +label("os-reload.server.server.LABEL")
         +ui-select("pxeInstallForm.server")
-          ui-select-match(placeholder="{{ 'server.form.cpu.PLACEHOLDER' | translate }}")
+          ui-select-match(placeholder="{{ 'os-reload.server.server.PLACEHOLDER' | translate }}")
             span(ng-bind="$select.selected.name")
 
           ui-select-choices(

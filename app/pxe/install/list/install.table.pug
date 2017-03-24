@@ -1,4 +1,4 @@
-extends /resources/angle/pug/table
+extends /resources/angle/pug/table-checkable
 
 block headings
   th
@@ -27,10 +27,10 @@ block columns
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(
-        ui-sref="app.hardware.server.view.edit({id: row.id})"
+        ng-click="table.list.list.reloadServer(row.server)"
       )
         i.fa.fa-plus
       a.btn.btn-default(
-        ng-click="table.list.list.onDelete(row)"
+        ng-click="table.list.list.onDelete([row])"
       )
         i.fa.fa-trash

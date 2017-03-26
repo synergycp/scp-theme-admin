@@ -50,6 +50,11 @@
       };
 
       if (!item.id) {
+        if (!item.name && !item.billing_id) {
+          // Nothing to save.
+          return;
+        }
+
         return tab.list
           .create(formData, createOpts)
           .then(_.assign.bind(_, item))
@@ -62,7 +67,11 @@
       if (!_.some(formElems, '$dirty')) {
         return;
       }
-      return tab.list.patch(formData, [item]).then(cleanForm);
+
+      return tab.list
+        .patch(formData, [item])
+        .then(cleanForm)
+        ;
     }
 
     function getFormElems(id) {

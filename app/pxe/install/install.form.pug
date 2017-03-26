@@ -90,10 +90,3 @@ form(ng-submit="pxeInstallForm.submit()")
           type="submit"
           translate="os-reload.server.SUBMIT"
         )
-div(ng-class="{ hide: !pxeInstallForm.list.items.length }")
-  +panel("{{ 'os-reload.server.TITLE' | translate }}")
-    .panel-body.pxe-install-status(ng-if="pxeInstallForm.list.items.length")
-      os-reload-progress(
-        install="pxeInstallForm.list.items[0]"
-        on-delete="pxeInstallForm.delete(install, restart)"
-      )

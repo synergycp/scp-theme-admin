@@ -10,7 +10,7 @@
       bindings: {
         showSwitchId: '=?',
         showIp: '=?',
-        showServerCount: '=?',
+        showPortCount: '=?',
         showScanStatus: '=?',
         showActions: '=?',
       },
@@ -36,7 +36,7 @@
       _.defaults(table, {
         showSwitchId: true,
         showIp: true,
-        showServerCount: true,
+        showPortCount: true,
         showScanStatus: true,
         showActions: true,
       });

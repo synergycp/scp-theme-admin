@@ -155,9 +155,6 @@
             port.original.switch.port.id :
             undefined,
         })
-        .on('change', function () {
-          port.entities.original
-        })
       ;
       port.switch.port.switchId = port.switch.selected.id;
       port.switch.port.load();

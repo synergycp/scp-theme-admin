@@ -147,14 +147,30 @@
     }
 
     function getV4RangeEnd() {
-      if (entityForm.v4.type === TYPE_V4.SINGLE) {
-        return;
+        if (entityForm.v4.type === TYPE_V4.SINGLE) {
+            return;
+        }
+
+        if (!entityForm.v4.range_end) {
+            return entityForm.v4.range_end;
+        }
+
+        var countDots = (entityForm.v4.range_end.match(RegExp('\\.', 'g')) || []).length;
+
+        var rules = ['\\d+.', '\\d+.', '\\d+'];
+
+        rules.splice(0, countDots);
+
+        var pattern = rules.join("");
+
+        if (pattern) {
+            var part = entityForm.input.v4.address.match(pattern).pop();
+
+            return part + '.' + entityForm.v4.range_end;
+        }
+
+        return entityForm.v4.range_end;
       }
-
-      var first3 = entityForm.input.v4.address.match(/\d+.\d+.\d+/).pop();
-
-      return first3+'.'+entityForm.v4.range_end;
-    }
 
     function updateTypeFromInput() {
       fillFormInputs();

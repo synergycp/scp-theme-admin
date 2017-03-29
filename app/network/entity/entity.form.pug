@@ -75,16 +75,16 @@ div(ng-if="entityForm.showV4")
     "v4.address"
   )
     .row
-      div(ng-class="entityForm.v4.is_single ? 'col-xs-12' : 'col-xs-8'")
+      div(ng-class="entityForm.v4.is_single ? 'col-xs-12' : 'col-xs-5'")
         input.form-control(
           type="text"
           placeholder="{{ 'entity.form.v4.address.PLACEHOLDER' | translate }}"
           ng-model="entityForm.input.v4.address"
         )
-      .col-xs-1.text-center(ng-if-start="entityForm.v4.is_range")
+      .col-xs-2.text-center(ng-if-start="entityForm.v4.is_range")
         p.form-control-static
           strong -
-      .col-xs-3(ng-if-end)
+      .col-xs-5(ng-if-end)
         input.form-control(
           type="text"
           placeholder="{{ 'entity.form.v4.range.PLACEHOLDER' | translate }}"

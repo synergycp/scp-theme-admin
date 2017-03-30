@@ -1,8 +1,10 @@
 extends /resources/angle/pug/table-checkable
 
 block headings
-  th Name
-  th Description
+  th.sortable(ng-if="table.showName") Name
+    sort(col="name")
+  th.sortable(ng-if="table.showDescription") Description
+    sort(col="description")
   th Actions
 
 block columns

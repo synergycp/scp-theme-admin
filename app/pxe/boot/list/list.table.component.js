@@ -29,7 +29,7 @@
 
     function init() {
       _.defaults(table, {
-        // showName: true,
+        showName: true,
       });
     }
   }

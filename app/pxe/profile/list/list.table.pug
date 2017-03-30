@@ -1,10 +1,13 @@
 extends /resources/angle/pug/table-checkable
 
 block headings
-  th Name
-  th Billing ID
-  th Client Access
-  th(ng-if="table.showActions") Actions
+    th.sortable(ng-if="table.showName") Name
+        sort(col="name")
+    th.sortable(ng-if="table.showBilling") Billing ID
+        sort(col="billing_id")
+    th.sortable(ng-if="table.showClientAccess") Client Access
+        sort(col="client_access")
+    th(ng-if="table.showActions") Actions
 
 block columns
   td

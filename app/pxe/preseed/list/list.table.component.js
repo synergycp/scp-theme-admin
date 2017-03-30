@@ -34,6 +34,8 @@
     function init() {
       _.defaults(table, {
         showName: true,
+        showDescription: true,
+        showInstallable: true,
         showReserved: true,
         showIpEntities: true,
         showServers: true,

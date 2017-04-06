@@ -74,8 +74,9 @@ block columns
 
   td(
     ng-if="table.showSwitch"
-    ng-bind="row.switch.name || '-'"
   )
+    span(ng-bind="row.switch.name || '-'")
+    span(ng-bind="row.switch.port ? ' - ' + row.switch.port.name : ''")
   td(
     ng-if="table.showGroup"
     ng-bind="row.group.name || '-'"

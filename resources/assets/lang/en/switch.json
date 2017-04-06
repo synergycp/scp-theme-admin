@@ -134,6 +134,6 @@
   },
   "search": {
     "TITLE": "Switches",
-    "SERVERS": "{{ servers }} Server{{ servers == '1' ? '' : 's' }}"
+    "PORTS": "{{ portsInUseCount }} Port{{ portsInUseCount == '1' ? '' : 's' }} in use"
   }
 }

@@ -10,7 +10,7 @@ block headings
   th(ng-if="table.showScanStatus")
     span(translate="switch.heading.SCAN")
   th(
-    ng-if="table.showServerCount"
+    ng-if="table.showPortCount"
     translate="switch.heading.SERVER_COUNT"
   )
   th(
@@ -42,10 +42,10 @@ block columns
     )
       i.fa.fa-plus
 
-  td(ng-if="table.showServerCount")
+  td(ng-if="table.showPortCount")
     a(
       ui-sref="app.hardware.server.list({switch: row.id})"
-      ng-bind="row.serverPortsCount"
+      ng-bind="row.portsInUseCount"
     )
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs

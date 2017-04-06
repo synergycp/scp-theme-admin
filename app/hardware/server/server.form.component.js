@@ -223,23 +223,23 @@
     function savePortChanges(port, portIndex) {
       var formData = port.data();
       var portPrefix = 'port-'+portIndex+'.';
+      var switchId = port.switch.getSelected('id');
+      var switchPortId = port.switch.port.getSelected('id');
+      var speedId = port.switch.speed.getSelected('id');
+      var dirtySwitchPort =
+        serverForm.alwaysDirty ||
+        port.switch.$dirty ||
+        port.switch.port.$dirty ||
+        port.switch.speed.$dirty;
 
       return $q.all([
-        updateSwitchPort()
-          .then(updateServerPort)
+        updateServerPort()
+          .then(updateSwitchPort)
           .then(updateEntities),
       ]).then(port.$setPristine);
 
       function updateSwitchPort() {
-        if (!serverForm.alwaysDirty && !port.switch.$dirty && !port.switch.port.$dirty && !port.switch.speed.$dirty) {
-          return $q.when();
-        }
-
-        var switchId = port.switch.getSelected('id');
-        var switchPortId = port.switch.port.getSelected('id');
-        var speedId = port.switch.speed.getSelected('id');
-
-        if (!switchId || !switchPortId || !speedId) {
+        if (!dirtySwitchPort || !switchId || !switchPortId) {
           return $q.when();
         }
 
@@ -248,7 +248,11 @@
             'switch/' + switchId + '/port/' + switchPortId
           )
           .patch({
-            port_speed_id: speedId,
+            port_speed_id: speedId || null,
+            owner: {
+              type: 'server.port',
+              id: port.id,
+            }
           })
           ;
       }
@@ -285,7 +289,6 @@
         var data = {
           mac: serverForm.alwaysDirty || serverForm.form.form[portPrefix+'mac'].$dirty ? port.input.mac : undefined,
           group_id: serverForm.alwaysDirty || port.group.$dirty ? port.group.getSelected('id') : undefined,
-          switch_port_id: serverForm.alwaysDirty || port.switch.port.$dirty ? port.switch.port.getSelected('id') : undefined,
         };
 
         if (!_(data).values().reject(isUndefined).value().length) {

@@ -295,9 +295,9 @@
           return $q.when();
         }
 
-        if (formData.id) {
+        if (port.id && !serverForm.isCreating) {
           return $ports
-            .one('' + formData.id)
+            .one('' + port.id)
             .patch(data)
             .then(updateExisting)
             ;
@@ -309,9 +309,7 @@
           ;
 
         function updateExisting(response) {
-          if (!serverForm.isCreating) {
-            port.fromExisting(response, true);
-          }
+          port.fromExisting(response, true);
         }
       }
     }

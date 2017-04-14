@@ -22,9 +22,7 @@ block headings
   )
 
 block columns
-  td(
-    ng-if="table.showName"
-  )
+  td(ng-if="table.showName")
     a(
       ui-sref="app.network.entity.view({id: row.id})"
       ng-bind="row.name"
@@ -37,10 +35,13 @@ block columns
     ng-if="table.showGroup"
     ng-bind="row.group.name || '-'"
   )
-  td(
-    ng-if="table.showServerCount"
-    ng-bind="row.owner.server.name || '-'"
-  )
+  td(ng-if="table.showServerCount")
+    a(
+      ui-sref="app.hardware.server.view.manage({id: row.owner.server.id})"
+      ng-bind="row.owner.server.name"
+      ng-if="row.owner.server"
+    )
+    span.text-muted(ng-if="!row.owner.server") -
   td(
     ng-if="table.showVlan"
     ng-bind="row.vlan"

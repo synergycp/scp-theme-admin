@@ -37,8 +37,7 @@
   angular
     .module('app.network')
     .component('entityForm', {
-      require: {
-      },
+      require: {},
       bindings: {
         form: '=',
       },
@@ -47,7 +46,7 @@
       templateUrl: 'app/network/entity/entity.form.html',
     })
     .controller('EntityFormCtrl', EntityFormCtrl)
-    ;
+  ;
 
   /**
    * @ngInject
@@ -66,7 +65,8 @@
       is_range: false,
       onTypeChange: onV4TypeChange,
       range_end: '',
-      onRangeChange: function() {},
+      onRangeChange: function () {
+      },
     };
     entityForm.$onInit = init;
     entityForm.onTypeChange = onTypeChange;
@@ -102,7 +102,7 @@
         entityForm.form
           .on('load', updateTypeFromInput)
           .on('change', updateTypeFromInput)
-          ;
+        ;
       }
     }
 
@@ -139,7 +139,7 @@
         };
       }
 
-      var input = _.clone(entityForm.input.v4);
+      var input = _.clone(entityForm.input.v4 || {});
 
       input.range_end = getV4RangeEnd();
 
@@ -147,13 +147,30 @@
     }
 
     function getV4RangeEnd() {
-      if (entityForm.v4.type === TYPE_V4.SINGLE) {
+      if (!entityForm.v4 || entityForm.v4.type === TYPE_V4.SINGLE) {
         return;
       }
 
-      var first3 = entityForm.input.v4.address.match(/\d+.\d+.\d+/).pop();
+      if (!entityForm.v4.range_end) {
+        return entityForm.v4.range_end;
+      }
 
-      return first3+'.'+entityForm.v4.range_end;
+      var countDots = (entityForm.v4.range_end.match(RegExp('\\.', 'g')) || []).length;
+
+      var rules = ['\\d+.', '\\d+.', '\\d+'];
+
+      rules.splice(0, countDots);
+
+      var pattern = rules.join("");
+
+      if (pattern) {
+        var part = entityForm.input.v4.address.match(pattern)
+          .pop();
+
+        return part + '.' + entityForm.v4.range_end;
+      }
+
+      return entityForm.v4.range_end;
     }
 
     function updateTypeFromInput() {
@@ -184,14 +201,27 @@
     }
 
     function getV4RangeEndFromInput() {
-      return entityForm.input.v4.range_end ?
-        entityForm.input.v4.range_end.match(/\d+$/).pop() :
-        null;
+      var rangeEnd = entityForm.input.v4.range_end;
+
+      if (!rangeEnd) {
+        return;
+      }
+
+      var sep = '.';
+      var exp = entityForm.input.v4.range_end.split(sep);
+      var last = exp.pop();
+      var first = exp.join(sep) + sep;
+
+      if (entityForm.input.v4.address.substr(0, first.length) === first) {
+        return last;
+      }
+
+      return entityForm.input.v4.range_end;
     }
 
     function loadGroups(search) {
       return $groups
-        .getList({ q: search })
+        .getList({q: search})
         .then(storeGroups)
         ;
     }

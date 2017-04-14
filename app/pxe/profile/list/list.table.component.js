@@ -35,6 +35,8 @@
       _.defaults(table, {
         showName: true,
         showReserved: true,
+        showBilling: true,
+        showClientAccess: true,
         showIpEntities: true,
         showServers: true,
         showActions: true,

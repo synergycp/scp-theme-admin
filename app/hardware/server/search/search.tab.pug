@@ -1,3 +1,12 @@
 list(list="tab.list")
+  .panel-body
+    .btn-group.btn-group-xs.pull-right
+      a.btn.btn-default(ng-click="tab.filter.visible = !tab.filter.visible")
+        i.fa.fa-filter
+  server-filters(
+    show="tab.filter.visible"
+    current="tab.filter.current"
+    change="tab.filter.change()"
+  )
   server-table
   list-footer

@@ -1,10 +1,16 @@
 include /resources/angle/pug/mixins/form
 
 .form-horizontal
+  +label("permissions.all.TITLE")
+    +checkbox("permissions.all.TEXT")(
+      ng-model="perms.allSelected"
+      ng-change="perms.toggleAllCheckboxes()"
+    )
   div(ng-repeat="(key, section) in perms.map")
     +label("permissions.{{key}}.TITLE")
       permission-section(
         prefix="key == 'pkg' ? key : 'permissions.'+key"
         map="section"
         has-columns="true"
+        on-change="perms.areAllSelected()"
       )

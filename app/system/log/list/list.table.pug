@@ -28,5 +28,5 @@ block columns
   td(ng-if="table.showDate")
     a(
       ui-sref="app.system.log.view({id: row.id})"
-      ng-bind="row.created_at"
+      date="row.created_at"
     )

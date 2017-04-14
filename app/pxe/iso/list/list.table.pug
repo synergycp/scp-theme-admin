@@ -15,7 +15,7 @@ block columns
       ng-bind="row.name"
     )
   td(ng-bind="row.status")
-  td(ng-bind="row.created_at")
+  td(date="row.created_at")
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(

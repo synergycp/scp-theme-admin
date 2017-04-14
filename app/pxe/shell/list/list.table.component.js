@@ -29,7 +29,9 @@
 
     function init() {
       _.defaults(table, {
-        showActions: true,
+          showName: true,
+          showDescription: true,
+          showActions: true,
       });
     }
   }

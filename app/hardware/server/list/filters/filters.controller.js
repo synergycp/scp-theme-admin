@@ -43,7 +43,7 @@
         filters.switch.setSelectedId($state.params['switch']),
         filters.cpu.setSelectedId($state.params['cpu']),
         filters.mem.setSelectedId($state.params['mem']),
-        filters.disks.setSelectedId($state.params['disks']),
+        filters.disks.setSelectedId(($state.params['disks[]'] || []).join(',')),
       ];
       filters.bw.min = $state.params['bw.min'] || null;
       filters.bw.max = $state.params['bw.max'] || null;
@@ -64,30 +64,21 @@
     }
 
     function fireChangeEvent() {
+      console.log(filters.disks.items);
       _.assign(filters.current, {
-        group: (filters.group.selected || []).map(getObjId).join(','),
-        client: (filters.client.selected || []).map(getObjId).join(','),
-        switch: (filters.switch.selected || []).map(getObjId).join(','),
-        cpu: (filters.cpu.selected || []).map(getObjId).join(','),
-        mem: (filters.mem.selected || []).map(getObjId).join(','),
-        disks: (filters.disks.items || []).map(function(select){
-          return select.selected && select.selected.id
-        }).join(','),
+        group: _.map((filters.group.selected || []), getObjId).join(','),
+        client: _.map((filters.client.selected || []), getObjId).join(','),
+        switch: _.map((filters.switch.selected || []), getObjId).join(','),
+        cpu: _.map((filters.cpu.selected || []), getObjId).join(','),
+        mem: _.map((filters.mem.selected || []), getObjId).join(','),
+        'disks[]': _(filters.disks.items || []).map(function(select){
+          return select.selected && select.selected.id;
+        }).filter().value() || '',
         'bw.min': filters.bw.min, 
         'bw.max': filters.bw.max, 
       });
 
-      $state.go($state.current.name, {
-        'group': filters.current.group,
-        'client': filters.current.client,
-        'switch': filters.current.switch,
-        'cpu': filters.current.cpu,
-        'mem': filters.current.mem,
-        'disks': filters.current.disks,
-        'q': filters.current.q,
-        'bw.min': filters.current['bw.min'],
-        'bw.max': filters.current['bw.max'],
-      });
+      $state.go($state.current.name, _.assign({}, filters.current));
 
       if (filters.change) {
         filters.change();

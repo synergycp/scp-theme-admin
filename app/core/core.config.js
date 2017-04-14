@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-   function coreConfig($compileProvider, $animateProvider, $locationProvider) {
+  function coreConfig($compileProvider, $animateProvider, $locationProvider) {
     // Disable debug info for performance boost.
     $compileProvider.debugInfoEnabled(false);
 

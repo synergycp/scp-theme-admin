@@ -81,6 +81,7 @@
         create({
           pxe_profile_id: profile.id,
           disk: { "raid": raid },
+          queue: true,
           edition_id: (edition || {}).id,
           license_key: pxeInstallForm.input.licenseKey,
           password: pxeInstallForm.input.password,

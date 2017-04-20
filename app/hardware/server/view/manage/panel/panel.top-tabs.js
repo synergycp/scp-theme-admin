@@ -7,9 +7,11 @@
   ;
 
   function TopTabsPanel(ServerManage, ServerManagePanelBandwidth) {
-    return ServerManagePanelBandwidth(
-      ServerManage.getServer(),
-      ServerManage.getControllerScope()
-    );
+    return function() {
+      return ServerManagePanelBandwidth(
+        ServerManage.getServer(),
+        ServerManage.getControllerScope()
+      );
+    }
   }
 })();

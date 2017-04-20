@@ -1,0 +1,13 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="os-reload.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+    block table
+      pxe-install-table.border-top-table
+    list-footer
+block bottom-left
+  pxe-install-form(form="vm.create")(id="pxe-install-form")

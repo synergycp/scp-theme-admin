@@ -16,6 +16,9 @@ block headings
   th.sortable(ng-if="table.showVlan")
     span(translate="entity.heading.VLAN")
     sort(col="vlan")
+  th.sortable(ng-if="table.showBillingId")
+    span(translate="entity.heading.BILLING_ID")
+    sort(col="billing_id")
   th(
     ng-if="table.showActions"
     translate="entity.heading.ACTIONS"
@@ -45,6 +48,10 @@ block columns
   td(
     ng-if="table.showVlan"
     ng-bind="row.vlan"
+  )
+  td(
+    ng-if="table.showBillingId"
+    ng-bind="row.billing_id"
   )
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs

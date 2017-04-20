@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function SwitchFiltersCtrl(Select, Observable, $state, $q, $timeout) {
+  function SwitchFiltersCtrl(Select, Search, Observable, $state, $q, $timeout) {
     var filters = this;
 
     filters.$onInit = init;
@@ -37,6 +37,11 @@
     }
 
     function listenForChanges() {
+      Search.on('change', function(searchStr) {
+        _.assign(filters.current, {
+          q: searchStr
+        });
+      })
       // filters.switch.on('change', fireChangeEvent);
     }
 
@@ -49,6 +54,7 @@
         // 'switch': filters.current.switch,
         'q': filters.current.q,
       });
+      Search.go(filters.current.q);
 
       if (filters.change) {
         filters.change();

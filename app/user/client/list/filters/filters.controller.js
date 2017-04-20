@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function ClientFiltersCtrl(Select, Observable, $state, $q, $timeout) {
+  function ClientFiltersCtrl(Select, Search, Observable, $state, $q, $timeout) {
     var filters = this;
 
     filters.$onInit = init;
@@ -37,6 +37,11 @@
     }
 
     function listenForChanges() {
+      Search.on('change', function(searchStr) {
+        _.assign(filters.current, {
+          q: searchStr
+        });
+      })
       // filters.client.on('change', fireChangeEvent);
     }
 
@@ -44,11 +49,7 @@
       _.assign(filters.current, {
         // client: filters.client.getSelected('id'),
       });
-
-      $state.go($state.current.name, {
-        // 'client': filters.current.client,
-        'q': filters.current.q,
-      });
+      Search.go(filters.current.q);
 
       if (filters.change) {
         filters.change();

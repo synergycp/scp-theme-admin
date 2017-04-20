@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function ServerFiltersCtrl(Select, MultiInput, Observable, $state, $q, $timeout) {
+  function ServerFiltersCtrl(Select, Search, MultiInput, Observable, $state, $q, $timeout) {
     var filters = this;
 
     filters.$onInit = init;
@@ -61,6 +61,12 @@
       filters.cpu.on('change', fireChangeEvent);
       filters.mem.on('change', fireChangeEvent);
       filters.disks.on('rem', fireChangeEvent); // on 'add' event will be fired by Select
+      
+      Search.on('change', function(searchStr) {
+        _.assign(filters.current, {
+          q: searchStr
+        });
+      })
     }
 
     function fireChangeEvent() {
@@ -88,6 +94,7 @@
         'bw.min': filters.current['bw.min'],
         'bw.max': filters.current['bw.max'],
       });
+      Search.go(filters.current.q);
 
       if (filters.change) {
         filters.change();

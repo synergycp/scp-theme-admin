@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function EntityFiltersCtrl(Select, Observable, $state, $q, $timeout) {
+  function EntityFiltersCtrl(Select, Search, Observable, $state, $q, $timeout) {
     var filters = this;
 
     filters.$onInit = init;
@@ -40,6 +40,12 @@
     function listenForChanges() {
       filters.group.on('change', fireChangeEvent);
       filters.server.on('change', fireChangeEvent);
+
+      Search.on('change', function(searchStr) {
+        _.assign(filters.current, {
+          q: searchStr
+        });
+      })
     }
 
     function fireChangeEvent() {
@@ -53,6 +59,7 @@
         'server.id': filters.current.server,
         q: filters.current.q,
       });
+      Search.go(filters.current.q);
 
       if (filters.change) {
         filters.change();

@@ -13,6 +13,7 @@
         showGroup: '=?',
         showServerCount: '=?',
         showVlan: '=?',
+        showBillingId: '=?',
         showActions: '=?',
       },
       controller: 'EntityTableCtrl as table',
@@ -39,6 +40,7 @@
         showGroup: true,
         showServerCount: true,
         showVlan: true,
+        showBillingId: true,
         showActions: true,
       });
     }

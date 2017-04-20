@@ -16,15 +16,16 @@ block headings
   th.sortable(ng-if="table.showVlan")
     span(translate="entity.heading.VLAN")
     sort(col="vlan")
+  th.sortable(ng-if="table.showBillingId")
+    span(translate="entity.heading.BILLING_ID")
+    sort(col="billing_id")
   th(
     ng-if="table.showActions"
     translate="entity.heading.ACTIONS"
   )
 
 block columns
-  td(
-    ng-if="table.showName"
-  )
+  td(ng-if="table.showName")
     a(
       ui-sref="app.network.entity.view({id: row.id})"
       ng-bind="row.name"
@@ -37,16 +38,20 @@ block columns
     ng-if="table.showGroup"
     ng-bind="row.group.name || '-'"
   )
-  td(
-    ng-if="table.showServerCount"
-  )
+  td(ng-if="table.showServerCount")
     a(
       ui-sref="app.hardware.server.view.manage({id: row.owner.server.id})"
-      ng-bind="row.owner.server.name || '-'"
+      ng-bind="row.owner.server.name"
+      ng-if="row.owner.server"
     )
+    span.text-muted(ng-if="!row.owner.server") -
   td(
     ng-if="table.showVlan"
     ng-bind="row.vlan"
+  )
+  td(
+    ng-if="table.showBillingId"
+    ng-bind="row.billing_id"
   )
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs

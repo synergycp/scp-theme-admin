@@ -1,6 +1,13 @@
 {
   "list": {
-    "EMPTY": "There are no PXE installations running right now"
+    "EMPTY": "There are no PXE installations running right now",
+    "TITLE": "OS Reloads",
+    "heading": {
+      "SERVER": "Server",
+      "PROFILE": "Profile",
+      "PROGRESS": "Progress",
+      "ACTIONS": "Actions"
+    }
   },
   "progress": {
     "RELOADING": "This server's operating system is being reloaded.",
@@ -23,6 +30,10 @@
     "TITLE": "Operating System Reload",
     "NOT_ENABLED": "This server must have a MAC address and be assigned an IP Entity to use OS Reload.",
     "SUBMIT": "Reload Operating System",
+    "server": {
+      "LABEL": "Server",
+      "PLACEHOLDER": "Type to Search..."
+    },
     "profile": {
       "LABEL": "Profile",
       "PLACEHOLDER": "Type to Search..."

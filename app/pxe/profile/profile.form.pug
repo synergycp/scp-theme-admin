@@ -37,38 +37,40 @@ include /resources/angle/pug/mixins/form
       +ui-select-choices("profileForm.emailTemplate")
         span(ng-bind-html="choice.name | highlight: $select.search")
 
-+label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
-  +ui-select("profileForm.shellScripts")(multiple, sortable="true")
-    ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
-      | {{ $item.name }}
-
-    ui-select-choices(
-      repeat=
-        "choice in (" +
-          "profileForm.shellScripts.items" +
-          "| filter: {name: $select.search}" +
-          "| filter: profileForm.shellScripts.notSelected" +
-        ") track by choice.id"
-      refresh="profileForm.shellScripts.load($select.search)"
-      refresh-delay="400"
-    )
-      span(ng-bind-html="choice.name | highlight: $select.search")
-      br
-      small(ng-bind-html="choice.description | highlight: $select.search")
-
-+label()
-  +checkbox()(
-    ng-model="profileForm.input.access_client"
++select("pxe.profile.form.platform.LABEL")(
+    ng-model="profileForm.platform"
   )
-    span(translate="pxe.profile.form.client_access.LABEL")
-+label()
-  +checkbox()(
-    ng-model="profileForm.windows"
+  option(
+    value="linux"
+    translate="pxe.profile.form.platform.linux"
   )
-    span(translate="pxe.profile.form.windows.LABEL")
+  option(
+    value="windows"
+    translate="pxe.profile.form.platform.windows"
+  )
 
 
-div(ng-if="profileForm.windows")
+div(ng-if="profileForm.platform == 'linux'")
+  +label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
+    +ui-select("profileForm.shellScripts")(multiple, sortable="true")
+      ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
+        | {{ $item.name }}
+
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "profileForm.shellScripts.items" +
+            "| filter: {name: $select.search}" +
+            "| filter: profileForm.shellScripts.notSelected" +
+          ") track by choice.id"
+        refresh="profileForm.shellScripts.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
+        br
+        small(ng-bind-html="choice.description | highlight: $select.search")
+
+div(ng-if="profileForm.platform == 'windows'")
   +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
     +input-with-btn("fa fa-times-circle")(
       ng-click="profileForm.input.iso = null"
@@ -122,3 +124,9 @@ div(ng-if="profileForm.windows")
         refresh-delay="400"
       )
         span(ng-bind-html="choice.name | highlight: $select.search")
+
++label()
+  +checkbox()(
+    ng-model="profileForm.input.access_client"
+  )
+    span(translate="pxe.profile.form.client_access.LABEL")

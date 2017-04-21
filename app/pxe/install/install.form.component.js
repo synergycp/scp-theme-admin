@@ -23,8 +23,8 @@
     var pxeInstallForm = this;
 
     pxeInstallForm.$onInit = init;
-    pxeInstallForm.server = Select('server').on('change', syncServer); 
-    pxeInstallForm.isEnabled = false;
+    pxeInstallForm.server = Select('server').on('change', syncServer);
+    pxeInstallForm.isEnabled = true;
     pxeInstallForm.canRAID = false;
     pxeInstallForm.submit = submit;
     pxeInstallForm.input = {

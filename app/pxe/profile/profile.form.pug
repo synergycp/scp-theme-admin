@@ -37,25 +37,6 @@ include /resources/angle/pug/mixins/form
       +ui-select-choices("profileForm.emailTemplate")
         span(ng-bind-html="choice.name | highlight: $select.search")
 
-+label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
-  +ui-select("profileForm.shellScripts")(multiple, sortable="true")
-    ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
-      | {{ $item.name }}
-
-    ui-select-choices(
-      repeat=
-        "choice in (" +
-          "profileForm.shellScripts.items" +
-          "| filter: {name: $select.search}" +
-          "| filter: profileForm.shellScripts.notSelected" +
-        ") track by choice.id"
-      refresh="profileForm.shellScripts.load($select.search)"
-      refresh-delay="400"
-    )
-      span(ng-bind-html="choice.name | highlight: $select.search")
-      br
-      small(ng-bind-html="choice.description | highlight: $select.search")
-
 +select("pxe.profile.form.platform.LABEL")(
     ng-model="profileForm.platform"
   )
@@ -68,6 +49,26 @@ include /resources/angle/pug/mixins/form
     translate="pxe.profile.form.platform.windows"
   )
 
+
+div(ng-if="profileForm.platform == 'linux'")
+  +label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
+    +ui-select("profileForm.shellScripts")(multiple, sortable="true")
+      ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
+        | {{ $item.name }}
+
+      ui-select-choices(
+        repeat=
+          "choice in (" +
+            "profileForm.shellScripts.items" +
+            "| filter: {name: $select.search}" +
+            "| filter: profileForm.shellScripts.notSelected" +
+          ") track by choice.id"
+        refresh="profileForm.shellScripts.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="choice.name | highlight: $select.search")
+        br
+        small(ng-bind-html="choice.description | highlight: $select.search")
 
 div(ng-if="profileForm.platform == 'windows'")
   +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")

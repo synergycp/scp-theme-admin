@@ -24,7 +24,7 @@
     filters.cpu = Select('part').filter({'part_type':'cpu'}).multi();
     filters.mem = Select('part').filter({'part_type':'mem'}).multi();
     filters.disks = MultiInput(DiskSelector)
-      .add();
+      .add().setMax(8);
     filters.bw = {
       min: null,
       max: null
@@ -64,7 +64,6 @@
     }
 
     function fireChangeEvent() {
-      console.log(filters.disks.items);
       _.assign(filters.current, {
         group: _.map((filters.group.selected || []), getObjId).join(','),
         client: _.map((filters.client.selected || []), getObjId).join(','),

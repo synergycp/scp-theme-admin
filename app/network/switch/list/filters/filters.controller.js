@@ -37,7 +37,7 @@
     }
 
     function listenForChanges() {
-      Search.on('change', function(searchStr) {
+      filters.shouldWatchMainSearch && Search.on('change', function(searchStr) {
         _.assign(filters.current, {
           q: searchStr
         });
@@ -54,7 +54,7 @@
         // 'switch': filters.current.switch,
         'q': filters.current.q,
       });
-      Search.go(filters.current.q);
+      filters.shouldWatchMainSearch && Search.go(filters.current.q);
 
       if (filters.change) {
         filters.change();

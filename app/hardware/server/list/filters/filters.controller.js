@@ -62,7 +62,7 @@
       filters.mem.on('change', fireChangeEvent);
       filters.disks.on('rem', fireChangeEvent); // on 'add' event will be fired by Select
       
-      Search.on('change', function(searchStr) {
+      filters.shouldWatchMainSearch && Search.on('change', function(searchStr) {
         _.assign(filters.current, {
           q: searchStr
         });
@@ -94,7 +94,7 @@
         'bw.min': filters.current['bw.min'],
         'bw.max': filters.current['bw.max'],
       });
-      Search.go(filters.current.q);
+      filters.shouldWatchMainSearch && Search.go(filters.current.q);
 
       if (filters.change) {
         filters.change();

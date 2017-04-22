@@ -41,7 +41,7 @@
       filters.group.on('change', fireChangeEvent);
       filters.server.on('change', fireChangeEvent);
 
-      Search.on('change', function(searchStr) {
+      filters.shouldWatchMainSearch && Search.on('change', function(searchStr) {
         _.assign(filters.current, {
           q: searchStr
         });
@@ -59,7 +59,7 @@
         'server.id': filters.current.server,
         q: filters.current.q,
       });
-      Search.go(filters.current.q);
+      filters.shouldWatchMainSearch && Search.go(filters.current.q);
 
       if (filters.change) {
         filters.change();

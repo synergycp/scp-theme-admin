@@ -11,6 +11,7 @@
         show: '<',
         current: '=',
         change: '&?',
+        shouldWatchMainSearch: '=?'
       },
       controller: 'SwitchFiltersCtrl as filters',
       transclude: true,

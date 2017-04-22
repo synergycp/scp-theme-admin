@@ -11,6 +11,7 @@
         show: '<',
         current: '=',
         change: '&?',
+        shouldWatchMainSearch: '=?'
       },
       controller: 'EntityFiltersCtrl as filters',
       transclude: true,

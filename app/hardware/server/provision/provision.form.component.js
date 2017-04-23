@@ -52,12 +52,13 @@
   /**
    * @ngInject
    */
-  function ProvisionFormCtrl(Select, MultiInput, _, $stateParams, ServerConfig, moment) {
+  function ProvisionFormCtrl(ClientUsersModals, Select, MultiInput, _, $stateParams, ServerConfig, moment) {
     var provisionForm = this;
 
     provisionForm.$onInit = init;
     provisionForm.input = _.clone(INPUT);
     provisionForm.client = Select('client');
+    provisionForm.createClient = openCreateClientModal;
     provisionForm.group = Select('group')
       .filter(FILTER.GROUP)
       .on('change', syncGroupToEntities)
@@ -322,6 +323,12 @@
       _.each(multi.items, function (select) {
         clear(select);
       });
+    }
+
+    function openCreateClientModal() {
+      ClientUsersModals.openCreate().result.then(function(user){
+        provisionForm.client.selected = user;
+      }).catch(function(){});
     }
   }
 })();

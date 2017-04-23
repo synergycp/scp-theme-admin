@@ -5,6 +5,9 @@
       "SUBMIT": "Delete",
       "CANCEL": "Cancel",
       "BODY": "Click \"Delete\" to permanently delete these Clients:"
+    },
+    "create": {
+      "CANCEL": "Cancel"
     }
   },
   "buttons": {

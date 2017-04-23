@@ -2,16 +2,19 @@ doctype html
 include /resources/angle/pug/mixins/form
 
 +label("{{ 'server.modal.client.client.LABEL' | translate }}")
-  +ui-select("provisionForm.client")
-    ui-select-match(placeholder="{{ 'server.modal.client.client.PLACEHOLDER' | translate }}")
-      span(ng-bind="$select.selected.name")
+  +input-with-btn("fa fa-plus")(
+    ng-click="provisionForm.createClient()"
+  )
+    +ui-select("provisionForm.client")
+      ui-select-match(placeholder="{{ 'server.modal.client.client.PLACEHOLDER' | translate }}")
+        span(ng-bind="$select.selected.name")
 
-    ui-select-choices(
-      repeat="client in provisionForm.client.items track by client.id"
-      refresh="provisionForm.client.load($select.search)"
-      refresh-delay="400"
-    )
-      span(ng-bind-html="client.name | highlight: $select.search")
+      ui-select-choices(
+        repeat="client in provisionForm.client.items track by client.id"
+        refresh="provisionForm.client.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="client.name | highlight: $select.search")
 
 div(ng-if="!provisionForm.serverId")
   +label("{{ 'server.form.group.LABEL' | translate }}")

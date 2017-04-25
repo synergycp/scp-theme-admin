@@ -5,6 +5,13 @@ list.panel.panel-default(
   list-header(text="switch.port.list.TITLE")
     a.btn.btn-default(ng-click="ports.list.refresh.now()")
       i.fa.fa-refresh
+    a.btn.btn-default(ng-click="ports.filters.visible = !ports.filters.visible")
+      i.fa.fa-filter
+  switch-port-filters(
+    show="ports.filters.visible"
+    current="ports.filters.current"
+    change="ports.filters.change()"
+  )
   switch-port-table.border-top-table(
     ng-if="ports.list.items.length"
   )

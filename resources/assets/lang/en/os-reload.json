@@ -38,12 +38,17 @@
       "LABEL": "Profile",
       "PLACEHOLDER": "Type to Search..."
     },
-    "raid": {
-      "LABEL": "RAID",
-      "PLACEHOLDER": "Type to Search...",
-      "NONE": "None",
-      "ZERO": "0",
-      "ONE": "1"
+    "disk": {
+      "raid": {
+        "LABEL": "RAID",
+        "PLACEHOLDER": "Type to Search...",
+        "NONE": "None",
+        "ZERO": "0",
+        "ONE": "1"
+      },
+      "index": {
+        "LABEL": "Disk Index"
+      }
     },
     "license-key": {
       "LABEL": "License Key",

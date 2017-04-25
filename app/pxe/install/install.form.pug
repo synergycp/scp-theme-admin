@@ -70,21 +70,25 @@ form(ng-submit="pxeInstallForm.submit()")
             p.help-block(translate="os-reload.server.license-key.HELP")
 
         div(ng-if="pxeInstallForm.canRAID")
-          +select("os-reload.server.raid.LABEL")(
-            ng-model="pxeInstallForm.input.raid"
+          +select("os-reload.server.disk.raid.LABEL")(
+            ng-model="pxeInstallForm.input.disk.raid"
           )
             option(
               value="None"
-              translate="os-reload.server.raid.NONE"
+              translate="os-reload.server.disk.raid.NONE"
             )
             option(
               value="0"
-              translate="os-reload.server.raid.ZERO"
+              translate="os-reload.server.disk.raid.ZERO"
             )
             option(
               value="1"
-              translate="os-reload.server.raid.ONE"
+              translate="os-reload.server.disk.raid.ONE"
             )
+
+          +field("os-reload.server.disk.index.LABEL")(
+            ng-model="pxeInstallForm.input.disk.index"
+          )
 
     .panel-footer.clearfix(ng-if="pxeInstallForm.isEnabled || !pxeInstallForm.server.selected")
       .pull-right

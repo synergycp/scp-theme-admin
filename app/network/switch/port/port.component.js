@@ -19,7 +19,7 @@
   /**
    * @ngInject
    */
-  function SwitchPortListCtrl(List) {
+  function SwitchPortListCtrl(List, ListFilter) {
     var ports = this;
 
     ports.$onInit = init;
@@ -29,6 +29,7 @@
     function init() {
       ports.list = List('switch/'+ports.switch.id+'/port');
       ports.list.load();
+      ports.filters = ListFilter(ports.list);
     }
   }
 })();

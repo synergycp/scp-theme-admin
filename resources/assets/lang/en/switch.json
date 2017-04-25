@@ -119,6 +119,20 @@
       "empty": {
         "BODY": "We haven't discovered any ports on this switch yet."
       }
+    },
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "server": {
+        "LABEL": "Owner",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "speed": {
+        "LABEL": "Speed",
+        "PLACEHOLDER": "Type to search..."
+      }
     }
   },
   "logs": {

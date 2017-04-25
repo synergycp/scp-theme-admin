@@ -131,6 +131,9 @@
       }]);
 
       _.setContents(vm.panels.left, [{
+        templateUrl: PANELS+'/panel.details.html',
+        context: panelContext,
+      },{
         templateUrl: PANELS+'/panel.logs.html',
         context: {
           switch: vm.switch,

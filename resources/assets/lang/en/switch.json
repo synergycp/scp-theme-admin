@@ -135,6 +135,12 @@
       }
     }
   },
+  "details": {
+    "TITLE": "Switch details",
+    "name": "Name (type)",
+    "ip": "IP",
+    "groups": "IP Groups" 
+  },
   "logs": {
     "TITLE": "Switch Logs"
   },

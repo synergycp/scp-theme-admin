@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.pxe')
+    .module('app.pxe.install')
     .component('pxeInstallForm', {
       require: {
       },

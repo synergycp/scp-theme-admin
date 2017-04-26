@@ -58,6 +58,12 @@
             "CANCEL": "Cancel",
             "SUBMIT": "Verify",
             "CODE": "Code"
+          },
+          "confirm_delete": {
+            "TITLE": "Are you sure?",
+            "BODY": "This will delete the following Two Factor Authentication methods:",
+            "CANCEL": "Cancel",
+            "SUBMIT": "Delete"
           }
         }
       }

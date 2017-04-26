@@ -29,9 +29,14 @@
       min: null,
       max: null
     };
+    filters.billing = {
+      id: null,
+      integration: Select('integration')
+    };
     filters.searchFocus = Observable(false);
 
     filters.fireChangeEvent = fireChangeEvent;
+    filters.clearBilling = clearBilling;
 
     //////////
 
@@ -44,9 +49,11 @@
         filters.cpu.setSelectedId($state.params['cpu']),
         filters.mem.setSelectedId($state.params['mem']),
         filters.disks.setSelectedId(($state.params['disks[]'] || []).join(',')),
+        filters.billing.integration.setSelectedId($state.params['billing.integration']),
       ];
       filters.bw.min = $state.params['bw.min'] || null;
       filters.bw.max = $state.params['bw.max'] || null;
+      filters.billing.id = $state.params['billing.id'] || null;
 
       $q.all(promises)
         .then(listenForChanges)
@@ -61,6 +68,7 @@
       filters.cpu.on('change', fireChangeEvent);
       filters.mem.on('change', fireChangeEvent);
       filters.disks.on('rem', fireChangeEvent); // on 'add' event will be fired by Select
+      filters.billing.integration.on('change', fireChangeEvent);
       
       filters.shouldWatchMainSearch && Search.on('change', function(searchStr) {
         _.assign(filters.current, {
@@ -76,6 +84,8 @@
         switch: _.map((filters.switch.selected || []), getObjId).join(','),
         cpu: _.map((filters.cpu.selected || []), getObjId).join(','),
         mem: _.map((filters.mem.selected || []), getObjId).join(','),
+        'billing.id': filters.billing.integration.selected && filters.billing.id || undefined,
+        'billing.integration': filters.billing.integration.selected && filters.billing.integration.selected.id,
         'disks[]': _(filters.disks.items || []).map(function(select){
           return select.selected && select.selected.id;
         }).filter().value() || '',
@@ -104,6 +114,11 @@
       select.on('change', fireChangeEvent);
 
       return select;
+    }
+
+    function clearBilling() {
+      filters.billing.id = null;
+      filters.billing.integration.clear();
     }
 
     function getObjId(obj) {

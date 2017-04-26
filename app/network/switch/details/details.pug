@@ -1,0 +1,19 @@
+include /resources/angle/pug/mixins/panel
+
++panel("{{ 'switch.details.TITLE' | translate }}")
+  table.table.table-bordered.border-top-table
+    tbody
+      tr
+        th.v-mid.shrink(translate="switch.details.name")
+        td
+          span {{details.switch.name}} ({{details.switch.type}})
+      tr
+        th.v-mid.shrink(translate="switch.details.ip")
+        td
+          span {{details.switch.ip}}
+      tr
+        th.v-mid.shrink(translate="switch.details.groups")
+        td
+          span(ng-repeat="group in details.switch.groups") 
+            a(ui-sref="app.network.group.view({id: group.id})") {{group.name}}
+            span(ng-hide="$index == (details.switch.groups.length-1)") ,

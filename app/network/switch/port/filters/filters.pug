@@ -1,0 +1,30 @@
+include /resources/angle/pug/mixins/form
+
+.panel-body.form-horizontal(ng-show="filters.show")
+  .row
+    .col-md-6
+      +label("{{ 'switch.port.filter.search.LABEL' | translate }}")
+        +search-field()(
+          ng-model="filters.current.q"
+          ng-change="filters.fireChangeEvent()"
+          placeholder="{{ 'switch.port.filter.search.PLACEHOLDER' | translate }}"
+          observable-focus="filters.searchFocus"
+        )
+      +label("{{ 'switch.port.filter.server.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.server.clear()")
+          +ui-select("filters.server")
+            ui-select-match(placeholder="{{ 'switch.port.filter.server.PLACEHOLDER' | translate }}")
+              span(ng-bind="$select.selected.name")
+
+            +ui-select-choices("filters.server")
+              span(ng-bind-html="choice.name | highlight: $select.search")
+
+    .col-md-6
+      +label("{{ 'switch.port.filter.speed.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.speed.clear()")
+          +ui-select("filters.speed")
+            ui-select-match(placeholder="{{ 'switch.port.filter.speed.PLACEHOLDER' | translate }}")
+              span(ng-bind="$select.selected.name")
+
+            +ui-select-choices("filters.speed")
+              span(ng-bind-html="choice.name | highlight: $select.search")

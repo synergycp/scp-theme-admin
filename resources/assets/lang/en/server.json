@@ -302,6 +302,15 @@
       "bw": {
         "LABEL": "Bandwidth Usage",
         "PLACEHOLDER": "e.g. 1TB"
+      },
+      "billing": {
+        "LABEL": "Billing ID",
+        "integration": {
+          "PLACEHOLDER": "Type to search..."
+        },
+        "id": {
+          "PLACEHOLDER": "Optional"
+        }
       }
     }
   },

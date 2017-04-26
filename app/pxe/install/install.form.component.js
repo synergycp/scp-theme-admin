@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.pxe')
+    .module('app.pxe.install')
     .component('pxeInstallForm', {
       require: {
       },
@@ -29,7 +29,10 @@
     pxeInstallForm.submit = submit;
     pxeInstallForm.input = {
       profile: Select('pxe/profile').on('change', syncProfile),
-      raid: 'None',
+      disk: {
+        raid: 'None',
+        index: 0,
+      },
       edition: null,
       licenseKey: '',
       password: '',
@@ -48,7 +51,7 @@
       server.get().then(function (res) {
         pxeInstallForm.isEnabled = res.is_pxe_ready;
         pxeInstallForm.canRAID = res.raid_soft_ready;
-      })
+      });
     }
 
     function syncProfile(profile) {
@@ -67,7 +70,8 @@
     function submit() {
       var profile = pxeInstallForm.input.profile.selected;
       var edition = (pxeInstallForm.input.edition || {}).selected;
-      var raid = pxeInstallForm.input.raid !== 'None' ? pxeInstallForm.input.raid : undefined;
+      var raid = pxeInstallForm.input.disk.raid !== 'None' && pxeInstallForm.canRAID ? pxeInstallForm.input.disk.raid : undefined;
+      var index = pxeInstallForm.input.disk.index;
 
       if (!profile) {
         return Alert.warning('Please select an OS Reload Profile.');
@@ -80,7 +84,10 @@
       OsReloadModals.openCreate().result.then(function (result) {
         create({
           pxe_profile_id: profile.id,
-          disk: { "raid": raid },
+          disk: {
+            raid: raid,
+            index: index,
+          },
           queue: true,
           edition_id: (edition || {}).id,
           license_key: pxeInstallForm.input.licenseKey,
@@ -100,7 +107,5 @@
     function fireChangeEvent() {
       pxeInstallForm.form.fire('created');
     }
-
-
   }
 })();

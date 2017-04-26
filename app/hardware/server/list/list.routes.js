@@ -13,7 +13,7 @@
    */
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
-    var search = '?switch&group&disks[]&cpu&mem&client&bw.min&bw.max&q';
+    var search = '?switch&group&disks[]&cpu&mem&client&bw.min&bw.max&billing.id&billing.integration&q';
     $stateProvider
       .state('app.hardware.server.inventory', {
         url: '/inventory'+search,

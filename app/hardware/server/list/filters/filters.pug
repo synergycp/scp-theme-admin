@@ -111,3 +111,24 @@ include /resources/angle/pug/mixins/form
               ng-model="filters.bw.max"
               ng-change="filters.fireChangeEvent()"
             )
+
+      +label("server.list.filter.billing.LABEL")
+        .row
+          .col-sm-6
+            +input-with-btn("fa fa-close", "filters.billing.integration.selected")(
+              ng-click="filters.clearBilling()"
+            )
+              +ui-select("filters.billing.integration")
+                ui-select-match(placeholder="{{ 'server.list.filter.billing.integration.PLACEHOLDER' | translate }}")
+                  span(ng-bind="$select.selected.name")
+
+                +ui-select-choices("filters.billing.integration")
+                  span(ng-bind-html="choice.name | highlight: $select.search")
+          .col-sm-6
+            input.form-control(
+              type="text"
+              translate-attr="{ 'placeholder': 'server.list.filter.billing.id.PLACEHOLDER' }"
+              ng-model="filters.billing.id"
+              ng-disabled="!filters.billing.integration.selected"
+              ng-change="filters.fireChangeEvent()"
+            )

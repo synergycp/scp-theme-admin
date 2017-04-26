@@ -84,8 +84,8 @@
         switch: _.map((filters.switch.selected || []), getObjId).join(','),
         cpu: _.map((filters.cpu.selected || []), getObjId).join(','),
         mem: _.map((filters.mem.selected || []), getObjId).join(','),
-        'billing.id': filters.billing.id,
-        'billing.integration' : filters.billing.integration.selected && filters.billing.integration.selected.id,
+        'billing.id': filters.billing.integration.selected && filters.billing.id || undefined,
+        'billing.integration': filters.billing.integration.selected && filters.billing.integration.selected.id,
         'disks[]': _(filters.disks.items || []).map(function(select){
           return select.selected && select.selected.id;
         }).filter().value() || '',

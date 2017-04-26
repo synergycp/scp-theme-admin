@@ -1,0 +1,35 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="gateway.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('gateway-create-form')")
+        i.fa.fa-plus
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    gateway-filters(
+    show="vm.filters.visible"
+    current="vm.filters.current"
+    change="vm.filters.change()"
+    )
+    block table
+      gateway-table.border-top-table
+    list-footer
+
+block bottom-left
+  +create-form("{{ 'gateway.form.title.ADD' | translate }}", 'gateway-create-form', "vm.create.form")
+    gateway-form(
+    form="vm.create"
+    always-dirty="true"
+    is-creating="true"
+    )
+
+block bottom-right
+  logs(
+  heading="Gateway Logs"
+  filter="vm.logs.filter"
+  listen-to="vm.list"
+  )

@@ -1,0 +1,74 @@
+{
+  "list": {
+    "TITLE": "Gateways",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      }
+    },
+    "heading": {
+      "HOSTNAME": "Hostname",
+      "PORT_LIMIT": "Port limit",
+      "ACTIONS": "Actions"
+    }
+  },
+  "search": {
+    "TITLE": "Gateways"
+  },
+  "modal": {
+    "delete": {
+      "TITLE": "Delete Gateways",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these Gateways:"
+    }
+  },
+  "form": {
+    "title": {
+      "EDIT": "Edit {{ hostname }}",
+      "ADD": "Create Gateway"
+    },
+    "hostname": {
+      "LABEL": "Hostname",
+      "PLACEHOLDER": "Hostname"
+    },
+    "port_limit": {
+      "LABEL": "Port limit",
+      "PLACEHOLDER": "Port limit"
+    },
+    "port": {
+      "remove": {
+        "TITLE": "Remove Gateway Port",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Remove Port",
+        "BODY": "Remove port from this gateway."
+      },
+      "src_port": {
+        "LABEL": "Source port",
+        "PLACEHOLDER": "Source port"
+      },
+      "dest_ip": {
+        "LABEL": "Destination ip",
+        "PLACEHOLDER": "Destination ip"
+      },
+      "dest_port": {
+        "LABEL": "Destination port",
+        "PLACEHOLDER": "Destination port"
+      },
+      "type": {
+        "LABEL": "Type",
+        "PLACEHOLDER": "Type"
+      },
+      "owner": {
+        "LABEL": "Owner",
+        "PLACEHOLDER": "Owner"
+      },
+      "ADD": "Add port",
+      "LABEL": "Port"
+    }
+  },
+  "buttons": {
+    "DELETE": "Delete"
+  }
+}

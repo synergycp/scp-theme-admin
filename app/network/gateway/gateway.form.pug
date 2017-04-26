@@ -1,0 +1,82 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field(
+"{{ 'gateway.form.hostname.LABEL' | translate }}",
+"hostname"
+)(
+placeholder="{{ 'gateway.form.hostname.PLACEHOLDER' | translate }}"
+ng-model="gatewayForm.input.hostname"
+)
+
++field(
+"{{ 'gateway.form.port_limit.LABEL' | translate }}",
+"port_limit"
+)(
+placeholder="{{ 'gateway.form.port_limit.PLACEHOLDER' | translate }}"
+ng-model="gatewayForm.input.port_limit"
+)
+
+hr
+
+div.relative(
+ng-repeat="(portIndex, port) in gatewayForm.ports"
+)
+    +icon-label("gateway.form.port.LABEL").fa.fa-times-circle(
+    ng-click="gatewayForm.ports.remove(port)"
+    )
+
+    +label("gateway.form.port.src_port.LABEL")
+        input.form-control(
+        "{{ 'gateway.form.port.port_limit.LABEL' | translate }}"
+        type="text"
+        ng-model="port.input.src_port"
+        name="port-{{ portIndex }}.src_port"
+        translate-attr="{ 'placeholder': 'gateway.form.port.src_port.PLACEHOLDER' }"
+        )
+
+    +label("gateway.form.port.dest_ip.LABEL")
+        input.form-control(
+        type="text"
+        ng-model="port.input.dest_ip"
+        name="port-{{ portIndex }}.dest_ip"
+        translate-attr="{ 'placeholder': 'gateway.form.port.dest_ip.PLACEHOLDER' }"
+        )
+
+    +label("gateway.form.port.dest_port.LABEL")
+        input.form-control(
+        type="text"
+        ng-model="port.input.dest_port"
+        name="port-{{ portIndex }}.dest_port"
+        translate-attr="{ 'placeholder': 'gateway.form.port.dest_port.PLACEHOLDER' }"
+        )
+
+
+    +label("gateway.form.port.type.LABEL")
+        +ui-select("port.type")
+            ui-select-match(placeholder="{{ 'gateway.form.port.type.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.name")
+
+            ui-select-choices(
+            repeat="type in port.type.items track by type.id"
+            refresh="port.type.load($select.search)"
+            refresh-delay="400"
+            )
+                span(ng-bind-html="type.name | highlight: $select.search")
+
+    +label("gateway.form.port.owner.LABEL")
+        +ui-select("port.owner")
+            ui-select-match(placeholder="{{ 'gateway.form.port.owner.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.name")
+
+            ui-select-choices(
+            repeat="owner in port.owner.items track by owner.id"
+            refresh="port.owner.load($select.search)"
+            refresh-delay="400"
+            )
+                span(ng-bind-html="owner.name | highlight: $select.search")
+
+div.big-add-button(
+ng-click="gatewayForm.ports.add()"
+translate="gateway.form.port.ADD"
+)

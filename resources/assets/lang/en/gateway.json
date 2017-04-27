@@ -60,10 +60,6 @@
         "LABEL": "Type",
         "PLACEHOLDER": "Type"
       },
-      "owner": {
-        "LABEL": "Owner",
-        "PLACEHOLDER": "Owner"
-      },
       "ADD": "Add port",
       "LABEL": "Port"
     }

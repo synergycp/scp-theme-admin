@@ -27,11 +27,9 @@
             src_port: '',
             dest_ip: '',
             dest_port: '',
-            owner: '',
         };
 
         port.type = Select('forward/type');
-        port.owner = Select('server');
 
         port.data = data;
         port.fromExisting = fromExisting;
@@ -46,14 +44,6 @@
             if (port.type.getSelected('id') != response.type.id) {
                 port.type.selected = response.type;
             }
-
-            if (response.owner) {
-                if (port.owner.getSelected('id') != response.owner.id) {
-                    port.owner.selected = response.owner;
-                }
-            } else {
-                port.owner.selected = null;
-            }
         }
 
         function data() {
@@ -63,7 +53,6 @@
                 dest_ip: port.input.dest_ip,
                 dest_port: port.input.dest_port,
                 type: {id: port.type.getSelected('id') || null},
-                owner: {id: port.owner.getSelected('id') || null},
             };
         }
     }

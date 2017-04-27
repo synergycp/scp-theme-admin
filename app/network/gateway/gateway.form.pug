@@ -64,18 +64,6 @@ ng-repeat="(portIndex, port) in gatewayForm.ports"
             )
                 span(ng-bind-html="type.name | highlight: $select.search")
 
-    +label("gateway.form.port.owner.LABEL")
-        +ui-select("port.owner")
-            ui-select-match(placeholder="{{ 'gateway.form.port.owner.PLACEHOLDER' | translate }}")
-                span(ng-bind="$select.selected.name")
-
-            ui-select-choices(
-            repeat="owner in port.owner.items track by owner.id"
-            refresh="port.owner.load($select.search)"
-            refresh-delay="400"
-            )
-                span(ng-bind-html="owner.name | highlight: $select.search")
-
 div.big-add-button(
 ng-click="gatewayForm.ports.add()"
 translate="gateway.form.port.ADD"

@@ -27,8 +27,7 @@
     portControl.loader = Loader();
     portControl.response = {
       show: false,
-      outputs: [],
-      errors: [],
+      commands: [],
       loader: Loader(),
       areCommandsFinished: false,
       areCommandsFinishedObj: {}
@@ -91,8 +90,11 @@
 
       function updateCommandStatus(response) {
         if (response.status != 'Queued' && response.status != 'Running') {
-          // portControl.response.errors.push(response.errors);
-          portControl.response.outputs.push({id: response.id, output: response.output});
+          portControl.response.commands.push({
+            id: response.id,
+            output: response.output,
+            errors: response.errors,
+          });
           finish();
         }
       }
@@ -131,8 +133,7 @@
 
     function clearCommandsOutput() {
       portControl.response.areCommandsFinished = false;
-      portControl.response.errors = [];
-      portControl.response.outputs = [];
+      portControl.response.commands = [];
     }
   }
 })();

@@ -56,6 +56,10 @@ table.table.table-condensed.table-bordered(style="margin-bottom: 0")
 
 .panel-footer.clearfix(ng-class="portControl.response.loader.class + ' ' + (portControl.response.show ? '' : 'hidden')")
   .loader
-  pre(ng-if="portControl.response.output || portControl.response.errors")
-    div(ng-bind="portControl.response.output")
-    div(ng-bind="portControl.response.errors")
+  pre(ng-show="portControl.response.areCommandsFinished")
+    div(ng-repeat="output in portControl.response.outputs track by output.id")
+      span(ng-bind="output.output")
+      span(ng-hide="$index == (portControl.response.outputs.length-1) && portControl.response.errors.length == 0") ---------------
+    div(ng-repeat="error in portControl.response.errors")
+      span(ng-bind="error")
+      span(ng-hide="$index == (portControl.response.errors.length-1)") ---------------

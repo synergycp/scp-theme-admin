@@ -27,9 +27,10 @@
     portControl.loader = Loader();
     portControl.response = {
       show: false,
-      output: '',
-      errors: '',
+      commands: [],
       loader: Loader(),
+      areCommandsFinished: false,
+      areCommandsFinishedObj: {}
     };
 
     portControl.$onInit = init;
@@ -63,6 +64,7 @@
     }
 
     function command(cmd) {
+      if(portControl.response.areCommandsFinished) clearCommandsOutput();
       return portControl.loader.during(
         $command
           .post({
@@ -82,19 +84,25 @@
         'switch/'+response.command.switch.id+'/command/'+response.command.id
       );
 
+      portControl.response.areCommandsFinishedObj[response.command.id] = false;
+
       return response;
 
       function updateCommandStatus(response) {
         if (response.status != 'Queued' && response.status != 'Running') {
-          portControl.response.errors = response.errors;
-          portControl.response.output = response.output;
+          portControl.response.commands.push({
+            id: response.id,
+            output: response.output,
+            errors: response.errors,
+          });
           finish();
         }
       }
 
       function finish() {
         clearInterval(interval);
-        portControl.response.loader.loaded();
+        portControl.response.areCommandsFinishedObj[response.command.id] = true;
+        commandFinished();
       }
 
       function checkCommandStatus() {
@@ -109,6 +117,23 @@
       portControl.server.fire('change');
 
       return response;
+    }
+
+    function commandFinished() {
+      var areAllFinished = false;
+      _.forEach(portControl.response.areCommandsFinishedObj, function(value, key) {
+        return areAllFinished = value; 
+      });
+      if(areAllFinished) {
+        portControl.response.loader.loaded();
+        portControl.response.areCommandsFinished = true;
+        portControl.response.areCommandsFinishedObj = {};
+      }
+    }
+
+    function clearCommandsOutput() {
+      portControl.response.areCommandsFinished = false;
+      portControl.response.commands = [];
     }
   }
 })();

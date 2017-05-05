@@ -32,7 +32,8 @@
         templateUrl: helper.basepath(DIR+'list.index.html'),
         reloadOnSearch: false,
         resolve: helper.resolveFor(
-          'moment', 'after:date-range-picker'
+          'moment', 'after:date-range-picker',
+          'numeral'
         ),
       })
       ;

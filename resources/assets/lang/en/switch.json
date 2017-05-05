@@ -114,7 +114,11 @@
       "heading": {
         "PORT": "Port",
         "OWNER": "Owner",
-        "SPEED": "Speed"
+        "SPEED": "Speed",
+        "usage": {
+          "PERCENT": "Usage Percent",
+          "MAX": "Usage Max"
+        }
       },
       "empty": {
         "BODY": "We haven't discovered any ports on this switch yet."
@@ -137,7 +141,7 @@
   },
   "details": {
     "TITLE": "Switch details",
-    "name": "Name (type)",
+    "name": "Name",
     "ip": "IP",
     "groups": "IP Groups" 
   },

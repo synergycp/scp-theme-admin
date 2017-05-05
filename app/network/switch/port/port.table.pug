@@ -10,6 +10,12 @@ block headings
   th.sortable
     span(translate="switch.port.list.heading.SPEED")
     sort(col="speed")
+  th.sortable
+    span(translate="switch.port.list.heading.usage.PERCENT")
+    sort(col="usage.percent")
+  th.sortable
+    span(translate="switch.port.list.heading.usage.MAX")
+    sort(col="usage.max")
 
 block columns
   td
@@ -24,3 +30,12 @@ block columns
   td
     span(ng-bind="row.speed.name")
     span.text-muted(ng-if="!row.speed") -
+  td
+    span(ng-if="row.usage")
+      span(ng-bind="row.usage.percent")
+      | %
+    span.text-muted(ng-if="!row.usage") -
+  td
+    span(ng-if="row.usage")
+      span(ng-bind="row.usage.max | bitsToSize")
+    span.text-muted(ng-if="!row.usage") -

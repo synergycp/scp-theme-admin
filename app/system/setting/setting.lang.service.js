@@ -22,7 +22,7 @@
       _.map(groups, function(group) {
         if(group.settings[0].pkg) {
           promises.push(
-            RouteHelpers.loadLang('pkg:'+group.settings[0].pkg+':system:settings')
+            RouteHelpers.loadLang('pkg:'+group.settings[0].pkg+':admin:settings')
           );
         }
       })

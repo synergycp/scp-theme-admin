@@ -1,32 +1,58 @@
 include /resources/angle/pug/mixins/form
 
+script(
+  type="text/ng-template"
+  id="app.system.setting.list.item"
+)
+  +label("{{item.fullLang}}.LABEL")(
+    ng-init="item.fullLang=item.pkg ? 'pkg.'+item.pkg+'.admin.settings.'+item.lang : ['settings', tab.text, item.slug].join('.')"
+  )
+    div(ng-switch="item.type")
+      div(ng-switch-when="Text")
+        input.form-control(
+          type="text"
+          name="{{item.id}}.value"
+          ng-model="item.value"
+        )
+      div(ng-switch-when="Select")
+        select.form-control(
+          name="{{item.id}}.value"
+          ng-model="item.value"
+          ng-options="choice.value as choice.text for choice in item.options"
+        )
+      div(ng-switch-when="Textarea")
+        textarea.form-control(
+          rows="2"
+          name="{{item.id}}.value"
+          ng-model="item.value"
+        )
+      div.checkbox(ng-switch-when="Checkbox")
+        label
+          input(
+            type="checkbox"
+            name="{{item.id}}.value"
+            ng-model="item.value"
+          )
+    p.help-block(
+      ng-if="(item.fullLang + '.PLACEHOLDER' | translate) != item.fullLang + '.PLACEHOLDER'"
+      translate="{{ item.fullLang }}.PLACEHOLDER"
+    )
+
 .row.form-horizontal
-  div.col-md-6(ng-repeat="item in tab.items")
-    .form-group
-      +label("{{item.pkg ? 'pkg.abuse.system.settings.'+item.lang : ['settings', tab.text, item.slug].join('.')}}.LABEL")
-        div(ng-switch="item.type")
-          div(ng-switch-when="Text")
-            input.form-control(
-              type="text"
-              name="{{item.id}}.value"
-              ng-model="item.value"
-            )
-          div(ng-switch-when="Select")
-            select.form-control(
-              name="{{item.id}}.value"
-              ng-model="item.value"
-              ng-options="choice.value as choice.text for choice in item.options"
-            )
-          div(ng-switch-when="Textarea")
-            textarea.form-control(
-              rows="2"
-              name="{{item.id}}.value"
-              ng-model="item.value"
-            )
-          div.checkbox(ng-switch-when="Checkbox")
-            label
-              input(
-                type="checkbox"
-                name="{{item.id}}.value"
-                ng-model="item.value"
-              )
+  .col-md-6
+    div(
+      ng-repeat="(index, item) in tab.items"
+    )
+      div(
+        ng-if="index % 2 == 0"
+        ng-include="'app.system.setting.list.item'"
+      )
+  .col-md-6
+    div(
+      ng-repeat="(index, item) in tab.items"
+    )
+      div(
+        ng-if="index % 2"
+        ng-include="'app.system.setting.list.item'"
+      )
+

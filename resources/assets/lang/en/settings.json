@@ -14,48 +14,34 @@
     }
   },
   "Email Settings": {
-		"email_signature": {
-			"LABEL": "Email Signature"
-		},
-		"email_from_name": {
-			"LABEL": "Email From Name"
-		},
-		"email_from_email": {
-			"LABEL": "Email From Email"
-		},
-		"email_method": {
-			"LABEL": "Email Method"
-		}
-	},
-	"SMTP Settings": {
-		"smtp_host": {
-			"LABEL": "Smtp Host"
-		},
-		"smtp_user": {
-			"LABEL": "Smtp User"
-		},
-		"smtp_pass": {
-			"LABEL": "Smtp Pass"
-		},
-		"smtp_port": {
-			"LABEL": "Smtp Port"
-		},
-		"smtp_mode": {
-			"LABEL": "Smtp Mode"
-		}
-	},
-	"DDoS Settings": {
-		"ddos_attack_end": {
-			"LABEL": "Ddos Attack End"
-		},
-		"ddos_api_url": {
-			"LABEL": "Ddos Api Url"
-		},
-		"ddos_api_user": {
-			"LABEL": "Ddos Api User"
-		},
-		"ddos_api_pass": {
-			"LABEL": "Ddos Api Pass"
-		}
-	}
+    "email_signature": {
+      "LABEL": "Email Signature"
+    },
+    "email_from_name": {
+      "LABEL": "Email From Name"
+    },
+    "email_from_email": {
+      "LABEL": "Email From Email"
+    },
+    "email_method": {
+      "LABEL": "Email Method"
+    }
+  },
+  "SMTP Settings": {
+    "smtp_host": {
+      "LABEL": "SMTP Host"
+    },
+    "smtp_user": {
+      "LABEL": "SMTP User"
+    },
+    "smtp_pass": {
+      "LABEL": "SMTP Pass"
+    },
+    "smtp_port": {
+      "LABEL": "SMTP Port"
+    },
+    "smtp_mode": {
+      "LABEL": "SMTP Mode"
+    }
+  }
 }

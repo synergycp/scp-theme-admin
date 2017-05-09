@@ -3,7 +3,7 @@ include /resources/angle/pug/mixins/form
 .row.form-horizontal
   div.col-md-6(ng-repeat="item in tab.items")
     .form-group
-      +label("{{item.name}}")
+      +label("{{item.pkg ? 'pkg.abuse.system.settings.'+item.lang : ['settings', tab.text, item.slug].join('.')}}.LABEL")
         div(ng-switch="item.type")
           div(ng-switch-when="Text")
             input.form-control(

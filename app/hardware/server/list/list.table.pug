@@ -87,12 +87,12 @@ block columns
     ng-if="table.showGroup"
     ng-bind="row.group.name || '-'"
   )
-  td
+  td(ng-if="table.showUsage")
     span(ng-if="row.usage")
       span(ng-bind="row.usage.percent")
       | %
     span.text-muted(ng-if="!row.usage") -
-  td
+  td(ng-if="table.showUsage")
     span(ng-if="row.usage")
       span(ng-bind="row.usage.max | bitsToSize")
     span.text-muted(ng-if="!row.usage") -

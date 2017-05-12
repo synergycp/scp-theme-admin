@@ -130,6 +130,8 @@
         function savePortChanges(port) {
             var formData = port.data();
 
+            formData.gateway_id = gatewayForm.id;
+
             if (formData.id) {
                 return $ports
                     .one('' + formData.id)
@@ -137,8 +139,6 @@
                     .then(updateExisting)
                     ;
             }
-
-            formData.gateway_id = gatewayForm.id;
 
             return $ports
                 .post(formData)

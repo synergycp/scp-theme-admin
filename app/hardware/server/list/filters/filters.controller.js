@@ -25,6 +25,8 @@
     filters.mem = Select('part').filter({'part_type':'mem'}).multi();
     filters.disks = MultiInput(DiskSelector)
       .add().setMax(8);
+    filters.addons = MultiInput(AddonSelector)
+      .add().setMax(8);
     filters.bw = {
       min: null,
       max: null
@@ -49,6 +51,7 @@
         filters.cpu.setSelectedId($state.params['cpu']),
         filters.mem.setSelectedId($state.params['mem']),
         filters.disks.setSelectedId(($state.params['disks[]'] || []).join(',')),
+        filters.addons.setSelectedId(($state.params['addons[]'] || []).join(',')),
         filters.billing.integration.setSelectedId($state.params['billing.integration']),
       ];
       filters.bw.min = $state.params['bw.min'] || null;
@@ -68,6 +71,7 @@
       filters.cpu.on('change', fireChangeEvent);
       filters.mem.on('change', fireChangeEvent);
       filters.disks.on('rem', fireChangeEvent); // on 'add' event will be fired by Select
+      filters.addons.on('rem', fireChangeEvent); // on 'add' event will be fired by Select
       filters.billing.integration.on('change', fireChangeEvent);
       
       filters.shouldWatchMainSearch && Search.on('change', function(searchStr) {
@@ -86,9 +90,8 @@
         mem: _.map((filters.mem.selected || []), getObjId).join(','),
         'billing.id': filters.billing.integration.selected && filters.billing.id || undefined,
         'billing.integration': filters.billing.integration.selected && filters.billing.integration.selected.id,
-        'disks[]': _(filters.disks.items || []).map(function(select){
-          return select.selected && select.selected.id;
-        }).filter().value() || '',
+        'disks[]': multiIds(filters.disks),
+        'addons[]': multiIds(filters.addons),
         'bw.min': filters.bw.min, 
         'bw.max': filters.bw.max, 
       });
@@ -108,8 +111,22 @@
       }
     }
 
+    function multiIds(multi) {
+      return _(multi.items || []).map(function(select){
+          return select.selected && select.selected.id;
+        }).filter().value() || '';
+    }
+
     function DiskSelector(selected) {
       var select = Select('part').filter({'part_type':'disk'});
+      select.setSelectedId( selected && (_.isString(selected) ? selected : selected.id) || null);
+      select.on('change', fireChangeEvent);
+
+      return select;
+    }
+
+    function AddonSelector(selected) {
+      var select = Select('part').filter({'part_type':'add-on'});
       select.setSelectedId( selected && (_.isString(selected) ? selected : selected.id) || null);
       select.on('change', fireChangeEvent);
 

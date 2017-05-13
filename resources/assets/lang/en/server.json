@@ -300,7 +300,11 @@
         "PLACEHOLDER": "Type to search..."
       },
       "hdd": {
-        "LABEL": "HDD",
+        "LABEL": "Disk",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "addon": {
+        "LABEL": "Add-On",
         "PLACEHOLDER": "Type to search..."
       },
       "bw": {

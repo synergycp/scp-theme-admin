@@ -51,7 +51,6 @@ ng-repeat="(portIndex, port) in gatewayForm.ports"
         translate-attr="{ 'placeholder': 'gateway.form.port.dest_port.PLACEHOLDER' }"
         )
 
-
     +label("gateway.form.port.type.LABEL")
         +ui-select("port.type")
             ui-select-match(placeholder="{{ 'gateway.form.port.type.PLACEHOLDER' | translate }}")
@@ -63,6 +62,12 @@ ng-repeat="(portIndex, port) in gatewayForm.ports"
             refresh-delay="400"
             )
                 span(ng-bind-html="type.name | highlight: $select.search")
+
+    +label()
+        +checkbox()(
+        ng-model="port.input.is_acl_enabled"
+        )
+            span(translate="gateway.form.port.is_acl_enabled.LABEL")
 
 div.big-add-button(
 ng-click="gatewayForm.ports.add()"

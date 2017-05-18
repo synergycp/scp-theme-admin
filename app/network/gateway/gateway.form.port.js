@@ -27,6 +27,7 @@
             src_port: '',
             dest_ip: '',
             dest_port: '',
+            is_acl_enabled: '',
         };
 
         port.type = Select('forward/type');
@@ -40,6 +41,7 @@
             port.input.src_port = response.src_port;
             port.input.dest_ip = response.dest_ip;
             port.input.dest_port = response.dest_port;
+            port.input.is_acl_enabled = !!response.is_acl_enabled;
 
             if (port.type.getSelected('id') != response.type.id) {
                 port.type.selected = response.type;
@@ -52,6 +54,7 @@
                 src_port: port.input.src_port,
                 dest_ip: port.input.dest_ip,
                 dest_port: port.input.dest_port,
+                is_acl_enabled: port.input.is_acl_enabled,
                 type: {id: port.type.getSelected('id') || null},
             };
         }

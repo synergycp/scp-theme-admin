@@ -15,7 +15,7 @@
     var modal = this;
 
     modal.servers = servers;
-
+    modal.reason = '';
     modal.submit = submit;
 
     activate();
@@ -26,7 +26,7 @@
     }
 
     function submit() {
-      return modal.$close();
+      return modal.$close(modal.reason);
     }
   }
 })();

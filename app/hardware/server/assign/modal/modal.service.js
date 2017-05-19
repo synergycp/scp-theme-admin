@@ -57,6 +57,7 @@
     }
 
     function suspend(servers) {
+      var reason = '';
       var modal = $uibModal.open({
         templateUrl: 'app/hardware/server/assign/modal/modal.suspend.html',
         controller: 'ServerAssignSuspendModalCtrl',
@@ -65,13 +66,13 @@
         resolve: {
           servers: function () {
             return servers;
-          },
+          }
         },
       });
 
       return modal.result.then(patchServerAccesses);
 
-      function patchServerAccesses() {
+      function patchServerAccesses(reason) {
         return $q.all(
           _.map(servers, patchAccess)
         );
@@ -85,7 +86,10 @@
             .all('access')
             .one(''+server.access.id);
 
-          return $access.patch({ is_active: false })
+          return $access.patch({
+            is_active: false,
+            suspension_reason: reason
+          })
             .then(saveAccessResponse.bind(null, server));
         }
       }

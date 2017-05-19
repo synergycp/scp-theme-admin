@@ -71,7 +71,7 @@
         group.item(SPEEDS);
       }
 
-      if (map.network.gateways.read) {
+      if (map.network.forward.read) {
         group.item(GATEWAYS);
       }
     }

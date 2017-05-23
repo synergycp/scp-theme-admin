@@ -52,12 +52,13 @@
   /**
    * @ngInject
    */
-  function ProvisionFormCtrl(Select, MultiInput, _, $stateParams, ServerConfig, moment) {
+  function ProvisionFormCtrl(ClientUsersModals, Select, MultiInput, _, $stateParams, ServerConfig, moment) {
     var provisionForm = this;
 
     provisionForm.$onInit = init;
     provisionForm.input = _.clone(INPUT);
     provisionForm.client = Select('client');
+    provisionForm.createClient = openCreateClientModal;
     provisionForm.group = Select('group')
       .filter(FILTER.GROUP)
       .on('change', syncGroupToEntities)
@@ -172,28 +173,37 @@
       provisionForm.edition = Select('pxe/iso/' + iso.id + '/edition');
     }
 
+    function multiIds(multi) {
+      return _(multi.items)
+        .map(function (disk) {
+          return disk.getSelected('id');
+        })
+        .filter()
+        .value()
+    }
+
     function syncHardwareFilters() {
       var invFilter = {
         cpu: provisionForm.cpu.getSelected('id') || undefined,
         mem: provisionForm.mem.getSelected('id') || undefined,
         ip_group: provisionForm.group.getSelected('id') || undefined,
       };
-      var diskIds = _(provisionForm.disks.items)
-        .map(function (disk) {
-          return disk.getSelected('id');
-        })
-        .filter()
-        .value();
-      provisionForm.server.filter(invFilter)
+      var diskIds = multiIds(provisionForm.disks);
+      var addOnIds = multiIds(provisionForm.addOns);
+      provisionForm.server
+        .filter(invFilter)
         .filter({
           'disks[]': diskIds,
+          'addons[]': addOnIds,
         })
         .load();
-      provisionForm.cpu.filter({
+      provisionForm.cpu
+        .filter({
           inventory: _.pick(invFilter, ['ip_group']),
         })
         .load();
-      provisionForm.mem.filter({
+      provisionForm.mem
+        .filter({
           inventory: _.pick(invFilter, ['ip_group', 'cpu']),
         })
         .load();
@@ -290,7 +300,7 @@
       var select = Select('part')
         .filter(FILTER.DISK)
         .on('change', syncHardwareFilters)
-        ;
+      ;
 
       select.selected = selected || null;
       select.load();
@@ -302,7 +312,7 @@
       var select = Select('part')
         .filter(FILTER.ADDON)
         .on('change', syncHardwareFilters)
-        ;
+      ;
       select.selected = selected || null;
       select.load();
 
@@ -322,6 +332,16 @@
       _.each(multi.items, function (select) {
         clear(select);
       });
+    }
+
+    function openCreateClientModal() {
+      ClientUsersModals.openCreate()
+        .result
+        .then(function (user) {
+          provisionForm.client.selected = user;
+        })
+        .catch(function () {
+        });
     }
   }
 })();

@@ -114,12 +114,36 @@
       "heading": {
         "PORT": "Port",
         "OWNER": "Owner",
-        "SPEED": "Speed"
+        "SPEED": "Speed",
+        "usage": {
+          "PERCENT": "Usage Percent",
+          "MAX": "Usage Max"
+        }
       },
       "empty": {
         "BODY": "We haven't discovered any ports on this switch yet."
       }
+    },
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "server": {
+        "LABEL": "Owner",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "speed": {
+        "LABEL": "Speed",
+        "PLACEHOLDER": "Type to search..."
+      }
     }
+  },
+  "details": {
+    "TITLE": "Switch details",
+    "name": "Name",
+    "ip": "IP",
+    "groups": "IP Groups" 
   },
   "logs": {
     "TITLE": "Switch Logs"

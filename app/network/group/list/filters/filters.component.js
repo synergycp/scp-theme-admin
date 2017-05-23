@@ -11,6 +11,7 @@
         show: '<',
         current: '=',
         change: '&?',
+        shouldWatchMainSearch: '=?'
       },
       controller: 'GroupFiltersCtrl as filters',
       transclude: true,

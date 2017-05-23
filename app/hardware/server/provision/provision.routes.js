@@ -18,7 +18,7 @@
         controller: 'ServerProvisionCtrl as vm',
         templateUrl: helper.basepath('hardware/server/provision/provision.html'),
         resolve: helper.resolveFor(
-          'moment', 'after:date-range-picker'
+          'moment', 'after:date-range-picker', 'lang:client'
         ),
       })
       ;

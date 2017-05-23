@@ -1,0 +1,38 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th
+    span(translate="os-reload.list.heading.SERVER")
+  th
+    span(translate="os-reload.list.heading.PROFILE")
+  th
+    span(translate="os-reload.list.heading.PROGRESS")
+  th
+    span(translate="os-reload.list.heading.ACTIONS")
+
+block columns
+  
+  td
+    a(
+      ui-sref="app.hardware.server.view.manage({id: row.server.id})"
+      ng-bind="row.server.name"
+    )
+
+  td(
+    ng-bind="row.profile.name || '-'"
+  )
+  
+  td
+    uib-progressbar.progress-min-text.progress-striped.active.m-sm(value="row.percent")
+      | {{ row.percent }}%
+  
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ng-click="table.list.list.reloadServer(row.server)"
+      )
+        i.fa.fa-plus
+      a.btn.btn-default(
+        ng-click="table.list.list.onDelete([row])"
+      )
+        i.fa.fa-trash

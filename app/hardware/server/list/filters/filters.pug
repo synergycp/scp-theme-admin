@@ -10,16 +10,16 @@ include /resources/angle/pug/mixins/form
           ng-change="filters.fireChangeEvent()"
           observable-focus="filters.searchFocus"
         )
-      +label("{{ 'server.list.filter.client.LABEL' | translate }}")
-        +input-with-btn("fa fa-times-circle")(ng-click="filters.client.clear()")
-          +ui-select("filters.client")(multiple)
-            ui-select-match(placeholder="{{ 'server.list.filter.client.PLACEHOLDER' | translate }}")
-              span(ng-bind="$item.name")
+      +label("{{ 'server.list.filter.group.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
+          +ui-select("filters.group")(multiple)
+            ui-select-match(placeholder="{{ 'server.list.filter.group.PLACEHOLDER' | translate }}")
+              span(ng-bind="$item.name" class="ui-select-match-item")
 
             ui-select-choices(
-              repeat="choice in filters.client.items track by choice.id"
-              refresh="filters.client.load($select.search)"
-              refresh-delay="400"
+            repeat="choice in filters.group.items track by choice.id"
+            refresh="filters.group.load($select.search)"
+            refresh-delay="400"
             )
               span(ng-bind-html="choice.name | highlight: $select.search")
       +label("{{ 'server.list.filter.cpu.LABEL' | translate }}")
@@ -34,8 +34,20 @@ include /resources/angle/pug/mixins/form
               refresh-delay="400"
             )
               span(ng-bind-html="choice.name | highlight: $select.search")
+      +label("{{ 'server.list.filter.mem.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.mem.clear()")
+          +ui-select("filters.mem")(multiple)
+            ui-select-match(placeholder="{{ 'server.list.filter.mem.PLACEHOLDER' | translate }}")
+              span(ng-bind="$item.name")
+
+            ui-select-choices(
+              repeat="choice in filters.mem.items track by choice.id"
+              refresh="filters.mem.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="choice.name | highlight: $select.search")
       div(ng-repeat="disk in filters.disks.items track by $index")
-        +icon-label("{{ 'server.list.filter.hdd.LABEL' | translate }}")(
+        +icon-label("server.list.filter.hdd.LABEL")(
           class="fa"
           ng-class=
             "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
@@ -55,20 +67,61 @@ include /resources/angle/pug/mixins/form
                 refresh-delay="400"
               )
                 span(ng-bind-html="choice.name | highlight: $select.search")
-    
+      div(ng-repeat="addon in filters.addons.items track by $index")
+        +icon-label("server.list.filter.addon.LABEL")(
+          class="fa"
+          ng-class=
+            "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
+            "+($index || filters.addons.items.length < filters.addons.max ? '' : 'disabled ')"
+          ng-click="$index ? filters.addons.rem($index) : filters.addons.add(addon.selected)"
+        )
+          +input-with-btn("fa fa-times-circle")(
+            ng-click="$index ? filters.addons.rem($index) : addon.clear()"
+          )
+            +ui-select("addon")
+              ui-select-match(placeholder="{{ 'server.list.filter.hdd.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.name")
+
+              ui-select-choices(
+                repeat="choice in addon.items track by choice.id"
+                refresh="addon.load($select.search)"
+                refresh-delay="400"
+              )
+                span(ng-bind-html="choice.name | highlight: $select.search")
+
     .col-md-6
-      +label("{{ 'server.list.filter.group.LABEL' | translate }}")
-        +input-with-btn("fa fa-times-circle")(ng-click="filters.group.clear()")
-          +ui-select("filters.group")(multiple)
-            ui-select-match(placeholder="{{ 'server.list.filter.group.PLACEHOLDER' | translate }}")
-              span(ng-bind="$item.name" class="ui-select-match-item")
+      +label("{{ 'server.list.filter.client.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.client.clear()")
+          +ui-select("filters.client")(multiple)
+            ui-select-match(placeholder="{{ 'server.list.filter.client.PLACEHOLDER' | translate }}")
+              span(ng-bind="$item.name")
 
             ui-select-choices(
-            repeat="choice in filters.group.items track by choice.id"
-            refresh="filters.group.load($select.search)"
-            refresh-delay="400"
+              repeat="choice in filters.client.items track by choice.id"
+              refresh="filters.client.load($select.search)"
+              refresh-delay="400"
             )
               span(ng-bind-html="choice.name | highlight: $select.search")
+      +label("server.list.filter.billing.LABEL")
+        .row
+          .col-sm-6
+            +input-with-btn("fa fa-close", "filters.billing.integration.selected")(
+              ng-click="filters.clearBilling()"
+            )
+              +ui-select("filters.billing.integration")
+                ui-select-match(placeholder="{{ 'server.list.filter.billing.integration.PLACEHOLDER' | translate }}")
+                  span(ng-bind="$select.selected.name")
+
+                +ui-select-choices("filters.billing.integration")
+                  span(ng-bind-html="choice.name | highlight: $select.search")
+          .col-sm-6
+            input.form-control(
+              type="text"
+              translate-attr="{ 'placeholder': 'server.list.filter.billing.id.PLACEHOLDER' }"
+              ng-model="filters.billing.id"
+              ng-disabled="!filters.billing.integration.selected"
+              ng-change="filters.fireChangeEvent()"
+            )
       +label("{{ 'server.list.filter.switch.LABEL' | translate }}")
         +input-with-btn("fa fa-times-circle")(ng-click="filters.switch.clear()")
           +ui-select("filters.switch")(multiple)
@@ -78,18 +131,6 @@ include /resources/angle/pug/mixins/form
             ui-select-choices(
             repeat="choice in filters.switch.items track by choice.id"
             refresh="filters.switch.load($select.search)"
-            refresh-delay="400"
-            )
-              span(ng-bind-html="choice.name | highlight: $select.search")
-      +label("{{ 'server.list.filter.mem.LABEL' | translate }}")
-        +input-with-btn("fa fa-times-circle")(ng-click="filters.mem.clear()")
-          +ui-select("filters.mem")(multiple)
-            ui-select-match(placeholder="{{ 'server.list.filter.mem.PLACEHOLDER' | translate }}")
-              span(ng-bind="$item.name")
-
-            ui-select-choices(
-            repeat="choice in filters.mem.items track by choice.id"
-            refresh="filters.mem.load($select.search)"
             refresh-delay="400"
             )
               span(ng-bind-html="choice.name | highlight: $select.search")

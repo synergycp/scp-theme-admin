@@ -33,7 +33,7 @@
 
     profileForm.$onInit = init;
     profileForm.input = _.clone(INPUTS);
-    profileForm.windows = false;
+    profileForm.platform = 'linux';
     profileForm.preseeds = Select('pxe/preseed');
     profileForm.bootScripts = Select('pxe/template');
     profileForm.isos = Select('pxe/iso').on('change', onIsoChange);
@@ -76,7 +76,7 @@
     }
 
     function setupIsoDefaults(iso) {
-      profileForm.windows = !!iso;
+      profileForm.platform = !!iso ? 'windows' : 'linux';
       if (!iso) {
         profileForm.isos.editions = null;
         return;
@@ -100,7 +100,7 @@
         after: _.map(profileForm.shellScripts.selected, 'id'),
       };
       data.drivers = _.map(profileForm.drivers.selected, 'id');
-      data.iso = profileForm.windows && profileForm.input.iso ? {
+      data.iso = profileForm.platform == 'windows' && profileForm.input.iso ? {
         id: profileForm.input.iso.id,
         edition: profileForm.isos.selectedEdition ? {
           id: profileForm.isos.selectedEdition.id,

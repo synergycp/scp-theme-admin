@@ -18,6 +18,7 @@
         showHdds: '=?',
         showSwitch: '=?',
         showGroup: '=?',
+        showUsage: '=?',
       },
       controller: 'ServerTableCtrl as table',
       transclude: true,
@@ -48,6 +49,7 @@
         showHdds: false,
         showSwitch: true,
         showGroup: true,
+        showUsage: true,
       });
     }
   }

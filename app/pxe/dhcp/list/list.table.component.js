@@ -2,21 +2,18 @@
   'use strict';
 
   angular
-    .module('app.pxe.server.list')
+    .module('app.pxe.dhcp.list')
     .component('pxeServerTable', {
       require: {
         list: '\^list',
       },
       bindings: {
         showName: '=?',
-        showReserved: '=?',
-        showIpEntities: '=?',
-        showServers: '=?',
         showActions: '=?',
       },
       controller: 'ServerTableCtrl as table',
       transclude: true,
-      templateUrl: 'app/pxe/server/list/list.table.html'
+      templateUrl: 'app/pxe/dhcp/list/list.table.html'
     })
     .controller('ServerTableCtrl', ServerTableCtrl)
     ;
@@ -34,9 +31,6 @@
     function init() {
       _.defaults(table, {
         showName: true,
-        showReserved: true,
-        showIpEntities: true,
-        showServers: true,
         showActions: true,
       });
     }

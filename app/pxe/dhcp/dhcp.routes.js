@@ -1,6 +1,6 @@
 (function () {
   angular
-    .module('app.pxe.server')
+    .module('app.pxe.dhcp')
     .config(routeConfig)
     ;
 
@@ -10,21 +10,21 @@
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
     $stateProvider
-      .state('app.pxe.server', {
-        url: '/server',
+      .state('app.pxe.dhcp', {
+        url: '/dhcp',
         abstract: true,
         template: helper.dummyTemplate,
       })
-      .state('app.pxe.server.view', {
+      .state('app.pxe.dhcp.view', {
         url: '/:id',
-        title: 'View PXE Server',
+        title: 'View PXE DHCP Server',
         controller: 'PxeServerViewCtrl as vm',
-        templateUrl: helper.basepath('pxe/server/view/pxe-server.view.html'),
+        templateUrl: helper.basepath('pxe/dhcp/view/pxe-server.view.html'),
       })
       ;
 
-    helper.url.map('pxe/server/?([0-9]*)', function ($state, id) {
-      return 'pxe/server'+(id && '/'+id);
+    helper.url.map('pxe/dhcp/?([0-9]*)', function ($state, id) {
+      return 'pxe/dhcp'+(id && '/'+id);
     });
   }
 })();

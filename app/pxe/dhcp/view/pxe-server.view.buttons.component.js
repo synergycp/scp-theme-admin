@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.pxe.server')
+    .module('app.pxe.dhcp')
     .component('pxeServerButtons', {
       require: {},
       bindings: {
@@ -10,7 +10,7 @@
       },
       controller: 'PxeServerButtonsCtrl as buttons',
       transclude: true,
-      templateUrl: 'app/pxe/server/view/pxe-server.view.buttons.html'
+      templateUrl: 'app/pxe/dhcp/view/pxe-server.view.buttons.html'
     })
     .controller('PxeServerButtonsCtrl', PxeServerButtonsCtrl);
 
@@ -41,7 +41,7 @@
     }
 
     function transferToList() {
-      $state.go('app.pxe.server.list');
+      $state.go('app.pxe.dhcp.list');
     }
   }
 })();

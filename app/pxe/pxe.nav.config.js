@@ -34,12 +34,12 @@
   var DRIVERS = {
     text: "PXE Drivers",
     sref: "app.pxe.driver.list",
-  }
+  };
 
   var DEPLOY_SERVERS = {
-    text: "Deploy Servers",
-    sref: "app.pxe.server.list",
-  }
+    text: "Deploy DHCP Servers",
+    sref: "app.pxe.dhcp.list",
+  };
 
   /**
    * @ngInject

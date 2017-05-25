@@ -3,7 +3,7 @@
 
   var INPUTS = {
     name: '',
-    install_max_concurrent: '',
+    group: '',
     http: {
       host: '',
       port: '',
@@ -22,7 +22,7 @@
       },
       controller: 'PxeServerFormCtrl as pxeServerForm',
       transclude: true,
-      templateUrl: 'app/pxe/server/server.form.html'
+      templateUrl: 'app/pxe/dhcp/dhcp.form.html'
     })
     .controller('PxeServerFormCtrl', PxeServerFormCtrl)
     ;
@@ -35,7 +35,7 @@
 
     pxeServerForm.$onInit = init;
     pxeServerForm.input = _.clone(INPUTS);
-    pxeServerForm.parentServers = Select('pxe/server');
+    pxeServerForm.groups = Select('group');
 
     //////////
 
@@ -57,16 +57,16 @@
     function storeState(response) {
       $rootScope.$evalAsync(function() {
         fillFormInputs();
-        pxeServerForm.parentServers.selected = response.parent;
-        pxeServerForm.parentServers = pxeServerForm.parentServers.filter({
-          'id_not_in[]': response.id
-        })
+        pxeServerForm.groups.selected = response.group;
+        // pxeServerForm.groups = pxeServerForm.groups.filter({
+        //   'id_not_in[]': response.id
+        // })
       });
     }
 
     function getData() {
       var data = _.clone(pxeServerForm.input);
-      data.parent_id = pxeServerForm.parentServers.getSelected('id') || null;
+      data.group = pxeServerForm.groups.getSelected('id') || null;
 
       return data;
     }

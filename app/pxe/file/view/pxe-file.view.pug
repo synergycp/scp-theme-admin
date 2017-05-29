@@ -2,12 +2,12 @@ extends /resources/angle/pug/edit
 
 block title
   span(
-    translate='pxe.dhcp.form.title.EDIT'
+    translate='pxe.file.form.title.EDIT'
     translate-value-name='{{vm.edit.input.name}}'
   )
 
 block form
-  pxe-server-form(form="vm.edit")
+  pxe-file-form(form="vm.edit")
 
 block append right-side
-  pxe-server-buttons(pxe-server="vm.edit.input")
+  pxe-file-buttons(pxe-file="vm.edit.input")

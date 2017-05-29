@@ -18,8 +18,8 @@
       .state('app.pxe.dhcp.view', {
         url: '/:id',
         title: 'View PXE DHCP Server',
-        controller: 'PxeServerViewCtrl as vm',
-        templateUrl: helper.basepath('pxe/dhcp/view/pxe-server.view.html'),
+        controller: 'PxeDhcpViewCtrl as vm',
+        templateUrl: helper.basepath('pxe/dhcp/view/pxe-dhcp.view.html'),
       })
       ;
 

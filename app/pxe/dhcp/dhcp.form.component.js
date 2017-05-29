@@ -14,36 +14,36 @@
 
   angular
     .module('app.pxe')
-    .component('pxeServerForm', {
+    .component('pxeDhcpForm', {
       require: {
       },
       bindings: {
         form: '=',
       },
-      controller: 'PxeServerFormCtrl as pxeServerForm',
+      controller: 'PxeDhcpFormCtrl as pxeDhcpForm',
       transclude: true,
       templateUrl: 'app/pxe/dhcp/dhcp.form.html'
     })
-    .controller('PxeServerFormCtrl', PxeServerFormCtrl)
+    .controller('PxeDhcpFormCtrl', PxeDhcpFormCtrl)
     ;
 
   /**
    * @ngInject
    */
-  function PxeServerFormCtrl(Select, $scope, _, $rootScope) {
-    var pxeServerForm = this;
+  function PxeDhcpFormCtrl(Select, $scope, _, $rootScope) {
+    var pxeDhcpForm = this;
 
-    pxeServerForm.$onInit = init;
-    pxeServerForm.input = _.clone(INPUTS);
-    pxeServerForm.groups = Select('group');
+    pxeDhcpForm.$onInit = init;
+    pxeDhcpForm.input = _.clone(INPUTS);
+    pxeDhcpForm.groups = Select('group');
 
     //////////
 
     function init() {
-      pxeServerForm.form.getData = getData;
+      pxeDhcpForm.form.getData = getData;
 
-      if (pxeServerForm.form.on) {
-        pxeServerForm.form
+      if (pxeDhcpForm.form.on) {
+        pxeDhcpForm.form
           .on('load', storeState)
           .on('change', storeState)
           ;
@@ -51,22 +51,22 @@
     }
 
     function fillFormInputs() {
-      _.overwrite(pxeServerForm.input, pxeServerForm.form.input);
+      _.overwrite(pxeDhcpForm.input, pxeDhcpForm.form.input);
     }
 
     function storeState(response) {
       $rootScope.$evalAsync(function() {
         fillFormInputs();
-        pxeServerForm.groups.selected = response.group;
-        // pxeServerForm.groups = pxeServerForm.groups.filter({
+        pxeDhcpForm.groups.selected = response.group;
+        // pxeDhcpForm.groups = pxeDhcpForm.groups.filter({
         //   'id_not_in[]': response.id
         // })
       });
     }
 
     function getData() {
-      var data = _.clone(pxeServerForm.input);
-      data.group = pxeServerForm.groups.getSelected('id') || null;
+      var data = _.clone(pxeDhcpForm.input);
+      data.group = pxeDhcpForm.groups.getSelected('id') || null;
 
       return data;
     }

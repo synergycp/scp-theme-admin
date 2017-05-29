@@ -13,5 +13,6 @@
       'app.pxe.iso',
       'app.pxe.driver',
       'app.pxe.dhcp',
+      'app.pxe.file',
     ]);
 })();

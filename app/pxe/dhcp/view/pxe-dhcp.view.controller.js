@@ -3,7 +3,7 @@
 
   angular
     .module('app.pxe')
-    .controller('PxeServerViewCtrl', PxeServerViewCtrl)
+    .controller('PxeDhcpViewCtrl', PxeDhcpViewCtrl)
     ;
 
   /**
@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function PxeServerViewCtrl(Edit, $stateParams) {
+  function PxeDhcpViewCtrl(Edit, $stateParams) {
     var vm = this;
 
     vm.edit = Edit('pxe/dhcp/'+$stateParams.id);

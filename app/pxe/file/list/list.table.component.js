@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('app.pxe.dhcp.list')
-    .component('pxeDhcpTable', {
+    .module('app.pxe.file.list')
+    .component('pxeFileTable', {
       require: {
         list: '\^list',
       },
@@ -13,7 +13,7 @@
       },
       controller: 'ServerTableCtrl as table',
       transclude: true,
-      templateUrl: 'app/pxe/dhcp/list/list.table.html'
+      templateUrl: 'app/pxe/file/list/list.table.html'
     })
     .controller('ServerTableCtrl', ServerTableCtrl)
     ;

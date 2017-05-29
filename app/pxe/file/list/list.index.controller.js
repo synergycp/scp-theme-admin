@@ -3,15 +3,15 @@
 
   angular
     .module('app.pxe')
-    .controller('PxeDhcpIndexCtrl', PxeDhcpIndexCtrl);
+    .controller('PxeFileIndexCtrl', PxeFileIndexCtrl);
 
   /**
    * @ngInject
    */
-  function PxeDhcpIndexCtrl(PxeDhcpList, ListFilter) {
+  function PxeFileIndexCtrl(PxeFileList, ListFilter) {
     var vm = this;
 
-    vm.list = PxeDhcpList();
+    vm.list = PxeFileList();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe.server.dhcp',
+        target_type: 'pxe.server.file',
       },
     };
 

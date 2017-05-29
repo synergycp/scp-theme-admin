@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('app.pxe.dhcp.list.filters')
-    .component('pxeDhcpFilters', {
+    .module('app.pxe.file.list.filters')
+    .component('pxeFileFilters', {
       require: {
         list: '\^list',
       },
@@ -12,9 +12,9 @@
         current: '=',
         change: '&?',
       },
-      controller: 'PxeDhcpFiltersCtrl as filters',
+      controller: 'PxeFileFiltersCtrl as filters',
       transclude: true,
-      templateUrl: 'app/pxe/dhcp/list/filters/filters.html'
+      templateUrl: 'app/pxe/file/list/filters/filters.html'
     })
     ;
 })();

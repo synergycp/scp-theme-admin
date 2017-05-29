@@ -2,14 +2,14 @@
   'use strict';
 
   angular
-    .module('app.pxe.dhcp.list.filters')
-    .controller('PxeDhcpFiltersCtrl', PxeDhcpFiltersCtrl)
+    .module('app.pxe.file.list.filters')
+    .controller('PxeFileFiltersCtrl', PxeFileFiltersCtrl)
     ;
 
   /**
    * @ngInject
    */
-  function PxeDhcpFiltersCtrl(Select, Observable, $state, $q, $timeout) {
+  function PxeFileFiltersCtrl(Select, Observable, $state, $q, $timeout) {
     var filters = this;
 
     filters.$onInit = init;

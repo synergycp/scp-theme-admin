@@ -3,14 +3,14 @@
 
   angular
     .module('app.pxe.dhcp')
-    .factory('PxeServerList', PxeServerListFactory);
+    .factory('PxeDhcpList', PxeDhcpListFactory);
 
   /**
    * PxeProfileList Factory
    *
    * @ngInject
    */
-  function PxeServerListFactory (List, ListConfirm) {
+  function PxeDhcpListFactory (List, ListConfirm) {
     return function () {
       var list = List('pxe/dhcp');
       list.confirm = ListConfirm(list, 'pxe.dhcp.modal.delete');

@@ -275,6 +275,7 @@
       };
       data.billing.date = provisionForm.billing.date.value ? moment(provisionForm.billing.date.value)
         .toISOString() : null;
+      data.billing.max_bandwidth = provisionForm.billing.max_bandwidth;
       data.server = {
         id: provisionForm.server.getSelected('id'),
       };

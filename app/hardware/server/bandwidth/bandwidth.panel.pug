@@ -55,7 +55,7 @@ div(style="margin-bottom: 15px")
             div(ng-if="bandwidth.billing.isActive")
               uib-progressbar.progress-min-text(
                 value="bandwidth.billing.percent"
-                ng-class="bandwidth.billing.percent > 95 ? 'progress-bar-danger' : 'progress-bar-info'"
+                type="bandwidth.billing.percent > 95 ? 'danger' : 'info'"
               )
                 | {{ bandwidth.billing.percent }}%
 

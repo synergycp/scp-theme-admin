@@ -12,7 +12,7 @@
    */
   function ServerBandwidthPortFactory (
     $q,
-    date,
+    Date,
     BandwidthChart,
     BandwidthFilter,
     ServerBandwidthBilling
@@ -24,13 +24,13 @@
           filter || BandwidthFilter(),
           ServerBandwidthBilling(),
           BandwidthChart(),
-          date,
+          Date,
           $q
         );
     };
   }
 
-  function ServerBandwidthPort (server, port, filter, billing, chart, date, $q) {
+  function ServerBandwidthPort (server, port, filter, billing, chart, Date, $q) {
     // Private variables
     var bandwidth = this;
     var $api = port.one('bandwidth');
@@ -73,7 +73,7 @@
 
     function formatDateForServer(dateVal) {
       return typeof dateVal === "undefined" ? undefined  :
-        dateVal.utc().format(date.formatServer);
+        dateVal.utc().format(Date.formatServer);
     }
 
     function storeData(response) {
@@ -111,7 +111,7 @@
 
       billing.max = data.max;
       billing.used = data.used;
-      billing.cycleStart = date.parse(data.cycle_started_at.iso_8601).format(date.formatDate);
+      billing.cycleStart = Date.parse(data.cycle_started_at.iso_8601).format(Date.formatDate);
       billing.percent = data.percent;
     }
   }

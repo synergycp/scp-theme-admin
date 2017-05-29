@@ -13,7 +13,7 @@
    */
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
-    var search = '?switch&group&disks[]&cpu&mem&client&bw.min&bw.max&billing.id&billing.integration&q';
+    var search = '?switch&group&disks[]&addons[]&cpu&mem&client&bw.min&bw.max&billing.id&billing.integration&q';
     $stateProvider
       .state('app.hardware.server.inventory', {
         url: '/inventory'+search,
@@ -32,7 +32,8 @@
         templateUrl: helper.basepath(DIR+'list.index.html'),
         reloadOnSearch: false,
         resolve: helper.resolveFor(
-          'moment', 'after:date-range-picker'
+          'moment', 'after:date-range-picker',
+          'numeral'
         ),
       })
       ;

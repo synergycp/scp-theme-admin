@@ -18,7 +18,7 @@
    *
    * @ngInject
    */
-  function SettingIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, Api, $timeout) {
+  function SettingIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, Api, SettingLang, $timeout) {
     var vm = this;
     var $api = Api.all(API.SETTING);
     var $groups = Api.all(API.SETTING_GROUP);
@@ -61,8 +61,22 @@
       return $groups
         .getList()
         .then(function (groups) {
+          setPkg(groups);
+          SettingLang.load(groups);
           _.each(groups.reverse(), addSettingTab);
         });
+    }
+
+    function setPkg(groups) {
+      _.forEach(groups, function(group) {
+        _.forEach(group.settings, function(setting) {
+          if(setting.slug.startsWith('pkg.')) {
+            var secondDotIndex = setting.slug.indexOf('.', 4);
+            setting['pkg'] = setting.slug.substr(4, secondDotIndex-4); // i.e. pick `abuse` from `pkg.abuse.some_name`
+            setting['lang'] = setting.slug.substr(secondDotIndex+1);
+          }
+        })
+      })
     }
 
     function addSettingTab(group) {

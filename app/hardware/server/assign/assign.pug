@@ -20,7 +20,7 @@ include /resources/angle/pug/mixins/panel
       tr
         th.v-mid.shrink(translate="server.assign.client.TITLE")
         td
-          span.editable
+          .editable
             a(
               ng-if="assign.server.access"
               ui-sref="app.user.client.view(assign.server.access.client)"

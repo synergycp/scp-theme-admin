@@ -17,7 +17,6 @@
     },
     billing: {
       id: '',
-      max_bandwidth: '',
       date: '',
     },
   };
@@ -42,7 +41,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Api, Select, Modal, ServerFormPort, MultiInput, $rootScope, ServerConfig, $stateParams, $q) {
+  function ServerFormCtrl(_, Api, Select, Modal, ServerFormPort, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
     var serverForm = this;
     var $ports;
 
@@ -144,6 +143,7 @@
         $ports
           .getList()
           .then(storePorts)
+          .then(storePortsBandwidth)
         ;
       }
     }
@@ -156,6 +156,18 @@
         port.loadEntities();
         serverForm.ports.push(port);
       });
+    }
+
+    function storePortsBandwidth() {
+      serverForm.ports.forEach(function(port) {
+        $ports.get(port.id+'/bandwidth/usage')
+          .then(function(bandwidthData) {
+            if(bandwidthData.data[0]) {
+              port.bandwidthUsage = bandwidthData.data[0];
+              port.max_bandwidth = $filter('bitsToSize')(bandwidthData.data[0].max);
+            }
+          })
+      })
     }
 
     function fillFormInputs() {
@@ -214,8 +226,14 @@
         _.map(serverForm.ports, savePortChanges)
       ).then(function () {
         serverForm.form.form.$setPristine();
-        serverForm.disks.$dirty = serverForm.addOns.$dirty = serverForm.cpu.$dirty = serverForm.mem.$dirty =
+        serverForm.disks.$dirty =
+          serverForm.addOns.$dirty =
+          serverForm.cpu.$dirty =
+          serverForm.mem.$dirty =
           false;
+        _.map(serverForm.form.form, function (field) {
+          if (field) field.$dirty = false;
+        });
         serverForm.form.fire('created.relations');
       });
     }
@@ -235,6 +253,7 @@
       return $q.all([
         updateServerPort()
           .then(updateSwitchPort)
+          .then(updatePortBandwidth)
           .then(updateEntities),
       ]).then(port.$setPristine);
 
@@ -310,7 +329,56 @@
 
         function updateExisting(response) {
           port.fromExisting(response, true);
+          return response;
         }
+      }
+
+      function updatePortBandwidth() {
+        if (!serverForm.alwaysDirty &&
+            !serverForm.form.form[portPrefix+'max_bandwidth'].$dirty &&
+            !serverForm.form.form['billing.date'].$dirty
+        ) {
+          return;
+        }
+
+        var startDate = serverForm.billing.date ?
+          moment(serverForm.billing.date.value).toISOString() :
+          undefined;
+
+        if (port.id && !serverForm.isCreating && port.max_bandwidth && port.bandwidthUsage) {
+          return $ports
+            .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
+            .patch({
+              "max": $filter('sizeToBits')(port.max_bandwidth),
+              "started_at": startDate
+            })
+          ;
+        }
+
+        if(port.max_bandwidth && !port.bandwidthUsage) {
+          return $ports
+            .all(port.id +'/bandwidth/usage')
+            .post({
+              "max": $filter('sizeToBits')(port.max_bandwidth),
+              "started_at": startDate
+            })
+            .then(function(bandwidthData) {
+              port.bandwidthUsage = bandwidthData.response.data;
+              port.max_bandwidth = $filter('bitsToSize')(bandwidthData.response.data.max);
+            })
+          ;
+        }
+
+        if(!port.max_bandwidth && port.bandwidthUsage) {
+          return $ports
+            .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
+            .remove()
+            .then(function() {
+              port.bandwidthUsage = null;
+            })
+          ;
+        }
+
       }
     }
 

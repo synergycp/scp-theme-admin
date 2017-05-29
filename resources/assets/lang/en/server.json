@@ -137,6 +137,10 @@
     },
     "port": {
       "ADD": "Add Port",
+      "max_bandwidth": {
+        "LABEL": "Max Bandwidth",
+        "PLACEHOLDER": "e.g. 10TB. Leave blank for no maximum"
+      },
       "remove": {
         "TITLE": "Remove Server Port",
         "BODY": "This will make any entities on this port available again.",
@@ -165,7 +169,11 @@
     "GROUP": "IP Group",
     "HDDS": "Hard Drives",
     "RAM": "RAM",
-    "SRV_ID": "Server ID"
+    "SRV_ID": "Server ID",
+    "usage": {
+      "PERCENT": "Usage Percent",
+      "MAX": "Usage Max"
+    }
   },
   "inventory": {
     "TITLE": "Server Inventory"
@@ -296,7 +304,11 @@
         "PLACEHOLDER": "Type to search..."
       },
       "hdd": {
-        "LABEL": "HDD",
+        "LABEL": "Disk",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "addon": {
+        "LABEL": "Add-On",
         "PLACEHOLDER": "Type to search..."
       },
       "bw": {

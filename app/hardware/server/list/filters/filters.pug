@@ -41,13 +41,13 @@ include /resources/angle/pug/mixins/form
               span(ng-bind="$item.name")
 
             ui-select-choices(
-            repeat="choice in filters.mem.items track by choice.id"
-            refresh="filters.mem.load($select.search)"
-            refresh-delay="400"
+              repeat="choice in filters.mem.items track by choice.id"
+              refresh="filters.mem.load($select.search)"
+              refresh-delay="400"
             )
               span(ng-bind-html="choice.name | highlight: $select.search")
       div(ng-repeat="disk in filters.disks.items track by $index")
-        +icon-label("{{ 'server.list.filter.hdd.LABEL' | translate }}")(
+        +icon-label("server.list.filter.hdd.LABEL")(
           class="fa"
           ng-class=
             "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
@@ -64,6 +64,27 @@ include /resources/angle/pug/mixins/form
               ui-select-choices(
                 repeat="choice in disk.items track by choice.id"
                 refresh="disk.load($select.search)"
+                refresh-delay="400"
+              )
+                span(ng-bind-html="choice.name | highlight: $select.search")
+      div(ng-repeat="addon in filters.addons.items track by $index")
+        +icon-label("server.list.filter.addon.LABEL")(
+          class="fa"
+          ng-class=
+            "'fa-'+($index ? 'minus' : 'plus')+'-circle '" +
+            "+($index || filters.addons.items.length < filters.addons.max ? '' : 'disabled ')"
+          ng-click="$index ? filters.addons.rem($index) : filters.addons.add(addon.selected)"
+        )
+          +input-with-btn("fa fa-times-circle")(
+            ng-click="$index ? filters.addons.rem($index) : addon.clear()"
+          )
+            +ui-select("addon")
+              ui-select-match(placeholder="{{ 'server.list.filter.hdd.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.name")
+
+              ui-select-choices(
+                repeat="choice in addon.items track by choice.id"
+                refresh="addon.load($select.search)"
                 refresh-delay="400"
               )
                 span(ng-bind-html="choice.name | highlight: $select.search")

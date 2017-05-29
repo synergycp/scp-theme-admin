@@ -39,6 +39,7 @@
       });
 
       return modal.result.then(function (input) {
+        // TODO: use /server/{server}/port/{port}/bandwidth/usage
         return list.patch({
           billing: {
             max_bandwidth: input.limit,

@@ -17,7 +17,6 @@
     },
     billing: {
       id: '',
-      max_bandwidth: '',
       date: '',
     },
   };
@@ -227,8 +226,14 @@
         _.map(serverForm.ports, savePortChanges)
       ).then(function () {
         serverForm.form.form.$setPristine();
-        serverForm.disks.$dirty = serverForm.addOns.$dirty = serverForm.cpu.$dirty = serverForm.mem.$dirty =
+        serverForm.disks.$dirty =
+          serverForm.addOns.$dirty =
+          serverForm.cpu.$dirty =
+          serverForm.mem.$dirty =
           false;
+        _.map(serverForm.form.form, function (field) {
+          if (field) field.$dirty = false;
+        });
         serverForm.form.fire('created.relations');
       });
     }
@@ -329,31 +334,49 @@
       }
 
       function updatePortBandwidth() {
+        if (!serverForm.alwaysDirty &&
+            !serverForm.form.form[portPrefix+'max_bandwidth'].$dirty &&
+            !serverForm.form.form['billing.date'].$dirty
+        ) {
+          return;
+        }
+
+        var startDate = serverForm.billing.date ?
+          moment(serverForm.billing.date.value).toISOString() :
+          undefined;
+
         if (port.id && !serverForm.isCreating && port.max_bandwidth && port.bandwidthUsage) {
           return $ports
             .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
             .patch({
               "max": $filter('sizeToBits')(port.max_bandwidth),
-              "started_at": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+              "started_at": startDate
             })
-        } else if(port.max_bandwidth && !port.bandwidthUsage) {
+          ;
+        }
+
+        if(port.max_bandwidth && !port.bandwidthUsage) {
           return $ports
             .all(port.id +'/bandwidth/usage')
             .post({
               "max": $filter('sizeToBits')(port.max_bandwidth),
-              "started_at": moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+              "started_at": startDate
             })
             .then(function(bandwidthData) {
               port.bandwidthUsage = bandwidthData.response.data;
               port.max_bandwidth = $filter('bitsToSize')(bandwidthData.response.data.max);
             })
-        } else if(!port.max_bandwidth && port.bandwidthUsage) {
+          ;
+        }
+
+        if(!port.max_bandwidth && port.bandwidthUsage) {
           return $ports
             .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
             .remove()
             .then(function() {
               port.bandwidthUsage = null;
             })
+          ;
         }
 
       }

@@ -132,13 +132,21 @@ div.relative(
 
           +ui-select-choices("port.switch.speed")
             span(ng-bind-html="choice.name | highlight: $select.search")
-
+          
+  
   div(ng-if="port.group.selected")
     +label("server.form.entities.LABEL")
       entity-multi-select(
         placeholder="server.form.entities.PLACEHOLDER"
         select="port.entities"
       )
+    +field(
+      "server.form.billing.max_bandwidth.LABEL",
+      "port.max_bandwidth"
+    )(
+      translate-attr="{ 'placeholder': 'server.form.billing.max_bandwidth.PLACEHOLDER' }"
+      ng-model="port.max_bandwidth"
+    )
 
 div.big-add-button(
   ng-click="serverForm.ports.add()"
@@ -230,10 +238,10 @@ hr
     )
 
 +field(
-  "server.form.billing.max_bandwidth.LABEL",
+  "server.form.port.max_bandwidth.LABEL",
   "billing.max_bandwidth"
 )(
-  translate-attr="{ 'placeholder': 'server.form.billing.max_bandwidth.PLACEHOLDER' }"
+  translate-attr="{ 'placeholder': 'server.form.port.max_bandwidth.PLACEHOLDER' }"
   ng-model="serverForm.input.billing.max_bandwidth"
 )
 

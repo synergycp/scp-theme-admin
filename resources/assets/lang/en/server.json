@@ -137,6 +137,10 @@
     },
     "port": {
       "ADD": "Add Port",
+      "max_bandwidth": {
+        "LABEL": "Max Bandwidth",
+        "PLACEHOLDER": "e.g. 10TB. Leave blank for no maximum"
+      },
       "remove": {
         "TITLE": "Remove Server Port",
         "BODY": "This will make any entities on this port available again.",

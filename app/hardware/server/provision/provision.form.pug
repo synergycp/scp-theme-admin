@@ -217,6 +217,20 @@ div(ng-if="provisionForm.profile.hasIso")
       ng-model="provisionForm.billing.date.value"
     )
 
++label(
+  "{{ 'server.form.billing.max_bandwidth.LABEL' | translate }}",
+  "billing.date"
+)
+  +input-with-btn("fa fa-close")(
+    ng-click="provisionForm.billing.max_bandwidth = ''"
+  )
+    input.form-control(
+      type="text"
+      id="form-billing.max_bandwidth"
+      placeholder="{{ 'server.form.billing.max_bandwidth.PLACEHOLDER' | translate }}"
+      ng-model="provisionForm.billing.max_bandwidth"
+    )
+
 +field(
   "{{ 'server.form.nickname.LABEL' | translate }}",
   "nickname"

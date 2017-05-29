@@ -134,16 +134,18 @@ div.relative(
             span(ng-bind-html="choice.name | highlight: $select.search")
           
   
-  div(ng-if="port.group.selected")
+  div(ng-if="port.switch.port.selected")
     +label("server.form.entities.LABEL")
       entity-multi-select(
         placeholder="server.form.entities.PLACEHOLDER"
         select="port.entities"
       )
+
     +field(
       "server.form.billing.max_bandwidth.LABEL",
       "port.max_bandwidth"
     )(
+      name="port-{{ portIndex }}.max_bandwidth"
       translate-attr="{ 'placeholder': 'server.form.billing.max_bandwidth.PLACEHOLDER' }"
       ng-model="port.max_bandwidth"
     )
@@ -236,14 +238,6 @@ hr
       translate-attr="{ 'placeholder': 'server.form.billing.date.PLACEHOLDER' }"
       name="billing.date"
     )
-
-+field(
-  "server.form.port.max_bandwidth.LABEL",
-  "billing.max_bandwidth"
-)(
-  translate-attr="{ 'placeholder': 'server.form.port.max_bandwidth.PLACEHOLDER' }"
-  ng-model="serverForm.input.billing.max_bandwidth"
-)
 
 +field(
   "server.form.nickname.LABEL",

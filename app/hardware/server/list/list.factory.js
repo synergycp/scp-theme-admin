@@ -26,10 +26,12 @@
       var confirm = ListConfirm(list, 'server.modal.delete');
 
       list.bulk.add('Assign Client', handler(ServerAssign.client));
+      /*
       list.bulk.add(
         'Assign Bandwidth Limit',
         handler(ServerAssign.billing.limits)
       );
+      */
       list.bulk.add(
         'Assign Billing Date',
         handler(ServerAssign.billing.date)

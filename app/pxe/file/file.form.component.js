@@ -61,9 +61,7 @@
                 fillFormInputs();
                 pxeFileForm.groups.selected = response.group;
                 pxeFileForm.parentServers.selected = response.parent;
-                pxeFileForm.parentServers = pxeFileForm.parentServers.filter({
-                    'id_not_in[]': response.id
-                });
+                pxeFileForm.parentServers = pxeFileForm.parentServers.filter({'id_not_in[]': response.id})
             });
         }
 

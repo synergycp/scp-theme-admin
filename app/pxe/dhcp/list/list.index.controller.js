@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe.server.dhcp',
+        target_type: 'pxe.dhcp',
       },
     };
 

@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe.server.file',
+        target_type: 'pxe.file',
       },
     };
 

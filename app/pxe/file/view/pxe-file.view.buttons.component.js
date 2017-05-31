@@ -2,22 +2,22 @@
   'use strict';
 
   angular
-    .module('app.pxe.server')
-    .component('pxeServerButtons', {
+    .module('app.pxe.file')
+    .component('pxeFileButtons', {
       require: {},
       bindings: {
-        pxeServer: '=',
+        pxeFile: '=',
       },
-      controller: 'PxeServerButtonsCtrl as buttons',
+      controller: 'PxeFileButtonsCtrl as buttons',
       transclude: true,
-      templateUrl: 'app/pxe/server/view/pxe-server.view.buttons.html'
+      templateUrl: 'app/pxe/file/view/pxe-file.view.buttons.html'
     })
-    .controller('PxeServerButtonsCtrl', PxeServerButtonsCtrl);
+    .controller('PxeFileButtonsCtrl', PxeFileButtonsCtrl);
 
   /**
    * @ngInject
    */
-  function PxeServerButtonsCtrl(PxeServerList, Loader, $state) {
+  function PxeFileButtonsCtrl(PxeFileList, Loader, $state) {
     var buttons = this;
 
     buttons.loader = Loader();
@@ -33,15 +33,15 @@
 
     function doDelete() {
       return buttons.loader.during(
-        PxeServerList()
+        PxeFileList()
           .confirm
-          .delete([buttons.pxeServer])
+          .delete([buttons.pxeFile])
           .result.then(transferToList)
       );
     }
 
     function transferToList() {
-      $state.go('app.pxe.server.list');
+      $state.go('app.pxe.file.list');
     }
   }
 })();

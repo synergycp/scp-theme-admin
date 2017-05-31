@@ -1,0 +1,44 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field("{{ 'pxe.dhcp.form.name.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.dhcp.form.name.PLACEHOLDER' | translate }}"
+  ng-model="pxeDhcpForm.input.name"
+)
+
++label("{{ 'pxe.dhcp.form.group.LABEL' | translate }}")
+  +input-with-btn("fa fa-times-circle")(
+    ng-click="pxeDhcpForm.groups.selected = null"
+  )
+    +ui-select("pxeDhcpForm.groups")
+      ui-select-match(placeholder="{{ 'pxe.dhcp.form.group.PLACEHOLDER' | translate }}")
+        span(ng-bind="$select.selected.name")
+
+      ui-select-choices(
+        repeat="group in pxeDhcpForm.groups.items track by group.id"
+        refresh="pxeDhcpForm.groups.load($select.search)"
+        refresh-delay="400"
+      )
+        span(ng-bind-html="group.name | highlight: $select.search")
+
+hr
+
++field("{{ 'pxe.dhcp.form.host.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.dhcp.form.host.PLACEHOLDER' | translate }}"
+  ng-model="pxeDhcpForm.input.http.host"
+)
+
++field("{{ 'pxe.dhcp.form.port.LABEL' | translate }}", "name")(
+  placeholder="{{ 'pxe.dhcp.form.port.PLACEHOLDER' | translate }}"
+  ng-model="pxeDhcpForm.input.http.port"
+)
+
++label("{{ 'pxe.dhcp.form.https.LABEL' | translate }}")
+  +checkbox()(
+    ng-model="pxeDhcpForm.input.http.use_https"
+  )
+
++field("{{ 'pxe.dhcp.form.api_key.LABEL' | translate }}", "name")(
+  ng-model="pxeDhcpForm.input.http.api_key"
+)
+

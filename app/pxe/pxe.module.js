@@ -12,6 +12,7 @@
       'app.pxe.boot',
       'app.pxe.iso',
       'app.pxe.driver',
-      'app.pxe.server',
+      'app.pxe.dhcp',
+      'app.pxe.file',
     ]);
 })();

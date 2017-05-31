@@ -34,12 +34,17 @@
   var DRIVERS = {
     text: "PXE Drivers",
     sref: "app.pxe.driver.list",
-  }
+  };
 
-  var DEPLOY_SERVERS = {
-    text: "Deploy Servers",
-    sref: "app.pxe.server.list",
-  }
+  var DEPLOY_DHCP_SERVERS = {
+    text: "Deploy DHCP Servers",
+    sref: "app.pxe.dhcp.list",
+  };
+
+  var DEPLOY_FILE_SERVERS = {
+      text: "Deploy File Servers",
+      sref: "app.pxe.file.list",
+  };
 
   /**
    * @ngInject
@@ -72,7 +77,8 @@
         group.item(BOOT_SCRIPTS);
         group.item(ISOS);
         group.item(DRIVERS);
-        group.item(DEPLOY_SERVERS);
+        group.item(DEPLOY_DHCP_SERVERS);
+        group.item(DEPLOY_FILE_SERVERS);
       }
     }
 
@@ -84,7 +90,8 @@
       group.remove(BOOT_SCRIPTS);
       group.remove(ISOS);
       group.remove(DRIVERS);
-      group.remove(DEPLOY_SERVERS);
+      group.remove(DEPLOY_DHCP_SERVERS);
+      group.remove(DEPLOY_FILE_SERVERS);
     }
   }
 })();

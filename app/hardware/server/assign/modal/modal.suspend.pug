@@ -30,6 +30,11 @@ form(ng-submit="modal.submit()")
         span(ng-if="server.access && !server.access.is_active")
           | &nbsp; (suspended)
 
+    p(translate="server.modal.suspend.REASON")
+    textarea.form-control(
+      ng-model="modal.reason"
+      placeholder="{{ 'server.modal.suspend.REASON' | translate }}"
+    )
   .modal-footer
     button.btn.btn-secondary(
       type="button"

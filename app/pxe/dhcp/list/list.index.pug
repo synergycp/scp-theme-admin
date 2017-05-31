@@ -1,0 +1,30 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="pxe.dhcp.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('dhcp-edit-form')")
+        i.fa.fa-plus
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    pxe-dhcp-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
+    pxe-dhcp-table.border-top-table.scrollable-block
+    list-footer
+
+block bottom-left
+  +create-form("{{ 'pxe.dhcp.form.title.ADD' | translate }}", 'dhcp-edit-form')
+    pxe-dhcp-form(form="vm.create")
+
+block bottom-right
+  logs(
+    heading="PXE Server Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

@@ -406,7 +406,8 @@
         "Disable all client controls"
       ],
       "ACTION_COUNT": "2",
-      "CONFIRM": "Click \"Suspend\" to suspend these servers:"
+      "CONFIRM": "Click \"Suspend\" to suspend these servers:",
+      "REASON": "Set a reason:"
     },
     "wipe": {
       "TITLE": "Wipe Server",

@@ -3,7 +3,7 @@
 
   angular
     .module('app.pxe')
-    .controller('PxeServerViewCtrl', PxeServerViewCtrl)
+    .controller('PxeDhcpViewCtrl', PxeDhcpViewCtrl)
     ;
 
   /**
@@ -11,15 +11,15 @@
    *
    * @ngInject
    */
-  function PxeServerViewCtrl(Edit, $stateParams) {
+  function PxeDhcpViewCtrl(Edit, $stateParams) {
     var vm = this;
 
-    vm.edit = Edit('pxe/server/'+$stateParams.id);
+    vm.edit = Edit('pxe/dhcp/'+$stateParams.id);
     vm.edit.input = {};
     vm.edit.submit = submit;
     vm.logs = {
       filter: {
-        target_type: 'pxe.server',
+        target_type: 'pxe.dhcp',
         target_id: $stateParams.id,
       },
     };

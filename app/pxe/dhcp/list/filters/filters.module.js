@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('app.pxe.server.list.filters', [
+    .module('app.pxe.dhcp.list.filters', [
     ]);
 })();

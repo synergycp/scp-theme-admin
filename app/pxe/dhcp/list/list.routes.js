@@ -1,6 +1,6 @@
 (function () {
   angular
-    .module('app.pxe.server.list')
+    .module('app.pxe.dhcp.list')
     .config(routeConfig)
     ;
 
@@ -10,11 +10,11 @@
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
     $stateProvider
-      .state('app.pxe.server.list', {
+      .state('app.pxe.dhcp.list', {
         url: '?q',
         title: 'Profiles',
-        controller: 'PxeServerIndexCtrl as vm',
-        templateUrl: helper.basepath('pxe/server/list/list.index.html'),
+        controller: 'PxeDhcpIndexCtrl as vm',
+        templateUrl: helper.basepath('pxe/dhcp/list/list.index.html'),
         reloadOnSearch: false,
         resolve: helper.resolveFor(
           'moment'

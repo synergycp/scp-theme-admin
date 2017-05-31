@@ -197,9 +197,9 @@
       "DELETE": "Delete"
     }
   },
-  "server": {
+  "dhcp": {
     "list": {
-      "TITLE": "Deploy Servers",
+      "TITLE": "Deploy DHCP Servers",
       "filter": {
         "search": {
           "LABEL": "Search",
@@ -209,15 +209,65 @@
     },
     "modal": {
       "delete": {
-        "TITLE": "Delete OS Reload Servers",
+        "TITLE": "Delete OS Reload DHCP Servers",
         "SUBMIT": "Delete",
         "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these OS Reload Servers:"
+        "BODY": "Click \"Delete\" to permanently delete these OS Reload DHCP Servers:"
       }
     },
     "form": {
       "title": {
-        "ADD": "Create PXE Server",
+        "ADD": "Create PXE DHCP Server",
+        "EDIT": "Edit {{ name }}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "group": {
+        "LABEL": "Group",
+        "PLACEHOLDER": ""
+      },
+      "host": {
+        "LABEL": "Host",
+        "PLACEHOLDER": "localhost"
+      },
+      "port": {
+        "LABEL": "Port",
+        "PLACEHOLDER": "3000"
+      },
+      "https": {
+        "LABEL": "Use HTTPS"
+      },
+      "api_key": {
+        "LABEL": "API Key"
+      }
+    },
+    "buttons": {
+      "DELETE": "Delete"
+    }
+  },
+  "file": {
+    "list": {
+      "TITLE": "Deploy File Servers",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete OS Reload File Servers",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these OS Reload File Servers:"
+      }
+    },
+    "form": {
+      "title": {
+        "ADD": "Create PXE File Server",
         "EDIT": "Edit {{ name }}"
       },
       "name": {
@@ -225,7 +275,7 @@
         "PLACEHOLDER": "Must be unique"
       },
       "parent": {
-        "LABEL": "Parent PXE server",
+        "LABEL": "Parent PXE File server",
         "PLACEHOLDER": "Type to search..."
       },
       "max_installs": {
@@ -239,6 +289,10 @@
       "port": {
         "LABEL": "Port",
         "PLACEHOLDER": "3000"
+      },
+      "group": {
+        "LABEL": "Group",
+        "PLACEHOLDER": ""
       },
       "https": {
         "LABEL": "Use HTTPS"

@@ -2,14 +2,14 @@
   'use strict';
 
   angular
-    .module('app.pxe.server.list.filters')
-    .controller('PxeServerFiltersCtrl', PxeServerFiltersCtrl)
+    .module('app.pxe.file.list.filters')
+    .controller('PxeFileFiltersCtrl', PxeFileFiltersCtrl)
     ;
 
   /**
    * @ngInject
    */
-  function PxeServerFiltersCtrl(Select, Observable, $state, $q, $timeout) {
+  function PxeFileFiltersCtrl(Select, Observable, $state, $q, $timeout) {
     var filters = this;
 
     filters.$onInit = init;

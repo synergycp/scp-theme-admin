@@ -3,15 +3,15 @@
 
   angular
     .module('app.pxe')
-    .controller('PxeServerIndexCtrl', PxeServerIndexCtrl);
+    .controller('PxeFileIndexCtrl', PxeFileIndexCtrl);
 
   /**
    * @ngInject
    */
-  function PxeServerIndexCtrl(PxeServerList, ListFilter) {
+  function PxeFileIndexCtrl(PxeFileList, ListFilter) {
     var vm = this;
 
-    vm.list = PxeServerList();
+    vm.list = PxeFileList();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe.server',
+        target_type: 'pxe.file',
       },
     };
 

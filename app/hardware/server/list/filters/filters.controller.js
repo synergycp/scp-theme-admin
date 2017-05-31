@@ -24,7 +24,7 @@
     filters.cpu = Select('part').filter({'part_type':'cpu'}).multi();
     filters.mem = Select('part').filter({'part_type':'mem'}).multi();
     filters.disks = MultiInput(DiskSelector)
-      .add().setMax(8);
+      .add().setMax(50);
     filters.addons = MultiInput(AddonSelector)
       .add().setMax(8);
     filters.bw = {

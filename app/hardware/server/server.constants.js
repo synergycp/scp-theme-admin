@@ -2,7 +2,7 @@
   'use strict';
 
   var ServerConfig = {
-    MAX_DISKS: 8,
+    MAX_DISKS: 50,
   };
 
   angular

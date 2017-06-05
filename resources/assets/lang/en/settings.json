@@ -3,6 +3,18 @@
     "per_page": {
       "LABEL": "Per Page"
     },
+    "api_url": {
+      "LABEL": "API URL",
+      "PLACEHOLDER": "e.g. https://api.synergy.example.com"
+    },
+    "client_url": {
+      "LABEL": "Client URL",
+      "PLACEHOLDER": "e.g. https://synergy.example.com"
+    },
+    "admin_url": {
+      "LABEL": "Admin URL",
+      "PLACEHOLDER": "e.g. https://admin.synergy.example.com"
+    },
     "site_name": {
       "LABEL": "Site Name"
     },

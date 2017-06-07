@@ -8,22 +8,22 @@ include /resources/angle/pug/mixins/form
 
 +label("{{ 'pxe.file.form.parent.LABEL' | translate }}")
   +input-with-btn("fa fa-times-circle")(
-  ng-click="pxeFileForm.parentServers.selected = null"
+   ng-click="pxeFileForm.parentServers.selected = null"
   )
     +ui-select("pxeFileForm.parentServers")
       ui-select-match(placeholder="{{ 'pxe.file.form.parent.PLACEHOLDER' | translate }}")
         span(ng-bind="$select.selected.name")
 
       ui-select-choices(
-      repeat="parent in pxeFileForm.parentServers.items track by parent.id"
-      refresh="pxeFileForm.parentServers.load($select.search)"
-      refresh-delay="400"
+        repeat="parent in pxeFileForm.parentServers.items track by parent.id"
+        refresh="pxeFileForm.parentServers.load($select.search)"
+        refresh-delay="400"
       )
         span(ng-bind-html="parent.name | highlight: $select.search")
 
 +field("{{ 'pxe.file.form.max_installs.LABEL' | translate }}", "name")(
-placeholder="{{ 'pxe.file.form.max_installs.PLACEHOLDER' | translate }}"
-ng-model="pxeFileForm.input.install_max_concurrent"
+  placeholder="{{ 'pxe.file.form.max_installs.PLACEHOLDER' | translate }}"
+  ng-model="pxeFileForm.input.install_max_concurrent"
 )
 
 +label("{{ 'pxe.file.form.group.LABEL' | translate }}")
@@ -43,12 +43,12 @@ ng-model="pxeFileForm.input.install_max_concurrent"
 
 hr
 
-+field("{{ 'pxe.file.form.host.LABEL' | translate }}", "name")(
++field("{{ 'pxe.file.form.host.LABEL' | translate }}", "host")(
   placeholder="{{ 'pxe.file.form.host.PLACEHOLDER' | translate }}"
   ng-model="pxeFileForm.input.http.host"
 )
 
-+field("{{ 'pxe.file.form.port.LABEL' | translate }}", "name")(
++field("{{ 'pxe.file.form.port.LABEL' | translate }}", "port")(
   placeholder="{{ 'pxe.file.form.port.PLACEHOLDER' | translate }}"
   ng-model="pxeFileForm.input.http.port"
 )
@@ -58,7 +58,16 @@ hr
     ng-model="pxeFileForm.input.http.use_https"
   )
 
-+field("{{ 'pxe.file.form.api_key.LABEL' | translate }}", "name")(
++field("{{ 'pxe.file.form.api_key.LABEL' | translate }}", "api_key")(
   ng-model="pxeFileForm.input.http.api_key"
+)
+
+hr
+
++field("{{ 'pxe.file.form.ssh.port.LABEL' | translate }}", "ssh_port")(
+  ng-model="pxeFileForm.input.ssh.port"
+)
++textarea("{{ 'pxe.file.form.ssh.public_key.LABEL' | translate }}", "ssh_public_key")(
+  ng-model="pxeFileForm.input.ssh.public_key"
 )
 

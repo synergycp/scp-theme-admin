@@ -29,12 +29,6 @@ include /resources/angle/pug/mixins/panel
             th(translate="log.overview.IP")
             td(ng-bind="vm.log.ip")
           tr
-            th(translate="log.overview.URL")
-            td(ng-bind="vm.log.url")
-          tr(ng-if="vm.log.referrer")
-            th(translate="log.overview.REFERRER")
-            td(ng-bind="vm.log.referrer")
-          tr
             th(translate="log.overview.DESC")
             td(ng-bind="vm.log.desc")
           tr(ng-if="vm.log.target")

@@ -310,7 +310,8 @@
       }
     },
     "buttons": {
-      "DELETE": "Delete"
+      "DELETE": "Delete",
+      "SYNC_CHILDREN": "Sync Files to Children"
     }
   },
   "driver": {

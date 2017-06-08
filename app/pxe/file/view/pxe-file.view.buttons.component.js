@@ -23,12 +23,19 @@
     buttons.loader = Loader();
     buttons.$onInit = init;
     buttons.delete = doDelete;
+    buttons.syncChildren = syncChildren;
 
 
     //////////
 
     function init() {
 
+    }
+
+    function syncChildren() {
+      return buttons.loader.during(
+        buttons.pxeFile.one('child/sync').post()
+      );
     }
 
     function doDelete() {

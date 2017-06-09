@@ -1,51 +1,66 @@
 (function () {
-  'use strict';
+    'use strict';
 
-  var INPUTS = {
-    name: '',
-    billing_id: '',
-    reserved: false,
-  };
+    var INPUTS = {
+        name: '',
+        billing_id: '',
+        reserved: false,
+        pxe_dhcp_server: ''
+    };
 
-  angular
-    .module('app.network')
-    .component('groupForm', {
-      require: {
-      },
-      bindings: {
-        form: '=',
-      },
-      controller: 'GroupFormCtrl as groupForm',
-      transclude: true,
-      templateUrl: 'app/network/group/group.form.html'
-    })
-    .controller('GroupFormCtrl', GroupFormCtrl)
+    angular
+        .module('app.network')
+        .component('groupForm', {
+            require: {},
+            bindings: {
+                form: '=',
+            },
+            controller: 'GroupFormCtrl as groupForm',
+            transclude: true,
+            templateUrl: 'app/network/group/group.form.html'
+        })
+        .controller('GroupFormCtrl', GroupFormCtrl)
     ;
 
-  /**
-   * @ngInject
-   */
-  function GroupFormCtrl() {
-    var groupForm = this;
+    /**
+     * @ngInject
+     */
+    function GroupFormCtrl(Select, _, $rootScope) {
+        var groupForm = this;
 
-    groupForm.$onInit = init;
-    groupForm.input = _.clone(INPUTS);
+        groupForm.$onInit = init;
+        groupForm.input = _.clone(INPUTS);
+        groupForm.dhcp = Select('pxe/dhcp');
 
-    //////////
+        //////////
 
-    function init() {
-      fillFormInputs();
+        function init() {
+            groupForm.form.getData = getData;
 
-      groupForm.form.getData = getData;
-      (groupForm.form.on || function() {})(['change', 'load'], fillFormInputs);
+            if (groupForm.form.on) {
+                groupForm.form
+                    .on('load', storeState)
+                    .on('change', storeState)
+                ;
+            }
+        }
+
+        function fillFormInputs() {
+            _.overwrite(groupForm.input, groupForm.form.input);
+        }
+
+        function storeState(response) {
+            $rootScope.$evalAsync(function() {
+                fillFormInputs();
+                groupForm.dhcp.selected = response.pxe_dhcp_server;
+            });
+        }
+
+        function getData() {
+            var data = _.clone(groupForm.input);
+            data.pxe_dhcp_server = groupForm.dhcp.selected || null;
+
+            return data;
+        }
     }
-
-    function getData() {
-      return _.clone(groupForm.input);
-    }
-
-    function fillFormInputs() {
-      _.overwrite(groupForm.input, groupForm.form.input);
-    }
-  }
 })();

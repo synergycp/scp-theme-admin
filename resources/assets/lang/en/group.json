@@ -47,6 +47,10 @@
       "reserved": {
         "LABEL": "Reserved"
       }
+    },
+    "pxe_dhcp_server": {
+      "LABEL": "PXE DHCP Server",
+      "PLACEHOLDER": "Required"
     }
   },
   "buttons": {

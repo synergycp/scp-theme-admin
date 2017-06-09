@@ -6,23 +6,6 @@ include /resources/angle/pug/mixins/form
   ng-model="pxeDhcpForm.input.name"
 )
 
-+label("{{ 'pxe.dhcp.form.group.LABEL' | translate }}")
-  +input-with-btn("fa fa-times-circle")(
-    ng-click="pxeDhcpForm.groups.selected = null"
-  )
-    +ui-select("pxeDhcpForm.groups")
-      ui-select-match(placeholder="{{ 'pxe.dhcp.form.group.PLACEHOLDER' | translate }}")
-        span(ng-bind="$select.selected.name")
-
-      ui-select-choices(
-        repeat="group in pxeDhcpForm.groups.items track by group.id"
-        refresh="pxeDhcpForm.groups.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="group.name | highlight: $select.search")
-
-hr
-
 +field("{{ 'pxe.dhcp.form.host.LABEL' | translate }}", "name")(
   placeholder="{{ 'pxe.dhcp.form.host.PLACEHOLDER' | translate }}"
   ng-model="pxeDhcpForm.input.http.host"

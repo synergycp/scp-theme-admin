@@ -70,12 +70,7 @@
     function getData() {
         var data = _.clone(pxeFileForm.input);
         data.group_id = pxeFileForm.groups.getSelected('id') || null;
-
-        var parentId = pxeFileForm.parentServers.getSelected('id');
-
-        if (parentId) {
-            data.parent_id = parentId;
-        }
+        data.parent_id = pxeFileForm.parentServers.getSelected('id') || null;
 
       return data;
     }

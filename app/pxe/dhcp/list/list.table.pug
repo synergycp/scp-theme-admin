@@ -2,7 +2,6 @@ extends /resources/angle/pug/table-checkable
 
 block headings
     th Name
-    th Group
     th Host
 
 block columns
@@ -11,11 +10,6 @@ block columns
         ui-sref="app.pxe.dhcp.view({id: row.id})"
         ng-bind="row.name"
         )
-    td
-        ul(ng-repeat="item in row.groups")
-            li(
-            ng-bind="item.name"
-            )
     td(
     ng-bind="'http'+(row.http.use_https ? 's' : '')+'://'+row.http.host+':'+ row.http.port"
     )

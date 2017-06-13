@@ -21,3 +21,18 @@ include /resources/angle/pug/mixins/form
   +checkbox()(
     ng-model="groupForm.input.reserved"
   ) {{ 'group.form.options.reserved.LABEL' | translate }}
+
++label("{{ 'group.form.pxe_dhcp_server.LABEL' | translate }}")
+  +input-with-btn("fa fa-times-circle")(
+  ng-click="groupForm.dhcp.selected = null"
+  )
+    +ui-select("groupForm.dhcp")
+      ui-select-match(placeholder="{{ 'group.form.pxe_dhcp_server.PLACEHOLDER' | translate }}")
+        span(ng-bind="$select.selected.name")
+
+      ui-select-choices(
+      repeat="pxe_dhcp_server in groupForm.dhcp.items track by pxe_dhcp_server.id"
+      refresh="groupForm.dhcp.load($select.search)"
+      refresh-delay="400"
+      )
+        span(ng-bind-html="pxe_dhcp_server.name | highlight: $select.search")

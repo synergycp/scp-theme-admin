@@ -6,6 +6,8 @@ list.panel.panel-default(
   list="logs.list"
 )
   list-header(text="{{ logs.heading }}")
+    a.btn.btn-default(ng-click="logs.list.refresh.now()")
+      i.fa.fa-refresh
     a.btn.btn-default(ng-click="logs.filters.visible = !logs.filters.visible")
       i.fa.fa-filter
   log-filters(

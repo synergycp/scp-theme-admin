@@ -407,7 +407,10 @@
       ],
       "ACTION_COUNT": "2",
       "CONFIRM": "Click \"Suspend\" to suspend these servers:",
-      "REASON": "Set a reason:"
+      "reason": {
+        "LABEL": "Set a reason:",
+        "PLACEHOLDER": "Required. Examples: Bandwidth Overage or Billing Issue"
+      }
     },
     "wipe": {
       "TITLE": "Wipe Server",

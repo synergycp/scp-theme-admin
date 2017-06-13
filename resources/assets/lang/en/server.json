@@ -182,7 +182,17 @@
     "TITLE": "IPMI Controls",
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
     "ADDRESS": "IPMI IP Address",
-    "BMC": "Reset BMC",
+    "BMC": {
+      "TITLE": "Reset BMC",
+      "modal": {
+        "confirm": {
+          "TITLE": "Are you sure?",
+          "BODY": "This will reboot the IPMI Controller on the server, which can fix issues occurring with IPMI/iKVM. It will not affect the operation of the server, but IPMI will not be accessible for up to 10 minutes while it reboots.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Reset BMC"
+        }
+      }
+    },
     "client": {
       "USER": "Client Username",
       "PASS": "Client Password",

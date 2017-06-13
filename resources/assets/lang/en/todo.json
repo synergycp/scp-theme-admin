@@ -1,0 +1,24 @@
+{
+  "TITLE": "Setup checklist",
+  "network.group.add": {
+    "TITLE": "Add network group"
+  },
+  "network.entity.add": {
+    "TITLE": "Add network entity"
+  },
+  "network.switch.add": {
+    "TITLE": "Add network switch"
+  },
+  "hardware.server.part.add": {
+    "TITLE": "Add server part"
+  },
+  "hardware.server.add": {
+    "TITLE": "Add server"
+  },
+  "hardware.server.install.add": {
+    "TITLE": "Add server installation"
+  },
+  "hardware.server.install.finish": {
+    "TITLE": "Finish server install"
+  }
+}

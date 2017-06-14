@@ -89,6 +89,7 @@ form(ng-submit="pxeInstallForm.submit()")
           +field("os-reload.server.disk.index.LABEL")(
             ng-model="pxeInstallForm.input.disk.index"
           )
+            p.help-block(translate="os-reload.server.disk.index.HELP")
 
     .panel-footer.clearfix(ng-if="pxeInstallForm.isEnabled || !pxeInstallForm.server.selected")
       .pull-right

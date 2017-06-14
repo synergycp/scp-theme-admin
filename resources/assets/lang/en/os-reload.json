@@ -47,7 +47,8 @@
         "ONE": "1"
       },
       "index": {
-        "LABEL": "Disk Index"
+        "LABEL": "Disk Index",
+        "HELP": "0 for first disk, 1 for second, etc."
       }
     },
     "license-key": {

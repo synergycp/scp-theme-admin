@@ -90,27 +90,32 @@
       "LABEL": "IP Entities",
       "PLACEHOLDER": "Assign IP Entities"
     },
-    "ipmi": {
+    "control": {
+      "ADD": "Add Power Control",
+      "type": {
+        "LABEL": "Type",
+        "PLACEHOLDER": "Type to search..."
+      },
       "ip": {
-        "LABEL": "IPMI IP",
-        "PLACEHOLDER": "IPMI IP Address"
+        "LABEL": "IP",
+        "PLACEHOLDER": "IP Address"
       },
       "admin": {
-        "LABEL": "IPMI Admin",
+        "LABEL": "Admin",
         "username": {
-          "PLACEHOLDER": "IPMI Admin Username"
+          "PLACEHOLDER": "Admin Username"
         },
         "password": {
-          "PLACEHOLDER": "IPMI Admin Password"
+          "PLACEHOLDER": "Admin Password"
         }
       },
       "client": {
-        "LABEL": "IPMI Client",
+        "LABEL": "Client",
         "username": {
-          "PLACEHOLDER": "IPMI Client Username"
+          "PLACEHOLDER": "Client Username"
         },
         "password": {
-          "PLACEHOLDER": "IPMI Client Password"
+          "PLACEHOLDER": "Client Password"
         }
       }
     },

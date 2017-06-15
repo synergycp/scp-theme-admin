@@ -41,16 +41,6 @@
 
     function $setPristine() {
       control.type.$dirty = false;
-    //   port.switch.port.$dirty =
-    //     port.switch.speed.$dirty =
-    //     port.entities.$dirty =
-    //     port.group.$dirty =
-    //     port.switch.$dirty =
-    //     false;
-    //   _.setContents(
-    //     port.entities.original,
-    //     port.entities.selected
-    //   );
     }
 
     function syncTypeFilter() {

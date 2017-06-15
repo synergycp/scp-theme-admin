@@ -184,7 +184,7 @@
     "TITLE": "Server Inventory"
   },
   "ipmi": {
-    "TITLE": "IPMI Controls",
+    "TITLE": "Power Controls",
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
     "ADDRESS": "IPMI IP Address",
     "BMC": "Reset BMC",
@@ -243,6 +243,7 @@
     },
     "power": {
       "STATUS": "Power Status",
+      "TYPE": "Control Type",
       "CHECKED": "Last Checked",
       "BTN": "Power",
       "on": {

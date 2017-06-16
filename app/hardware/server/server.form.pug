@@ -151,53 +151,72 @@ div.relative(
     )
 
 div.big-add-button(
-  ng-click="serverForm.ports.add()"
+  ng-click="serverForm.port.add()"
   translate="server.form.port.ADD"
 )
 
 hr
 
-+field(
-  "server.form.ipmi.ip.LABEL",
-  "ipmi.ip"
-)(
-  translate-attr="{ 'placeholder': 'server.form.ipmi.ip.PLACEHOLDER' }"
-  ng-model="serverForm.input.ipmi.ip"
+div.relative(
+  ng-repeat="(controlIndex, control) in serverForm.controls"
 )
+  +icon-label("server.form.control.type.LABEL").fa.fa-times-circle(
+    ng-click="serverForm.controls.remove(control)"
+  )
+    +ui-select("control.type")
+      ui-select-match(placeholder="{{ 'server.form.control.type.PLACEHOLDER' | translate }}")
+        span(ng-bind="$select.selected.name")
 
-+label("server.form.ipmi.admin.LABEL")
-  .row
-    .col-xs-6
-      input.form-control(
-        type="text"
-        translate-attr="{ 'placeholder': 'server.form.ipmi.admin.username.PLACEHOLDER' }"
-        ng-model="serverForm.input.ipmi.admin.username"
-        name="ipmi.admin.username"
-      )
-    .col-xs-6
-      input.form-control(
-        type="text"
-        translate-attr="{ 'placeholder': 'server.form.ipmi.admin.password.PLACEHOLDER' }"
-        ng-model="serverForm.input.ipmi.admin.password"
-        name="ipmi.admin.password"
-      )
+      +ui-select-choices("control.type")
+        span(ng-bind-html="choice.name | highlight: $select.search")
 
-+label("server.form.ipmi.client.LABEL")
-  .row
-    .col-xs-6
-      input.form-control(
-        type="text"
-        translate-attr="{ 'placeholder': 'server.form.ipmi.client.username.PLACEHOLDER' }"
-        ng-model="serverForm.input.ipmi.client.username"
-        name="ipmi.client.username"
-      )
-    .col-xs-6
-      input.form-control(
-        type="text"
-        translate-attr="{ 'placeholder': 'server.form.ipmi.client.password.PLACEHOLDER' }"
-        ng-model="serverForm.input.ipmi.client.password"
-        name="ipmi.client.password"
-      )
+  +field(
+    "server.form.control.ip.LABEL",
+    "control-{{ controlIndex }}.ip"
+  )(
+    translate-attr="{ 'placeholder': 'server.form.control.ip.PLACEHOLDER' }"
+    ng-model="control.input.ip"
+  )
+
+  +label("server.form.control.admin.LABEL")
+    .row
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.admin.username.PLACEHOLDER' }"
+          ng-model="control.input.admin.username"
+          name="control-{{ controlIndex }}.admin.username"
+        )
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.admin.password.PLACEHOLDER' }"
+          ng-model="control.input.admin.password"
+          name="control-{{ controlIndex }}.admin.password"
+        )
+
+  +label("server.form.control.client.LABEL")
+    .row
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.client.username.PLACEHOLDER' }"
+          ng-model="control.input.client.username"
+          name="control-{{ controlIndex }}.client.username"
+        )
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.client.password.PLACEHOLDER' }"
+          ng-model="control.input.client.password"
+          name="control-{{ controlIndex }}.client.password"
+        )
+
+div.big-add-button(
+  ng-click="serverForm.controls.add()"
+  translate="server.form.control.ADD"
+  ng-hide="serverForm.controls.length"
+)
 
 hr
 

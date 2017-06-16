@@ -92,6 +92,12 @@
     },
     "control": {
       "ADD": "Add Power Control",
+      "remove": {
+        "TITLE": "Remove Server Power Control",
+        "BODY": "This will also remove any port forwarding setup on this power control.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Remove"
+      },
       "type": {
         "LABEL": "Type",
         "PLACEHOLDER": "Type to search..."
@@ -253,7 +259,7 @@
     },
     "power": {
       "STATUS": "Power Status",
-      "TYPE": "Control Type",
+      "TYPE": "Type",
       "CHECKED": "Last Checked",
       "BTN": "Power",
       "on": {

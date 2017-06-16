@@ -44,7 +44,8 @@
     }
 
     function syncTypeFilter() {
-      control.type
+      control
+        .type
         .filter({
           type: control.type.getSelected('id'),
         })
@@ -55,6 +56,7 @@
     function fromExisting(response) {
       control.id = response.id;
       control.input.ip = response.ip;
+      control.original = response;
       control.input.client.username = response.client_user;
       control.input.client.password = response.client_password;
       control.input.admin.username = response.admin_user;

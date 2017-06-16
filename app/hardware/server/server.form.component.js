@@ -142,11 +142,13 @@
     }
 
     function removeControl(control) {
-      removeFromList();
-
       if (control.id) {
-        removeFromDatabase();
+        return confirmRemoveControl(control)
+          .then(removeFromList)
+          .then(removeFromDatabase);
       }
+
+      removeFromList();
 
       function removeFromDatabase() {
         return $controls.one(''+control.id).remove();
@@ -155,6 +157,15 @@
       function removeFromList() {
         _.remove(serverForm.controls, control);
       }
+    }
+
+    function confirmRemoveControl(control) {
+      console.log(control);
+      return Modal
+        .confirm([control.original], 'server.form.control.remove')
+        .open()
+        .result
+        ;
     }
 
     function confirmRemove(port) {

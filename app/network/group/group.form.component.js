@@ -25,7 +25,7 @@
     /**
      * @ngInject
      */
-    function GroupFormCtrl(Select, _, $rootScope) {
+    function GroupFormCtrl(Select, Todo, _, $rootScope) {
         var groupForm = this;
 
         groupForm.$onInit = init;
@@ -41,6 +41,7 @@
                 groupForm.form
                     .on('load', storeState)
                     .on('change', storeState)
+                    .on('create', Todo.refresh)
                 ;
             }
         }

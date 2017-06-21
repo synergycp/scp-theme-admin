@@ -1,24 +1,24 @@
 {
   "TITLE": "Setup checklist",
   "network.group.add": {
-    "TITLE": "Add network group"
+    "TITLE": "Create IP Group"
   },
   "network.entity.add": {
-    "TITLE": "Add network entity"
+    "TITLE": "Create IP Entity"
   },
   "network.switch.add": {
-    "TITLE": "Add network switch"
+    "TITLE": "Create Switch"
   },
   "hardware.server.part.add": {
-    "TITLE": "Add server part"
+    "TITLE": "Create Server Parts"
   },
   "hardware.server.add": {
-    "TITLE": "Add server"
+    "TITLE": "Create Server"
   },
   "hardware.server.install.add": {
-    "TITLE": "Add server installation"
+    "TITLE": "Run an OS Reload"
   },
   "hardware.server.install.finish": {
-    "TITLE": "Finish server install"
+    "TITLE": "Verify OS Reload completes"
   }
 }

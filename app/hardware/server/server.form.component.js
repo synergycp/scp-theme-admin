@@ -4,17 +4,6 @@
   var INPUTS = {
     srv_id: '',
     nickname: '',
-    ipmi: {
-      ip: '',
-      admin: {
-        username: '',
-        password: '',
-      },
-      client: {
-        username: '',
-        password: '',
-      },
-    },
     billing: {
       id: '',
       date: '',
@@ -41,9 +30,9 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Api, Select, Modal, ServerFormPort, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
+  function ServerFormCtrl(_, Api, Select, Modal, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
     var serverForm = this;
-    var $ports;
+    var $ports, $controls;
 
     serverForm.$onInit = init;
     serverForm.input = _.clone(INPUTS);
@@ -56,7 +45,9 @@
     serverForm.ports = [];
     serverForm.ports.add = addPort;
     serverForm.ports.remove = removePort;
-    serverForm.ports.removed = [];
+    serverForm.controls = [];
+    serverForm.controls.add = addControl;
+    serverForm.controls.remove = removeControl;
     serverForm.billing = {
       integration: Select('integration'),
       date: {
@@ -84,6 +75,39 @@
     };
 
     //////////
+
+    function init() {
+      _.defaults(serverForm, {
+        alwaysDirty: false,
+        isCreating: false,
+      });
+      serverForm.form.getData = getData;
+      fillFormInputs();
+
+      if (!serverForm.form.on) {
+        return;
+      }
+
+      serverForm.form
+        .on(['load', 'change', 'created'], storeState)
+        .on(['saving', 'created'], savePorts)
+        .on(['saving', 'created'], saveControls)
+      ;
+
+      if ($stateParams.id) {
+        $ports = Api.all('server/'+$stateParams.id+'/port');
+        $ports
+          .getList()
+          .then(storePorts)
+          .then(storePortsBandwidth)
+        ;
+        $controls = Api.all('server/'+$stateParams.id+'/control');
+        $controls
+          .getList()
+          .then(storeControls)
+        ;
+      }
+    }
 
     function emptyBillingDate() {
       serverForm.form.form['billing.date'].$dirty = serverForm.billing.date.value != '';
@@ -113,39 +137,43 @@
       }
     }
 
+    function addControl() {
+      serverForm.controls.push(ServerFormControl());
+    }
+
+    function removeControl(control) {
+      if (control.id) {
+        return confirmRemoveControl(control)
+          .then(removeFromList)
+          .then(removeFromDatabase);
+      }
+
+      removeFromList();
+
+      function removeFromDatabase() {
+        return $controls.one(''+control.id).remove();
+      }
+
+      function removeFromList() {
+        _.remove(serverForm.controls, control);
+      }
+    }
+
+    function confirmRemoveControl(control) {
+      console.log(control);
+      return Modal
+        .confirm([control.original], 'server.form.control.remove')
+        .open()
+        .result
+        ;
+    }
+
     function confirmRemove(port) {
       return Modal
         .confirm([port.original], 'server.form.port.remove')
         .open()
         .result
         ;
-    }
-
-    function init() {
-      _.defaults(serverForm, {
-        alwaysDirty: false,
-        isCreating: false,
-      });
-      serverForm.form.getData = getData;
-      fillFormInputs();
-
-      if (!serverForm.form.on) {
-        return;
-      }
-
-      serverForm.form
-        .on(['load', 'change', 'created'], storeState)
-        .on(['saving', 'created'], savePorts)
-      ;
-
-      if ($stateParams.id) {
-        $ports = Api.all('server/'+$stateParams.id+'/port');
-        $ports
-          .getList()
-          .then(storePorts)
-          .then(storePortsBandwidth)
-        ;
-      }
     }
 
     function storePorts(response) {
@@ -170,12 +198,22 @@
       })
     }
 
+    function storeControls(response) {
+      _.each(response, function (controlData) {
+        var control = ServerFormControl();
+
+        control.fromExisting(controlData);
+        serverForm.controls.push(control);
+      });
+    }
+
     function fillFormInputs() {
       _.overwrite(serverForm.input, serverForm.form.input);
     }
 
     function storeState(response) {
       $ports = Api.all('server/'+response.id+'/port');
+      $controls = Api.all('server/'+response.id+'/control');
 
       $rootScope.$evalAsync(function() {
         fillFormInputs();
@@ -379,6 +417,58 @@
           ;
         }
 
+      }
+    }
+
+    function saveControls() {
+      return $q.all(
+        _.map(serverForm.controls, saveControlChanges)
+      ).then(function () {
+        serverForm.form.form.$setPristine();
+        serverForm.form.fire('created.relations');
+      });
+    }
+
+    function saveControlChanges(control, controlIndex) {
+      var controlPrefix = 'control-'+controlIndex+'.';
+
+      return $q.all([
+        updateServerControl()
+      ]).then(control.$setPristine);
+
+      function updateServerControl() {
+        var data = {
+          ip: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'ip'].$dirty ? control.input.ip : undefined,
+          client_user: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'client.username'].$dirty ? control.input.client.username : undefined,
+          client_password: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'client.password'].$dirty ? control.input.client.password : undefined,
+          admin_user: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'admin.username'].$dirty ? control.input.admin.username : undefined,
+          admin_password: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'admin.password'].$dirty ? control.input.admin.password : undefined,
+          type: control.type.$dirty ? {
+            id: control.type.getSelected('id')
+          } : undefined
+        }
+
+        if (!_(data).values().reject(isUndefined).value().length) {
+          return $q.when();
+        }
+
+        if (control.id && !serverForm.isCreating) {
+          return $controls
+            .one('' + control.id)
+            .patch(data)
+            .then(updateExisting)
+            ;
+        }
+
+        return $controls
+          .post(data)
+          .then(updateExisting)
+          ;
+
+        function updateExisting(response) {
+          control.fromExisting(response, true);
+          return response;
+        }
       }
     }
 

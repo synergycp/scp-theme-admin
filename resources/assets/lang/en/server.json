@@ -90,27 +90,38 @@
       "LABEL": "IP Entities",
       "PLACEHOLDER": "Assign IP Entities"
     },
-    "ipmi": {
+    "control": {
+      "ADD": "Add Power Control",
+      "remove": {
+        "TITLE": "Remove Server Power Control",
+        "BODY": "This will also remove any port forwarding setup on this power control.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Remove"
+      },
+      "type": {
+        "LABEL": "Type",
+        "PLACEHOLDER": "Type to search..."
+      },
       "ip": {
-        "LABEL": "IPMI IP",
-        "PLACEHOLDER": "IPMI IP Address"
+        "LABEL": "IP",
+        "PLACEHOLDER": "IP Address"
       },
       "admin": {
-        "LABEL": "IPMI Admin",
+        "LABEL": "Admin",
         "username": {
-          "PLACEHOLDER": "IPMI Admin Username"
+          "PLACEHOLDER": "Admin Username"
         },
         "password": {
-          "PLACEHOLDER": "IPMI Admin Password"
+          "PLACEHOLDER": "Admin Password"
         }
       },
       "client": {
-        "LABEL": "IPMI Client",
+        "LABEL": "Client",
         "username": {
-          "PLACEHOLDER": "IPMI Client Username"
+          "PLACEHOLDER": "Client Username"
         },
         "password": {
-          "PLACEHOLDER": "IPMI Client Password"
+          "PLACEHOLDER": "Client Password"
         }
       }
     },
@@ -179,10 +190,20 @@
     "TITLE": "Server Inventory"
   },
   "ipmi": {
-    "TITLE": "IPMI Controls",
+    "TITLE": "Power Controls",
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
     "ADDRESS": "IPMI IP Address",
-    "BMC": "Reset BMC",
+    "BMC": {
+      "TITLE": "Reset BMC",
+      "modal": {
+        "confirm": {
+          "TITLE": "Are you sure?",
+          "BODY": "This will reboot the IPMI Controller on the server, which can fix issues occurring with IPMI/iKVM. It will not affect the operation of the server, but IPMI will not be accessible for up to 10 minutes while it reboots.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Reset BMC"
+        }
+      }
+    },
     "client": {
       "USER": "Client Username",
       "PASS": "Client Password",
@@ -238,6 +259,7 @@
     },
     "power": {
       "STATUS": "Power Status",
+      "TYPE": "Type",
       "CHECKED": "Last Checked",
       "BTN": "Power",
       "on": {
@@ -407,7 +429,10 @@
       ],
       "ACTION_COUNT": "2",
       "CONFIRM": "Click \"Suspend\" to suspend these servers:",
-      "REASON": "Set a reason:"
+      "reason": {
+        "LABEL": "Set a reason:",
+        "PLACEHOLDER": "Required. Examples: Bandwidth Overage or Billing Issue"
+      }
     },
     "wipe": {
       "TITLE": "Wipe Server",

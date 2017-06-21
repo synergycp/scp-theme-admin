@@ -3,7 +3,6 @@
 
     var INPUTS = {
         name: '',
-        group_id: '',
         http: {
             host: '',
             port: '',
@@ -34,7 +33,6 @@
 
         pxeDhcpForm.$onInit = init;
         pxeDhcpForm.input = _.clone(INPUTS);
-        pxeDhcpForm.groups = Select('group');
 
         //////////
 
@@ -56,13 +54,11 @@
         function storeState(response) {
             $rootScope.$evalAsync(function () {
                 fillFormInputs();
-                pxeDhcpForm.groups.selected = response.group;
             });
         }
 
         function getData() {
             var data = _.clone(pxeDhcpForm.input);
-            data.group_id = pxeDhcpForm.groups.getSelected('id') || null;
 
             return data;
         }

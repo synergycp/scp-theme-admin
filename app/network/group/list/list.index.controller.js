@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function GroupIndexCtrl(GroupList, ListFilter, EventEmitter) {
+  function GroupIndexCtrl(GroupList, ListFilter, Todo) {
     var vm = this;
 
     vm.list = GroupList();
@@ -25,7 +25,6 @@
         target_type: 'group',
       },
     };
-    EventEmitter().bindTo(vm.create);
 
     activate();
 
@@ -36,9 +35,7 @@
 
     function create() {
       vm.list.create(vm.create.getData())
-        .then(function() {
-          vm.create.fire('create');  
-        });
+        .then(Todo.refresh);
     }
   }
 })();

@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function EntityIndexCtrl(ListFilter, EntityList) {
+  function EntityIndexCtrl(ListFilter, EntityList, Todo) {
     var vm = this;
 
     vm.list = EntityList();
@@ -31,7 +31,8 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.getData())
+        .then(Todo.refresh);
     }
   }
 })();

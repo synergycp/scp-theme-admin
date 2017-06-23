@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function SwitchIndexCtrl(SwitchList, ListFilter) {
+  function SwitchIndexCtrl(SwitchList, ListFilter, Todo) {
     var vm = this;
 
     vm.list = SwitchList();
@@ -33,7 +33,8 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.getData())
+        .then(Todo.refresh);
     }
   }
 })();

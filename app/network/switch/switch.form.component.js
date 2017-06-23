@@ -30,7 +30,7 @@
   /**
    * @ngInject
    */
-  function SwitchFormCtrl(Select, _) {
+  function SwitchFormCtrl(Todo, Select, _) {
     var switchForm = this;
 
     switchForm.switchTypes = ['Dell', 'Juniper'];
@@ -44,11 +44,14 @@
     function init() {
       fillFormInputs();
       switchForm.form.getData = getData;
-      (switchForm.form.on || function() {})(['change', 'load'], function (response) {
-        fillFormInputs();
+      if(switchForm.form.on) {
+        switchForm.form.on(['change', 'load'], function (response) {
+          fillFormInputs();
 
-        _.setContents(switchForm.groups.selected, response.groups);
-      });
+          _.setContents(switchForm.groups.selected, response.groups);
+        });
+        switchForm.form.on(['create'], Todo.refresh);
+      }
     }
 
     function fillFormInputs() {

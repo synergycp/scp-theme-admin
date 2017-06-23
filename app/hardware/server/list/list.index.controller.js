@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerIndexCtrl(ServerList, ListFilter, EventEmitter) {
+  function ServerIndexCtrl(ServerList, ListFilter, EventEmitter, Todo) {
     var vm = this;
 
     vm.list = ServerList();
@@ -41,6 +41,7 @@
       vm.list
         .create(vm.create.getData())
         .then(vm.create.fire.bind(null, 'created'))
+        .then(Todo.refresh)
       ;
     }
   }

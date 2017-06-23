@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function InstallIndexCtrl(OsReloadList, OsReloadModals, $scope, EventEmitter) {
+  function InstallIndexCtrl(OsReloadList, OsReloadModals, $scope, EventEmitter, Todo) {
     var vm = this;
 
     vm.list = OsReloadList().limitScope($scope);
@@ -22,7 +22,10 @@
     EventEmitter().bindTo(vm.create);
     activate();
 
-    vm.create.on('created', vm.list.refresh.now);
+    vm.create.on('created', function() {
+      vm.list.refresh.now();
+      Todo.refresh();
+    });
 
     //////////
 

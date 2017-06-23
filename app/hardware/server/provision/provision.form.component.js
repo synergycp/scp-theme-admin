@@ -94,9 +94,10 @@
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
     provisionForm.disks.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
     provisionForm.addOns.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
-    provisionForm.profile = Select('pxe/profile')
-      .on('change', checkPxeProfileForIso);
-    provisionForm.profile.hasIso = false;
+    provisionForm.profiles = MultiInput(ProfileSelector)
+      .add()
+      .on(['set', 'add', 'rem', 'change'], checkPxeProfileForIso)
+    ;
     provisionForm.billing = {
       integration: Select('integration'),
       date: {
@@ -166,15 +167,17 @@
     }
 
     function checkPxeProfileForIso() {
-      var iso = (provisionForm.profile.selected || {}).iso;
-      provisionForm.profile.hasIso = !!iso;
+      _.each(provisionForm.profiles.items, function(profile) {
+        var iso = (profile.selected || {}).iso;
+        profile.hasIso = !!iso;
 
-      if (!provisionForm.profile.hasIso) {
-        provisionForm.edition = null;
-        return;
-      }
+        if (!profile.hasIso) {
+          profile.edition = null;
+          return;
+        }
 
-      provisionForm.edition = Select('pxe/iso/' + iso.id + '/edition');
+        profile.edition = Select('pxe/iso/' + iso.id + '/edition');
+      })
     }
 
     function multiIds(multi) {
@@ -314,6 +317,18 @@
         .filter(FILTER.DISK)
         .on('change', syncHardwareFilters)
       ;
+
+      select.selected = selected || null;
+      select.load();
+
+      return select;
+    }
+
+    function ProfileSelector(selected) {
+      var select = Select('pxe/profile')
+        .on('change', checkPxeProfileForIso);
+      ;
+      select.hasIso = false;
 
       select.selected = selected || null;
       select.load();

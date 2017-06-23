@@ -42,6 +42,7 @@
     //////////
 
     function init() {
+      pxeInstallForm.osSettingsControl = {};
       pxeInstallForm.form.on('reload_server', function(server) {
         pxeInstallForm.server.setSelectedId(server.id);
       })
@@ -68,10 +69,13 @@
     }
 
     function submit() {
-      var profile = pxeInstallForm.input.profile.selected;
-      var edition = (pxeInstallForm.input.edition || {}).selected;
-      var raid = pxeInstallForm.input.disk.raid !== 'None' && pxeInstallForm.canRAID ? pxeInstallForm.input.disk.raid : undefined;
-      var index = pxeInstallForm.input.disk.index;
+      var osData = pxeInstallForm.osSettingsControl.getData();
+      var profile = osData.profile;
+      var edition = osData.edition;
+      var raid = osData.raid;
+      var index = osData.index;
+      var licenseKey = osData.licenseKey;
+      var password = osData.password;
 
       if (!profile) {
         return Alert.warning('Please select an OS Reload Profile.');
@@ -90,8 +94,8 @@
           },
           queue: true,
           edition_id: (edition || {}).id,
-          license_key: pxeInstallForm.input.licenseKey,
-          password: pxeInstallForm.input.password,
+          license_key: licenseKey,
+          password: password,
         })
       });
     }

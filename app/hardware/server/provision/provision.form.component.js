@@ -94,10 +94,7 @@
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
     provisionForm.disks.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
     provisionForm.addOns.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
-    provisionForm.profiles = MultiInput(ProfileSelector)
-      .add()
-      .on(['set', 'add', 'rem', 'change'], checkPxeProfileForIso)
-    ;
+    provisionForm.profiles = Profiles().add();
     provisionForm.billing = {
       integration: Select('integration'),
       date: {
@@ -167,6 +164,7 @@
     }
 
     function checkPxeProfileForIso() {
+      console.log('checkPxeProfileForIso: ', provisionForm.profiles);
       _.each(provisionForm.profiles.items, function(profile) {
         var iso = (profile.selected || {}).iso;
         profile.hasIso = !!iso;
@@ -370,6 +368,21 @@
         })
         .catch(function () {
         });
+    }
+
+    function Profiles() {
+      var profiles = [];
+
+      profiles.add = function() {
+        profiles.push({});
+        return profiles;
+      }
+
+      profiles.rem = function(index) {
+        profiles.splice(index, 1);
+        return profiles;
+      }
+      return profiles;
     }
   }
 })();

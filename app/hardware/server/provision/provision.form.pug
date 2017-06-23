@@ -138,7 +138,7 @@ div(ng-if="!provisionForm.serverId")
     )
       span(ng-bind-html="switchSpeed.name | highlight: $select.search")
 
-div(ng-repeat="profile in provisionForm.profiles.items track by $index")
+div(ng-repeat="profile in provisionForm.profiles track by $index")
   hr
   +icon-label("{{ 'server.provision.profile.LABEL' | translate }}")(
     class="fa"
@@ -146,41 +146,7 @@ div(ng-repeat="profile in provisionForm.profiles.items track by $index")
       "'fa-'+($index ? 'minus' : 'plus')+'-circle '"
     ng-click="$index ? provisionForm.profiles.rem($index) : provisionForm.profiles.add()"
   )
-    +ui-select("profile")(
-      ng-disabled="$index && !provisionForm.profiles.items[$index-1].selected"
-    )
-      ui-select-match(placeholder="{{ 'server.provision.profile.PLACEHOLDER' | translate }}")
-        span(ng-bind="$select.selected.name")
-
-      ui-select-choices(
-        repeat="choice in profile.items track by choice.id"
-        refresh="profile.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="choice.name | highlight: $select.search")
-
-  div(ng-if="profile.hasIso")
-    +label("{{ 'server.provision.edition.LABEL' | translate }}")
-      +ui-select("profile.edition")
-        ui-select-match(placeholder="{{ 'server.provision.edition.PLACEHOLDER' | translate }}")
-          span(ng-bind="$select.selected.name")
-
-        ui-select-choices(
-          repeat="choice in profile.edition.items track by choice.id"
-          refresh="profile.edition.load($select.search)"
-          refresh-delay="400"
-        )
-          span(ng-bind-html="choice.name | highlight: $select.search")
-
-    +field(
-      "{{ 'server.provision.license_key.LABEL' | translate }}",
-      "license_key"
-    )(
-      placeholder="{{ 'server.provision.license_key.PLACEHOLDER' | translate }}"
-      ng-model="profile.license_key"
-    )
-      p.help-block(data-translate="server.provision.license_key.HELP")
-
+    os-settings-fields(control="profile" server="provisionForm.server")
 hr
 
 +field(

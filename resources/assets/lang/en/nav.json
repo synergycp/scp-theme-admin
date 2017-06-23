@@ -6,7 +6,8 @@
   "network": {
     "TITLE": "Network",
     "ENTITIES": "IP Entities",
-    "GROUPS": "IP Groups"
+    "GROUPS": "IP Groups",
+    "GATEWAYS": "Gateways"
   },
   "pxe": {
     "TITLE": "OS Reloads"

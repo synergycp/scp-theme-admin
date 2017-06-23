@@ -139,6 +139,15 @@
       "write": {
         "LABEL": "Edit"
       }
+    },
+    "gateways": {
+      "TITLE": "Gateways",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
     }
   },
   "pkg": {

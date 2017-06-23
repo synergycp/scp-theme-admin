@@ -27,6 +27,11 @@
     sref: "app.network.switch.speed.list",
   };
 
+  var GATEWAYS = {
+    translate: "nav.network.GATEWAYS",
+    sref: "app.network.gateway.list",
+  };
+
   /**
    * @ngInject
    */
@@ -65,6 +70,10 @@
         group.item(SWITCHES);
         group.item(SPEEDS);
       }
+
+      if (map.network.forward.read) {
+        group.item(GATEWAYS);
+      }
     }
 
     function hide() {
@@ -72,6 +81,7 @@
       group.remove(ENTITIES);
       group.remove(SWITCHES);
       group.remove(SPEEDS);
+      group.remove(GATEWAYS);
     }
   }
 })();

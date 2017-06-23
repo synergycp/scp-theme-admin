@@ -1,0 +1,13 @@
+extends /resources/angle/pug/edit
+
+block title
+  span(
+    translate='gateway.form.title.EDIT'
+    translate-value-name='{{vm.edit.input.name}}'
+  )
+
+block form
+  gateway-form(form="vm.edit")
+
+block append right-side
+  gateway-buttons(gateway="vm.edit.input")

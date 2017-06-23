@@ -83,13 +83,17 @@
       .on('add', syncHardwareFilters)
     ;
     provisionForm.mem.on('change', clearMulti.bind(null, provisionForm.addOns));
+    provisionForm.disks.on(['set', 'add', 'rem', 'change'], clearMulti.bind(null, provisionForm.addOns));
     provisionForm.server = Select('server')
       .filter({
         available: true,
         'parts[exact]': true,
       })
       .on('change', syncServer);
+    provisionForm.cpu.on('change', clear.bind(null, provisionForm.server));
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
+    provisionForm.disks.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
+    provisionForm.addOns.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
     provisionForm.profile = Select('pxe/profile')
       .on('change', checkPxeProfileForIso);
     provisionForm.profile.hasIso = false;
@@ -208,24 +212,32 @@
         })
         .load();
 
+      var selectedCollection = {};
       _.each({
-        disks: provisionForm.disks.items,
         addOns: provisionForm.addOns.items,
-      }, function (selectItems, filterKey) {
-        _.reduce(selectItems, function (carry, select, key) {
-          var filter = {};
-          filter[filterKey] = _.clone(carry);
-          select.filter({
-              inventory: _.assign({}, invFilter, filter),
-            })
-            .load();
-          var val = select.getSelected('id');
-          if (val) {
-            carry.push(val);
+        disks: provisionForm.disks.items
+      }, function(itemSelects, itemKey) {
+        var ids = _.reduce(itemSelects, function(carry, select) {
+          var selected = select.getSelected('id');
+          if(selected) {
+            carry.push(selected);
           }
-          return carry;
-        }, []);
-      });
+          return carry;         
+        }, [])
+        if(ids.length) {
+          selectedCollection[itemKey] = ids;
+        }
+      })
+      _.each(provisionForm.addOns.items, function(addOnSelect) {
+        addOnSelect.filter({
+          inventory: _.assign({}, invFilter, _.pick(selectedCollection, ['disks'])),
+        }).load();
+      })
+      _.each(provisionForm.disks.items, function(addOnSelect) {
+        addOnSelect.filter({
+          inventory: _.assign({}, invFilter, _.pick(selectedCollection, ['addOns'])),
+        }).load();
+      })
     }
 
     function syncEntityToGroup() {

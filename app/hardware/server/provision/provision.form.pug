@@ -138,13 +138,13 @@ div(ng-if="!provisionForm.serverId")
     )
       span(ng-bind-html="switchSpeed.name | highlight: $select.search")
 
-div(ng-repeat="profile in provisionForm.profiles track by $index")
+div(ng-repeat="profile in provisionForm.osReloads track by $index")
   hr
   +icon-label()(
     class="fa"
     ng-class=
       "'fa-'+($index ? 'minus' : 'plus')+'-circle '"
-    ng-click="$index ? provisionForm.profiles.rem($index) : provisionForm.profiles.add()"
+    ng-click="$index ? provisionForm.osReloads.rem($index) : provisionForm.osReloads.add()"
   )
     span(translate="server.provision.os-reload.LABEL")
   os-settings-fields(control="profile" server="provisionForm.server" lang="server.provision.os-reload")

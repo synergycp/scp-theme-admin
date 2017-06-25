@@ -94,7 +94,7 @@
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
     provisionForm.disks.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
     provisionForm.addOns.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
-    provisionForm.profiles = Profiles().add();
+    provisionForm.osReloads = Profiles().add();
     provisionForm.billing = {
       integration: Select('integration'),
       date: {
@@ -163,20 +163,20 @@
       syncEntityFilter();
     }
 
-    function checkPxeProfileForIso() {
-      console.log('checkPxeProfileForIso: ', provisionForm.profiles);
-      _.each(provisionForm.profiles.items, function(profile) {
-        var iso = (profile.selected || {}).iso;
-        profile.hasIso = !!iso;
+    // function checkPxeProfileForIso() {
+    //   console.log('checkPxeProfileForIso: ', provisionForm.osReloads);
+    //   _.each(provisionForm.osReloads.items, function(profile) {
+    //     var iso = (profile.selected || {}).iso;
+    //     profile.hasIso = !!iso;
 
-        if (!profile.hasIso) {
-          profile.edition = null;
-          return;
-        }
+    //     if (!profile.hasIso) {
+    //       profile.edition = null;
+    //       return;
+    //     }
 
-        profile.edition = Select('pxe/iso/' + iso.id + '/edition');
-      })
-    }
+    //     profile.edition = Select('pxe/iso/' + iso.id + '/edition');
+    //   })
+    // }
 
     function multiIds(multi) {
       return _(multi.items)
@@ -292,12 +292,15 @@
       data.server = {
         id: provisionForm.server.getSelected('id'),
       };
+      var osReloadsData = provisionForm.osReloads.getProfilesData();
+      console.log('osReloadsData', osReloadsData);
       data.profile = {
-        id: provisionForm.profile.getSelected('id'),
+        id: osReloadsData[0].profile.id,
       };
-      data.edition = provisionForm.profile.hasIso ? {
-        id: provisionForm.edition.getSelected('id'),
+      data.edition = !!osReloadsData[0].profile.iso ? {
+        id: osReloadsData[0].edition.id,
       } : null;
+      data.osReloads = osReloadsData; // for `/server/{id}/install` requests, should be deleted before POST `/server/provision` request
 
       return data;
     }
@@ -322,17 +325,17 @@
       return select;
     }
 
-    function ProfileSelector(selected) {
-      var select = Select('pxe/profile')
-        .on('change', checkPxeProfileForIso);
-      ;
-      select.hasIso = false;
+    // function ProfileSelector(selected) {
+    //   var select = Select('pxe/profile')
+    //     .on('change', checkPxeProfileForIso);
+    //   ;
+    //   select.hasIso = false;
 
-      select.selected = selected || null;
-      select.load();
+    //   select.selected = selected || null;
+    //   select.load();
 
-      return select;
-    }
+    //   return select;
+    // }
 
     function AddOnSelector(selected) {
       var select = Select('part')
@@ -381,6 +384,12 @@
       profiles.rem = function(index) {
         profiles.splice(index, 1);
         return profiles;
+      }
+
+      profiles.getProfilesData = function() {
+        return _.map(profiles, function(profile) {
+          return profile.getData();
+        })
       }
       return profiles;
     }

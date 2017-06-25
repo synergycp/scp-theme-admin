@@ -283,6 +283,12 @@
       data.edition = !!osReloadsData[0].profile.iso ? {
         id: osReloadsData[0].edition.id,
       } : null;
+      data.license_key = osReloadsData[0].licenseKey;
+      data.password = osReloadsData[0].password;
+      data.disk = {
+        raid: osReloadsData[0].raid,
+        index: osReloadsData[0].index,
+      };
       data.osReloads = osReloadsData; // for `/server/{id}/install` requests, should be deleted before POST `/server/provision` request
 
       return data;

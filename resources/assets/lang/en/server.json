@@ -464,18 +464,34 @@
       "LABEL": "Server",
       "PLACEHOLDER": "Type to search..."
     },
-    "profile": {
+    "os-reload": {
       "LABEL": "Operating System",
-      "PLACEHOLDER": "Type to search..."
-    },
-    "edition": {
-      "LABEL": "Edition",
-      "PLACEHOLDER": "Type to search..."
-    },
-    "license_key": {
-      "LABEL": "License Key",
-      "PLACEHOLDER": "Optional",
-      "HELP": "Leave blank for trial"
+      "profile": {
+        "LABEL": "Profile",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "edition": {
+        "LABEL": "Edition",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "license-key": {
+        "LABEL": "License Key",
+        "PLACEHOLDER": "Optional",
+        "HELP": "Leave blank for trial"
+      },
+      "disk": {
+        "raid": {
+          "LABEL": "RAID",
+          "PLACEHOLDER": "Type to Search...",
+          "NONE": "None",
+          "ZERO": "0",
+          "ONE": "1"
+        },
+        "index": {
+          "LABEL": "Disk Index",
+          "HELP": "0 for first disk, 1 for second, etc."
+        }
+      }
     },
     "password": {
       "LABEL": "Password",

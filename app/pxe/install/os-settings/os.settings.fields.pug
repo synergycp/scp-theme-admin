@@ -1,8 +1,8 @@
 include /resources/angle/pug/mixins/panel
 include /resources/angle/pug/mixins/form
-+label("{{ 'os-reload.server.profile.LABEL' | translate }}")
++label("{{ pxeInstallForm.lang+'.profile.LABEL' | translate }}")
   +ui-select("pxeInstallForm.input.profile")
-    ui-select-match(placeholder="{{ 'os-reload.server.profile.PLACEHOLDER' | translate }}")
+    ui-select-match(placeholder="{{ pxeInstallForm.lang+'.profile.PLACEHOLDER' | translate }}")
       | {{ $select.selected.name }}
 
     ui-select-choices(
@@ -18,9 +18,9 @@ include /resources/angle/pug/mixins/form
       span(ng-bind-html="choice.name | highlight: $select.search")
 
 div(ng-if="pxeInstallForm.input.profile.selected.iso")
-  +label("{{ 'os-reload.server.edition.LABEL' | translate }}")
+  +label("{{ pxeInstallForm.lang+'.edition.LABEL' | translate }}")
     +ui-select("pxeInstallForm.input.edition")
-      ui-select-match(placeholder="{{ 'os-reload.server.edition.PLACEHOLDER' | translate }}")
+      ui-select-match(placeholder="{{ pxeInstallForm.lang+'.edition.PLACEHOLDER' | translate }}")
         | {{ $select.selected.name }}
 
       ui-select-choices(
@@ -35,30 +35,30 @@ div(ng-if="pxeInstallForm.input.profile.selected.iso")
       )
         span(ng-bind-html="choice.name | highlight: $select.search")
 
-  +field("{{ 'os-reload.server.license-key.LABEL' | translate }}")(
-    placeholder="{{ 'os-reload.server.license-key.PLACEHOLDER' | translate }}"
+  +field("{{ pxeInstallForm.lang+'.license-key.LABEL' | translate }}")(
+    placeholder="{{ pxeInstallForm.lang+'.license-key.PLACEHOLDER' | translate }}"
     ng-model="pxeInstallForm.input.licenseKey"
   )
-    p.help-block(translate="os-reload.server.license-key.HELP")
+    p.help-block(translate="{{pxeInstallForm.lang+'.license-key.HELP'}}")
 
 div(ng-if="pxeInstallForm.canRAID")
-  +select("os-reload.server.disk.raid.LABEL")(
+  +select("{{pxeInstallForm.lang+'.disk.raid.LABEL'}}")(
     ng-model="pxeInstallForm.input.disk.raid"
   )
     option(
       value="None"
-      translate="os-reload.server.disk.raid.NONE"
+      translate="{{pxeInstallForm.lang+'.disk.raid.NONE'}}"
     )
     option(
       value="0"
-      translate="os-reload.server.disk.raid.ZERO"
+      translate="{{pxeInstallForm.lang+'.disk.raid.ZERO'}}"
     )
     option(
       value="1"
-      translate="os-reload.server.disk.raid.ONE"
+      translate="{{pxeInstallForm.lang+'.disk.raid.ONE'}}"
     )
 
-  +field("os-reload.server.disk.index.LABEL")(
+  +field("{{pxeInstallForm.lang+'.disk.index.LABEL'}}")(
     ng-model="pxeInstallForm.input.disk.index"
   )
-    p.help-block(translate="os-reload.server.disk.index.HELP")
+    p.help-block(translate="{{pxeInstallForm.lang+'.disk.index.HELP'}}")

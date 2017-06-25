@@ -7,7 +7,8 @@
       require: '?control',
       bindings: {
         control: '=',
-        server: '='
+        server: '=',
+        lang: '@'
       },
       controller: 'OsSettingsFields as pxeInstallForm',
       transclude: true,

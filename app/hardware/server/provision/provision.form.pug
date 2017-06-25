@@ -140,13 +140,14 @@ div(ng-if="!provisionForm.serverId")
 
 div(ng-repeat="profile in provisionForm.profiles track by $index")
   hr
-  +icon-label("{{ 'server.provision.profile.LABEL' | translate }}")(
+  +icon-label()(
     class="fa"
     ng-class=
       "'fa-'+($index ? 'minus' : 'plus')+'-circle '"
     ng-click="$index ? provisionForm.profiles.rem($index) : provisionForm.profiles.add()"
   )
-    os-settings-fields(control="profile" server="provisionForm.server")
+    span(translate="server.provision.os-reload.LABEL")
+  os-settings-fields(control="profile" server="provisionForm.server" lang="server.provision.os-reload")
 hr
 
 +field(

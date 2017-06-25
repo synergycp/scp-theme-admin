@@ -21,7 +21,7 @@ div(style="margin-bottom: 15px")
         ng-class="panel.state.loader.class"
       )
         .loader
-        uib-tabset.relative.unpadded-content(
+        uib-tabset.relative.unpadded-content.hoverable(
           active="panel.tabs.active"
         )
           uib-tab(
@@ -31,7 +31,14 @@ div(style="margin-bottom: 15px")
             active="bandwidth.active"
             heading="{{bandwidth.port.name}}"
           )
-            .relative.hoverable
+            uib-tab-heading
+              span(
+                ng-bind="bandwidth.port.name"
+              )
+              span.fa.fa-times-circle.margin-left.show-hover(
+                ng-click="panel.tabs.remove(bandwidth)"
+              )
+            .relative
               .loader(ng-class="bandwidth.loader.class")
               .btn-group.btn-group-xs.floating-bar.float-right.show-hover
                 a.btn.btn-default(

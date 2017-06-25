@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function GroupIndexCtrl(GroupList, ListFilter) {
+  function GroupIndexCtrl(GroupList, ListFilter, Todo) {
     var vm = this;
 
     vm.list = GroupList();
@@ -34,7 +34,8 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.getData())
+        .then(Todo.refresh);
     }
   }
 })();

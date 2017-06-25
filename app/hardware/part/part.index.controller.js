@@ -13,7 +13,7 @@
    *
    * @ngInject
    */
-  function PartIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, PartList, PartTab) {
+  function PartIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, PartList, PartTab, Todo) {
     var vm = this;
 
     vm.list = EventEmitter();
@@ -109,6 +109,7 @@
 
     function fireChangeEvent(items) {
       vm.list.fire('change');
+      Todo.refresh();
 
       return items;
     }

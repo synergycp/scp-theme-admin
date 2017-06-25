@@ -138,39 +138,17 @@ div(ng-if="!provisionForm.serverId")
     )
       span(ng-bind-html="switchSpeed.name | highlight: $select.search")
 
-+label("{{ 'server.provision.profile.LABEL' | translate }}")
-  +ui-select("provisionForm.profile")
-    ui-select-match(placeholder="{{ 'server.provision.profile.PLACEHOLDER' | translate }}")
-      span(ng-bind="$select.selected.name")
-
-    ui-select-choices(
-      repeat="choice in provisionForm.profile.items track by choice.id"
-      refresh="provisionForm.profile.load($select.search)"
-      refresh-delay="400"
-    )
-      span(ng-bind-html="choice.name | highlight: $select.search")
-
-div(ng-if="provisionForm.profile.hasIso")
-  +label("{{ 'server.provision.edition.LABEL' | translate }}")
-    +ui-select("provisionForm.edition")
-      ui-select-match(placeholder="{{ 'server.provision.edition.PLACEHOLDER' | translate }}")
-        span(ng-bind="$select.selected.name")
-
-      ui-select-choices(
-        repeat="choice in provisionForm.edition.items track by choice.id"
-        refresh="provisionForm.edition.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="choice.name | highlight: $select.search")
-
-  +field(
-    "{{ 'server.provision.license_key.LABEL' | translate }}",
-    "license_key"
-  )(
-    placeholder="{{ 'server.provision.license_key.PLACEHOLDER' | translate }}"
-    ng-model="provisionForm.input.license_key"
+div(ng-repeat="profile in provisionForm.osReloads track by $index")
+  hr
+  +icon-label()(
+    class="fa"
+    ng-class=
+      "'fa-'+($index ? 'minus' : 'plus')+'-circle '"
+    ng-click="$index ? provisionForm.osReloads.rem($index) : provisionForm.osReloads.add()"
   )
-    p.help-block(data-translate="server.provision.license_key.HELP")
+    span(translate="server.provision.os-reload.LABEL")
+  os-settings-fields(control="profile" server="provisionForm.server" lang="server.provision.os-reload")
+hr
 
 +field(
   "{{ 'server.provision.password.LABEL' | translate }}",

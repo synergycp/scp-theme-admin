@@ -26,10 +26,14 @@
     //////////
 
     function submit() {
+      var data = vm.form.getData();
+      var osReloadsToQueue = data.osReloads.slice(1); // the first one was already queued
+      delete data.osReloads;
       return vm.loader.during(
         $api
-          .post(vm.form.getData())
+          .post(data)
           .then(getServerOffResponse)
+          .then(queueOsReloads.bind(null, osReloadsToQueue))
           .then(clearFromServerChoices)
           .then(addToProvisionedServers)
       );
@@ -47,6 +51,33 @@
 
     function addToProvisionedServers() {
 
+    }
+
+    function queueOsReloads(osReloads, server) {
+      nextRequest();
+
+      function nextRequest() {
+        if(!osReloads.length) return;
+        var osReload = osReloads[0];
+        var data = {
+          pxe_profile_id: osReload.profile.id,
+          disk: {
+            raid: osReload.raid,
+            index: osReload.index,
+          },
+          queue: true,
+          edition_id: osReload.edition,
+          license_key: osReload.licenseKey,
+          password: osReload.password,
+        }
+        Api.all('server/'+server.id+'/install')
+          .post(data)
+          .then(function() {
+            osReloads.splice(0, 1);
+            nextRequest();
+          })
+      }
+      return server;
     }
   }
 })();

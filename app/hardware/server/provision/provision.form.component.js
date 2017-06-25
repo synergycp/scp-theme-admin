@@ -94,9 +94,7 @@
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
     provisionForm.disks.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
     provisionForm.addOns.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
-    provisionForm.profile = Select('pxe/profile')
-      .on('change', checkPxeProfileForIso);
-    provisionForm.profile.hasIso = false;
+    provisionForm.osReloads = Profiles().add();
     provisionForm.billing = {
       integration: Select('integration'),
       date: {
@@ -118,7 +116,6 @@
         },
       },
     };
-    provisionForm.edition = null;
     provisionForm.switchSpeed = Select('port-speed');
     provisionForm.entities = Select('entity')
       .multi()
@@ -163,18 +160,6 @@
     function syncGroupToEntities() {
       _.setContents(provisionForm.entities.selected, []);
       syncEntityFilter();
-    }
-
-    function checkPxeProfileForIso() {
-      var iso = (provisionForm.profile.selected || {}).iso;
-      provisionForm.profile.hasIso = !!iso;
-
-      if (!provisionForm.profile.hasIso) {
-        provisionForm.edition = null;
-        return;
-      }
-
-      provisionForm.edition = Select('pxe/iso/' + iso.id + '/edition');
     }
 
     function multiIds(multi) {
@@ -291,12 +276,20 @@
       data.server = {
         id: provisionForm.server.getSelected('id'),
       };
+      var osReloadsData = provisionForm.osReloads.getProfilesData();
       data.profile = {
-        id: provisionForm.profile.getSelected('id'),
+        id: osReloadsData[0].profile.id,
       };
-      data.edition = provisionForm.profile.hasIso ? {
-        id: provisionForm.edition.getSelected('id'),
+      data.edition = !!osReloadsData[0].profile.iso ? {
+        id: osReloadsData[0].edition.id,
       } : null;
+      data.license_key = osReloadsData[0].licenseKey;
+      data.password = osReloadsData[0].password;
+      data.disk = {
+        raid: osReloadsData[0].raid,
+        index: osReloadsData[0].index,
+      };
+      data.osReloads = osReloadsData; // for `/server/{id}/install` requests, should be deleted before POST `/server/provision` request
 
       return data;
     }
@@ -355,6 +348,27 @@
         })
         .catch(function () {
         });
+    }
+
+    function Profiles() {
+      var profiles = [];
+
+      profiles.add = function() {
+        profiles.push({});
+        return profiles;
+      }
+
+      profiles.rem = function(index) {
+        profiles.splice(index, 1);
+        return profiles;
+      }
+
+      profiles.getProfilesData = function() {
+        return _.map(profiles, function(profile) {
+          return profile.getData();
+        })
+      }
+      return profiles;
     }
   }
 })();

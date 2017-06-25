@@ -116,7 +116,6 @@
         },
       },
     };
-    provisionForm.edition = null;
     provisionForm.switchSpeed = Select('port-speed');
     provisionForm.entities = Select('entity')
       .multi()
@@ -162,21 +161,6 @@
       _.setContents(provisionForm.entities.selected, []);
       syncEntityFilter();
     }
-
-    // function checkPxeProfileForIso() {
-    //   console.log('checkPxeProfileForIso: ', provisionForm.osReloads);
-    //   _.each(provisionForm.osReloads.items, function(profile) {
-    //     var iso = (profile.selected || {}).iso;
-    //     profile.hasIso = !!iso;
-
-    //     if (!profile.hasIso) {
-    //       profile.edition = null;
-    //       return;
-    //     }
-
-    //     profile.edition = Select('pxe/iso/' + iso.id + '/edition');
-    //   })
-    // }
 
     function multiIds(multi) {
       return _(multi.items)
@@ -293,7 +277,6 @@
         id: provisionForm.server.getSelected('id'),
       };
       var osReloadsData = provisionForm.osReloads.getProfilesData();
-      console.log('osReloadsData', osReloadsData);
       data.profile = {
         id: osReloadsData[0].profile.id,
       };
@@ -324,18 +307,6 @@
 
       return select;
     }
-
-    // function ProfileSelector(selected) {
-    //   var select = Select('pxe/profile')
-    //     .on('change', checkPxeProfileForIso);
-    //   ;
-    //   select.hasIso = false;
-
-    //   select.selected = selected || null;
-    //   select.load();
-
-    //   return select;
-    // }
 
     function AddOnSelector(selected) {
       var select = Select('part')

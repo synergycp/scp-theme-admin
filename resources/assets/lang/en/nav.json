@@ -32,7 +32,7 @@
       "TITLE": "Run an OS Reload"
     },
     "hardware.server.install.finish": {
-      "TITLE": "Verify OS Reload completes"
+      "TITLE": "Verify OS Reload finishes"
     }
   }
 }

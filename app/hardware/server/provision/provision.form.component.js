@@ -94,7 +94,7 @@
     provisionForm.mem.on('change', clear.bind(null, provisionForm.server));
     provisionForm.disks.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
     provisionForm.addOns.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
-    provisionForm.osReloads = Profiles().add();
+    provisionForm.osReloads = (new Profiles()).add();
     provisionForm.billing = {
       integration: Select('integration'),
       date: {
@@ -276,7 +276,9 @@
       data.server = {
         id: provisionForm.server.getSelected('id'),
       };
+      provisionForm.osReloads.removeEmpty();
       var osReloadsData = provisionForm.osReloads.getProfilesData();
+      if(!osReloadsData) return false;
       data.profile = {
         id: osReloadsData[0].profile.id,
       };
@@ -284,7 +286,7 @@
         id: osReloadsData[0].edition.id,
       } : null;
       data.license_key = osReloadsData[0].licenseKey;
-      data.password = osReloadsData[0].password;
+      data.password = provisionForm.input.password;
       data.disk = {
         raid: osReloadsData[0].raid,
         index: osReloadsData[0].index,
@@ -351,23 +353,42 @@
     }
 
     function Profiles() {
-      var profiles = [];
+      var profiles = this;
+      profiles.items = [];
 
-      profiles.add = function() {
-        profiles.push({});
+      this.add = function() {
+        profiles.items.push({
+          id: Math.random() // to make ng-repeat work correctly 
+        });
         return profiles;
       }
 
-      profiles.rem = function(index) {
-        profiles.splice(index, 1);
+      this.rem = function(index) {
+        profiles.items.splice(index, 1);
         return profiles;
       }
 
-      profiles.getProfilesData = function() {
-        return _.map(profiles, function(profile) {
-          return profile.getData();
+      this.getProfilesData = function() {
+        var isValid = true;
+        var profilesData = _.map(profiles.items, function(profile) {
+          var profileData = profile.getData();
+          if(!profileData) isValid = false;
+          return profileData;
         })
+        return isValid && profilesData;
       }
+
+      this.removeEmpty = function() {
+        profiles.items = _.reduce(profiles.items, function(accum, profile, i) {
+          if(profile.profileSelected) {
+            accum.push(profile);
+          } else {
+            console.log('to remove i', i);
+          }
+          return accum;
+        }, [])
+      }
+
       return profiles;
     }
   }

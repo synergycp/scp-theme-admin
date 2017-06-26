@@ -465,9 +465,9 @@
       "PLACEHOLDER": "Type to search..."
     },
     "os-reload": {
-      "LABEL": "Operating System",
+      "ADD": "Add OS Reload",
       "profile": {
-        "LABEL": "Profile",
+        "LABEL": "Operating System",
         "PLACEHOLDER": "Type to search..."
       },
       "edition": {

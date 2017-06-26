@@ -138,17 +138,18 @@ div(ng-if="!provisionForm.serverId")
     )
       span(ng-bind-html="switchSpeed.name | highlight: $select.search")
 
-div(ng-repeat="profile in provisionForm.osReloads track by $index")
+div(ng-repeat="profile in provisionForm.osReloads.items track by profile.id")
   hr
-  +icon-label()(
-    class="fa"
-    ng-class=
-      "'fa-'+($index ? 'minus' : 'plus')+'-circle '"
-    ng-click="$index ? provisionForm.osReloads.rem($index) : provisionForm.osReloads.add()"
+  +icon.fa.fa-minus-circle(
+    ng-show="$index"
+    ng-click="provisionForm.osReloads.rem($index)"
   )
-    span(translate="server.provision.os-reload.LABEL")
-  os-settings-fields(control="profile" server="provisionForm.server" lang="server.provision.os-reload")
-hr
+    os-settings-fields(control="profile" server="provisionForm.server" lang="server.provision.os-reload" is-password-showing="false")
+
+div.big-add-button.mb-lg(
+  ng-click="provisionForm.osReloads.add()"
+  translate="server.provision.os-reload.ADD"
+)
 
 +field(
   "{{ 'server.provision.password.LABEL' | translate }}",

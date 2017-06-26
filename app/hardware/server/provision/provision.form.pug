@@ -146,10 +146,9 @@ div(ng-repeat="profile in provisionForm.osReloads.items track by profile.id")
   )
     os-settings-fields(control="profile" server="provisionForm.server" lang="server.provision.os-reload" is-password-showing="false")
 
-div.big-add-button.mb-lg(
++btn-full-w("server.provision.os-reload.ADD")(
   ng-click="provisionForm.osReloads.add()"
-  translate="server.provision.os-reload.ADD"
-)
+).mb-lg
 
 +field(
   "{{ 'server.provision.password.LABEL' | translate }}",

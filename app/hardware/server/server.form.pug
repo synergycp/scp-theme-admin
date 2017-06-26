@@ -150,9 +150,8 @@ div.relative(
       ng-model="port.max_bandwidth"
     )
 
-div.big-add-button(
-  ng-click="serverForm.port.add()"
-  translate="server.form.port.ADD"
++btn-full-w("server.form.port.ADD")(
+  ng-click="serverForm.ports.add()"
 )
 
 hr
@@ -212,9 +211,8 @@ div.relative(
           name="control-{{ controlIndex }}.client.password"
         )
 
-div.big-add-button(
++btn-full-w("server.form.control.ADD")(
   ng-click="serverForm.controls.add()"
-  translate="server.form.control.ADD"
   ng-hide="serverForm.controls.length"
 )
 

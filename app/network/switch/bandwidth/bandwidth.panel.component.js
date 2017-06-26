@@ -97,8 +97,9 @@
       );
     }
 
-    function tabRemove(tab) {
+    function tabRemove(tab, $event) {
       _.remove(panel.bandwidth.ports, tab);
+      $event.preventDefault(); // otherwise tabChange() will be called, will result in error
 
       return tab.port
         .patch({ is_switch_primary: false })

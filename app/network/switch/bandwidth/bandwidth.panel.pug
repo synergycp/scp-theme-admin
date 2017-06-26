@@ -35,13 +35,13 @@ div(style="margin-bottom: 15px")
                 ng-bind="bandwidth.port.name"
               )
               span.fa.fa-times-circle.margin-left.show-hover(
-                ng-click="panel.tabs.remove(bandwidth)"
+                ng-click="panel.tabs.remove(bandwidth, $event)"
               )
             .relative
               .loader(ng-class="bandwidth.loader.class")
               .btn-group.btn-group-xs.floating-bar.float-right.show-hover
                 a.btn.btn-default(
-                  ng-click="panel.tabs.remove(bandwidth)"
+                  ng-click="panel.tabs.remove(bandwidth, $event)"
                 )
                   span.fa.fa-times-circle
 

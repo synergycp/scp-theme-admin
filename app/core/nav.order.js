@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function NavOrderConfig(NavProvider) {
+  function NavOrderConfig(NavProvider, RouteHelpersProvider) {
     NavProvider.order([
       'header',
       'dashboard',
@@ -22,5 +22,8 @@
       heading: "true",
       translate: "app.nav.heading.HEADER"
     });
+    NavProvider.widget({
+      templateUrl: RouteHelpersProvider.basepath('core/layout/todo.widget.html'),
+    })
   }
 })();

@@ -60,6 +60,10 @@
       "LABEL": "Edition",
       "PLACEHOLDER": "Type to Search..."
     },
+    "password": {
+      "LABEL": "Password",
+      "PLACEHOLDER": "Leave empty for random password."
+    },
     "modal": {
       "confirm": {
         "TITLE": "Are you sure?",

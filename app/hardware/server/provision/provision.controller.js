@@ -27,13 +27,14 @@
 
     function submit() {
       var data = vm.form.getData();
+      if(!data) return;
       var osReloadsToQueue = data.osReloads.slice(1); // the first one was already queued
       delete data.osReloads;
       return vm.loader.during(
         $api
           .post(data)
           .then(getServerOffResponse)
-          .then(queueOsReloads.bind(null, osReloadsToQueue))
+          .then(queueOsReloads.bind(null, osReloadsToQueue, data.password))
           .then(clearFromServerChoices)
           .then(addToProvisionedServers)
       );
@@ -53,7 +54,7 @@
 
     }
 
-    function queueOsReloads(osReloads, server) {
+    function queueOsReloads(osReloads, password, server) {
       nextRequest();
 
       function nextRequest() {
@@ -68,7 +69,7 @@
           queue: true,
           edition_id: osReload.edition,
           license_key: osReload.licenseKey,
-          password: osReload.password,
+          password: password,
         }
         Api.all('server/'+server.id+'/install')
           .post(data)

@@ -28,7 +28,7 @@
     port.switch = Select('switch').on('change', syncSwitchFilter);
     port.group = Select('group').on('change', syncGroupFilter);
     port.switch.port = {};
-    port.switch.speed = Select('port-speed');
+    port.switch.speed = Select('port-speed').on('change', setDirty);
     port.entities = Select('entity')
       .multi()
       .filter({
@@ -59,24 +59,14 @@
     };
 
     port.loadEntities = loadEntities;
+    port.$dirty = false;
+    port.setDirty = setDirty;
     port.$setPristine = $setPristine;
     port.data = data;
     port.fromExisting = fromExisting;
 
-    function $setPristine() {
-      port.switch.port.$dirty =
-        port.switch.speed.$dirty =
-        port.entities.$dirty =
-        port.group.$dirty =
-        port.switch.$dirty =
-        false;
-      _.setContents(
-        port.entities.original,
-        port.entities.selected
-      );
-    }
-
     function syncGroupFilter() {
+      setDirty();
       _.setContents(port.entities.selected, []);
       port.switch
         .filter({
@@ -125,6 +115,7 @@
     }
 
     function syncEntityFilter() {
+      setDirty();
       port.entities
         .clearFilter('extra_for_id')
         .clearFilter('ip_group')
@@ -138,6 +129,7 @@
     }
 
     function syncSwitchFilter() {
+      setDirty();
       if (!port.switch.selected) {
         port.switch.port = null;
 
@@ -149,6 +141,7 @@
       }
 
       port.switch.port = Select('switch/'+port.switch.selected.id+'/port')
+        .on('change', setDirty)
         .filter({
           available: true,
           allowed_id: port.original && port.original.switch ?
@@ -196,6 +189,24 @@
           ),
         },
       };
+    }
+
+    function $setPristine() {
+      port.$dirty = 
+        port.switch.port.$dirty =
+        port.switch.speed.$dirty =
+        port.entities.$dirty =
+        port.group.$dirty =
+        port.switch.$dirty =
+        false;
+      _.setContents(
+        port.entities.original,
+        port.entities.selected
+      );
+    }
+
+    function setDirty() {
+      port.$dirty = true;
     }
   }
 })();

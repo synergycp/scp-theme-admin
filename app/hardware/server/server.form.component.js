@@ -5,8 +5,7 @@
     srv_id: '',
     nickname: '',
     billing: {
-      id: '',
-      date: '',
+      id: ''
     },
   };
 
@@ -106,6 +105,7 @@
           .getList()
           .then(storeControls)
         ;
+        setFormPristine();
       }
     }
 
@@ -121,8 +121,8 @@
     function removePort(port) {
       if (port.id) {
         return confirmRemove(port)
-          .then(removeFromList)
           .then(removeFromDatabase)
+          .then(removeFromList)
         ;
       }
 
@@ -160,7 +160,6 @@
     }
 
     function confirmRemoveControl(control) {
-      console.log(control);
       return Modal
         .confirm([control.original], 'server.form.control.remove')
         .open()
@@ -227,6 +226,7 @@
 
         serverForm.billing.date.value = response.billing.date ?
           Date.parse(response.billing.date) : '';
+        setFormPristine();
       });
     }
 
@@ -263,20 +263,13 @@
       return $q.all(
         _.map(serverForm.ports, savePortChanges)
       ).then(function () {
-        serverForm.form.form.$setPristine();
-        serverForm.disks.$dirty =
-          serverForm.addOns.$dirty =
-          serverForm.cpu.$dirty =
-          serverForm.mem.$dirty =
-          false;
-        _.map(serverForm.form.form, function (field) {
-          if (field) field.$dirty = false;
-        });
+        setFormPristine();
         serverForm.form.fire('created.relations');
       });
     }
 
     function savePortChanges(port, portIndex) {
+      if(!port.$dirty) return;
       var formData = port.data();
       var portPrefix = 'port-'+portIndex+'.';
       var switchId = port.switch.getSelected('id');
@@ -424,7 +417,7 @@
       return $q.all(
         _.map(serverForm.controls, saveControlChanges)
       ).then(function () {
-        serverForm.form.form.$setPristine();
+        setFormPristine();
         serverForm.form.fire('created.relations');
       });
     }
@@ -503,6 +496,7 @@
             .toISOString() :
           null;
       }
+      if(_.isEmpty(data.billing)) delete data.billing;
 
       return data;
     }
@@ -549,6 +543,19 @@
       select.load();
 
       return select;
+    }
+
+    function setFormPristine() {
+      serverForm.disks.$dirty =
+        serverForm.addOns.$dirty =
+        serverForm.cpu.$dirty =
+        serverForm.mem.$dirty =
+        false;
+      serverForm.billing.integration.$dirty = false;
+      _.each(serverForm.form.form, function (field, key) {
+        if (field && field.$setDirty) field.$setDirty(false);
+      });
+      serverForm.form.form.$setPristine();
     }
   }
 

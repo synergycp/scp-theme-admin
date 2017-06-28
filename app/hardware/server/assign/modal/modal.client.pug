@@ -35,7 +35,9 @@ form(ng-submit="modal.submit()")
       form="modal.create"
     )
 
-    +label("{{ 'server.modal.client.access.LABEL' | translate }}")
+    +label("{{ 'server.modal.client.access.LABEL' | translate }}")(
+      ng-if="modal.access.client"
+    )
       .checkbox
         label
           input(

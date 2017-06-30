@@ -47,7 +47,8 @@
     tab.order = 15;
     tab.list = list;
     tab.filter = filter;
-    tab.select = onSelect;
+    tab.getState = getState;
+    tab.getStateParams = getStateParams;
     tab.results = {
       url: RouteHelpers.basepath('network/entity/search/search.tab.html'),
     };
@@ -56,13 +57,16 @@
     );
 
     //////////
-    
-    function onSelect($item, shouldOpenInNewTab, openSelected) {
-      openSelected('app.network.entity.view', {
-          id: $item.id,
-        }, shouldOpenInNewTab);
+
+    function getState() {
+      return 'app.network.entity.view';
     }
 
+    function getStateParams($item) {
+      return {
+        id: $item.id,
+      };
+    }
 
   }
 })();

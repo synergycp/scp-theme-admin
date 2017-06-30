@@ -41,7 +41,8 @@
     tab.text = 'switch.search.TITLE';
     tab.list = list;
     tab.filter = filter;
-    tab.select = onSelect;
+    tab.getState = getState;
+    tab.getStateParams = getStateParams;
     tab.order = 20;
     tab.results = {
       url: RouteHelpers.basepath('network/switch/search/search.tab.html'),
@@ -53,10 +54,14 @@
 
     //////////
 
-    function onSelect($item, shouldOpenInNewTab, openSelected) {
-      openSelected('app.network.switch.view.manage', {
-          id: $item.id,
-        }, shouldOpenInNewTab);
+    function getState() {
+      return 'app.network.switch.view.manage';
+    }
+
+    function getStateParams($item) {
+      return {
+        id: $item.id,
+      };
     }
 
   }

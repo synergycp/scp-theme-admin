@@ -41,7 +41,6 @@
     tab.filter = filter;
     tab.lang = 'client';
     tab.text = 'client.search.TITLE';
-    tab.select = onSelect;
     tab.getState = getState;
     tab.getStateParams = getStateParams;
     tab.order = 5;
@@ -62,12 +61,6 @@
       return {
         id: $item.id,
       };
-    }
-
-    function onSelect($item, shouldOpenInNewTab, openSelected) {
-      openSelected('app.user.client.view', {
-          id: $item.id,
-        }, shouldOpenInNewTab);
     }
   }
 })();

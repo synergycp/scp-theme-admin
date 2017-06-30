@@ -24,11 +24,12 @@
 
     port.input = {
       mac: '',
+      max_bandwidth: ''
     };
     port.switch = Select('switch').on('change', syncSwitchFilter);
     port.group = Select('group').on('change', syncGroupFilter);
     port.switch.port = {};
-    port.switch.speed = Select('port-speed');
+    port.switch.speed = Select('port-speed').on('change', setDirty);
     port.entities = Select('entity')
       .multi()
       .filter({
@@ -36,7 +37,7 @@
       })
       .on('change', syncEntityFilter)
     ;
-    port.entities.original = [];
+    port.entitiesOriginal = [];
     port.billing = {
       start: {
         value: null,
@@ -59,24 +60,14 @@
     };
 
     port.loadEntities = loadEntities;
+    port.$dirty = false;
+    port.setDirty = setDirty;
     port.$setPristine = $setPristine;
     port.data = data;
     port.fromExisting = fromExisting;
 
-    function $setPristine() {
-      port.switch.port.$dirty =
-        port.switch.speed.$dirty =
-        port.entities.$dirty =
-        port.group.$dirty =
-        port.switch.$dirty =
-        false;
-      _.setContents(
-        port.entities.original,
-        port.entities.selected
-      );
-    }
-
     function syncGroupFilter() {
+      setDirty();
       _.setContents(port.entities.selected, []);
       port.switch
         .filter({
@@ -119,12 +110,13 @@
 
     function storeEntities(response) {
       _.setContents(port.entities.selected, response);
-      _.setContents(port.entities.original, response);
+      _.setContents(port.entitiesOriginal, response);
 
       syncEntityFilter();
     }
 
     function syncEntityFilter() {
+      setDirty();
       port.entities
         .clearFilter('extra_for_id')
         .clearFilter('ip_group')
@@ -138,6 +130,7 @@
     }
 
     function syncSwitchFilter() {
+      setDirty();
       if (!port.switch.selected) {
         port.switch.port = null;
 
@@ -147,8 +140,8 @@
       if (port.switch.port && port.switch.port.switchId == port.switch.selected.id) {
         return;
       }
-
       port.switch.port = Select('switch/'+port.switch.selected.id+'/port')
+        .on('change', switchPortChanged)
         .filter({
           available: true,
           allowed_id: port.original && port.original.switch ?
@@ -162,7 +155,7 @@
 
     function data() {
       var currentEntityIds = _.map(port.entities.selected, 'id');
-      var originalEntityIds = _.map(port.entities.original, 'id');
+      var originalEntityIds = _.map(port.entitiesOriginal, 'id');
 
       return {
         id: port.id,
@@ -196,6 +189,29 @@
           ),
         },
       };
+    }
+
+    function switchPortChanged() {
+      port.max_bandwidth = '';
+      setDirty();
+    }
+
+    function $setPristine() {
+      _.setContents(
+        port.entitiesOriginal,
+        port.entities.selected
+      );
+      port.$dirty = 
+        port.switch.port.$dirty =
+        port.switch.speed.$dirty =
+        port.entities.$dirty =
+        port.group.$dirty =
+        port.switch.$dirty =
+        false;
+    }
+
+    function setDirty() {
+      port.$dirty = true;
     }
   }
 })();

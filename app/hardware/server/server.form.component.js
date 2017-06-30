@@ -5,8 +5,7 @@
     srv_id: '',
     nickname: '',
     billing: {
-      id: '',
-      date: '',
+      id: ''
     },
   };
 
@@ -30,7 +29,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Api, Select, Modal, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
+  function ServerFormCtrl(_, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
     var serverForm = this;
     var $ports, $controls;
 
@@ -92,6 +91,7 @@
         .on(['load', 'change', 'created'], storeState)
         .on(['saving', 'created'], savePorts)
         .on(['saving', 'created'], saveControls)
+        .on(['change'], setFormPristine) // when saving completed
       ;
 
       if ($stateParams.id) {
@@ -100,11 +100,13 @@
           .getList()
           .then(storePorts)
           .then(storePortsBandwidth)
+          .then(setFormPristine)
         ;
         $controls = Api.all('server/'+$stateParams.id+'/control');
         $controls
           .getList()
           .then(storeControls)
+          .then(setFormPristine)
         ;
       }
     }
@@ -121,8 +123,8 @@
     function removePort(port) {
       if (port.id) {
         return confirmRemove(port)
-          .then(removeFromList)
           .then(removeFromDatabase)
+          .then(removeFromList)
         ;
       }
 
@@ -160,7 +162,6 @@
     }
 
     function confirmRemoveControl(control) {
-      console.log(control);
       return Modal
         .confirm([control.original], 'server.form.control.remove')
         .open()
@@ -187,15 +188,17 @@
     }
 
     function storePortsBandwidth() {
-      serverForm.ports.forEach(function(port) {
-        $ports.get(port.id+'/bandwidth/usage')
-          .then(function(bandwidthData) {
-            if(bandwidthData.data[0]) {
-              port.bandwidthUsage = bandwidthData.data[0];
-              port.max_bandwidth = $filter('bitsToSize')(bandwidthData.data[0].max);
-            }
-          })
-      })
+      return $q.all(
+        _.map(serverForm.ports, function(port) {
+          return $ports.get(port.id+'/bandwidth/usage')
+            .then(function(bandwidthData) {
+              if(bandwidthData.data[0]) {
+                port.bandwidthUsage = bandwidthData.data[0];
+                port.max_bandwidth = $filter('bitsToSize')(bandwidthData.data[0].max);
+              }
+            })
+        })
+      );
     }
 
     function storeControls(response) {
@@ -263,25 +266,22 @@
       return $q.all(
         _.map(serverForm.ports, savePortChanges)
       ).then(function () {
-        serverForm.form.form.$setPristine();
-        serverForm.disks.$dirty =
-          serverForm.addOns.$dirty =
-          serverForm.cpu.$dirty =
-          serverForm.mem.$dirty =
-          false;
-        _.map(serverForm.form.form, function (field) {
-          if (field) field.$dirty = false;
-        });
+        // setFormPristine();
         serverForm.form.fire('created.relations');
       });
     }
 
     function savePortChanges(port, portIndex) {
-      var formData = port.data();
+      var portData = port.data();
       var portPrefix = 'port-'+portIndex+'.';
-      var switchId = port.switch.getSelected('id');
-      var switchPortId = port.switch.port.getSelected('id');
-      var speedId = port.switch.speed.getSelected('id');
+      var switchId = portData.switch.id;
+      var switchPortId = portData.switch.port.id;
+      var speedId = portData.switch.speed.id;
+
+      if(!switchId || !switchPortId || !speedId) {
+        return Alert.warning("Please specify all needed port data.")
+      }
+
       var dirtySwitchPort =
         serverForm.alwaysDirty ||
         port.switch.$dirty ||
@@ -316,9 +316,9 @@
 
       function updateEntities() {
         // Remove entities first so that VLANs don't conflict.
-        if (formData.entities.remove.length) {
+        if (portData.entities.remove.length) {
           return Api
-            .one('entity/' + formData.entities.remove.join(','))
+            .one('entity/' + portData.entities.remove.join(','))
             .patch({
               server_port_id: null,
             })
@@ -329,12 +329,12 @@
         return addEntities();
 
         function addEntities() {
-          if (!formData.entities.add.length) {
+          if (!portData.entities.add.length) {
             return $q.when();
           }
 
           return Api
-            .one('entity/' + formData.entities.add.join(','))
+            .one('entity/' + portData.entities.add.join(','))
             .patch({
                 server_port_id: port.id,
             })
@@ -373,8 +373,9 @@
 
       function updatePortBandwidth() {
         if (!serverForm.alwaysDirty &&
-            !serverForm.form.form[portPrefix+'max_bandwidth'].$dirty &&
-            !serverForm.form.form['billing.date'].$dirty
+            !(serverForm.form.form[portPrefix+'max_bandwidth'] && serverForm.form.form[portPrefix+'max_bandwidth'].$dirty) &&
+            !serverForm.form.form['billing.date'].$dirty &&
+            !(port.switch.port && port.switch.port.$dirty) // save bandwidth if port changed
         ) {
           return;
         }
@@ -383,7 +384,7 @@
           moment(serverForm.billing.date.value).toISOString() :
           undefined;
 
-        if (port.id && !serverForm.isCreating && port.max_bandwidth && port.bandwidthUsage) {
+        if (port.id && !serverForm.isCreating && port.max_bandwidth && port.bandwidthUsage && !port.switch.port.$dirty) {
           return $ports
             .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
             .patch({
@@ -392,8 +393,7 @@
             })
           ;
         }
-
-        if(port.max_bandwidth && !port.bandwidthUsage) {
+        if(port.max_bandwidth && (!port.bandwidthUsage || port.switch.port.$dirty)) {
           return $ports
             .all(port.id +'/bandwidth/usage')
             .post({
@@ -424,7 +424,6 @@
       return $q.all(
         _.map(serverForm.controls, saveControlChanges)
       ).then(function () {
-        serverForm.form.form.$setPristine();
         serverForm.form.fire('created.relations');
       });
     }
@@ -503,6 +502,7 @@
             .toISOString() :
           null;
       }
+      if(_.isEmpty(data.billing)) delete data.billing;
 
       return data;
     }
@@ -549,6 +549,22 @@
       select.load();
 
       return select;
+    }
+
+    function setFormPristine() {
+      serverForm.disks.$dirty =
+        serverForm.addOns.$dirty =
+        serverForm.cpu.$dirty =
+        serverForm.mem.$dirty =
+        false;
+      serverForm.billing.integration.$dirty = false;
+      _.each(serverForm.ports, function(port) {
+        port.$setPristine();
+      })
+      _.each(serverForm.form.form, function (field, key) {
+        if (field && field.$setDirty) field.$setDirty(false);
+      });
+      serverForm.form.form.$setPristine();
     }
   }
 

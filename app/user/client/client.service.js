@@ -12,7 +12,7 @@
    */
   function ClientService (Api, $httpParamSerializer) {
     var Client = this;
-    var $sso = Api.all('sso');
+    var $sso = Api.all('auth/sso');
     var $key = Api.all('key');
 
     Client.loginAs = loginAs;
@@ -36,10 +36,8 @@
         var queryData = _.assign({
           key: apiKey.key,
         }, options || {});
-        var url = $sso.getRestangularUrl(
-          '?'+$httpParamSerializer(queryData)
-        );
-
+        var url = $sso.getRestangularUrl()+'?'+$httpParamSerializer(queryData);
+        
         window.open(url, '_blank');
       }
     }

@@ -16,6 +16,7 @@
       list.confirm = ListConfirm(list, 'pxe.profile.modal.delete');
 
       list.bulk.add('Delete', list.confirm.delete);
+      list.bulk.add('Duplicate', list.fire.bind(null, 'duplicate_profiles'));
 
       return list;
     };

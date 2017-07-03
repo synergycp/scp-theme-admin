@@ -28,8 +28,9 @@
   /**
    * @ngInject
    */
-  function ProfileFormCtrl(Select, $scope, _) {
+  function ProfileFormCtrl(Select, Api, $scope, _) {
     var profileForm = this;
+    var $profile = Api.all('pxe/profile');
 
     profileForm.$onInit = init;
     profileForm.input = _.clone(INPUTS);
@@ -42,6 +43,8 @@
     profileForm.shellScripts = Select('pxe/shell').multi();
     profileForm.drivers = Select('pxe/driver').multi();
 
+    profileForm.profilesToDuplicate = [];
+
     //////////
 
     function init() {
@@ -50,7 +53,12 @@
         syncResponse(profileForm.form.input);
       }
 
-      (profileForm.form.on || function() {})(['change', 'load'], syncResponse);
+      // create page
+      profileForm.form.on('duplicate_profiles', duplicateProfiles);
+      profileForm.form.on('create', setNextProfile);
+      
+      // edit page
+      profileForm.form.on(['change', 'load'], syncResponse);
     }
 
     function onIsoChange() {
@@ -91,6 +99,26 @@
       _.setContents(profileForm.drivers.selected, response.drivers);
       setupIsoDefaults(response.iso);
       profileForm.emailTemplate.selected = response.email.template;
+    }
+
+    function duplicateProfiles(profiles) {
+      profileForm.profilesToDuplicate = profiles;
+      setNextProfile();
+    }
+
+    function setNextProfile() {
+      if(!profileForm.profilesToDuplicate.length) return;
+      $profile
+        .one(''+profileForm.profilesToDuplicate[0].id)
+        .get()
+        .then(_.assign.bind(null, profileForm.form.input)) // fill in input fields
+        .then(syncResponse) // fill in the rest of the form (selects etc)
+        .then(removeFromList)
+
+        function removeFromList() {
+          profileForm.profilesToDuplicate.splice(0, 1);
+        }
+      ;
     }
 
     function getData() {

@@ -138,7 +138,7 @@ gulp.task('scripts:app', function () {
       preserveComments: 'some'
     })))
     .on('error', handleError)
-    .pipe($.if(useSourceMaps, $.sourcemaps.write()))
+    .pipe($.if(useSourceMaps, $.sourcemaps.write('./')))
     .pipe(gulp.dest(build.scripts))
     .pipe(reload({
       stream: true
@@ -161,10 +161,10 @@ gulp.task('vendor:base', function () {
     .src(vendor.base.source, { follow: true })
     .pipe($.expectFile(vendor.base.source))
     .pipe(jsFilter)
-    .pipe($.sourcemaps.init({loadMaps: true,  largeFile: true}))
+    .pipe($.if(useSourceMaps, $.sourcemaps.init({loadMaps: true,  largeFile: true})))
     .pipe($.concat(vendor.base.js))
     //TODO (breaks) .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
-    .pipe($.sourcemaps.write('./'))
+    .pipe($.if(useSourceMaps, $.sourcemaps.write('./')))
     .pipe(gulp.dest(build.scripts))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
@@ -361,7 +361,7 @@ gulp.task('prod', function () {
 
 // Server for development
 gulp.task('serve', gulpsync.sync([
-  // 'usesources',
+  'usesources',
   'default',
   'create-versions',
   'browsersync']), done);

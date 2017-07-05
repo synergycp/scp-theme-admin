@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerIndexCtrl(ServerList, ListFilter, EventEmitter, Todo) {
+  function ServerIndexCtrl(ServerList, ListFilter, EventEmitter, Todo, $scope) {
     var vm = this;
 
     vm.list = ServerList();
@@ -35,6 +35,7 @@
     ////////////
 
     function activate() {
+      $scope.$on('$destroy', vm.list.destroy)
     }
 
     function create() {

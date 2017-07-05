@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function ClientIndexCtrl(ClientList, ListFilter) {
+  function ClientIndexCtrl(ClientList, ListFilter, $scope) {
     var vm = this;
 
     vm.list = ClientList();
@@ -31,6 +31,7 @@
     ////////////
 
     function activate() {
+      $scope.$on('$destroy', vm.list.destroy)
     }
 
     function create() {

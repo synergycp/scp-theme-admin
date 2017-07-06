@@ -54,6 +54,12 @@
         server: filters.server.getSelected('id'),
       });
 
+      filters.server
+        .filter({
+          ip_group: (filters.group.selected || {}).id,
+        })
+        .load();
+
       $state.go($state.current.name, {
         'group.id': filters.current.group,
         'server.id': filters.current.server,

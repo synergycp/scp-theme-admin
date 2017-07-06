@@ -41,7 +41,8 @@
     tab.text = 'group.search.TITLE';
     tab.list = list;
     tab.filter = filter;
-    tab.select = onSelect;
+    tab.getState = getState;
+    tab.getStateParams = getStateParams;
     tab.order = 25;
     tab.results = {
       url: RouteHelpers.basepath('network/group/search/search.tab.html'),
@@ -52,10 +53,14 @@
 
     //////////
 
-    function onSelect($item, shouldOpenInNewTab, openSelected) {
-      openSelected('app.network.group.view', {
-          id: $item.id,
-        }, shouldOpenInNewTab);
+    function getState() {
+      return 'app.network.group.view';
+    }
+
+    function getStateParams($item) {
+      return {
+        id: $item.id,
+      };
     }
 
 

@@ -42,7 +42,8 @@
     tab.lang = 'server';
     tab.order = 10;
     tab.filter = filter;
-    tab.select = onSelect;
+    tab.getState = getState;
+    tab.getStateParams = getStateParams;
     tab.results = {
       url: RouteHelpers.basepath('hardware/server/search/search.tab.html'),
     };
@@ -52,10 +53,14 @@
 
     //////////
 
-    function onSelect($item, shouldOpenInNewTab, openSelected) {
-      openSelected('app.hardware.server.view.manage', {
-          id: $item.id,
-        }, shouldOpenInNewTab);
+    function getState() {
+      return 'app.hardware.server.view.manage';
+    }
+
+    function getStateParams($item) {
+      return {
+        id: $item.id,
+      };
     }
 
 

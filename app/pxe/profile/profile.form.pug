@@ -1,132 +1,147 @@
 doctype html
 include /resources/angle/pug/mixins/form
 
-+field("{{ 'pxe.profile.form.name.LABEL' | translate }}", "name")(
-  placeholder="{{ 'pxe.profile.form.name.PLACEHOLDER' | translate }}"
-  ng-model="profileForm.input.name"
-)
-
-+field("{{ 'pxe.profile.form.billing_id.LABEL' | translate }}", "billing_id")(
-  placeholder="{{ 'pxe.profile.form.billing_id.PLACEHOLDER' | translate }}"
-  ng-model="profileForm.input.billing_id"
-)
-
-+label("{{ 'pxe.profile.form.preseed.LABEL' | translate }}")
-  +input-with-btn("fa fa-times-circle")(ng-click="profileForm.input.preseed = null")
-    +ui-select("profileForm.preseeds")(ng-model="profileForm.input.preseed")
-      ui-select-match(placeholder="{{ 'pxe.profile.form.preseed.PLACEHOLDER' | translate }}")
-        | {{ $select.selected.name }}
-
-      +ui-select-choices("profileForm.preseeds")
-        span(ng-bind-html="choice.name | highlight: $select.search")
-
-+label("{{ 'pxe.profile.form.boot.LABEL' | translate }}")
-  +ui-select("profileForm.bootScripts")(ng-model="profileForm.input.boot_script")
-    ui-select-match(placeholder="{{ 'pxe.profile.form.boot.PLACEHOLDER' | translate }}")
-      | {{ $select.selected.name }}
-
-    +ui-select-choices("profileForm.bootScripts")
-      span(ng-bind-html="choice.name | highlight: $select.search")
-
-+label("{{ 'pxe.profile.form.email.LABEL' | translate }}")
-  +input-with-btn("fa fa-times-circle")(ng-click="profileForm.emailTemplate.clear()")
-    +ui-select("profileForm.emailTemplate")
-      ui-select-match(placeholder="{{ 'pxe.profile.form.email.PLACEHOLDER' | translate }}")
-        | {{ $select.selected.name }}
-
-      +ui-select-choices("profileForm.emailTemplate")
-        span(ng-bind-html="choice.name | highlight: $select.search")
-
-+select("pxe.profile.form.platform.LABEL")(
-    ng-model="profileForm.platform"
-  )
-  option(
-    value="linux"
-    translate="pxe.profile.form.platform.linux"
-  )
-  option(
-    value="windows"
-    translate="pxe.profile.form.platform.windows"
+.panel-body.form-horizontal
+  +field("{{ 'pxe.profile.form.name.LABEL' | translate }}", "name")(
+    placeholder="{{ 'pxe.profile.form.name.PLACEHOLDER' | translate }}"
+    ng-model="profileForm.input.name"
   )
 
+  +field("{{ 'pxe.profile.form.billing_id.LABEL' | translate }}", "billing_id")(
+    placeholder="{{ 'pxe.profile.form.billing_id.PLACEHOLDER' | translate }}"
+    ng-model="profileForm.input.billing_id"
+  )
 
-div(ng-if="profileForm.platform == 'linux'")
-  +label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
-    +ui-select("profileForm.shellScripts")(multiple, sortable="true")
-      ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
-        | {{ $item.name }}
-
-      ui-select-choices(
-        repeat=
-          "choice in (" +
-            "profileForm.shellScripts.items" +
-            "| filter: {name: $select.search}" +
-            "| filter: profileForm.shellScripts.notSelected" +
-          ") track by choice.id"
-        refresh="profileForm.shellScripts.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="choice.name | highlight: $select.search")
-        br
-        small(ng-bind-html="choice.description | highlight: $select.search")
-
-div(ng-if="profileForm.platform == 'windows'")
-  +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
-    +input-with-btn("fa fa-times-circle")(
-      ng-click="profileForm.input.iso = null"
-    )
-      +ui-select("profileForm.isos")(ng-model="profileForm.input.iso")
-        ui-select-match(placeholder="{{ 'pxe.profile.form.iso.PLACEHOLDER' | translate }}")
+  +label("{{ 'pxe.profile.form.preseed.LABEL' | translate }}")
+    +input-with-btn("fa fa-times-circle")(ng-click="profileForm.input.preseed = null")
+      +ui-select("profileForm.preseeds")(ng-model="profileForm.input.preseed")
+        ui-select-match(placeholder="{{ 'pxe.profile.form.preseed.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
 
-        +ui-select-choices("profileForm.isos")
+        +ui-select-choices("profileForm.preseeds")
           span(ng-bind-html="choice.name | highlight: $select.search")
 
-  +label("{{ 'pxe.profile.form.iso.edition.LABEL' | translate }}")
-    +input-with-btn("fa fa-times-circle")(
-      ng-click="profileForm.isos.selectedEdition = null"
-    )
-      +ui-select()(
-        ng-model="profileForm.isos.selectedEdition"
-        ng-disabled="!profileForm.input.iso"
-      )
-        ui-select-match(placeholder="{{ 'pxe.profile.form.iso.edition.PLACEHOLDER' | translate }}")
+  +label("{{ 'pxe.profile.form.boot.LABEL' | translate }}")
+    +ui-select("profileForm.bootScripts")(ng-model="profileForm.input.boot_script")
+      ui-select-match(placeholder="{{ 'pxe.profile.form.boot.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      +ui-select-choices("profileForm.bootScripts")
+        span(ng-bind-html="choice.name | highlight: $select.search")
+
+  +label("{{ 'pxe.profile.form.email.LABEL' | translate }}")
+    +input-with-btn("fa fa-times-circle")(ng-click="profileForm.emailTemplate.clear()")
+      +ui-select("profileForm.emailTemplate")
+        ui-select-match(placeholder="{{ 'pxe.profile.form.email.PLACEHOLDER' | translate }}")
           | {{ $select.selected.name }}
+
+        +ui-select-choices("profileForm.emailTemplate")
+          span(ng-bind-html="choice.name | highlight: $select.search")
+
+  +select("pxe.profile.form.platform.LABEL")(
+      ng-model="profileForm.platform"
+    )
+    option(
+      value="linux"
+      translate="pxe.profile.form.platform.linux"
+    )
+    option(
+      value="windows"
+      translate="pxe.profile.form.platform.windows"
+    )
+
+
+  div(ng-if="profileForm.platform == 'linux'")
+    +label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
+      +ui-select("profileForm.shellScripts")(multiple, sortable="true")
+        ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
+          | {{ $item.name }}
 
         ui-select-choices(
           repeat=
             "choice in (" +
-              "profileForm.isos.editions.items" +
-              "| multiFilter: $select.search" +
+              "profileForm.shellScripts.items" +
+              "| filter: {name: $select.search}" +
+              "| filter: profileForm.shellScripts.notSelected" +
             ") track by choice.id"
-          refresh="profileForm.isos.editions.load($select.search)"
+          refresh="profileForm.shellScripts.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice.name | highlight: $select.search")
+          br
+          small(ng-bind-html="choice.description | highlight: $select.search")
+
+  div(ng-if="profileForm.platform == 'windows'")
+    +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
+      +input-with-btn("fa fa-times-circle")(
+        ng-click="profileForm.input.iso = null"
+      )
+        +ui-select("profileForm.isos")(ng-model="profileForm.input.iso")
+          ui-select-match(placeholder="{{ 'pxe.profile.form.iso.PLACEHOLDER' | translate }}")
+            | {{ $select.selected.name }}
+
+          +ui-select-choices("profileForm.isos")
+            span(ng-bind-html="choice.name | highlight: $select.search")
+
+    +label("{{ 'pxe.profile.form.iso.edition.LABEL' | translate }}")
+      +input-with-btn("fa fa-times-circle")(
+        ng-click="profileForm.isos.selectedEdition = null"
+      )
+        +ui-select()(
+          ng-model="profileForm.isos.selectedEdition"
+          ng-disabled="!profileForm.input.iso"
+        )
+          ui-select-match(placeholder="{{ 'pxe.profile.form.iso.edition.PLACEHOLDER' | translate }}")
+            | {{ $select.selected.name }}
+
+          ui-select-choices(
+            repeat=
+              "choice in (" +
+                "profileForm.isos.editions.items" +
+                "| multiFilter: $select.search" +
+              ") track by choice.id"
+            refresh="profileForm.isos.editions.load($select.search)"
+            refresh-delay="400"
+          )
+            span(ng-bind-html="choice.name | highlight: $select.search")
+
+    +label("{{ 'pxe.profile.form.driver.LABEL' | translate }}")
+      +ui-select("profileForm.drivers")(
+        multiple 
+        sortable="true"
+        ng-disabled="!profileForm.input.iso"
+      )
+        ui-select-match(placeholder="{{ 'pxe.profile.form.driver.PLACEHOLDER' | translate }}")
+          | {{ $item.name }}
+
+        ui-select-choices(
+          repeat=
+            "choice in (" +
+              "profileForm.drivers.items" +
+              "| multiFilter: $select.search" +
+              "| filter: profileForm.drivers.notSelected" +
+            ") track by choice.id"
+          refresh="profileForm.drivers.load($select.search)"
           refresh-delay="400"
         )
           span(ng-bind-html="choice.name | highlight: $select.search")
 
-  +label("{{ 'pxe.profile.form.driver.LABEL' | translate }}")
-    +ui-select("profileForm.drivers")(
-      multiple 
-      sortable="true"
-      ng-disabled="!profileForm.input.iso"
+  +label()
+    +checkbox()(
+      ng-model="profileForm.input.access_client"
     )
-      ui-select-match(placeholder="{{ 'pxe.profile.form.driver.PLACEHOLDER' | translate }}")
-        | {{ $item.name }}
-
-      ui-select-choices(
-        repeat=
-          "choice in (" +
-            "profileForm.drivers.items" +
-            "| multiFilter: $select.search" +
-            "| filter: profileForm.drivers.notSelected" +
-          ") track by choice.id"
-        refresh="profileForm.drivers.load($select.search)"
-        refresh-delay="400"
-      )
-        span(ng-bind-html="choice.name | highlight: $select.search")
-
-+label()
-  +checkbox()(
-    ng-model="profileForm.input.access_client"
-  )
-    span(translate="pxe.profile.form.client_access.LABEL")
+      span(translate="pxe.profile.form.client_access.LABEL")
+.panel-footer.clearfix(
+  ng-if="!profileForm.form.isEditing"
+)
+  .pull-right
+    input.btn.btn-info(
+      type="submit"
+      translate-attr="{ value: 'pxe.profile.form.title.ADD' }"
+      ng-hide="profileForm.profilesToDuplicate.length"
+    )
+    input.btn.btn-info(
+      type="submit"
+      translate-attr="{ value: 'pxe.profile.form.title.SUBMIT_DUPLICATE' }"
+      ng-show="profileForm.profilesToDuplicate.length"
+    )

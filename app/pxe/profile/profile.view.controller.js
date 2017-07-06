@@ -15,6 +15,7 @@
     var vm = this;
 
     vm.edit = Edit('pxe/profile/'+$stateParams.id);
+    vm.edit.isEditing = true;
     vm.edit.input = {};
     vm.edit.submit = submit;
     vm.logs = {

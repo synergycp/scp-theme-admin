@@ -146,6 +146,7 @@
     "form": {
       "title": {
         "ADD": "Create OS Reload Profile",
+        "SUBMIT_DUPLICATE": "Create and add next",
         "EDIT": "Edit {{ name }}"
       },
       "name": {

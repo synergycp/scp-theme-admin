@@ -12,15 +12,12 @@
    */
   function SwitchSpeedListFactory ($uibModal, List, ListConfirm) {
     return function () {
-      var list = List('port-speed')
-        .setPaginationAndSortToUrl();
+      var list = List('port-speed');
       list.confirm = ListConfirm(list, 'speed.modal.delete');
 
       var doDelete = list.delete;
       list.delete = proxyDelete;
       list.bulk.add('Delete', list.confirm.delete);
-
-      list.destroy = destroy;
 
       return list;
 
@@ -53,10 +50,6 @@
             merge_id: speed.id,
           });
         });
-      }
-
-      function destroy() {
-        list.clearPaginationAndSortFromUrl();
       }
     };
   }

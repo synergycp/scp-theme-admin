@@ -19,7 +19,7 @@ block list
     list-footer
 
 block bottom-left
-  +create-form("{{ 'pxe.profile.form.title.ADD' | translate }}", 'profile-edit-form')
+  +create-form-custom-content("{{ 'pxe.profile.form.title.ADD' | translate }}", 'profile-edit-form')
     profile-form(form="vm.create")
 
 block bottom-right

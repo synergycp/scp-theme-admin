@@ -41,7 +41,8 @@
     tab.filter = filter;
     tab.lang = 'client';
     tab.text = 'client.search.TITLE';
-    tab.select = onSelect;
+    tab.getState = getState;
+    tab.getStateParams = getStateParams;
     tab.order = 5;
     tab.results = {
       url: RouteHelpers.basepath('user/client/search/search.tab.html'),
@@ -52,10 +53,14 @@
 
     //////////
 
-    function onSelect($item, shouldOpenInNewTab, openSelected) {
-      openSelected('app.user.client.view', {
-          id: $item.id,
-        }, shouldOpenInNewTab);
+    function getState() {
+      return 'app.user.client.view';
+    }
+
+    function getStateParams($item) {
+      return {
+        id: $item.id,
+      };
     }
   }
 })();

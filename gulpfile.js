@@ -130,7 +130,7 @@ gulp.task('scripts:app', function () {
   return gulp.src(source.scripts)
     .pipe($.jsvalidate())
     .on('error', handleError)
-    .pipe($.if(useSourceMaps, $.sourcemaps.init()))
+    .pipe($.if(useSourceMaps, $.sourcemaps.init({loadMaps: true})))
     .pipe($.concat('app.js'))
     .pipe($.ngAnnotate())
     .on('error', handleError)
@@ -138,7 +138,7 @@ gulp.task('scripts:app', function () {
       preserveComments: 'some'
     })))
     .on('error', handleError)
-    .pipe($.if(useSourceMaps, $.sourcemaps.write()))
+    .pipe($.if(useSourceMaps, $.sourcemaps.write('./')))
     .pipe(gulp.dest(build.scripts))
     .pipe(reload({
       stream: true
@@ -161,8 +161,10 @@ gulp.task('vendor:base', function () {
     .src(vendor.base.source, { follow: true })
     .pipe($.expectFile(vendor.base.source))
     .pipe(jsFilter)
+    .pipe($.if(useSourceMaps, $.sourcemaps.init({loadMaps: true,  largeFile: true})))
     .pipe($.concat(vendor.base.js))
     //TODO (breaks) .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
+    .pipe($.if(useSourceMaps, $.sourcemaps.write('./')))
     .pipe(gulp.dest(build.scripts))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
@@ -300,9 +302,9 @@ gulp.task('assets:raw', function () {
 gulp.task('watch', function () {
   log('Watching source files..');
 
-  gulp.watch(source.scripts, ['scripts:app']);
-  gulp.watch(source.templates.views, ['templates:views']);
-  gulp.watch(source.assets, ['assets:raw']);
+  gulp.watch(source.scripts, { interval: 500 }, ['scripts:app']);
+  gulp.watch(source.templates.views, { interval: 500 }, ['templates:views']);
+  gulp.watch(source.assets, { interval: 500 }, ['assets:raw']);
 
 });
 
@@ -359,6 +361,7 @@ gulp.task('prod', function () {
 
 // Server for development
 gulp.task('serve', gulpsync.sync([
+  'usesources',
   'default',
   'create-versions',
   'browsersync']), done);

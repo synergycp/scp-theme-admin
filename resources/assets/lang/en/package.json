@@ -1,0 +1,12 @@
+{
+  "list": {
+    "TITLE": "Packages",
+    "heading": {
+      "NAME": "Name",
+      "RESERVED": "Reserved",
+      "ENTITIES": "IP Entities",
+      "SERVERS": "Servers",
+      "ACTIONS": "Actions"
+    }
+  }
+}

@@ -14,7 +14,7 @@
   function ClientListFactory (List, ListConfirm) {
     return function () {
       var list = List('client')
-        .setSortPaginationUrlParams(true);
+        .setPaginationAndSortToUrl(true);
 
       list.confirm = ListConfirm(list, 'client.modal.delete');
       list.bulk.add('Delete', list.confirm.delete);
@@ -24,7 +24,7 @@
       return list;
 
       function destroy() {
-        list.clearSortPaginationUrlParams();
+        list.clearPaginationAndSortFromUrl();
       }
     };
   }

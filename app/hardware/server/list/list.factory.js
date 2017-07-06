@@ -24,7 +24,7 @@
           switch: $stateParams.switch,
           client: $stateParams.client,
         })
-        .setSortPaginationUrlParams(true);
+        .setPaginationAndSortToUrl(true);
       var confirm = ListConfirm(list, 'server.modal.delete');
 
       list.bulk.add('Assign Client', handler(ServerAssign.client));
@@ -59,7 +59,7 @@
       }
 
       function destroy() {
-        list.clearSortPaginationUrlParams();
+        list.clearPaginationAndSortFromUrl();
       }
     };
   }

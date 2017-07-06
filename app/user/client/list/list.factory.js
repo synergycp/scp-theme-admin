@@ -13,19 +13,12 @@
    */
   function ClientListFactory (List, ListConfirm) {
     return function () {
-      var list = List('client')
-        .setPaginationAndSortToUrl(true);
+      var list = List('client');
 
       list.confirm = ListConfirm(list, 'client.modal.delete');
       list.bulk.add('Delete', list.confirm.delete);
 
-      list.destroy = destroy;
-
       return list;
-
-      function destroy() {
-        list.clearPaginationAndSortFromUrl();
-      }
     };
   }
 })();

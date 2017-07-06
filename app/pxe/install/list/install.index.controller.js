@@ -14,7 +14,9 @@
   function InstallIndexCtrl(OsReloadList, OsReloadModals, $scope, EventEmitter, Todo) {
     var vm = this;
 
-    vm.list = OsReloadList().limitScope($scope);
+    vm.list = OsReloadList()
+      .limitScope($scope)
+      .setPaginationAndSortToUrl();
     vm.list.onDelete = onDelete;
     vm.list.queueInstall = queueInstall;
     vm.list.reloadServer = reloadServer;
@@ -30,6 +32,7 @@
     //////////
 
     function activate() {
+      $scope.$on('$destroy', onDestroy);
     }
 
     function onDelete(install) {
@@ -45,6 +48,10 @@
     function reloadServer(server) {
       vm.create.fire('reload_server', server);
       vm.list.scrollToAnchor('pxe-install-form');
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

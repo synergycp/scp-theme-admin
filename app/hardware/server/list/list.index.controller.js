@@ -14,7 +14,8 @@
   function ServerIndexCtrl(ServerList, ListFilter, EventEmitter, Todo, $scope) {
     var vm = this;
 
-    vm.list = ServerList();
+    vm.list = ServerList()
+      .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
     vm.create = {
       input: {},
@@ -35,7 +36,7 @@
     ////////////
 
     function activate() {
-      $scope.$on('$destroy', vm.list.destroy)
+      $scope.$on('$destroy', onDestroy)
     }
 
     function create() {
@@ -44,6 +45,10 @@
         .then(vm.create.fire.bind(null, 'created'))
         .then(Todo.refresh)
       ;
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

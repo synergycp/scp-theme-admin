@@ -12,7 +12,8 @@
   function ClientIndexCtrl(ClientList, ListFilter, $scope) {
     var vm = this;
 
-    vm.list = ClientList();
+    vm.list = ClientList()
+      .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -31,11 +32,15 @@
     ////////////
 
     function activate() {
-      $scope.$on('$destroy', vm.list.destroy)
+      $scope.$on('$destroy', onDestroy);
     }
 
     function create() {
       vm.list.create(vm.create.getData());
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

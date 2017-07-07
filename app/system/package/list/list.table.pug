@@ -1,0 +1,33 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.sortable
+    span(translate="package.list.heading.PACKAGE_NAME")
+    sort(col="package_name")
+  th.sortable
+    span(translate="package.list.heading.ENABLED")
+    sort(col="enabled")
+  th
+    span(translate="package.list.heading.VERSION")
+  th(
+    translate="package.list.heading.ACTIONS"
+  )
+
+block columns
+  td(ng-bind="row.name")
+  td
+    span.fa.fa-check.text-success(ng-if="row.enabled")
+  td
+    span(ng-bind="row.version")
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ng-if="!row.enabled"
+        translate="package.list.actions.ENABLE"
+        ng-click="table.toggleEnabled()"
+      )
+      a.btn.btn-default(
+        ng-if="row.enabled"
+        translate="package.list.actions.DISABLE"
+        ng-click="table.toggleEnabled()"
+      )

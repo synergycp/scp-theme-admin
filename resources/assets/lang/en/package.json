@@ -2,11 +2,27 @@
   "list": {
     "TITLE": "Packages",
     "heading": {
-      "NAME": "Name",
-      "RESERVED": "Reserved",
-      "ENTITIES": "IP Entities",
-      "SERVERS": "Servers",
+      "PACKAGE_NAME": "Name",
+      "ENABLED": "Enabled",
+      "VERSION": "Version",
       "ACTIONS": "Actions"
+    },
+    "actions": {
+      "ENABLE": "Enable",
+      "DISABLE": "Disable"
+    }
+  },
+  "form": {
+    "title": {
+      "ADD": "Create Package"
+    },
+    "name": {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Must be unique"
+    },
+    "driver": {
+      "LABEL": "Package",
+      "HELP": "Can be .zip, .tar.gz, etc."
     }
   }
 }

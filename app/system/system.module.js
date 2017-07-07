@@ -10,5 +10,6 @@
       'app.system.integration',
       'app.system.setting',
       'app.system.log',
+      'app.system.package',
     ]);
 })();

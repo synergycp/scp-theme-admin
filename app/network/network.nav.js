@@ -27,11 +27,6 @@
     sref: "app.network.switch.speed.list",
   };
 
-  var PACKAGES = {
-    text: "Packages",
-    sref: "app.network.package.list",
-  };
-
   /**
    * @ngInject
    */
@@ -70,7 +65,6 @@
         group.item(SWITCHES);
         group.item(SPEEDS);
       }
-      group.item(PACKAGES);
     }
 
     function hide() {
@@ -78,7 +72,6 @@
       group.remove(ENTITIES);
       group.remove(SWITCHES);
       group.remove(SPEEDS);
-      group.remove(PACKAGES);
     }
   }
 })();

@@ -21,6 +21,11 @@
     sref: "app.system.email.list",
   };
 
+  var PACKAGES = {
+    text: "Package Manager",
+    sref: "app.system.package.list",
+  };
+
   angular
     .module('app.system')
     .run(SystemNavConfig)
@@ -61,6 +66,9 @@
       if (map.system.emails.read) {
         group.item(EMAILS);
       }
+      if (true || map.system.package.read) {
+        group.item(PACKAGES);
+      }
     }
 
     function hide() {
@@ -68,6 +76,7 @@
       group.remove(SETTINGS);
       group.remove(INTEGRATIONS);
       group.remove(EMAILS);
+      group.remove(PACKAGES);
     }
   }
 })();

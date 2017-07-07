@@ -5,6 +5,5 @@
     .module('app.network', [
       'app.network.entity',
       'app.network.group',
-      'app.network.package',
     ]);
 })();

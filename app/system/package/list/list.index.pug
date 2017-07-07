@@ -1,0 +1,17 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="package.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('package-edit-form')")
+        i.fa.fa-plus
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+    block table  
+      package-table.border-top-table.scrollable-block
+    list-footer
+
+block bottom-left
+  +create-form("{{ 'package.form.title.ADD' | translate }}", 'package-edit-form')
+    package-form(form="vm.create")

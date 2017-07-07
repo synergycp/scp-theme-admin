@@ -16,7 +16,7 @@
     vm.filters = ListFilter(vm.list);
     vm.filters.current.q = $state.params.q;
     vm.filters.on('change', function () {
-      $state.go($state.current.name, vm.filters.current);
+      $state.go($state.current.name, vm.filters.current, {location: 'replace'});
     });
 
     activate();

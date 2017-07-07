@@ -48,7 +48,7 @@
       $state.go($state.current.name, {
         // 'email': filters.current.email,
         'q': filters.current.q,
-      });
+      }, {location: 'replace'});
 
       if (filters.change) {
         filters.change();

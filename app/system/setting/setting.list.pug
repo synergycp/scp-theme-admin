@@ -38,21 +38,28 @@ script(
       translate="{{ item.fullLang }}.PLACEHOLDER"
     )
 
-.row.form-horizontal
-  .col-md-6
-    div(
-      ng-repeat="(index, item) in tab.items"
-    )
+form(name="tab.form", ng-submit="tab.patchChanges()")
+  .row.form-horizontal
+    .col-md-6
       div(
-        ng-if="index % 2 == 0"
-        ng-include="'app.system.setting.list.item'"
+        ng-repeat="(index, item) in tab.items"
       )
-  .col-md-6
-    div(
-      ng-repeat="(index, item) in tab.items"
-    )
+        div(
+          ng-if="index % 2 == 0"
+          ng-include="'app.system.setting.list.item'"
+        )
+    .col-md-6
       div(
-        ng-if="index % 2"
-        ng-include="'app.system.setting.list.item'"
+        ng-repeat="(index, item) in tab.items"
+      )
+        div(
+          ng-if="index % 2"
+          ng-include="'app.system.setting.list.item'"
+        )
+  .panel-footer(style="margin: 0 -20px -10px")
+    .text-center
+      button.btn.btn-primary(
+        type="submit"
+        data-translate="system.setting.list.SUBMIT"
       )
 

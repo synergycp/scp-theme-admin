@@ -53,6 +53,14 @@
   "setting": {
     "list": {
       "SUBMIT": "Save Changes"
+    },
+    "http": {
+      "TITLE": "HTTP",
+      "SSL": {
+        "TITLE": "SSL",
+        "ALLOW-NON": "Allow non-SSL",
+        "REQUIRE": "Require SSL"
+      }
     }
   },
   "integration": {

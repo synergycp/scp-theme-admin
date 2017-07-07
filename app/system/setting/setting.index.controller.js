@@ -30,7 +30,6 @@
       items: [],
       change: changeTab,
     };
-    vm.submit = onSubmit;
 
     vm.logs = {
       filter: {
@@ -38,18 +37,21 @@
       },
     };
 
+    EventEmitter().bindTo(vm);
+
     setTimeout(activate, 1);
 
     //////////
 
     function activate() {
+      vm.tabs.items.push(new HttpTab());
       $q.all([
         loadSettingsTabs(),
       ]).then(setActive);
     }
 
     function setActive() {
-      vm.tabs.items[vm.tabs.active].active = true;
+      (vm.tabs.items[vm.tabs.active] || {}).active = true;
     }
 
     function changeTab(active) {
@@ -63,7 +65,7 @@
         .then(function (groups) {
           setPkg(groups);
           SettingLang.load(groups);
-          _.each(groups.reverse(), addSettingTab);
+          _.each(groups, addSettingTab);
         });
     }
 
@@ -80,41 +82,18 @@
     }
 
     function addSettingTab(group) {
-      vm.tabs.items.unshift(
+      vm.tabs.items.push(
         new SettingsTab(group.name, group.settings, group.parent)
       );
     }
 
-    function onSubmit() {
-      var promises = _(vm.tabs.items)
-        .invokeMap('patchChanges')
-        .filter()
-        .flatten()
-        .value();
+    function handleError(error) {
+      Alert.danger('An unknown error has occurred.');
 
-      return vm.loader.during(
-        $q.all(promises)
-          .catch(handleError)
-          .branch()
-            .then(getChangedItems)
-            .then(fireChangeEvent)
-            .then(showSuccess)
-            .catch(showWarning)
-          .unbranch()
-      );
-
-      function handleError(error) {
-        Alert.danger('An unknown error has occurred.');
-
-        throw error;
-      }
+      throw error;
     }
 
-    function getChangedItems(tabs) {
-      var items = _(tabs)
-        .flatten()
-        .value();
-
+    function getChangedItems(items) {
       if (!items.length) {
         return $q.reject('No changes found');
       }
@@ -150,28 +129,35 @@
       tab.text = trans;
       tab.items = items;
       tab.patchChanges = patchChanges;
+      tab.getFormElems = getFormElems;
       tab.active = false;
       tab.visible = true;
+      tab.form = {};
       tab.body = 'app/system/setting/setting.list.html';
 
       if (parent) {
-        $timeout(function() {
-          var elem = getFormElems(parent.id)[0];
-          elem.$viewChangeListeners.push(setVisibility);
-          setVisibility();
-
-          function setVisibility() {
-            tab.visible = elem.$viewValue === parent.value;
-          }
+        // If this tab has a parent, it is only shown when the parent setting value matches the selected one
+        vm.on('change-'+parent.id, function (setting) {
+          tab.visible = setting.value === parent.value;
         });
       }
 
       function patchChanges() {
-        return $q.all(
-          _(tab.items)
-            .map(patch)
-            .filter()
-            .value()
+        return vm.loader.during(
+          $q
+            .all(
+              _(tab.items)
+                .map(patch)
+                .filter()
+                .value()
+            )
+            .catch(handleError)
+            .branch()
+              .then(getChangedItems)
+              .then(fireChangeEvent)
+              .then(showSuccess)
+              .catch(showWarning)
+            .unbranch()
         );
 
         function patch(item) {
@@ -199,8 +185,86 @@
 
       function getFormElems(id) {
         return [
-          $scope.form[id + '.value'],
+          tab.form[id + '.value'],
         ];
+      }
+    }
+
+    function HttpTab() {
+      var tab = this;
+      var $api = Api.one('http/ssl');
+
+      tab.trans = 'system.setting.http.TITLE';
+      tab.active = false;
+      tab.visible = true;
+      tab.body = 'app/system/setting/setting.http.html';
+      tab.ssl = {
+        loader: Loader(),
+        input: {
+          // TODO auto fill user email
+          email: '',
+        },
+        enabled: false,
+        required: false,
+        refresh: refreshSsl,
+        disable: disableSsl,
+        enable: enableSsl,
+        patch: patchSsl,
+      };
+      tab.patchChanges = patchChanges;
+
+      activate();
+
+      //////////////
+
+      function activate() {
+        tab.ssl.refresh();
+      }
+
+      function patchChanges() {
+      }
+
+      function patchSsl(data) {
+        return tab.ssl.loader.during(
+          $api
+            .patch(data)
+            .then(storeSslStatus)
+        );
+      }
+
+      function disableSsl() {
+        return tab.ssl.loader.during(
+          $api
+            .remove()
+            .then(function () {
+              tab.ssl.enabled = false;
+              tab.ssl.required = false;
+            })
+        );
+      }
+
+      function enableSsl() {
+        return tab.ssl.loader.during(
+          Api
+            .all('http/ssl')
+            .post({
+              email: tab.ssl.input.email,
+            })
+            .then(storeSslStatus)
+        );
+      }
+
+      function refreshSsl() {
+        return tab.ssl.loader.during(
+          $api
+            .get()
+            .then(storeSslStatus)
+        );
+      }
+
+      function storeSslStatus(response) {
+        tab.ssl.enabled = response.enabled;
+        tab.ssl.required = response.required;
       }
     }
   }

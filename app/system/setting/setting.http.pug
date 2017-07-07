@@ -1,0 +1,48 @@
+include /resources/angle/pug/mixins/panel
+
+.row
+  .col-md-4
+    +panel("system.setting.http.SSL.TITLE")(
+      ng-class="tab.ssl.loader.class"
+    )
+      .loader
+      .panel-body
+        .text-center(ng-if="!tab.ssl.enabled")
+          p
+            | SynergyCP uses&nbsp;
+            a(
+              href="https://letsencrypt.org"
+              target="_blank"
+            )
+              | Let's Encrypt
+            |  for free and automatic SSL certificate generation and renewal so you can set it once and forget it. We just need an email to register your Let's Encrypt account:
+          p
+            input.form-control(
+              placeholder="Email Address"
+              type="email"
+              ng-model="tab.ssl.input.email"
+            )
+          p
+            a.btn.btn-primary.btn-lg(
+              ng-click="tab.ssl.enable()"
+            )
+              | Sign me up!
+        .text-center(ng-if="tab.ssl.enabled")
+          p Your site is secured using a free&nbsp;
+            a(
+              href="https://letsencrypt.org"
+              target="_blank"
+            )
+              | Let's Encrypt
+            |  SSL certificate.
+          p
+            a.btn.btn-danger.btn-lg(
+              ng-click="tab.ssl.disable()"
+            )
+              | Disable SSL
+            | &nbsp; &nbsp;
+            a.btn.btn-lg(
+              ng-click="tab.ssl.patch({required: !tab.ssl.required})"
+              ng-class="tab.ssl.required ? 'btn-primary' : 'btn-success'"
+              data-translate="system.setting.http.SSL.{{ tab.ssl.required ? 'ALLOW-NON' : 'REQUIRE' }}"
+            )

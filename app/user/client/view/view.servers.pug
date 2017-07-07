@@ -1,0 +1,21 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="servers.list")
+    list-header(text="server.list.TITLE")
+      a.btn.btn-default(ng-click="servers.list.refresh.now()")
+        i.fa.fa-refresh
+      a.btn.btn-default(ng-click="servers.filters.visible = !servers.filters.visible")
+        i.fa.fa-filter    
+    server-filters(
+      show="servers.filters.visible"
+      current="servers.filters.current"
+      change="servers.filters.change()"
+      show-client="false"
+    )
+    block table
+      server-table.border-top-table.scrollable-block(
+        show-client="false"
+      )
+    list-footer

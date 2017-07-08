@@ -30,6 +30,7 @@
       items: [],
       change: changeTab,
     };
+    vm.refresh = refresh;
 
     vm.logs = {
       filter: {
@@ -48,6 +49,27 @@
       $q.all([
         loadSettingsTabs(),
       ]).then(setActive);
+    }
+
+    function refresh() {
+      return $groups
+        .getList()
+        .then(function (groups) {
+          _.each(groups, refreshSettingTab)
+        })
+      ;
+
+      function refreshSettingTab(group) {
+        var items = _.find(vm.tabs.items, {
+          id: group.id,
+        }).items;
+
+        _.each(group.settings, function (setting) {
+          _.find(items, {
+            id: setting.id,
+          }).value = setting.value;
+        });
+      }
     }
 
     function setActive() {
@@ -83,7 +105,7 @@
 
     function addSettingTab(group) {
       vm.tabs.items.push(
-        new SettingsTab(group.name, group.settings, group.parent)
+        new SettingsTab(group.id, group.name, group.settings, group.parent)
       );
     }
 
@@ -123,9 +145,10 @@
       return [];
     }
 
-    function SettingsTab(trans, items, parent) {
+    function SettingsTab(id, trans, items, parent) {
       var tab = this;
 
+      tab.id = id;
       tab.text = trans;
       tab.items = items;
       tab.patchChanges = patchChanges;
@@ -229,6 +252,7 @@
           $api
             .patch(data)
             .then(storeSslStatus)
+            .then(vm.refresh)
         );
       }
 
@@ -240,6 +264,7 @@
               tab.ssl.enabled = false;
               tab.ssl.required = false;
             })
+            .then(vm.refresh)
         );
       }
 
@@ -251,6 +276,7 @@
               email: tab.ssl.input.email,
             })
             .then(storeSslStatus)
+            .then(vm.refresh)
         );
       }
 

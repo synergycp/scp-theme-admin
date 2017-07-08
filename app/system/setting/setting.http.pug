@@ -7,7 +7,10 @@ include /resources/angle/pug/mixins/panel
     )
       .loader
       .panel-body
-        .text-center(ng-if="!tab.ssl.enabled")
+        form.text-center(
+          ng-if="!tab.ssl.enabled"
+          ng-submit="tab.ssl.enable()"
+        )
           p
             | SynergyCP uses&nbsp;
             a(
@@ -23,9 +26,7 @@ include /resources/angle/pug/mixins/panel
               ng-model="tab.ssl.input.email"
             )
           p
-            a.btn.btn-primary.btn-lg(
-              ng-click="tab.ssl.enable()"
-            )
+            button.btn.btn-primary.btn-lg(type="submit")
               | Sign me up!
         .text-center(ng-if="tab.ssl.enabled")
           p Your site is secured using a free&nbsp;

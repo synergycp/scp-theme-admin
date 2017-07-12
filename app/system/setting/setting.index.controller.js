@@ -87,7 +87,7 @@
         .then(function (groups) {
           setPkg(groups);
           SettingLang.load(groups);
-          _.each(groups, addSettingTab);
+          addSettingTabs(groups);
         });
     }
 
@@ -103,10 +103,25 @@
       })
     }
 
-    function addSettingTab(group) {
-      vm.tabs.items.push(
-        new SettingsTab(group.id, group.name, group.settings, group.parent)
-      );
+    function addSettingTabs(groups) {
+      var settingsObj = getAllSettingsObj(groups);
+      _.each(groups, addTab);
+
+      function addTab(group) {
+        vm.tabs.items.push(
+          new SettingsTab(group.id, group.name, group.settings, group.parent, 
+            group.parent && settingsObj[group.parent.id])
+        );
+      }
+
+      function getAllSettingsObj(groups) {
+        return _.reduce(groups, function(acc, group) {
+          _.each(group.settings, function(setting) {
+            acc[setting.id] = setting;
+          })
+          return acc;
+        }, {})
+      }
     }
 
     function handleError(error) {
@@ -145,7 +160,7 @@
       return [];
     }
 
-    function SettingsTab(id, trans, items, parent) {
+    function SettingsTab(id, trans, items, parent, parentActualSetting) {
       var tab = this;
 
       tab.id = id;
@@ -153,6 +168,7 @@
       tab.items = items;
       tab.patchChanges = patchChanges;
       tab.getFormElems = getFormElems;
+      tab.onFieldChanged = onFieldChanged;
       tab.active = false;
       tab.visible = true;
       tab.form = {};
@@ -160,6 +176,7 @@
 
       if (parent) {
         // If this tab has a parent, it is only shown when the parent setting value matches the selected one
+        tab.visible = parent.value == parentActualSetting.value;
         vm.on('change-'+parent.id, function (setting) {
           tab.visible = setting.value === parent.value;
         });
@@ -210,6 +227,10 @@
         return [
           tab.form[id + '.value'],
         ];
+      }
+
+      function onFieldChanged(item) {
+        vm.fire('change-'+item.id, item)
       }
     }
 

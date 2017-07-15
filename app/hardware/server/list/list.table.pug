@@ -31,10 +31,10 @@ block headings
   th.sortable(ng-if="table.showGroup")
     span(translate="server.heading.GROUP")
     sort(col="group")
-  th.sortable(ng-if="table.showUsage")
+  th.sortable(ng-if="table.showUsagePercent")
     span(translate="server.heading.usage.PERCENT")
     sort(col="usage.percent")
-  th.sortable(ng-if="table.showUsage")
+  th.sortable(ng-if="table.showUsageMax")
     span(translate="server.heading.usage.MAX")
     sort(col="usage.max")
   th Actions
@@ -87,12 +87,12 @@ block columns
     ng-if="table.showGroup"
     ng-bind="row.group.name || '-'"
   )
-  td(ng-if="table.showUsage")
+  td(ng-if="table.showUsagePercent")
     span(ng-if="row.usage")
       span(ng-bind="row.usage.percent")
       | %
     span.text-muted(ng-if="!row.usage") -
-  td(ng-if="table.showUsage")
+  td(ng-if="table.showUsageMax")
     span(ng-if="row.usage")
       span(ng-bind="row.usage.max | bitsToSize")
     span.text-muted(ng-if="!row.usage") -

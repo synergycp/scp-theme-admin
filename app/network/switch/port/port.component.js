@@ -19,7 +19,7 @@
   /**
    * @ngInject
    */
-  function SwitchPortListCtrl(List, ListFilter) {
+  function SwitchPortListCtrl(List, ListFilter, $scope) {
     var ports = this;
 
     ports.$onInit = init;
@@ -27,9 +27,16 @@
     //////////
 
     function init() {
-      ports.list = List('switch/'+ports.switch.id+'/port');
+      ports.list = List('switch/'+ports.switch.id+'/port')
+        .setPaginationAndSortToUrl();
       ports.list.load();
       ports.filters = ListFilter(ports.list);
+
+      $scope.$on('$destroy', onDestroy);
+    }
+
+    function onDestroy() {
+      ports.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

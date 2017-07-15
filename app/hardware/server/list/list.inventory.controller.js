@@ -11,12 +11,14 @@
    *
    * @ngInject
    */
-  function ServerInventoryCtrl(ServerList, ListFilter) {
+  function ServerInventoryCtrl(ServerList, ListFilter, $scope) {
     var vm = this;
 
-    vm.list = ServerList().filter({
-      inventory: 1,
-    });
+    vm.list = ServerList()
+      .filter({
+        inventory: 1,
+      })
+      .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
     vm.create = {
       input: {},
@@ -34,10 +36,15 @@
     ////////////
 
     function activate() {
+      $scope.$on('$destroy', onDestroy);
     }
 
     function create() {
       vm.list.create(vm.create.getData());
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

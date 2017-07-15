@@ -8,10 +8,11 @@
   /**
    * @ngInject
    */
-  function BootIndexCtrl(PxeBootList, ListFilter) {
+  function BootIndexCtrl(PxeBootList, ListFilter, $scope) {
     var vm = this;
 
-    vm.list = PxeBootList();
+    vm.list = PxeBootList()
+      .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -30,10 +31,15 @@
     ////////////
 
     function activate() {
+      $scope.$on('$destroy', onDestroy);
     }
 
     function create() {
       vm.list.create(vm.create.getData());
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

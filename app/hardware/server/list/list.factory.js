@@ -18,11 +18,12 @@
     $stateParams
   ) {
     return function () {
-      var list = List('server').filter({
-        group: $stateParams.group,
-        switch: $stateParams.switch,
-        client: $stateParams.client,
-      });
+      var list = List('server')
+        .filter({
+          group: $stateParams.group,
+          switch: $stateParams.switch,
+          client: $stateParams.client,
+        });
       var confirm = ListConfirm(list, 'server.modal.delete');
 
       list.bulk.add('Assign Client', handler(ServerAssign.client));

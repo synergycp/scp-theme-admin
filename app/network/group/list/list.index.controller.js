@@ -9,10 +9,11 @@
   /**
    * @ngInject
    */
-  function GroupIndexCtrl(GroupList, ListFilter, Todo) {
+  function GroupIndexCtrl(GroupList, ListFilter, Todo, $scope) {
     var vm = this;
 
-    vm.list = GroupList();
+    vm.list = GroupList()
+      .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -31,11 +32,16 @@
     ////////////
 
     function activate() {
+      $scope.$on('$destroy', onDestroy);
     }
 
     function create() {
       vm.list.create(vm.create.getData())
         .then(Todo.refresh);
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

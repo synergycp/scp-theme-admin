@@ -8,10 +8,11 @@
   /**
    * @ngInject
    */
-  function ProfileIndexCtrl(PxeProfileList, ListFilter, EventEmitter) {
+  function ProfileIndexCtrl(PxeProfileList, ListFilter, $scope, EventEmitter) {
     var vm = this;
 
-    vm.list = PxeProfileList();
+    vm.list = PxeProfileList()
+      .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -32,6 +33,7 @@
 
     function activate() {
       vm.list.on('duplicate_profiles', duplicateProfiles)
+      $scope.$on('$destroy', onDestroy);
     }
 
     function create() {
@@ -48,6 +50,10 @@
     function duplicateProfiles(profiles) {
         vm.create.fire('duplicate_profiles', profiles);
         vm.list.scrollToAnchor('profile-edit-form');
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

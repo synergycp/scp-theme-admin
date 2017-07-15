@@ -18,7 +18,7 @@
    *
    * @ngInject
    */
-  function SettingIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, Api, SettingLang, $timeout) {
+  function SettingIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, Api, SettingLang, SettingsTab, HttpTab, $timeout) {
     var vm = this;
     var $api = Api.all(API.SETTING);
     var $groups = Api.all(API.SETTING_GROUP);
@@ -31,6 +31,8 @@
       change: changeTab,
     };
     vm.refresh = refresh;
+    vm.patchSetting = patchSetting;
+    vm.onChangesPatch = onChangesPatch;
 
     vm.logs = {
       filter: {
@@ -45,7 +47,7 @@
     //////////
 
     function activate() {
-      vm.tabs.items.push(new HttpTab());
+      vm.tabs.items.push(new HttpTab(vm));
       $q.all([
         loadSettingsTabs(),
       ]).then(setActive);
@@ -87,7 +89,7 @@
         .then(function (groups) {
           setPkg(groups);
           SettingLang.load(groups);
-          _.each(groups, addSettingTab);
+          addSettingTabs(groups);
         });
     }
 
@@ -103,10 +105,46 @@
       })
     }
 
-    function addSettingTab(group) {
-      vm.tabs.items.push(
-        new SettingsTab(group.id, group.name, group.settings, group.parent)
+    function addSettingTabs(groups) {
+      var settingsObj = getAllSettingsObj(groups);
+      _.each(groups, addTab);
+
+      function addTab(group) {
+        vm.tabs.items.push(
+          new SettingsTab(vm, group.id, group.name, group.settings, group.parent, 
+            group.parent && settingsObj[group.parent.id])
+        );
+      }
+
+      function getAllSettingsObj(groups) {
+        return _.reduce(groups, function(acc, group) {
+          _.each(group.settings, function(setting) {
+            acc[setting.id] = setting;
+          })
+          return acc;
+        }, {})
+      }
+    }
+
+    function onChangesPatch(patchCalls) {
+      return vm.loader.during(
+        $q
+          .all(
+            patchCalls
+          )
+          .catch(handleError)
+          .branch()
+            .then(getChangedItems)
+            .then(fireChangeEvent)
+            .then(showSuccess)
+            .catch(showWarning)
+          .unbranch()
       );
+    }
+
+    function patchSetting(id, formData) {
+      return $api.one("" + id)
+        .patch(formData)
     }
 
     function handleError(error) {
@@ -143,155 +181,6 @@
       Alert.warning('No changes found');
 
       return [];
-    }
-
-    function SettingsTab(id, trans, items, parent) {
-      var tab = this;
-
-      tab.id = id;
-      tab.text = trans;
-      tab.items = items;
-      tab.patchChanges = patchChanges;
-      tab.getFormElems = getFormElems;
-      tab.active = false;
-      tab.visible = true;
-      tab.form = {};
-      tab.body = 'app/system/setting/setting.list.html';
-
-      if (parent) {
-        // If this tab has a parent, it is only shown when the parent setting value matches the selected one
-        vm.on('change-'+parent.id, function (setting) {
-          tab.visible = setting.value === parent.value;
-        });
-      }
-
-      function patchChanges() {
-        return vm.loader.during(
-          $q
-            .all(
-              _(tab.items)
-                .map(patch)
-                .filter()
-                .value()
-            )
-            .catch(handleError)
-            .branch()
-              .then(getChangedItems)
-              .then(fireChangeEvent)
-              .then(showSuccess)
-              .catch(showWarning)
-            .unbranch()
-        );
-
-        function patch(item) {
-          var formElems = getFormElems(item.id);
-
-          if (!_.some(formElems, '$dirty')) {
-            return;
-          }
-
-          var formData = {
-            value: item.value,
-          };
-
-          return $api.one("" + item.id)
-            .patch(formData)
-            .then(setFormToClean);
-
-          function setFormToClean(response) {
-            _.invokeMap(formElems, '$setPristine');
-
-            return response;
-          }
-        }
-      }
-
-      function getFormElems(id) {
-        return [
-          tab.form[id + '.value'],
-        ];
-      }
-    }
-
-    function HttpTab() {
-      var tab = this;
-      var $api = Api.one('http/ssl');
-
-      tab.trans = 'system.setting.http.TITLE';
-      tab.active = false;
-      tab.visible = true;
-      tab.body = 'app/system/setting/setting.http.html';
-      tab.ssl = {
-        loader: Loader(),
-        input: {
-          // TODO auto fill user email
-          email: '',
-        },
-        enabled: false,
-        required: false,
-        refresh: refreshSsl,
-        disable: disableSsl,
-        enable: enableSsl,
-        patch: patchSsl,
-      };
-      tab.patchChanges = patchChanges;
-
-      activate();
-
-      //////////////
-
-      function activate() {
-        tab.ssl.refresh();
-      }
-
-      function patchChanges() {
-      }
-
-      function patchSsl(data) {
-        return tab.ssl.loader.during(
-          $api
-            .patch(data)
-            .then(storeSslStatus)
-            .then(vm.refresh)
-        );
-      }
-
-      function disableSsl() {
-        return tab.ssl.loader.during(
-          $api
-            .remove()
-            .then(function () {
-              tab.ssl.enabled = false;
-              tab.ssl.required = false;
-            })
-            .then(vm.refresh)
-        );
-      }
-
-      function enableSsl() {
-        return tab.ssl.loader.during(
-          Api
-            .all('http/ssl')
-            .post({
-              email: tab.ssl.input.email,
-            })
-            .then(storeSslStatus)
-            .then(vm.refresh)
-        );
-      }
-
-      function refreshSsl() {
-        return tab.ssl.loader.during(
-          $api
-            .get()
-            .then(storeSslStatus)
-        );
-      }
-
-      function storeSslStatus(response) {
-        tab.ssl.enabled = response.enabled;
-        tab.ssl.required = response.required;
-      }
     }
   }
 })();

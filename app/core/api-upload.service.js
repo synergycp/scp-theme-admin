@@ -19,7 +19,7 @@
     //////////
 
     function upload(method, url, file, data) {
-      url = Api.baseUrl() + 'api/' + url + '?key=' + ApiKey.get();
+      url = Api.baseUrl() + '/' + url + '?key=' + ApiKey.get();
       data._method = method; // Laravel bug handling multipart/form-data w/ PATCH
       file.upload = Upload.upload({
         url: url,

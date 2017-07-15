@@ -1,14 +1,13 @@
 span(
   ng-repeat="target in logTarget.log.targets track by $index"
-  ng-init="logTarget.getHref(target)"
 )
   a(
-    ng-if="target.href"
+    ng-if="logTarget.getHref(target)"
     ng-href="{{ target.href }}"
     ng-bind="target.name"
   )
   span(
-    ng-if="!target.href"
+    ng-if="!logTarget.getHref(target)"
     ng-bind="target.name"
   )
   |  ({{target.singular}})

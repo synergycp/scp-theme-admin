@@ -28,13 +28,12 @@
     //////////
 
     function getHref(target) {
-      target.href = target.href ||
+      return target.href = target.href ||
         Url.get(target.url)
         ;
     }
 
     function init() {
-
     }
   }
 })();

@@ -48,7 +48,7 @@
       $state.go($state.current.name, {
         // 'admin': filters.current.admin,
         'q': filters.current.q,
-      });
+      }, {location: 'replace'});
 
       if (filters.change) {
         filters.change();

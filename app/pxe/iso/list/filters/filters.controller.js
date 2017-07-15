@@ -48,7 +48,7 @@
       $state.go($state.current.name, {
         // 'iso': filters.current.iso,
         'q': filters.current.q,
-      });
+      }, {location: 'replace'});
 
       if (filters.change) {
         filters.change();

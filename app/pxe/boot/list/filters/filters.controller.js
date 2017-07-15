@@ -48,7 +48,7 @@
       $state.go($state.current.name, {
         // 'boot': filters.current.boot,
         'q': filters.current.q,
-      });
+      }, {location: 'replace'});
 
       if (filters.change) {
         filters.change();

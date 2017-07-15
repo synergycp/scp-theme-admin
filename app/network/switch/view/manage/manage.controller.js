@@ -111,13 +111,13 @@
       $state.go($state.current.name, {
         'bandwidth.start': filter.start.utc().format(date.formatDateTime),
         'bandwidth.end': filter.end.utc().format(date.formatDateTime),
-      });
+      }, {location: 'replace'});
     }
 
     function onBandwidthTabChange(index) {
       $state.go($state.current.name, {
         'bandwidth.tab': index,
-      });
+      }, {location: 'replace'});
     }
 
     function loadPanels() {

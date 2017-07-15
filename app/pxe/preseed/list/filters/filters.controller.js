@@ -48,7 +48,7 @@
       $state.go($state.current.name, {
         // 'preseed': filters.current.preseed,
         'q': filters.current.q,
-      });
+      }, {location: 'replace'});
 
       if (filters.change) {
         filters.change();

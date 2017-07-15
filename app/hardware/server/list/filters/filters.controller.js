@@ -96,7 +96,7 @@
         'bw.max': filters.bw.max, 
       });
 
-      $state.go($state.current.name, _.assign({}, filters.current));
+      $state.go($state.current.name, _.assign({}, filters.current), {location: 'replace'});
       filters.shouldWatchMainSearch && Search.go(filters.current.q);
 
       if (filters.change) {

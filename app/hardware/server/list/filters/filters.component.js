@@ -11,7 +11,8 @@
         show: '<',
         current: '=',
         change: '&?',
-        shouldWatchMainSearch: '=?'
+        shouldWatchMainSearch: '=?',
+        showClient: '=?'
       },
       controller: 'ServerFiltersCtrl as filters',
       transclude: true,

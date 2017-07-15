@@ -15,9 +15,9 @@
     filters.$onInit = init;
     filters.$onChanges = $onChanges;
 
-    filters.current = {
-      q: $state.params.q,
-    };
+    _.assign(filters.current, {
+      q: $state.params.q
+    });
     filters.group = Select('group').multi();
     filters.client = Select('client').multi();
     filters.switch = Select('switch').multi();
@@ -43,10 +43,14 @@
     //////////
 
     function init() {
+      _.defaults(filters, {
+        showClient: true
+      });
+    
       var promises = [
         $timeout(),
         filters.group.setSelectedId($state.params['group']),
-        filters.client.setSelectedId($state.params['client']),
+        filters.client.setSelectedId($state.params['client'] || filters.current.client),
         filters.switch.setSelectedId($state.params['switch']),
         filters.cpu.setSelectedId($state.params['cpu']),
         filters.mem.setSelectedId($state.params['mem']),

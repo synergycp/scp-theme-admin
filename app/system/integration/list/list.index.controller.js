@@ -8,10 +8,11 @@
   /**
    * @ngInject
    */
-  function IntegrationIndexCtrl(IntegrationList, ListFilter) {
+  function IntegrationIndexCtrl(IntegrationList, ListFilter, $scope) {
     var vm = this;
 
-    vm.list = IntegrationList();
+    vm.list = IntegrationList()
+      .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -31,10 +32,15 @@
 
     function activate() {
       vm.list.load();
+      $scope.$on('$destroy', onDestroy);
     }
 
     function create() {
       vm.list.create(vm.create.getData());
+    }
+
+    function onDestroy() {
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

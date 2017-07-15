@@ -53,7 +53,7 @@
       $state.go($state.current.name, {
         // 'group': filters.current.group,
         'q': filters.current.q,
-      });
+      }, {location: 'replace'});
       filters.shouldWatchMainSearch && Search.go(filters.current.q);
 
       if (filters.change) {

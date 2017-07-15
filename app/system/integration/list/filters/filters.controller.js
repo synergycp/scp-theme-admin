@@ -48,7 +48,7 @@
       $state.go($state.current.name, {
         // 'integration': filters.current.integration,
         'q': filters.current.q,
-      });
+      }, {location: 'replace'});
 
       if (filters.change) {
         filters.change();

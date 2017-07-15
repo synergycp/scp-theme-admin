@@ -95,7 +95,7 @@
           queue: true,
           edition_id: (edition || {}).id,
           license_key: licenseKey,
-          password: password,
+          password: result.password,
         })
       });
     }

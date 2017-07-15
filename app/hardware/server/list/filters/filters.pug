@@ -90,7 +90,9 @@ include /resources/angle/pug/mixins/form
                 span(ng-bind-html="choice.name | highlight: $select.search")
 
     .col-md-6
-      +label("{{ 'server.list.filter.client.LABEL' | translate }}")
+      +label("{{ 'server.list.filter.client.LABEL' | translate }}")(
+        ng-if="filters.showClient"
+      )
         +input-with-btn("fa fa-times-circle")(ng-click="filters.client.clear()")
           +ui-select("filters.client")(multiple)
             ui-select-match(placeholder="{{ 'server.list.filter.client.PLACEHOLDER' | translate }}")

@@ -1,0 +1,20 @@
+include /resources/angle/pug/mixins/panel
+include /resources/angle/pug/mixins/form
+
+form.form-horizontal(
+  ng-class="panel.loader.class"
+  ng-submit="panel.submit()"
+)
+  .loader
+  .panel.panel-default
+    .panel-heading
+      .btn-group.btn-group-xs.pull-right
+        a.btn.btn-default(ng-click="panel.refresh()")
+          i.fa.fa-refresh
+      h3.panel-title(translate="license.dashboard.TITLE")
+    .panel-body.text-center
+      | License Key: {{ panel.license.key }}
+      br
+      | Maximum number of Servers: {{ panel.license.servers }}
+
+

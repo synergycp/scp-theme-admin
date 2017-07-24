@@ -29,7 +29,7 @@ form(ng-submit="pxeInstallForm.submit()")
         )
 
       div(ng-if="pxeInstallForm.isEnabled")
-        os-settings-fields(control="pxeInstallForm.osSettingsControl" server="pxeInstallForm.server" lang="os-reload.server")
+        os-settings-fields(control="pxeInstallForm.osSettingsControl" server="pxeInstallForm.server.selected" lang="os-reload.server")
         
     .panel-footer.clearfix(ng-if="pxeInstallForm.isEnabled || !pxeInstallForm.server.selected")
       .pull-right

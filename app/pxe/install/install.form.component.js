@@ -25,7 +25,6 @@
     pxeInstallForm.$onInit = init;
     pxeInstallForm.server = Select('server').on('change', syncServer);
     pxeInstallForm.isEnabled = true;
-    pxeInstallForm.canRAID = false;
     pxeInstallForm.submit = submit;
     pxeInstallForm.input = {
       profile: Select('pxe/profile').on('change', syncProfile),
@@ -50,8 +49,8 @@
 
     function syncServer(server) {
       server.get().then(function (res) {
+        pxeInstallForm.server.selected = res;
         pxeInstallForm.isEnabled = res.is_pxe_ready;
-        pxeInstallForm.canRAID = res.raid_soft_ready;
       });
     }
 

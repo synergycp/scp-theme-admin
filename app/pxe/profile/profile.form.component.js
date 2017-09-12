@@ -6,7 +6,6 @@
     billing_id: '',
     preseed: null,
     boot_script: null,
-    iso: null,
     access_client: false
   };
 
@@ -128,8 +127,8 @@
         after: _.map(profileForm.shellScripts.selected, 'id'),
       };
       data.drivers = _.map(profileForm.drivers.selected, 'id');
-      data.iso = profileForm.platform == 'windows' && profileForm.input.iso ? {
-        id: profileForm.input.iso.id,
+      data.iso = profileForm.platform == 'windows' && profileForm.isos.selected ? {
+        id: profileForm.isos.selected.id,
         edition: profileForm.isos.selectedEdition ? {
           id: profileForm.isos.selectedEdition.id,
         } : null,

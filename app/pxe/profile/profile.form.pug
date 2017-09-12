@@ -74,9 +74,9 @@ include /resources/angle/pug/mixins/form
   div(ng-if="profileForm.platform == 'windows'")
     +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
       +input-with-btn("fa fa-times-circle")(
-        ng-click="profileForm.input.iso = null"
+        ng-click="profileForm.isos.clear()"
       )
-        +ui-select("profileForm.isos")(ng-model="profileForm.input.iso")
+        +ui-select("profileForm.isos")
           ui-select-match(placeholder="{{ 'pxe.profile.form.iso.PLACEHOLDER' | translate }}")
             | {{ $select.selected.name }}
 
@@ -87,9 +87,9 @@ include /resources/angle/pug/mixins/form
       +input-with-btn("fa fa-times-circle")(
         ng-click="profileForm.isos.selectedEdition = null"
       )
-        +ui-select()(
+        +ui-select("profileForm.isos.editions")(
           ng-model="profileForm.isos.selectedEdition"
-          ng-disabled="!profileForm.input.iso"
+          ng-disabled="!profileForm.isos.selected"
         )
           ui-select-match(placeholder="{{ 'pxe.profile.form.iso.edition.PLACEHOLDER' | translate }}")
             | {{ $select.selected.name }}
@@ -109,7 +109,7 @@ include /resources/angle/pug/mixins/form
       +ui-select("profileForm.drivers")(
         multiple 
         sortable="true"
-        ng-disabled="!profileForm.input.iso"
+        ng-disabled="!profileForm.isos.selected"
       )
         ui-select-match(placeholder="{{ 'pxe.profile.form.driver.PLACEHOLDER' | translate }}")
           | {{ $item.name }}

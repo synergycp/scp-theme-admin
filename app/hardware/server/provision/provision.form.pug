@@ -145,7 +145,7 @@ div(ng-repeat="profile in provisionForm.osReloads.items track by profile.id")
     ng-show="$index"
     ng-click="provisionForm.osReloads.rem($index)"
   )
-    os-settings-fields(control="profile" server="provisionForm.server" lang="server.provision.os-reload")
+    os-settings-fields(control="profile" server="provisionForm.server.selected" lang="server.provision.os-reload")
 
 +btn-full-w("server.provision.os-reload.ADD")(
   ng-click="provisionForm.osReloads.add()"

@@ -465,9 +465,9 @@
       "PLACEHOLDER": "Type to search..."
     },
     "os-reload": {
-      "ADD": "Add OS Reload",
+      "ADD": "Queue Another OS Reload",
       "profile": {
-        "LABEL": "Operating System",
+        "LABEL": "OS Profile",
         "PLACEHOLDER": "Type to search..."
       },
       "edition": {

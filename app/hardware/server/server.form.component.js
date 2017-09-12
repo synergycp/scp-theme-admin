@@ -278,7 +278,7 @@
       var switchPortId = portData.switch.port.id;
       var speedId = portData.switch.speed.id;
 
-      if(!switchId || !switchPortId || !speedId) {
+      if(!switchId || !switchPortId) {
         return Alert.warning("Please specify all needed port data.")
       }
 

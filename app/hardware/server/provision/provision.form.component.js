@@ -139,6 +139,9 @@
       if (!server) {
         return;
       }
+      server.get().then(function (res) {
+        provisionForm.server.selected = res;
+      })
 
       if (!provisionForm.group.getSelected('id')) {
         provisionForm.group.setSelectedId(server.group.id);

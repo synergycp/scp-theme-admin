@@ -5,6 +5,11 @@ include /resources/angle/pug/mixins/form
   .graph-helper
     .panel.panel-default
       .panel-heading
+        h3.panel-title(
+          translate="switch.dashboard.bandwidth.TITLE"
+          translate-value-name="{{ panel.homeSwitch.switch.name }}"
+        )
+
         .btn-group.btn-group-xs.pull-right.relative(style="z-index:2")
           bandwidth-date-range-picker.btn-group.btn-group-xs(
             bandwidth="panel.bandwidth"
@@ -23,11 +28,6 @@ include /resources/angle/pug/mixins/form
             ng-click="panel.delete()"
           )
             span.fa.fa-times
-
-        h3.panel-title(
-          translate="switch.dashboard.bandwidth.TITLE"
-          translate-value-name="{{ panel.homeSwitch.switch.name }}"
-        )
 
       div.relative(
         ng-class="panel.state.loader.class"

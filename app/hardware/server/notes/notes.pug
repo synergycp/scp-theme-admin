@@ -6,10 +6,10 @@ form.panel.panel-default(
 )
   .loader
   .panel-heading(ng-click="notes.isExpanded = !notes.isExpanded")
+    h3.panel-title(translate="server.notes.TITLE")
     .btn-group.btn-group-xs.pull-right
       a.btn.btn-default
         span.fa(ng-class="notes.isExpanded ? 'fa-minus' : 'fa-plus'")
-    h3.panel-title(translate="server.notes.TITLE")
   .panel-body(ng-class="notes.isExpanded ? '' : 'hidden'")
     .form-group
       label.control-label(

@@ -8,10 +8,10 @@ form.form-horizontal(
   .loader
   .panel.panel-default
     .panel-heading
+      h3.panel-title(translate="license.dashboard.TITLE")
       .btn-group.btn-group-xs.pull-right
         a.btn.btn-default(ng-click="panel.refresh()")
           i.fa.fa-refresh
-      h3.panel-title(translate="license.dashboard.TITLE")
     .panel-body.text-center
       | License Key: {{ panel.license.key }}
       br

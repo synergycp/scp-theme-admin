@@ -16,9 +16,10 @@
         template: helper.dummyTemplate,
       })
       .state('app.pxe.install.list', {
-        url: '',
+        url: '?q',
         title: 'PXE Installs',
         controller: 'InstallIndexCtrl as vm',
+        reloadOnSearch: false,
         templateUrl: helper.basepath('pxe/install/list/install.index.html'),
         resolve: helper.resolveFor('lang:os-reload', 'lang:server'),
       })

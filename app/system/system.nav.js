@@ -21,6 +21,11 @@
     sref: "app.system.email.list",
   };
 
+  var SSH_KEYS = {
+    text: "SSH Keys",
+    sref: "app.system.ssh.key.home",
+  };
+
   angular
     .module('app.system')
     .run(SystemNavConfig)
@@ -32,7 +37,6 @@
   function SystemNavConfig(Auth, Nav, Permission) {
     var group = Nav.group('system', {
       translate: "nav.SYSTEM",
-      sref: "app.system.setting.list",
       icon: "fa fa-wrench",
     });
 
@@ -61,6 +65,8 @@
       if (map.system.emails.read) {
         group.item(EMAILS);
       }
+
+      group.item(SSH_KEYS);
     }
 
     function hide() {
@@ -68,6 +74,7 @@
       group.remove(SETTINGS);
       group.remove(INTEGRATIONS);
       group.remove(EMAILS);
+      group.remove(SSH_KEYS);
     }
   }
 })();

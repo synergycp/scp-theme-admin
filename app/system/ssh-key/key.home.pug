@@ -1,0 +1,22 @@
+.row
+  .col-md-6
+    .panel.panel-default(ng-class="vm.loader.class")
+      .loader
+      .panel-heading
+        h3.panel-title SSH Key
+      .panel-body
+        .text-center(ng-if="vm.sshKey")
+          p Your public key is:
+          textarea.code.form-control(
+            ng-bind="vm.sshKey.public_key"
+            rows="9"
+            readonly="true"
+          )
+          p
+          p
+            button.btn.btn-danger(ng-click="vm.deleteKey()")
+              | Delete SSH Key
+        .text-center(ng-if="!vm.sshKey")
+          p You have not generated an SSH Key yet.
+          button.btn.btn-primary(ng-click="vm.generateKey()")
+            | Generate SSH Key

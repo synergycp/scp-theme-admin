@@ -1,0 +1,10 @@
+{
+  "delete": {
+    "confirm": {
+      "TITLE": "Are you sure?",
+      "BODY": "Deleting this SSH key will permanently revoke this server's access to any machines you have granted it SSH access to.",
+      "CANCEL": "Cancel",
+      "SUBMIT": "Delete Permanently"
+    }
+  }
+}

@@ -9,6 +9,7 @@
       'app.system.email',
       'app.system.license',
       'app.system.integration',
+      'app.system.ssh.key',
       'app.system.setting',
       'app.system.log',
     ]);

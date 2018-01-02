@@ -10,16 +10,16 @@
    * @ngInject
    * @constructor
    */
-  function ControlFactory(Select, $stateParams, $q, date, moment, Api) {
+  function ControlFactory(Select) {
     return function () {
-      return new Control(Select, $stateParams, $q, date, moment, Api);
+      return new Control(Select);
     };
   }
 
   /**
    * @constructor
    */
-  function Control(Select, $stateParams, $q, date, moment, Api) {
+  function Control(Select) {
     var control = this;
 
     control.input = {
@@ -33,7 +33,7 @@
         password: '',
       }
     };
-    control.type = Select('server/control/type').on('change', syncTypeFilter);
+    control.type = Select('server/control/type');
 
     control.$setPristine = $setPristine;
     control.data = data;
@@ -41,16 +41,6 @@
 
     function $setPristine() {
       control.type.$dirty = false;
-    }
-
-    function syncTypeFilter() {
-      control
-        .type
-        .filter({
-          type: control.type.getSelected('id'),
-        })
-        .load()
-      ;
     }
 
     function fromExisting(response) {
@@ -64,12 +54,12 @@
 
       if (control.type.getSelected('id') != response.type.id) {
         control.type.selected = response.type;
-        syncTypeFilter();
       }
     }
 
     
     function data() {
+      // TODO: looks like this isn't used anywhere? verify and remove.
       return {
         id: control.id,
         ip: control.input.mac,

@@ -432,7 +432,7 @@
       var controlPrefix = 'control-'+controlIndex+'.';
 
       return $q.all([
-        updateServerControl()
+        updateServerControl(),
       ]).then(control.$setPristine);
 
       function updateServerControl() {
@@ -442,7 +442,7 @@
           client_password: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'client.password'].$dirty ? control.input.client.password : undefined,
           admin_user: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'admin.username'].$dirty ? control.input.admin.username : undefined,
           admin_password: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'admin.password'].$dirty ? control.input.admin.password : undefined,
-          type: control.type.$dirty ? {
+          type: serverForm.alwaysDirty || control.type.$dirty ? {
             id: control.type.getSelected('id')
           } : undefined
         }

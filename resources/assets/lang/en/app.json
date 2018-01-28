@@ -11,6 +11,7 @@
       "dropdown": {
         "TITLE": "My Account",
         "SETTINGS": "Account Settings",
+        "KEYS": "API Keys",
         "LAYOUT": "Theme Settings",
         "LOGOUT": "Logout"
       }

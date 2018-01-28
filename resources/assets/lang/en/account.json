@@ -11,6 +11,38 @@
       }
     }
   },
+  "key": {
+    "list": {
+      "TITLE": "API Keys"
+    },
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "By name"
+      }
+    },
+    "heading": {
+      "KEY": "API Key",
+      "NAME": "Name"
+    },
+    "form": {
+      "title": {
+        "ADD": "Create an API Key"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Where will this API key be used? (e.g. WHMCS)"
+      }
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Are you sure?",
+        "BODY": "Deleting this API Key will permanently revoke access to all applications using this API Key. This action cannot be undone!",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Permanently Delete"
+      }
+    }
+  },
   "settings": {
     "overview": {
       "TITLE": "Account Overview",

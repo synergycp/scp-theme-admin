@@ -15,9 +15,7 @@
     filters.$onInit = init;
     filters.$onChanges = $onChanges;
 
-    filters.current = {
-      q: $state.params.q,
-    };
+    filters.current = {};
     filters.searchFocus = Observable(false);
 
     filters.fireChangeEvent = fireChangeEvent;
@@ -25,6 +23,9 @@
     //////////
 
     function init() {
+      _.assign(filters.current, {
+        q: $state.params.q,
+      });
       var promises = [
         $timeout(),
         // filters.switch.setSelectedId($state.params['switch']),

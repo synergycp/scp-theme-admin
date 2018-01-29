@@ -15,9 +15,7 @@
     filters.$onInit = init;
     filters.$onChanges = $onChanges;
 
-    _.assign(filters.current, {
-      q: $state.params.q
-    });
+    filters.current = {};
     filters.group = Select('group').multi();
     filters.client = Select('client').multi();
     filters.switch = Select('switch').multi();
@@ -45,6 +43,9 @@
     function init() {
       _.defaults(filters, {
         showClient: true
+      });
+      _.assign(filters.current, {
+        q: $state.params.q
       });
     
       var promises = [

@@ -15,9 +15,7 @@
     filters.$onInit = init;
     filters.$onChanges = $onChanges;
 
-    filters.current = {
-      q: $state.params.q,
-    };
+    filters.current = {};
     filters.group = Select('group');
     filters.server = Select('server')
       .addItem({
@@ -31,6 +29,9 @@
     //////////
 
     function init() {
+      _.assign(filters.current, {
+        q: $state.params.q,
+      });
       $q.all([
         filters.group.setSelectedId($state.params['group.id']),
         filters.server.setSelectedId($state.params['server.id']),

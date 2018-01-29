@@ -16,7 +16,6 @@
     filters.$onChanges = $onChanges;
 
     filters.current = {
-      q: $state.params.q,
     };
     filters.searchFocus = Observable(false);
 
@@ -25,6 +24,9 @@
     //////////
 
     function init() {
+      _.assign(filters.current, {
+        q: $state.params.q,
+      });
       var promises = [
         $timeout(),
         // filters.client.setSelectedId($state.params['client']),

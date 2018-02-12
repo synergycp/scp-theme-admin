@@ -45,7 +45,7 @@
     "options": {
       "LABEL": "Options",
       "reserved": {
-        "LABEL": "Reserved"
+        "LABEL": "Reserved (not available for provisioning)"
       }
     },
     "pxe_dhcp_server": {

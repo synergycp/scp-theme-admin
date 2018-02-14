@@ -22,7 +22,7 @@
   },
   "bandwidth": {
     "add": {
-      "BODY": "Add a primary switch port:",
+      "BODY": "Add an uplink port to display bandwidth data for here:",
       "SUBMIT": "Add Port",
       "port": {
         "PLACEHOLDER": "Type to search ports..."

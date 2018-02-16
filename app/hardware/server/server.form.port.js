@@ -6,20 +6,27 @@
     .factory('ServerFormPort', PortFactory)
   ;
 
+  const OS_RELOAD_STATUS = {
+    SUPPORTED: "server.form.os-reloads.SUPPORTED",
+    NOT_PRIMARY: "server.form.os-reloads.NOT-PRIMARY",
+    NEEDS_ENTITY: "server.form.os-reloads.NEEDS-ENTITY",
+    NEEDS_MAC: "server.form.os-reloads.NEEDS-MAC",
+  };
+
   /**
    * @ngInject
    * @constructor
    */
   function PortFactory(Select, $stateParams, $q, date, moment, Api) {
-    return function () {
-      return new Port(Select, $stateParams, $q, date, moment, Api);
+    return function (index) {
+      return new Port(index, Select, $stateParams, $q, date, moment, Api);
     };
   }
 
   /**
    * @constructor
    */
-  function Port(Select, $stateParams, $q, date, moment, Api) {
+  function Port(index, Select, $stateParams, $q, date, moment, Api) {
     var port = this;
 
     port.input = {
@@ -59,6 +66,8 @@
       },
     };
 
+    port.getOSReloadStatusLang = getOSReloadStatusLang;
+
     port.loadEntities = loadEntities;
     port.$dirty = false;
     port.setDirty = setDirty;
@@ -96,8 +105,25 @@
         port.switch.speed.selected = response.switch.port.speed;
       }
 
+
       port.billing.start.value = response.billing.start ?
         date.parse(response.billing.start) : '';
+    }
+
+    function getOSReloadStatusLang() {
+      if (index > 0) {
+        return OS_RELOAD_STATUS.NOT_PRIMARY;
+      }
+
+      if (!port.input.mac) {
+        return OS_RELOAD_STATUS.NEEDS_MAC;
+      }
+
+      if (!port.entities.selected.length) {
+        return OS_RELOAD_STATUS.NEEDS_ENTITY;
+      }
+
+      return OS_RELOAD_STATUS.SUPPORTED;
     }
 
     function loadEntities() {

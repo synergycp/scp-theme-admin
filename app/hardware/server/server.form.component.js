@@ -117,7 +117,7 @@
     }
 
     function addPort() {
-      serverForm.ports.push(ServerFormPort());
+      serverForm.ports.push(ServerFormPort(serverForm.ports.length));
     }
 
     function removePort(port) {
@@ -179,7 +179,7 @@
 
     function storePorts(response) {
       _.each(response, function (portData) {
-        var port = ServerFormPort();
+        var port = ServerFormPort(serverForm.ports.length);
 
         port.fromExisting(portData);
         port.loadEntities();

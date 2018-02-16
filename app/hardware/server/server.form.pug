@@ -76,9 +76,12 @@ hr
 div.relative(
   ng-repeat="(portIndex, port) in serverForm.ports"
 )
-  +icon-label("server.form.mac.LABEL").fa.fa-times-circle(
+  +icon-label("server.form.os-reloads.LABEL").fa.fa-times-circle(
     ng-click="serverForm.ports.remove(port)"
   )
+    p.form-control-static(translate="{{port.getOSReloadStatusLang()}}")
+
+  +label("server.form.mac.LABEL")
     input.form-control(
       type="text"
       ng-model="port.input.mac"
@@ -132,8 +135,8 @@ div.relative(
 
           +ui-select-choices("port.switch.speed")
             span(ng-bind-html="choice.name | highlight: $select.search")
-          
-  
+
+
   div(ng-if="port.switch.port.selected")
     +label("server.form.entities.LABEL")
       entity-multi-select(

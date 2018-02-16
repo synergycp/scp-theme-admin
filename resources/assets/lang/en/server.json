@@ -44,6 +44,13 @@
       "EDIT": "Edit {{ name }}",
       "ADD": "Create Server"
     },
+    "os-reloads": {
+      "LABEL": "OS Reloads",
+      "SUPPORTED": "Ready",
+      "NEEDS-MAC": "Needs MAC Address",
+      "NEEDS-ENTITY": "Needs IP Entity",
+      "NOT-PRIMARY": "Currently, OS Reloads are only supported on the primary (first) server port."
+    },
     "id": {
       "LABEL": "Server ID",
       "PLACEHOLDER": "Must be unique"

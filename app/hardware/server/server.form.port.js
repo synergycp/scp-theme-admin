@@ -17,16 +17,16 @@
    * @ngInject
    * @constructor
    */
-  function PortFactory(Select, $stateParams, $q, date, moment, Api) {
+  function PortFactory(Select, date, moment, Api) {
     return function (index) {
-      return new Port(index, Select, $stateParams, $q, date, moment, Api);
+      return new Port(index, Select, date, moment, Api);
     };
   }
 
   /**
    * @constructor
    */
-  function Port(index, Select, $stateParams, $q, date, moment, Api) {
+  function Port(index, Select, date, moment, Api) {
     var port = this;
 
     port.input = {
@@ -35,7 +35,7 @@
     };
     port.switch = Select('switch').on('change', syncSwitchFilter);
     port.group = Select('group').on('change', syncGroupFilter);
-    port.switch.port = {};
+    port.switch.port = null;
     port.switch.speed = Select('port-speed').on('change', setDirty);
     port.entities = Select('entity')
       .multi()

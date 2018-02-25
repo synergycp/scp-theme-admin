@@ -263,12 +263,15 @@
     }
 
     function savePorts() {
-      return $q.all(
-        _.map(serverForm.ports, savePortChanges)
-      ).then(function () {
-        // setFormPristine();
-        serverForm.form.fire('created.relations');
-      });
+      return _.reduce(serverForm.ports, function (previousRequest, port, portIndex) {
+        return previousRequest.then(
+          savePortChanges.bind(null, port, portIndex)
+        );
+      }, $q.when())
+        .then(function () {
+          // setFormPristine();
+          serverForm.form.fire('created.relations');
+        });
     }
 
     function savePortChanges(port, portIndex) {

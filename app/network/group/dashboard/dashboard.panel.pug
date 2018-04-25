@@ -1,0 +1,18 @@
+include /resources/angle/pug/mixins/panel
+include /resources/angle/pug/mixins/form
+
+list.panel.panel-default(list="panel.list")
+  list-header(text="group.dashboard.TITLE")
+    a.btn.btn-default(ng-click="panel.list.refresh.now()")
+      i.fa.fa-refresh
+    a.btn.btn-default(ng-click="panel.filters.visible = !panel.filters.visible")
+      i.fa.fa-filter
+  group-filters(
+    show="panel.filters.visible"
+    current="panel.filters.current"
+    change="panel.filters.change()"
+  )
+  group-table.border-top-table.scrollable-block(show-reserved="false" show-actions="false")
+  list-footer
+
+

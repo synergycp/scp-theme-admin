@@ -7,5 +7,6 @@
       'scp.core.api',
       'app.network.group.search',
       'app.network.group.list',
+      'app.network.group.dashboard',
     ]);
 })();

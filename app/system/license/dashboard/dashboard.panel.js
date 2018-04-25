@@ -16,14 +16,16 @@
     RouteHelpers,
     EventEmitter,
     Loader,
-    Api
+    Api,
+    $q
   ) {
     return function () {
       return new LicenseDashboardPanel(
         RouteHelpers,
         EventEmitter,
         Loader,
-        Api
+        Api,
+        $q
       );
     };
   }
@@ -32,7 +34,8 @@
     RouteHelpers,
     EventEmitter,
     Loader,
-    Api
+    Api,
+    $q
   ) {
     var panel = this;
 
@@ -51,18 +54,35 @@
 
     function onRefresh() {
       return panel.context.loader.during(
-        Api
-        .all('license/refresh')
-        .post()
-        .then(store)
+        $q.all([
+          Api
+            .all('license/refresh')
+            .post()
+            .then(store),
+          refreshServerCount(),
+        ])
       );
     }
 
     function load() {
+      return $q.all([
+        Api
+          .one('license')
+          .get()
+          .then(store),
+        refreshServerCount(),
+      ]);
+    }
+
+    function refreshServerCount() {
       return Api
-        .one('license')
-        .get()
-        .then(store)
+        .one('server')
+        .get({per_page: 1})
+        .then(storeServerCount)
+    }
+
+    function storeServerCount(res) {
+      panel.context.serversInUse = res.total;
     }
 
     function store(res) {

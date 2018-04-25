@@ -15,54 +15,54 @@ div(style="margin-bottom: 15px")
             ng-class="panel.state.fullScreen ? 'glyphicon-resize-small' : 'glyphicon-resize-full'"
           )
 
-      div.relative(
-        ng-class="panel.state.loader.class"
-      )
+      div(class="{{panel.state.loader.class + ' ' + panel.chart.loader.class}}")
         .loader
-        uib-tabset(
-          active="panel.tabs.active"
-        )
-          uib-tab(
-            ng-repeat="bandwidth in panel.bandwidth.ports"
-            index="$index"
-            select="panel.tabs.change(bandwidth)"
-            active="bandwidth.active"
+        div(ng-if="!panel.state.loader.hasLoaded" style="height: 600px")
+        div(ng-if="panel.state.loader.hasLoaded")
+          uib-tabset(
+            active="panel.tabs.active"
           )
-            uib-tab-heading
-              span(ng-bind="bandwidth.port.name")
-
-            bandwidth-graph(
-              target="panel.server"
-              filter="panel.filter"
-              state="panel.state"
-              chart="bandwidth.chart"
-              type="Server"
+            uib-tab(
+              ng-repeat="bandwidth in panel.bandwidth.ports"
+              index="$index"
+              select="panel.tabs.change(bandwidth)"
+              active="bandwidth.active"
             )
+              uib-tab-heading
+                span(ng-bind="bandwidth.port.name")
 
-            .panel-body.bandwidth-stats(ng-if="bandwidth.chart.showStats")
-              .clearfix
-                .col-sm-4(ng-repeat="statCol in bandwidth.chart.stats.cols")
-                  h3
-                    span.v-mid
-                      span(translate="bandwidth.stats.heading.{{ statCol.label }}")
-                      span :
-                    span.square(style="background-color: {{ stat.color }}")
-                  ul
-                    li(ng-repeat="item in statCol.items")
-                      span(translate="bandwidth.stats.{{ item.label }}")
-                      span(ng-bind="': ' + item.value")
-
-            div(ng-if="bandwidth.billing.isActive")
-              uib-progressbar.progress-min-text(
-                value="bandwidth.billing.percent"
-                type="bandwidth.billing.percent > 95 ? 'danger' : 'info'"
+              bandwidth-graph(
+                target="panel.server"
+                filter="panel.filter"
+                state="panel.state"
+                chart="bandwidth.chart"
+                type="Server"
               )
-                | {{ bandwidth.billing.percent }}%
 
-              p.help-block(
-                ng-init="billing = bandwidth.billing"
-                translate="bandwidth.billing.USAGE"
-                translate-value-max="{{ billing.max | bitsToSize }}"
-                translate-value-used="{{ billing.used | bitsToSize }}"
-                translate-value-since="{{ billing.cycleStart }}"
-              )
+              div(ng-if="bandwidth.chart.firstLoad" style="height: 203px")
+              .panel-body.bandwidth-stats(ng-if="bandwidth.chart.showStats")
+                .clearfix
+                  .col-sm-4(ng-repeat="statCol in bandwidth.chart.stats.cols")
+                    h3
+                      span.v-mid
+                        span(translate="bandwidth.stats.heading.{{ statCol.label }}")
+                        span :
+                      span.square(style="background-color: {{ stat.color }}")
+                    ul
+                      li(ng-repeat="item in statCol.items")
+                        span(translate="bandwidth.stats.{{ item.label }}")
+                        span(ng-bind="': ' + item.value")
+              div(ng-if="bandwidth.billing.isActive")
+                uib-progressbar.progress-min-text(
+                  value="bandwidth.billing.percent"
+                  type="bandwidth.billing.percent > 95 ? 'danger' : 'info'"
+                )
+                  | {{ bandwidth.billing.percent }}%
+
+                p.help-block(
+                  ng-init="billing = bandwidth.billing"
+                  translate="bandwidth.billing.USAGE"
+                  translate-value-max="{{ billing.max | bitsToSize }}"
+                  translate-value-used="{{ billing.used | bitsToSize }}"
+                  translate-value-since="{{ billing.cycleStart }}"
+                )

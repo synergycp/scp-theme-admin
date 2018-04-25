@@ -1,4 +1,7 @@
 {
+  "dashboard": {
+    "TITLE": "Location Overview"
+  },
   "list": {
     "TITLE": "IP Groups",
     "filter": {
@@ -11,7 +14,7 @@
       "NAME": "Name",
       "RESERVED": "Reserved",
       "ENTITIES": "IP Entities",
-      "SERVERS": "Servers",
+      "SERVERS": "Servers (Inventory / Total)",
       "ACTIONS": "Actions"
     }
   },

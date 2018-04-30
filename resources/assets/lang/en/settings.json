@@ -55,5 +55,15 @@
     "smtp_mode": {
       "LABEL": "SMTP Mode"
     }
+  },
+  "Security": {
+    "admin_acls": {
+      "LABEL": "Admin IP ACL",
+      "PLACEHOLDER": "Enter IPs or subnets in CIDR notation (e.g. /29) separated by new lines. As soon as you save, this will take affect, so make sure your IP is included!"
+    },
+    "integration_acls": {
+      "LABEL": "Integration IP ACL",
+      "PLACEHOLDER": "Enter IPs or subnets in CIDR notation (e.g. /29) separated by new lines. As soon as you save, this will take affect!"
+    }
   }
 }

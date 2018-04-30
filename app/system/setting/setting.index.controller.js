@@ -87,6 +87,9 @@
       return $groups
         .getList()
         .then(function (groups) {
+          groups = _.filter(groups, function (group) {
+            return group.settings.length;
+          });
           setPkg(groups);
           SettingLang.load(groups);
           addSettingTabs(groups);

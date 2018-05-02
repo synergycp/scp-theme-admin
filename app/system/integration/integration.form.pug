@@ -7,3 +7,7 @@ include /resources/angle/pug/mixins/form
   placeholder="{{ 'system.integration.form.name.PLACEHOLDER' | translate }}"
   ng-model="integrationForm.input.name"
 )
+
+div(ng-if="!integrationForm.form.input.id")
+  hr
+  permissions(map="integrationForm.permissions")

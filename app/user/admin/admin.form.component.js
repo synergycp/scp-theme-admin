@@ -26,19 +26,41 @@
   /**
    * @ngInject
    */
-  function AdminFormCtrl() {
+  function AdminFormCtrl(Api, PermissionLang) {
     var adminForm = this;
 
     adminForm.$onInit = init;
     adminForm.input = _.clone(INPUTS);
+    adminForm.permissions = {};
 
     //////////
 
     function init() {
+      if (!_.get(adminForm.form, 'input.id')) {
+        // TODO: provide an endpoint that makes this one request instead of two.
+        Api.all('admin')
+          .getList()
+          .then(function (admins) {
+            return Api.one('admin/'+admins[0].id+'/permission').get()
+          })
+          .then(function (response) {
+            // TODO: share common code w/ admin.permissions.js
+            _.merge(adminForm.permissions, response.getOriginalData());
+            PermissionLang.load(adminForm.permissions)
+          });
+      }
+
       adminForm.form.getData = getData;
       fillFormInputs();
 
-      (adminForm.form.on || function() {})(['change', 'load'], fillFormInputs);
+      var listen = adminForm.form.on || function () {};
+
+      listen(['change', 'load'], fillFormInputs);
+      listen(['created'], savePermissions);
+    }
+
+    function savePermissions(created) {
+      Api.one('admin/'+created.id+'/permission').patch(adminForm.permissions);
     }
 
     function getData() {

@@ -18,3 +18,7 @@ include /resources/angle/pug/mixins/form
   +checkbox()(
     ng-model="adminForm.input.receive_copies"
   ) {{ 'admin.form.receive_copies.LABEL' | translate }}
+
+div(ng-if="!adminForm.form.input.id")
+  hr
+  permissions(map="adminForm.permissions")

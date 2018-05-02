@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function AdminIndexCtrl(AdminList, ListFilter, $scope) {
+  function AdminIndexCtrl(AdminList, ListFilter, $scope, EventEmitter) {
     var vm = this;
 
     vm.list = AdminList()
@@ -19,6 +19,7 @@
       input: {},
       submit: create,
     };
+    EventEmitter().bindTo(vm.create);
 
     vm.logs = {
       filter: {
@@ -35,7 +36,8 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.getData())
+        .then(vm.create.fire.bind(null, 'created'));
     }
 
     function onDestroy() {

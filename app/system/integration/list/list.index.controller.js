@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function IntegrationIndexCtrl(IntegrationList, ListFilter, $scope) {
+  function IntegrationIndexCtrl(IntegrationList, ListFilter, $scope, EventEmitter) {
     var vm = this;
 
     vm.list = IntegrationList()
@@ -19,6 +19,9 @@
       input: {},
       submit: create,
     };
+    EventEmitter().bindTo(vm.create);
+
+    vm.create.on('created.relations', vm.list.refresh.now);
 
     vm.logs = {
       filter: {
@@ -31,12 +34,12 @@
     ////////////
 
     function activate() {
-      vm.list.load();
       $scope.$on('$destroy', onDestroy);
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.getData())
+        .then(vm.create.fire.bind(null, 'created'));
     }
 
     function onDestroy() {

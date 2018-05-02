@@ -69,8 +69,8 @@
     "v4": {
       "type": {
         "LABEL": "IPv4 Type",
-        "RANGE": "Range",
-        "SINGLE": "IP"
+        "RANGE": "IP Range",
+        "SINGLE": "Single IP"
       },
       "address": {
         "LABEL": "IPv4 Address",

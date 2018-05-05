@@ -5,7 +5,10 @@
     srv_id: '',
     nickname: '',
     billing: {
-      id: ''
+      id: '',
+      integration: {
+        id: '',
+      },
     },
   };
 
@@ -515,6 +518,10 @@
       _.forOwn(input, function(value, key) {
         var keyWithPrefix = keyPrefix ? (keyPrefix+"."+key) : key;
         try { // throw error in console if input is not named properly
+          if (value === null) {
+            // The null value is the backend result of an empty object.
+            return;
+          }
           if(_.isObject(value)) {
             var tmp = cloneInputs(value, keyWithPrefix);
             !_.isEmpty(tmp) && (resObj[key] = tmp);

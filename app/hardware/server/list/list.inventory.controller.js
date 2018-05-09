@@ -11,8 +11,9 @@
    *
    * @ngInject
    */
-  function ServerInventoryCtrl(ServerList, ListFilter, $scope) {
+  function ServerInventoryCtrl(ServerList, ListFilter, $scope, EventEmitter, Todo) {
     var vm = this;
+    // TODO: DRY this up by extending the server list controller?
 
     vm.list = ServerList()
       .filter({
@@ -24,6 +25,9 @@
       input: {},
       submit: create,
     };
+    EventEmitter().bindTo(vm.create);
+
+    vm.create.on('created.relations', vm.list.refresh.now);
 
     vm.logs = {
       filter: {
@@ -40,7 +44,9 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.getData())
+        .then(vm.create.fire.bind(null, 'created'))
+        .then(Todo.refresh);
     }
 
     function onDestroy() {

@@ -6,6 +6,7 @@
     nickname: '',
     billing: {
       id: '',
+      date: '',
       integration: {
         id: '',
       },
@@ -32,7 +33,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
+  function ServerFormCtrl(_, $scope, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
     var serverForm = this;
     var $ports, $controls;
 
@@ -59,14 +60,12 @@
             format: 'MM/DD/YYYY h:mm A',
             cancelLabel: 'Clear',
           },
+          autoApply: true,
           autoUpdateInput: false,
           singleDatePicker: true,
           timePicker: true,
           timePickerIncrement: 30,
           eventHandlers: {
-            'apply.daterangepicker': function (ev, picker) {
-              serverForm.form.form['billing.date'].$dirty = true;
-            },
             'cancel.daterangepicker': function (ev, picker) {
               serverForm.billing.date.value = '';
             },
@@ -79,6 +78,9 @@
     //////////
 
     function init() {
+      $scope.$watch('serverForm.billing.date.value', function () {
+        serverForm.form.form['billing.date'].$dirty = true;
+      });
       _.defaults(serverForm, {
         alwaysDirty: false,
         isCreating: false,
@@ -233,6 +235,7 @@
 
         serverForm.billing.date.value = response.billing.date ?
           Date.parse(response.billing.date) : '';
+        serverForm.form.form['billing.date'].$dirty = false;
       });
     }
 
@@ -508,24 +511,22 @@
             .toISOString() :
           null;
       }
+
       if(_.isEmpty(data.billing)) delete data.billing;
 
       return data;
     }
 
     function cloneInputs(input, keyPrefix) {
+      var ignore = ['billing.integration.name', 'billing.integration'];
       var resObj = {};
       _.forOwn(input, function(value, key) {
         var keyWithPrefix = keyPrefix ? (keyPrefix+"."+key) : key;
         try { // throw error in console if input is not named properly
-          if (value === null) {
-            // The null value is the backend result of an empty object.
-            return;
-          }
           if(_.isObject(value)) {
             var tmp = cloneInputs(value, keyWithPrefix);
             !_.isEmpty(tmp) && (resObj[key] = tmp);
-          } else {
+          } else if (ignore.indexOf(keyWithPrefix) === -1) {
             if(serverForm.alwaysDirty || serverForm.form.form[keyWithPrefix].$dirty) {
               resObj[key] = value;
             }

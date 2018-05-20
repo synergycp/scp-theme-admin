@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerInventoryCtrl(ServerList, ListFilter, $scope, EventEmitter, Todo) {
+  function ServerInventoryCtrl(ServerList, LicenseService, ListFilter, $scope, EventEmitter, Todo) {
     var vm = this;
     // TODO: DRY this up by extending the server list controller?
 
@@ -34,6 +34,16 @@
         target_type: 'server',
       },
     };
+    vm.licenseFull = false;
+
+    LicenseService.onChange(function () {
+      LicenseService.getCanAddMoreServers()
+        .then(storeCanAddMore);
+    }).getCanAddMoreServers().then(storeCanAddMore);
+
+    function storeCanAddMore(canAddMore) {
+      vm.licenseFull = !canAddMore;
+    }
 
     activate();
 
@@ -41,6 +51,7 @@
 
     function activate() {
       $scope.$on('$destroy', onDestroy);
+
     }
 
     function create() {

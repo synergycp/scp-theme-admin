@@ -16,7 +16,7 @@
     RouteHelpers,
     EventEmitter,
     Loader,
-    Api,
+    LicenseService,
     $q
   ) {
     return function () {
@@ -24,7 +24,7 @@
         RouteHelpers,
         EventEmitter,
         Loader,
-        Api,
+        LicenseService,
         $q
       );
     };
@@ -34,7 +34,7 @@
     RouteHelpers,
     EventEmitter,
     Loader,
-    Api,
+    LicenseService,
     $q
   ) {
     var panel = this;
@@ -50,44 +50,28 @@
     RouteHelpers.loadLang('license');
     load();
 
+    LicenseService.onChange(load);
+
     //////////
 
     function onRefresh() {
       return panel.context.loader.during(
         $q.all([
-          Api
-            .all('license/refresh')
-            .post()
-            .then(store),
-          refreshServerCount(),
+          LicenseService.refresh(),
+          LicenseService.getSkipCache(),
         ])
       );
     }
 
     function load() {
-      return $q.all([
-        Api
-          .one('license')
-          .get()
-          .then(store),
-        refreshServerCount(),
-      ]);
+      return LicenseService.getLicense()
+        .then(store);
     }
 
-    function refreshServerCount() {
-      return Api
-        .one('server')
-        .get({per_page: 1})
-        .then(storeServerCount)
-    }
-
-    function storeServerCount(res) {
-      panel.context.serversInUse = res.total;
-    }
-
-    function store(res) {
-      panel.context.license.key = res.key;
-      panel.context.license.servers = res.max_servers;
+    function store(license) {
+      panel.context.serversInUse = license.serversInUse;
+      panel.context.license.key = license.key;
+      panel.context.license.servers = license.serversAllowed;
     }
   }
 })();

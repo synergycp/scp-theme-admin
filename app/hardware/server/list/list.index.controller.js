@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerIndexCtrl(ServerList, ListFilter, EventEmitter, Todo, $scope) {
+  function ServerIndexCtrl(ServerList, LicenseService, ListFilter, EventEmitter, Todo, $scope) {
     var vm = this;
 
     vm.list = ServerList()
@@ -30,6 +30,16 @@
         target_type: 'server',
       },
     };
+    vm.licenseFull = false;
+
+    LicenseService.onChange(function () {
+      LicenseService.getCanAddMoreServers()
+        .then(storeCanAddMore);
+    }).getCanAddMoreServers().then(storeCanAddMore);
+
+    function storeCanAddMore(canAddMore) {
+      vm.licenseFull = !canAddMore;
+    }
 
     activate();
 

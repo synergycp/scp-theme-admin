@@ -40,6 +40,12 @@
     "SUSPENDED": "This server is currently suspended so the client does not have access to any controls."
   },
   "form": {
+    "no-space": {
+      "TITLE": "Server Maximum Reached",
+      "BODY1": "You have reached the maximum number of servers allowed for your license key.",
+      "BODY2": "Please purchase support more servers, then use the License refresh button on the home page.",
+      "UPGRADE": "Upgrade License"
+    },
     "title": {
       "EDIT": "Edit {{ name }}",
       "ADD": "Create Server"

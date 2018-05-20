@@ -20,12 +20,26 @@ block list
     list-footer
 
 block bottom-left
-  +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-create-form', "vm.create.form")
-    server-form(
-      form="vm.create"
-      always-dirty="true"
-      is-creating="true"
-    )
+  .panel.panel-default(ng-if="vm.licenseFull")
+    .panel-heading
+      h3.panel-title(translate='server.form.no-space.TITLE')
+    .panel-body
+      .text-center
+        p(translate='server.form.no-space.BODY1')
+        p(translate='server.form.no-space.BODY2')
+        p
+          a.btn.btn-lg.btn-primary(
+            href="https://billing.synergycp.com"
+            translate='server.form.no-space.UPGRADE'
+            target='_blank'
+          )
+  div(ng-if="!vm.licenseFull")
+    +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-create-form', "vm.create.form")
+      server-form(
+        form="vm.create"
+        always-dirty="true"
+        is-creating="true"
+      )
 
 block bottom-right
   logs(

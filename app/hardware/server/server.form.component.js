@@ -287,10 +287,6 @@
       var switchPortId = portData.switch.port.id;
       var speedId = portData.switch.speed.id;
 
-      if(!switchId || !switchPortId) {
-        return Alert.warning("Please specify all needed port data.")
-      }
-
       var dirtySwitchPort =
         serverForm.alwaysDirty ||
         port.switch.$dirty ||
@@ -513,6 +509,17 @@
       }
 
       if(_.isEmpty(data.billing)) delete data.billing;
+
+      serverForm.ports.map(function (port) {
+        var portData = port.data();
+        var switchId = portData.switch.id;
+        var switchPortId = portData.switch.port.id;
+
+        if (!switchId || !switchPortId) {
+          Alert.warning("Please specify a switch port.");
+          throw new Error('Please specify a switch port.');
+        }
+      })
 
       return data;
     }

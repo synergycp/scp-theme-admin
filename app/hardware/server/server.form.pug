@@ -180,6 +180,15 @@ div.relative(
     ng-model="control.input.ip"
   )
 
+  +select(
+    "server.form.control.forward.LABEL",
+    "control-{{ controlIndex }}.port_forwarding_type"
+  )(
+    name="control-{{ controlIndex }}.port_forwarding_type"
+    ng-model="control.input.port_forwarding_type"
+    ng-options="'server.form.control.forward.type.'+type | translate for (type,value) in control.portForwardingTypes"
+  )
+
   +label("server.form.control.admin.LABEL")
     .row
       .col-xs-6

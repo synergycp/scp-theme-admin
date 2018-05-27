@@ -94,8 +94,10 @@
 
       serverForm.form
         .on(['load', 'change', 'created'], storeState)
-        .on(['saving', 'created'], savePorts)
-        .on(['saving', 'created'], saveControls)
+        .on(['saving', 'created'], function () {
+          // Control Port Forwarding depends on port IP group so controls must come after.
+          return savePorts().then(saveControls);
+        })
         .on(['change'], setFormPristine) // when saving completed
       ;
 
@@ -449,7 +451,8 @@
           admin_password: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'admin.password'].$dirty ? control.input.admin.password : undefined,
           type: serverForm.alwaysDirty || control.type.$dirty ? {
             id: control.type.getSelected('id')
-          } : undefined
+          } : undefined,
+          port_forwarding_type: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'port_forwarding_type'].$dirty ? control.input.port_forwarding_type : undefined
         }
 
         if (!_(data).values().reject(isUndefined).value().length) {

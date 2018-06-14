@@ -105,6 +105,16 @@
     },
     "control": {
       "ADD": "Add Power Control",
+      "forward": {
+        "LABEL": "Port Forwarding",
+        "type": {
+          "DISABLED": "Not Enabled",
+          "PUBLIC": "Publicly Accessible",
+          "ACL": "IP Whitelist"
+        },
+        "ENABLE": "Enable",
+        "ACL": "ACL"
+      },
       "remove": {
         "TITLE": "Remove Server Power Control",
         "BODY": "This will also remove any port forwarding setup on this power control.",
@@ -214,6 +224,21 @@
           "BODY": "This will reboot the IPMI Controller on the server, which can fix issues occurring with IPMI/iKVM. It will not affect the operation of the server, but IPMI will not be accessible for up to 10 minutes while it reboots.",
           "CANCEL": "Cancel",
           "SUBMIT": "Reset BMC"
+        }
+      }
+    },
+    "acl": {
+      "TITLE": "Manage ACLs",
+      "modal": {
+        "manage": {
+          "TITLE": "ACLs",
+          "CREATE": "Grant IP Access"
+        },
+        "delete": {
+          "TITLE": "Delete ACL",
+          "SUBMIT": "Delete",
+          "CANCEL": "Cancel",
+          "BODY": "Click \"Delete\" to permanently delete these ACLs:"
         }
       }
     },

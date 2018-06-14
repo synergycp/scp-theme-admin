@@ -33,7 +33,7 @@
   function SwitchFormCtrl(Todo, Select, _) {
     var switchForm = this;
 
-    switchForm.switchTypes = ['Dell', 'Juniper', 'Dell PowerConnect 6248'];
+    switchForm.switchTypes = ['Dell', 'Juniper', 'Dell PowerConnect 6248', 'Brocade'];
     switchForm.input = _.clone(INPUTS);
     switchForm.groups = Select('group').multi();
 

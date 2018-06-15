@@ -240,6 +240,13 @@
           "CANCEL": "Cancel",
           "BODY": "Click \"Delete\" to permanently delete these ACLs:"
         }
+      },
+      "form": {
+        "SUBMIT": "Add ACL",
+        "ip": {
+          "LABEL": "IP Address",
+          "PLACEHOLDER": ""
+        }
       }
     },
     "client": {
@@ -294,6 +301,9 @@
           "PERSIST": "Make Persistent"
         }
       }
+    },
+    "kvm": {
+      "LAUNCH": "Launch KVM"
     },
     "power": {
       "STATUS": "Power Status",

@@ -39,7 +39,7 @@
     }
 
     function onDestroy() {
-      ports.list.clearPaginationAndSortFromUrl();
+      vm.list.clearPaginationAndSortFromUrl();
     }
   }
 })();

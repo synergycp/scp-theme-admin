@@ -180,16 +180,18 @@ div.relative(
     ng-model="control.input.ip"
   )
 
-  +select(
-    "server.form.control.forward.LABEL",
-    "control-{{ controlIndex }}.port_forwarding_type"
-  )(
-    name="control-{{ controlIndex }}.port_forwarding_type"
-    ng-model="control.input.port_forwarding_type"
-    ng-options="'server.form.control.forward.type.'+type | translate for (type,value) in control.portForwardingTypes"
-  )
+  // TODO: Support for port forwarding as a separate attribute
+  div(ng-if="control.type.selected.supports.client_user")
+    +select(
+      "server.form.control.forward.LABEL",
+      "control-{{ controlIndex }}.port_forwarding_type"
+    )(
+      name="control-{{ controlIndex }}.port_forwarding_type"
+      ng-model="control.input.port_forwarding_type"
+      ng-options="'server.form.control.forward.type.'+type | translate for (type,value) in control.portForwardingTypes"
+    )
 
-  +label("server.form.control.admin.LABEL")
+  +label("server.form.control.admin.LABEL")(ng-if="control.type.selected.supports.admin_user")
     .row
       .col-xs-6
         input.form-control(
@@ -206,7 +208,24 @@ div.relative(
           name="control-{{ controlIndex }}.admin.password"
         )
 
-  +label("server.form.control.client.LABEL")
+  +label("server.form.control.snmp.LABEL")(ng-if="control.type.selected.supports.snmp")
+    .row
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.snmp.port.PLACEHOLDER' }"
+          ng-model="control.input.admin.username"
+          name="control-{{ controlIndex }}.admin.username"
+        )
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.snmp.password.PLACEHOLDER' }"
+          ng-model="control.input.admin.password"
+          name="control-{{ controlIndex }}.admin.password"
+        )
+
+  +label("server.form.control.client.LABEL")(ng-if="control.type.selected.supports.client_user")
     .row
       .col-xs-6
         input.form-control(

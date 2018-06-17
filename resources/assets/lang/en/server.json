@@ -146,6 +146,15 @@
         "password": {
           "PLACEHOLDER": "Client Password"
         }
+      },
+      "snmp": {
+        "LABEL": "SNMP Details",
+        "port": {
+          "PLACEHOLDER": "Port Number (e.g. 1)"
+        },
+        "password": {
+          "PLACEHOLDER": "Community Key"
+        }
       }
     },
     "billing": {

@@ -180,7 +180,7 @@ div.relative(
     ng-model="control.input.ip"
   )
 
-  +label("server.form.control.admin.LABEL")
+  +label("server.form.control.admin.LABEL")(ng-if="control.type.selected.supports.admin_user")
     .row
       .col-xs-6
         input.form-control(
@@ -197,7 +197,24 @@ div.relative(
           name="control-{{ controlIndex }}.admin.password"
         )
 
-  +label("server.form.control.client.LABEL")
+  +label("server.form.control.snmp.LABEL")(ng-if="control.type.selected.supports.snmp")
+    .row
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.snmp.port.PLACEHOLDER' }"
+          ng-model="control.input.admin.username"
+          name="control-{{ controlIndex }}.admin.username"
+        )
+      .col-xs-6
+        input.form-control(
+          type="text"
+          translate-attr="{ 'placeholder': 'server.form.control.snmp.password.PLACEHOLDER' }"
+          ng-model="control.input.admin.password"
+          name="control-{{ controlIndex }}.admin.password"
+        )
+
+  +label("server.form.control.client.LABEL")(ng-if="control.type.selected.supports.client_user")
     .row
       .col-xs-6
         input.form-control(

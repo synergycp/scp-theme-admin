@@ -2,16 +2,17 @@
   'use strict';
 
   angular
-    .module('app.network.switch.speed.list')
-    .controller('SwitchSpeedIndexCtrl', SwitchSpeedIndexCtrl);
+    .module('app.network.forward.gateway.list')
+    .controller('ForwardGatewayIndexCtrl', ForwardGatewayIndexCtrl)
+    ;
 
   /**
    * @ngInject
    */
-  function SwitchSpeedIndexCtrl(SwitchSpeedList, ListFilter, $scope) {
+  function ForwardGatewayIndexCtrl(ForwardGatewayList, ListFilter, Todo, $scope) {
     var vm = this;
 
-    vm.list = SwitchSpeedList()
+    vm.list = ForwardGatewayList()
       .setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
 
@@ -22,7 +23,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'port-speed',
+        target_type: 'forward.gateway',
       },
     };
 
@@ -35,7 +36,8 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      vm.list.create(vm.create.getData())
+        .then(Todo.refresh);
     }
 
     function onDestroy() {

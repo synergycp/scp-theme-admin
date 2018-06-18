@@ -146,6 +146,15 @@
         "password": {
           "PLACEHOLDER": "Client Password"
         }
+      },
+      "snmp": {
+        "LABEL": "SNMP Details",
+        "port": {
+          "PLACEHOLDER": "Port Number (e.g. 1)"
+        },
+        "password": {
+          "PLACEHOLDER": "Community Key"
+        }
       }
     },
     "billing": {
@@ -240,6 +249,13 @@
           "CANCEL": "Cancel",
           "BODY": "Click \"Delete\" to permanently delete these ACLs:"
         }
+      },
+      "form": {
+        "SUBMIT": "Add ACL",
+        "ip": {
+          "LABEL": "IP Address",
+          "PLACEHOLDER": ""
+        }
       }
     },
     "client": {
@@ -294,6 +310,9 @@
           "PERSIST": "Make Persistent"
         }
       }
+    },
+    "kvm": {
+      "LAUNCH": "Launch KVM"
     },
     "power": {
       "STATUS": "Power Status",

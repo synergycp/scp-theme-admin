@@ -1,0 +1,55 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field(
+  "{{ 'forward.gateway.form.name.LABEL' | translate }}",
+  "name"
+)(
+  placeholder="{{ 'forward.gateway.form.name.PLACEHOLDER' | translate }}"
+  ng-model="gatewayForm.input.name"
+)
+
++field(
+  "{{ 'forward.gateway.form.hostname.LABEL' | translate }}",
+  "hostname"
+)(
+  placeholder="{{ 'forward.gateway.form.hostname.PLACEHOLDER' | translate }}"
+  ng-model="gatewayForm.input.hostname"
+)
+
++field(
+  "{{ 'forward.gateway.form.api_key.LABEL' | translate }}",
+  "api_key"
+)(
+  placeholder="{{ 'forward.gateway.form.api_key.PLACEHOLDER' | translate }}"
+  ng-model="gatewayForm.input.api_key"
+)
+
++field(
+  "{{ 'forward.gateway.form.port_limit.LABEL' | translate }}",
+  "port_limit"
+)(
+  placeholder="{{ 'forward.gateway.form.port_limit.PLACEHOLDER' | translate }}"
+  ng-model="gatewayForm.input.port_limit"
+)
+
++label("{{ 'forward.gateway.form.group.LABEL' | translate }}")
+  +ui-select("gatewayForm.groups")(
+    multiple
+    theme="bootstrap"
+    close-on-select="false"
+  )
+    ui-select-match(placeholder="{{ 'forward.gateway.form.group.LABEL' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+        "group in (" +
+        "gatewayForm.groups.items |" +
+        "filter: {name: $select.search} |" +
+        "filter: gatewayForm.groups.notSelected" +
+        ") track by group.id"
+      refresh="gatewayForm.groups.load($select.search)"
+      refresh-delay="400"
+    )
+      div(ng-bind-html="group.name | highlight: $select.search")

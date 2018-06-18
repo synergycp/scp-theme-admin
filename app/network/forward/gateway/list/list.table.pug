@@ -1,0 +1,35 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showName")
+    span(translate="forward.gateway.list.heading.NAME")
+    sort(col="name")
+  th.sortable(ng-if="table.showHostname")
+    span(translate="forward.gateway.list.heading.HOSTNAME")
+    sort(col="hostname")
+  th.sortable(ng-if="table.showPortLimit")
+    span(translate="forward.gateway.list.heading.PORT-LIMIT")
+    sort(col="port_limit")
+  th(ng-if="table.showActions")
+    span(translate="forward.gateway.list.heading.ACTIONS")
+
+block columns
+  td(ng-if="table.showName")
+    a(
+      ui-sref="app.network.forward.gateway.view({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(
+    ng-if="table.showHostname"
+    ng-bind="row.hostname"
+  )
+  td(
+    ng-if="table.showPortLimit"
+    ng-bind="row.port_limit"
+  )
+  td(ng-if="table.showActions")
+    .btn-forward.gateway.btn-forward.gateway-xs
+      a.btn.btn-default(
+        ui-sref="app.network.forward.gateway.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

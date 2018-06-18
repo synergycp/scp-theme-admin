@@ -7,5 +7,58 @@
         }
       }
     }
+  },
+  "gateway": {
+    "buttons": {
+      "DELETE": "Delete"
+    },
+    "list": {
+      "TITLE": "Port Forwarding Gateways",
+      "heading": {
+        "NAME": "Name",
+        "HOSTNAME": "Hostname",
+        "PORT-LIMIT": "Port Limit",
+        "ACTIONS": "Actions"
+      },
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
+    "form": {
+      "title": {
+        "ADD": "Create Port Forwarding Gateway",
+        "EDIT": "Edit Port Forwarding Gateway"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Los Angeles 1"
+      },
+      "hostname": {
+        "LABEL": "Hostname",
+        "PLACEHOLDER": "la1.ipmi.example.org:3000"
+      },
+      "api_key": {
+        "LABEL": "API Key",
+        "PLACEHOLDER": "The installer will tell you this"
+      },
+      "port_limit": {
+        "LABEL": "Port Limit",
+        "PLACEHOLDER": "3000"
+      },
+      "group": {
+        "LABEL": "IP Groups"
+      }
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Port Forwarding Gateways",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Port Forwarding Gateways:"
+      }
+    }
   }
 }

@@ -443,16 +443,17 @@
       ]).then(control.$setPristine);
 
       function updateServerControl() {
+        var form = serverForm.form.form;
         var data = {
-          ip: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'ip'].$dirty ? control.input.ip : undefined,
-          client_user: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'client.username'].$dirty ? control.input.client.username : undefined,
-          client_password: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'client.password'].$dirty ? control.input.client.password : undefined,
-          admin_user: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'admin.username'].$dirty ? control.input.admin.username : undefined,
-          admin_password: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'admin.password'].$dirty ? control.input.admin.password : undefined,
+          ip: serverForm.alwaysDirty || (form[controlPrefix+'ip'] || {}).$dirty ? control.input.ip : undefined,
+          client_user: serverForm.alwaysDirty || (form[controlPrefix+'client.username'] || {}).$dirty ? control.input.client.username : undefined,
+          client_password: serverForm.alwaysDirty || (form[controlPrefix+'client.password'] || {}).$dirty ? control.input.client.password : undefined,
+          admin_user: serverForm.alwaysDirty || (form[controlPrefix+'admin.username'] || {}).$dirty ? control.input.admin.username : undefined,
+          admin_password: serverForm.alwaysDirty || (form[controlPrefix+'admin.password'] || {}).$dirty ? control.input.admin.password : undefined,
           type: serverForm.alwaysDirty || control.type.$dirty ? {
             id: control.type.getSelected('id')
           } : undefined,
-          port_forwarding_type: serverForm.alwaysDirty || serverForm.form.form[controlPrefix+'port_forwarding_type'].$dirty ? control.input.port_forwarding_type : undefined
+          port_forwarding_type: serverForm.alwaysDirty || (form[controlPrefix+'port_forwarding_type'] || {}).$dirty ? control.input.port_forwarding_type : undefined
         }
 
         if (!_(data).values().reject(isUndefined).value().length) {

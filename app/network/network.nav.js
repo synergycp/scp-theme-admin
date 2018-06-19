@@ -27,6 +27,11 @@
     sref: "app.network.switch.speed.list",
   };
 
+  var FORWARD_GATEWAYS = {
+    text: "Forwarding Gateways",
+    sref: "app.network.forward.gateway.list",
+  };
+
   /**
    * @ngInject
    */
@@ -65,12 +70,17 @@
         group.item(SWITCHES);
         group.item(SPEEDS);
       }
+
+      if (map.network.forward.read) {
+        group.item(FORWARD_GATEWAYS);
+      }
     }
 
     function hide() {
       group.remove(GROUPS);
       group.remove(ENTITIES);
       group.remove(SWITCHES);
+      group.remove(FORWARD_GATEWAYS);
       group.remove(SPEEDS);
     }
   }

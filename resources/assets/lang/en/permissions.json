@@ -139,6 +139,15 @@
       "write": {
         "LABEL": "Edit"
       }
+    },
+    "forward": {
+      "TITLE": "Forwarding Gateways",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
     }
   },
   "pkg": {

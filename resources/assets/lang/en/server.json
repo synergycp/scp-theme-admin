@@ -567,6 +567,14 @@
     "SPEED": "Port Speed",
     "PORT": "Port Number",
     "MAC": "MAC Address",
+    "modal": {
+      "bulk-commands": {
+        "TITLE": "Run Bulk Switch Commands",
+        "BODY": "Please choose which commands should be run on all of the server ports on these servers. Note that this queues the commands to be run in the background, so it may take a few minutes for the changes to take affect if there are a lot of servers.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Run Commands"
+      }
+    },
     "power": {
       "BTN": "Port Power",
       "on": {

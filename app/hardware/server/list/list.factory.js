@@ -14,7 +14,9 @@
     List,
     ListConfirm,
     ServerAssign,
-    $stateParams
+    Modal,
+    $stateParams,
+    _
   ) {
     return function () {
       var list = List('server')
@@ -38,9 +40,23 @@
       );
       list.bulk.add('Suspend', handler(ServerAssign.suspend));
       list.bulk.add('Unsuspend', handler(ServerAssign.unsuspend));
+      list.bulk.add('Run Switch Commands', switchCommands);
       list.bulk.add('Delete', confirm.delete);
 
       return list;
+
+      function switchCommands(items) {
+        return Modal
+          .make({
+            templateUrl: 'app/hardware/server/switch/switch.modal.bulk-commands.html',
+            controller: 'ServerSwitchModalBulkCommandsCtrl',
+            resolve: {
+              items: _.wrap(items),
+            },
+          })
+          .open()
+          .result;
+      }
 
       function handler(callback) {
         return function () {

@@ -49,7 +49,7 @@
     }
 
     function load() {
-      return $inventory
+      /*return $inventory
         .getList({
           per_page: 1,
           available: true,
@@ -57,7 +57,7 @@
         .then(function(items) {
           ServerInventoryNav.alert = items.meta.total;
           ServerInventoryNav.group.syncAlerts();
-        });
+        });*/
     }
   }
 })();

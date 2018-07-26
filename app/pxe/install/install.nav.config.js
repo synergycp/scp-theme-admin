@@ -45,14 +45,14 @@
     }
 
     function load() {
-      return $installs
+      /*return $installs
         .getList({
           per_page: 1,
         })
         .then(function(items) {
           PxeInstallNav.alert = items.meta.total;
           PxeInstallNav.group.syncAlerts();
-        });
+        });*/
     }
   }
 })();

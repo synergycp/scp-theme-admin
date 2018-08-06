@@ -1,0 +1,7 @@
+extends /resources/angle/pug/modal.confirm.pug
+
+block append body
+  .loader(ng-class="modal.loader.class")
+  p.form-horizontal
+    div(ng-repeat="checklistItem in modal.checklistItems track by checklistItem.command")
+      +checkbox("{{checklistItem.translate}}")(ng-model="checklistItem.selected")

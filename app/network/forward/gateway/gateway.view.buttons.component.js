@@ -17,12 +17,13 @@
   /**
    * @ngInject
    */
-  function ForwardGatewayButtonsCtrl(ForwardGatewayList, Loader, $state) {
+  function ForwardGatewayButtonsCtrl(ForwardGatewayList, Loader, $state, Api) {
     var buttons = this;
 
     buttons.loader = Loader();
     buttons.$onInit = init;
     buttons.delete = doDelete;
+    buttons.resync = resync;
 
 
     //////////
@@ -37,6 +38,14 @@
           .confirm
           .delete([buttons.gateway])
           .result.then(transferToList)
+      );
+    }
+
+    function resync() {
+      return buttons.loader.during(
+        Api.all('forward/gateway')
+          .one(buttons.gateway.id+'')
+          .patch({resync: true})
       );
     }
 

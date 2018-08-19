@@ -10,7 +10,8 @@
   },
   "gateway": {
     "buttons": {
-      "DELETE": "Delete"
+      "DELETE": "Delete",
+      "RESYNC": "Resync"
     },
     "list": {
       "TITLE": "Port Forwarding Gateways",

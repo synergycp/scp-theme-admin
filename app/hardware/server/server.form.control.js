@@ -30,7 +30,7 @@
       ACL: 'acl',
     };
     control.input = {
-      ip: '',
+      hostname: '',
       admin: {
         username: '',
         password: '',
@@ -52,7 +52,7 @@
 
     function fromExisting(response) {
       control.id = response.id;
-      control.input.ip = response.ip;
+      control.input.hostname = response.hostname;
       control.original = response;
       control.input.client.username = response.client_user;
       control.input.client.password = response.client_password;

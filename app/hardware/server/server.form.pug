@@ -173,11 +173,11 @@ div.relative(
         span(ng-bind-html="choice.name | highlight: $select.search")
 
   +field(
-    "server.form.control.ip.LABEL",
-    "control-{{ controlIndex }}.ip"
+    "server.form.control.hostname.LABEL",
+    "control-{{ controlIndex }}.hostname"
   )(
-    translate-attr="{ 'placeholder': 'server.form.control.ip.PLACEHOLDER' }"
-    ng-model="control.input.ip"
+    translate-attr="{ 'placeholder': 'server.form.control.hostname.PLACEHOLDER' }"
+    ng-model="control.input.hostname"
   )
 
   // TODO: Support for port forwarding as a separate attribute

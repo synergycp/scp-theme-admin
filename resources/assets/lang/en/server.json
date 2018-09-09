@@ -125,9 +125,9 @@
         "LABEL": "Type",
         "PLACEHOLDER": "Type to search..."
       },
-      "ip": {
-        "LABEL": "IP",
-        "PLACEHOLDER": "IP Address"
+      "hostname": {
+        "LABEL": "Hostname",
+        "PLACEHOLDER": "Hostname or IP Address"
       },
       "admin": {
         "LABEL": "Admin",
@@ -224,7 +224,7 @@
   "ipmi": {
     "TITLE": "Power Controls",
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
-    "ADDRESS": "IPMI IP Address",
+    "ADDRESS": "IPMI Address",
     "BMC": {
       "TITLE": "Reset BMC",
       "modal": {

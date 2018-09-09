@@ -445,7 +445,7 @@
       function updateServerControl() {
         var form = serverForm.form.form;
         var data = {
-          ip: serverForm.alwaysDirty || (form[controlPrefix+'ip'] || {}).$dirty ? control.input.ip : undefined,
+          hostname: serverForm.alwaysDirty || (form[controlPrefix+'hostname'] || {}).$dirty ? control.input.hostname : undefined,
           client_user: serverForm.alwaysDirty || (form[controlPrefix+'client.username'] || {}).$dirty ? control.input.client.username : undefined,
           client_password: serverForm.alwaysDirty || (form[controlPrefix+'client.password'] || {}).$dirty ? control.input.client.password : undefined,
           admin_user: serverForm.alwaysDirty || (form[controlPrefix+'admin.username'] || {}).$dirty ? control.input.admin.username : undefined,

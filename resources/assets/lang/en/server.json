@@ -564,6 +564,15 @@
     "NAME": "Switch Name",
     "SYNC_VLAN": "Assign VLAN",
     "SYNC_SPEED": "Set Port Speed",
+    "wipe": {
+      "BTN": "Wipe",
+      "confirm": {
+        "TITLE": "Wipe Switch Port?",
+        "BODY": "This will turn off power for port {{ port }} on {{ switch }}. If {{ switch }} has a Layer 3 switch type, it will also revoke access to all IPs for this switch port.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Wipe Switch Port"
+      }
+    },
     "SPEED": "Port Speed",
     "PORT": "Port Number",
     "MAC": "MAC Address",

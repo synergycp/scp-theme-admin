@@ -35,6 +35,10 @@
         command: 'power-off',
         translate: "server.switch.power.off.BTN",
       },
+      {
+        command: 'wipe',
+        translate: "server.switch.wipe.BTN",
+      },
     ];
 
     modal.checklistItems = _.clone(CHECKLIST_ITEMS);

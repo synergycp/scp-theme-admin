@@ -467,7 +467,7 @@
         "PXE": "OS Reload",
         "IPMI": "IPMI Controls",
         "SWITCH": "Switch Controls (port power on/off)",
-        "HELP": "All client access is temporarily disabled in the case of server suspension."
+        "HELP": "All client access is disabled while a server is suspended."
       }
     },
     "delete": {

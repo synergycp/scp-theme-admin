@@ -57,6 +57,9 @@
     function syncProfile(profile) {
       if (profile.iso) {
         pxeInstallForm.input.edition = Select('pxe/iso/' + profile.iso.id + '/edition')
+          .filter({
+            is_enabled: true,
+          })
           .on('change', syncEdition);
       } else {
         pxeInstallForm.input.edition = null;

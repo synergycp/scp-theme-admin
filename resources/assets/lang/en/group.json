@@ -43,7 +43,7 @@
     },
     "billing_id": {
       "LABEL": "Billing ID",
-      "PLACEHOLDER": "Optional. Must be alphanumeric and unique"
+      "PLACEHOLDER": "Optional. Must be alphanumeric"
     },
     "options": {
       "LABEL": "Options",

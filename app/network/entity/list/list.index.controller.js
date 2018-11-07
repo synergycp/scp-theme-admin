@@ -19,8 +19,6 @@
     };
     EventEmitter().bindTo(vm.create);
 
-    vm.create.on('created.relations', vm.list.refresh.now);
-
     vm.logs = {
       filter: {
         target_type: 'entity',

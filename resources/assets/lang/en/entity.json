@@ -88,12 +88,13 @@
         "PLACEHOLDER": "e.g. 255"
       },
       "bulk": {
-        "LABEL": "Add Bulk",
-        "text": "Add Bulk IPs",
+        "LABEL": "Bulk Add",
+        "text": "Add IPs in bulk",
         "increment_amount": "IP Increment",
         "PLACEHOLDER": "e.g. 8 for /29",
-        "increment_vlan": "VLAN",
-        "increment_vlan_text": "Increment VLAN"
+        "increment_vlan": "VLAN/Gateway",
+        "increment_vlan_text": "Increment VLAN and Gateway",
+        "HELP": "We'll increment the IP address by this amount each time you add one."
       }
     },
     "v6": {

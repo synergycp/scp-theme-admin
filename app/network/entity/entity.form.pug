@@ -115,6 +115,11 @@ div(ng-if="entityForm.showV4")
     )
     
   div(ng-if="entityForm.v4.is_bulk")
+    +label("entity.form.v4.bulk.increment_vlan")
+      +checkbox("entity.form.v4.bulk.increment_vlan_text")(
+        ng-model="entityForm.v4.increment_vlan"
+      )
+      
     +field(
       "{{ 'entity.form.v4.bulk.increment_amount' | translate }}",
       "v4.bulk"
@@ -123,11 +128,9 @@ div(ng-if="entityForm.showV4")
       ng-model="entityForm.input.v4.increment_amount"
       type="number"
     )
+      p.help-block(translate="entity.form.v4.bulk.HELP")
     
-    +label("entity.form.v4.bulk.increment_vlan")
-      +checkbox("entity.form.v4.bulk.increment_vlan_text")(
-        ng-model="entityForm.v4.increment_vlan"
-      )
+    
     
 
 div(ng-if="entityForm.showV6")

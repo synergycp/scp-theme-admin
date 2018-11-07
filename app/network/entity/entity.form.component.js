@@ -60,7 +60,7 @@
     entityForm.type = TYPE.V4;
     entityForm.input = _.clone(INPUTS);
     entityForm.v4 = {
-      increment_vlan: '',
+      increment_vlan: true,
       is_bulk: '',
       type: TYPE_V4.SINGLE,
       types: TYPE_V4,
@@ -234,71 +234,46 @@
       _.setContents(entityForm.groups.items, groups);
     }
 
+    function ipHandler(wholeIP, ip_increment) {
+      var ip = wholeIP.split('.');
+      var last = parseInt(ip.pop()) + ip_increment;
+      ip.push(last);
+      return ip.join('.');
+    }
+
+    function nicknameHandler(wholeName, ip_increment) {
+      var ip = wholeName.split('/')[0].split('.');
+      var last = parseInt(ip.pop()) + ip_increment;
+      ip.push(last);
+      var end = wholeName.split('/')[1];
+
+      if (last !== parseInt(last, 10)) {
+        return wholeName;
+      }
+
+      if (!end) {
+        return ip.join('.');
+      }
+      return ip.join('.')+'/'+end;
+    }
+
     function incrementBulk() {
       var is_bulk = entityForm.v4.is_bulk;
       var increment_vlan = entityForm.v4.increment_vlan;
       var ip_increment = entityForm.input.v4.increment_amount;
 
-      if (is_bulk) {
-        if (ip_increment) {
-          var wholeIP = entityForm.input.v4.address;
-          var ip = wholeIP.split('.');
-          var last = parseInt(ip.pop());
-          last += ip_increment;
-          ip.push(last);
-          entityForm.input.v4.address = ip.join('.');
-
-          entityForm.v4.range_end = (parseInt(entityForm.v4.range_end) + parseInt(ip_increment)).toString();
-
-          //nickname
-          var wholeName = entityForm.input.nickname;
-          ip = wholeName.split('/')[0].split('.');
-          last = parseInt(ip.pop());
-          last += ip_increment;
-          ip.push(last);
-          var end = wholeName.split('/')[1];
-
-          if (last === parseInt(last, 10) && end == parseInt(end, 10)) {
-            entityForm.input.nickname = ip.join('.')+'/'+wholeName.split('/')[1];
-          }
-
-          if (increment_vlan) {
-            entityForm.input.vlan++;
-
-            wholeIP = entityForm.input.v4.gateway;
-            ip = wholeIP.split('.');
-            last = parseInt(ip.pop());
-            last += ip_increment;
-            ip.push(last);
-            entityForm.input.v4.gateway = ip.join('.');
-          }
-        }
+      if (!is_bulk || !ip_increment) {
+        return;
       }
-    }
 
-    function deleteThis() {
-      var val = $('#form-nickname').val();
-      var ip = val.split('/')[0].split('.');
-      var last = parseInt(ip.pop());
-      last += ADD;
-      ip.push(last);
-      $('#form-nickname').val(ip.join('.')+'/'+val.split('/')[1]).trigger('input');
+      entityForm.input.v4.address = ipHandler(entityForm.input.v4.address, ip_increment)
+      entityForm.v4.range_end = (parseInt(entityForm.v4.range_end) + parseInt(ip_increment)).toString();
 
-      $('#form-vlan').val(parseInt($('#form-vlan').val())+VLAN_ADD).trigger('input');
-
-      val = $('input[ng-model="entityForm.input.v4.address"]').val().split('.');
-      val.push(parseInt(val.pop()) + ADD);
-      $('input[ng-model="entityForm.input.v4.address"]').val(val.join('.')).trigger('input');
-
-      $('input[ng-model="entityForm.v4.range_end"]').val(
-          parseInt($('input[ng-model="entityForm.v4.range_end"]').val())+ADD
-      ).trigger('input');
-
-      val = $('input[ng-model="entityForm.input.v4.gateway"]').val().split('.');
-      val.push(parseInt(val.pop()) + (VLAN_ADD ? ADD : 0));
-      $('input[ng-model="entityForm.input.v4.gateway"]').val(val.join('.')).trigger('input');
-
-      $('form[ng-submit="vm.create.submit()"]').triggerHandler('submit');
+      if (increment_vlan) {
+        entityForm.input.vlan++;
+        entityForm.input.v4.gateway = ipHandler(entityForm.input.v4.gateway, ip_increment)
+      }
+      entityForm.input.nickname = nicknameHandler(entityForm.input.nickname, ip_increment);
     }
   }
 })();

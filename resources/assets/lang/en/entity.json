@@ -86,6 +86,14 @@
       },
       "range": {
         "PLACEHOLDER": "e.g. 255"
+      },
+      "bulk": {
+        "LABEL": "Add Bulk",
+        "text": "Add Bulk IPs",
+        "increment_amount": "IP Increment",
+        "PLACEHOLDER": "e.g. 8 for /29",
+        "increment_vlan": "VLAN",
+        "increment_vlan_text": "Increment VLAN"
       }
     },
     "v6": {

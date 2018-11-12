@@ -127,5 +127,61 @@
         }
       }
     }
+  },
+  "theme": {
+    "customize": {
+      "form": {
+        "not-allowed": {
+          "billing": {
+            "TEXT": "Theme Customization is only available for licenses that have at least business support.",
+            "BTN": "Upgrade License"
+          },
+          "refresh": {
+            "TEXT": "Then, you can refresh your license for the upgrade to take effect:",
+            "BTN": "Refresh License"
+          }
+        },
+        "title": {
+          "EDIT": "Customize Theme"
+        },
+        "main_bg": {
+          "LABEL": "Page Background",
+          "PLACEHOLDER": "e.g. #000000. Leave blank for default."
+        },
+        "custom_css": {
+          "LABEL": "Custom CSS",
+          "PLACEHOLDER": "Any additional CSS overrides can be placed here."
+        },
+        "nav_bg": {
+          "LABEL": "Navigation Background",
+          "PLACEHOLDER": "e.g. #000000. Leave blank for default."
+        },
+        "side_nav_bg": {
+          "LABEL": "Side Navigation Background",
+          "PLACEHOLDER": "e.g. #000000. Leave blank for default."
+        },
+        "panel_bg": {
+          "LABEL": "Panel Background",
+          "PLACEHOLDER": "e.g. #000000. Leave blank for default."
+        },
+        "panel_alt_bg": {
+          "LABEL": "Panel Alternate Background",
+          "PLACEHOLDER": "e.g. #000000. Leave blank for default."
+        },
+        "logo": {
+          "LABEL": "Logo URL",
+          "PLACEHOLDER": "Leave blank for default.",
+          "HELP": "For best results, use an image that is 64px tall."
+        },
+        "link_color": {
+          "LABEL": "Link Color",
+          "PLACEHOLDER": "e.g. #000000. Leave blank for default."
+        },
+        "text_color": {
+          "LABEL": "Page Text Color",
+          "PLACEHOLDER": "e.g. #000000. Leave blank for default."
+        }
+      }
+    }
   }
 }

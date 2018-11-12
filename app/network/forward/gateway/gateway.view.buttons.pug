@@ -1,10 +1,11 @@
-.btn-group.btn-group-lg(ng-class="buttons.loader.class")
+div(ng-class="buttons.loader.class")
   .loader
-  a.btn.btn-danger(
-    ng-click="buttons.delete()"
-    translate="forward.gateway.buttons.DELETE"
-  )
-  a.btn.btn-primary(
-    ng-click="buttons.resync()"
-    translate="forward.gateway.buttons.RESYNC"
-  )
+  .btn-group.btn-group-lg(ng-class="buttons.loader.class")
+    a.btn.btn-danger(
+      ng-click="buttons.delete()"
+      translate="forward.gateway.buttons.DELETE"
+    )
+    a.btn.btn-primary(
+      ng-click="buttons.resync()"
+      translate="forward.gateway.buttons.RESYNC"
+    )

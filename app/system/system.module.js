@@ -11,6 +11,7 @@
       'app.system.integration',
       'app.system.ssh.key',
       'app.system.setting',
+      'app.system.theme',
       'app.system.log',
     ]);
 })();

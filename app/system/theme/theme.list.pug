@@ -1,0 +1,69 @@
+include /resources/angle/pug/mixins/form
+
+script(
+  type="text/ng-template"
+  id="app.system.theme.list.item"
+)
+  +label("{{item.fullLang}}.LABEL")(
+    ng-init="item.fullLang=item.pkg ? 'pkg.'+item.pkg+'.admin.themes.'+item.lang : ['themes', tab.text, item.slug].join('.')"
+  )
+    div(ng-switch="item.type")
+      div(ng-switch-when="Text")
+        input.form-control(
+          type="text"
+          name="{{item.id}}.value"
+          ng-model="item.value"
+          ng-change="tab.onFieldChanged(item)"
+        )
+      div(ng-switch-when="Select")
+        select.form-control(
+          name="{{item.id}}.value"
+          ng-model="item.value"
+          ng-options="choice.value as choice.text for choice in item.options"
+          ng-change="tab.onFieldChanged(item)"
+        )
+      div(ng-switch-when="Textarea")
+        textarea.form-control(
+          rows="2"
+          name="{{item.id}}.value"
+          ng-model="item.value"
+          ng-change="tab.onFieldChanged(item)"
+        )
+      div.checkbox(ng-switch-when="Checkbox")
+        label
+          input(
+            type="checkbox"
+            name="{{item.id}}.value"
+            ng-model="item.value"
+            ng-change="tab.onFieldChanged(item)"
+          )
+    p.help-block(
+      ng-if="(item.fullLang + '.PLACEHOLDER' | translate) != item.fullLang + '.PLACEHOLDER'"
+      translate="{{ item.fullLang }}.PLACEHOLDER"
+    )
+
+form(name="tab.form", ng-submit="tab.patchChanges()")
+  .row.form-horizontal
+    .col-md-6
+      div(
+        ng-repeat="(index, item) in tab.items"
+      )
+        div(
+          ng-if="index % 2 == 0"
+          ng-include="'app.system.theme.list.item'"
+        )
+    .col-md-6
+      div(
+        ng-repeat="(index, item) in tab.items"
+      )
+        div(
+          ng-if="index % 2"
+          ng-include="'app.system.theme.list.item'"
+        )
+  .panel-footer(style="margin: 0 -20px -10px")
+    .text-center
+      button.btn.btn-primary(
+        type="submit"
+        data-translate="system.theme.list.SUBMIT"
+      )
+

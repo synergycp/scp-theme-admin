@@ -15,7 +15,7 @@ include /resources/angle/pug/mixins/form
 )(
   placeholder="{{ 'switch.form.type.PLACEHOLDER' | translate }}"
   ng-model="switchForm.input.type"
-  ng-options="key*1 as value for (key, value) in switchForm.switchTypes"
+  ng-options="value.slug as value.name for value in switchForm.switchTypes"
 )
 
 +label("{{ 'switch.form.network.LABEL' | translate }}")

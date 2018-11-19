@@ -11,6 +11,11 @@
     sref: "app.system.setting.list",
   };
 
+  var THEME = {
+    text: "Theme",
+    sref: "app.system.theme.home",
+  };
+
   var INTEGRATIONS = {
     text: "Integrations",
     sref: "app.system.integration.list",
@@ -58,6 +63,10 @@
         group.item(SETTINGS);
       }
 
+      if (map.system.theme.read) {
+        group.item(THEME);
+      }
+
       if (map.system.integrations.read) {
         group.item(INTEGRATIONS);
       }
@@ -72,6 +81,7 @@
     function hide() {
       group.remove(LOGS);
       group.remove(SETTINGS);
+      group.remove(THEME);
       group.remove(INTEGRATIONS);
       group.remove(EMAILS);
       group.remove(SSH_KEYS);

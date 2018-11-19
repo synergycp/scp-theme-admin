@@ -125,9 +125,9 @@
         "LABEL": "Type",
         "PLACEHOLDER": "Type to search..."
       },
-      "ip": {
-        "LABEL": "IP",
-        "PLACEHOLDER": "IP Address"
+      "hostname": {
+        "LABEL": "Hostname",
+        "PLACEHOLDER": "Hostname or IP Address"
       },
       "admin": {
         "LABEL": "Admin",
@@ -224,7 +224,7 @@
   "ipmi": {
     "TITLE": "Power Controls",
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
-    "ADDRESS": "IPMI IP Address",
+    "ADDRESS": "IPMI Address",
     "BMC": {
       "TITLE": "Reset BMC",
       "modal": {
@@ -466,7 +466,8 @@
         "LABEL": "Access",
         "PXE": "OS Reload",
         "IPMI": "IPMI Controls",
-        "SWITCH": "Switch Controls"
+        "SWITCH": "Switch Controls (port power on/off)",
+        "HELP": "All client access is disabled while a server is suspended."
       }
     },
     "delete": {
@@ -564,6 +565,15 @@
     "NAME": "Switch Name",
     "SYNC_VLAN": "Assign VLAN",
     "SYNC_SPEED": "Set Port Speed",
+    "wipe": {
+      "BTN": "Wipe",
+      "confirm": {
+        "TITLE": "Wipe Switch Port?",
+        "BODY": "This will turn off power for port {{ port }} on {{ switch }}. If {{ switch }} has a Layer 3 switch type, it will also revoke access to all IPs for this switch port.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Wipe Switch Port"
+      }
+    },
     "SPEED": "Port Speed",
     "PORT": "Port Number",
     "MAC": "MAC Address",

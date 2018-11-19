@@ -1,0 +1,78 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field(
+  "{{ 'system.theme.customize.form.main_bg.LABEL' | translate }}",
+  "main_bg"
+)(
+  placeholder="{{ 'system.theme.customize.form.main_bg.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.main_bg"
+)
+
++field(
+  "{{ 'system.theme.customize.form.nav_bg.LABEL' | translate }}",
+  "nav_bg"
+)(
+  placeholder="{{ 'system.theme.customize.form.nav_bg.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.nav_bg"
+)
+
++field(
+  "{{ 'system.theme.customize.form.side_nav_bg.LABEL' | translate }}",
+  "side_nav_bg"
+)(
+  placeholder="{{ 'system.theme.customize.form.side_nav_bg.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.side_nav_bg"
+)
+
+
++field(
+  "{{ 'system.theme.customize.form.panel_bg.LABEL' | translate }}",
+  "panel_bg"
+)(
+  placeholder="{{ 'system.theme.customize.form.panel_bg.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.panel_bg"
+)
+
+
++field(
+  "{{ 'system.theme.customize.form.panel_alt_bg.LABEL' | translate }}",
+  "panel_alt_bg"
+)(
+  placeholder="{{ 'system.theme.customize.form.panel_alt_bg.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.panel_alt_bg"
+)
+
++field(
+  "{{ 'system.theme.customize.form.text_color.LABEL' | translate }}",
+  "text_color"
+)(
+  placeholder="{{ 'system.theme.customize.form.text_color.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.text_color"
+)
+
++field(
+  "{{ 'system.theme.customize.form.link_color.LABEL' | translate }}",
+  "link_color"
+)(
+  placeholder="{{ 'system.theme.customize.form.link_color.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.link_color"
+)
+
++field(
+  "{{ 'system.theme.customize.form.logo.LABEL' | translate }}",
+  "logo"
+)(
+  placeholder="{{ 'system.theme.customize.form.logo.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.logo"
+)
+  p.help-block(translate="system.theme.customize.form.logo.HELP")
+
++textarea(
+  "{{ 'system.theme.customize.form.custom_css.LABEL' | translate }}",
+  "custom_css"
+).code(
+  placeholder="{{ 'system.theme.customize.form.custom_css.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.custom_css"
+  rows="15"
+)

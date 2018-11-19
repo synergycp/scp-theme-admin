@@ -40,6 +40,7 @@
       on: command.bind(null, 'power-on'),
       off: confirmPowerOff,
     };
+    portControl.wipe = confirmWipe;
 
     //////////
 
@@ -50,17 +51,25 @@
     }
 
     function confirmPowerOff() {
+      return modalConfirmCommand('power-off', 'server.switch.power.off.confirm');
+    }
+
+    function confirmWipe() {
+      return modalConfirmCommand('wipe', 'server.switch.wipe.confirm');
+    }
+
+    function modalConfirmCommand(cmd, lang) {
       return portControl.loader.during(
         Modal
-          .confirm([portControl.server], 'server.switch.power.off.confirm')
+          .confirm([portControl.server], lang)
           .data({
             port: portControl.server.switch.port.name,
             switch: portControl.server.switch.name,
           })
           .open()
           .result
-          .then(command.bind(null, 'power-off'))
-      );
+          .then(command.bind(null, cmd))
+      )
     }
 
     function command(cmd) {

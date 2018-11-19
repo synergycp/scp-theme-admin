@@ -1,0 +1,35 @@
+extends /resources/angle/pug/edit
+
+block title
+  span(
+    translate='system.theme.customize.form.title.EDIT'
+  )
+
+block form
+  div(ng-if="vm.allowed")
+    theme-customization-form(form="vm.edit")
+
+  .text-center(
+    ng-if="!vm.allowed && vm.edit.loader.hasLoaded"
+    style="max-width: 60%; margin: 0 auto"
+  )
+    p(translate="system.theme.customize.form.not-allowed.billing.TEXT")
+    p
+      a.btn.btn-primary(
+        translate="system.theme.customize.form.not-allowed.billing.BTN"
+        target="_blank"
+        href="https://billing.synergycp.com/"
+      )
+    p(style="height: 16px")
+    p(translate="system.theme.customize.form.not-allowed.refresh.TEXT")
+    p
+      .btn.btn-success(
+        translate="system.theme.customize.form.not-allowed.refresh.BTN"
+        ng-click="vm.refreshLicense()"
+      )
+
+  div(
+    ng-if="!vm.edit.loader.hasLoaded"
+    style="height: 150px"
+  )
+

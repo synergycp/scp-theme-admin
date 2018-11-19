@@ -30,10 +30,16 @@
   /**
    * @ngInject
    */
-  function SwitchFormCtrl(Todo, Select, _) {
+  function SwitchFormCtrl(Todo, Select, _, Api) {
     var switchForm = this;
 
-    switchForm.switchTypes = ['Dell', 'Juniper', 'Dell PowerConnect 6248', 'Brocade', 'Cisco'];
+
+    Api.all('switch/type').getList().then(function (result) {
+      _.setContents(switchForm.switchTypes, result);
+      switchForm.input.type = switchForm.input.type || switchForm.switchTypes[0].slug;
+    });
+
+    switchForm.switchTypes = [];
     switchForm.input = _.clone(INPUTS);
     switchForm.groups = Select('group').multi();
 

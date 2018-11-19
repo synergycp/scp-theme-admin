@@ -57,6 +57,15 @@
       "write": {
         "LABEL": "Edit"
       }
+    },
+    "theme": {
+      "TITLE": "Theme Customization",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
     }
   },
   "pxe": {

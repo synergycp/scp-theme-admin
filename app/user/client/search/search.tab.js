@@ -43,7 +43,7 @@
     tab.text = 'client.search.TITLE';
     tab.getState = getState;
     tab.getStateParams = getStateParams;
-    tab.order = 5;
+    tab.order = 10;
     tab.results = {
       url: RouteHelpers.basepath('user/client/search/search.tab.html'),
     };

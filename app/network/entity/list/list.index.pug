@@ -20,7 +20,7 @@ block list
 
 block bottom-left
   +create-form("{{ 'entity.form.title.ADD' | translate }}", 'entity-edit-form')
-    entity-form(form="vm.create")
+    entity-form(form="vm.create" allow-bulk-add="true")
 
 block bottom-right
   logs(

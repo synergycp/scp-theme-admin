@@ -108,27 +108,28 @@ div(ng-if="entityForm.showV4")
     placeholder="{{ 'entity.form.v4.gateway.PLACEHOLDER' | translate }}"
     ng-model="entityForm.input.v4.gateway"
   )
-  
-  +label("entity.form.v4.bulk.LABEL")
-    +checkbox("entity.form.v4.bulk.text")(
-      ng-model="entityForm.v4.is_bulk"
-    )
+
+  div(ng-if="entityForm.allowBulkAdd")
+    +label("entity.form.v4.bulk.toggle.LABEL")
+      +checkbox("entity.form.v4.bulk.toggle.TEXT")(
+        ng-model="entityForm.v4.is_bulk"
+      )
     
   div(ng-if="entityForm.v4.is_bulk")
-    +label("entity.form.v4.bulk.increment_vlan")
-      +checkbox("entity.form.v4.bulk.increment_vlan_text")(
+    +label("entity.form.v4.bulk.increment_vlan.LABEL")
+      +checkbox("entity.form.v4.bulk.increment_vlan.TEXT")(
         ng-model="entityForm.v4.increment_vlan"
       )
       
     +field(
-      "{{ 'entity.form.v4.bulk.increment_amount' | translate }}",
+      "{{ 'entity.form.v4.bulk.increment_amount.LABEL' | translate }}",
       "v4.bulk"
     )(
-      placeholder="{{ 'entity.form.v4.bulk.PLACEHOLDER' | translate }}"
+      placeholder="{{ 'entity.form.v4.bulk.increment_amount.PLACEHOLDER' | translate }}"
       ng-model="entityForm.input.v4.increment_amount"
       type="number"
     )
-      p.help-block(translate="entity.form.v4.bulk.HELP")
+      p.help-block(translate="entity.form.v4.bulk.increment_amount.HELP")
     
     
     

@@ -41,6 +41,7 @@
       require: {},
       bindings: {
         form: '=',
+        allowBulkAdd: '<?',
       },
       controller: 'EntityFormCtrl as entityForm',
       transclude: true,

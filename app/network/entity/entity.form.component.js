@@ -268,7 +268,10 @@
       }
 
       entityForm.input.v4.address = ipHandler(entityForm.input.v4.address, ip_increment)
-      entityForm.v4.range_end = (parseInt(entityForm.v4.range_end) + parseInt(ip_increment)).toString();
+
+      if (entityForm.v4.range_end) {
+        entityForm.v4.range_end = (parseInt(entityForm.v4.range_end) + parseInt(ip_increment)).toString();
+      }
 
       if (increment_vlan) {
         entityForm.input.vlan++;

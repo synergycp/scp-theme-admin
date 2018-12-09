@@ -6,6 +6,7 @@ include /resources/angle/pug/mixins/form
   "email"
 )(
   ng-model="clientForm.input.email"
+  placeholder="{{ 'client.form.email.PLACEHOLDER' | translate }}"
 )
 
 +field(
@@ -19,9 +20,11 @@ include /resources/angle/pug/mixins/form
 +double-field(
   "{{ 'client.form.name.LABEL' | translate }}",
   "name", {
-    "ng-model": "clientForm.input.first"
+    "ng-model": "clientForm.input.first",
+    "placeholder": "{{ 'client.form.name.first.PLACEHOLDER' | translate }}"
   }, {
-    "ng-model": "clientForm.input.last"
+    "ng-model": "clientForm.input.last",
+    "placeholder": "{{ 'client.form.name.last.PLACEHOLDER' | translate }}"
   }
 )
 

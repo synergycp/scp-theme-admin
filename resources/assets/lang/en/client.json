@@ -42,7 +42,8 @@
       "EDIT": "Edit {{ email }}"
     },
     "email": {
-      "LABEL": "Email"
+      "LABEL": "Email",
+      "PLACEHOLDER": "Email Address"
     },
     "password": {
       "LABEL": "Password",
@@ -62,7 +63,13 @@
       }
     },
     "name": {
-      "LABEL": "Name"
+      "LABEL": "Name",
+      "first": {
+          "PLACEHOLDER": "First Name"
+        },
+        "last": {
+          "PLACEHOLDER": "Last Name"
+        }
     }
   }
 }

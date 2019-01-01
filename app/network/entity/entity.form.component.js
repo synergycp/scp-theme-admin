@@ -22,6 +22,7 @@
       gateway: '',
       subnet_mask: '',
       range_end: '',
+      increment_amount: '',
     },
     v6: {
       address: '',
@@ -40,6 +41,7 @@
       require: {},
       bindings: {
         form: '=',
+        allowBulkAdd: '<?',
       },
       controller: 'EntityFormCtrl as entityForm',
       transclude: true,
@@ -59,6 +61,8 @@
     entityForm.type = TYPE.V4;
     entityForm.input = _.clone(INPUTS);
     entityForm.v4 = {
+      increment_vlan: true,
+      is_bulk: '',
       type: TYPE_V4.SINGLE,
       types: TYPE_V4,
       is_single: true,
@@ -100,6 +104,7 @@
 
       if (entityForm.form.on) {
         entityForm.form
+          .on('created', incrementBulk)
           .on('load', updateTypeFromInput)
           .on('change', updateTypeFromInput)
         ;
@@ -228,6 +233,51 @@
 
     function storeGroups(groups) {
       _.setContents(entityForm.groups.items, groups);
+    }
+
+    function ipHandler(wholeIP, ip_increment) {
+      var ip = wholeIP.split('.');
+      var last = parseInt(ip.pop()) + ip_increment;
+      ip.push(last);
+      return ip.join('.');
+    }
+
+    function nicknameHandler(wholeName, ip_increment) {
+      var ip = wholeName.split('/')[0].split('.');
+      var last = parseInt(ip.pop()) + ip_increment;
+      ip.push(last);
+      var end = wholeName.split('/')[1];
+
+      if (last !== parseInt(last, 10)) {
+        return wholeName;
+      }
+
+      if (!end) {
+        return ip.join('.');
+      }
+      return ip.join('.')+'/'+end;
+    }
+
+    function incrementBulk() {
+      var is_bulk = entityForm.v4.is_bulk;
+      var increment_vlan = entityForm.v4.increment_vlan;
+      var ip_increment = entityForm.input.v4.increment_amount;
+
+      if (!is_bulk || !ip_increment) {
+        return;
+      }
+
+      entityForm.input.v4.address = ipHandler(entityForm.input.v4.address, ip_increment)
+
+      if (entityForm.v4.range_end) {
+        entityForm.v4.range_end = (parseInt(entityForm.v4.range_end) + parseInt(ip_increment)).toString();
+      }
+
+      if (increment_vlan) {
+        entityForm.input.vlan++;
+        entityForm.input.v4.gateway = ipHandler(entityForm.input.v4.gateway, ip_increment)
+      }
+      entityForm.input.nickname = nicknameHandler(entityForm.input.nickname, ip_increment);
     }
   }
 })();

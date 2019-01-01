@@ -12,7 +12,7 @@
     $stateProvider
       .state('app.pxe.file.list', {
         url: '?q',
-        title: 'Profiles',
+        title: 'File Servers',
         controller: 'PxeFileIndexCtrl as vm',
         templateUrl: helper.basepath('pxe/file/list/list.index.html'),
         reloadOnSearch: false,

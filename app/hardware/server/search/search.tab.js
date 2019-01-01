@@ -40,7 +40,7 @@
     tab.list = list;
     tab.text = 'server.search.TITLE';
     tab.lang = 'server';
-    tab.order = 10;
+    tab.order = 5;
     tab.filter = filter;
     tab.getState = getState;
     tab.getStateParams = getStateParams;

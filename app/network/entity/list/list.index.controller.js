@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function EntityIndexCtrl(ListFilter, EntityList, Todo, $scope) {
+  function EntityIndexCtrl(ListFilter, EntityList, EventEmitter, Todo, $scope) {
     var vm = this;
 
     vm.list = EntityList()
@@ -17,6 +17,7 @@
     vm.create = {
       submit: create,
     };
+    EventEmitter().bindTo(vm.create);
 
     vm.logs = {
       filter: {
@@ -34,6 +35,7 @@
 
     function create() {
       vm.list.create(vm.create.getData())
+        .then(vm.create.fire.bind(null, 'created'))
         .then(Todo.refresh);
     }
 

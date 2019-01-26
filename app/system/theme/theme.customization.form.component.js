@@ -4,6 +4,8 @@
   var INPUTS = {
     main_bg: '',
     custom_css: '',
+    custom_admin: '',
+    custom_client: '',
     nav_bg: '',
     side_nav_bg: '',
     panel_bg: '',

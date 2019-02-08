@@ -63,6 +63,9 @@
               tab.ssl.required = false;
             })
             .then(vm.refresh)
+            .then(function () {
+              window.location.protocol = "http:";
+            })
         );
       }
 
@@ -75,6 +78,9 @@
             })
             .then(storeSslStatus)
             .then(vm.refresh)
+            .then(function () {
+              window.location.protocol = "https:";
+            })
         );
       }
 

@@ -74,5 +74,23 @@ include /resources/angle/pug/mixins/form
 ).code(
   placeholder="{{ 'system.theme.customize.form.custom_css.PLACEHOLDER' | translate }}"
   ng-model="customizeForm.input.custom_css"
-  rows="15"
+  rows="7"
+)
+
++textarea(
+  "{{ 'system.theme.customize.form.custom_admin_html.LABEL' | translate }}",
+  "custom_admin_html"
+).code(
+  placeholder="{{ 'system.theme.customize.form.custom_admin_html.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.custom_admin_html"
+  rows="7"
+)
+
++textarea(
+  "{{ 'system.theme.customize.form.custom_client_html.LABEL' | translate }}",
+  "custom_client_html"
+).code(
+  placeholder="{{ 'system.theme.customize.form.custom_client_html.PLACEHOLDER' | translate }}"
+  ng-model="customizeForm.input.custom_client_html"
+  rows="7"
 )

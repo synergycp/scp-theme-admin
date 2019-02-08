@@ -3,6 +3,7 @@
 
   angular
     .module('app.core')
+    .value("THEME_CUSTOM_HTML_LOCATION", "config/custom-admin-theme.html")
     .config(coreConfig);
 
 

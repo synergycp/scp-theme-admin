@@ -152,13 +152,13 @@
           "LABEL": "Custom CSS",
           "PLACEHOLDER": "Any additional CSS overrides can be placed here."
         },
-        "custom_admin": {
+        "custom_admin_html": {
           "LABEL": "Custom Admin HTML",
-          "PLACEHOLDER": "Any additional HTML or Javascript for the Admin side can be placed here."
+          "PLACEHOLDER": "Any additional HTML for the Admin side can be placed here, for example Google Analytics or Customer Support script tags."
         },
-        "custom_client": {
+        "custom_client_html": {
           "LABEL": "Custom Client HTML",
-          "PLACEHOLDER": "Any additional HTML or Javascript for the Client side can be placed here."
+          "PLACEHOLDER": "Any additional HTML for the Client side can be placed here, for example Google Analytics or Customer Support script tags."
         },
         "nav_bg": {
           "LABEL": "Navigation Background",

@@ -52,13 +52,14 @@
   /**
    * @ngInject
    */
-  function ProvisionFormCtrl(ClientUsersModals, Select, MultiInput, _, $stateParams, ServerConfig, moment) {
+  function ProvisionFormCtrl(ClientUsersModals, Select, MultiInput, _, $stateParams, ServerConfig, moment, $uibModal) {
     var provisionForm = this;
 
     provisionForm.$onInit = init;
     provisionForm.input = _.clone(INPUT);
     provisionForm.client = Select('client');
     provisionForm.createClient = openCreateClientModal;
+    provisionForm.bandwidthModal = openBandwidthHelpModal;
     provisionForm.group = Select('group')
       .filter(FILTER.GROUP)
       .on('change', syncGroupToEntities)
@@ -210,7 +211,7 @@
           if(selected) {
             carry.push(selected);
           }
-          return carry;         
+          return carry;
         }, [])
         if(ids.length) {
           selectedCollection[itemKey] = ids;
@@ -355,13 +356,19 @@
         });
     }
 
+    function openBandwidthHelpModal() {
+      var modal = $uibModal.open({
+        templateUrl: 'app/hardware/server/modal/modal.bandwidth.html',
+      });
+    }
+
     function Profiles() {
       var profiles = this;
       profiles.items = [];
 
       this.add = function() {
         profiles.items.push({
-          id: Math.random() // to make ng-repeat work correctly 
+          id: Math.random() // to make ng-repeat work correctly
         });
         return profiles;
       }

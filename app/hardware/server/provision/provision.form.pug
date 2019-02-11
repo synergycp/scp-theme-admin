@@ -211,6 +211,13 @@ hr
       placeholder="{{ 'server.form.billing.max_bandwidth.PLACEHOLDER' | translate }}"
       ng-model="provisionForm.billing.max_bandwidth"
     )
+  
+  p.help-block()
+    span(translate="server.form.billing.max_bandwidth.HELP")
+    a(
+      translate="server.form.billing.max_bandwidth.HELP_MODAL_OPENER"      
+      ng-click="provisionForm.bandwidthModal()"
+    )
 
 +field(
   "{{ 'server.form.nickname.LABEL' | translate }}",

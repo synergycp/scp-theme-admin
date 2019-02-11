@@ -33,7 +33,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, $scope, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
+  function ServerFormCtrl(_, $scope, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment, $uibModal) {
     var serverForm = this;
     var $ports, $controls;
 
@@ -48,6 +48,7 @@
     serverForm.ports = [];
     serverForm.ports.add = addPort;
     serverForm.ports.remove = removePort;
+    serverForm.bandwidthModal = openBandwidthHelpModal;
     serverForm.controls = [];
     serverForm.controls.add = addControl;
     serverForm.controls.remove = removeControl;
@@ -587,6 +588,12 @@
         if (field && field.$setDirty) field.$setDirty(false);
       });
       serverForm.form.form.$setPristine();
+    }
+
+    function openBandwidthHelpModal() {
+      var modal = $uibModal.open({
+        templateUrl: 'app/hardware/server/modal/modal.bandwidth.html',
+      });
     }
   }
 

@@ -171,7 +171,11 @@
       },
       "max_bandwidth": {
         "LABEL": "Max Bandwidth",
-        "PLACEHOLDER": "e.g. 10TB. Leave blank for no maximum"
+        "PLACEHOLDER": "e.g. 10TB. Leave blank for no maximum",
+        "HELP": "Read more about our ",
+        "HELP_MODAL_OPENER": "automatic server suspension.",
+        "HELP_MODAL_TITLE": "Automatic Server Suspension",
+        "HELP_MODAL": "The server will automatically be suspended until its next billing cycle starts if it reaches this threshold, unless it is assigned to a client that has VIP privileges. If there is a client attached, the client will receive an email once the usage reaches 90% of the limit (whether or not they are VIP). The usage resets monthly based on the server's billing date."
       }
     },
     "nickname": {

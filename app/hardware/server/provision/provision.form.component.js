@@ -52,7 +52,7 @@
   /**
    * @ngInject
    */
-  function ProvisionFormCtrl(ClientUsersModals, Select, MultiInput, _, $stateParams, ServerConfig, moment, $uibModal) {
+  function ProvisionFormCtrl(ClientUsersModals, Select, MultiInput, _, $stateParams, ServerConfig, moment, Modal) {
     var provisionForm = this;
 
     provisionForm.$onInit = init;
@@ -357,9 +357,9 @@
     }
 
     function openBandwidthHelpModal() {
-      var modal = $uibModal.open({
-        templateUrl: 'app/hardware/server/modal/modal.bandwidth.html',
-      });
+        var lang = "server.form.billing.max_bandwidth.modal";
+        return Modal.information(lang)
+          .open().result.then(function(){}, function(res){});
     }
 
     function Profiles() {

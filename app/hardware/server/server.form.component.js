@@ -33,7 +33,7 @@
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, $scope, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment, $uibModal) {
+  function ServerFormCtrl(_, $scope, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
     var serverForm = this;
     var $ports, $controls;
 
@@ -591,9 +591,9 @@
     }
 
     function openBandwidthHelpModal() {
-      var modal = $uibModal.open({
-        templateUrl: 'app/hardware/server/modal/modal.bandwidth.html',
-      });
+        var lang = "server.form.billing.max_bandwidth.modal";
+        return Modal.information(lang)
+          .open().result.then(function(){}, function(res){});
     }
   }
 

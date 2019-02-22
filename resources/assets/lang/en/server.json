@@ -176,7 +176,8 @@
           "HELP_TEXT": "Read more about our ",
           "HELP_LINK": "automatic server suspension.",
           "TITLE": "Automatic Server Suspension",
-          "BODY": "The server will automatically be suspended until its next billing cycle starts if it reaches this threshold, unless it is assigned to a client that has VIP privileges. If there is a client attached, the client will receive an email once the usage reaches 90% of the limit (whether or not they are VIP). The usage resets monthly based on the server's billing date."
+          "BODY": "The server will automatically be suspended until its next billing cycle starts if it reaches this threshold, unless it is assigned to a client that has VIP privileges. If there is a client attached, the client will receive an email once the usage reaches 90% of the limit (whether or not they are VIP). The usage resets monthly based on the server's billing date.",
+          "CLOSE": "Close"
         }
       }
     },

@@ -151,7 +151,13 @@ div.relative(
       name="port-{{ portIndex }}.max_bandwidth"
       translate-attr="{ 'placeholder': 'server.form.billing.max_bandwidth.PLACEHOLDER' }"
       ng-model="port.max_bandwidth"
-    )
+      )
+      p.help-block
+        span(translate="server.form.billing.max_bandwidth.modal.HELP_TEXT")
+        a(
+          translate="server.form.billing.max_bandwidth.modal.HELP_LINK"      
+          ng-click="serverForm.bandwidthModal()"
+        )
 
 +btn-full-w("server.form.port.ADD")(
   ng-click="serverForm.ports.add()"

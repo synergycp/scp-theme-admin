@@ -48,6 +48,7 @@
     serverForm.ports = [];
     serverForm.ports.add = addPort;
     serverForm.ports.remove = removePort;
+    serverForm.bandwidthModal = openBandwidthHelpModal;
     serverForm.controls = [];
     serverForm.controls.add = addControl;
     serverForm.controls.remove = removeControl;
@@ -587,6 +588,12 @@
         if (field && field.$setDirty) field.$setDirty(false);
       });
       serverForm.form.form.$setPristine();
+    }
+
+    function openBandwidthHelpModal() {
+        var lang = "server.form.billing.max_bandwidth.modal";
+        return Modal.information(lang)
+          .open().result.then(function(){}, function(res){});
     }
   }
 

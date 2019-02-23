@@ -12,7 +12,7 @@ include /resources/angle/pug/mixins/panel
           ng-submit="tab.ssl.enable()"
         )
           p
-            | SynergyCP uses&nbsp;
+            | {{app.theme.siteName}} uses&nbsp;
             a(
               href="https://letsencrypt.org"
               target="_blank"
@@ -36,7 +36,7 @@ include /resources/angle/pug/mixins/panel
             )
               | Let's Encrypt
             |  SSL certificate.
-          p SynergyCP will automatically renew and re-install the certificate each time it gets near its expiration date.
+          p {{app.theme.siteName}} will automatically renew and re-install the certificate each time it gets near its expiration date.
           p
             a.btn.btn-danger.btn-lg(
               ng-click="tab.ssl.disable()"

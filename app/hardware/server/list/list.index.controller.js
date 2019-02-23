@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerIndexCtrl(ServerList, LicenseService, ListFilter, EventEmitter, Todo, $scope) {
+  function ServerIndexCtrl($rootScope, ServerList, LicenseService, ListFilter, EventEmitter, Todo, $scope) {
     var vm = this;
 
     vm.list = ServerList()

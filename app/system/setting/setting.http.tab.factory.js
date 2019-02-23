@@ -10,7 +10,7 @@
    *
    * @ngInject
    */
-  function HttpTab(Loader, Api) {
+  function HttpTab($rootScope, Loader, Api) {
     return function(vm) {
       var tab = this;
       var $api = Api.one('http/ssl');

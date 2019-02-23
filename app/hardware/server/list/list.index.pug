@@ -32,6 +32,7 @@ block bottom-left
             href="https://billing.synergycp.com"
             translate='server.form.no-space.UPGRADE'
             target='_blank'
+            ng-if="!app.theme.whitelabeling"
           )
   div(ng-if="!vm.licenseFull")
     +create-form("{{ 'server.form.title.ADD' | translate }}", 'server-create-form', "vm.create.form")

@@ -42,7 +42,7 @@
     }
 
     function loginAs() {
-      Alert.warning('Logging in as client... If the page doesn\'t open please disable your popup blocker on this application.');
+      Alert.info('Logging in as client... If the page doesn\'t open please disable your popup blocker on this application.');
       return buttons.loader.during(
         Client.loginAs(buttons.client.id)
       );

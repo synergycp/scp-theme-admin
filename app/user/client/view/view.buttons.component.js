@@ -17,7 +17,7 @@
   /**
    * @ngInject
    */
-  function ClientButtonsCtrl(Client, ClientList, Loader, $state) {
+  function ClientButtonsCtrl(Client, ClientList, Loader, $state, Alert) {
     var buttons = this;
 
     buttons.loader = Loader();
@@ -42,6 +42,7 @@
     }
 
     function loginAs() {
+      Alert.warning('Logging in as client... If the page doesn\'t open please disable your popup blocker on this application.');
       return buttons.loader.during(
         Client.loginAs(buttons.client.id)
       );

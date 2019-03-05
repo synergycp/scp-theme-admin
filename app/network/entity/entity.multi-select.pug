@@ -15,8 +15,7 @@ include /resources/angle/pug/mixins/form
     repeat=[
       "entity in (",
         "select.select.items",
-        "| filter: select.select.notSelected",
-        "| filter: { vlan: select.select.selected.vlan }",
+        "| filter: select.filter",
       ") track by entity.id",
     ].join('')
     refresh="select.select.load($select.search)"

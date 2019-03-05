@@ -70,6 +70,17 @@
     "group": {
       "LABEL": "IP Groups",
       "PLACEHOLDER": "Select IP Group(s)..."
+    },
+    "options": {
+      "LABEL": "Advanced Options",
+      "allow_vlan_tagging": {
+        "LABEL": "VLAN Tagging (enables support for multiple VLANs on one port)"
+      },
+      "snmp_version": {
+        "LABEL": "SNMP Version",
+        "V2c": "Version 2c (most common)",
+        "V1": "Version 1 (outdated)"
+      }
     }
   },
   "heading": {

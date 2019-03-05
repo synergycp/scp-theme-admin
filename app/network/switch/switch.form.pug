@@ -64,6 +64,7 @@ include /resources/angle/pug/mixins/form
   ng-model="switchForm.input.snmp_pass"
 )
 
+
 +label("{{ 'switch.form.group.LABEL' | translate }}")
   +ui-select("switchForm.groups")(
     multiple
@@ -85,3 +86,17 @@ include /resources/angle/pug/mixins/form
     )
       div(ng-bind-html="group.name | highlight: $select.search")
         small servers: {{ group.serversCount }}
+
++select(
+  "{{ 'switch.form.options.snmp_version.LABEL' | translate }}",
+  "snmp_version"
+)(
+  placeholder="{{ 'switch.form.options.snmp_version.PLACEHOLDER' | translate }}"
+  ng-model="switchForm.input.snmp_version"
+  ng-options="'switch.form.options.snmp_version.'+version | translate for (version,value) in switchForm.SNMP_VERSION"
+)
+
++label("{{ 'switch.form.options.LABEL' | translate }}")
+  +checkbox("{{ 'switch.form.options.allow_vlan_tagging.LABEL' | translate }}")(
+    ng-model="switchForm.input.allow_vlan_tagging"
+  )

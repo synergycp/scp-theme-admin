@@ -6,7 +6,7 @@
     .factory('ServerFormPort', PortFactory)
   ;
 
-  const OS_RELOAD_STATUS = {
+  var OS_RELOAD_STATUS = {
     SUPPORTED: "server.form.os-reloads.SUPPORTED",
     NOT_PRIMARY: "server.form.os-reloads.NOT-PRIMARY",
     NEEDS_ENTITY: "server.form.os-reloads.NEEDS-ENTITY",
@@ -29,6 +29,7 @@
   function Port(index, Select, date, moment, Api) {
     var port = this;
 
+    port.allowMultipleVLANs = false;
     port.input = {
       mac: '',
       max_bandwidth: ''
@@ -103,8 +104,10 @@
 
         port.switch.port.selected = response.switch.port;
         port.switch.speed.selected = response.switch.port.speed;
-      }
 
+        port.allowMultipleVLANs = response.switch.allow_vlan_tagging;
+        syncEntityFilter();
+      }
 
       port.billing.start.value = response.billing.start ?
         date.parse(response.billing.start) : '';
@@ -147,8 +150,9 @@
         .clearFilter('extra_for_id')
         .clearFilter('ip_group')
         .filter({
-          extra_for_id: (port.entities.selected[0] || {}).id,
-          ip_group: (port.group.selected || {}).id,
+          extra_for_id: _.get(port, 'entities.selected[0].id'),
+          allow_multiple_vlans: port.allowMultipleVLANs,
+          ip_group: _.get(port, 'group.selected.id'),
           allow_server_port_id: port.id,
         })
         .load()

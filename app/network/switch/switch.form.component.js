@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  var SNMP_VERSION = {
+    V2c: 0,
+    V1: 1,
+  };
+
   var INPUTS = {
     name: '',
     type: 0,
@@ -10,6 +15,8 @@
     ssh_pass: '',
     ssh_en_pass: '',
     snmp_pass: '',
+    allow_vlan_tagging: false,
+    snmp_version: SNMP_VERSION.V2c,
   };
 
   angular
@@ -42,6 +49,7 @@
     switchForm.switchTypes = [];
     switchForm.input = _.clone(INPUTS);
     switchForm.groups = Select('group').multi();
+    switchForm.SNMP_VERSION = SNMP_VERSION;
 
     switchForm.$onInit = init;
 

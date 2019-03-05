@@ -124,6 +124,7 @@ div(ng-if="!provisionForm.serverId")
   entity-multi-select(
     placeholder="server.form.entities.PLACEHOLDER"
     select="provisionForm.entities"
+    allow-multiple-vlans="provisionForm.server.selected.switch.allow_vlan_tagging"
   )
 
 +label("{{ 'server.form.switch.speed.LABEL' | translate }}")

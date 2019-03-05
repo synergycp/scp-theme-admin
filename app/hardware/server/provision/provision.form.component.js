@@ -110,7 +110,7 @@
           timePicker: true,
           timePickerIncrement: 30,
           eventHandlers: {
-            'cancel.daterangepicker': function (ev, picker) {
+            'cancel.daterangepicker': function () {
               provisionForm.billing.date.value = '';
             },
           }
@@ -137,12 +137,14 @@
     }
 
     function syncServer(server) {
+      syncEntityFilter();
       if (!server) {
         return;
       }
-      server.get().then(function (res) {
-        provisionForm.server.selected = res;
-      })
+      server.get()
+        .then(function (res) {
+          provisionForm.server.selected = res;
+        });
 
       if (!provisionForm.group.getSelected('id')) {
         provisionForm.group.setSelectedId(server.group.id);
@@ -205,27 +207,29 @@
       _.each({
         addOns: provisionForm.addOns.items,
         disks: provisionForm.disks.items
-      }, function(itemSelects, itemKey) {
-        var ids = _.reduce(itemSelects, function(carry, select) {
+      }, function (itemSelects, itemKey) {
+        var ids = _.reduce(itemSelects, function (carry, select) {
           var selected = select.getSelected('id');
-          if(selected) {
+          if (selected) {
             carry.push(selected);
           }
           return carry;
-        }, [])
-        if(ids.length) {
+        }, []);
+        if (ids.length) {
           selectedCollection[itemKey] = ids;
         }
-      })
-      _.each(provisionForm.addOns.items, function(addOnSelect) {
+      });
+      _.each(provisionForm.addOns.items, function (addOnSelect) {
         addOnSelect.filter({
-          inventory: _.assign({}, invFilter, _.pick(selectedCollection, ['disks'])),
-        }).load();
-      })
-      _.each(provisionForm.disks.items, function(addOnSelect) {
+            inventory: _.assign({}, invFilter, _.pick(selectedCollection, ['disks'])),
+          })
+          .load();
+      });
+      _.each(provisionForm.disks.items, function (addOnSelect) {
         addOnSelect.filter({
-          inventory: _.assign({}, invFilter, _.pick(selectedCollection, ['addOns'])),
-        }).load();
+            inventory: _.assign({}, invFilter, _.pick(selectedCollection, ['addOns'])),
+          })
+          .load();
       })
     }
 
@@ -250,8 +254,9 @@
         .clearFilter('extra_for_id')
         .clearFilter('ip_group')
         .filter({
-          extra_for_id: (provisionForm.entities.selected[0] || {}).id,
-          ip_group: (provisionForm.group.selected || {}).id,
+          extra_for_id: _.get(provisionForm, 'entities.selected[0].id'),
+          allow_multiple_vlans: _.get(provisionForm, 'server.selected.switch.allow_vlan_tagging'),
+          ip_group: _.get(provisionForm, 'group.selected.id'),
         })
         .load();
     }
@@ -282,7 +287,9 @@
       };
       provisionForm.osReloads.removeEmpty();
       var osReloadsData = provisionForm.osReloads.getProfilesData();
-      if(!osReloadsData) return false;
+      if (!osReloadsData) {
+        return false;
+      }
       data.profile = {
         id: osReloadsData[0].profile.id,
       };
@@ -298,14 +305,6 @@
       data.osReloads = osReloadsData; // for `/server/{id}/install` requests, should be deleted before POST `/server/provision` request
 
       return data;
-    }
-
-    function ids(multi) {
-      return _(multi.items)
-        .map('selected.id')
-        .filter()
-        .value()
-        ;
     }
 
     function DiskSelector(selected) {
@@ -335,7 +334,7 @@
       var prev = select.selected;
       select.selected = null;
 
-      if (select.selected != prev) {
+      if (select.selected !== prev) {
         select.fireChangeEvent();
       }
     }
@@ -357,47 +356,53 @@
     }
 
     function openBandwidthHelpModal() {
-        var lang = "server.form.billing.max_bandwidth.modal";
-        return Modal.information(lang)
-          .open().result.then(function(){}, function(res){});
+      var lang = "server.form.billing.max_bandwidth.modal";
+      return Modal.information(lang)
+        .open()
+        .result
+        .then(function () {
+        }, function (res) {
+        });
     }
 
     function Profiles() {
       var profiles = this;
       profiles.items = [];
 
-      this.add = function() {
+      this.add = function () {
         profiles.items.push({
           id: Math.random() // to make ng-repeat work correctly
         });
         return profiles;
-      }
+      };
 
-      this.rem = function(index) {
+      this.rem = function (index) {
         profiles.items.splice(index, 1);
         return profiles;
-      }
+      };
 
-      this.getProfilesData = function() {
+      this.getProfilesData = function () {
         var isValid = true;
-        var profilesData = _.map(profiles.items, function(profile) {
+        var profilesData = _.map(profiles.items, function (profile) {
           var profileData = profile.getData();
-          if(!profileData) isValid = false;
+          if (!profileData) {
+            isValid = false;
+          }
           return profileData;
-        })
+        });
         return isValid && profilesData;
-      }
+      };
 
-      this.removeEmpty = function() {
-        profiles.items = _.reduce(profiles.items, function(accum, profile, i) {
-          if(profile.profileSelected) {
+      this.removeEmpty = function () {
+        profiles.items = _.reduce(profiles.items, function (accum, profile, i) {
+          if (profile.profileSelected) {
             accum.push(profile);
           } else {
             console.log('to remove i', i);
           }
           return accum;
         }, [])
-      }
+      };
 
       return profiles;
     }

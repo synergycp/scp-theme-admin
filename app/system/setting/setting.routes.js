@@ -23,5 +23,9 @@
         reloadOnSearch: false,
       })
       ;
+
+    helper.url.map('system/setting/?([0-9]*)', function () {
+      return 'system/setting';
+    });
   }
 })();

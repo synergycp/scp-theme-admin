@@ -490,9 +490,10 @@
       "BODY": "Suspending a server does the following:",
       "ACTIONS": [
         "Turn off server's switch port",
-        "Disable all client controls"
+        "Disable all client controls",
+        "Remove any IPMI ACLs"
       ],
-      "ACTION_COUNT": "2",
+      "ACTION_COUNT": "3",
       "CONFIRM": "Click \"Suspend\" to suspend these servers:",
       "reason": {
         "LABEL": "Set a reason:",
@@ -510,9 +511,10 @@
         "Set nickname to EMPTY",
         "Remove IPMI user",
         "Turn server off via IPMI",
-        "Turn off server's switch port"
+        "Turn off server's switch port",
+        "Remove any IPMI ACLs"
       ],
-      "ACTION_COUNT": "6",
+      "ACTION_COUNT": "7",
       "CONFIRM": "Click \"Wipe\" to wipe these servers:"
     }
   },

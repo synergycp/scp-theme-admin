@@ -16,6 +16,7 @@
     ssh_en_pass: '',
     snmp_pass: '',
     allow_vlan_tagging: false,
+    snmp_use_32_bit: false,
     snmp_version: SNMP_VERSION.V2c,
   };
 

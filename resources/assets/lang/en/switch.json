@@ -76,6 +76,9 @@
       "allow_vlan_tagging": {
         "LABEL": "VLAN Tagging (enables support for multiple VLANs on one port)"
       },
+      "snmp_use_32_bit": {
+        "LABEL": "Use 32-bit SNMP data (less accurate, but the only option on some switches)"
+      },
       "snmp_version": {
         "LABEL": "SNMP Version",
         "V2c": "Version 2c (most common)",

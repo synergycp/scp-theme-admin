@@ -7,5 +7,6 @@
       'app.user.client.search',
       'app.user.client.list',
       'app.user.client.view',
+      'scp.angle.user.client.modal',
     ]);
 })();

@@ -52,7 +52,7 @@
   /**
    * @ngInject
    */
-  function ProvisionFormCtrl(ClientUsersModals, Select, MultiInput, _, $stateParams, ServerConfig, moment, Modal) {
+  function ProvisionFormCtrl(ClientModal, Select, MultiInput, _, $stateParams, ServerConfig, moment, Modal) {
     var provisionForm = this;
 
     provisionForm.$onInit = init;
@@ -346,7 +346,8 @@
     }
 
     function openCreateClientModal() {
-      ClientUsersModals.openCreate()
+      ClientModal.create()
+        .open()
         .result
         .then(function (user) {
           provisionForm.client.selected = user;

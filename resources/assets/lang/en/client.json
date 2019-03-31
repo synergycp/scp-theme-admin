@@ -8,6 +8,15 @@
     },
     "create": {
       "CANCEL": "Cancel"
+    },
+    "send-email": {
+      "CANCEL": "Cancel",
+      "SUBMIT": "Send Email",
+      "TITLE": "Send Email to Client(s)",
+      "type": {
+        "LABEL": "Email Type",
+        "client-account-created": "Welcome Email (client-account-created.tpl)"
+      }
     }
   },
   "buttons": {
@@ -70,6 +79,10 @@
         "last": {
           "PLACEHOLDER": "Last Name"
         }
+    },
+    "options": {
+      "LABEL": "Options",
+      "SEND-WELCOME-EMAIL": "Send Welcome Email"
     }
   }
 }

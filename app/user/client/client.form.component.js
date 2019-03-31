@@ -10,6 +10,9 @@
       id: '',
       ignoreAutoSuspend: false,
     },
+    sendEmail: {
+      welcome: true,
+    },
   };
 
   angular
@@ -30,7 +33,7 @@
   /**
    * @ngInject
    */
-  function ClientFormCtrl(Select) {
+  function ClientFormCtrl(Select, Api) {
     var clientForm = this;
 
     clientForm.$onInit = init;
@@ -46,6 +49,11 @@
       fillFormInputs();
 
       (clientForm.form.on || function() {})(['change', 'load'], storeState);
+      clientForm.form.on && clientForm.form.on('created', function (result) {
+        return clientForm.input.sendEmail.welcome && Api.all('client/'+result.id+'/email').post({
+          type: 'client-account-created',
+        });
+      });
     }
 
     function getData() {

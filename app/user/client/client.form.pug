@@ -59,3 +59,9 @@ hr
     ng-model="clientForm.input.billing.ignoreAutoSuspend"
   )
     span(translate="client.form.billing.vip.IGNORE_AUTO_SUSPEND")
+
+div(ng-if="!clientForm.form.input.id")
+  +label("client.form.options.LABEL")
+    +checkbox("client.form.options.SEND-WELCOME-EMAIL")(
+    ng-model="clientForm.input.sendEmail.welcome"
+    )

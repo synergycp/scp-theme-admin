@@ -21,6 +21,7 @@
     $translateModuleLoader,
     $translate,
     Api,
+    EventEmitter,
     _,
     servers,
     access
@@ -42,6 +43,7 @@
       value: MODE.SEARCH,
     }, MODE);
     modal.create = {};
+    EventEmitter().bindTo(modal.create);
 
     activate();
 
@@ -67,6 +69,7 @@
             }
 
             modal.access.client = client;
+            modal.create.fire('created', client);
 
             return client;
           })

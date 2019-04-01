@@ -49,7 +49,7 @@
       fillFormInputs();
 
       (clientForm.form.on || function() {})(['change', 'load'], storeState);
-      clientForm.form.on && clientForm.form.on('created', function (result) {
+      (clientForm.form.on || function() {})('created', function (result) {
         return clientForm.input.sendEmail.welcome && Api.all('client/'+result.id+'/email').post({
           type: 'client-account-created',
         });

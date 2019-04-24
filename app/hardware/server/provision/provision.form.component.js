@@ -147,7 +147,7 @@
         });
 
       if (!provisionForm.group.getSelected('id')) {
-        provisionForm.group.setSelectedId(server.group.id);
+        provisionForm.group.setSelectedId($stateParams['server.group.id']);
       }
 
       // Primary group can be different from the IP group.

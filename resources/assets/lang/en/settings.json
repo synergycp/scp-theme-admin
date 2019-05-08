@@ -67,8 +67,7 @@
     },
     "security": {
         "session_duration": {
-            "LABEL": "Session Duration",
-            "PLACEHOLDER": "wat"
+            "LABEL": "Session Duration"
         }
     }
   }

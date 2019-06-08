@@ -262,8 +262,8 @@
     }
 
     function clearCpuOnGroupChange() {
-      if (provisionForm.group.getSelected('id') !== provisionForm.server.selected.group.id) {
-        clear.bind(null, provisionForm.cpu);
+      if (!provisionForm.server.selected || provisionForm.group.getSelected('id') !== provisionForm.server.selected.group.id) {
+        clear(provisionForm.cpu);
       }
     }
 

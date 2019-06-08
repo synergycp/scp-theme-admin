@@ -64,6 +64,12 @@
     "integration_acls": {
       "LABEL": "Integration IP ACL",
       "PLACEHOLDER": "Enter IPs or subnets in CIDR notation (e.g. /29) separated by new lines. As soon as you save, this will take affect!"
+    },
+    "security": {
+      "session_duration": {
+        "LABEL": "Session Duration",
+        "PLACEHOLDER": "Default Session Duration, in minutes. Applies to clients and administrators. Sessions auto-renew while active. Set to 0 for no session expiration."
+      }
     }
   }
 }

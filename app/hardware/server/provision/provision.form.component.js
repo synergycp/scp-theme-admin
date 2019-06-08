@@ -68,7 +68,7 @@
     provisionForm.cpu = Select('part')
       .filter(FILTER.CPU)
       .on('change', syncHardwareFilters);
-    provisionForm.group.on('change', clear.bind(null, provisionForm.cpu));
+    provisionForm.group.on('change', clearCpuOnGroupChange);
     provisionForm.mem = Select('part')
       .filter(FILTER.MEM)
       .on('change', syncHardwareFilters);
@@ -260,6 +260,13 @@
         })
         .load();
     }
+
+    function clearCpuOnGroupChange() {
+      if (provisionForm.group.getSelected('id') !== provisionForm.server.selected.group.id) {
+        clear.bind(null, provisionForm.cpu);
+      }
+    }
+
 
     function getData() {
       var data = _.clone(provisionForm.input);

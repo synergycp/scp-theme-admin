@@ -3,6 +3,7 @@
 
   var INPUTS = {
     name: '',
+    expires_at: null,
   };
 
   angular

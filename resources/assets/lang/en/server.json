@@ -598,7 +598,7 @@
     "modal": {
       "bulk-commands": {
         "TITLE": "Run Bulk Switch Commands",
-        "BODY": "Please choose which commands should be run on all of the server ports on these servers. Note that this queues the commands to be run in the background, so it may take a few minutes for the changes to take affect if there are a lot of servers.",
+        "BODY": "Please choose which commands should be run on all of the server ports on these servers. Note that this queues the commands to be run in the background, so it may take a few minutes for the changes to take effect if there are a lot of servers.",
         "CANCEL": "Cancel",
         "SUBMIT": "Run Commands"
       }

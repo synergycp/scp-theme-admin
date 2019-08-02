@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerInventoryCtrl(ServerList, LicenseService, ListFilter, $scope, EventEmitter, Todo) {
+  function ServerInventoryCtrl(ServerList, LicenseService, ListFilter, $scope, EventEmitter, Todo, Loader) {
     var vm = this;
     // TODO: DRY this up by extending the server list controller?
 
@@ -24,6 +24,7 @@
     vm.create = {
       input: {},
       submit: create,
+      loader: Loader(),
     };
     EventEmitter().bindTo(vm.create);
 

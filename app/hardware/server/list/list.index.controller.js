@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function ServerIndexCtrl(ServerList, LicenseService, ListFilter, EventEmitter, Todo, $scope) {
+  function ServerIndexCtrl(ServerList, LicenseService, ListFilter, EventEmitter, Todo, $scope, Loader) {
     var vm = this;
 
     vm.list = ServerList()
@@ -20,6 +20,7 @@
     vm.create = {
       input: {},
       submit: create,
+      loader: Loader(),
     };
     EventEmitter().bindTo(vm.create);
 

@@ -96,10 +96,18 @@
       serverForm.form
         .on(['load', 'change', 'created'], storeState)
         .on(['saving', 'created'], function () {
-          // Control Port Forwarding depends on port IP group so controls must come after.
-          return savePorts().then(saveControls);
+          return serverForm.form.loader.during(
+            savePorts()
+              // Control Port Forwarding depends on port IP group so controls must come after.
+              .then(saveControls, saveControls)
+              .then(onCreated, onCreated)
+          );
+
+          function onCreated() {
+            setFormPristine();
+            serverForm.form.fire('created.relations');
+          }
         })
-        .on(['change'], setFormPristine) // when saving completed
       ;
 
       if ($stateParams.id) {
@@ -276,11 +284,7 @@
         return previousRequest.then(
           savePortChanges.bind(null, port, portIndex)
         );
-      }, $q.when())
-        .then(function () {
-          // setFormPristine();
-          serverForm.form.fire('created.relations');
-        });
+      }, $q.when());
     }
 
     function savePortChanges(port, portIndex) {
@@ -324,7 +328,7 @@
 
       function updateEntities() {
         // Remove entities first so that VLANs don't conflict.
-        if (portData.entities.remove.length) {
+        if (portData.entities.remove.length && !serverForm.isCreating) {
           return Api
             .one('entity/' + portData.entities.remove.join(','))
             .patch({
@@ -431,9 +435,7 @@
     function saveControls() {
       return $q.all(
         _.map(serverForm.controls, saveControlChanges)
-      ).then(function () {
-        serverForm.form.fire('created.relations');
-      });
+      );
     }
 
     function saveControlChanges(control, controlIndex) {

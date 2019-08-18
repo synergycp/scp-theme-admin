@@ -50,26 +50,45 @@ include /resources/angle/pug/mixins/form
       translate="pxe.profile.form.platform.windows"
     )
 
-
   div(ng-if="profileForm.platform == 'linux'")
-    +label("{{ 'pxe.profile.form.shell.LABEL' | translate }}")
-      +ui-select("profileForm.shellScripts")(multiple, sortable="true")
-        ui-select-match(placeholder="{{ 'pxe.profile.form.shell.PLACEHOLDER' | translate }}")
+    +label("{{ 'pxe.profile.form.shell.during.LABEL' | translate }}")
+      +ui-select("profileForm.shellScripts.during")(multiple, sortable="true")
+        ui-select-match(placeholder="{{ 'pxe.profile.form.shell.during.PLACEHOLDER' | translate }}")
           | {{ $item.name }}
 
         ui-select-choices(
           repeat=
-            "choice in (" +
-              "profileForm.shellScripts.items" +
-              "| filter: {name: $select.search}" +
-              "| filter: profileForm.shellScripts.notSelected" +
-            ") track by choice.id"
-          refresh="profileForm.shellScripts.load($select.search)"
+          "choice in (" +
+            "profileForm.shellScripts.during.items" +
+            "| filter: {name: $select.search}" +
+            "| filter: profileForm.shellScripts.during.notSelected" +
+          ") track by choice.id"
+          refresh="profileForm.shellScripts.during.load($select.search)"
           refresh-delay="400"
         )
           span(ng-bind-html="choice.name | highlight: $select.search")
           br
           small(ng-bind-html="choice.description | highlight: $select.search")
+      p.help-block(ng-translate="pxe.profile.form.shell.during.HELP")
+    +label("{{ 'pxe.profile.form.shell.after.LABEL' | translate }}")
+      +ui-select("profileForm.shellScripts.after")(multiple, sortable="true")
+        ui-select-match(placeholder="{{ 'pxe.profile.form.shell.after.PLACEHOLDER' | translate }}")
+          | {{ $item.name }}
+
+        ui-select-choices(
+          repeat=
+          "choice in (" +
+            "profileForm.shellScripts.after.items" +
+            "| filter: {name: $select.search}" +
+            "| filter: profileForm.shellScripts.after.notSelected" +
+          ") track by choice.id"
+          refresh="profileForm.shellScripts.after.load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice.name | highlight: $select.search")
+          br
+          small(ng-bind-html="choice.description | highlight: $select.search")
+      p.help-block(ng-translate="pxe.profile.form.shell.after.HELP")
 
   div(ng-if="profileForm.platform == 'windows'")
     +label("{{ 'pxe.profile.form.iso.LABEL' | translate }}")
@@ -107,7 +126,7 @@ include /resources/angle/pug/mixins/form
 
     +label("{{ 'pxe.profile.form.driver.LABEL' | translate }}")
       +ui-select("profileForm.drivers")(
-        multiple 
+        multiple
         sortable="true"
         ng-disabled="!profileForm.isos.selected"
       )

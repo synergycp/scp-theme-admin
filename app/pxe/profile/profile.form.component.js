@@ -22,7 +22,7 @@
       templateUrl: 'app/pxe/profile/profile.form.html'
     })
     .controller('ProfileFormCtrl', ProfileFormCtrl)
-    ;
+  ;
 
   /**
    * @ngInject
@@ -39,7 +39,12 @@
     profileForm.isos = Select('pxe/iso').on('change', onIsoChange);
     profileForm.isos.selectedEdition = null;
     profileForm.emailTemplate = Select('email/template');
-    profileForm.shellScripts = Select('pxe/shell').multi();
+    profileForm.shellScripts = {
+      during: Select('pxe/shell')
+        .multi(),
+      after: Select('pxe/shell')
+        .multi(),
+    };
     profileForm.drivers = Select('pxe/driver').multi();
 
     profileForm.profilesToDuplicate = [];
@@ -55,7 +60,7 @@
       // create page
       profileForm.form.on('duplicate_profiles', duplicateProfiles);
       profileForm.form.on('create', setNextProfile);
-      
+
       // edit page
       profileForm.form.on(['change', 'load'], syncResponse);
     }
@@ -94,7 +99,8 @@
 
     function syncResponse(response) {
       _.overwrite(profileForm.input, profileForm.form.input);
-      _.setContents(profileForm.shellScripts.selected, response.shell.after);
+      _.setContents(profileForm.shellScripts.during.selected, response.shell.during);
+      _.setContents(profileForm.shellScripts.after.selected, response.shell.after);
       _.setContents(profileForm.drivers.selected, response.drivers);
       setupIsoDefaults(response.iso);
       profileForm.emailTemplate.selected = response.email.template;
@@ -114,17 +120,17 @@
         .then(syncResponse) // fill in the rest of the form (selects etc)
         .then(removeFromList)
 
-        function removeFromList() {
-          profileForm.profilesToDuplicate.splice(0, 1);
-        }
-      ;
+      function removeFromList() {
+        profileForm.profilesToDuplicate.splice(0, 1);
+      }
     }
 
     function getData() {
       var data = _.clone(profileForm.input);
 
       data.shell = {
-        after: _.map(profileForm.shellScripts.selected, 'id'),
+        during: _.map(profileForm.shellScripts.during.selected, 'id'),
+        after: _.map(profileForm.shellScripts.after.selected, 'id'),
       };
       data.drivers = _.map(profileForm.drivers.selected, 'id');
       data.iso = profileForm.platform == 'windows' && profileForm.isos.selected ? {

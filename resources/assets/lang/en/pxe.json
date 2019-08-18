@@ -178,8 +178,16 @@
         "PLACEHOLDER": "Type to search..."
       },
       "shell": {
-        "LABEL": "Shell Scripts",
-        "PLACEHOLDER": "Type to search..."
+        "during": {
+          "HELP": "These Shell Scripts will be run in the live OS just before installation to the disk.",
+          "LABEL": "During Shell Scripts",
+          "PLACEHOLDER": "Type to search..."
+        },
+        "after": {
+          "HELP": "These Shell Scripts will be run in the live OS after installation has completed, just before reboot.",
+          "LABEL": "After Shell Scripts",
+          "PLACEHOLDER": "Type to search..."
+        }
       },
       "driver": {
         "LABEL": "Drivers",

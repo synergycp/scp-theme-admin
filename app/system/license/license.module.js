@@ -3,6 +3,6 @@
 
   angular
     .module('app.system.license', [
-      'app.system.license.dashboard',
+      'app.system.license.widget',
     ]);
 })();

@@ -1,0 +1,32 @@
+extends /resources/angle/pug/modal.information.pug
+
+block body
+  p(
+    translate=lang+".SEMVER"
+    translate-values="modal.data.version"
+  )
+  p(
+    translate=lang+".RELEASE_DATE"
+    translate-value-release-date="{{ modal.data.version.release_date.unix * 1000 | date }}"
+  )
+  p(translate=lang+".CHANGELOG")
+  ul
+    li(
+      ng-repeat="change in modal.data.version.changelog"
+      ng-bind="change"
+    )
+
+block footer
+  .row
+    .text-left.col-xs-6
+      button.btn.btn-secondary(
+        type="button"
+        ng-click="modal.$dismiss()"
+        data-translate=lang + ".CLOSE"
+      )
+    .text-right.col-xs-6
+      a.btn.btn-primary(
+        href="https://synergycp.com/changelog.html"
+        target="_blank"
+        translate=lang+".UPDATE_INSTRUCTIONS"
+      )

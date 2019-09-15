@@ -1,0 +1,53 @@
+div(ng-if="widget.isNewVersionAvailable()")
+  .alert.alert-success.bounceIn
+    span(translate="version.widget.is-not-latest.ALERT")
+  .card.align-items-center.rounded-10.bg-primary-light(
+    ng-class="widget.loader.class"
+  )
+    .loader.rounded-10
+    .col-xs-6.p0.text-right.rounded-left-10
+      .card-heading.pv-lg.bg-primary.rounded-top-left-10
+        h5.card-title(translate="version.widget.is-not-latest.current.TITLE")
+      .card-body
+        h3.m0(ng-bind="widget.current.semver")
+        p(
+          translate="version.widget.is-not-latest.current.RELEASE_DATE"
+          translate-value-release-date="{{ widget.current.release_date.unix * 1000 | date }}"
+        )
+    .col-xs-6.p0.bg-success.rounded-right-10
+      .card-heading.pv-lg.bg-success-dark.rounded-top-right-10
+        h5.card-title(translate="version.widget.is-not-latest.latest.TITLE")
+      .card-body
+        h3.m0(ng-bind="widget.latest.semver")
+        p
+          span(
+            translate="version.widget.is-not-latest.latest.RELEASE_DATE"
+            translate-value-release-date="{{ widget.latest.release_date.unix * 1000 | date }}"
+          )
+          br
+          a.text-white(
+            ng-click="widget.latest.viewDetails()"
+            translate="version.widget.is-not-latest.latest.DETAILS"
+          )
+    .clearfix
+.card.text-center.rounded-10(
+  ng-if="!widget.isNewVersionAvailable()"
+  ng-class="widget.loader.class"
+)
+  .loader.rounded-10
+  .card-heading.pv-lg.bg-gray-dark.rounded-top-10
+    .btn-group.btn-group-xs.pull-right
+      a.btn.btn-default(ng-click="widget.refresh()")
+        i.fa.fa-refresh
+    h5.card-title(translate="version.widget.is-latest.TITLE")
+  .card-body.rounded-bottom-10
+    div(ng-if="widget.loader.hasLoaded")
+      h3.m0(ng-bind="widget.current.semver")
+      p
+        span(
+          translate="version.widget.is-latest.RELEASE_DATE"
+          translate-value-release-date="{{ widget.current.release_date.unix * 1000 | date }}"
+        )
+      p
+        span(translate="version.widget.is-latest.IS_LATEST")
+    div(ng-if="!widget.loader.hasLoaded" style="height: 60px")

@@ -13,5 +13,7 @@
       'app.system.setting',
       'app.system.theme',
       'app.system.log',
+      'app.system.health',
+      'app.system.version',
     ]);
 })();

@@ -1,0 +1,18 @@
+.card.text-center.rounded-10(ng-class="widget.loader.class")
+  .loader.rounded-10
+  .card-heading.pv-lg.bg-gray-dark.rounded-top-10
+    .btn-group.btn-group-xs.pull-right
+      a.btn.btn-default(ng-click="widget.refresh()")
+        i.fa.fa-refresh
+    h5.card-title(translate="license.widget.TITLE")
+  .card-body.rounded-bottom-10
+    h5.mt0(ng-bind="widget.license.key")
+    .row
+      .col-xs-6
+        h4 {{ widget.serversInUse }}
+        h5 Servers in use
+      .col-xs-6
+        h4 {{ widget.license.servers }}
+        h5 Maximum servers
+
+

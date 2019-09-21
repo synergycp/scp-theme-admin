@@ -34,8 +34,8 @@
 
       _.map(Dashboard.get(), addRepo);
       
-      Dashboard.provider.on('repo:add', function(name) {
-        addRepo(Dashboard.provider.getRepo(name));
+      Dashboard.provider.on('repo:add', function(repo) {
+        addRepo(Dashboard.provider.getRepo(repo));
       });
       
       // hide preloader screen (fixes preloader showing too long when a lot of items are on Dashboard)

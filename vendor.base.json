@@ -1,4 +1,5 @@
 [
   "node_modules/scp-angle/dist/dist.min.js",
-  "node_modules/scp-angle/dist/css/vendor.min.css"
+  "node_modules/scp-angle/dist/css/vendor.min.css",
+  "node_modules/semver/semver.js"
 ]

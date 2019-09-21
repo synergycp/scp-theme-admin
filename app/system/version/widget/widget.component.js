@@ -1,8 +1,6 @@
 (function () {
   'use strict';
 
-  var DIR = 'system/version/widget/';
-
   angular
     .module('app.system.version.widget')
     .component('systemVersionWidget', {
@@ -23,8 +21,7 @@
     VersionService,
     $q,
     Modal,
-    _,
-    $timeout
+    _
   ) {
     var widget = this;
     widget.current = {};
@@ -82,7 +79,9 @@
     }
 
     function isNewVersionAvailable() {
-      return _.get(widget, 'latest.semver') !== _.get(widget, 'current.semver');
+      var latest = _.get(widget, 'latest.semver');
+      var current = _.get(widget, 'current.semver')
+      return latest && current && SemVer.gt(latest,  current);
     }
   }
 })();

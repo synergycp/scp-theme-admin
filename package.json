@@ -27,6 +27,7 @@
     "gulp-util": "^3.0.1",
     "lodash": "^4.15.0",
     "q": "^1.4.1",
+    "semver": "^6.3.0",
     "stream-to-promise": "^2.2.0"
   },
   "scripts": {
@@ -34,8 +35,8 @@
     "poststart": "gulp"
   },
   "dependencies": {
-    "scp-angle": "git+ssh://git@github.com/cabloo/scp-angle.git",
-    "scp-ng-util": "git+ssh://git@github.com/cabloo/scp-ng-util.git",
+    "scp-angle": "git+ssh://git@github.com/synergycp/scp-angle.git",
+    "scp-ng-util": "git+ssh://git@github.com/synergycp/scp-ng-util.git",
     "scp-ng-gulp": "git+ssh://git@github.com/synergycp/scp-ng-gulp.git"
   }
 }

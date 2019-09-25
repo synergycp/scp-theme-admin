@@ -35,7 +35,7 @@
     ListFilter
   ) {
     var panel = this;
-    const list = GroupList();
+    var list = GroupList();
     //list.bulk = [];
     panel.templateUrl = RouteHelpers.basepath(DIR + 'dashboard.panel.html');
     panel.context = {

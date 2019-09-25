@@ -386,10 +386,6 @@
         "LABEL": "Client",
         "PLACEHOLDER": "Type to search..."
       },
-      "switch": {
-        "LABEL": "Switch",
-        "PLACEHOLDER": "Type to search..."
-      },
       "mem": {
         "LABEL": "RAM",
         "PLACEHOLDER": "Type to search..."
@@ -604,17 +600,17 @@
       }
     },
     "power": {
-      "BTN": "Port Power",
+      "BTN": "Port State",
       "on": {
-        "BTN": "Port Power On"
+        "BTN": "Enable"
       },
       "off": {
-        "BTN": "Port Power Off",
+        "BTN": "Disable",
         "confirm": {
-          "TITLE": "Set Port Power to Off?",
-          "BODY": "This will turn off power for port {{ port }} on {{ switch }}.",
+          "TITLE": "Disable port?",
+          "BODY": "This will disable port {{ port }} on {{ switch }}. Affected server(s):",
           "CANCEL": "Cancel",
-          "SUBMIT": "Power Off Port"
+          "SUBMIT": "Disable Port"
         }
       }
     }

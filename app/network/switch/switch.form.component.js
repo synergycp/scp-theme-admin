@@ -14,6 +14,7 @@
     ssh_user: '',
     ssh_pass: '',
     ssh_en_pass: '',
+    ssh_en_type: 0,
     snmp_pass: '',
     allow_vlan_tagging: false,
     snmp_use_32_bit: false,

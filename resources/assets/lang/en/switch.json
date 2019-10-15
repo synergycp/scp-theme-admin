@@ -57,8 +57,15 @@
       }
     },
     "enable": {
-      "LABEL": "(En)able Pass",
-      "PLACEHOLDER": "Required"
+      "type": {
+        "LABEL": "Use (En)able",
+        "NONE": "Do not run enable command",
+        "DEFAULT": "Run enable command"
+      },
+      "password": {
+        "LABEL": "(En)able Pass",
+        "PLACEHOLDER": "Optional. Leave blank if enable does not require a password."
+      }
     },
     "snmp": {
       "LABEL": "SNMP Key",

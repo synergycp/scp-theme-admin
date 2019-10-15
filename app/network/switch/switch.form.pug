@@ -48,13 +48,27 @@ include /resources/angle/pug/mixins/form
         ng-model="switchForm.input.ssh_pass"
       )
 
-+field(
-  "{{ 'switch.form.enable.LABEL' | translate }}",
-  "enable"
-)(
-  placeholder="{{ 'switch.form.enable.PLACEHOLDER' | translate }}"
-  ng-model="switchForm.input.ssh_en_pass"
-)
++select(
+  "{{ 'switch.form.enable.type.LABEL' | translate }}",
+  "enable_type"
+)(ng-model="switchForm.input.ssh_en_type")
+  option(
+    ng-value="{{0}}"
+    translate="switch.form.enable.type.DEFAULT"
+  )
+  option(
+    ng-value="{{1}}"
+    translate="switch.form.enable.type.NONE"
+  )
+
+div(ng-if="switchForm.input.ssh_en_type !== 1")
+  +field(
+    "{{ 'switch.form.enable.password.LABEL' | translate }}",
+    "enable_pass"
+  )(
+    placeholder="{{ 'switch.form.enable.password.PLACEHOLDER' | translate }}"
+    ng-model="switchForm.input.ssh_en_pass"
+  )
 
 +field(
   "{{ 'switch.form.snmp.LABEL' | translate }}",

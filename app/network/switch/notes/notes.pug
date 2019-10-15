@@ -1,0 +1,19 @@
+include /resources/angle/pug/mixins/form
+
+form.panel.panel-default(
+  ng-submit="notes.save()"
+  ng-class="notes.loader.class"
+)
+  .loader
+  .panel-heading(ng-click="notes.isExpanded = !notes.isExpanded")
+    h3.panel-title(translate="switch.notes.TITLE")
+    .btn-group.btn-group-xs.pull-right
+      a.btn.btn-default
+        span.fa(ng-class="notes.isExpanded ? 'fa-minus' : 'fa-plus'")
+  .panel-body(ng-class="notes.isExpanded ? '' : 'hidden'")
+    +textarea("{{ 'switch.notes.ADMIN' | translate }}")(
+      ng-model="notes.switch.admin_notes"
+    )
+  .panel-footer.clearfix(ng-class="notes.isExpanded ? '' : 'hidden'")
+    .pull-right
+      button.btn.btn-primary(translate="switch.notes.SUBMIT")

@@ -18,6 +18,30 @@ include /resources/angle/pug/mixins/form
   ng-options="value.slug as value.name for value in switchForm.switchTypes"
 )
 
++label("{{ 'switch.form.group.LABEL' | translate }}")
+  +ui-select("switchForm.groups")(
+    multiple
+    theme="bootstrap"
+    close-on-select="false"
+  )
+    ui-select-match(placeholder="{{ 'switch.form.group.LABEL' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+      "group in (" +
+      "switchForm.groups.items |" +
+      "filter: {name: $select.search} |" +
+      "filter: switchForm.groups.notSelected" +
+      ") track by group.id"
+      refresh="switchForm.groups.load($select.search)"
+      refresh-delay="400"
+    )
+      div(ng-bind-html="group.name | highlight: $select.search")
+        small servers: {{ group.serversCount }}
+
+hr
+
 +label("{{ 'switch.form.network.LABEL' | translate }}")
   .row 
     .col-xs-8 
@@ -78,28 +102,15 @@ div(ng-if="switchForm.input.ssh_en_type !== 1")
   ng-model="switchForm.input.snmp_pass"
 )
 
+hr
 
-+label("{{ 'switch.form.group.LABEL' | translate }}")
-  +ui-select("switchForm.groups")(
-    multiple
-    theme="bootstrap"
-    close-on-select="false"
-  )
-    ui-select-match(placeholder="{{ 'switch.form.group.LABEL' | translate }}")
-      | {{ $item.name }}
-
-    ui-select-choices(
-      repeat=
-        "group in (" +
-          "switchForm.groups.items |" +
-          "filter: {name: $select.search} |" +
-          "filter: switchForm.groups.notSelected" +
-        ") track by group.id"
-      refresh="switchForm.groups.load($select.search)"
-      refresh-delay="400"
-    )
-      div(ng-bind-html="group.name | highlight: $select.search")
-        small servers: {{ group.serversCount }}
++textarea(
+  "{{ 'switch.form.admin_notes.LABEL' | translate }}",
+  "admin_notes"
+)(
+  ng-model="switchForm.input.admin_notes"
+  placeholder="{{ 'switch.form.admin_notes.PLACEHOLDER' | translate }}"
+)
 
 +select(
   "{{ 'switch.form.options.snmp_version.LABEL' | translate }}",

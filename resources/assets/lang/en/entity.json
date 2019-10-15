@@ -37,6 +37,10 @@
     "DELETE": "Delete"
   },
   "form": {
+    "admin_notes": {
+      "LABEL": "Admin Notes",
+      "PLACEHOLDER": "Optional"
+    },
     "title": {
       "EDIT": "Edit {{ nickname }}",
       "ADD": "Create IP Entity"

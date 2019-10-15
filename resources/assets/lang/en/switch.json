@@ -29,7 +29,16 @@
       }
     }
   },
+  "notes": {
+    "TITLE": "Switch Notes",
+    "ADMIN": "Administrator Notes",
+    "SUBMIT": "Save Notes"
+  },
   "form": {
+    "admin_notes": {
+      "LABEL": "Admin Notes",
+      "PLACEHOLDER": "Optional"
+    },
     "title": {
       "EDIT": "Edit {{ name }}",
       "ADD": "Create Switch"

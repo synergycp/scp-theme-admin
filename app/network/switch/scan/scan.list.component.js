@@ -29,6 +29,10 @@
     function init() {
       scans.list = List('switch/'+scans.switch.id+'/scan');
       scans.list.load();
+      scans.list.on('create', function () {
+        // This doesn't technically change anything on the switch, but the change event triggers a log refresh which is handy.
+        scans.switch.fire('change', scans.switch);
+      });
     }
   }
 })();

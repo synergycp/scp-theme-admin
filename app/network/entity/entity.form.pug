@@ -130,9 +130,6 @@ div(ng-if="entityForm.showV4")
       type="number"
     )
       p.help-block(translate="entity.form.v4.bulk.increment_amount.HELP")
-    
-    
-    
 
 div(ng-if="entityForm.showV6")
   hr
@@ -152,3 +149,13 @@ div(ng-if="entityForm.showV6")
     placeholder="{{ 'entity.form.v6.gateway.PLACEHOLDER' | translate }}"
     ng-model="entityForm.input.v6.gateway"
   )
+
+hr
+
++textarea(
+  "{{ 'entity.form.admin_notes.LABEL' | translate }}",
+  "admin_notes"
+)(
+  ng-model="entityForm.input.admin_notes"
+  placeholder="{{ 'entity.form.admin_notes.PLACEHOLDER' | translate }}"
+)

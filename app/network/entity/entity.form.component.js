@@ -13,6 +13,7 @@
   };
 
   var INPUTS = {
+    admin_notes: '',
     nickname: '',
     billing_id: '',
     vlan: '',

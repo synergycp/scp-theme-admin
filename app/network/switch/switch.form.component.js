@@ -7,6 +7,7 @@
   };
 
   var INPUTS = {
+    admin_notes: '',
     name: '',
     type: 0,
     ip: '',

@@ -71,6 +71,10 @@
         "PLACEHOLDER": "Integration"
       }
     },
+    "sub_super_client_access": {
+      "LABEL": "Sub/Super Clients",
+      "SUB_SUPER_CLIENTS": "Can Create Sub and Super Clients"
+    },
     "name": {
       "LABEL": "Name",
       "first": {

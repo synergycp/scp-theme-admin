@@ -52,6 +52,15 @@ hr
       )
 
 +label(
+  "{{ 'client.form.sub_super_client_access.LABEL' | translate }}",
+  "sub_super_client_access"
+)
+  +checkbox()(
+    ng-model="clientForm.input.sub_super_client_access"
+  )
+    span(translate="client.form.sub_super_client_access.SUB_SUPER_CLIENTS")
+      
++label(
   "{{ 'client.form.billing.vip.LABEL' | translate }}",
   "billing-ignoreAutoSuspend"
 )

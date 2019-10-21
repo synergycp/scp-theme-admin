@@ -10,6 +10,7 @@
       id: '',
       ignoreAutoSuspend: false,
     },
+    sub_super_client_access: true,
     sendEmail: {
       welcome: true,
     },

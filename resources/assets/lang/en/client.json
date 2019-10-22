@@ -58,6 +58,10 @@
       "LABEL": "Password",
       "PLACEHOLDER": "Enter a password to set"
     },
+    "sso_only": {
+      "LABEL": "Only SSO",
+      "INFO": "Restricts the client account to use only SSO"
+    },
     "billing": {
       "id": {
         "LABEL": "Billing ID",

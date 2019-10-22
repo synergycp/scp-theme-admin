@@ -10,6 +10,7 @@
       id: '',
       ignoreAutoSuspend: false,
     },
+    sso_only: false,
     sendEmail: {
       welcome: true,
     },

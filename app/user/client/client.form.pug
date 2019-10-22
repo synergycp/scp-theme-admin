@@ -52,6 +52,17 @@ hr
       )
 
 +label(
+  "{{ 'client.form.sso_only.LABEL' | translate }}",
+  "sso_only"
+)
+  +checkbox()(
+    ng-model="clientForm.input.sso_only"
+  )
+    span(translate="client.form.sso_only.INFO")
+
+
+
++label(
   "{{ 'client.form.billing.vip.LABEL' | translate }}",
   "billing-ignoreAutoSuspend"
 )

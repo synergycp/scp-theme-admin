@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('app.system.health', [
+    .module('app.system.dashboard', [
       'app.system.health.widget',
-      'app.system.health.renderer',
+      'app.system.license.widget',
     ]);
 })();

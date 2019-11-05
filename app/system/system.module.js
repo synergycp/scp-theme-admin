@@ -6,6 +6,7 @@
       'scp.core.api',
       'scp.angle.layout.list',
 
+      'app.system.dashboard',
       'app.system.email',
       'app.system.license',
       'app.system.integration',

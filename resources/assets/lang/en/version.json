@@ -1,32 +1,13 @@
 {
-  "widget": {
-    "is-not-latest": {
-      "ALERT": "A new version of SynergyCP is available!",
-      "UPDATE_BUTTON": "Update Instructions",
-      "current": {
-        "TITLE": "Current Version",
-        "RELEASE_DATE": "{{ releaseDate }}"
-      },
-      "latest": {
-        "TITLE": "Latest Version",
-        "RELEASE_DATE": "{{ releaseDate }}",
-        "DETAILS": "Update Details"
-      }
-    },
-    "is-latest": {
-      "TITLE": "Current Version",
-      "RELEASE_DATE": "{{ releaseDate }}",
-      "IS_LATEST": "You are on the latest version."
-    }
-  },
   "modal": {
-    "details": {
-      "CLOSE": "Close",
-      "TITLE": "Latest Version Details",
+    "update": {
+      "CANCEL": "Don't update yet",
+      "SUBMIT": "Update Now",
+      "TITLE": "New SynergyCP Version available",
       "SEMVER": "Version: {{ semver }}",
       "RELEASE_DATE": "Release Date: {{ releaseDate }}",
-      "CHANGELOG": "Changelog:",
-      "UPDATE_INSTRUCTIONS": "Update Instructions"
+      "CHANGELOG": "Changelog:"
     }
-  }
+  },
+  "UPDATE_STARTED": "Version update started, waiting for completion."
 }

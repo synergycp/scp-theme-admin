@@ -1,0 +1,39 @@
+{
+  "widget": {
+    "TITLE": "System Health",
+    "status": {
+      "ERROR": "Error!",
+      "OK": "Healthy",
+      "LOADING": "Loading...",
+      "WARN": "Warning"
+    }
+  },
+  "check": {
+    "http": {
+      "ssl": {
+        "disabled": {
+          "OK": "SSL is enabled.",
+          "WARN": "SSL is disabled.",
+          "ERROR": "SSL is disabled.",
+          "LOADING": "SSL status has not been checked yet."
+        }
+      }
+    },
+    "system": {
+      "version": {
+        "is_latest": {
+          "OK": "Application is up to date.",
+          "WARN": "There is a new version of SynergyCP available.",
+          "ERROR": "There is a new version of SynergyCP available.",
+          "LOADING": "Checking if version is latest."
+        }
+      }
+    },
+    "missing_renderer": {
+      "ERROR": "ERROR: missing HealthStatusRenderer for {{slug}}"
+    },
+    "error_in_render": {
+      "ERROR": "ERROR: HealthStatusRenderer.render() error for {{slug}}"
+    }
+  }
+}

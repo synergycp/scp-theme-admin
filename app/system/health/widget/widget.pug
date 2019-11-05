@@ -1,0 +1,23 @@
+- LANG = "health.widget."
+
+.card.text-center.rounded-10(ng-class="widget.loader.class")
+  .loader.rounded-10
+  .card-heading.pv-lg.bg-gray-dark.rounded-top-10
+    .btn-group.btn-group-xs.card-heading-fixed-right
+      a.btn.btn-default(ng-click="widget.refresh()")
+        i.fa.fa-refresh
+    h5.card-title(translate=LANG+"TITLE")
+
+  .alert.mb0.radius-clear.b0(
+    ng-class="widget.statusToAlertClass(widget.status.current)"
+    translate=LANG+"status.{{widget.status.current}}"
+  )
+  table.table.table-bordered.table-no-edge-border.text-left
+    tbody
+      tr(ng-repeat="check in widget.checks" ng-click="check.onClick()")
+        td(translate="{{ check.i18n_key }}" translate-values="check.i18n_params")
+        td.shrink(
+          ng-class="widget.statusToTextClass(check.status)"
+          translate=LANG+"status.{{check.status || widget.status.LOADING}}"
+        )
+

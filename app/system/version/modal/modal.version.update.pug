@@ -1,0 +1,17 @@
+extends /resources/angle/pug/modal.confirm.pug
+
+block body
+  p(
+    translate=lang+".SEMVER"
+    translate-values="modal.data.version"
+  )
+  p(
+    translate=lang+".RELEASE_DATE"
+    translate-value-release-date="{{ modal.data.version.release_date.unix * 1000 | date }}"
+  )
+  p(translate=lang+".CHANGELOG")
+  ul
+    li(
+      ng-repeat="change in modal.data.version.changelog"
+      ng-bind="change"
+    )

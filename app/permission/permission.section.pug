@@ -2,7 +2,7 @@ include /resources/angle/pug/mixins/form
 
 div(ng-class="{'row': section.hasColumns}")
   div(
-    ng-class="{'col-md-4': section.hasColumns}"
+    ng-class="{'col-md-4': section.hasColumns, 'clear-left': $index % 3 === 0}"
     ng-repeat="(key, sub) in section.map"
     ng-init="pfx = [section.prefix, key].join('.') + (section.prefix == 'pkg' ? '.admin.permissions' : '')"
   )
@@ -31,3 +31,4 @@ div(ng-class="{'row': section.hasColumns}")
         prefix="pfx"
         map="sub"
       )
+  .clearfix(ng-if="key % 3 === 0")

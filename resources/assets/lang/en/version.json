@@ -1,12 +1,27 @@
 {
   "modal": {
     "update": {
-      "CANCEL": "Don't update yet",
+      "CANCEL": "Close",
       "SUBMIT": "Update Now",
-      "TITLE": "New SynergyCP Version available",
-      "SEMVER": "Version: {{ semver }}",
-      "RELEASE_DATE": "Release Date: {{ releaseDate }}",
-      "CHANGELOG": "Changelog:"
+      "TITLE": "SynergyCP Application Version",
+      "already_latest": {
+        "HEADING": "You are on the latest version ({{ semver }}).",
+        "BODY": "You can choose to switch to a different release channel above."
+      },
+      "new": {
+        "CURRENT": "Current Version",
+        "LATEST": "Latest Version",
+        "CHANGELOG": "Changelog",
+        "CHANGELOG_SUB_TEXT": "This changelog will only reflect the latest version, not other versions between the current version and the latest version.",
+        "FULL_CHANGELOG": "Full Changelog",
+        "VERSION_DESCR": "{{semver}} ({{releaseDate}})"
+      },
+      "release_channel": {
+        "LABEL": "Release Channel",
+        "MASTER": "Stable (recommended)",
+        "BETA": "Beta - early updates that are still being tested",
+        "TEST": "Test - pre-beta, only use if suggested by SynergyCP team"
+      }
     }
   },
   "UPDATE_STARTED": "Version update started, waiting for completion."

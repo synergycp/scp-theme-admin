@@ -66,6 +66,12 @@
       "write": {
         "LABEL": "Edit"
       }
+    },
+    "version": {
+      "TITLE": "Application Version",
+      "update": {
+        "LABEL": "Update Version"
+      }
     }
   },
   "pxe": {

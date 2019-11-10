@@ -11,7 +11,7 @@
    */
   function configPackagesLoader(PackagesLoaderProvider) {
     PackagesLoaderProvider
-      .setApiBase('package/angular-admin')
+      .setApiBase('package/asset/angular-admin')
       ;
   }
 })();

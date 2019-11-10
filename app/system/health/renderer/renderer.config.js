@@ -47,13 +47,12 @@
       renderer.render = render;
 
       function render() {
-        i18nObjectCallback = i18nObjectCallback || function () {
-          return {
-            key: 'health.check.'+healthCheck.slug+'.'+healthCheck.status,
-          };
-        };
-        var i18nObject = $injector.invoke(i18nObjectCallback, {healthCheck: healthCheck});
-        return $q.when(i18nObjectCallback).then(function (message) {
+        var i18nObject = $injector.invoke(i18nObjectCallback || inferI18nFromHealthCheckSlug, null, {
+          healthCheck: healthCheck,
+        });
+        // Unwrap the promise if it returns one.
+        return $q.when(i18nObject).then(function (i18nObject) {
+          console.log(i18nObject, healthCheck);
           return {
             i18n_key: i18nObject.key || i18nObject,
             i18n_params: i18nObject.params || healthCheck,
@@ -71,5 +70,12 @@
       return SimpleHealthStatusRenderer;
     };
     return SimpleHealthStatusRenderer;
+  }
+
+  /** @ngInject */
+  function inferI18nFromHealthCheckSlug(healthCheck) {
+    return {
+      key: 'health.check.'+healthCheck.slug+'.'+healthCheck.status,
+    };
   }
 })();

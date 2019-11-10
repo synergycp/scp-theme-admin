@@ -20,6 +20,7 @@
     VersionService.onChange = onChange;
     VersionService.getCurrent = getCurrent;
     VersionService.getLatest = getLatest;
+    VersionService.getLatestForReleaseChannel = getLatestForReleaseChannel;
     VersionService.getReleaseChannel = getReleaseChannel;
     VersionService.refresh = refresh;
 
@@ -44,6 +45,12 @@
 
       return (apiFetchResult || refresh()).then(function () {
         return cachedLatest;
+      });
+    }
+
+    function getLatestForReleaseChannel(releaseChannel) {
+      return Api.one('version/'+releaseChannel).get().then(function (response) {
+        return response.latest;
       });
     }
 

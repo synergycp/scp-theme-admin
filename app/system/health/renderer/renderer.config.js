@@ -52,7 +52,6 @@
         });
         // Unwrap the promise if it returns one.
         return $q.when(i18nObject).then(function (i18nObject) {
-          console.log(i18nObject, healthCheck);
           return {
             i18n_key: i18nObject.key || i18nObject,
             i18n_params: i18nObject.params || healthCheck,

@@ -14,7 +14,7 @@
   )
   table.table.table-bordered.table-no-edge-border.text-left
     tbody
-      tr(ng-repeat="check in widget.checks" ng-click="check.onClick()")
+      tr(ng-repeat="check in widget.checks" ng-click="widget.handleClick(check)")
         td(translate="{{ check.i18n_key }}" translate-values="check.i18n_params")
         td.shrink(
           ng-class="widget.statusToTextClass(check.status)"

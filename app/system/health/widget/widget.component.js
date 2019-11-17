@@ -38,6 +38,7 @@
       current: STATE.LOADING,
     }, STATE);
     widget.checks = [];
+    widget.handleClick = handleClick;
     widget.statusToTextClass = statusToTextClass;
     widget.statusToAlertClass = statusToAlertClass;
     widget.refresh = refresh;
@@ -45,6 +46,13 @@
     widget.$onInit = init;
 
     //////////
+
+    function handleClick(check) {
+      var potentialPromise = check.onClick();
+      if (typeof _.get(potentialPromise, 'then') === 'function') {
+        return widget.loader.during(potentialPromise.then(refresh));
+      }
+    }
 
     function setMinState(status) {
       if (STATES_BY_URGENCY.indexOf(widget.status.current) < STATES_BY_URGENCY.indexOf(status)) {

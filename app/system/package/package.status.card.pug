@@ -1,0 +1,20 @@
+.card.text-center.rounded-10(ng-class="status.loader.class")
+  .loader.rounded-10
+  .card-heading.pv-lg.bg-gray-dark.rounded-top-10
+    h5.card-title(translate="package.edit.status.TITLE" translate-value-name="{{status.package.name}}")
+  .card-alert.alert(translate="package.edit.status.title.{{status.package.status}}" ng-class=`{
+    'alert-success': status.package.status === 'ENABLED',
+    'alert-warning': status.package.status === 'DISABLED',
+    'alert-danger': status.package.status === 'SETUP_FAILED',
+  }`)
+  .card-body.rounded-bottom-10
+    p(translate="package.edit.status.body.{{status.package.status}}")
+  .card-footer-btn(
+    ng-class=`{
+     'btn-success': status.toggledStateName() === 'ENABLED',
+     'btn-warning': status.toggledStateName() === 'DISABLED',
+    }`
+    ng-click="status.toggleState()"
+    translate="package.edit.status.action.{{status.toggledStateName()}}"
+    translate-value-name="{{status.package.name}}"
+  )

@@ -1,0 +1,10 @@
+.card.text-center.rounded-10(ng-class="overview.loader.class")
+  .loader.rounded-10
+  .card-heading.pv-lg.bg-gray-dark.rounded-top-10
+    h5.card-title(ng-bind="overview.package.name")
+  .card-body.rounded-bottom-10
+    p(ng-bind="overview.package.description")
+  .card-footer-btn.btn-danger(
+    translate="package.edit.overview.DELETE"
+    ng-click="overview.delete()"
+  )

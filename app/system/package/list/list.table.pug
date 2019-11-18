@@ -1,0 +1,42 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th(
+    ng-if="table.showName"
+    translate="package.list.heading.NAME"
+  )
+  th(
+    ng-if="table.showStatus"
+    translate="package.list.heading.STATUS"
+  )
+  th(
+    ng-if="table.showVersion"
+    translate="package.list.heading.CURRENT_VERSION"
+  )
+  th(
+    ng-if="table.showVersion"
+    translate="package.list.heading.LATEST_VERSION"
+  )
+  th(
+    ng-if="table.showActions"
+    translate="package.list.heading.ACTIONS"
+  )
+
+block columns
+  td(ng-if="table.showName")
+    a(
+      ui-sref="app.system.package.view.edit({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(ng-if="table.showStatus")
+    span(translate="package.status.{{row.status}}")
+  td(ng-if="table.showVersion")
+    span(ng-bind="row.version.current.semver")
+  td(ng-if="table.showVersion")
+    span(ng-bind="row.version.latest.semver")
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.system.package.view.edit({id: row.id})"
+        translate="app.action.EDIT"
+      )

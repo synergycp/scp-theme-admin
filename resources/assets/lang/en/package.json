@@ -1,0 +1,74 @@
+{
+  "edit": {
+    "status": {
+      "TITLE": "Package State",
+      "title": {
+        "ENABLED": "Enabled",
+        "DISABLED": "Disabled",
+        "SETUP_FAILED": "Setup Failed"
+      },
+      "body": {
+        "ENABLED": "This package is enabled. It can be disabled using the button below.",
+        "DISABLED": "This package is disabled. It can be enabled using the button below.",
+        "SETUP_FAILED": "This package's setup process failed. Please check the logs for more information."
+      },
+      "action": {
+        "ENABLED": "Enable {{ name }} package",
+        "DISABLED": "Disable {{ name }} package"
+      },
+      "modal": {
+        "ENABLED": {
+          "TITLE": "Enable package",
+          "BODY": "Are you sure you wish to enable these packages:",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Enable Packages"
+        },
+        "DISABLED": {
+          "TITLE": "Disable package",
+          "BODY": "Are you sure you wish to disable these packages? The packages' data will remain in the database so if you reenable one, it will be in the same state it was in.",
+          "CANCEL": "Cancel",
+          "SUBMIT": "Disable Packages"
+        }
+      }
+    },
+    "overview": {
+      "DELETE": "Delete"
+    }
+  },
+  "list": {
+    "TITLE": "Installed Packages",
+    "heading": {
+      "NAME": "Name",
+      "STATUS": "Status",
+      "CURRENT_VERSION": "Current Version",
+      "LATEST_VERSION": "Latest Version",
+      "ACTIONS": "Actions"
+    },
+    "actions": {
+      "ENABLE": "Enable",
+      "DISABLE": "Disable"
+    }
+  },
+  "status": {
+    "DISABLED": "Disabled",
+    "ENABLED": "Enabled"
+  },
+  "form": {
+    "title": {
+      "ADD": "Install Package"
+    },
+    "slug": {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Visit the available packages page for names",
+      "HELP": "Available Packages"
+    }
+  },
+  "modal": {
+    "delete": {
+      "TITLE": "Delete Packages",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these Packages:"
+    }
+  }
+}

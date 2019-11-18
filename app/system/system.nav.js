@@ -31,6 +31,11 @@
     sref: "app.system.ssh.key.home",
   };
 
+  var PACKAGES = {
+    text: "Package Manager",
+    sref: "app.system.package.list",
+  };
+
   angular
     .module('app.system')
     .run(SystemNavConfig)
@@ -75,6 +80,10 @@
         group.item(EMAILS);
       }
 
+      if (map.system.package.read) {
+        group.item(PACKAGES);
+      }
+
       group.item(SSH_KEYS);
     }
 
@@ -85,6 +94,7 @@
       group.remove(INTEGRATIONS);
       group.remove(EMAILS);
       group.remove(SSH_KEYS);
+      group.remove(PACKAGES);
     }
   }
 })();

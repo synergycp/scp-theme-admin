@@ -58,6 +58,15 @@
         "LABEL": "Edit"
       }
     },
+    "package": {
+      "TITLE": "Packages",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
+    },
     "theme": {
       "TITLE": "Theme Customization",
       "read": {

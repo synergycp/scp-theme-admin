@@ -29,6 +29,14 @@
         }
       }
     },
+    "package": {
+      "update_available": {
+        "OK": "All Packages are up to date.",
+        "WARN": "Package update(s) available.",
+        "ERROR": "Package update(s) available.",
+        "LOADING": "Checking if package updates are available."
+      }
+    },
     "missing_renderer": {
       "ERROR": "ERROR: missing HealthStatusRenderer for {{slug}}"
     },

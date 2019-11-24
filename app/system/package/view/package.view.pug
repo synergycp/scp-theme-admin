@@ -1,0 +1,12 @@
+extends /resources/angle/pug/edit
+
+block left-side
+  .row
+    .col-xs-6
+      package-version-card(package="vm.edit.input")
+    .col-xs-6
+      package-overview-card(package="vm.edit.input")
+  .row
+    .col-xs-6
+      package-status-card(package="vm.edit.input")
+

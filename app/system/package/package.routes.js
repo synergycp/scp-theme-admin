@@ -25,7 +25,7 @@
         url: '',
         title: 'Edit Package',
         controller: 'PackageViewCtrl as vm',
-        templateUrl: helper.basepath('system/package/package.view.html'),
+        templateUrl: helper.basepath('system/package/view/package.view.html'),
       })
       ;
 

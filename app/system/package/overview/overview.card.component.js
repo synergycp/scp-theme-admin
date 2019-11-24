@@ -10,7 +10,7 @@
       },
       controller: 'PackageOverviewCardCtrl as overview',
       transclude: true,
-      templateUrl: 'app/system/package/package.overview.card.html'
+      templateUrl: 'app/system/package/overview/overview.card.html'
     })
     .controller('PackageOverviewCardCtrl', PackageOverviewCardCtrl);
 

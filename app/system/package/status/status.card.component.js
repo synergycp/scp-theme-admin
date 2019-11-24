@@ -10,7 +10,7 @@
       },
       controller: 'PackageStatusCardCtrl as status',
       transclude: true,
-      templateUrl: 'app/system/package/package.status.card.html'
+      templateUrl: 'app/system/package/status/status.card.html'
     })
     .controller('PackageStatusCardCtrl', PackageStatusCardCtrl);
 

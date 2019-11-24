@@ -1,5 +1,34 @@
 {
   "edit": {
+    "version": {
+      "is-not-latest": {
+        "ALERT": "A new version of this package is available!",
+        "current": {
+          "TITLE": "Current Version",
+          "RELEASE_DATE": "{{ releaseDate }}"
+        },
+        "latest": {
+          "TITLE": "Latest Version",
+          "RELEASE_DATE": "{{ releaseDate }}",
+          "DETAILS": "Update Details"
+        }
+      },
+      "is-latest": {
+        "TITLE": "Current Version",
+        "RELEASE_DATE": "{{ releaseDate }}",
+        "IS_LATEST": "You are on the latest version."
+      },
+      "modal": {
+        "update": {
+          "CLOSE": "Close",
+          "TITLE": "Latest Version Details",
+          "SEMVER": "Version: {{ semver }}",
+          "RELEASE_DATE": "Release Date: {{ releaseDate }}",
+          "CHANGELOG": "Changelog:",
+          "UPDATE": "Update Package"
+        }
+      }
+    },
     "status": {
       "TITLE": "Package State",
       "title": {
@@ -44,14 +73,16 @@
       "LATEST_VERSION": "Latest Version",
       "ACTIONS": "Actions"
     },
-    "actions": {
+    "action": {
       "ENABLE": "Enable",
-      "DISABLE": "Disable"
+      "DISABLE": "Disable",
+      "UPDATE": "Update"
     }
   },
   "status": {
     "DISABLED": "Disabled",
-    "ENABLED": "Enabled"
+    "ENABLED": "Enabled",
+    "SETUP_FAILURE": "Setup Failure"
   },
   "form": {
     "title": {
@@ -69,6 +100,24 @@
       "SUBMIT": "Delete",
       "CANCEL": "Cancel",
       "BODY": "Click \"Delete\" to permanently delete these Packages:"
+    },
+    "update": {
+      "TITLE": "Update Packages",
+      "SUBMIT": "Update",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Update\" to update these Packages:"
+    },
+    "enable": {
+      "TITLE": "Enable Packages",
+      "SUBMIT": "Enable",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Enable\" to enable these Packages:"
+    },
+    "disable": {
+      "TITLE": "Disable Packages",
+      "SUBMIT": "Disable",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Disable\" to disable these Packages:"
     }
   }
 }

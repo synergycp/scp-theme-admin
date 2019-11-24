@@ -32,6 +32,11 @@ block columns
     span(translate="package.status.{{row.status}}")
   td(ng-if="table.showVersion")
     span(ng-bind="row.version.current.semver")
+    a.btn.btn-success.btn-xs.ml(
+      ng-if="row.version.can_update"
+      ng-click="table.list.list.confirm.update([row]); $event.stopPropagation()"
+      translate="package.list.action.UPDATE"
+    )
   td(ng-if="table.showVersion")
     span(ng-bind="row.version.latest.semver")
   td(ng-if="table.showActions")
@@ -39,4 +44,14 @@ block columns
       a.btn.btn-default(
         ui-sref="app.system.package.view.edit({id: row.id})"
         translate="app.action.EDIT"
+      )
+      a.btn.btn-default(
+        ng-if="row.status !== 'ENABLED'"
+        ng-click="table.list.list.confirm.enable([row]); $event.stopPropagation()"
+        translate="package.list.action.ENABLE"
+      )
+      a.btn.btn-default(
+        ng-if="row.status === 'ENABLED'"
+        ng-click="table.list.list.confirm.disable([row]); $event.stopPropagation()"
+        translate="package.list.action.DISABLE"
       )

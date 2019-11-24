@@ -1,0 +1,50 @@
+div(ng-if="version.package.version.can_update")
+  .alert.alert-success.bounceIn
+    span(translate="package.edit.version.is-not-latest.ALERT")
+  .card.align-items-center.rounded-10.bg-primary-light(
+    ng-class="version.loader.class"
+  )
+    .loader.rounded-10
+    .col-xs-6.p0.text-right.rounded-left-10
+      .card-heading.pv-lg.bg-primary.rounded-top-left-10
+        h5.card-title(translate="package.edit.version.is-not-latest.current.TITLE")
+      .card-body
+        h3.m0(ng-bind="version.package.version.current.semver")
+        p(
+          translate="package.edit.version.is-not-latest.current.RELEASE_DATE"
+          translate-value-release-date="{{ version.package.version.current.release_date.unix * 1000 | date }}"
+        )
+    .col-xs-6.p0.bg-success.rounded-right-10
+      .card-heading.pv-lg.bg-success-dark.rounded-top-right-10
+        h5.card-title(translate="package.edit.version.is-not-latest.latest.TITLE")
+      .card-body
+        h3.m0(ng-bind="version.package.version.latest.semver")
+        p
+          span(
+            translate="package.edit.version.is-not-latest.latest.RELEASE_DATE"
+            translate-value-release-date="{{ version.package.version.latest.release_date.unix * 1000 | date }}"
+          )
+          br
+          a.text-white(
+            ng-click="version.viewUpdateDetails()"
+            translate="package.edit.version.is-not-latest.latest.DETAILS"
+          )
+    .clearfix
+.card.text-center.rounded-10(
+  ng-if="!version.package.version.can_update"
+  ng-class="version.loader.class"
+)
+  .loader.rounded-10
+  .card-heading.pv-lg.bg-gray-dark.rounded-top-10
+    h5.card-title(translate="package.edit.version.is-latest.TITLE")
+  .card-body.rounded-bottom-10
+    div(ng-if="version.loader.hasLoaded")
+      h3.m0(ng-bind="version.package.version.current.semver")
+      p
+        span(
+          translate="package.edit.version.is-latest.RELEASE_DATE"
+          translate-value-release-date="{{ version.package.version.current.release_date.unix * 1000 | date }}"
+        )
+      p
+        span(translate="package.edit.version.is-latest.IS_LATEST")
+    div(ng-if="!version.loader.hasLoaded" style="height: 60px")

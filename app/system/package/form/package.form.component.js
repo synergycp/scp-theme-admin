@@ -15,7 +15,7 @@
       },
       controller: 'PackageFormCtrl as packageForm',
       transclude: true,
-      templateUrl: 'app/system/package/package.form.html',
+      templateUrl: 'app/system/package/form/package.form.html',
     })
     .controller('PackageFormCtrl', PackageFormCtrl)
     ;

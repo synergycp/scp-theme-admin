@@ -82,7 +82,9 @@
   "status": {
     "DISABLED": "Disabled",
     "ENABLED": "Enabled",
-    "SETUP_FAILURE": "Setup Failure"
+    "SETUP_FAILURE": "Setup Failure",
+    "DELETING": "Being Deleted",
+    "INSTALLING": "Being Installed"
   },
   "form": {
     "title": {

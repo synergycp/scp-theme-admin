@@ -23,8 +23,8 @@ include /resources/angle/pug/mixins/form
   "layer"
 )(
   placeholder="{{ 'switch.form.layer.PLACEHOLDER' | translate }}"
-  ng-model="switchForm.input.layer_type"
-  ng-options="'switch.form.layer.'+type | translate for (type,value) in switchForm.LAYER_TYPE"
+  ng-model="switchForm.input.layer"
+  ng-options="'switch.form.layer.'+type | translate for (type,value) in switchForm.LAYER"
 )
 
 +label("{{ 'switch.form.group.LABEL' | translate }}")

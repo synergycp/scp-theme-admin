@@ -6,7 +6,7 @@
     V1: 1,
   };
 
- var LAYER_TYPE = {
+ var LAYER = {
     Rack: "rack",
     Distribution: "distribution",
   };
@@ -25,7 +25,7 @@
     allow_vlan_tagging: false,
     snmp_use_32_bit: false,
     snmp_version: SNMP_VERSION.V2c,
-    layer_type: LAYER_TYPE.Rack,
+    layer: LAYER.Rack,
   };
 
   angular
@@ -59,7 +59,7 @@
     switchForm.input = _.clone(INPUTS);
     switchForm.groups = Select('group').multi();
     switchForm.SNMP_VERSION = SNMP_VERSION;
-    switchForm.LAYER_TYPE = LAYER_TYPE;
+    switchForm.LAYER = LAYER;
 
 
     switchForm.$onInit = init;

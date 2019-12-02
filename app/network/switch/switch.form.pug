@@ -18,6 +18,15 @@ include /resources/angle/pug/mixins/form
   ng-options="value.slug as value.name for value in switchForm.switchTypes"
 )
 
++select(
+  "{{ 'switch.form.layer.LABEL' | translate }}",
+  "layer"
+)(
+  placeholder="{{ 'switch.form.layer.PLACEHOLDER' | translate }}"
+  ng-model="switchForm.input.layer_type"
+  ng-options="'switch.form.layer.'+type | translate for (type,value) in switchForm.LAYER_TYPE"
+)
+
 +label("{{ 'switch.form.group.LABEL' | translate }}")
   +ui-select("switchForm.groups")(
     multiple

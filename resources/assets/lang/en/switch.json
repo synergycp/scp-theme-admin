@@ -83,6 +83,11 @@
     "type": {
       "LABEL": "Type"
     },
+    "layer": {
+      "LABEL": "Layer",
+      "Rack": "Rack",
+      "Distribution": "Distribution"
+    },
     "group": {
       "LABEL": "IP Groups",
       "PLACEHOLDER": "Select IP Group(s)..."
@@ -173,7 +178,7 @@
     "TITLE": "Switch details",
     "name": "Name",
     "ip": "IP",
-    "groups": "IP Groups" 
+    "groups": "IP Groups"
   },
   "logs": {
     "TITLE": "Switch Logs"

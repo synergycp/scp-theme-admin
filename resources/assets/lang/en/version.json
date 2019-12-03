@@ -24,5 +24,5 @@
       }
     }
   },
-  "UPDATE_STARTED": "Version update started, waiting for completion."
+  "UPDATE_STARTED": "Version update started. It could take a few minutes for it to complete."
 }

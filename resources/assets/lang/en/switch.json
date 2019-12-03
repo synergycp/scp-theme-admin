@@ -85,8 +85,14 @@
     },
     "layer": {
       "LABEL": "Layer",
-      "Rack": "Rack",
-      "Distribution": "Distribution"
+      "rack": "Rack",
+      "distribution": "Distribution",
+      "distribution_switches": {
+        "LABEL": "Distribution Switches"
+      },
+      "layer_three": {
+        "LABEL": "Layer 3 Switch (Runs layer 3 commands when any switch commands are run)"
+      }
     },
     "group": {
       "LABEL": "IP Groups",

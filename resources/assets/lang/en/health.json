@@ -1,6 +1,7 @@
 {
   "widget": {
     "TITLE": "System Health",
+    "NO_RESULTS": "No health checks have finished running yet. Some results should show here in the next few minutes.",
     "status": {
       "ERROR": "Error!",
       "OK": "Healthy",

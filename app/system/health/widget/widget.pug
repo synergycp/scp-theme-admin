@@ -12,6 +12,11 @@
     ng-class="widget.statusToAlertClass(widget.status.current)"
     translate=LANG+"status.{{widget.status.current}}"
   )
+  .card-body(
+    ng-if="widget.checks.length === 0 && widget.loader.hasLoaded"
+    translate=LANG+"NO_RESULTS"
+    )
+
   table.table.table-bordered.table-no-edge-border.text-left
     tbody
       tr(ng-repeat="check in widget.checks" ng-click="widget.handleClick(check)")

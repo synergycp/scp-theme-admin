@@ -83,6 +83,11 @@
     }
 
     function storeHealth(healthChecks) {
+      if (healthChecks.length === 0) {
+        setMinState(STATE.WARN);
+        return;
+      }
+
       return $q.all(
         _.map(healthChecks, function (healthCheck) {
           setMinState(healthCheck.status);

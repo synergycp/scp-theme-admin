@@ -25,7 +25,8 @@
     allow_vlan_tagging: false,
     snmp_use_32_bit: false,
     snmp_version: SNMP_VERSION.V2c,
-    layer: LAYER.Rack
+    layer: LAYER.Rack,
+    layer_three: false
   };
 
   angular

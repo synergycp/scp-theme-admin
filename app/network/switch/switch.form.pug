@@ -144,7 +144,7 @@ hr
     p.help-block(translate="switch.form.layer.layer_three.HELP_TEXT")
 
 +label("{{ 'switch.form.layer.uplinks.LABEL' | translate }}")(
-  ng-if="switchForm.input.layer_three && switchForm.input.layer === switchForm.LAYER.RACK"
+  ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK"
 )
   +ui-select("switchForm.uplinks")(
     multiple

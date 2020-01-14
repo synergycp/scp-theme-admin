@@ -137,31 +137,31 @@ hr
   +checkbox("{{ 'switch.form.options.snmp_use_32_bit.LABEL' | translate }}")(
     ng-model="switchForm.input.snmp_use_32_bit"
   )
-  div(ng-if="switchForm.input.layer === 'rack'")
+  div(ng-if="switchForm.input.layer === switchForm.LAYER.RACK")
     +checkbox("{{ 'switch.form.layer.layer_three.LABEL' | translate }}")(
-      ng-model="switchForm.input.layer_three"
+      ng-model="switchForm.layer3"
     )
+    p.help-block(translate="switch.form.layer.layer_three.HELP_TEXT")
 
-+label("{{ 'switch.form.layer.distribution_switches.LABEL' | translate }}")(
-  ng-if="switchForm.input.layer_three && switchForm.input.layer === 'rack'"
++label("{{ 'switch.form.layer.uplinks.LABEL' | translate }}")(
+  ng-if="switchForm.input.layer_three && switchForm.input.layer === switchForm.LAYER.RACK"
 )
-  +ui-select("switchForm.groups")(
+  +ui-select("switchForm.uplinks")(
     multiple
     theme="bootstrap"
     close-on-select="false"
   )
-    ui-select-match(placeholder="{{ 'switch.form.layer.distribution_switches.LABEL' | translate }}")
+    ui-select-match(placeholder="{{ 'switch.form.layer.uplinks.LABEL' | translate }}")
       | {{ $item.name }}
 
     ui-select-choices(
       repeat=
-        "group in (" +
-          "switchForm.groups.items |" +
+        "uplink in (" +
+          "switchForm.uplinks.items |" +
           "filter: {name: $select.search} |" +
-          "filter: switchForm.groups.notSelected" +
-        ") track by group.id"
-      refresh="switchForm.groups.load($select.search)"
+          "filter: switchForm.uplinks.notSelected" +
+        ") track by uplink.id"
+      refresh="switchForm.uplinks.load($select.search)"
       refresh-delay="400"
     )
-      div(ng-bind-html="group.name | highlight: $select.search")
-        small servers: {{ group.serversCount }}
+      div(ng-bind-html="uplink.name | highlight: $select.search")

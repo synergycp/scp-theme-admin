@@ -84,14 +84,15 @@
       "LABEL": "Type"
     },
     "layer": {
-      "LABEL": "Layer",
-      "rack": "Rack",
-      "distribution": "Distribution",
-      "distribution_switches": {
-        "LABEL": "Distribution Switches"
+      "LABEL": "Network Layer",
+      "RACK": "Top of Rack Switch",
+      "DISTRIBUTION": "Distribution Switch",
+      "uplinks": {
+        "LABEL": "Uplinks"
       },
       "layer_three": {
-        "LABEL": "Layer 3 Switch (Runs layer 3 commands when any switch commands are run)"
+        "LABEL": "Layer 3 Support",
+        "HELP_TEXT": "On supported switches, runs additional Layer 3 switch commands during VLAN assignment/wipe so that the switch can route traffic for that IP. This will also run the necessary commands on the distribution switches that are marked as uplinks."
       }
     },
     "group": {

@@ -7,9 +7,14 @@
   };
 
  var LAYER = {
-    Rack: "rack",
-    Distribution: "distribution",
+    RACK: "RACK",
+    DISTRIBUTION: "DISTRIBUTION",
   };
+
+ var FUNCTION = {
+   LAYER_2: "LAYER_2",
+   LAYER_3: "LAYER_3",
+ };
 
   var INPUTS = {
     admin_notes: '',
@@ -25,8 +30,8 @@
     allow_vlan_tagging: false,
     snmp_use_32_bit: false,
     snmp_version: SNMP_VERSION.V2c,
-    layer: LAYER.Rack,
-    layer_three: false
+    layer: LAYER.RACK,
+    function: FUNCTION.LAYER_2,
   };
 
   angular
@@ -59,8 +64,10 @@
     switchForm.switchTypes = [];
     switchForm.input = _.clone(INPUTS);
     switchForm.groups = Select('group').multi();
+    switchForm.uplinks = Select('switch').multi();
     switchForm.SNMP_VERSION = SNMP_VERSION;
     switchForm.LAYER = LAYER;
+    switchForm.layer3 = false;
 
 
     switchForm.$onInit = init;
@@ -75,6 +82,7 @@
           fillFormInputs();
 
           _.setContents(switchForm.groups.selected, response.groups);
+          _.setContents(switchForm.uplinks.selected, response.uplinks);
         });
         switchForm.form.on(['create'], Todo.refresh);
       }
@@ -82,12 +90,15 @@
 
     function fillFormInputs() {
       _.overwrite(switchForm.input, switchForm.form.input);
+      switchForm.layer3 = switchForm.input.function === FUNCTION.LAYER_3;
     }
 
     function getData() {
       var data = _.clone(switchForm.input);
 
       data.groups = _.map(switchForm.groups.selected, 'id');
+      data.uplinks = _.map(switchForm.uplinks.selected, 'id');
+      data.function = switchForm.layer3 ? FUNCTION.LAYER_3 : FUNCTION.LAYER_2;
 
       return data;
     }

@@ -47,7 +47,7 @@
     function init() {
       $command = portControl.port
         .all('command')
-        ;
+      ;
     }
 
     function confirmPowerOff() {
@@ -73,7 +73,9 @@
     }
 
     function command(cmd) {
-      if(portControl.response.areCommandsFinished) clearCommandsOutput();
+      if (portControl.response.areCommandsFinished) {
+        clearCommandsOutput();
+      }
       return portControl.loader.during(
         $command
           .post({
@@ -88,14 +90,13 @@
       portControl.response.show = true;
       portControl.response.loader.loading();
 
+      _.map(response.commands, listenForCommandComplete);
+    }
+
+    function listenForCommandComplete(command) {
       var interval = setInterval(checkCommandStatus, INTERVAL_CHECK_STATUS);
-      var $cmd = Api.one(
-        'switch/'+response.command.switch.id+'/command/'+response.command.id
-      );
 
-      portControl.response.areCommandsFinishedObj[response.command.id] = false;
-
-      return response;
+      portControl.response.areCommandsFinishedObj[command.id] = false;
 
       function updateCommandStatus(response) {
         if (response.status != 'Queued' && response.status != 'Running') {
@@ -110,12 +111,12 @@
 
       function finish() {
         clearInterval(interval);
-        portControl.response.areCommandsFinishedObj[response.command.id] = true;
+        portControl.response.areCommandsFinishedObj[command.id] = true;
         commandFinished();
       }
 
       function checkCommandStatus() {
-        $cmd
+        Api.one('switch/' + command.switch.id + '/command/' + command.id)
           .get()
           .then(updateCommandStatus)
         ;
@@ -130,10 +131,10 @@
 
     function commandFinished() {
       var areAllFinished = false;
-      _.forEach(portControl.response.areCommandsFinishedObj, function(value, key) {
-        return areAllFinished = value; 
+      _.forEach(portControl.response.areCommandsFinishedObj, function (value, key) {
+        return areAllFinished = value;
       });
-      if(areAllFinished) {
+      if (areAllFinished) {
         portControl.response.loader.loaded();
         portControl.response.areCommandsFinished = true;
         portControl.response.areCommandsFinishedObj = {};

@@ -52,14 +52,14 @@ include /resources/angle/pug/mixins/form
 hr
 
 +label("{{ 'switch.form.network.LABEL' | translate }}")
-  .row 
-    .col-xs-8 
+  .row
+    .col-xs-8
       input.form-control(
         type="text"
         placeholder="{{ 'switch.form.network.ip.PLACEHOLDER' | translate }}"
         ng-model="switchForm.input.ip"
       )
-    .col-xs-4 
+    .col-xs-4
       input.form-control(
         type="text"
         placeholder="{{ 'switch.form.network.port.PLACEHOLDER' | translate }}"
@@ -67,14 +67,14 @@ hr
       )
 
 +label("{{ 'switch.form.ssh.LABEL' | translate }}")
-  .row 
+  .row
     .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'switch.form.ssh.username.PLACEHOLDER' | translate }}"
         ng-model="switchForm.input.ssh_user"
       )
-    .col-xs-6 
+    .col-xs-6
       input.form-control(
         type="text"
         placeholder="{{ 'switch.form.ssh.password.PLACEHOLDER' | translate }}"
@@ -165,3 +165,21 @@ hr
       refresh-delay="400"
     )
       div(ng-bind-html="uplink.name | highlight: $select.search")
+
+div(ng-if="switchForm.function && switchForm.input.layer === switchForm.LAYER.RACK")
+  +field(
+    "{{ 'switch.form.ipv4.LABEL' | translate }}",
+    "v4_address"
+  )(
+    placeholder="{{ 'switch.form.ipv4.PLACEHOLDER' | translate }}"
+    ng-model="switchForm.input.v4_address"
+  )
+
+div(ng-if="switchForm.function && switchForm.input.layer === switchForm.LAYER.RACK")
+  +field(
+    "{{ 'switch.form.ipv6.LABEL' | translate }}",
+    "v6_address"
+  )(
+    placeholder="{{ 'switch.form.ipv6.PLACEHOLDER' | translate }}"
+    ng-model="switchForm.input.v6_address"
+  )

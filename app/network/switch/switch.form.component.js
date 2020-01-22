@@ -57,12 +57,6 @@
   function SwitchFormCtrl(Todo, Select, _, Api) {
     var switchForm = this;
 
-
-    Api.all('switch/type').getList().then(function (result) {
-      _.setContents(switchForm.switchTypes, result);
-      switchForm.input.type = switchForm.input.type || switchForm.switchTypes[0].slug;
-    });
-
     switchForm.switchTypes = [];
     switchForm.input = _.clone(INPUTS);
     switchForm.groups = Select('group').multi();
@@ -70,12 +64,18 @@
     switchForm.SNMP_VERSION = SNMP_VERSION;
     switchForm.LAYER = LAYER;
     switchForm.function = FUNCTION;
+    switchForm.uplinksOriginal = [];
     
     switchForm.$onInit = init;
 
     //////////
 
     function init() {
+      Api.all('switch/type').getList().then(function (result) {
+        _.setContents(switchForm.switchTypes, result);
+        switchForm.input.type = switchForm.input.type || switchForm.switchTypes[0].slug;
+      });
+
       fillFormInputs();
       switchForm.form.getData = getData;
       if(switchForm.form.on) {
@@ -83,7 +83,7 @@
           fillFormInputs();
 
           _.setContents(switchForm.groups.selected, response.groups);
-          _.setContents(switchForm.uplinks.selected, response.uplinks);
+          loadUplinks();
         });
         switchForm.form.on(['create'], Todo.refresh);
       }
@@ -94,14 +94,42 @@
       switchForm.layer3 = switchForm.input.function === FUNCTION.LAYER_3;
     }
 
+    function loadUplinks() {
+      return Api.all('switch/'+switchForm.form.input.id+'/uplink')
+        .getList()
+        .then(storeUplinks)
+        ;
+    }
+
+    function storeUplinks(response) {
+      _.setContents(switchForm.uplinks.selected, _.map(response, function (uplink) {
+        return uplink.parent;
+      }));
+      _.setContents(switchForm.uplinksOriginal, response);
+    }
+
     function getData() {
-      var data = _.clone(switchForm.input);
-
-      data.groups = _.map(switchForm.groups.selected, 'id');
-      data.uplinks = _.map(switchForm.uplinks.selected, 'id');
-      data.function = switchForm.layer3 ? FUNCTION.LAYER_3 : FUNCTION.LAYER_2;
-
-      return data;
+      var currentUplinkSwitchIds = _.map(switchForm.uplinks.selected, 'id');
+      var originalUplinkSwitchIds = _.map(switchForm.uplinksOriginal, 'parent.id');
+      return {
+        switch: _.assign(_.clone(switchForm.input), {
+          groups: _.map(switchForm.groups.selected, 'id'),
+          function: switchForm.layer3 ? FUNCTION.LAYER_3 : FUNCTION.LAYER_2,
+        }),
+        uplinks: {
+          add: _.difference(
+            currentUplinkSwitchIds,
+            originalUplinkSwitchIds
+          ).map(function (addedSwitchId) {
+            return {
+              parent_id: addedSwitchId,
+            };
+          }),
+          remove: _.filter(switchForm.uplinksOriginal, function (uplink) {
+            return currentUplinkSwitchIds.indexOf(uplink.parent.id) === -1;
+          }),
+        },
+      };
     }
   }
 })();

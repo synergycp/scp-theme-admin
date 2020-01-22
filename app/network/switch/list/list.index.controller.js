@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function SwitchIndexCtrl(SwitchList, ListFilter, Todo, $scope) {
+  function SwitchIndexCtrl(SwitchList, ListFilter, Todo, $scope, _, $q) {
     var vm = this;
 
     vm.list = SwitchList()
@@ -35,7 +35,13 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData())
+      var data = vm.create.getData();
+      vm.list.create(data.switch)
+        .then(function (createdSwitch) {
+          return $q.all(_.map(data.uplinks.add, function (uplink) {
+            return createdSwitch.all(createdSwitch.id + '/uplink').post(uplink);
+          }));
+        })
         .then(Todo.refresh);
     }
 

@@ -166,20 +166,20 @@ hr
     )
       div(ng-bind-html="uplink.name | highlight: $select.search")
 
-div(ng-if="switchForm.function && switchForm.input.layer === switchForm.LAYER.RACK")
+div(ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK")
   +field(
     "{{ 'switch.form.ipv4.LABEL' | translate }}",
-    "v4_address"
+    "ipv4_address"
   )(
     placeholder="{{ 'switch.form.ipv4.PLACEHOLDER' | translate }}"
-    ng-model="switchForm.input.v4_address"
+    ng-model="switchForm.input.ipv4_address"
   )
 
-div(ng-if="switchForm.function && switchForm.input.layer === switchForm.LAYER.RACK")
+div(ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK")
   +field(
     "{{ 'switch.form.ipv6.LABEL' | translate }}",
-    "v6_address"
+    "ipv6_address"
   )(
     placeholder="{{ 'switch.form.ipv6.PLACEHOLDER' | translate }}"
-    ng-model="switchForm.input.v6_address"
+    ng-model="switchForm.input.ipv6_address"
   )

@@ -99,6 +99,14 @@
       "LABEL": "IP Groups",
       "PLACEHOLDER": "Select IP Group(s)..."
     },
+    "ipv4": {
+      "LABEL": "IPv4 Address",
+      "PLACEHOLDER": "e.g. 192.168.0.1"
+    },
+    "ipv6": {
+      "LABEL": "IPv6 Address",
+      "PLACEHOLDER": "e.g. 2001:0db8:85a3..."
+    },
     "options": {
       "LABEL": "Advanced Options",
       "allow_vlan_tagging": {

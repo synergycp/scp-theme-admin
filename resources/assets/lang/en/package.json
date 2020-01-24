@@ -34,12 +34,14 @@
       "title": {
         "ENABLED": "Enabled",
         "DISABLED": "Disabled",
-        "SETUP_FAILED": "Setup Failed"
+        "SETUP_FAILURE": "Setup Failed",
+        "INSTALLING": "Installing"
       },
       "body": {
         "ENABLED": "This package is enabled. It can be disabled using the button below.",
         "DISABLED": "This package is disabled. It can be enabled using the button below.",
-        "SETUP_FAILED": "This package's setup process failed. Please check the logs for more information."
+        "SETUP_FAILURE": "This package's setup process failed. Please check the logs for more information.",
+        "INSTALLING": "This package is currently being installed."
       },
       "action": {
         "ENABLED": "Enable {{ name }} package",
@@ -77,6 +79,12 @@
       "ENABLE": "Enable",
       "DISABLE": "Disable",
       "UPDATE": "Update"
+    },
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      }
     }
   },
   "status": {

@@ -5,7 +5,7 @@
   .card-alert.alert(translate="package.edit.status.title.{{status.package.status}}" ng-class=`{
     'alert-success': status.package.status === 'ENABLED',
     'alert-warning': status.package.status === 'DISABLED',
-    'alert-danger': status.package.status === 'SETUP_FAILED',
+    'alert-danger': status.package.status === 'SETUP_FAILURE',
   }`)
   .card-body.rounded-bottom-10
     p(translate="package.edit.status.body.{{status.package.status}}")

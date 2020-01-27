@@ -44,11 +44,13 @@
 
     function submit() {
       var data = vm.edit.getData();
-      vm.edit.loader.during($q.all(_.flatten([
-        _.map(data.uplinks.add, addUplink),
-        _.map(data.uplinks.remove, removeUplink)
-      ])).then(function () {
-        return vm.edit.patch(data.switch);
+      vm.edit.loader.during($q.all(
+        vm.edit.patch(data.switch)
+      ).then(function () {
+        return _.flatten([
+          _.map(data.uplinks.add, addUplink),
+          _.map(data.uplinks.remove, removeUplink)
+        ]);
       }));
     }
 

@@ -44,14 +44,14 @@
 
     function submit() {
       var data = vm.edit.getData();
-      vm.edit.loader.during($q.all(
-        vm.edit.patch(data.switch)
-      ).then(function () {
-        return _.flatten([
+      return vm.edit.loader.during(vm.edit.patch(data.switch)).then(function () {
+        return $q.all(_.flatten([
           _.map(data.uplinks.add, addUplink),
           _.map(data.uplinks.remove, removeUplink)
-        ]);
-      }));
+        ]));
+      }).then(function () {
+        vm.edit.fire('change:all-complete');
+      });
     }
 
     function addUplink(uplink) {

@@ -84,8 +84,8 @@
           fillFormInputs();
 
           _.setContents(switchForm.groups.selected, response.groups);
-          loadUplinks();
         });
+        switchForm.form.on(['load', 'change:all-complete'], loadUplinks);
         switchForm.form.on(['create'], Todo.refresh);
       }
     }

@@ -400,7 +400,7 @@
           return $ports
             .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
             .patch({
-              "max": $filter('sizeToBits')(port.max_bandwidth),
+              "max": port.max_bandwidth,
               "started_at": startDate
             })
           ;
@@ -409,12 +409,12 @@
           return $ports
             .all(port.id +'/bandwidth/usage')
             .post({
-              "max": $filter('sizeToBits')(port.max_bandwidth),
+              "max": port.max_bandwidth,
               "started_at": startDate
             })
             .then(function(bandwidthData) {
               port.bandwidthUsage = bandwidthData.response.data;
-              port.max_bandwidth = $filter('bitsToSize')(bandwidthData.response.data.max);
+              port.max_bandwidth = bandwidthData.response.data.max;
             })
           ;
         }

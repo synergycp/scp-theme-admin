@@ -418,7 +418,7 @@
             })
             .then(function(bandwidthData) {
               port.bandwidthUsage = bandwidthData.response.data;
-              maxBandwidth = $filter('bitsToSize')(bandwidthData.response.data.max);
+              port.max_bandwidth = $filter('bitsToSize')(bandwidthData.response.data.max);
             })
           ;
         }

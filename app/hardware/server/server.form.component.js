@@ -396,11 +396,15 @@
           moment(serverForm.billing.date.value).toISOString() :
           undefined;
 
+        // The API is expecting the value in bits and the frontend takes in bytes if it's an integer,
+        // otherwise the string is passed through and the backend parses it.
+        var maxBandwidth = isNaN(port.max_bandwidth) ? port.max_bandwidth : (port.max_bandwidth * 8);
+
         if (port.id && !serverForm.isCreating && port.max_bandwidth && port.bandwidthUsage && !port.switch.port.$dirty) {
           return $ports
             .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
             .patch({
-              "max": port.max_bandwidth,
+              "max": maxBandwidth,
               "started_at": startDate
             })
           ;
@@ -409,7 +413,7 @@
           return $ports
             .all(port.id +'/bandwidth/usage')
             .post({
-              "max": port.max_bandwidth,
+              "max": maxBandwidth,
               "started_at": startDate
             })
             .then(function(bandwidthData) {

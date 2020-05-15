@@ -588,6 +588,10 @@
         "SUBMIT": "Wipe Switch Port"
       }
     },
+    "dryRun": {
+      "BTN": "Dry Run",
+      "ENABLED_ALERT": "Dry Run mode has been enabled. Commands will not be run, the commands will instead show up here."
+    },
     "SPEED": "Port Speed",
     "PORT": "Port Number",
     "MAC": "MAC Address",

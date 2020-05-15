@@ -20,7 +20,7 @@
   /**
    * @ngInject
    */
-  function ServerSwitchPortControlCtrl(Loader, Modal, Api) {
+  function ServerSwitchPortControlCtrl(Loader, Modal, Api, $q) {
     var portControl = this;
     var $command;
 
@@ -32,6 +32,7 @@
       areCommandsFinished: false,
       areCommandsFinishedObj: {}
     };
+    portControl.dryRun = false;
 
     portControl.$onInit = init;
     portControl.syncVlan = command.bind(null, 'sync-vlan');
@@ -59,15 +60,16 @@
     }
 
     function modalConfirmCommand(cmd, lang) {
+      var getConfirmationIfNeeded = portControl.dryRun ? $q.when() : Modal
+        .confirm([portControl.server], lang)
+        .data({
+          port: portControl.server.switch.port.name,
+          switch: portControl.server.switch.name,
+        })
+        .open()
+        .result;
       return portControl.loader.during(
-        Modal
-          .confirm([portControl.server], lang)
-          .data({
-            port: portControl.server.switch.port.name,
-            switch: portControl.server.switch.name,
-          })
-          .open()
-          .result
+        getConfirmationIfNeeded
           .then(command.bind(null, cmd))
       )
     }
@@ -79,7 +81,8 @@
       return portControl.loader.during(
         $command
           .post({
-            'command': cmd,
+            command: cmd,
+            dry: portControl.dryRun,
           })
           .then(listenForResponse)
           .then(fireChangeEvent)
@@ -88,12 +91,22 @@
 
     function listenForResponse(response) {
       portControl.response.show = true;
-      portControl.response.loader.loading();
 
       _.map(response.commands, listenForCommandComplete);
     }
 
-    function listenForCommandComplete(command) {
+    function listenForCommandComplete(command, index) {
+      if (!command.id) {
+        portControl.response.commands.push({
+          id: index,
+          output: command.command,
+          errors: '',
+        });
+        commandFinished();
+        return;
+      }
+
+      portControl.response.loader.loading();
       var interval = setInterval(checkCommandStatus, INTERVAL_CHECK_STATUS);
 
       portControl.response.areCommandsFinishedObj[command.id] = false;
@@ -130,9 +143,9 @@
     }
 
     function commandFinished() {
-      var areAllFinished = false;
+      var areAllFinished = true;
       _.forEach(portControl.response.areCommandsFinishedObj, function (value, key) {
-        return areAllFinished = value;
+        areAllFinished &= value;
       });
       if (areAllFinished) {
         portControl.response.loader.loaded();

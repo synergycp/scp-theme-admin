@@ -1,6 +1,6 @@
 {
   "name": "scp-theme-admin",
-  "version": "0.0.1",
+  "version": "2.2.0",
   "description": "Synergy Control Panel Default Admin Theme",
   "author": "synergycontrolpanel",
   "devDependencies": {

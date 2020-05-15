@@ -44,6 +44,15 @@ table.table.table-condensed.table-bordered(style="margin-bottom: 0")
           ng-click="portControl.wipe()"
           translate="server.switch.wipe.BTN"
         )
+        a.btn.btn-default(
+          ng-click="portControl.dryRun = !portControl.dryRun"
+        )
+          label.switch.switch-sm.mb0
+           input(type="checkbox" ng-checked="portControl.dryRun")
+           span
+          span.ml-sm(
+            translate="server.switch.dryRun.BTN"
+          )
       //- End Buttons
   tr.mid-aligned
     td.shrink.pad-right
@@ -57,7 +66,10 @@ table.table.table-condensed.table-bordered(style="margin-bottom: 0")
     td.shrink.pad-right
       strong(translate="server.switch.MAC")
     td(ng-bind="portControl.port.mac")
-
+.alert.alert-success.m0.no-rounding(
+  ng-if="portControl.dryRun"
+  translate="server.switch.dryRun.ENABLED_ALERT"
+)
 .panel-footer.clearfix(ng-class="portControl.response.loader.class + ' ' + (portControl.response.show ? '' : 'hidden')")
   .loader
   pre(

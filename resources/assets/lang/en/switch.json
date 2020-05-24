@@ -109,8 +109,23 @@
     },
     "options": {
       "LABEL": "Advanced Options",
-      "allow_vlan_tagging": {
-        "LABEL": "VLAN Tagging (enables support for multiple VLANs on one port)"
+      "multi_vlan_logic": {
+        "LABEL": "Multi-VLAN logic",
+        "options": {
+          "SINGLE": "Single VLAN per port",
+          "TAGGING": "VLAN Tagging",
+          "COMBINE": "VLAN Combination"
+        },
+        "learn_more_modal": {
+          "CLOSE": "Close",
+          "CTA": "Learn More",
+          "TITLE": "Multi-VLAN logic",
+          "options": {
+            "SINGLE": "All Entities assigned to one switch port must have the same VLAN.",
+            "TAGGING": "Entities with different VLANs can be assigned to the same switch port. These VLANs are configured by tagging the port with all of the VLANs.",
+            "COMBINE": "Entities with different VLANs can be assigned to the same switch port. Secondary IP Entity VLANs are ignored, instead those entities are routed to the port using Layer 3 switch commands. Only works in Layer 3 switch setups."
+          }
+        }
       },
       "snmp_use_32_bit": {
         "LABEL": "Use 32-bit SNMP data (less accurate, but the only option on some switches)"

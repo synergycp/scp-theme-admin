@@ -6,6 +6,12 @@
     V1: 1,
   };
 
+  var MULTI_VLAN_LOGIC = {
+    SINGLE: 'SINGLE',
+    TAGGING: 'TAGGING',
+    COMBINE: 'COMBINE',
+  };
+
  var LAYER = {
     RACK: "RACK",
     DISTRIBUTION: "DISTRIBUTION",
@@ -27,7 +33,7 @@
     ssh_en_pass: '',
     ssh_en_type: 0,
     snmp_pass: '',
-    allow_vlan_tagging: false,
+    multi_vlan_logic: MULTI_VLAN_LOGIC.SINGLE,
     snmp_use_32_bit: false,
     snmp_version: SNMP_VERSION.V2c,
     layer: LAYER.RACK,
@@ -54,7 +60,7 @@
   /**
    * @ngInject
    */
-  function SwitchFormCtrl(Todo, Select, _, Api) {
+  function SwitchFormCtrl(Todo, Select, _, Api, Modal) {
     var switchForm = this;
 
     switchForm.switchTypes = [];
@@ -62,10 +68,12 @@
     switchForm.groups = Select('group').multi();
     switchForm.uplinks = Select('switch').multi();
     switchForm.SNMP_VERSION = SNMP_VERSION;
+    switchForm.MULTI_VLAN_LOGIC = MULTI_VLAN_LOGIC;
     switchForm.LAYER = LAYER;
     switchForm.function = FUNCTION;
     switchForm.uplinksOriginal = [];
     switchForm.layer3 = false;
+    switchForm.openMultiVLANLogicLearnMoreModal = openMultiVLANLogicLearnMoreModal;
 
     switchForm.$onInit = init;
 
@@ -88,6 +96,16 @@
         switchForm.form.on(['load', 'change:all-complete'], loadUplinks);
         switchForm.form.on(['create'], Todo.refresh);
       }
+    }
+    
+    function openMultiVLANLogicLearnMoreModal() {
+      return Modal.information("switch.form.options.multi_vlan_logic.learn_more_modal")
+        .data({
+          options: MULTI_VLAN_LOGIC,
+        })
+        .templateUrl("app/network/switch/switch.form.multiVlanLogic.learnMoreModal.html")
+        .open()
+        .result;
     }
 
     function fillFormInputs() {

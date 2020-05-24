@@ -255,7 +255,7 @@
         .clearFilter('ip_group')
         .filter({
           extra_for_id: _.get(provisionForm, 'entities.selected[0].id'),
-          allow_multiple_vlans: _.get(provisionForm, 'server.selected.switch.allow_vlan_tagging'),
+          allow_multiple_vlans: _.get(provisionForm, 'server.selected.switch.allow_multiple_vlans'),
           ip_group: _.get(provisionForm, 'group.selected.id'),
         })
         .load();

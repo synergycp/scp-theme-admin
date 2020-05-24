@@ -1,0 +1,6 @@
+extends /resources/angle/pug/modal.information.pug
+
+block body
+  div(ng-repeat="key in modal.data.options")
+    b(translate="switch.form.options.multi_vlan_logic.options.{{key}}")
+    p(translate=lang + ".options.{{key}}")

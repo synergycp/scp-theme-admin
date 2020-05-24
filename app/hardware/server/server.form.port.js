@@ -105,7 +105,7 @@
         port.switch.port.selected = response.switch.port;
         port.switch.speed.selected = response.switch.port.speed;
 
-        port.allowMultipleVLANs = response.switch.allow_vlan_tagging;
+        port.allowMultipleVLANs = response.switch.allow_multiple_vlans;
         syncEntityFilter();
       }
 

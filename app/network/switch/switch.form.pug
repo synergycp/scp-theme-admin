@@ -125,15 +125,22 @@ hr
   "{{ 'switch.form.options.snmp_version.LABEL' | translate }}",
   "snmp_version"
 )(
-  placeholder="{{ 'switch.form.options.snmp_version.PLACEHOLDER' | translate }}"
   ng-model="switchForm.input.snmp_version"
   ng-options="'switch.form.options.snmp_version.'+version | translate for (version,value) in switchForm.SNMP_VERSION"
 )
 
-+label("{{ 'switch.form.options.LABEL' | translate }}")
-  +checkbox("{{ 'switch.form.options.allow_vlan_tagging.LABEL' | translate }}")(
-    ng-model="switchForm.input.allow_vlan_tagging"
++label("switch.form.options.multi_vlan_logic.LABEL")
+  select.form-control(
+    ng-model="switchForm.input.multi_vlan_logic"
+    ng-options="'switch.form.options.multi_vlan_logic.options.'+opt | translate for (opt,value) in switchForm.MULTI_VLAN_LOGIC"
   )
+  p.help-block
+    a(
+      ng-click="switchForm.openMultiVLANLogicLearnMoreModal()"
+      translate="switch.form.options.multi_vlan_logic.learn_more_modal.CTA"
+    )
+
++label("{{ 'switch.form.options.LABEL' | translate }}")
   +checkbox("{{ 'switch.form.options.snmp_use_32_bit.LABEL' | translate }}")(
     ng-model="switchForm.input.snmp_use_32_bit"
   )

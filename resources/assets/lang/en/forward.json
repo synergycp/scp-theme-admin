@@ -13,10 +13,17 @@
       "DELETE": "Delete",
       "RESYNC": "Resync"
     },
+    "status": {
+      "OK": "OK",
+      "WARN": "Warning",
+      "ERROR": "Error"
+    },
     "list": {
       "TITLE": "Port Forwarding Gateways",
       "heading": {
         "NAME": "Name",
+        "HEALTH": "Health",
+        "VERSION": "Version",
         "HOSTNAME": "Hostname",
         "PORT-LIMIT": "Port Limit",
         "ACTIONS": "Actions"

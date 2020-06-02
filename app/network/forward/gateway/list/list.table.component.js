@@ -9,6 +9,8 @@
       },
       bindings: {
         showName: '=?',
+        showHealth: '=?',
+        showVersion: '=?',
         showHostname: '=?',
         showPortLimit: '=?',
         showActions: '=?',
@@ -33,6 +35,8 @@
     function init() {
       _.defaults(table, {
         showName: true,
+        showHealth: true,
+        showVersion: true,
         showHostname: true,
         showPortLimit: true,
         showActions: true,

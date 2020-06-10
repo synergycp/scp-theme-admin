@@ -6,6 +6,7 @@
         hostname: '',
         api_key: '',
         port_limit: '',
+        usable_ips: '',
     };
 
     angular
@@ -44,6 +45,7 @@
 
         function fillFormInputs() {
             _.overwrite(gatewayForm.input, gatewayForm.form.input);
+            gatewayForm.input.usable_ips = (gatewayForm.form.input.usable_ips || []).join(', ');
         }
 
         function storeState(response) {

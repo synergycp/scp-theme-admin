@@ -1,0 +1,30 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="pool.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('pool-edit-form')")
+        i.fa.fa-plus
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
+    pool-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
+    pool-table.border-top-table.scrollable-block
+    list-footer
+
+block bottom-left
+  +create-form("{{ 'pool.form.title.ADD' | translate }}", 'pool-edit-form')
+    pool-form(form="vm.create" allow-bulk-add="true")
+
+block bottom-right
+  logs(
+    heading="Pool Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

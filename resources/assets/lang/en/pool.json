@@ -1,0 +1,135 @@
+{
+  "heading": {
+    "NAME": "Name",
+    "ADDRESS": "IP",
+    "IP_GROUP": "IP Group",
+    "CLIENT": "Client",
+    "VLAN": "VLAN",
+    "BILLING_ID": "Billing ID",
+    "ACTIONS": "Actions"
+  },
+  "search": {
+    "TITLE": "IP Pools",
+    "EMPTY": "No IP Group or Server assigned"
+  },
+  "modal": {
+    "pools": {
+      "LABEL": "IP Pools"
+    },
+    "delete": {
+      "TITLE": "Delete IP Pools",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these IP Pools:"
+    },
+    "group": {
+      "CANCEL": "Cancel",
+      "SUBMIT": "Assign IP Group",
+      "TITLE": "Assign IP Group",
+      "group": {
+        "LABEL": "IP Group",
+        "PLACEHOLDER": "Type to search IP Groups..."
+      }
+    }
+  },
+  "buttons": {
+    "DELETE": "Delete"
+  },
+  "form": {
+    "admin_notes": {
+      "LABEL": "Admin Notes",
+      "PLACEHOLDER": "Optional"
+    },
+    "title": {
+      "EDIT": "Edit {{ name }}",
+      "ADD": "Create IP Pool"
+    },
+    "name": {
+      "LABEL": "Name",
+      "PLACEHOLDER": "e.g. 192.168.0.0/24"
+    },
+    "billing_id": {
+      "LABEL": "Billing ID",
+      "PLACEHOLDER": "Optional"
+    },
+    "group": {
+      "LABEL": "Group",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "vlan": {
+      "LABEL": "VLAN",
+      "PLACEHOLDER": "1"
+    },
+    "owner": {
+      "LABEL": "Owner",
+      "PLACEHOLDER": "Type to search..."
+    },
+    "type": {
+      "LABEL": "IP Type",
+      "V4": "IPv4",
+      "V6": "IPv6"
+    },
+    "ipv4": {
+      "range_start": {
+        "LABEL": "IPv4 Address",
+        "PLACEHOLDER": "e.g. 192.168.0.1"
+      },
+      "subnet": {
+        "LABEL": "IPv4 Subnet Mask",
+        "PLACEHOLDER": "e.g. 255.255.255.0"
+      },
+      "gateway": {
+        "LABEL": "IPv4 Gateway",
+        "PLACEHOLDER": "e.g. 192.168.0.1"
+      },
+      "range": {
+        "PLACEHOLDER": "e.g. 255"
+      },
+      "bulk": {
+        "toggle": {
+          "LABEL": "Bulk Add",
+          "TEXT": "Add IPs in bulk"
+        },
+        "increment_amount": {
+          "LABEL": "IP Increment",
+          "PLACEHOLDER": "e.g. 8 for /29",
+          "HELP": "We'll increment the IP address range by this amount each time you add one."
+        },
+        "increment_vlan": {
+          "LABEL": "VLAN/Gateway",
+          "TEXT": "Increment VLAN and Gateway"
+        }
+      }
+    },
+    "ipv6": {
+      "range_start": {
+        "LABEL": "IPv6 Address",
+        "PLACEHOLDER": "e.g. ::1"
+      },
+      "range": {
+        "PLACEHOLDER": "e.g. ffff"
+      },
+      "gateway": {
+        "LABEL": "IPv6 Gateway",
+        "PLACEHOLDER": ""
+      }
+    }
+  },
+  "list": {
+    "TITLE": "IP Pools",
+    "filter": {
+      "search": {
+        "LABEL": "Search",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "group": {
+        "LABEL": "IP Group",
+        "PLACEHOLDER": "Type to search..."
+      },
+      "owner": {
+        "LABEL": "Owner",
+        "PLACEHOLDER": "Type to search..."
+      }
+    }
+  }
+}

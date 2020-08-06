@@ -1,0 +1,152 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field(
+  "{{ 'pool.form.name.LABEL' | translate }}",
+  "name"
+)(
+  placeholder="{{ 'pool.form.name.PLACEHOLDER' | translate }}"
+  ng-model="poolForm.input.name"
+)
+
++field(
+  "{{ 'pool.form.billing_id.LABEL' | translate }}",
+  "billing_id"
+)(
+  placeholder="{{ 'pool.form.billing_id.PLACEHOLDER' | translate }}"
+  ng-model="poolForm.input.billing_id"
+)
+
++field(
+  "{{ 'pool.form.vlan.LABEL' | translate }}",
+  "vlan"
+)(
+  placeholder="{{ 'pool.form.vlan.PLACEHOLDER' | translate }}"
+  ng-model="poolForm.input.vlan"
+  type="number"
+)
+
++label("{{ 'pool.form.group.LABEL' | translate }}")
+  .input-group
+    +ui-select("poolForm.groups")(ng-model="poolForm.input.group")
+      ui-select-match(placeholder="{{ 'pool.form.group.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      +ui-select-choices("poolForm.groups")
+        span(ng-bind-html="choice.name | highlight: $select.search")
+    span.input-group-btn
+      button.btn.btn-default(
+        type="button"
+        ng-click="poolForm.input.group = null"
+      )
+        span.fa.fa-times-circle
+
++label("{{ 'pool.form.owner.LABEL' | translate }}")
+  +input-with-btn("fa fa-times-circle")(ng-click="poolForm.owner.clear()")
+    +ui-select("poolForm.owner")
+      ui-select-match(placeholder="{{ 'pool.form.owner.PLACEHOLDER' | translate }}")
+        span(ng-bind="$select.selected.name")
+
+      +ui-select-choices("poolForm.owner")
+        span(ng-bind-html="choice.name | highlight: $select.search")
++select(
+  "{{ 'pool.form.type.LABEL' | translate }}",
+  "type"
+)(
+  ng-model="poolForm.type"
+  ng-change="poolForm.onTypeChange()"
+  ng-options="'pool.form.type.'+type | translate for (type,value) in poolForm.types"
+)
+
+div(ng-if="poolForm.showV4")
+  hr
+
+  +label(
+    "{{ 'pool.form.ipv4.range_start.LABEL' | translate }}",
+    "ipv4.range_start"
+  )
+    .row
+      div(ng-class="poolForm.ipv4.is_single ? 'col-xs-12' : 'col-xs-5'")
+        input.form-control(
+          type="text"
+          placeholder="{{ 'pool.form.ipv4.range_start.PLACEHOLDER' | translate }}"
+          ng-model="poolForm.input.ipv4.range_start"
+        )
+      .col-xs-2.text-center
+        p.form-control-static
+          strong -
+      .col-xs-5
+        input.form-control(
+          type="text"
+          placeholder="{{ 'pool.form.ipv4.range.PLACEHOLDER' | translate }}"
+          ng-model="poolForm.ipv4.range_end"
+          ng-change="poolForm.ipv4.onRangeChange()"
+        )
+
+  +field(
+    "{{ 'pool.form.ipv4.subnet.LABEL' | translate }}",
+    "ipv4.subnet"
+  )(
+    placeholder="{{ 'pool.form.ipv4.subnet.PLACEHOLDER' | translate }}"
+    ng-model="poolForm.input.ipv4.subnet_mask"
+  )
+
+  +field(
+    "{{ 'pool.form.ipv4.gateway.LABEL' | translate }}",
+    "ipv4.gateway"
+  )(
+    placeholder="{{ 'pool.form.ipv4.gateway.PLACEHOLDER' | translate }}"
+    ng-model="poolForm.input.ipv4.gateway"
+  )
+
+  div(ng-if="poolForm.allowBulkAdd")
+    +label("pool.form.ipv4.bulk.toggle.LABEL")
+      +checkbox("pool.form.ipv4.bulk.toggle.TEXT")(
+        ng-model="poolForm.ipv4.is_bulk"
+      )
+    
+  div(ng-if="poolForm.ipv4.is_bulk")
+    +label("pool.form.ipv4.bulk.increment_vlan.LABEL")
+      +checkbox("pool.form.ipv4.bulk.increment_vlan.TEXT")(
+        ng-model="poolForm.ipv4.increment_vlan"
+      )
+      
+    +field(
+      "{{ 'pool.form.ipv4.bulk.increment_amount.LABEL' | translate }}",
+      "ipv4.bulk"
+    )(
+      placeholder="{{ 'pool.form.ipv4.bulk.increment_amount.PLACEHOLDER' | translate }}"
+      ng-model="poolForm.input.ipv4.increment_amount"
+      type="number"
+    )
+      p.help-block(translate="pool.form.ipv4.bulk.increment_amount.HELP")
+
+div(ng-if="poolForm.showV6")
+  hr
+tus
+
+  +field(
+    "{{ 'pool.form.ipv6.range_start.LABEL' | translate }}",
+    "ipv6.range_start"
+  )(
+    placeholder="{{ 'pool.form.ipv6.range_start.PLACEHOLDER' | translate }}"
+    ng-model="poolForm.input.ipv6.range_start"
+  )
+
+  +field(
+    "{{ 'pool.form.ipv6.gateway.LABEL' | translate }}",
+    "ipv6.gateway"
+  )(
+    placeholder="{{ 'pool.form.ipv6.gateway.PLACEHOLDER' | translate }}"
+    ng-model="poolForm.input.ipv6.gateway"
+  )
+
+hr
+
++textarea(
+  "{{ 'pool.form.admin_notes.LABEL' | translate }}",
+  "admin_notes"
+)(
+  ng-model="poolForm.input.admin_notes"
+  placeholder="{{ 'pool.form.admin_notes.PLACEHOLDER' | translate }}"
+)

@@ -12,9 +12,15 @@
     sref: "app.network.group.list",
   };
 
+
   var ENTITIES = {
     translate: "nav.network.ENTITIES",
     sref: "app.network.entity.list",
+  };
+
+  var POOLS = {
+    translate: "nav.network.POOLS",
+    sref: "app.network.pool.list",
   };
 
   var SWITCHES = {
@@ -63,6 +69,7 @@
       }
 
       if (map.network.entities.read) {
+        group.item(POOLS);
         group.item(ENTITIES);
       }
 

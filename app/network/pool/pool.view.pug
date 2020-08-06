@@ -1,0 +1,14 @@
+extends /resources/angle/pug/edit
+
+block title
+  span(
+    translate='pool.form.title.EDIT'
+    translate-value-nickname='{{vm.edit.input.nickname}}'
+  )
+
+block form
+  pool-form(
+    form="vm.edit"
+  )
+block append right-side
+  pool-buttons(pool="vm.edit.input")

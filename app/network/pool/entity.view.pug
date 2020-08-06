@@ -1,0 +1,14 @@
+extends /resources/angle/pug/edit
+
+block title
+  span(
+    translate='entity.form.title.EDIT'
+    translate-value-nickname='{{vm.edit.input.nickname}}'
+  )
+
+block form
+  entity-form(
+    form="vm.edit"
+  )
+block append right-side
+  entity-buttons(entity="vm.edit.input")

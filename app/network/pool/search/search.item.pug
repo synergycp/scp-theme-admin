@@ -1,0 +1,18 @@
+div.ip-pool
+  span(ng-bind="match.label.name")
+  | &nbsp;
+  span.text-muted(
+    ng-if="match.label.reserved"
+    translate="pool.search.RESERVED"
+  )
+  br
+  small
+    span.text-muted(
+      ng-if="!match.label.owner && !match.label.group"
+      translate="pool.search.EMPTY"
+    )
+
+    span(ng-bind="match.label.group.name")
+    span(ng-if="match.label.owner")
+      span(ng-if="match.label.group") &nbsp;-&nbsp;
+      span(ng-bind="match.label.owner.name")

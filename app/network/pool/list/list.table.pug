@@ -1,0 +1,61 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showName")
+    span(translate="pool.heading.NAME")
+    sort(col="nickname")
+  th.sortable(ng-if="table.showAddr")
+    span(translate="pool.heading.ADDRESS")
+    sort(col="ip")
+  th.sortable(ng-if="table.showGroup")
+    span(translate="pool.heading.IP_GROUP")
+    sort(col="ip_group")
+  th.sortable(ng-if="table.showOwner")
+    span(translate="pool.heading.OWNER")
+    sort(col="owner")
+  th.sortable(ng-if="table.showVlan")
+    span(translate="pool.heading.VLAN")
+    sort(col="vlan")
+  th.sortable(ng-if="table.showBillingId")
+    span(translate="pool.heading.BILLING_ID")
+    sort(col="billing_id")
+  th(
+    ng-if="table.showActions"
+    translate="pool.heading.ACTIONS"
+  )
+
+block columns
+  td(ng-if="table.showName")
+    a(
+      ui-sref="app.network.pool.view({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(
+    ng-if="table.showAddr"
+    ng-bind="row.full_ip"
+  )
+  td(
+    ng-if="table.showGroup"
+    ng-bind="row.group.name || '-'"
+  )
+  td(ng-if="table.showOwner")
+    a(
+      ui-sref="app.user.client.view({id: row.owner.id})"
+      ng-bind="row.owner.name"
+      ng-if="row.owner"
+    )
+    span.text-muted(ng-if="!row.owner") -
+  td(
+    ng-if="table.showVlan"
+    ng-bind="row.vlan"
+  )
+  td(
+    ng-if="table.showBillingId"
+    ng-bind="row.billing_id"
+  )
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.network.pool.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

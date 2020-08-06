@@ -1,0 +1,31 @@
+include /resources/angle/pug/mixins/form
+
++ui-select("select.select")(
+  multiple
+  sortable="true"
+  close-on-select="false"
+)
+  ui-select-match(placeholder="{{ select.placeholder | translate }}")
+    span(ng-bind="$item.name")
+    span(ng-if="$item.v6")
+      span(ng-if="$item.v4") &nbsp;+&nbsp;
+      span(ng-bind="$item.v6.address")
+
+  ui-select-choices(
+    repeat=[
+      "pool in (",
+        "select.select.items",
+        "| filter: select.filter",
+      ") track by pool.id",
+    ].join('')
+    refresh="select.select.load($select.search)"
+    refresh-delay="400"
+  )
+    span(ng-bind-html="pool.name | highlight: $select.search")
+    | &nbsp;
+    small
+      | (VLAN:&nbsp;
+      span(ng-bind-html="pool.vlan | highlight: $select.search")
+      | {{ pool.siblings_count ? ' +'+pool.siblings_count : '' }})
+    div(ng-if="pool.v6")
+      small(ng-bind="pool.v6.address")

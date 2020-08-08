@@ -12,7 +12,7 @@
    */
   function PoolAssignService (List, $uibModal) {
     var PoolAssign = this;
-    var list = List('pool');
+    var list = List('entity/pool');
 
     PoolAssign.group = group;
 
@@ -33,7 +33,7 @@
 
       return modal.result.then(function (group) {
         return list.patch({
-          group: group ? group.id : null,
+          group: group ? {id: group.id} : null,
         }, items);
       });
     }

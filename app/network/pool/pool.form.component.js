@@ -14,10 +14,12 @@
   var INPUTS = {
     admin_notes: '',
     name: '',
-    billing_id: '',
+    billing: {
+      id: null,
+    },
     vlan: '',
     group: null,
-    owner: null,
+    client: null,
     ipv4: {
       gateway: '',
       increment_amount: '',
@@ -52,13 +54,14 @@
    */
   function PoolFormCtrl(_, Api, Select) {
     var poolForm = this;
-    var $groups = Api.all('group');
 
-    poolForm.owner = Select('client')
+    poolForm.client = Select('client')
       .addItem({
         id: 'none',
         text: 'Unassigned'
       });
+
+    poolForm.group = Select('group');
 
     poolForm.types = TYPES;
     poolForm.type = TYPE.V4;
@@ -73,11 +76,6 @@
     poolForm.$onInit = init;
     poolForm.onTypeChange = onTypeChange;
 
-    poolForm.groups = {
-      items: [],
-      load: loadGroups,
-    };
-
     activate();
 
     //////////
@@ -88,7 +86,7 @@
 
     function onTypeChange() {
       poolForm.showV4 = poolForm.type & TYPE.V4;
-      poolForm.showV6 = poolForm.type & TYPE.V6;
+      poolForm.showV6 = !poolForm.showV4 && (poolForm.type & TYPE.V6);
     }
 
     function init() {
@@ -106,6 +104,8 @@
 
     function fillFormInputs() {
       _.overwrite(poolForm.input, poolForm.form.input);
+      poolForm.group.selected = poolForm.form.input.group;
+      poolForm.client.selected = poolForm.form.input.owner;
     }
 
     function getData() {
@@ -113,6 +113,8 @@
 
       data.ipv4 = getV4Data();
       data.ipv6 = getV6Data();
+      data.client = poolForm.client.selected ? {id: poolForm.client.selected.id} : null;
+      data.group = poolForm.group.selected ? {id: poolForm.group.selected.id} : null
 
       return data;
     }
@@ -206,17 +208,6 @@
       }
 
       return poolForm.input.ipv4.range_end;
-    }
-
-    function loadGroups(search) {
-      return $groups
-        .getList({q: search})
-        .then(storeGroups)
-        ;
-    }
-
-    function storeGroups(groups) {
-      _.setContents(poolForm.groups.items, groups);
     }
 
     function ipHandler(wholeIP, ip_increment) {

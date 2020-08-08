@@ -103,15 +103,16 @@
     },
     "ipv6": {
       "range_start": {
-        "LABEL": "IPv6 Address",
-        "PLACEHOLDER": "e.g. ::1"
+        "LABEL": "IPv6 Address Start",
+        "PLACEHOLDER": "e.g. ::2"
       },
-      "range": {
-        "PLACEHOLDER": "e.g. ffff"
+      "range_end": {
+        "LABEL": "IPv6 Address End",
+        "PLACEHOLDER": "e.g. ::ffff"
       },
       "gateway": {
         "LABEL": "IPv6 Gateway",
-        "PLACEHOLDER": ""
+        "PLACEHOLDER": "e.g. ::1"
       }
     }
   },

@@ -14,7 +14,7 @@ include /resources/angle/pug/mixins/form
   "billing_id"
 )(
   placeholder="{{ 'pool.form.billing_id.PLACEHOLDER' | translate }}"
-  ng-model="poolForm.input.billing_id"
+  ng-model="poolForm.input.billing.id"
 )
 
 +field(
@@ -27,27 +27,20 @@ include /resources/angle/pug/mixins/form
 )
 
 +label("{{ 'pool.form.group.LABEL' | translate }}")
-  .input-group
-    +ui-select("poolForm.groups")(ng-model="poolForm.input.group")
-      ui-select-match(placeholder="{{ 'pool.form.group.PLACEHOLDER' | translate }}")
-        | {{ $select.selected.name }}
+  +ui-select("poolForm.group")
+    ui-select-match(placeholder="{{ 'pool.form.group.PLACEHOLDER' | translate }}")
+      span(ng-bind="$select.selected.name")
 
-      +ui-select-choices("poolForm.groups")
-        span(ng-bind-html="choice.name | highlight: $select.search")
-    span.input-group-btn
-      button.btn.btn-default(
-        type="button"
-        ng-click="poolForm.input.group = null"
-      )
-        span.fa.fa-times-circle
+    +ui-select-choices("poolForm.group")
+      span(ng-bind-html="choice.name | highlight: $select.search")
 
 +label("{{ 'pool.form.owner.LABEL' | translate }}")
-  +input-with-btn("fa fa-times-circle")(ng-click="poolForm.owner.clear()")
-    +ui-select("poolForm.owner")
+  +input-with-btn("fa fa-times-circle")(ng-click="poolForm.client.clear()")
+    +ui-select("poolForm.client")
       ui-select-match(placeholder="{{ 'pool.form.owner.PLACEHOLDER' | translate }}")
         span(ng-bind="$select.selected.name")
 
-      +ui-select-choices("poolForm.owner")
+      +ui-select-choices("poolForm.client")
         span(ng-bind-html="choice.name | highlight: $select.search")
 +select(
   "{{ 'pool.form.type.LABEL' | translate }}",
@@ -123,7 +116,6 @@ div(ng-if="poolForm.showV4")
 
 div(ng-if="poolForm.showV6")
   hr
-tus
 
   +field(
     "{{ 'pool.form.ipv6.range_start.LABEL' | translate }}",
@@ -131,6 +123,14 @@ tus
   )(
     placeholder="{{ 'pool.form.ipv6.range_start.PLACEHOLDER' | translate }}"
     ng-model="poolForm.input.ipv6.range_start"
+  )
+
+  +field(
+    "{{ 'pool.form.ipv6.range_end.LABEL' | translate }}",
+    "ipv6.range_end"
+  )(
+    placeholder="{{ 'pool.form.ipv6.range_end.PLACEHOLDER' | translate }}"
+    ng-model="poolForm.input.ipv6.range_end"
   )
 
   +field(

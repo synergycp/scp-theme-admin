@@ -10,13 +10,13 @@ include /resources/angle/pug/mixins/form
           placeholder="{{ 'pool.list.filter.search.PLACEHOLDER' | translate }}"
           observable-focus="filters.searchFocus"
         )
-      +label("{{ 'pool.list.filter.owner.LABEL' | translate }}")
-        +input-with-btn("fa fa-times-circle")(ng-click="filters.owner.clear()")
-          +ui-select("filters.owner")
-            ui-select-match(placeholder="{{ 'pool.list.filter.owner.PLACEHOLDER' | translate }}")
+      +label("{{ 'pool.list.filter.client.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(ng-click="filters.client.clear()")
+          +ui-select("filters.client")
+            ui-select-match(placeholder="{{ 'pool.list.filter.client.PLACEHOLDER' | translate }}")
               span(ng-bind="$select.selected.name")
 
-            +ui-select-choices("filters.owner")
+            +ui-select-choices("filters.client")
               span(ng-bind-html="choice.name | highlight: $select.search")
     .col-md-6
       +label("{{ 'pool.list.filter.group.LABEL' | translate }}")

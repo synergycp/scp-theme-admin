@@ -17,7 +17,7 @@
 
     filters.current = {};
     filters.group = Select('group');
-    filters.owner = Select('client')
+    filters.client = Select('client')
       .addItem({
         id: 'none',
         text: 'Unassigned'
@@ -34,13 +34,13 @@
       });
       $q.all([
         filters.group.setSelectedId($state.params['group.id']),
-        filters.owner.setSelectedId($state.params['owner.id']),
+        filters.client.setSelectedId($state.params['client.id']),
       ]).then(listenForChanges).then(fireChangeEvent);
     }
 
     function listenForChanges() {
       filters.group.on('change', fireChangeEvent);
-      filters.owner.on('change', fireChangeEvent);
+      filters.client.on('change', fireChangeEvent);
 
       filters.shouldWatchMainSearch && Search.on('change', function(searchStr) {
         _.assign(filters.current, {
@@ -52,10 +52,10 @@
     function fireChangeEvent() {
       _.assign(filters.current, {
         group: filters.group.getSelected('id'),
-        owner: filters.owner.getSelected('id'),
+        client: filters.client.getSelected('id'),
       });
 
-      filters.owner
+      filters.client
         .filter({
           ip_group: (filters.group.selected || {}).id,
         })
@@ -63,7 +63,7 @@
 
       $state.go($state.current.name, {
         'group.id': filters.current.group,
-        'owner.id': filters.current.owner,
+        'client.id': filters.current.client,
         q: filters.current.q,
       }, {location: 'replace'});
       filters.shouldWatchMainSearch && Search.go(filters.current.q);

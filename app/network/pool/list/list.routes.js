@@ -11,7 +11,7 @@
     var helper = RouteHelpersProvider;
     $stateProvider
       .state('app.network.pool.list', {
-        url: '?group.id&owner.id&q',
+        url: '?group.id&client.id&q',
         title: 'IP Pools',
         controller: 'PoolIndexCtrl as vm',
         templateUrl: helper.basepath('network/pool/list/list.index.html'),

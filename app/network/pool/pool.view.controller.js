@@ -14,12 +14,12 @@
   function PoolViewCtrl(Edit, $stateParams) {
     var vm = this;
 
-    vm.edit = Edit('entity/pool/'+$stateParams.id);
+    vm.edit = Edit('ip/pool/'+$stateParams.id);
     vm.edit.submit = submit;
 
     vm.logs = {
       filter: {
-        target_type: 'entity.pool',
+        target_type: 'ip.pool',
         target_id: $stateParams.id,
       },
     };

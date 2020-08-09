@@ -12,7 +12,7 @@
    */
   function PoolAssignService (List, $uibModal) {
     var PoolAssign = this;
-    var list = List('entity/pool');
+    var list = List('ip/pool');
 
     PoolAssign.group = group;
 

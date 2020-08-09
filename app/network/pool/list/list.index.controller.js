@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'entity.pool',
+        target_type: 'ip.pool',
       },
     };
 

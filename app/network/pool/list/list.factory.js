@@ -12,7 +12,7 @@
    */
   function PoolListFactory (List, ListConfirm, PoolAssign) {
     return function () {
-      var list = List('entity/pool');
+      var list = List('ip/pool');
       list.confirm = ListConfirm(list, 'pool.modal.delete');
 
       list.bulk.add('Assign IP Group', wrapChangeEvent(PoolAssign.group));

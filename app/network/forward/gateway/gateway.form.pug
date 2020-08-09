@@ -18,6 +18,15 @@ include /resources/angle/pug/mixins/form
 )
 
 +field(
+  "{{ 'forward.gateway.form.usable_ips.LABEL' | translate }}",
+  "usable_ips"
+)(
+  placeholder="{{ 'forward.gateway.form.usable_ips.PLACEHOLDER' | translate }}"
+  ng-model="gatewayForm.input.usable_ips"
+)
+  p.help-block(translate="forward.gateway.form.usable_ips.HELP")
+
++field(
   "{{ 'forward.gateway.form.api_key.LABEL' | translate }}",
   "api_key"
 )(

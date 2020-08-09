@@ -13,10 +13,17 @@
       "DELETE": "Delete",
       "RESYNC": "Resync"
     },
+    "status": {
+      "OK": "OK",
+      "WARN": "Warning",
+      "ERROR": "Error"
+    },
     "list": {
       "TITLE": "Port Forwarding Gateways",
       "heading": {
         "NAME": "Name",
+        "HEALTH": "Health",
+        "VERSION": "Version",
         "HOSTNAME": "Hostname",
         "PORT-LIMIT": "Port Limit",
         "ACTIONS": "Actions"
@@ -51,6 +58,11 @@
       },
       "group": {
         "LABEL": "IP Groups"
+      },
+      "usable_ips": {
+        "LABEL": "Usable IPs",
+        "PLACEHOLDER": "e.g. 1.1.1.1, 1.1.1.2, etc.",
+        "HELP": "Enter in comma separated format. Concurrent ACLed IPMI connections are limited per-IP to the number of usable IPs on the gateway."
       }
     },
     "modal": {

@@ -231,7 +231,10 @@
   "ipmi": {
     "TITLE": "Power Controls",
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
-    "ADDRESS": "IPMI Address",
+    "web_panel": {
+      "HEADING": "Web CP",
+      "OPEN": "Open Web Control Panel"
+    },
     "BMC": {
       "TITLE": "Reset BMC",
       "modal": {

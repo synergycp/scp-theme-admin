@@ -104,8 +104,8 @@
 
     function fillFormInputs() {
       _.overwrite(poolForm.input, poolForm.form.input);
-      poolForm.group.selected = poolForm.form.input.group;
-      poolForm.client.selected = poolForm.form.input.owner;
+      poolForm.group.selected = (poolForm.form.input || {}).group;
+      poolForm.client.selected = (poolForm.form.input || {}).owner;
     }
 
     function getData() {
@@ -252,7 +252,7 @@
         poolForm.input.vlan++;
         poolForm.input.ipv4.gateway = ipHandler(poolForm.input.ipv4.gateway, ip_increment)
       }
-      poolForm.input.name = nameHandler(poolForm.input.nickname, ip_increment);
+      poolForm.input.name = nameHandler(poolForm.input.name, ip_increment);
     }
   }
 })();

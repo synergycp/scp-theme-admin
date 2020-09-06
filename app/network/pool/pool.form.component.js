@@ -15,7 +15,7 @@
     admin_notes: '',
     name: '',
     billing: {
-      id: null,
+      id: '',
     },
     vlan: '',
     group: null,

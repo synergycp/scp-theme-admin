@@ -17,16 +17,16 @@
    * @ngInject
    * @constructor
    */
-  function PortFactory(Select, date, moment, Api) {
+  function PortFactory(Select, date, moment, Api, PoolSelectIPsModal) {
     return function (index) {
-      return new Port(index, Select, date, moment, Api);
+      return new Port(index, Select, date, moment, Api, PoolSelectIPsModal);
     };
   }
 
   /**
    * @constructor
    */
-  function Port(index, Select, date, moment, Api) {
+  function Port(index, Select, date, moment, Api, PoolSelectIPsModal) {
     var port = this;
 
     port.allowMultipleVLANs = false;
@@ -34,10 +34,13 @@
       mac: '',
       max_bandwidth: ''
     };
-    port.switch = Select('switch').on('change', syncSwitchFilter);
-    port.group = Select('group').on('change', syncGroupFilter);
+    port.switch = Select('switch')
+      .on('change', syncSwitchFilter);
+    port.group = Select('group')
+      .on('change', syncGroupFilter);
     port.switch.port = null;
-    port.switch.speed = Select('port-speed').on('change', setDirty);
+    port.switch.speed = Select('port-speed')
+      .on('change', setDirty);
     port.entities = Select('entity')
       .multi()
       .filter({
@@ -67,6 +70,7 @@
       },
     };
 
+    port.addPoolIP = addPoolIP;
     port.getOSReloadStatusLang = getOSReloadStatusLang;
 
     port.loadEntities = loadEntities;
@@ -75,6 +79,14 @@
     port.$setPristine = $setPristine;
     port.data = data;
     port.fromExisting = fromExisting;
+
+    function addPoolIP() {
+      PoolSelectIPsModal.open(port.group).then(function (poolIPs) {
+        _.map(poolIPs, function (poolIP) {
+          // port.entities.selected.push(poolIP);
+        })
+      });
+    }
 
     function syncGroupFilter() {
       setDirty();
@@ -170,7 +182,7 @@
       if (port.switch.port && port.switch.port.switchId == port.switch.selected.id) {
         return;
       }
-      port.switch.port = Select('switch/'+port.switch.selected.id+'/port')
+      port.switch.port = Select('switch/' + port.switch.selected.id + '/port')
         .on('change', switchPortChanged)
         .filter({
           available: true,
@@ -231,13 +243,13 @@
         port.entitiesOriginal,
         port.entities.selected
       );
-      port.$dirty = 
+      port.$dirty =
         port.switch.port.$dirty =
-        port.switch.speed.$dirty =
-        port.entities.$dirty =
-        port.group.$dirty =
-        port.switch.$dirty =
-        false;
+          port.switch.speed.$dirty =
+            port.entities.$dirty =
+              port.group.$dirty =
+                port.switch.$dirty =
+                  false;
     }
 
     function setDirty() {

@@ -140,11 +140,12 @@ div.relative(
 
   div(ng-if="port.switch.port.selected")
     +label("server.form.entities.LABEL")
-      entity-multi-select(
-        placeholder="server.form.entities.PLACEHOLDER"
-        select="port.entities"
-        allow-multiple-vlans="port.switch.selected.allow_multiple_vlans"
-      )
+      +input-with-btn("pool")(ng-click="port.addPoolIP()")
+        entity-multi-select(
+          placeholder="server.form.entities.PLACEHOLDER"
+          select="port.entities"
+          allow-multiple-vlans="port.switch.selected.allow_multiple_vlans"
+        )
 
     +field(
       "server.form.billing.max_bandwidth.LABEL",

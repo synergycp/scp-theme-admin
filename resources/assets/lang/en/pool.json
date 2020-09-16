@@ -3,7 +3,7 @@
     "NAME": "Name",
     "ADDRESS": "IP",
     "IP_GROUP": "IP Group",
-    "CLIENT": "Client",
+    "OWNER": "Owner",
     "VLAN": "VLAN",
     "BILLING_ID": "Billing ID",
     "ACTIONS": "Actions"
@@ -130,6 +130,22 @@
       "owner": {
         "LABEL": "Owner",
         "PLACEHOLDER": "Type to search..."
+      }
+    }
+  },
+  "modal": {
+    "select-ips": {
+      "TITLE": "Select IP Pool addresses",
+      "CANCEL": "Cancel",
+      "SUBMIT": "Add IP addresses",
+      "pool": {
+        "LABEL": "IP Pool",
+        "PLACEHOLDER": "Filter IP Pools",
+        "HELP": "When a Pool is selected, its available IPs will be selectable in the Pool IPs field below."
+      },
+      "ips": {
+        "LABEL": "Pool IPs",
+        "PLACEHOLDER": "Select Pool IPs to assign"
       }
     }
   }

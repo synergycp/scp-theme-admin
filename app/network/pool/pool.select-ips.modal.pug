@@ -1,0 +1,30 @@
+extends /resources/angle/pug/modal.confirm.pug
+
+block body
+  +label("pool.modal.select-ips.pool.LABEL")
+    +ui-select("modal.data.pool")
+      ui-select-match(placeholder="{{ 'pool.modal.select-ips.pool.PLACEHOLDER' | translate }}")
+        | {{ $select.selected.name }}
+
+      +ui-select-choices("modal.data.pool")
+        span(ng-bind-html="choice.name | highlight: $select.search")
+    p.help-block(translate="pool.modal.select-ips.pool.HELP")
+  div(ng-if="modal.data.availableIPs()")
+    +label("pool.modal.select-ips.ips.LABEL")
+      +ui-select(
+        "modal.data.availableIPs()"
+      )(
+        multiple
+        sortable="true"
+        close-on-select="false"
+      )
+        ui-select-match(placeholder="{{ 'pool.modal.select-ips.ips.PLACEHOLDER' | translate }}")
+          | {{ $item }}
+
+        ui-select-choices(
+          repeat="choice in modal.data.availableIPs().items track by choice"
+          refresh="modal.data.availableIPs().load($select.search)"
+          refresh-delay="400"
+        )
+          span(ng-bind-html="choice | highlight: $select.search")
+  .clearfix

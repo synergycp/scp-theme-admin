@@ -140,7 +140,7 @@ div.relative(
 
   div(ng-if="port.switch.port.selected")
     +label("server.form.entities.LABEL")
-      +input-with-btn("pool")(ng-click="port.addPoolIP()")
+      +input-with-btn("fa fa-plus-circle")(ng-click="port.addPoolIP()")
         entity-multi-select(
           placeholder="server.form.entities.PLACEHOLDER"
           select="port.entities"

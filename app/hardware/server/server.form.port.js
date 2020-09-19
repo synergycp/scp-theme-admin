@@ -81,11 +81,12 @@
     port.fromExisting = fromExisting;
 
     function addPoolIP() {
-      PoolSelectIPsModal.open(port.group).then(function (poolIPs) {
-        _.map(poolIPs, function (poolIP) {
-          // port.entities.selected.push(poolIP);
-        })
-      });
+      PoolSelectIPsModal.open(port.group)
+        .then(function (poolIPs) {
+          _.map(poolIPs, function (poolIP) {
+            port.entities.selected.push(poolIP);
+          })
+        });
     }
 
     function syncGroupFilter() {
@@ -104,6 +105,7 @@
       port.id = response.id;
       port.original = response;
       port.input.mac = response.mac;
+      port.server = response.server;
 
       if (port.group.getSelected('id') != response.group.id) {
         port.group.selected = response.group;
@@ -142,9 +144,8 @@
     }
 
     function loadEntities() {
-      return Api
-        .all('entity')
-        .getList({'server_port_id': port.id})
+      return Api.all('server/'+port.server.id+'/port/'+port.id+'/entity')
+        .getList()
         .then(storeEntities)
         ;
     }
@@ -196,9 +197,6 @@
     }
 
     function data() {
-      var currentEntityIds = _.map(port.entities.selected, 'id');
-      var originalEntityIds = _.map(port.entitiesOriginal, 'id');
-
       return {
         id: port.id,
         mac: port.input.mac,
@@ -221,14 +219,18 @@
           id: port.group.getSelected('id') || null,
         },
         entities: {
-          add: _.difference(
-            currentEntityIds,
-            originalEntityIds
-          ),
-          remove: _.difference(
-            originalEntityIds,
-            currentEntityIds
-          ),
+          add: _.reduce(port.entities.selected, function (additions, current) {
+            if (!_.find(port.entitiesOriginal, {id: current.id})) {
+              additions.push(current.setOwner ? current : new IPEntity(current));
+            }
+            return additions;
+          }, []),
+          remove: _.reduce(port.entitiesOriginal, function (removals, current) {
+            if (!_.find(port.entities.selected, {id: current.id})) {
+              removals.push(current.removeOwner ? current : new IPEntity(current));
+            }
+            return removals;
+          }, []),
         },
       };
     }
@@ -254,6 +256,26 @@
 
     function setDirty() {
       port.$dirty = true;
+    }
+
+    function IPEntity(entity) {
+      this.setOwner = function setOwner() {
+        return patchOwner(port.id);
+      };
+      this.removeOwner = function removeOwner() {
+        return patchOwner(null);
+      }
+
+      function patchOwner(ownerID) {
+        return Api
+          .one(new URL(entity.url).pathname)
+          .patch({
+            owner: ownerID ? {
+              type: 'server.port',
+              id: ownerID,
+            } : null,
+          });
+      }
     }
   }
 })();

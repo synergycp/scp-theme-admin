@@ -49,7 +49,7 @@
       }
 
       if (!select.allowMultipleVlans && selected[0].vlan !== item.vlan) {
-         return false;
+        return false;
       }
 
       return true;

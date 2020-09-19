@@ -16,8 +16,7 @@
   angular
     .module('app.hardware')
     .component('serverForm', {
-      require: {
-      },
+      require: {},
       bindings: {
         isCreating: '=?',
         alwaysDirty: '=?',
@@ -28,12 +27,13 @@
       templateUrl: 'app/hardware/server/server.form.html'
     })
     .controller('ServerFormCtrl', ServerFormCtrl)
-    ;
+  ;
 
   /**
    * @ngInject
    */
-  function ServerFormCtrl(_, $scope, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput, $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
+  function ServerFormCtrl(_, $scope, Api, Select, Modal, Alert, ServerFormPort, ServerFormControl, MultiInput,
+    $rootScope, ServerConfig, $stateParams, $q, $filter, moment) {
     var serverForm = this;
     var $ports, $controls;
 
@@ -44,7 +44,8 @@
     serverForm.disks = MultiInput(DiskSelector)
       .setMax(ServerConfig.MAX_DISKS)
       .add();
-    serverForm.addOns = MultiInput(AddOnSelector).add();
+    serverForm.addOns = MultiInput(AddOnSelector)
+      .add();
     serverForm.ports = [];
     serverForm.ports.add = addPort;
     serverForm.ports.remove = removePort;
@@ -111,14 +112,14 @@
       ;
 
       if ($stateParams.id) {
-        $ports = Api.all('server/'+$stateParams.id+'/port');
+        $ports = Api.all('server/' + $stateParams.id + '/port');
         $ports
           .getList()
           .then(storePorts)
           .then(storePortsBandwidth)
           .then(setFormPristine)
         ;
-        $controls = Api.all('server/'+$stateParams.id+'/control');
+        $controls = Api.all('server/' + $stateParams.id + '/control');
         $controls
           .getList()
           .then(storeControls)
@@ -141,13 +142,14 @@
         return confirmRemove(port)
           .then(removeFromDatabase)
           .then(removeFromList)
-        ;
+          ;
       }
 
       removeFromList();
 
       function removeFromDatabase() {
-        return $ports.one(''+port.id).remove();
+        return $ports.one('' + port.id)
+          .remove();
       }
 
       function removeFromList() {
@@ -169,7 +171,8 @@
       removeFromList();
 
       function removeFromDatabase() {
-        return $controls.one(''+control.id).remove();
+        return $controls.one('' + control.id)
+          .remove();
       }
 
       function removeFromList() {
@@ -205,10 +208,10 @@
 
     function storePortsBandwidth() {
       return $q.all(
-        _.map(serverForm.ports, function(port) {
-          return $ports.get(port.id+'/bandwidth/usage')
-            .then(function(bandwidthData) {
-              if(bandwidthData.data[0]) {
+        _.map(serverForm.ports, function (port) {
+          return $ports.get(port.id + '/bandwidth/usage')
+            .then(function (bandwidthData) {
+              if (bandwidthData.data[0]) {
                 port.bandwidthUsage = bandwidthData.data[0];
                 port.max_bandwidth = $filter('bitsToSize')(bandwidthData.data[0].max);
               }
@@ -231,10 +234,10 @@
     }
 
     function storeState(response) {
-      $ports = Api.all('server/'+response.id+'/port');
-      $controls = Api.all('server/'+response.id+'/control');
+      $ports = Api.all('server/' + response.id + '/port');
+      $controls = Api.all('server/' + response.id + '/control');
 
-      $rootScope.$evalAsync(function() {
+      $rootScope.$evalAsync(function () {
         fillFormInputs();
 
         storeMulti(response.disks, serverForm.disks);
@@ -268,7 +271,7 @@
         target.add(item, key);
       }
 
-      function hasChanged (item, key) {
+      function hasChanged(item, key) {
         var currentSelector = target.items[key];
         if (!currentSelector) {
           return true;
@@ -289,7 +292,7 @@
 
     function savePortChanges(port, portIndex) {
       var portData = port.data();
-      var portPrefix = 'port-'+portIndex+'.';
+      var portPrefix = 'port-' + portIndex + '.';
       var switchId = portData.switch.id;
       var switchPortId = portData.switch.port.id;
       var speedId = portData.switch.speed.id;
@@ -301,11 +304,12 @@
         port.switch.speed.$dirty;
 
       return $q.all([
-        updateServerPort()
-          .then(updateSwitchPort)
-          .then(updatePortBandwidth)
-          .then(updateEntities),
-      ]).then(port.$setPristine);
+          updateServerPort()
+            .then(updateSwitchPort)
+            .then(updatePortBandwidth)
+            .then(updateEntities),
+        ])
+        .then(port.$setPristine);
 
       function updateSwitchPort() {
         if (!dirtySwitchPort || !switchId || !switchPortId) {
@@ -328,12 +332,10 @@
 
       function updateEntities() {
         // Remove entities first so that VLANs don't conflict.
-        if (portData.entities.remove.length && !serverForm.isCreating) {
-          return Api
-            .one('entity/' + portData.entities.remove.join(','))
-            .patch({
-              server_port_id: null,
-            })
+        if (!serverForm.isCreating) {
+          return _.reduce(portData.entities.remove, function (promise, entity) {
+              return promise.then(entity.removeOwner);
+            }, $q.when())
             .then(addEntities)
             ;
         }
@@ -341,26 +343,24 @@
         return addEntities();
 
         function addEntities() {
-          if (!portData.entities.add.length) {
-            return $q.when();
-          }
-
-          return Api
-            .one('entity/' + portData.entities.add.join(','))
-            .patch({
-                server_port_id: port.id,
-            })
-            ;
+          return _.reduce(portData.entities.add, function (promise, entity) {
+            return promise.then(function () {
+              return entity.setOwner(port);
+            });
+          }, $q.when()).then(port.loadEntities);
         }
       }
 
       function updateServerPort() {
         var data = {
-          mac: serverForm.alwaysDirty || serverForm.form.form[portPrefix+'mac'].$dirty ? port.input.mac : undefined,
+          mac: serverForm.alwaysDirty || serverForm.form.form[portPrefix + 'mac'].$dirty ? port.input.mac : undefined,
           group_id: serverForm.alwaysDirty || port.group.$dirty ? port.group.getSelected('id') : undefined,
         };
 
-        if (!_(data).values().reject(isUndefined).value().length) {
+        if (!_(data)
+          .values()
+          .reject(isUndefined)
+          .value().length) {
           return $q.when();
         }
 
@@ -385,52 +385,55 @@
 
       function updatePortBandwidth() {
         if (!serverForm.alwaysDirty &&
-            !(serverForm.form.form[portPrefix+'max_bandwidth'] && serverForm.form.form[portPrefix+'max_bandwidth'].$dirty) &&
-            !serverForm.form.form['billing.date'].$dirty &&
-            !(port.switch.port && port.switch.port.$dirty) // save bandwidth if port changed
+          !(serverForm.form.form[portPrefix + 'max_bandwidth'] &&
+            serverForm.form.form[portPrefix + 'max_bandwidth'].$dirty) &&
+          !serverForm.form.form['billing.date'].$dirty &&
+          !(port.switch.port && port.switch.port.$dirty) // save bandwidth if port changed
         ) {
           return;
         }
 
         var startDate = serverForm.billing.date ?
-          moment(serverForm.billing.date.value).toISOString() :
+          moment(serverForm.billing.date.value)
+            .toISOString() :
           undefined;
 
         // The API is expecting the value in bits and the frontend takes in bytes if it's an integer,
         // otherwise the string is passed through and the backend parses it.
         var maxBandwidth = isNaN(port.max_bandwidth) ? port.max_bandwidth : (port.max_bandwidth * 8);
 
-        if (port.id && !serverForm.isCreating && port.max_bandwidth && port.bandwidthUsage && !port.switch.port.$dirty) {
+        if (port.id && !serverForm.isCreating && port.max_bandwidth && port.bandwidthUsage &&
+          !port.switch.port.$dirty) {
           return $ports
-            .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
+            .one(port.id + '/bandwidth/usage/' + port.bandwidthUsage.id)
             .patch({
               "max": maxBandwidth,
               "started_at": startDate
             })
-          ;
+            ;
         }
-        if(port.max_bandwidth && (!port.bandwidthUsage || port.switch.port.$dirty)) {
+        if (port.max_bandwidth && (!port.bandwidthUsage || port.switch.port.$dirty)) {
           return $ports
-            .all(port.id +'/bandwidth/usage')
+            .all(port.id + '/bandwidth/usage')
             .post({
               "max": maxBandwidth,
               "started_at": startDate
             })
-            .then(function(bandwidthData) {
+            .then(function (bandwidthData) {
               port.bandwidthUsage = bandwidthData.response.data;
               port.max_bandwidth = $filter('bitsToSize')(bandwidthData.response.data.max);
             })
-          ;
+            ;
         }
 
-        if(!port.max_bandwidth && port.bandwidthUsage) {
+        if (!port.max_bandwidth && port.bandwidthUsage) {
           return $ports
-            .one(port.id +'/bandwidth/usage/'+port.bandwidthUsage.id)
+            .one(port.id + '/bandwidth/usage/' + port.bandwidthUsage.id)
             .remove()
-            .then(function() {
+            .then(function () {
               port.bandwidthUsage = null;
             })
-          ;
+            ;
         }
 
       }
@@ -443,27 +446,37 @@
     }
 
     function saveControlChanges(control, controlIndex) {
-      var controlPrefix = 'control-'+controlIndex+'.';
+      var controlPrefix = 'control-' + controlIndex + '.';
 
       return $q.all([
-        updateServerControl(),
-      ]).then(control.$setPristine);
+          updateServerControl(),
+        ])
+        .then(control.$setPristine);
 
       function updateServerControl() {
         var form = serverForm.form.form;
         var data = {
-          hostname: serverForm.alwaysDirty || (form[controlPrefix+'hostname'] || {}).$dirty ? control.input.hostname : undefined,
-          client_user: serverForm.alwaysDirty || (form[controlPrefix+'client.username'] || {}).$dirty ? control.input.client.username : undefined,
-          client_password: serverForm.alwaysDirty || (form[controlPrefix+'client.password'] || {}).$dirty ? control.input.client.password : undefined,
-          admin_user: serverForm.alwaysDirty || (form[controlPrefix+'admin.username'] || {}).$dirty ? control.input.admin.username : undefined,
-          admin_password: serverForm.alwaysDirty || (form[controlPrefix+'admin.password'] || {}).$dirty ? control.input.admin.password : undefined,
+          hostname: serverForm.alwaysDirty ||
+          (form[controlPrefix + 'hostname'] || {}).$dirty ? control.input.hostname : undefined,
+          client_user: serverForm.alwaysDirty ||
+          (form[controlPrefix + 'client.username'] || {}).$dirty ? control.input.client.username : undefined,
+          client_password: serverForm.alwaysDirty ||
+          (form[controlPrefix + 'client.password'] || {}).$dirty ? control.input.client.password : undefined,
+          admin_user: serverForm.alwaysDirty ||
+          (form[controlPrefix + 'admin.username'] || {}).$dirty ? control.input.admin.username : undefined,
+          admin_password: serverForm.alwaysDirty ||
+          (form[controlPrefix + 'admin.password'] || {}).$dirty ? control.input.admin.password : undefined,
           type: serverForm.alwaysDirty || control.type.$dirty ? {
             id: control.type.getSelected('id')
           } : undefined,
-          port_forwarding_type: serverForm.alwaysDirty || (form[controlPrefix+'port_forwarding_type'] || {}).$dirty ? control.input.port_forwarding_type : undefined
+          port_forwarding_type: serverForm.alwaysDirty ||
+          (form[controlPrefix + 'port_forwarding_type'] || {}).$dirty ? control.input.port_forwarding_type : undefined
         }
 
-        if (!_(data).values().reject(isUndefined).value().length) {
+        if (!_(data)
+          .values()
+          .reject(isUndefined)
+          .value().length) {
           return $q.when();
         }
 
@@ -519,7 +532,9 @@
           null;
       }
 
-      if(_.isEmpty(data.billing)) delete data.billing;
+      if (_.isEmpty(data.billing)) {
+        delete data.billing;
+      }
 
       serverForm.ports.map(function (port) {
         var portData = port.data();
@@ -538,19 +553,20 @@
     function cloneInputs(input, keyPrefix) {
       var ignore = ['billing.integration.name', 'billing.integration'];
       var resObj = {};
-      _.forOwn(input, function(value, key) {
-        var keyWithPrefix = keyPrefix ? (keyPrefix+"."+key) : key;
+      _.forOwn(input, function (value, key) {
+        var keyWithPrefix = keyPrefix ? (keyPrefix + "." + key) : key;
         try { // throw error in console if input is not named properly
-          if(_.isObject(value)) {
+          if (_.isObject(value)) {
             var tmp = cloneInputs(value, keyWithPrefix);
             !_.isEmpty(tmp) && (resObj[key] = tmp);
           } else if (ignore.indexOf(keyWithPrefix) === -1) {
-            if(serverForm.alwaysDirty || serverForm.form.form[keyWithPrefix].$dirty) {
+            if (serverForm.alwaysDirty || serverForm.form.form[keyWithPrefix].$dirty) {
               resObj[key] = value;
             }
           }
-        } catch(e) {
-          console.error('Error. Input field "'+keyWithPrefix+'" is not named properly inside form. Each input should have name attribute set. Use dot notation names for fields that are inside of nested objects in INPUTS object.');
+        } catch (e) {
+          console.error('Error. Input field "' + keyWithPrefix +
+            '" is not named properly inside form. Each input should have name attribute set. Use dot notation names for fields that are inside of nested objects in INPUTS object.');
         }
       });
       return resObj;
@@ -583,23 +599,29 @@
     function setFormPristine() {
       serverForm.disks.$dirty =
         serverForm.addOns.$dirty =
-        serverForm.cpu.$dirty =
-        serverForm.mem.$dirty =
-        false;
+          serverForm.cpu.$dirty =
+            serverForm.mem.$dirty =
+              false;
       serverForm.billing.integration.$dirty = false;
-      _.each(serverForm.ports, function(port) {
+      _.each(serverForm.ports, function (port) {
         port.$setPristine();
       })
       _.each(serverForm.form.form, function (field, key) {
-        if (field && field.$setDirty) field.$setDirty(false);
+        if (field && field.$setDirty) {
+          field.$setDirty(false);
+        }
       });
       serverForm.form.form.$setPristine();
     }
 
     function openBandwidthHelpModal() {
-        var lang = "server.form.billing.max_bandwidth.modal";
-        return Modal.information(lang)
-          .open().result.then(function(){}, function(res){});
+      var lang = "server.form.billing.max_bandwidth.modal";
+      return Modal.information(lang)
+        .open()
+        .result
+        .then(function () {
+        }, function (res) {
+        });
     }
   }
 

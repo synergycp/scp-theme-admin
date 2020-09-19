@@ -43,8 +43,33 @@
         .open()
         .result
         .then(function () {
-          return availableIPs.selected;
+          return _.map(availableIPs.selected, function (ip) {
+            return new PoolIP(pool.selected, ip);
+          });
         })
     }
+  }
+
+  function PoolIP(pool, ip) {
+    this.pool = pool;
+    this.ip = ip;
+    this.name = ip;
+    this.group = pool.group;
+    this.id = ip;
+
+    this.setOwner = (function setOwner(port) {
+      return this.pool.post('ip', {
+        range_start: this.ip,
+        range_end: this.ip,
+        owner: {
+          type: 'server.port',
+          id: port.id
+        }
+      });
+    }).bind(this);
+
+    this.removeOwner = (function removeOwner() {
+      // these PoolIPs are fresh ones so technically haven't been added yet.
+    }).bind(this);
   }
 })();

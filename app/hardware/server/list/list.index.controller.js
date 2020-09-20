@@ -31,7 +31,9 @@
         target_type: 'server',
       },
     };
+    vm.licenseLoader = Loader();
     vm.licenseFull = false;
+    vm.licenseRefresh = licenseRefresh;
 
     LicenseService.onChange(function () {
       LicenseService.getCanAddMoreServers()
@@ -45,6 +47,12 @@
     activate();
 
     ////////////
+
+    function licenseRefresh() {
+      return vm.licenseLoader.during(
+        LicenseService.refresh()
+      );
+    }
 
     function activate() {
       $scope.$on('$destroy', onDestroy)

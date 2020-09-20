@@ -37,11 +37,14 @@
     }
 
     function refresh() {
-      return Api.one('license/refresh')
-        .post()
-        .then(storeLicense)
+      return $q.all([
+        Api.one('license/refresh')
+          .post()
+          .then(storeLicense),
+        refreshServerCountSkipCache(true),
+      ])
         .then(triggerChange)
-        .then(returnCachedLicense);
+        .then(returnCachedLicense)
     }
 
     function getSkipCache() {
@@ -50,7 +53,7 @@
           .one('license')
           .get()
           .then(storeLicense),
-        refreshServerCount(),
+        refreshServerCountSkipCache(false),
       ]).then(triggerChange).then(returnCachedLicense);
     }
 
@@ -82,12 +85,14 @@
     }
 
     /**
+     * @param {boolean} skipCache
+     *
      * @return {Promise}
      */
-    function refreshServerCount() {
+    function refreshServerCountSkipCache(skipCache) {
       return Api
         .one('server')
-        .get({per_page: 1})
+        .get({per_page: 1, force_refresh_count: skipCache ? true : undefined})
         .then(storeServerCount)
     }
 

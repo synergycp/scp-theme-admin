@@ -162,7 +162,6 @@
       setDirty();
       var primaryEntity = port.entities.selected[0];
       var extraFor = primaryEntity ? primaryEntity.extraForFilter() : undefined;
-      console.log(port.entities.selected);
       port.entities
         .clearFilter('extra_for_id')
         .clearFilter('ip_group')

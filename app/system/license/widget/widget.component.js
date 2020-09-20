@@ -29,7 +29,8 @@
     widget.license = {};
     widget.refresh = onRefresh;
     widget.loader = Loader();
-    EventEmitter().bindTo(widget);
+    EventEmitter()
+      .bindTo(widget);
     widget.$onInit = init;
 
     //////////
@@ -43,10 +44,7 @@
 
     function onRefresh() {
       return widget.loader.during(
-        $q.all([
-          LicenseService.refresh(),
-          LicenseService.getSkipCache(),
-        ])
+        LicenseService.refresh()
       );
     }
 

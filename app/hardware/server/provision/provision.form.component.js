@@ -406,7 +406,7 @@
           if (profile.profileSelected) {
             accum.push(profile);
           } else {
-            console.log('to remove i', i);
+            // TODO?
           }
           return accum;
         }, [])

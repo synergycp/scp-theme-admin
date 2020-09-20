@@ -20,9 +20,16 @@ block list
     list-footer
 
 block bottom-left
-  .panel.panel-default(ng-if="vm.licenseFull")
+  .panel.panel-default(
+    ng-if="vm.licenseFull"
+    ng-class="vm.licenseLoader.class"
+  )
+    .loader
     .panel-heading
       h3.panel-title(translate='server.form.no-space.TITLE')
+      .btn-group.btn-group-responsive.pull-right
+        a.btn.btn-default(ng-click="vm.licenseRefresh()")
+          i.fa.fa-refresh
     .panel-body
       .text-center
         p(translate='server.form.no-space.BODY1')

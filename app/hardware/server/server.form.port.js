@@ -86,7 +86,8 @@
           _.map(poolIPs, function (poolIP) {
             port.entities.selected.push(poolIP);
           })
-        });
+        })
+        .then(syncEntityFilter);
     }
 
     function syncGroupFilter() {
@@ -159,11 +160,15 @@
 
     function syncEntityFilter() {
       setDirty();
+      var primaryEntity = port.entities.selected[0];
+      var extraFor = primaryEntity ? primaryEntity.extraForFilter() : undefined;
+      console.log(port.entities.selected);
       port.entities
         .clearFilter('extra_for_id')
         .clearFilter('ip_group')
         .filter({
-          extra_for_id: _.get(port, 'entities.selected[0].id'),
+          'extra_for[type]': extraFor ? extraFor.type : undefined,
+          'extra_for[id]': extraFor ? extraFor.id : undefined,
           allow_multiple_vlans: port.allowMultipleVLANs,
           ip_group: _.get(port, 'group.selected.id'),
           allow_server_port_id: port.id,
@@ -264,7 +269,21 @@
       };
       this.removeOwner = function removeOwner() {
         return patchOwner(null);
-      }
+      };
+      this.extraForFilter = function extraForFilter() {
+        if (entity.pool) {
+          return {
+            type: 'ip.pool',
+            id: entity.pool.id,
+          };
+        }
+
+        return {
+          type: 'ip.entity',
+          id: entity.id,
+        };
+      };
+
 
       function patchOwner(ownerID) {
         return Api

@@ -71,5 +71,12 @@
     this.removeOwner = (function removeOwner() {
       // these PoolIPs are fresh ones so technically haven't been added yet.
     }).bind(this);
+
+    this.extraForFilter = (function extraForFilter() {
+      return {
+        type: 'ip.pool',
+        id: this.pool.id,
+      };
+    }).bind(this);
   }
 })();

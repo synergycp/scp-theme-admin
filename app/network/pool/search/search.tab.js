@@ -41,7 +41,7 @@
   function PoolSearchTab (list, $state, filter, RouteHelpers) {
     var tab = this;
 
-    tab.name = 'entities';
+    tab.name = 'pools';
     tab.lang = 'pool';
     tab.text = 'pool.search.TITLE';
     tab.order = 15;

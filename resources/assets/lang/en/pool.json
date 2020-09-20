@@ -1,40 +1,8 @@
 {
-  "heading": {
-    "NAME": "Name",
-    "ADDRESS": "IP",
-    "IP_GROUP": "IP Group",
-    "OWNER": "Owner",
-    "VLAN": "VLAN",
-    "BILLING_ID": "Billing ID",
-    "ACTIONS": "Actions"
-  },
-  "search": {
-    "TITLE": "IP Pools",
-    "EMPTY": "No IP Group or Server assigned"
-  },
-  "modal": {
-    "pools": {
-      "LABEL": "IP Pools"
-    },
-    "delete": {
-      "TITLE": "Delete IP Pools",
-      "SUBMIT": "Delete",
-      "CANCEL": "Cancel",
-      "BODY": "Click \"Delete\" to permanently delete these IP Pools:"
-    },
-    "group": {
-      "CANCEL": "Cancel",
-      "SUBMIT": "Assign IP Group",
-      "TITLE": "Assign IP Group",
-      "group": {
-        "LABEL": "IP Group",
-        "PLACEHOLDER": "Type to search IP Groups..."
-      }
-    }
-  },
   "buttons": {
     "DELETE": "Delete"
   },
+
   "form": {
     "admin_notes": {
       "LABEL": "Admin Notes",
@@ -116,6 +84,15 @@
       }
     }
   },
+  "heading": {
+    "NAME": "Name",
+    "ADDRESS": "IP",
+    "IP_GROUP": "IP Group",
+    "OWNER": "Owner",
+    "VLAN": "VLAN",
+    "BILLING_ID": "Billing ID",
+    "ACTIONS": "Actions"
+  },
   "list": {
     "TITLE": "IP Pools",
     "filter": {
@@ -134,6 +111,24 @@
     }
   },
   "modal": {
+    "pools": {
+      "LABEL": "IP Pools"
+    },
+    "delete": {
+      "TITLE": "Delete IP Pools",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these IP Pools:"
+    },
+    "group": {
+      "CANCEL": "Cancel",
+      "SUBMIT": "Assign IP Group",
+      "TITLE": "Assign IP Group",
+      "group": {
+        "LABEL": "IP Group",
+        "PLACEHOLDER": "Type to search IP Groups..."
+      }
+    },
     "select-ips": {
       "TITLE": "Select IP Pool addresses",
       "CANCEL": "Cancel",
@@ -148,5 +143,9 @@
         "PLACEHOLDER": "Select Pool IPs to assign"
       }
     }
+  },
+  "search": {
+    "TITLE": "IP Pools",
+    "EMPTY": "No IP Group or Server assigned"
   }
 }

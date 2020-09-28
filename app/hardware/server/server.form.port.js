@@ -81,7 +81,7 @@
     port.fromExisting = fromExisting;
 
     function addPoolIP() {
-      PoolSelectIPsModal.open(port.group)
+      PoolSelectIPsModal.open(port.group.selected, _.get(port, 'server.access.client'))
         .then(function (poolIPs) {
           _.map(poolIPs, function (poolIP) {
             port.entities.selected.push(poolIP);
@@ -102,11 +102,11 @@
       syncEntityFilter();
     }
 
-    function fromExisting(response) {
+    function fromExisting(response, server) {
       port.id = response.id;
       port.original = response;
       port.input.mac = response.mac;
-      port.server = response.server;
+      port.server = server || response.server;
 
       if (port.group.getSelected('id') != response.group.id) {
         port.group.selected = response.group;
@@ -161,7 +161,7 @@
     function syncEntityFilter() {
       setDirty();
       var primaryEntity = port.entities.selected[0];
-      var extraFor = primaryEntity ? primaryEntity.extraForFilter() : undefined;
+      var extraFor = primaryEntity ? (primaryEntity.extraForFilter || new IPEntity(primaryEntity).extraForFilter)() : undefined;
       port.entities
         .clearFilter('extra_for_id')
         .clearFilter('ip_group')

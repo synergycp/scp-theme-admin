@@ -38,6 +38,7 @@
     var $ports, $controls;
 
     serverForm.$onInit = init;
+    serverForm.server = {};
     serverForm.input = _.clone(INPUTS);
     serverForm.cpu = Select('part?part_type=cpu');
     serverForm.mem = Select('part?part_type=mem');
@@ -200,7 +201,7 @@
       _.each(response, function (portData) {
         var port = ServerFormPort(serverForm.ports.length);
 
-        port.fromExisting(portData);
+        port.fromExisting(portData, serverForm.server);
         port.loadEntities();
         serverForm.ports.push(port);
       });
@@ -230,6 +231,7 @@
     }
 
     function fillFormInputs() {
+      _.assign(serverForm.server, serverForm.form.input);
       _.overwrite(serverForm.input, serverForm.form.input);
     }
 
@@ -378,7 +380,7 @@
           ;
 
         function updateExisting(response) {
-          port.fromExisting(response, true);
+          port.fromExisting(response, serverForm.server);
           return response;
         }
       }

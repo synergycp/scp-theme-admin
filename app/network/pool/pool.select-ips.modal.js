@@ -25,7 +25,8 @@
         .filter({
           available: true,
           ip_group: group.id,
-          client: client && client.id,
+          'owner_could_be[type]': client && 'client',
+          'owner_could_be[id]': client && client.id,
         })
         .on('change', resyncAvailableIPs);
       pool.load();

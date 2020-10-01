@@ -53,6 +53,7 @@ include /resources/angle/pug/mixins/panel
             ui-sref="app.network.entity.view(entity)"
             ng-bind="entity.nickname"
           )
+          span(translate="server.assign.entity.VLAN" translate-value-vlan="{{ entity.vlan }}")
 
       //- Start IPv4
       tr(ng-if-start="entity.v4")

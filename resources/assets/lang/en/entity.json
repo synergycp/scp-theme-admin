@@ -31,6 +31,12 @@
         "LABEL": "IP Group",
         "PLACEHOLDER": "Type to search IP Groups..."
       }
+    },
+    "convert": {
+      "TITLE": "Convert IP Entities to IP Pools?",
+      "BODY": "Click \"Convert\" to convert these IP Entities to IP Pools:",
+      "CANCEL": "Cancel",
+      "SUBMIT": "Convert"
     }
   },
   "buttons": {

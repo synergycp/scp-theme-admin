@@ -235,7 +235,7 @@
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
     "web_panel": {
       "HEADING": "Web CP",
-      "OPEN": "Open Web Control Panel"
+      "OPEN": "Open {{ type }} Web Control Panel"
     },
     "BMC": {
       "TITLE": "Reset BMC",

@@ -52,6 +52,11 @@
         "LABEL": "API Key",
         "PLACEHOLDER": "The installer will tell you this"
       },
+      "forwarding_type": {
+        "LABEL": "Forwarding Type",
+        "PORT_TO_PORT": "Port to Port",
+        "IP_TO_IP": "IP To IP (beta)"
+      },
       "port_limit": {
         "LABEL": "Port Limit",
         "PLACEHOLDER": "3000"

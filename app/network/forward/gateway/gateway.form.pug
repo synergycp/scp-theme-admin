@@ -34,6 +34,15 @@ include /resources/angle/pug/mixins/form
   ng-model="gatewayForm.input.api_key"
 )
 
++select(
+  "{{ 'forward.gateway.form.forwarding_type.LABEL' | translate }}",
+  "forwarding_type"
+)(
+  placeholder="{{ 'forward.gateway.form.forwarding_type.PLACEHOLDER' | translate }}"
+  ng-model="gatewayForm.input.forwarding_type"
+  ng-options="'forward.gateway.form.forwarding_type.'+type | translate for (type,value) in gatewayForm.FORWARDING_TYPE"
+)
+
 +field(
   "{{ 'forward.gateway.form.port_limit.LABEL' | translate }}",
   "port_limit"

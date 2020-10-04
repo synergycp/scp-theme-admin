@@ -5,8 +5,14 @@
         name: '',
         hostname: '',
         api_key: '',
+        forwarding_type: 0,
         port_limit: '',
         usable_ips: '',
+    };
+
+    var FORWARDING_TYPE = {
+        PORT_TO_PORT: 'PORT_TO_PORT',
+        IP_TO_IP: 'IP_TO_IP',
     };
 
     angular
@@ -32,6 +38,7 @@
         gatewayForm.$onInit = init;
         gatewayForm.input = _.clone(INPUTS);
         gatewayForm.groups = Select('group').multi();
+        gatewayForm.FORWARDING_TYPE = FORWARDING_TYPE;
 
         //////////
 

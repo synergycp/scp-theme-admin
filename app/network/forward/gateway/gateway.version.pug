@@ -1,0 +1,12 @@
+a.btn.btn-xs.btn-warning(
+  ng-click="version.updateVersion()"
+  ng-if="version.gateway.version.is_update_available"
+  translate="forward.gateway.version.update-available"
+)
+span(ng-if="!version.gateway.version.is_update_available")
+  span(ng-bind="version.gateway.version.current || '?'")
+|&nbsp;
+span(ng-class="version.loader.class")
+  .loader
+  a.btn.btn-xs(ng-click="version.refresh($event)")
+    .fa.fa-refresh

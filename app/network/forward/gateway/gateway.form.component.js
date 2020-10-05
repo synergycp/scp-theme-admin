@@ -20,6 +20,7 @@
         .component('forwardGatewayForm', {
             require: {},
             bindings: {
+                isCreating: '@',
                 form: '=',
             },
             controller: 'ForwardGatewayFormCtrl as gatewayForm',
@@ -36,6 +37,7 @@
         var gatewayForm = this;
 
         gatewayForm.$onInit = init;
+        gatewayForm.gateway = {};
         gatewayForm.input = _.clone(INPUTS);
         gatewayForm.groups = Select('group').multi();
         gatewayForm.FORWARDING_TYPE = FORWARDING_TYPE;
@@ -51,6 +53,7 @@
         }
 
         function fillFormInputs() {
+            _.assign(gatewayForm.gateway, gatewayForm.form.input);
             _.overwrite(gatewayForm.input, gatewayForm.form.input);
             gatewayForm.input.usable_ips = (gatewayForm.form.input.usable_ips || []).join(', ');
         }

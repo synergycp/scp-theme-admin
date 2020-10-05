@@ -25,19 +25,10 @@ block columns
       ui-sref="app.network.forward.gateway.view({id: row.id})"
       ng-bind="row.name"
     )
-  td(
-    ng-if="table.showHealth"
-    ng-class=`{
-      'text-success': row.status_health === 'OK',
-      'text-warning': row.status_health === 'WARN',
-      'text-danger': row.status_health === 'ERROR',
-     }`
-    translate="forward.gateway.status.{{row.status_health}}"
-  )
-  td(
-    ng-if="table.showVersion"
-    ng-bind="row.current_semver"
-  )
+  td(ng-if="table.showHealth")
+    forward-gateway-health(gateway="row")
+  td(ng-if="table.showVersion")
+    forward-gateway-version(gateway="row")
   td(
     ng-if="table.showHostname"
     ng-bind="row.hostname"

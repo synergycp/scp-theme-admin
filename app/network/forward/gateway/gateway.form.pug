@@ -2,7 +2,7 @@ doctype html
 include /resources/angle/pug/mixins/form
 
 +field(
-  "{{ 'forward.gateway.form.name.LABEL' | translate }}",
+  "forward.gateway.form.name.LABEL",
   "name"
 )(
   placeholder="{{ 'forward.gateway.form.name.PLACEHOLDER' | translate }}"
@@ -10,7 +10,7 @@ include /resources/angle/pug/mixins/form
 )
 
 +field(
-  "{{ 'forward.gateway.form.hostname.LABEL' | translate }}",
+  "forward.gateway.form.hostname.LABEL",
   "hostname"
 )(
   placeholder="{{ 'forward.gateway.form.hostname.PLACEHOLDER' | translate }}"
@@ -18,7 +18,7 @@ include /resources/angle/pug/mixins/form
 )
 
 +field(
-  "{{ 'forward.gateway.form.usable_ips.LABEL' | translate }}",
+  "forward.gateway.form.usable_ips.LABEL",
   "usable_ips"
 )(
   placeholder="{{ 'forward.gateway.form.usable_ips.PLACEHOLDER' | translate }}"
@@ -27,15 +27,23 @@ include /resources/angle/pug/mixins/form
   p.help-block(translate="forward.gateway.form.usable_ips.HELP")
 
 +field(
-  "{{ 'forward.gateway.form.api_key.LABEL' | translate }}",
+  "forward.gateway.form.api_key.LABEL",
   "api_key"
 )(
   placeholder="{{ 'forward.gateway.form.api_key.PLACEHOLDER' | translate }}"
   ng-model="gatewayForm.input.api_key"
 )
 
+div(ng-if="!gatewayForm.isCreating")
+  +label("forward.gateway.form.health.LABEL")
+    p.form-control-static
+      forward-gateway-health(gateway="gatewayForm.gateway")
+  +label("forward.gateway.form.version.LABEL")
+    p.form-control-static
+      forward-gateway-version(gateway="gatewayForm.gateway")
+
 +select(
-  "{{ 'forward.gateway.form.forwarding_type.LABEL' | translate }}",
+  "forward.gateway.form.forwarding_type.LABEL",
   "forwarding_type"
 )(
   placeholder="{{ 'forward.gateway.form.forwarding_type.PLACEHOLDER' | translate }}"
@@ -44,14 +52,14 @@ include /resources/angle/pug/mixins/form
 )
 
 +field(
-  "{{ 'forward.gateway.form.port_limit.LABEL' | translate }}",
+  "forward.gateway.form.port_limit.LABEL",
   "port_limit"
 )(
   placeholder="{{ 'forward.gateway.form.port_limit.PLACEHOLDER' | translate }}"
   ng-model="gatewayForm.input.port_limit"
 )
 
-+label("{{ 'forward.gateway.form.group.LABEL' | translate }}")
++label("forward.gateway.form.group.LABEL")
   +ui-select("gatewayForm.groups")(
     multiple
     theme="bootstrap"

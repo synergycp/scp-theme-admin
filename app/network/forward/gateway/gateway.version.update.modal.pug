@@ -1,0 +1,23 @@
+extends /resources/angle/pug/modal.confirm.pug
+include /resources/angle/pug/mixins/form.pug
+block vars
+  - lang="forward.gateway.version.update"
+
+block body
+  p(translate=lang+".INTRO")
+  .form-horizontal.clearfix
+    +label(lang+".CURRENT").clearfix
+      p.form-control-static(ng-bind="modal.data.gateway.version.current.semver")
+    +label(lang+".LATEST").clearfix
+      p.form-control-static(ng-bind="modal.data.gateway.version.latest.semver")
+  p(translate=lang+".COMMAND")
+  pre
+    code
+      | cd /tmp && wget https://install.synergycp.com/bm/gateway-installer.sh && bash gateway-installer.sh
+  p(translate=lang+".NEXT_STEPS")
+  .form-horizontal.clearfix
+    +field(lang + ".api_key.LABEL")(
+      placeholder="{{ '"+lang+".api_key.PLACEHOLDER' | translate }}"
+      ng-model="modal.api_key"
+    )
+

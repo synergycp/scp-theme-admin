@@ -20,7 +20,10 @@ block list
 
 block bottom-left
   +create-form("{{ 'forward.gateway.form.title.ADD' | translate }}", 'forward.gateway-edit-form')
-    forward-gateway-form(form="vm.create")
+    forward-gateway-form(
+      form="vm.create"
+      is-creating="true"
+    )
 
 block bottom-right
   logs(

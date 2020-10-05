@@ -27,7 +27,6 @@
     //////////
 
     function init() {
-      version.updateVersion();
     }
 
     function updateVersion() {

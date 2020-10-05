@@ -4,7 +4,7 @@ a.btn.btn-xs.btn-warning(
   translate="forward.gateway.version.update-available"
 )
 span(ng-if="!version.gateway.version.is_update_available")
-  span(ng-bind="version.gateway.version.current || '?'")
+  span(ng-bind="version.gateway.version.current.semver || '?'")
 |&nbsp;
 span(ng-class="version.loader.class")
   .loader

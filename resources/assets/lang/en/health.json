@@ -30,6 +30,16 @@
         }
       }
     },
+    "forward": {
+      "gateway": {
+        "status": {
+          "OK": "Forwarding gateways healthy",
+          "WARN": "Forwarding gateway warning",
+          "ERROR": "Forwarding gateway error",
+          "LOADING": "Checking if forwarding gateways are healthy"
+        }
+      }
+    },
     "package": {
       "update_available": {
         "OK": "All Packages are up to date.",

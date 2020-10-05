@@ -18,6 +18,10 @@
       ConstantHealthStatusStateChangeRenderer('app.system.setting.list')
     );
     HealthStatusRendererProvider.set(
+      'forward.gateway.status',
+      ConstantHealthStatusStateChangeRenderer('app.network.forward.gateway.list')
+    );
+    HealthStatusRendererProvider.set(
       'package.update_available',
       ConstantHealthStatusStateChangeRenderer('app.system.package.list')
     );

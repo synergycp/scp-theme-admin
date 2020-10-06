@@ -1,18 +1,18 @@
 (function () {
     'use strict';
 
+    var FORWARDING_TYPE = {
+        PORT_TO_PORT: 'PORT_TO_PORT',
+        IP_TO_IP: 'IP_TO_IP',
+    };
+
     var INPUTS = {
         name: '',
         hostname: '',
         api_key: '',
-        forwarding_type: 0,
+        forwarding_type: FORWARDING_TYPE.PORT_TO_PORT,
         port_limit: '',
         usable_ips: '',
-    };
-
-    var FORWARDING_TYPE = {
-        PORT_TO_PORT: 'PORT_TO_PORT',
-        IP_TO_IP: 'IP_TO_IP',
     };
 
     angular

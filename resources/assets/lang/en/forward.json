@@ -13,6 +13,12 @@
       "DELETE": "Delete",
       "RESYNC": "Resync"
     },
+    "install": {
+      "TITLE": "Creating Port Forwarding Servers",
+      "NEXT": "Next Step",
+      "INTRO": "SynergyCP's Port Forwarding feature can be used to move IPMI IPs onto a private LAN where they do not take up IP space and are not accessible to the public (ACL by IP). To setup Port Forwarding, add a subnet for IPMI devices on your router that is internal only (e.g. 10.0.1.1/24). Make sure this subnet is accessible only to other devices in the same VLAN, i.e. your customers cannot access any IPMI device directly using the internal IP. Provision a server with Debian 9 that has a public IP and also has access to the private IPMI LAN. It is fine if these are on two different ethernet ports as long as the routing is setup in the OS so that it can connect to the private LAN. it is important that the server only be assigned a single static public IP as having multiple can cause conflicts. Install a fresh Debian 8 server - do not reuse another server as there may be port conflicts (there are guaranteed to be conflicts if installed alongside the DHCP server or the file server). Then run this command on the fresh server as the root user (add \"sudo\" before \"bash\" if you are running as a sudo user):",
+      "TESTING": "Next, copy the details at the end into the form on the next page. To enable Port Forwarding on a server, pick a server that is not in use at the location that you added the Port Forwarding Gateway to, go to its IPMI control panel, and change its static IP to one from the internal subnet. Edit the server on SynergyCP so that it has the internal IPMI IP and port forwarding set to whichever setting you choose. Port Forwards will be automatically generated for you based on whatever ports that device needs to be public. Go to the manage server page for that server and click Launch KVM to test that the port forwarding is working."
+    },
     "status": {
       "OK": "OK",
       "WARN": "Warning",

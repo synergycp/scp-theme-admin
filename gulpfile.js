@@ -3,7 +3,6 @@ var
   gulp = require('gulp'),
   ngGulp = require('scp-ng-gulp')(require('gulp'))
   $ = require('gulp-load-plugins')(),
-  gulpsync = $.sync(gulp),
   browserSync = require('browser-sync').create(),
   reload = browserSync.reload,
   PluginError = $.util.PluginError;
@@ -18,11 +17,6 @@ var streamToPromise = require('stream-to-promise');
 var isProduction = false;
 // styles sourcemaps
 var useSourceMaps = false;
-
-
-// ignore everything that begins with underscore
-var hidden_files = '**/_*.*';
-var ignored_files = '!' + hidden_files;
 
 // MAIN PATHS
 var paths = {
@@ -78,33 +72,10 @@ var build = {
 
 // PLUGINS OPTIONS
 
-var vendorUglifyOpts = {
-  mangle: {
-    except: ['$super'] // rickshaw requires this
-  }
-};
-
 var pugOptions = {
   doctype: 'html',
   basedir: __dirname,
   pretty: false,
-};
-
-var compassOpts = {
-  project: __dirname,
-  css: 'public/app/css',
-  sass: paths.styles,
-  image: 'public/assets/img'
-};
-
-var tplCacheOptions = {
-  root: 'app',
-  filename: 'templates.js',
-  //standalone: true,
-  module: 'app.core',
-  base: function (file) {
-    return file.path.split('pug')[1];
-  }
 };
 
 var filter = {
@@ -145,12 +116,6 @@ gulp.task('scripts:app', function () {
     }));
 });
 
-
-// VENDOR BUILD
-gulp.task('vendor', ['vendor:base', 'vendor:app', 'vendor:exports'], function(done) {
-  done();
-});
-
 // Build the base script to start the application from vendor assets
 gulp.task('vendor:base', function () {
   log('Copying base vendor assets..');
@@ -179,6 +144,10 @@ gulp.task('vendor:base', function () {
 
 // copy files from vendor folder into the app vendor folder
 gulp.task('vendor:app', function () {
+  if (!vendor.app.source.length) {
+    return;
+  }
+
   log('Copying vendor assets..');
   var jsFilter = filter.js();
   var cssFilter = filter.css();
@@ -252,6 +221,9 @@ gulp.task('vendor:exports', function (done) {
     }
   }
 });
+
+// VENDOR BUILD
+gulp.task('vendor', gulp.parallel(['vendor:base', 'vendor:app', 'vendor:exports']));
 
 function addPrefixFolder (folder, file) {
   file.dirname = folder + '/' + file.dirname;
@@ -341,57 +313,61 @@ gulp.task('clean', function (done) {
 
 gulp.task('create-versions', createVersions);
 
+// build with sourcemaps (no minify)
+gulp.task('usesources', function () {
+  useSourceMaps = true;
+});
+
 //---------------
 // MAIN TASKS
 //---------------
-
-// build for production (minify)
-gulp.task('build', gulpsync.sync([
-  'prod',
-  'vendor',
-  'assets'
-]), function() {
-  if (isProduction) gulp.start('create-versions');
-});
 
 gulp.task('prod', function () {
   log('Starting production build...');
   isProduction = true;
 });
 
-// Server for development
-gulp.task('serve', gulpsync.sync([
-  'usesources',
-  'default',
-  'create-versions',
-  'browsersync']), done);
-
-// Server for production
-gulp.task('serve-prod', gulpsync.sync([
-  'build',
-  'browsersync'
-]), done);
-
-// build with sourcemaps (no minify)
-gulp.task('sourcemaps', ['usesources', 'default']);
-gulp.task('usesources', function () {
-  useSourceMaps = true;
-});
-
-// default (no minify)
-gulp.task('default', gulpsync.sync([
-  'vendor',
-  'assets',
-  'watch'
-]));
-
-gulp.task('assets', [
+gulp.task('assets', gulp.parallel([
   'scripts:app',
   'templates:views',
   'templates:index',
   'assets:raw'
-]);
+]));
 
+// build for production (minify)
+gulp.task('build', gulp.series([
+  'prod',
+  gulp.parallel([
+    'vendor',
+    'assets',
+  ]),
+  isProduction ? 'create-versions' : null
+].filter(e => !!e)));
+
+// default (no minify)
+gulp.task('default', gulp.series([
+  'vendor',
+  'assets',
+  'watch',
+]));
+
+gulp.task('sourcemaps', gulp.series(['usesources', 'default']));
+
+// Server for development
+gulp.task('serve', gulp.series([
+  'usesources',
+  'default',
+  'create-versions',
+  'browsersync',
+  done,
+]));
+
+// Server for production
+gulp.task('serve-prod', gulp.series([
+  'build',
+  'browsersync',
+  done,
+]));
 
 /////////////////////
 

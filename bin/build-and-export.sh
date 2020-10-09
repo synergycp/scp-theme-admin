@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 exit-with-error() {
   CODE=$?

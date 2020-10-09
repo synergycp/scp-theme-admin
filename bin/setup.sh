@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 sudo apt install -y ruby-dev dirmngr || exit 1
 

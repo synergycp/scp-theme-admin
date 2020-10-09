@@ -331,9 +331,10 @@ gulp.task("usesources", function (done) {
 // MAIN TASKS
 //---------------
 
-gulp.task("prod", function () {
+gulp.task("prod", function (done) {
   log("Starting production build...");
   isProduction = true;
+  done();
 });
 
 gulp.task(

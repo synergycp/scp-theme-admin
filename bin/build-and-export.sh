@@ -6,6 +6,6 @@ exit_with_error() {
   exit $CODE
 }
 
-mkdir -p ../build
+mkdir -p ../../build
 ./node_modules/.bin/gulp prod build || exit_with_error "Gulp build failed"
-tar -zcvf "../build/admin.tar.gz" --transform 's,^public,admin,' public || exit_with_error "Archive build failed"
+tar -zcvf "../../build/admin.tar.gz" --transform 's,^public,admin,' public || exit_with_error "Archive build failed"

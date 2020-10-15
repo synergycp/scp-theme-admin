@@ -1,10 +1,9 @@
 (function () {
-  'use strict';
+  "use strict";
 
   angular
-    .module('app.network.pool.list.filters')
-    .controller('PoolFiltersCtrl', PoolFiltersCtrl)
-    ;
+    .module("app.network.pool.list.filters")
+    .controller("PoolFiltersCtrl", PoolFiltersCtrl);
 
   /**
    * @ngInject
@@ -16,12 +15,11 @@
     filters.$onChanges = $onChanges;
 
     filters.current = {};
-    filters.group = Select('group');
-    filters.client = Select('client')
-      .addItem({
-        id: 'none',
-        text: 'Unassigned'
-      });
+    filters.group = Select("group");
+    filters.owner = Select("client").addItem({
+      id: "none",
+      name: "Unassigned",
+    });
     filters.searchFocus = Observable(false);
 
     filters.fireChangeEvent = fireChangeEvent;
@@ -33,39 +31,63 @@
         q: $state.params.q,
       });
       $q.all([
-        filters.group.setSelectedId($state.params['group.id']),
-        filters.client.setSelectedId($state.params['client.id']),
-      ]).then(listenForChanges).then(fireChangeEvent);
+        filters.group.setSelectedId($state.params["group.id"]),
+        filters.owner.setSelectedId(
+          $state.params["owner.id"] || $state.params["owner"]
+        ),
+      ])
+        .then(listenForChanges)
+        .then(fireChangeEvent);
     }
 
     function listenForChanges() {
-      filters.group.on('change', fireChangeEvent);
-      filters.client.on('change', fireChangeEvent);
+      filters.group.on("change", fireChangeEvent);
+      filters.owner.on("change", fireChangeEvent);
 
-      filters.shouldWatchMainSearch && Search.on('change', function(searchStr) {
-        _.assign(filters.current, {
-          q: searchStr
+      filters.shouldWatchMainSearch &&
+        Search.on("change", function (searchStr) {
+          _.assign(filters.current, {
+            q: searchStr,
+          });
         });
-      })
     }
 
     function fireChangeEvent() {
       _.assign(filters.current, {
-        group: filters.group.getSelected('id'),
-        client: filters.client.getSelected('id'),
+        group: filters.group.getSelected("id"),
       });
+      var ownerID = filters.owner.getSelected("id");
 
-      filters.client
-        .filter({
-          ip_group: (filters.group.selected || {}).id,
-        })
-        .load();
+      switch (ownerID) {
+        case null:
+        case undefined:
+          break;
+        default:
+          _.assign(filters.current, {
+            owner: undefined,
+            "owner[type]": "client",
+            "owner[id]": filters.owner.getSelected("id"),
+          });
+          break;
+        case "none":
+          _.assign(filters.current, {
+            owner: "none",
+            "owner[type]": undefined,
+            "owner[id]": undefined,
+          });
+          break;
+      }
 
-      $state.go($state.current.name, {
-        'group.id': filters.current.group,
-        'client.id': filters.current.client,
-        q: filters.current.q,
-      }, {location: 'replace'});
+      $state.go(
+        $state.current.name,
+        {
+          "group.id": filters.current.group,
+          "owner.id": filters.current["owner[id]"],
+          owner: filters.current.owner,
+          q: filters.current.q,
+        },
+        { location: "replace" }
+      );
       filters.shouldWatchMainSearch && Search.go(filters.current.q);
 
       if (filters.change) {

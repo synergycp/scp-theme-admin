@@ -54,7 +54,7 @@
 
     function fireChangeEvent() {
       _.assign(filters.current, {
-        group: filters.group.getSelected("id"),
+        ip_group: filters.group.getSelected("id"),
       });
       var ownerID = filters.owner.getSelected("id");
 
@@ -81,7 +81,7 @@
       $state.go(
         $state.current.name,
         {
-          "group.id": filters.current.group,
+          "group.id": filters.current.ip_group,
           "owner.id": filters.current["owner[id]"],
           owner: filters.current.owner,
           q: filters.current.q,

@@ -5,9 +5,13 @@ block body
     +ui-select("modal.data.pool")
       ui-select-match(placeholder="{{ 'pool.modal.select-ips.pool.PLACEHOLDER' | translate }}")
         | {{ $select.selected.name }}
+        font(ng-if="$select.selected.owner")
+          |  ({{ $select.selected.owner.name }})
 
       +ui-select-choices("modal.data.pool")
         span(ng-bind-html="choice.name | highlight: $select.search")
+        span(ng-if="choice.owner")
+          |  ({{ choice.owner.name }})
     p.help-block(translate="pool.modal.select-ips.pool.HELP")
   div(ng-if="modal.data.availableIPs()")
     +label("pool.modal.select-ips.ips.LABEL")

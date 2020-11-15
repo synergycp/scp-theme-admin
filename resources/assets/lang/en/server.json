@@ -25,7 +25,7 @@
     },
     "entity": {
       "TITLE": "IP Allocation",
-      "VLAN": " [VLAN {{ vlan }}]",
+      "SWITCH": " [{{ switchname }} -> {{ switchport }} -> VLAN {{ vlan }}]",
       "v4": {
         "USABLE": " - Usable IP(s)",
         "GATEWAY": " - Gateway IP",

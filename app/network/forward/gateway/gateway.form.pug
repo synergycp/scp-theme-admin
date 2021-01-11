@@ -18,15 +18,6 @@ include /resources/angle/pug/mixins/form
 )
 
 +field(
-  "forward.gateway.form.usable_ips.LABEL",
-  "usable_ips"
-)(
-  placeholder="{{ 'forward.gateway.form.usable_ips.PLACEHOLDER' | translate }}"
-  ng-model="gatewayForm.input.usable_ips"
-)
-  p.help-block(translate="forward.gateway.form.usable_ips.HELP")
-
-+field(
   "forward.gateway.form.api_key.LABEL",
   "api_key"
 )(
@@ -50,6 +41,16 @@ div(ng-if="!gatewayForm.isCreating")
   ng-model="gatewayForm.input.forwarding_type"
   ng-options="'forward.gateway.form.forwarding_type.'+type | translate for (type,value) in gatewayForm.FORWARDING_TYPE"
 )
+
+div(ng-if="gatewayForm.input.forwarding_type == 'IP_TO_IP'")
+  +field(
+    "forward.gateway.form.usable_ips.LABEL",
+    "usable_ips"
+  )(
+    placeholder="{{ 'forward.gateway.form.usable_ips.PLACEHOLDER' | translate }}"
+    ng-model="gatewayForm.input.usable_ips"
+  )
+    p.help-block(translate="forward.gateway.form.usable_ips.HELP")
 
 +field(
   "forward.gateway.form.port_limit.LABEL",

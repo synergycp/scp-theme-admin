@@ -260,6 +260,10 @@
     "acl": {
       "TITLE": "Manage ACLs",
       "modal": {
+        "conflicting": {
+          "TITLE": "Conflicting ACLs",
+          "INTRO": "You have used all of the available concurrent IP addresses for forwarding from your IP. You will need to delete one of your ACLs and try again. Please keep in mind that if there are any other users from your IP (e.g. staff on the same VPN), these ACLs may be in use."
+        },
         "manage": {
           "TITLE": "ACLs",
           "CREATE": "Grant IP Access"

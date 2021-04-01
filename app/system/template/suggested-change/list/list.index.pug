@@ -1,0 +1,11 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="template.suggested-change.list.TITLE")
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+    template-suggested-change-table.border-top-table.scrollable-block
+    list-footer
+

@@ -48,6 +48,14 @@
         "LOADING": "Checking if package updates are available."
       }
     },
+    "template": {
+      "suggested_change": {
+        "OK": "All Templates are up to date.",
+        "WARN": "Template update(s) available.",
+        "ERROR": "Template update(s) available.",
+        "LOADING": "Checking if template updates are available."
+      }
+    },
     "missing_renderer": {
       "ERROR": "ERROR: missing HealthStatusRenderer for {{slug}}"
     },

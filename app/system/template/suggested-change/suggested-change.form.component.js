@@ -39,6 +39,7 @@
     templateSuggestedChangeForm.theirFiles = { file: "Loading..." };
     templateSuggestedChangeForm.mergelySettings = {
       height: "auto",
+      license: "lgpl-separate-notice",
     };
 
     //////////

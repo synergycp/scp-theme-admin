@@ -211,17 +211,24 @@ gulp.task("vendor:exports", function (done) {
         follow: true,
       };
 
+      console.log(exp, opts);
+      // exp.files = _.map(exp.files, function (file) {
+      //   if (_.startsWith(file, __dirname)) {
+      //     return file.substr(__dirname.length + 1);
+      //   }
+      //   return file;
+      // });
       return (
         gulp
           .src(exp.files, opts)
           .pipe($.expectFile(opts, exp.files))
           .pipe($.rename(addPrefixFolder.bind(null, exp.name)))
-          .pipe(jsFilter)
+          // .pipe(jsFilter)
           //  .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
-          .pipe(jsFilter.restore())
-          .pipe(cssFilter)
-          //  .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
-          .pipe(cssFilter.restore())
+          // .pipe(jsFilter.restore())
+          // .pipe(cssFilter)
+          // .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
+          // .pipe(cssFilter.restore())
           .pipe(gulp.dest(vendor.app.dest))
           .pipe(
             reload({

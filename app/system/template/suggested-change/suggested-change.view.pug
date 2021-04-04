@@ -1,10 +1,11 @@
-h2(
-  translate='pxe.templateSuggestedChange.form.title.EDIT'
+h3(
+  translate='template.suggested-change.view.TITLE'
   translate-value-name='{{vm.edit.input.name}}'
 )
 
-template-suggested-change-buttons(templateSuggestedChange="vm.edit.input")
+ul
+  li(ng-repeat="entry in vm.edit.input.changelog" ng-bind="entry")
 
-
-template-suggested-change-form(form="vm.edit")  
+template-suggested-change-buttons(template-suggested-change="vm.edit.input")
+template-suggested-change-form(form="vm.edit")
 

@@ -1,0 +1,33 @@
+{
+  "suggested-change": {
+    "list": {
+      "TITLE": "Suggested Template Changes"
+    },
+    "view": {
+      "TITLE": "Suggested Template Change: {{name}}"
+    },
+    "form": {
+      "title": {
+        "EDIT": "Manually Merge"
+      }
+    },
+    "buttons": {
+      "DELETE": "Keep Current",
+      "OVERWRITE": "Overwrite Current"
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Ignore Suggested Template Changes",
+        "BODY": "This will ignore the suggested template change(s), keeping your customizations. This means you will not get the features from these changes. This operation cannot be undone.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Ignore"
+      },
+      "overwrite": {
+        "TITLE": "Overwrite Using Suggested Template Changes",
+        "BODY": "This will overwrite any customizations you've made to the following files. This operation cannot be undone. You may want to make a backup in case important changes are lost.",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Overwrite"
+      }
+    }
+  }
+}

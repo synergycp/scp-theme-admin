@@ -1,8 +1,8 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  angular
-    .module('app.system.template.suggested-change', [
-      'app.system.template.suggested-change.list',
-    ]);
+  angular.module("app.system.template.suggested-change", [
+    "app.system.template.suggested-change.list",
+    "app.lib.mergely",
+  ]);
 })();

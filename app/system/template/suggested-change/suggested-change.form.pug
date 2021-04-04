@@ -1,4 +1,13 @@
 doctype html
 include /resources/angle/pug/mixins/form
 
-| Form
+h3(translate="template.suggested-change.form.title.EDIT")
+mergely-editor.scp-mergely(
+  accept-button-class="btn btn-success btn-lg"
+  accept-callback="templateSuggestedChangeForm.merge"
+  cancel-button-class="hidden"
+  original-files="templateSuggestedChangeForm.ourFiles"
+  other-files="templateSuggestedChangeForm.theirFiles"
+  settings="templateSuggestedChangeForm.mergelySettings"
+  style="height:calc(100vh - 450px);min-height: 400px"
+)

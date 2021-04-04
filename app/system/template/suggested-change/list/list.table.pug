@@ -11,7 +11,9 @@ block columns
       ui-sref="app.system.template.suggested-change.view({id: row.id})"
       ng-bind="row.name"
     )
-  td(ng-bind="row.changelog")
+  td
+    ul.no-margin(style="padding-left: 15px")
+      li(ng-repeat="entry in row.changelog" ng-bind="entry")
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(

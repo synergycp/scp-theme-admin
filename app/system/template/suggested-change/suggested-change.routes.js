@@ -11,6 +11,7 @@
         url: "/template",
         abstract: true,
         template: helper.dummyTemplate,
+        resolve: helper.resolveFor("lang:template"),
       })
       .state("app.system.template.suggested-change", {
         url: "/suggested-change",
@@ -24,6 +25,7 @@
         templateUrl: helper.basepath(
           "system/template/suggested-change/suggested-change.view.html"
         ),
+        resolve: helper.resolveFor("codemirror", "after:mergely"),
       });
 
     helper.url.map(

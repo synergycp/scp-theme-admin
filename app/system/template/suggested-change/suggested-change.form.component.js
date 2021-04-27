@@ -48,9 +48,14 @@
       return Api.one(
         "template/suggested-change/" + templateSuggestedChangeForm.input.id
       )
-        .remove({
-          body: result.file,
-        })
+        .customDELETE(
+          "",
+          {},
+          { "Content-Type": "application/json;charset=UTF-8" },
+          {
+            body: result.file,
+          }
+        )
         .then(transferToList);
     }
 

@@ -4,6 +4,7 @@
   "description": "Synergy Control Panel Default Admin Theme",
   "author": "synergycontrolpanel",
   "devDependencies": {
+    "@prettier/plugin-pug": "^1.15.2",
     "angular-mergely": "git+ssh://git@github.com/synergycp/angular-mergely.git",
     "browser-sync": "^2.11.0",
     "codemirror": "^5.60.0",

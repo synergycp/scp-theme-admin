@@ -82,6 +82,13 @@
       "LABEL": "Add-On",
       "PLACEHOLDER": "None"
     },
+    "pxe-boot-mode": {
+      "LABEL": "PXE Boot Mode",
+      "type": {
+        "LEGACY": "Legacy",
+        "UEFI": "UEFI (beta, limited support)"
+      }
+    },
     "switch": {
       "LABEL": "Switch",
       "port": {

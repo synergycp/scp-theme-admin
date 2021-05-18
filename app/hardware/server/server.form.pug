@@ -71,6 +71,15 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
           refresh-delay="400"
         )
           span(ng-bind-html="choice.name | highlight: $select.search")
+        
++select(
+  "server.form.pxe-boot-mode.LABEL",
+  "pxe_boot_mode"
+)(
+  name="pxe_boot_mode"
+  ng-model="serverForm.input.pxe_boot_mode"
+  ng-options="'server.form.pxe-boot-mode.type.'+type | translate for (type,value) in serverForm.pxeBootModeTypes"
+)
 
 hr
 

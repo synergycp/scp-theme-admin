@@ -11,6 +11,7 @@
         id: "",
       },
     },
+    pxe_boot_mode: "LEGACY",
   };
 
   angular
@@ -89,6 +90,12 @@
         },
         empty: emptyBillingDate,
       },
+    };
+    serverForm.pxeBootModeTypes = {
+      // The key corresponds to a translation key in server.form.pxe-boot-mode.type
+      // The value corresponds to the API outputs for the enum ServerPXEBootMode
+      LEGACY: "LEGACY",
+      UEFI: "UEFI",
     };
 
     //////////
@@ -633,7 +640,11 @@
     }
 
     function setFormPristine() {
-      serverForm.disks.$dirty = serverForm.addOns.$dirty = serverForm.cpu.$dirty = serverForm.mem.$dirty = false;
+      serverForm.disks.$dirty =
+        serverForm.addOns.$dirty =
+        serverForm.cpu.$dirty =
+        serverForm.mem.$dirty =
+          false;
       serverForm.billing.integration.$dirty = false;
       _.each(serverForm.ports, function (port) {
         port.$setPristine();

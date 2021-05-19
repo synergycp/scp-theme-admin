@@ -1,15 +1,20 @@
 doctype html
 include /resources/angle/pug/mixins/form
 
-+field(
-  "{{ 'package.form.slug.LABEL' | translate }}"
-)(
-  placeholder="{{ 'package.form.slug.PLACEHOLDER' | translate }}"
++field("{{ 'package.form.slug.LABEL' | translate }}")(
+  placeholder="{{ 'package.form.slug.PLACEHOLDER' | translate }}",
   ng-model="packageForm.input.slug"
 )
   p.help-block
     a(
-      href="https://synergycp.com/packages"
-      target="_blank"
+      href="https://synergycp.com/packages",
+      target="_blank",
       translate="package.form.slug.HELP"
     )
+
+hr
+
+h4(translate="package.form.upload.TITLE")
++label("{{ 'package.form.upload.LABEL' | translate }}", 'package')
+  +file-upload("packageForm.package")
+  p.help-block(translate="package.form.upload.HELP")

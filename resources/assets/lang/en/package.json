@@ -1,5 +1,9 @@
 {
   "edit": {
+    "custom": {
+      "TITLE": "Custom Package",
+      "UPLOAD": "Upload New Version"
+    },
     "version": {
       "is-not-latest": {
         "ALERT": "A new version of this package is available!",
@@ -102,6 +106,11 @@
       "LABEL": "Name",
       "PLACEHOLDER": "Visit the available packages page for names",
       "HELP": "Available Packages"
+    },
+    "upload": {
+      "TITLE": "(Optional) Upload your own package",
+      "LABEL": "Archive",
+      "HELP": "Must be in .tar.gz format and must contain a single folder which is your package slug above"
     }
   },
   "modal": {

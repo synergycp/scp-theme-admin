@@ -1,3 +1,5 @@
+include /resources/angle/pug/mixins/form
+
 div(ng-if="version.package.version.can_update")
   .alert.alert-success.bounceIn
     span(translate="package.edit.version.is-not-latest.ALERT")
@@ -7,31 +9,35 @@ div(ng-if="version.package.version.can_update")
     .loader.rounded-10
     .col-xs-6.p0.text-right.rounded-left-10
       .card-heading.pv-lg.bg-primary.rounded-top-left-10
-        h5.card-title(translate="package.edit.version.is-not-latest.current.TITLE")
+        h5.card-title(
+          translate="package.edit.version.is-not-latest.current.TITLE"
+        )
       .card-body
         h3.m0(ng-bind="version.package.version.current.semver")
         p(
-          translate="package.edit.version.is-not-latest.current.RELEASE_DATE"
+          translate="package.edit.version.is-not-latest.current.RELEASE_DATE",
           translate-value-release-date="{{ version.package.version.current.release_date.unix * 1000 | date }}"
         )
     .col-xs-6.p0.bg-success.rounded-right-10
       .card-heading.pv-lg.bg-success-dark.rounded-top-right-10
-        h5.card-title(translate="package.edit.version.is-not-latest.latest.TITLE")
+        h5.card-title(
+          translate="package.edit.version.is-not-latest.latest.TITLE"
+        )
       .card-body
         h3.m0(ng-bind="version.package.version.latest.semver")
         p
           span(
-            translate="package.edit.version.is-not-latest.latest.RELEASE_DATE"
+            translate="package.edit.version.is-not-latest.latest.RELEASE_DATE",
             translate-value-release-date="{{ version.package.version.latest.release_date.unix * 1000 | date }}"
           )
           br
           a.text-white(
-            ng-click="version.viewUpdateDetails()"
+            ng-click="version.viewUpdateDetails()",
             translate="package.edit.version.is-not-latest.latest.DETAILS"
           )
     .clearfix
 .card.text-center.rounded-10(
-  ng-if="!version.package.version.can_update"
+  ng-if="!version.package.version.can_update && version.package.version.current.semver !== 'custom'",
   ng-class="version.loader.class"
 )
   .loader.rounded-10
@@ -42,9 +48,27 @@ div(ng-if="version.package.version.can_update")
       h3.m0(ng-bind="version.package.version.current.semver")
       p
         span(
-          translate="package.edit.version.is-latest.RELEASE_DATE"
+          translate="package.edit.version.is-latest.RELEASE_DATE",
           translate-value-release-date="{{ version.package.version.current.release_date.unix * 1000 | date }}"
         )
       p
         span(translate="package.edit.version.is-latest.IS_LATEST")
-    div(ng-if="!version.loader.hasLoaded" style="height: 60px")
+    div(ng-if="!version.loader.hasLoaded", style="height: 60px")
+
+.card.text-center.rounded-10(
+  ng-if="version.package.version.current.semver === 'custom'",
+  ng-class="version.loader.class"
+)
+  .loader.rounded-10
+  .card-heading.pv-lg.bg-gray-dark.rounded-top-10
+    h5.card-title(
+      translate="package.edit.custom.TITLE",
+      translate-value-name="{{ status.package.name }}"
+    )
+  .card-body.rounded-bottom-10
+    +file-upload("version.custom.package")
+    p.help-block(translate="package.form.upload.HELP")
+  .card-footer-btn.btn-info(
+    ng-click="version.custom.upload()",
+    translate="package.edit.custom.UPLOAD"
+  )

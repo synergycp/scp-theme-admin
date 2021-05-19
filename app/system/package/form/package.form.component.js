@@ -1,24 +1,22 @@
 (function () {
-  'use strict';
+  "use strict";
 
   var INPUTS = {
-    slug: '',
+    slug: "",
   };
 
   angular
-    .module('app.system')
-    .component('packageForm', {
-      require: {
-      },
+    .module("app.system")
+    .component("packageForm", {
+      require: {},
       bindings: {
-        form: '='
+        form: "=",
       },
-      controller: 'PackageFormCtrl as packageForm',
+      controller: "PackageFormCtrl as packageForm",
       transclude: true,
-      templateUrl: 'app/system/package/form/package.form.html',
+      templateUrl: "app/system/package/form/package.form.html",
     })
-    .controller('PackageFormCtrl', PackageFormCtrl)
-    ;
+    .controller("PackageFormCtrl", PackageFormCtrl);
 
   /**
    * @ngInject
@@ -28,6 +26,7 @@
 
     packageForm.$onInit = init;
     packageForm.input = _.clone(INPUTS);
+    packageForm.package = null;
 
     //////////
 
@@ -37,11 +36,14 @@
 
       var listen = packageForm.form.on || function () {};
 
-      listen(['change', 'load'], fillFormInputs);
+      listen(["change", "load"], fillFormInputs);
     }
 
     function getData() {
-      return _.clone(packageForm.input);
+      var data = _.clone(packageForm.input);
+      data.package = packageForm.package;
+
+      return data;
     }
 
     function fillFormInputs() {

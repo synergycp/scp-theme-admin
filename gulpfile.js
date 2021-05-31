@@ -1,5 +1,4 @@
-var path = require("path"),
-  gulp = require("gulp"),
+var gulp = require("gulp"),
   ngGulp = require("scp-ng-gulp")(require("gulp"));
 ($ = require("gulp-load-plugins")()),
   (browserSync = require("browser-sync").create()),
@@ -21,7 +20,6 @@ var useSourceMaps = false;
 var paths = {
   app: "public/app/",
   markup: "app/",
-  styles: "resources/sass/",
   scripts: "app/",
   public: "public/",
   assets: "resources/assets/",

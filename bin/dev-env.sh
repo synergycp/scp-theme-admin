@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
 . ~/.nvm/nvm.sh
-npm i && exec ./node_modules/.bin/gulp serve
+
+while [ ! -f ../dependencies/tmp/init ]; do
+  sleep 2
+done
+
+exec ./node_modules/.bin/gulp serve

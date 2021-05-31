@@ -30,16 +30,14 @@
     "lodash": "^4.15.0",
     "mergely": "^4.2.1",
     "q": "^1.4.1",
+    "scp-angle": "file:../scp-angle",
+    "scp-ng-gulp": "file:../scp-ng-gulp",
+    "scp-ng-util": "file:../scp-ng-util",
     "semver": "^6.3.0",
     "stream-to-promise": "^2.2.0"
   },
   "scripts": {
     "start": "npm install",
     "poststart": "gulp"
-  },
-  "dependencies": {
-    "scp-angle": "git+ssh://git@github.com/synergycp/scp-angle.git",
-    "scp-ng-util": "git+ssh://git@github.com/synergycp/scp-ng-util.git",
-    "scp-ng-gulp": "git+ssh://git@github.com/synergycp/scp-ng-gulp.git"
   }
 }

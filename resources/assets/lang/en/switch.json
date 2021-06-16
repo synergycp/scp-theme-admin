@@ -81,14 +81,16 @@
       "PLACEHOLDER": "SNMP Community / Key"
     },
     "type": {
-      "LABEL": "Type"
+      "LABEL": "Type",
+      "HELP_TEXT": "You can add your own switch types with custom commands using <a href='https://github.com/synergycp/scp-package-seed/wiki' target='_blank'>Add-On Packages</a>, e.g. <a href='https://github.com/synergycp/bm-pkg-switch-brocade-fcx-layer3' target='_blank'>this custom switch setup</a>."
     },
     "layer": {
       "LABEL": "Network Layer",
       "RACK": "Top of Rack Switch",
       "DISTRIBUTION": "Distribution Switch",
       "uplinks": {
-        "LABEL": "Uplinks"
+        "LABEL": "Uplinks",
+        "HELP_TEXT": "Runs additional Distribution/Layer 3 switch commands during VLAN assignment/wipe on all supported uplink switches. This could be static routes, VLANs spanning multiple switches, or more."
       },
       "layer_three": {
         "LABEL": "Layer 3 Support",

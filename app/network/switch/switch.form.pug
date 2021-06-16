@@ -1,49 +1,38 @@
 doctype html
 include /resources/angle/pug/mixins/form
 
-+field(
-  "{{ 'switch.form.name.LABEL' | translate }}",
-  "name"
-)(
-  placeholder="{{ 'switch.form.name.PLACEHOLDER' | translate }}"
++field("{{ 'switch.form.name.LABEL' | translate }}", "name")(
+  placeholder="{{ 'switch.form.name.PLACEHOLDER' | translate }}",
   ng-model="switchForm.input.name"
 )
 
-+select(
-  "{{ 'switch.form.type.LABEL' | translate }}",
-  "type"
-)(
-  placeholder="{{ 'switch.form.type.PLACEHOLDER' | translate }}"
-  ng-model="switchForm.input.type"
-  ng-options="value.slug as value.name for value in switchForm.switchTypes"
-)
++label("{{ 'switch.form.type.LABEL' | translate }}")
+  select.form-control(
+    placeholder="{{ 'switch.form.type.PLACEHOLDER' | translate }}",
+    ng-model="switchForm.input.type",
+    ng-options="value.slug as value.name for value in switchForm.switchTypes"
+  )
+  p.help-block
+    span(translate="switch.form.type.HELP_TEXT")
 
-+select(
-  "{{ 'switch.form.layer.LABEL' | translate }}",
-  "layer"
-)(
-  placeholder="{{ 'switch.form.layer.PLACEHOLDER' | translate }}"
-  ng-model="switchForm.input.layer"
++select("{{ 'switch.form.layer.LABEL' | translate }}", "layer")(
+  placeholder="{{ 'switch.form.layer.PLACEHOLDER' | translate }}",
+  ng-model="switchForm.input.layer",
   ng-options="'switch.form.layer.'+type | translate for (type,value) in switchForm.LAYER"
 )
 
 +label("{{ 'switch.form.group.LABEL' | translate }}")
   +ui-select("switchForm.groups")(
-    multiple
-    theme="bootstrap"
+    multiple,
+    theme="bootstrap",
     close-on-select="false"
   )
     ui-select-match(placeholder="{{ 'switch.form.group.LABEL' | translate }}")
       | {{ $item.name }}
 
     ui-select-choices(
-      repeat=
-      "group in (" +
-      "switchForm.groups.items |" +
-      "filter: {name: $select.search} |" +
-      "filter: switchForm.groups.notSelected" +
-      ") track by group.id"
-      refresh="switchForm.groups.load($select.search)"
+      repeat='group in (' + 'switchForm.groups.items |' + 'filter: {name: $select.search} |' + 'filter: switchForm.groups.notSelected' + ') track by group.id',
+      refresh="switchForm.groups.load($select.search)",
       refresh-delay="400"
     )
       div(ng-bind-html="group.name | highlight: $select.search")
@@ -55,14 +44,14 @@ hr
   .row
     .col-xs-8
       input.form-control(
-        type="text"
-        placeholder="{{ 'switch.form.network.ip.PLACEHOLDER' | translate }}"
+        type="text",
+        placeholder="{{ 'switch.form.network.ip.PLACEHOLDER' | translate }}",
         ng-model="switchForm.input.ip"
       )
     .col-xs-4
       input.form-control(
-        type="text"
-        placeholder="{{ 'switch.form.network.port.PLACEHOLDER' | translate }}"
+        type="text",
+        placeholder="{{ 'switch.form.network.port.PLACEHOLDER' | translate }}",
         ng-model="switchForm.input.port"
       )
 
@@ -70,73 +59,54 @@ hr
   .row
     .col-xs-6
       input.form-control(
-        type="text"
-        placeholder="{{ 'switch.form.ssh.username.PLACEHOLDER' | translate }}"
+        type="text",
+        placeholder="{{ 'switch.form.ssh.username.PLACEHOLDER' | translate }}",
         ng-model="switchForm.input.ssh_user"
       )
     .col-xs-6
       input.form-control(
-        type="text"
-        placeholder="{{ 'switch.form.ssh.password.PLACEHOLDER' | translate }}"
+        type="text",
+        placeholder="{{ 'switch.form.ssh.password.PLACEHOLDER' | translate }}",
         ng-model="switchForm.input.ssh_pass"
       )
 
-+select(
-  "{{ 'switch.form.enable.type.LABEL' | translate }}",
-  "enable_type"
-)(ng-model="switchForm.input.ssh_en_type")
-  option(
-    ng-value="{{0}}"
-    translate="switch.form.enable.type.DEFAULT"
-  )
-  option(
-    ng-value="{{1}}"
-    translate="switch.form.enable.type.NONE"
-  )
++select("{{ 'switch.form.enable.type.LABEL' | translate }}", "enable_type")(
+  ng-model="switchForm.input.ssh_en_type"
+)
+  option(ng-value="{{ 0 }}", translate="switch.form.enable.type.DEFAULT")
+  option(ng-value="{{ 1 }}", translate="switch.form.enable.type.NONE")
 
 div(ng-if="switchForm.input.ssh_en_type !== 1")
-  +field(
-    "{{ 'switch.form.enable.password.LABEL' | translate }}",
-    "enable_pass"
-  )(
-    placeholder="{{ 'switch.form.enable.password.PLACEHOLDER' | translate }}"
+  +field("{{ 'switch.form.enable.password.LABEL' | translate }}", "enable_pass")(
+    placeholder="{{ 'switch.form.enable.password.PLACEHOLDER' | translate }}",
     ng-model="switchForm.input.ssh_en_pass"
   )
 
-+field(
-  "{{ 'switch.form.snmp.LABEL' | translate }}",
-  "snmp"
-)(
-  placeholder="{{ 'switch.form.snmp.PLACEHOLDER' | translate }}"
++field("{{ 'switch.form.snmp.LABEL' | translate }}", "snmp")(
+  placeholder="{{ 'switch.form.snmp.PLACEHOLDER' | translate }}",
   ng-model="switchForm.input.snmp_pass"
 )
 
 hr
 
-+textarea(
-  "{{ 'switch.form.admin_notes.LABEL' | translate }}",
-  "admin_notes"
-)(
-  ng-model="switchForm.input.admin_notes"
++textarea("{{ 'switch.form.admin_notes.LABEL' | translate }}", "admin_notes")(
+  ng-model="switchForm.input.admin_notes",
   placeholder="{{ 'switch.form.admin_notes.PLACEHOLDER' | translate }}"
 )
 
-+select(
-  "{{ 'switch.form.options.snmp_version.LABEL' | translate }}",
-  "snmp_version"
-)(
-  ng-model="switchForm.input.snmp_version"
++select("{{ 'switch.form.options.snmp_version.LABEL' | translate }}", "snmp_version")(
+  ng-model="switchForm.input.snmp_version",
   ng-options="'switch.form.options.snmp_version.'+version | translate for (version,value) in switchForm.SNMP_VERSION"
 )
 
 +label("switch.form.options.multi_vlan_logic.LABEL")
   select.form-control(
-    ng-model="switchForm.input.multi_vlan_logic"
+    ng-model="switchForm.input.multi_vlan_logic",
     ng-options="'switch.form.options.multi_vlan_logic.options.'+opt | translate for (opt,value) in switchForm.MULTI_VLAN_LOGIC"
   )
   p.help-block
     a(
-      ng-click="switchForm.openMultiVLANLogicLearnMoreModal()"
+      ng-click="switchForm.openMultiVLANLogicLearnMoreModal()",
       translate="switch.form.options.multi_vlan_logic.learn_more_modal.CTA"
     )
 
@@ -150,43 +120,37 @@ hr
     )
     p.help-block(translate="switch.form.layer.layer_three.HELP_TEXT")
 
-+label("{{ 'switch.form.layer.uplinks.LABEL' | translate }}")(
-  ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK"
-)
++label("{{ 'switch.form.layer.uplinks.LABEL' | translate }}")
   +ui-select("switchForm.uplinks")(
-    multiple
-    theme="bootstrap"
+    multiple,
+    theme="bootstrap",
     close-on-select="false"
   )
-    ui-select-match(placeholder="{{ 'switch.form.layer.uplinks.LABEL' | translate }}")
+    ui-select-match(
+      placeholder="{{ 'switch.form.layer.uplinks.LABEL' | translate }}"
+    )
       | {{ $item.name }}
 
     ui-select-choices(
-      repeat=
-        "uplink in (" +
-          "switchForm.uplinks.items |" +
-          "filter: {name: $select.search} |" +
-          "filter: switchForm.uplinks.notSelected" +
-        ") track by uplink.id"
-      refresh="switchForm.uplinks.load($select.search)"
+      repeat='uplink in (' + 'switchForm.uplinks.items |' + 'filter: {name: $select.search} |' + 'filter: switchForm.uplinks.notSelected' + ') track by uplink.id',
+      refresh="switchForm.uplinks.load($select.search)",
       refresh-delay="400"
     )
       div(ng-bind-html="uplink.name | highlight: $select.search")
+  p.help-block(translate="switch.form.layer.uplinks.HELP_TEXT")
 
-div(ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK")
-  +field(
-    "{{ 'switch.form.ipv4.LABEL' | translate }}",
-    "ipv4_address"
-  )(
-    placeholder="{{ 'switch.form.ipv4.PLACEHOLDER' | translate }}"
+div(
+  ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK"
+)
+  +field("{{ 'switch.form.ipv4.LABEL' | translate }}", "ipv4_address")(
+    placeholder="{{ 'switch.form.ipv4.PLACEHOLDER' | translate }}",
     ng-model="switchForm.input.ipv4_address"
   )
 
-div(ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK")
-  +field(
-    "{{ 'switch.form.ipv6.LABEL' | translate }}",
-    "ipv6_address"
-  )(
-    placeholder="{{ 'switch.form.ipv6.PLACEHOLDER' | translate }}"
+div(
+  ng-if="switchForm.layer3 && switchForm.input.layer === switchForm.LAYER.RACK"
+)
+  +field("{{ 'switch.form.ipv6.LABEL' | translate }}", "ipv6_address")(
+    placeholder="{{ 'switch.form.ipv6.PLACEHOLDER' | translate }}",
     ng-model="switchForm.input.ipv6_address"
   )

@@ -1,9 +1,9 @@
 (function () {
-  'use strict';
+  "use strict";
 
   angular
-    .module('app.system.license')
-    .service('LicenseService', makeLicenseService);
+    .module("app.system.license")
+    .service("LicenseService", makeLicenseService);
 
   /**
    * @ngInject
@@ -29,7 +29,10 @@
     ///////////
 
     function getLicense() {
-      if (cachedLicense.serversAllowed !== null && cachedLicense.serversInUse !== null) {
+      if (
+        cachedLicense.serversAllowed !== null &&
+        cachedLicense.serversInUse !== null
+      ) {
         return $q.when(cachedLicense);
       }
 
@@ -37,24 +40,19 @@
     }
 
     function refresh() {
-      return $q.all([
-        Api.one('license/refresh')
-          .post()
-          .then(storeLicense),
-        refreshServerCountSkipCache(true),
-      ])
+      return Api.one("license/refresh")
+        .post()
+        .then(storeLicense)
         .then(triggerChange)
-        .then(returnCachedLicense)
+        .then(returnCachedLicense);
     }
 
     function getSkipCache() {
-      return $q.all([
-        Api
-          .one('license')
-          .get()
-          .then(storeLicense),
-        refreshServerCountSkipCache(false),
-      ]).then(triggerChange).then(returnCachedLicense);
+      return Api.one("license")
+        .get()
+        .then(storeLicense)
+        .then(triggerChange)
+        .then(returnCachedLicense);
     }
 
     function returnCachedLicense() {
@@ -74,8 +72,7 @@
      * @return {Promise}
      */
     function getCanAddMoreServers() {
-      return getLicense()
-        .then(canAddMoreServers);
+      return getLicense().then(canAddMoreServers);
     }
 
     function triggerChange() {
@@ -84,25 +81,10 @@
       });
     }
 
-    /**
-     * @param {boolean} skipCache
-     *
-     * @return {Promise}
-     */
-    function refreshServerCountSkipCache(skipCache) {
-      return Api
-        .one('server')
-        .get({per_page: 1, force_refresh_count: skipCache ? true : undefined})
-        .then(storeServerCount)
-    }
-
-    function storeServerCount(res) {
-      cachedLicense.serversInUse = res.total;
-    }
-
     function storeLicense(res) {
       cachedLicense.key = res.key;
       cachedLicense.serversAllowed = res.max_servers;
+      cachedLicense.serversInUse = res.in_use_servers;
     }
 
     /**

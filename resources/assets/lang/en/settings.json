@@ -71,5 +71,11 @@
         "PLACEHOLDER": "Default Session Duration, in minutes. Applies to clients and administrators. Sessions auto-renew while active. Set to 0 for no session expiration."
       }
     }
+  },
+  "Server": {
+    "reload_onwipe": {
+      "LABEL": "OS Reload on Wipe",
+      "PLACEHOLDER": "Enter the OS Profile Billing ID to be loaded on Server wipe"
+    }
   }
 }

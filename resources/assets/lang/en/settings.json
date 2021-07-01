@@ -73,7 +73,7 @@
     }
   },
   "Server": {
-    "reload_onwipe": {
+    "reload_on_wipe": {
       "LABEL": "OS Reload on Wipe",
       "PLACEHOLDER": "Enter the OS Profile Billing ID to be loaded on Server wipe"
     }

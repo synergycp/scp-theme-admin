@@ -56,6 +56,19 @@
         "LOADING": "Checking if template updates are available."
       }
     },
+    "cron": {
+      "running": {
+        "OK": "Cron is running.",
+        "WARN": "Cron is not running.",
+        "ERROR": "Cron is not running.",
+        "LOADING": "Checking Cron heatlh.",
+        "modal": {
+          "TITLE": "Cron Status",
+          "BODY": "If Cron is not running, try restarting server.  If that does not help, please contact <a href='mailto:Support@SynergyCP.com'>Support@SynergyCP.com</a>",
+          "CLOSE": "Close"
+        }
+      }
+    },
     "missing_renderer": {
       "ERROR": "ERROR: missing HealthStatusRenderer for {{slug}}"
     },

@@ -64,7 +64,7 @@
         "LOADING": "Checking Cron heatlh.",
         "modal": {
           "TITLE": "Cron Status",
-          "BODY": "If Cron is not running, try restarting server.  If that does not help, please contact <a href='mailto:Support@SynergyCP.com'>Support@SynergyCP.com</a>",
+          "BODY": "If Cron is not running, try restarting the server.  If that does not help, please contact <a href='mailto:support@synergycp.com'>support@synergycp.com</a>",
           "CLOSE": "Close"
         }
       }

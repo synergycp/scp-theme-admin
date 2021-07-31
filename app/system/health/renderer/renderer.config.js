@@ -41,5 +41,14 @@
         }
       )
     );
+    HealthStatusRendererProvider.set(
+      "cron.running",
+      SimpleHealthStatusRenderer(
+        /** @ngInject */ function (Modal) {
+          return Modal.information("health.check.cron.running.modal").open()
+            .result;
+        }
+      )
+    );
   }
 })();

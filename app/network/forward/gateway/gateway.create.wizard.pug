@@ -1,44 +1,39 @@
 include /resources/angle/pug/mixins/list
 include /resources/angle/pug/mixins/panel
 
-- var lang = "forward.gateway.install."
+- var lang = 'forward.gateway.install.';
 
 div(ng-if="wizard.step === wizard.STEPS.INSTALL")
   +panel(lang + "TITLE")
     .panel-body
-      p(translate=lang+"INTRO")
-      p(translate=lang+"PORT_TO_PORT")
-      p(translate=lang+"IP_TO_IP")
-      p(translate=lang+"SETUP")
+      p(translate=lang + 'INTRO')
+      p(translate=lang + 'PORT_TO_PORT')
+      p(translate=lang + 'IP_TO_IP')
+      p(translate=lang + 'SETUP')
       pre
         code
           | cd /tmp
           | rm -f gateway-installer.sh
+          | apt-get install -yq wget
           | wget https://install.synergycp.com/bm/gateway-installer.sh
           | bash gateway-installer.sh
-      p(translate=lang+"TESTING")
+      p(translate=lang + 'TESTING')
       .text-center
         button.btn.btn-info(
-          ng-click="wizard.step = wizard.STEPS.CREATE"
-          translate=lang+"NEXT"
+          ng-click="wizard.step = wizard.STEPS.CREATE",
+          translate=lang + 'NEXT'
         )
 div(ng-if="wizard.step === wizard.STEPS.CREATE")
-  form(
-    ng-submit="wizard.form.submit()"
-    id='forward-gateway-edit-form'
-  )
+  form#forward-gateway-edit-form(ng-submit="wizard.form.submit()")
     +panel('forward.gateway.form.title.ADD')(
       ng-class="wizard.form.loader.class"
     )
       .loader
       .panel-body.form-horizontal
-        forward-gateway-form(
-          form="wizard.form"
-          is-creating="true"
-        )
+        forward-gateway-form(form="wizard.form", is-creating="true")
       .panel-footer.clearfix
         .pull-right
           input.btn.btn-info(
-            type="submit"
+            type="submit",
             translate-value-value="{{ 'forward.gateway.form.title.ADD' | translate }}"
           )

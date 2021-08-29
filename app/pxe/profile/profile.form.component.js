@@ -1,51 +1,48 @@
 (function () {
-  'use strict';
+  "use strict";
 
   var INPUTS = {
-    name: '',
-    billing_id: '',
+    name: "",
+    billing_id: "",
     preseed: null,
     boot_script: null,
-    access_client: false
+    access_client: false,
+    time_until_marked_failed: "",
   };
 
   angular
-    .module('app.pxe')
-    .component('profileForm', {
-      require: {
-      },
+    .module("app.pxe")
+    .component("profileForm", {
+      require: {},
       bindings: {
-        form: '=',
+        form: "=",
       },
-      controller: 'ProfileFormCtrl as profileForm',
+      controller: "ProfileFormCtrl as profileForm",
       transclude: true,
-      templateUrl: 'app/pxe/profile/profile.form.html'
+      templateUrl: "app/pxe/profile/profile.form.html",
     })
-    .controller('ProfileFormCtrl', ProfileFormCtrl)
-  ;
+    .controller("ProfileFormCtrl", ProfileFormCtrl);
 
   /**
    * @ngInject
    */
   function ProfileFormCtrl(Select, Api, $scope, _) {
     var profileForm = this;
-    var $profile = Api.all('pxe/profile');
+    var $profile = Api.all("pxe/profile");
 
     profileForm.$onInit = init;
     profileForm.input = _.clone(INPUTS);
-    profileForm.platform = 'linux';
-    profileForm.preseeds = Select('pxe/preseed');
-    profileForm.bootScripts = Select('pxe/template');
-    profileForm.isos = Select('pxe/iso').on('change', onIsoChange);
+    profileForm.platform = "linux";
+    profileForm.preseeds = Select("pxe/preseed");
+    profileForm.bootScripts = Select("pxe/template");
+    profileForm.isos = Select("pxe/iso").on("change", onIsoChange);
     profileForm.isos.selectedEdition = null;
-    profileForm.emailTemplate = Select('email/template');
+    profileForm.emailTemplate = Select("email/template");
     profileForm.shellScripts = {
-      during: Select('pxe/shell')
-        .multi(),
-      after: Select('pxe/shell')
-        .multi(),
+      during: Select("pxe/shell").multi(),
+      after: Select("pxe/shell").multi(),
     };
-    profileForm.drivers = Select('pxe/driver').multi();
+    profileForm.drivers = Select("pxe/driver").multi();
 
     profileForm.profilesToDuplicate = [];
 
@@ -58,16 +55,16 @@
       }
 
       // create page
-      profileForm.form.on('duplicate_profiles', duplicateProfiles);
-      profileForm.form.on('create', setNextProfile);
+      profileForm.form.on("duplicate_profiles", duplicateProfiles);
+      profileForm.form.on("create", setNextProfile);
 
       // edit page
-      profileForm.form.on(['change', 'load'], syncResponse);
+      profileForm.form.on(["change", "load"], syncResponse);
     }
 
     function onIsoChange() {
       syncIso();
-      $scope.$evalAsync(function() {
+      $scope.$evalAsync(function () {
         profileForm.isos.selectedEdition = null;
       });
     }
@@ -78,8 +75,8 @@
         return;
       }
 
-      var url = 'pxe/iso/'+iso.id+'/edition';
-      $scope.$evalAsync(function() {
+      var url = "pxe/iso/" + iso.id + "/edition";
+      $scope.$evalAsync(function () {
         profileForm.isos.editions = Select(url).filter({
           is_enabled: true,
         });
@@ -88,7 +85,7 @@
     }
 
     function setupIsoDefaults(iso) {
-      profileForm.platform = !!iso ? 'windows' : 'linux';
+      profileForm.platform = !!iso ? "windows" : "linux";
       if (!iso) {
         profileForm.isos.editions = null;
         return;
@@ -99,8 +96,14 @@
 
     function syncResponse(response) {
       _.overwrite(profileForm.input, profileForm.form.input);
-      _.setContents(profileForm.shellScripts.during.selected, response.shell.during);
-      _.setContents(profileForm.shellScripts.after.selected, response.shell.after);
+      _.setContents(
+        profileForm.shellScripts.during.selected,
+        response.shell.during
+      );
+      _.setContents(
+        profileForm.shellScripts.after.selected,
+        response.shell.after
+      );
       _.setContents(profileForm.drivers.selected, response.drivers);
       setupIsoDefaults(response.iso);
       profileForm.emailTemplate.selected = response.email.template;
@@ -112,13 +115,13 @@
     }
 
     function setNextProfile() {
-      if(!profileForm.profilesToDuplicate.length) return;
+      if (!profileForm.profilesToDuplicate.length) return;
       $profile
-        .one(''+profileForm.profilesToDuplicate[0].id)
+        .one("" + profileForm.profilesToDuplicate[0].id)
         .get()
         .then(_.assign.bind(null, profileForm.form.input)) // fill in input fields
         .then(syncResponse) // fill in the rest of the form (selects etc)
-        .then(removeFromList)
+        .then(removeFromList);
 
       function removeFromList() {
         profileForm.profilesToDuplicate.splice(0, 1);
@@ -129,19 +132,24 @@
       var data = _.clone(profileForm.input);
 
       data.shell = {
-        during: _.map(profileForm.shellScripts.during.selected, 'id'),
-        after: _.map(profileForm.shellScripts.after.selected, 'id'),
+        during: _.map(profileForm.shellScripts.during.selected, "id"),
+        after: _.map(profileForm.shellScripts.after.selected, "id"),
       };
-      data.drivers = _.map(profileForm.drivers.selected, 'id');
-      data.iso = profileForm.platform == 'windows' && profileForm.isos.selected ? {
-        id: profileForm.isos.selected.id,
-        edition: profileForm.isos.selectedEdition ? {
-          id: profileForm.isos.selectedEdition.id,
-        } : null,
-      } : null;
+      data.drivers = _.map(profileForm.drivers.selected, "id");
+      data.iso =
+        profileForm.platform == "windows" && profileForm.isos.selected
+          ? {
+              id: profileForm.isos.selected.id,
+              edition: profileForm.isos.selectedEdition
+                ? {
+                    id: profileForm.isos.selectedEdition.id,
+                  }
+                : null,
+            }
+          : null;
       data.email = {
         template: {
-          id: profileForm.emailTemplate.getSelected('id') || null,
+          id: profileForm.emailTemplate.getSelected("id") || null,
         },
       };
 

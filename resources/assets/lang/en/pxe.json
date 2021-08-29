@@ -200,6 +200,10 @@
         "LABEL": "Platform",
         "linux": "Linux",
         "windows": "Windows"
+      },
+      "time_until_marked_failed": {
+        "LABEL": "Time Until Install Fails",
+        "PLACEHOLDER": "Optional, Enter a Number of Minutes."
       }
     },
     "buttons": {

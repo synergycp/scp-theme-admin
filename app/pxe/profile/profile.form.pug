@@ -49,6 +49,10 @@ include /resources/angle/pug/mixins/form
       value="windows"
       translate="pxe.profile.form.platform.windows"
     )
+  +field("{{ 'pxe.profile.form.time_until_marked_failed.LABEL' | translate }}", "time_until_marked_failed")(
+    placeholder="{{ 'pxe.profile.form.time_until_marked_failed.PLACEHOLDER' | translate }}"
+    ng-model="profileForm.input.time_until_marked_failed"
+  )
 
   div(ng-if="profileForm.platform == 'linux'")
     +label("{{ 'pxe.profile.form.shell.during.LABEL' | translate }}")

@@ -355,13 +355,7 @@ gulp.task(
 // build for production (minify)
 gulp.task(
   "build",
-  gulp.series(
-    [
-      "prod",
-      gulp.parallel(["vendor", "assets"]),
-      isProduction ? "create-versions" : null,
-    ].filter((e) => !!e)
-  )
+  gulp.series(["prod", gulp.parallel(["vendor", "assets"]), "create-versions"])
 );
 
 //---------------

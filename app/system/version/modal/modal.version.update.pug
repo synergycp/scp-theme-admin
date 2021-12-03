@@ -1,59 +1,9 @@
-extends /resources/angle/pug/modal.confirm.pug
+extends /resources/angle/pug/modal.information.pug
 include /resources/angle/pug/mixins/form.pug
-block vars
-  - lang="version.modal.update"
 
 block body
-  .form-horizontal
-    +select(lang + ".release_channel.LABEL")(
-      ng-model="modal.releaseChannel"
-      ng-change="modal.onChangeReleaseChannel()"
-    )
-      option(
-        value="master"
-        translate=lang + ".release_channel.MASTER"
-      )
-      option(
-        value="beta"
-        translate=lang + ".release_channel.BETA"
-      )
-      option(
-        value="test"
-        translate=lang + ".release_channel.TEST"
-      )
-
-    div.text-center(ng-if="!modal.isNewVersionAvailable()")
-      h3.text-success(
-        translate=lang+".already_latest.HEADING"
-        translate-value-semver="{{modal.current.semver}}"
-      )
-      p(translate=lang+".already_latest.BODY")
-
-    div(ng-if="modal.isNewVersionAvailable()")
-      +label(lang+".new.CURRENT").clearfix
-        p.form-control-static(
-          translate=lang+".new.VERSION_DESCR"
-          translate-value-semver="{{modal.current.semver}}"
-          translate-value-release-date="{{modal.current.release_date.unix * 1000 | date}}"
-        )
-      +label(lang+".new.LATEST").clearfix
-        p.form-control-static(
-          translate=lang + ".new.VERSION_DESCR"
-          translate-value-semver="{{modal.latest.semver}}"
-          translate-value-release-date="{{modal.latest.release_date.unix * 1000 | date}}"
-        )
-      +label(lang+".new.CHANGELOG").clearfix
-        div.form-control-static
-          ul.ph-lg
-            li(
-              ng-repeat="change in modal.latest.changelog"
-              ng-bind="change"
-            )
-
-          p.help-block(translate=lang+".new.CHANGELOG_SUB_TEXT")
-          p.help-block
-            a(
-              href="https://synergycp.com/changelog.html"
-              target="_blank"
-              translate=lang+".new.FULL_CHANGELOG"
-            )
+  p A new version of SynergyCP is available. This time, it will require a shell command to update. The new version includes a new update process which will allow SynergyCP to update more of its components automatically, including all of the docker containers that the software uses. As a result, we will also be able to update more complex dependencies like the PHP version.
+  p
+    b Due to the complexity of this update, we recommend that you first make a database and configuration backup using our Backups Package as an extra precaution.
+  p Once you've created a backup, you can run the following command as root on the master SynergyCP server to update the software. It will result in the application being unavailable for a few seconds while the new docker containers come online.
+  code curl -q https://install.synergycp.com/bm/update/4.0.sh -o- | sh

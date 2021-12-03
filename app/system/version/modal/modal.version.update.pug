@@ -1,59 +1,47 @@
 extends /resources/angle/pug/modal.confirm.pug
 include /resources/angle/pug/mixins/form.pug
 block vars
-  - lang="version.modal.update"
+  - lang = 'version.modal.update';
 
 block body
   .form-horizontal
     +select(lang + ".release_channel.LABEL")(
-      ng-model="modal.releaseChannel"
+      ng-model="modal.releaseChannel",
       ng-change="modal.onChangeReleaseChannel()"
     )
-      option(
-        value="master"
-        translate=lang + ".release_channel.MASTER"
-      )
-      option(
-        value="beta"
-        translate=lang + ".release_channel.BETA"
-      )
-      option(
-        value="test"
-        translate=lang + ".release_channel.TEST"
-      )
+      option(value="stable", translate=lang + '.release_channel.STABLE')
+      option(value="beta", translate=lang + '.release_channel.BETA')
+      option(value="test", translate=lang + '.release_channel.TEST')
 
-    div.text-center(ng-if="!modal.isNewVersionAvailable()")
+    .text-center(ng-if="!modal.isNewVersionAvailable()")
       h3.text-success(
-        translate=lang+".already_latest.HEADING"
-        translate-value-semver="{{modal.current.semver}}"
+        translate=lang + '.already_latest.HEADING',
+        translate-value-semver="{{ modal.current.semver }}"
       )
-      p(translate=lang+".already_latest.BODY")
+      p(translate=lang + '.already_latest.BODY')
 
     div(ng-if="modal.isNewVersionAvailable()")
       +label(lang+".new.CURRENT").clearfix
         p.form-control-static(
-          translate=lang+".new.VERSION_DESCR"
-          translate-value-semver="{{modal.current.semver}}"
-          translate-value-release-date="{{modal.current.release_date.unix * 1000 | date}}"
+          translate=lang + '.new.VERSION_DESCR',
+          translate-value-semver="{{ modal.current.semver }}",
+          translate-value-release-date="{{ modal.current.release_date.unix * 1000 | date }}"
         )
       +label(lang+".new.LATEST").clearfix
         p.form-control-static(
-          translate=lang + ".new.VERSION_DESCR"
-          translate-value-semver="{{modal.latest.semver}}"
-          translate-value-release-date="{{modal.latest.release_date.unix * 1000 | date}}"
+          translate=lang + '.new.VERSION_DESCR',
+          translate-value-semver="{{ modal.latest.semver }}",
+          translate-value-release-date="{{ modal.latest.release_date.unix * 1000 | date }}"
         )
       +label(lang+".new.CHANGELOG").clearfix
-        div.form-control-static
+        .form-control-static
           ul.ph-lg
-            li(
-              ng-repeat="change in modal.latest.changelog"
-              ng-bind="change"
-            )
+            li(ng-repeat="change in modal.latest.changelog", ng-bind="change")
 
-          p.help-block(translate=lang+".new.CHANGELOG_SUB_TEXT")
+          p.help-block(translate=lang + '.new.CHANGELOG_SUB_TEXT')
           p.help-block
             a(
-              href="https://synergycp.com/changelog.html"
-              target="_blank"
-              translate=lang+".new.FULL_CHANGELOG"
+              href="https://synergycp.com/changelog.html",
+              target="_blank",
+              translate=lang + '.new.FULL_CHANGELOG'
             )

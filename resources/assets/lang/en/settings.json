@@ -77,5 +77,11 @@
       "LABEL": "OS Reload on Wipe",
       "PLACEHOLDER": "Enter the OS Profile Billing ID to be loaded on Server wipe, e.g. format-quick to clear disk partition tables or format-slow to fully zero all disks."
     }
+  },
+  "Bandwidth": {
+    "poll_granularity": {
+      "LABEL": "Bandwidth Poll Granularity",
+      "PLACEHOLDER": "Number of minutes between bandwidth polls. Smaller granularity (e.g. 1 minute) means more accuracy, but requires more storage space and slows down bandwidth graphs"
+    }
   }
 }

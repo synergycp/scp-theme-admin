@@ -137,9 +137,12 @@
               .then(onCreated, onCreated)
           );
 
-          function onCreated() {
+          function onCreated(exc) {
             setFormPristine();
             serverForm.form.fire("created.relations");
+            if (exc) {
+              throw exc;
+            }
           }
         });
     }
@@ -250,7 +253,7 @@
     function storeState(response) {
       $ports = Api.all("server/" + response.id + "/port");
       $controls = Api.all("server/" + response.id + "/control");
-
+      serverForm.server = response;
       $rootScope.$evalAsync(function () {
         fillFormInputs();
 
@@ -368,7 +371,9 @@
               });
             },
             $q.when()
-          ).then(port.loadEntities);
+          )
+            .then(port.setServer(serverForm.server))
+            .then(port.loadEntities);
         }
       }
 
@@ -470,8 +475,12 @@
       }
     }
 
-    function saveControls() {
-      return $q.all(_.map(serverForm.controls, saveControlChanges));
+    function saveControls(exc) {
+      return $q
+        .all(_.map(serverForm.controls, saveControlChanges))
+        .then(function () {
+          throw exc;
+        });
     }
 
     function saveControlChanges(control, controlIndex) {

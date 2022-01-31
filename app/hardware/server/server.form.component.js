@@ -479,7 +479,9 @@
       return $q
         .all(_.map(serverForm.controls, saveControlChanges))
         .then(function () {
-          throw exc;
+          if (exc) {
+            throw exc;
+          }
         });
     }
 

@@ -372,7 +372,7 @@
             },
             $q.when()
           )
-            .then(port.setServer(serverForm.server))
+            .then(port.setServer.bind(port, serverForm.server))
             .then(port.loadEntities);
         }
       }

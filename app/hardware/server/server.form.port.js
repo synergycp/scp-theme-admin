@@ -1,10 +1,7 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  angular
-    .module('app.hardware.server')
-    .factory('ServerFormPort', PortFactory)
-  ;
+  angular.module("app.hardware.server").factory("ServerFormPort", PortFactory);
 
   var OS_RELOAD_STATUS = {
     SUPPORTED: "server.form.os-reloads.SUPPORTED",
@@ -31,41 +28,37 @@
 
     port.allowMultipleVLANs = false;
     port.input = {
-      mac: '',
-      max_bandwidth: ''
+      mac: "",
+      max_bandwidth: "",
     };
-    port.switch = Select('switch')
-      .on('change', syncSwitchFilter);
-    port.group = Select('group')
-      .on('change', syncGroupFilter);
+    port.switch = Select("switch").on("change", syncSwitchFilter);
+    port.group = Select("group").on("change", syncGroupFilter);
     port.switch.port = null;
-    port.switch.speed = Select('port-speed')
-      .on('change', setDirty);
-    port.entities = Select('entity')
+    port.switch.speed = Select("port-speed").on("change", setDirty);
+    port.entities = Select("entity")
       .multi()
       .filter({
         available: true,
       })
-      .on('change', syncEntityFilter)
-    ;
+      .on("change", syncEntityFilter);
     port.entitiesOriginal = [];
     port.billing = {
       start: {
         value: null,
         options: {
           locale: {
-            format: 'MM/DD/YYYY h:mm A',
-            cancelLabel: 'Clear',
+            format: "MM/DD/YYYY h:mm A",
+            cancelLabel: "Clear",
           },
           autoUpdateInput: false,
           singleDatePicker: true,
           timePicker: true,
           timePickerIncrement: 30,
           eventHandlers: {
-            'cancel.daterangepicker': function (ev, picker) {
-              port.billing.start.value = '';
+            "cancel.daterangepicker": function (ev, picker) {
+              port.billing.start.value = "";
             },
-          }
+          },
         },
       },
     };
@@ -79,13 +72,17 @@
     port.$setPristine = $setPristine;
     port.data = data;
     port.fromExisting = fromExisting;
+    port.setServer = setServer;
 
     function addPoolIP() {
-      PoolSelectIPsModal.open(port.group.selected, _.get(port, 'server.access.client'))
+      PoolSelectIPsModal.open(
+        port.group.selected,
+        _.get(port, "server.access.client")
+      )
         .then(function (poolIPs) {
           _.map(poolIPs, function (poolIP) {
             port.entities.selected.push(poolIP);
-          })
+          });
         })
         .then(syncEntityFilter);
     }
@@ -95,10 +92,9 @@
       _.setContents(port.entities.selected, []);
       port.switch
         .filter({
-          group: port.group.getSelected('id'),
+          group: port.group.getSelected("id"),
         })
-        .load()
-      ;
+        .load();
       syncEntityFilter();
     }
 
@@ -108,7 +104,7 @@
       port.input.mac = response.mac;
       port.server = server || response.server;
 
-      if (port.group.getSelected('id') != response.group.id) {
+      if (port.group.getSelected("id") != response.group.id) {
         port.group.selected = response.group;
         syncGroupFilter();
       }
@@ -124,8 +120,9 @@
         syncEntityFilter();
       }
 
-      port.billing.start.value = response.billing.start ?
-        date.parse(response.billing.start) : '';
+      port.billing.start.value = response.billing.start
+        ? date.parse(response.billing.start)
+        : "";
     }
 
     function getOSReloadStatusLang() {
@@ -145,10 +142,15 @@
     }
 
     function loadEntities() {
-      return Api.all('server/'+port.server.id+'/port/'+port.id+'/entity')
+      return Api.all(
+        "server/" + port.server.id + "/port/" + port.id + "/entity"
+      )
         .getList()
-        .then(storeEntities)
-        ;
+        .then(storeEntities);
+    }
+
+    function setServer(server) {
+      port.server = server;
     }
 
     function storeEntities(response) {
@@ -161,19 +163,23 @@
     function syncEntityFilter() {
       setDirty();
       var primaryEntity = port.entities.selected[0];
-      var extraFor = primaryEntity ? (primaryEntity.extraForFilter || new IPEntity(primaryEntity).extraForFilter)() : undefined;
+      var extraFor = primaryEntity
+        ? (
+            primaryEntity.extraForFilter ||
+            new IPEntity(primaryEntity).extraForFilter
+          )()
+        : undefined;
       port.entities
-        .clearFilter('extra_for_id')
-        .clearFilter('ip_group')
+        .clearFilter("extra_for_id")
+        .clearFilter("ip_group")
         .filter({
-          'extra_for[type]': extraFor ? extraFor.type : undefined,
-          'extra_for[id]': extraFor ? extraFor.id : undefined,
+          "extra_for[type]": extraFor ? extraFor.type : undefined,
+          "extra_for[id]": extraFor ? extraFor.id : undefined,
           allow_multiple_vlans: port.allowMultipleVLANs,
-          ip_group: _.get(port, 'group.selected.id'),
+          ip_group: _.get(port, "group.selected.id"),
           allow_server_port_id: port.id,
         })
-        .load()
-      ;
+        .load();
     }
 
     function syncSwitchFilter() {
@@ -184,18 +190,21 @@
         return;
       }
 
-      if (port.switch.port && port.switch.port.switchId == port.switch.selected.id) {
+      if (
+        port.switch.port &&
+        port.switch.port.switchId == port.switch.selected.id
+      ) {
         return;
       }
-      port.switch.port = Select('switch/' + port.switch.selected.id + '/port')
-        .on('change', switchPortChanged)
+      port.switch.port = Select("switch/" + port.switch.selected.id + "/port")
+        .on("change", switchPortChanged)
         .filter({
           available: true,
-          allowed_id: port.original && port.original.switch ?
-            port.original.switch.port.id :
-            undefined,
-        })
-      ;
+          allowed_id:
+            port.original && port.original.switch
+              ? port.original.switch.port.id
+              : undefined,
+        });
       port.switch.port.switchId = port.switch.selected.id;
       port.switch.port.load();
     }
@@ -205,57 +214,67 @@
         id: port.id,
         mac: port.input.mac,
         switch: {
-          id: port.switch.getSelected('id'),
+          id: port.switch.getSelected("id"),
           port: {
-            id: port.switch.port ? port.switch.port.getSelected('id') || null : null,
+            id: port.switch.port
+              ? port.switch.port.getSelected("id") || null
+              : null,
           },
           speed: {
-            id: port.switch.speed.getSelected('id') || null,
+            id: port.switch.speed.getSelected("id") || null,
           },
         },
         billing: {
-          start: port.billing.start.value ?
-            moment(port.billing.start.value)
-              .toISOString() :
-            null,
+          start: port.billing.start.value
+            ? moment(port.billing.start.value).toISOString()
+            : null,
         },
         group: {
-          id: port.group.getSelected('id') || null,
+          id: port.group.getSelected("id") || null,
         },
         entities: {
-          add: _.reduce(port.entities.selected, function (additions, current) {
-            if (!_.find(port.entitiesOriginal, {id: current.id})) {
-              additions.push(current.setOwner ? current : new IPEntity(current));
-            }
-            return additions;
-          }, []),
-          remove: _.reduce(port.entitiesOriginal, function (removals, current) {
-            if (!_.find(port.entities.selected, {id: current.id})) {
-              removals.push(current.removeOwner ? current : new IPEntity(current));
-            }
-            return removals;
-          }, []),
+          add: _.reduce(
+            port.entities.selected,
+            function (additions, current) {
+              if (!_.find(port.entitiesOriginal, { id: current.id })) {
+                additions.push(
+                  current.setOwner ? current : new IPEntity(current)
+                );
+              }
+              return additions;
+            },
+            []
+          ),
+          remove: _.reduce(
+            port.entitiesOriginal,
+            function (removals, current) {
+              if (!_.find(port.entities.selected, { id: current.id })) {
+                removals.push(
+                  current.removeOwner ? current : new IPEntity(current)
+                );
+              }
+              return removals;
+            },
+            []
+          ),
         },
       };
     }
 
     function switchPortChanged() {
-      port.max_bandwidth = '';
+      port.max_bandwidth = "";
       setDirty();
     }
 
     function $setPristine() {
-      _.setContents(
-        port.entitiesOriginal,
-        port.entities.selected
-      );
+      _.setContents(port.entitiesOriginal, port.entities.selected);
       port.$dirty =
         port.switch.port.$dirty =
-          port.switch.speed.$dirty =
-            port.entities.$dirty =
-              port.group.$dirty =
-                port.switch.$dirty =
-                  false;
+        port.switch.speed.$dirty =
+        port.entities.$dirty =
+        port.group.$dirty =
+        port.switch.$dirty =
+          false;
     }
 
     function setDirty() {
@@ -272,29 +291,27 @@
       this.extraForFilter = function extraForFilter() {
         if (entity.pool) {
           return {
-            type: 'ip.pool',
+            type: "ip.pool",
             id: entity.pool.id,
           };
         }
 
         return {
-          type: 'ip.entity',
+          type: "ip.entity",
           id: entity.id,
         };
       };
 
-
       function patchOwner(ownerID) {
-        return Api
-          .one(new URL(entity.url).pathname)
-          .patch({
-            owner: ownerID ? {
-              type: 'server.port',
-              id: ownerID,
-            } : null,
-          });
+        return Api.one(new URL(entity.url).pathname).patch({
+          owner: ownerID
+            ? {
+                type: "server.port",
+                id: ownerID,
+              }
+            : null,
+        });
       }
     }
   }
 })();
-

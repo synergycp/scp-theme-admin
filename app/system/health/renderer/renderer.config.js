@@ -50,5 +50,15 @@
         }
       )
     );
+    HealthStatusRendererProvider.set(
+      "bandwidth.usage.sync",
+      SimpleHealthStatusRenderer(
+        /** @ngInject */ function (Modal) {
+          return Modal.information(
+            "health.check.bandwidth.usage.sync.modal"
+          ).open().result;
+        }
+      )
+    );
   }
 })();

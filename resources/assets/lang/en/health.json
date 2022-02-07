@@ -69,6 +69,21 @@
         }
       }
     },
+    "bandwidth": {
+      "usage": {
+        "sync": {
+          "OK": "Bandwidth usage sync up to date.",
+          "WARN": "Bandwidth usage sync behind",
+          "ERROR": "Bandwidth usage sync not running",
+          "LOADING": "Checking Cron heatlh.",
+          "modal": {
+            "TITLE": "Bandwidth Usage Sync Status",
+            "BODY": "If Bandwidth Usage Sync is not running, try restarting the server. If that does not help, please contact <a href='mailto:support@synergycp.com'>support@synergycp.com</a>",
+            "CLOSE": "Close"
+          }
+        }
+      }
+    },
     "missing_renderer": {
       "ERROR": "ERROR: missing HealthStatusRenderer for {{slug}}"
     },

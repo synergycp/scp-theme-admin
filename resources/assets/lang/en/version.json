@@ -19,7 +19,7 @@
       },
       "release_channel": {
         "LABEL": "Release Channel",
-        "MASTER": "Stable (recommended)",
+        "STABLE": "Stable (recommended)",
         "BETA": "Beta - early updates that are still being tested",
         "TEST": "Test - pre-beta, only use if suggested by SynergyCP team"
       }

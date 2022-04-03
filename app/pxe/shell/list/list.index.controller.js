@@ -1,9 +1,7 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  angular
-    .module('app.pxe')
-    .controller('ShellIndexCtrl', ShellIndexCtrl);
+  angular.module("app.pxe").controller("ShellIndexCtrl", ShellIndexCtrl);
 
   /**
    * @ngInject
@@ -11,8 +9,7 @@
   function ShellIndexCtrl(PxeShellList, ListFilter, $scope) {
     var vm = this;
 
-    vm.list = PxeShellList()
-      .setPaginationAndSortToUrl();
+    vm.list = PxeShellList().setPaginationAndSortToUrl();
     vm.filters = ListFilter(vm.list);
 
     vm.create = {
@@ -22,7 +19,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'pxe.shell-script',
+        target_type: "pxe.shell",
       },
     };
 
@@ -32,7 +29,7 @@
 
     function activate() {
       vm.list.load();
-      $scope.$on('$destroy', onDestroy);
+      $scope.$on("$destroy", onDestroy);
     }
 
     function create() {

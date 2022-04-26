@@ -17,5 +17,6 @@
     "app.system.health",
     "app.system.package",
     "app.system.version",
+    "app.system.permission-groups",
   ]);
 })();

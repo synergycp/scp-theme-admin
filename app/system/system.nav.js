@@ -1,5 +1,5 @@
 (function () {
-  'use strict';
+  "use strict";
 
   var LOGS = {
     text: "Logs",
@@ -36,16 +36,18 @@
     sref: "app.system.package.list",
   };
 
-  angular
-    .module('app.system')
-    .run(SystemNavConfig)
-  ;
+  var PERMISSION_GROUPS = {
+    text: "Permission Groups",
+    sref: "app.system.permission-groups.list",
+  };
+
+  angular.module("app.system").run(SystemNavConfig);
 
   /**
    * @ngInject
    */
   function SystemNavConfig(Auth, Nav, Permission) {
-    var group = Nav.group('system', {
+    var group = Nav.group("system", {
       translate: "nav.SYSTEM",
       icon: "fa fa-wrench",
     });
@@ -53,10 +55,7 @@
     Auth.whileLoggedIn(show, hide);
 
     function show() {
-      Permission
-        .map()
-        .then(showPermitted)
-      ;
+      Permission.map().then(showPermitted);
     }
 
     function showPermitted(map) {
@@ -84,6 +83,8 @@
         group.item(PACKAGES);
       }
 
+      group.item(PERMISSION_GROUPS);
+
       group.item(SSH_KEYS);
     }
 
@@ -95,6 +96,7 @@
       group.remove(EMAILS);
       group.remove(SSH_KEYS);
       group.remove(PACKAGES);
+      group.remove(PERMISSION_GROUPS);
     }
   }
 })();

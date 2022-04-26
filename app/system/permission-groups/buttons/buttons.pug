@@ -1,0 +1,10 @@
+div(
+  ng-init="permission-groups = buttons.permissionGroups",
+  ng-class="buttons.loader.class"
+)
+  .loader
+  .btn-group.btn-group-lg
+    a.btn.btn-danger(
+      ng-click="buttons.delete()",
+      translate="permission-groups.modal.delete.SUBMIT"
+    )

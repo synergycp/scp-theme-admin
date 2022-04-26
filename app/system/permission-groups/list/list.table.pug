@@ -1,0 +1,19 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.relative Name
+    sort(col="name")
+  th Actions
+
+block columns
+  td
+    a(
+      ui-sref="app.system.permission-groups.view.edit({ id: row.id })"
+      ng-bind="row.name"
+    )
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.system.permission-groups.view.edit({ id: row.id })"
+        translate="app.action.EDIT"
+      )

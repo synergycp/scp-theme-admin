@@ -1,0 +1,15 @@
+{
+  "list": {
+    "TITLE": "Permission Groups"
+  },
+  "form": {
+    "title": {
+      "ADD": "Create Permission Group",
+      "EDIT": "Edit {{ name }}"
+    },
+    "name": {
+      "LABEL": "Name",
+      "PLACEHOLDER": "Required. Must be alphanumeric and unique"
+    }
+  }
+}

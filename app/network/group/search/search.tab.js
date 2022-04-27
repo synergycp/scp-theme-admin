@@ -12,10 +12,19 @@
    *
    * @ngInject
    */
-  function addGroupSearchTab(Search, GroupSearchTab) {
-    Search.tab.add(GroupSearchTab());
-  }
+  function addGroupSearchTab(Search, GroupSearchTab, Auth, Permission) {
+    Auth.whileLoggedIn(checkPerms);
 
+    function checkPerms() {
+      Permission
+        .ifHas("network.groups.read")
+        .then(addTab);
+    }
+
+    function addTab() {
+      Search.tab.add(GroupSearchTab());
+    }
+  }
   /**
    * GroupSearchTab Factory
    *

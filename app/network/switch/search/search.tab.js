@@ -12,8 +12,18 @@
    *
    * @ngInject
    */
-  function addSwitchSearchTab(Search, SwitchSearchTab) {
-    Search.tab.add(SwitchSearchTab());
+  function addSwitchSearchTab(Search, SwitchSearchTab, Auth, Permission) {
+    Auth.whileLoggedIn(checkPerms);
+    
+    function checkPerms() {
+      Permission
+        .ifHas("network.switches.read")
+        .then(addTab);
+    }
+
+    function addTab() {
+      Search.tab.add(SwitchSearchTab());
+    }    
   }
 
   /**

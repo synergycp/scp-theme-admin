@@ -12,8 +12,18 @@
    *
    * @ngInject
    */
-  function addEntitySearchTab(Search, EntitySearchTab) {
-    Search.tab.add(EntitySearchTab());
+  function addEntitySearchTab(Search, EntitySearchTab, Auth, Permission) {
+    Auth.whileLoggedIn(checkPerms);
+
+    function checkPerms() {
+      Permission
+        .ifHas("network.entities.read")
+        .then(addTab);
+    }
+
+    function addTab() {
+      Search.tab.add(EntitySearchTab());
+    }
   }
 
   /**

@@ -12,8 +12,18 @@
    *
    * @ngInject
    */
-  function addClientSearchTab(Search, ClientSearchTab) {
-    Search.tab.add(ClientSearchTab());
+  function addClientSearchTab(Search, ClientSearchTab, Auth, Permission) {
+    Auth.whileLoggedIn(checkPerms);
+
+    function checkPerms() {
+      Permission
+        .ifHas("users.clients.read")
+        .then(addTab);
+    }
+
+    function addTab() {
+      Search.tab.add(ClientSearchTab());
+    }
   }
 
   /**

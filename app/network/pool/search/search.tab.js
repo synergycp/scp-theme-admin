@@ -12,10 +12,19 @@
    *
    * @ngInject
    */
-  function addPoolSearchTab(Search, PoolSearchTab) {
-    Search.tab.add(PoolSearchTab());
-  }
+  function addPoolSearchTab(Search, PoolSearchTab, Auth, Permission) {
+    Auth.whileLoggedIn(checkPerms);
 
+    function checkPerms() {
+      Permission
+        .ifHas("network.entities.read")
+        .then(addTab);
+    }
+
+    function addTab() {
+      Search.tab.add(PoolSearchTab());
+    }
+  }
   /**
    * PoolSearchTab Factory
    *

@@ -30,25 +30,23 @@ const { $QUESTION } = require("prettier");
     permissionGroupsForm.permissions = {};
 
     function init() {
-      if (!_.get(permissionGroupsForm.form, "input.id")) {
-        Api.all("permission-group")
-          .getList()
-          .then(function (permissionGroups) {
-            return Api.one(
-              "permission-group/" + permissionGroups[0].id + "/permission"
-            ).get();
-          })
-          .then(function (response) {
-            _.merge(
-              permissionGroupsForm.permissions,
-              response.getOriginalData()
-            );
-            PermissionLang.load(permissionGroupsForm.permissions);
-            console.log(permissionGroupsForm.permissions);
-          });
-        permissionGroupsForm.form.getData = getData;
-        fillFormInputs();
-      }
+      getPermissionGroupID()
+        .then(function (permissionGroups) {
+          return Api.one(
+            "permission-group/" + permissionGroups[0].id + "/permission"
+          ).get();
+        })
+        .then(function (response) {
+          _.merge(
+            permissionGroupsForm.permissions,
+            response.getOriginalData()
+          );
+          PermissionLang.load(permissionGroupsForm.permissions);
+          console.log(permissionGroupsForm.permissions);
+        });
+      permissionGroupsForm.form.getData = getData;
+      fillFormInputs();
+
       var listen = permissionGroupsForm.form.on || function () {};
       listen(["change", "load"], fillFormInputs);
       listen(["created"], savePermissions);
@@ -68,17 +66,17 @@ const { $QUESTION } = require("prettier");
       );
     }
 
-    // function getPermissionGroupID() {
-    //   if (!_.get(permissionGroupsForm.form, 'input.id')) {
-    //     Api.all("permission-group")
-    //       .getList()
-    //       .then(function (permissionGroups) {
-    //         return permissionGroups[0].id;
-    //       });
-    //   }
-    //   else {
-    //     return $q.when(permissionGroupsForm.form.input.id);
-    //   }
-    // }
+    function getPermissionGroupID() {
+      if (!_.get(permissionGroupsForm.form, 'input.id')) {
+        Api.all("permission-group")
+          .getList()
+          .then(function (permissionGroups) {
+            return permissionGroups[0].id;
+          });
+      }
+      else {
+        return $q.when(permissionGroupsForm.form.input.id);
+      }
+    }
   }
 })();

@@ -1,20 +1,20 @@
 include /resources/angle/pug/mixins/panel
 
-+panel()
++panel
   table.table
     tbody
       tr
         th.v-mid.shrink(translate="server.assign.NICKNAME")
         td
           editable(
-            value="assign.server.nickname"
+            value="assign.server.nickname",
             on-save="assign.saveNickname()"
           )
       tr
         th.v-mid.shrink(translate="server.assign.SRV_ID")
         td
           editable(
-            value="assign.server.srv_id"
+            value="assign.server.srv_id",
             on-save="assign.saveServerId()"
           )
       tr
@@ -22,12 +22,12 @@ include /resources/angle/pug/mixins/panel
         td
           .editable
             a(
-              ng-if="assign.server.access"
-              ui-sref="app.user.client.view(assign.server.access.client)"
+              ng-if="assign.server.access",
+              ui-sref="app.user.client.view(assign.server.access.client)",
               ng-bind="assign.server.access.client.name"
             )
             span(
-              ng-if="!assign.server.access"
+              ng-if="!assign.server.access",
               translate="server.assign.client.NONE"
             )
             .btn.btn-default.btn-xs.editable-floater(
@@ -38,8 +38,8 @@ include /resources/angle/pug/mixins/panel
         th.v-mid.shrink(translate="server.assign.GROUP")
         td
           a(
-            ng-if="assign.server.group"
-            ui-sref="app.network.group.view(assign.server.group)"
+            ng-if="assign.server.group",
+            ui-sref="app.network.group.view(assign.server.group)",
             ng-bind="assign.server.group.name"
           )
       tr(ng-if="assign.entities.items.length")
@@ -50,10 +50,15 @@ include /resources/angle/pug/mixins/panel
         th.v-mid.shrink(translate="server.assign.entity.TITLE")
         td
           a(
-            ui-sref="app.network.entity.view(entity)"
-            ng-bind="entity.nickname"
+            ui-sref="app.network.{{entity.ip_pool ? 'pool' : 'entity'}}.view(entity.ip_pool ? entity.ip_pool : entity)",
+            ng-bind="entity.name || (entity.v4 && entity.v4.full) || (entity.v6 && entity.v6).address"
           )
-          span(translate="server.assign.entity.SWITCH" translate-value-switchname="{{ entity.owner.switch.name }}" translate-value-switchport="{{ entity.owner.name }}" translate-value-vlan="{{ entity.vlan_inferred }}")
+          span(
+            translate="server.assign.entity.SWITCH",
+            translate-value-switchname="{{ entity.owner.switch.name }}",
+            translate-value-switchport="{{ entity.owner.name }}",
+            translate-value-vlan="{{ entity.vlan_inferred }}"
+          )
 
       //- Start IPv4
       tr(ng-if-start="entity.v4")

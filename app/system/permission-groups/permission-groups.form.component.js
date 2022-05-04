@@ -1,5 +1,3 @@
-const { $QUESTION } = require("prettier");
-
 (function () {
   "use strict";
 
@@ -22,7 +20,7 @@ const { $QUESTION } = require("prettier");
   /**
    * @ngInject
    */
-  function PermissionGroupsFormCtrl(Api, PermissionLang) {
+  function PermissionGroupsFormCtrl(Api, PermissionLang, $stateParams, $q) {
     var permissionGroupsForm = this;
 
     permissionGroupsForm.$onInit = init;
@@ -33,7 +31,7 @@ const { $QUESTION } = require("prettier");
       getPermissionGroupID()
         .then(function (permissionGroups) {
           return Api.one(
-            "permission-group/" + permissionGroups[0].id + "/permission"
+            "permission-group/" + permissionGroups + "/permission"
           ).get();
         })
         .then(function (response) {
@@ -42,9 +40,9 @@ const { $QUESTION } = require("prettier");
             response.getOriginalData()
           );
           PermissionLang.load(permissionGroupsForm.permissions);
-          console.log(permissionGroupsForm.permissions);
         });
       permissionGroupsForm.form.getData = getData;
+      permissionGroupsForm.form.getPermissions = getPermissions;
       fillFormInputs();
 
       var listen = permissionGroupsForm.form.on || function () {};
@@ -56,8 +54,13 @@ const { $QUESTION } = require("prettier");
       return _.clone(permissionGroupsForm.input);
     }
 
+    function getPermissions() {
+      return _.clone(permissionGroupsForm.permissions)
+    }
+
     function fillFormInputs() {
       _.overwrite(permissionGroupsForm.input, permissionGroupsForm.form.input);
+      _.overwrite(permissionGroupsForm.permissions, permissionGroupsForm.form.permissions);
     }
 
     function savePermissions(created) {
@@ -67,15 +70,14 @@ const { $QUESTION } = require("prettier");
     }
 
     function getPermissionGroupID() {
-      if (!_.get(permissionGroupsForm.form, 'input.id')) {
-        Api.all("permission-group")
+      if (!$stateParams.id) {
+        return Api.all("permission-group")
           .getList()
           .then(function (permissionGroups) {
             return permissionGroups[0].id;
           });
-      }
-      else {
-        return $q.when(permissionGroupsForm.form.input.id);
+      } else {
+        return $q.when($stateParams.id);
       }
     }
   }

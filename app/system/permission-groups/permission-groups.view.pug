@@ -3,8 +3,8 @@ extends /resources/angle/pug/edit
 block title
   span(
     translate="permission-groups.form.title.EDIT",
-    translate-value-name="{{ vm.edit.input.name }}"
+    translate-value-name="{{vm.edit.input.name}}"
   )
-block
-  form(ng-submit="vm.submit")
+
+block form
   permission-groups-form(form="vm.edit")

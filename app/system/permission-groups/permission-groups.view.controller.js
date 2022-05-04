@@ -13,15 +13,10 @@
   function PermissionGroupsViewCtrl(
     Api,
     Edit,
-    EventEmitter,
-    _,
-    $stateParams,
-    PermissionLang,
-    Loader
+    $stateParams
   ) {
     var vm = this;
     var $api;
-    vm.loader = Loader();
     vm.edit = Edit("permission-group/" + $stateParams.id);
     vm.edit.input = {};
     vm.edit.submit = submit;
@@ -36,18 +31,13 @@
 
     function init() {
       $api = Api.one("permission-group/" + $stateParams.id + "/permission");
-      vm.loader.during(
-        $api.get().then(function (response) {
-          _.merge(vm.map, response.getOriginalData());
-          PermissionLang.load(vm.map);
-        })
-      );
+
       vm.edit.getCurrent();
     }
 
     function submit() {
       vm.edit.patch(vm.edit.getData());
-      $api.patch(vm.edit.map);
+      $api.patch(vm.edit.getPermissions());
     }
   }
 })();

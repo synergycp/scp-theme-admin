@@ -6,7 +6,7 @@
     password: '',
     email: '',
     receive_copies: '',
-    permission_group_id: 1
+    permission_group_id: null
   };
 
   angular
@@ -37,20 +37,14 @@
     //////////
 
     function init() {
-      if (!_.get(adminForm.form, 'input.id')) {
-        // TODO: provide an endpoint that makes this one request instead of two.
-        Api.all('admin')
-          .getList()
-          .then(function () {
-            return Api.all("permission-group")
-              .getList()
-              .then(function (response) {
-                _.setContents(adminForm.permission_groups, response);
-                adminForm.input.permission_group_id = adminForm.input.permission_group_id ||
-                  adminForm.permission_groups[0].slug;
-              });
-          });
-      }
+      Api.all("permission-group")
+        .getList()
+        .then(function (response) {
+          _.setContents(adminForm.permission_groups, response);
+          adminForm.input.permission_group_id = adminForm.input.permission_group_id ||
+            adminForm.permission_groups[0].id;
+        });
+
 
       adminForm.form.getData = getData;
       fillFormInputs();

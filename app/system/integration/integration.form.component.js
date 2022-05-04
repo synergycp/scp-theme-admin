@@ -5,7 +5,7 @@
     name: '',
     subject: '',
     body: '',
-    permission_group_id: 1
+    permission_group_id: null
     
   };
 
@@ -37,19 +37,12 @@
     //////////
 
     function init() {
-      if (!_.get(integrationForm.form, 'input.id')) {
-        // TODO: provide an endpoint that makes this one request instead of two.
-        Api.all('admin')
-          .getList()
-          .then(function () {
-            return Api.all("permission-group").getList()
-              .then(function (response) {
-                _.setContents(integrationForm.permission_groups, response);
-                integrationForm.input.permission_group_id = integrationForm.input.permission_group_id ||
-                  integrationForm.permission_groups[0].slug;
-              });
-          });
-      }
+      Api.all("permission-group").getList()
+        .then(function (response) {
+          _.setContents(integrationForm.permission_groups, response);
+          integrationForm.input.permission_group_id = integrationForm.input.permission_group_id ||
+            integrationForm.permission_groups[0].id;
+      });
 
       integrationForm.form.getData = getData;
       fillFormInputs();

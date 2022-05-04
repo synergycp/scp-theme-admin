@@ -1,11 +1,10 @@
 (function () {
-  'use strict';
+  "use strict";
 
   angular
-    .module('app.network.entity.search')
-    .factory('EntitySearchTab', EntitySearchTabFactory)
-    .run(addEntitySearchTab)
-    ;
+    .module("app.network.entity.search")
+    .factory("EntitySearchTab", EntitySearchTabFactory)
+    .run(addEntitySearchTab);
 
   /**
    * Add the EntitySearchTab to the Search tabs list.
@@ -13,16 +12,19 @@
    * @ngInject
    */
   function addEntitySearchTab(Search, EntitySearchTab, Auth, Permission) {
-    Auth.whileLoggedIn(checkPerms);
+    var tab = EntitySearchTab();
+    Auth.whileLoggedIn(checkPerms, removeTab);
 
     function checkPerms() {
-      Permission
-        .ifHas("network.entities.read")
-        .then(addTab);
+      Permission.ifHas("network.entities.read").then(addTab).else(removeTab);
+    }
+
+    function removeTab() {
+      Search.tab.remove(tab);
     }
 
     function addTab() {
-      Search.tab.add(EntitySearchTab());
+      Search.tab.add(tab);
     }
   }
 
@@ -31,45 +33,40 @@
    *
    * @ngInject
    */
-  function EntitySearchTabFactory (
+  function EntitySearchTabFactory(
     $state,
     EntityList,
     ListFilter,
     RouteHelpers
   ) {
     return function () {
-        var list = EntityList();
-        return new EntitySearchTab(
-          list,
-          $state,
-          ListFilter(list),
-          RouteHelpers
-        );
+      var list = EntityList();
+      return new EntitySearchTab(list, $state, ListFilter(list), RouteHelpers);
     };
   }
 
-  function EntitySearchTab (list, $state, filter, RouteHelpers) {
+  function EntitySearchTab(list, $state, filter, RouteHelpers) {
     var tab = this;
 
-    tab.name = 'entities';
-    tab.lang = 'entity';
-    tab.text = 'entity.search.TITLE';
+    tab.name = "entities";
+    tab.lang = "entity";
+    tab.text = "entity.search.TITLE";
     tab.order = 15;
     tab.list = list;
     tab.filter = filter;
     tab.getState = getState;
     tab.getStateParams = getStateParams;
     tab.results = {
-      url: RouteHelpers.basepath('network/entity/search/search.tab.html'),
+      url: RouteHelpers.basepath("network/entity/search/search.tab.html"),
     };
     tab.typeaheadTemplateUrl = RouteHelpers.basepath(
-      'network/entity/search/search.item.html'
+      "network/entity/search/search.item.html"
     );
 
     //////////
 
     function getState() {
-      return 'app.network.entity.view';
+      return "app.network.entity.view";
     }
 
     function getStateParams($item) {
@@ -77,6 +74,5 @@
         id: $item.id,
       };
     }
-
   }
 })();

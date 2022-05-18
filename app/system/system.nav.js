@@ -1,5 +1,5 @@
 (function () {
-  'use strict';
+  "use strict";
 
   var LOGS = {
     text: "Logs",
@@ -36,16 +36,13 @@
     sref: "app.system.package.list",
   };
 
-  angular
-    .module('app.system')
-    .run(SystemNavConfig)
-  ;
+  angular.module("app.system").run(SystemNavConfig);
 
   /**
    * @ngInject
    */
   function SystemNavConfig(Auth, Nav, Permission) {
-    var group = Nav.group('system', {
+    var group = Nav.group("system", {
       translate: "nav.SYSTEM",
       icon: "fa fa-wrench",
     });
@@ -53,10 +50,7 @@
     Auth.whileLoggedIn(show, hide);
 
     function show() {
-      Permission
-        .map()
-        .then(showPermitted)
-      ;
+      Permission.map().then(showPermitted);
     }
 
     function showPermitted(map) {
@@ -84,7 +78,9 @@
         group.item(PACKAGES);
       }
 
-      group.item(SSH_KEYS);
+      if (map.system.settings.read) {
+        group.item(SSH_KEYS);
+      }
     }
 
     function hide() {

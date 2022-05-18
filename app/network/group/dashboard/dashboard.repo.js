@@ -1,17 +1,25 @@
 (function () {
-  'use strict';
+  "use strict";
 
   angular
-    .module('app.network.group.dashboard')
-    .service('GroupDashboardRepo', GroupDashboardRepo)
-    .run(addGroupDashboardRepo)
-    ;
+    .module("app.network.group.dashboard")
+    .service("GroupDashboardRepo", GroupDashboardRepo)
+    .run(addGroupDashboardRepo);
 
   /**
    * @ngInject
    */
-  function addGroupDashboardRepo(Dashboard) {
-    Dashboard.add('GroupDashboardRepo');
+  function addGroupDashboardRepo(Permission, Auth, Dashboard) {
+    Auth.whileLoggedIn(
+      function () {
+        Permission.ifHas("network.groups.read").then(function () {
+          Dashboard.add("GroupDashboardRepo");
+        });
+      },
+      function () {
+        Dashboard.remove("GroupDashboardRepo");
+      }
+    );
   }
 
   /**
@@ -19,12 +27,7 @@
    *
    * @ngInject
    */
-  function GroupDashboardRepo(
-    Api,
-    EventEmitter,
-    GroupDashboardPanel,
-    _
-  ) {
+  function GroupDashboardRepo(EventEmitter, GroupDashboardPanel, _) {
     var repo = this;
 
     repo.all = all;
@@ -33,10 +36,7 @@
     ///////////
 
     function all() {
-      repo.fire(
-        'item',
-        GroupDashboardPanel()
-      );
+      repo.fire("item", GroupDashboardPanel());
     }
   }
 })();

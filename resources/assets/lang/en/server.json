@@ -390,6 +390,10 @@
         "LABEL": "Search",
         "PLACEHOLDER": "Type to search..."
       },
+      "parts-exact": {
+        "LABEL": "Exact Parts",
+        "DESCRIPTION": "Only show servers whose parts match above exactly, i.e. don't include servers that have parts in addition to the above"
+      },
       "group": {
         "LABEL": "IP Group",
         "PLACEHOLDER": "Type to search..."

@@ -83,9 +83,13 @@
         group.item(PACKAGES);
       }
 
-      group.item(PERMISSION_GROUPS);
+      if (map.users.admins.write) {
+        group.item(PERMISSION_GROUPS);
+      }
 
-      group.item(SSH_KEYS);
+      if (map.system.settings.read) {
+        group.item(SSH_KEYS);
+      }
     }
 
     function hide() {

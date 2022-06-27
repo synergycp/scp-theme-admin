@@ -88,6 +88,11 @@ include /resources/angle/pug/mixins/form
                 refresh-delay="400"
               )
                 span(ng-bind-html="choice.name | highlight: $select.search")
+      +label("{{ 'server.list.filter.parts-exact.LABEL' | translate }}")
+        .checkbox
+          label
+            input(type="checkbox" ng-model="filters.current['parts.exact']" ng-change="filters.fireChangeEvent()")
+            span(translate="server.list.filter.parts-exact.DESCRIPTION")
 
     .col-md-6
       +label("{{ 'server.list.filter.client.LABEL' | translate }}")(

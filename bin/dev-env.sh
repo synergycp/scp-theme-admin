@@ -1,9 +1,7 @@
-#!/usr/bin/env bash
-
-. ~/.nvm/nvm.sh
+#!/usr/bin/env fish
 
 while [ ! -f ../dependencies/tmp/init ]; do
   sleep 2
-done
+end
 
 exec ./node_modules/.bin/gulp serve

@@ -1,41 +1,37 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  var DIR = 'hardware/server/list/';
+  var DIR = "hardware/server/list/";
 
-  angular
-    .module('app.hardware.server.list')
-    .config(routeConfig)
-    ;
+  angular.module("app.hardware.server.list").config(routeConfig);
 
   /**
    * @ngInject
    */
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
-    var search = '?switch&group&disks[]&addons[]&cpu&mem&client&bw.min&bw.max&billing.id&billing.integration&q';
+    var search =
+      "?switch&group&disks[]&addons[]&cpu&mem&client&bw.min&bw.max&billing.id&billing.integration&q&parts.exact";
     $stateProvider
-      .state('app.hardware.server.inventory', {
-        url: '/inventory'+search,
-        title: 'Server Inventory',
-        controller: 'ServerInventoryCtrl as vm',
-        templateUrl: helper.basepath(DIR+'list.inventory.html'),
+      .state("app.hardware.server.inventory", {
+        url: "/inventory" + search,
+        title: "Server Inventory",
+        controller: "ServerInventoryCtrl as vm",
+        templateUrl: helper.basepath(DIR + "list.inventory.html"),
         reloadOnSearch: false,
-        resolve: helper.resolveFor(
-          'moment', 'after:date-range-picker'
-        ),
+        resolve: helper.resolveFor("moment", "after:date-range-picker"),
       })
-      .state('app.hardware.server.list', {
+      .state("app.hardware.server.list", {
         url: search,
-        title: 'Servers',
-        controller: 'ServerIndexCtrl as vm',
-        templateUrl: helper.basepath(DIR+'list.index.html'),
+        title: "Servers",
+        controller: "ServerIndexCtrl as vm",
+        templateUrl: helper.basepath(DIR + "list.index.html"),
         reloadOnSearch: false,
         resolve: helper.resolveFor(
-          'moment', 'after:date-range-picker',
-          'numeral'
+          "moment",
+          "after:date-range-picker",
+          "numeral"
         ),
-      })
-      ;
+      });
   }
 })();

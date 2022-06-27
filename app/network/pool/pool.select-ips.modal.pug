@@ -15,20 +15,21 @@ block body
     p.help-block(translate="pool.modal.select-ips.pool.HELP")
   div(ng-if="modal.data.availableIPs()")
     +label("pool.modal.select-ips.ips.LABEL")
-      +ui-select(
-        "modal.data.availableIPs()"
-      )(
-        multiple
-        sortable="true"
-        close-on-select="false"
-      )
-        ui-select-match(placeholder="{{ 'pool.modal.select-ips.ips.PLACEHOLDER' | translate }}")
-          | {{ $item }}
-
-        ui-select-choices(
-          repeat="choice in modal.data.availableIPs().items track by choice"
-          refresh="modal.data.availableIPs().load($select.search)"
-          refresh-delay="400"
+      +input-with-btn("fa fa-times-circle")(ng-click="modal.data.availableIPs().clear()")
+        +ui-select(
+          "modal.data.availableIPs()"
+        )(
+          multiple
+          sortable="true"
+          close-on-select="false"
         )
-          span(ng-bind-html="choice | highlight: $select.search")
+          ui-select-match(placeholder="{{ 'pool.modal.select-ips.ips.PLACEHOLDER' | translate }}")
+            | {{ $item }}
+
+          ui-select-choices(
+            repeat="choice in modal.data.availableIPs().items track by choice"
+            refresh="modal.data.availableIPs().load($select.search)"
+            refresh-delay="400"
+          )
+            span(ng-bind-html="choice | highlight: $select.search")
   .clearfix

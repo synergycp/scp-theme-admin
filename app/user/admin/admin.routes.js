@@ -27,12 +27,6 @@
         controller: 'AdminViewCtrl as vm',
         templateUrl: helper.basepath('user/admin/admin.view.html'),
       })
-      .state('app.user.admin.view.permissions', {
-        url: '/permissions',
-        title: 'Administrator Permissions',
-        controller: 'AdminPermissionsCtrl as vm',
-        templateUrl: helper.basepath('user/admin/admin.permissions.html'),
-      })
       ;
 
     helper.url.map('admin/?([0-9]*)', function ($state, id) {

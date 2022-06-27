@@ -15,10 +15,13 @@ include /resources/angle/pug/mixins/form
   placeholder="{{ 'admin.form.email.PLACEHOLDER' | translate }}"
   ng-model="adminForm.input.email"
 )
+
++select("{{ 'admin.form.permission_group.LABEL' | translate }}","permission_group")(
+  placeholder="{{ 'admin.form.permission_group.PLACEHOLDER' | translate }}"
+  ng-model= "adminForm.input.permission_group_id",
+  ng-options="value.id as value.name for value in adminForm.permission_groups"
+)
   +checkbox()(
     ng-model="adminForm.input.receive_copies"
   ) {{ 'admin.form.receive_copies.LABEL' | translate }}
 
-div(ng-if="!adminForm.form.input.id")
-  hr
-  permissions(map="adminForm.permissions")

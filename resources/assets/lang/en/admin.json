@@ -36,11 +36,14 @@
       "LABEL": "Username",
       "PLACEHOLDER": "Required. Must be alphanumeric and unique"
     },
+    "permission_group": {
+      "LABEL": "Permission Group",
+      "PLACEHOLDER": "Required. Select Permission Group"
+    },
     "receive_copies": {
       "LABEL": "Receive All Emails"
     }
   },
   "buttons": {
-    "PERMISSIONS": "Edit Permissions"
   }
 }

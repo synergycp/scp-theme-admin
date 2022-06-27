@@ -6,6 +6,7 @@
     password: '',
     email: '',
     receive_copies: '',
+    permission_group_id: null
   };
 
   angular
@@ -26,29 +27,24 @@
   /**
    * @ngInject
    */
-  function AdminFormCtrl(Api, PermissionLang) {
+  function AdminFormCtrl(Api) {
     var adminForm = this;
 
     adminForm.$onInit = init;
     adminForm.input = _.clone(INPUTS);
-    adminForm.permissions = {};
+    adminForm.permission_groups = [];
 
     //////////
 
     function init() {
-      if (!_.get(adminForm.form, 'input.id')) {
-        // TODO: provide an endpoint that makes this one request instead of two.
-        Api.all('admin')
-          .getList()
-          .then(function (admins) {
-            return Api.one('admin/'+admins[0].id+'/permission').get()
-          })
-          .then(function (response) {
-            // TODO: share common code w/ admin.permissions.js
-            _.merge(adminForm.permissions, response.getOriginalData());
-            PermissionLang.load(adminForm.permissions)
-          });
-      }
+      Api.all("permission-group")
+        .getList()
+        .then(function (response) {
+          _.setContents(adminForm.permission_groups, response);
+          adminForm.input.permission_group_id = adminForm.input.permission_group_id ||
+            adminForm.permission_groups[0].id;
+        });
+
 
       adminForm.form.getData = getData;
       fillFormInputs();
@@ -56,11 +52,6 @@
       var listen = adminForm.form.on || function () {};
 
       listen(['change', 'load'], fillFormInputs);
-      listen(['created'], savePermissions);
-    }
-
-    function savePermissions(created) {
-      Api.one('admin/'+created.id+'/permission').patch(adminForm.permissions);
     }
 
     function getData() {

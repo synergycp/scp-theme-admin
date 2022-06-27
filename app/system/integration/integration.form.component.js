@@ -5,6 +5,8 @@
     name: '',
     subject: '',
     body: '',
+    permission_group_id: null
+    
   };
 
   angular
@@ -30,24 +32,17 @@
 
     integrationForm.$onInit = init;
     integrationForm.input = _.clone(INPUTS);
-    integrationForm.permissions = {};
+    integrationForm.permission_groups = [];
 
     //////////
 
     function init() {
-      if (!_.get(integrationForm.form, 'input.id')) {
-        // TODO: provide an endpoint that makes this one request instead of two.
-        Api.all('admin')
-          .getList()
-          .then(function (admins) {
-            return Api.one('admin/'+admins[0].id+'/permission').get()
-          })
-          .then(function (response) {
-            // TODO: share common code w/ admin.permissions.js
-            _.merge(integrationForm.permissions, response.getOriginalData());
-            PermissionLang.load(integrationForm.permissions)
-          });
-      }
+      Api.all("permission-group").getList()
+        .then(function (response) {
+          _.setContents(integrationForm.permission_groups, response);
+          integrationForm.input.permission_group_id = integrationForm.input.permission_group_id ||
+            integrationForm.permission_groups[0].id;
+      });
 
       integrationForm.form.getData = getData;
       fillFormInputs();
@@ -55,7 +50,6 @@
       var listen = integrationForm.form.on || function () {};
 
       listen(['change', 'load'], fillFormInputs);
-      listen(['created'], savePermissions);
     }
 
     function getData() {
@@ -64,14 +58,6 @@
 
     function fillFormInputs() {
       _.overwrite(integrationForm.input, integrationForm.form.input);
-    }
-
-    function savePermissions(created) {
-      Api.one('integration/'+created.id+'/permission')
-        .patch(integrationForm.permissions)
-        .then(function () {
-          integrationForm.form.fire('created.relations', created);
-        });
     }
   }
 })();

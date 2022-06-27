@@ -8,6 +8,8 @@ include /resources/angle/pug/mixins/form
   ng-model="integrationForm.input.name"
 )
 
-div(ng-if="!integrationForm.form.input.id")
-  hr
-  permissions(map="integrationForm.permissions")
++select("{{ 'system.integration.form.permission_group.LABEL' | translate }}","permission_group")(
+  placeholder="{{ 'system.integration.form.permission_group.PLACEHOLDER' | translate }}"
+  ng-model= "integrationForm.input.permission_group_id",
+  ng-options="value.id as value.name for value in integrationForm.permission_groups"
+)

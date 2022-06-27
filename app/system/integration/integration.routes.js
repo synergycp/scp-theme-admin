@@ -26,12 +26,6 @@
         controller: 'IntegrationViewCtrl as vm',
         templateUrl: helper.basepath('system/integration/integration.view.html'),
       })
-      .state('app.system.integration.view.permissions', {
-        url: '/permissions',
-        title: 'Integration Permissions',
-        controller: 'IntegrationPermissionsCtrl as vm',
-        templateUrl: helper.basepath('system/integration/integration.permissions.html'),
-      })
       ;
 
     helper.url.map('integration/?([0-9]*)', function ($state, id) {

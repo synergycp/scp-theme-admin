@@ -64,9 +64,6 @@
     }
   },
   "integration": {
-    "permissions": {
-      "TITLE": "Integration Permissions"
-    },
     "list": {
       "TITLE": "Integrations",
       "filter": {
@@ -78,7 +75,6 @@
     },
     "buttons": {
       "KEYS": "API Keys",
-      "PERMISSIONS": "Permissions",
       "DELETE": "Delete"
     },
     "form": {
@@ -89,6 +85,9 @@
       "name": {
         "LABEL": "Name",
         "PLACEHOLDER": "What program is integrating with the API? e.g. WHMCS"
+      },
+      "permission_group": {
+        "LABEL": "Permission Group"
       }
     },
     "modal": {

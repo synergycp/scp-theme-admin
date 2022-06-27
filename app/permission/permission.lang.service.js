@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.user.admin')
+    .module('app.system.permission-groups')
     .service('PermissionLang', PermissionLangService)
   ;
 

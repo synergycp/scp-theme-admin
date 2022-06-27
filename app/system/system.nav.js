@@ -36,6 +36,11 @@
     sref: "app.system.package.list",
   };
 
+  var PERMISSION_GROUPS = {
+    text: "Permission Groups",
+    sref: "app.system.permission-groups.list",
+  };
+
   angular.module("app.system").run(SystemNavConfig);
 
   /**
@@ -78,6 +83,10 @@
         group.item(PACKAGES);
       }
 
+      if (map.users.admins.write) {
+        group.item(PERMISSION_GROUPS);
+      }
+
       if (map.system.settings.read) {
         group.item(SSH_KEYS);
       }
@@ -91,6 +100,7 @@
       group.remove(EMAILS);
       group.remove(SSH_KEYS);
       group.remove(PACKAGES);
+      group.remove(PERMISSION_GROUPS);
     }
   }
 })();

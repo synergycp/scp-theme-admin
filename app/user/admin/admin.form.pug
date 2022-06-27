@@ -2,26 +2,23 @@ doctype html
 include /resources/angle/pug/mixins/form
 
 +field("{{ 'admin.form.username.LABEL' | translate }}", "username")(
-  placeholder="{{ 'admin.form.username.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'admin.form.username.PLACEHOLDER' | translate }}",
   ng-model="adminForm.input.username"
 )
 
 +field("{{ 'admin.form.password.LABEL' | translate }}", "password")(
-  placeholder="{{ 'admin.form.password.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'admin.form.password.PLACEHOLDER' | translate }}",
   ng-model="adminForm.input.password"
 )
 
 +field("{{ 'admin.form.email.LABEL' | translate }}", "email")(
-  placeholder="{{ 'admin.form.email.PLACEHOLDER' | translate }}"
+  placeholder="{{ 'admin.form.email.PLACEHOLDER' | translate }}",
   ng-model="adminForm.input.email"
 )
+  +checkbox(ng-model="adminForm.input.receive_copies") {{ 'admin.form.receive_copies.LABEL' | translate }}
 
 +select("{{ 'admin.form.permission_group.LABEL' | translate }}","permission_group")(
-  placeholder="{{ 'admin.form.permission_group.PLACEHOLDER' | translate }}"
-  ng-model= "adminForm.input.permission_group_id",
+  placeholder="{{ 'admin.form.permission_group.PLACEHOLDER' | translate }}",
+  ng-model="adminForm.input.permission_group_id",
   ng-options="value.id as value.name for value in adminForm.permission_groups"
 )
-  +checkbox()(
-    ng-model="adminForm.input.receive_copies"
-  ) {{ 'admin.form.receive_copies.LABEL' | translate }}
-

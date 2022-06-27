@@ -11,5 +11,13 @@
       "LABEL": "Name",
       "PLACEHOLDER": "Required. Must be alphanumeric and unique"
     }
+  },
+  "modal": {
+    "delete": {
+      "TITLE": "Delete Permission Groups",
+      "SUBMIT": "Delete",
+      "CANCEL": "Cancel",
+      "BODY": "Click \"Delete\" to permanently delete these Permission Groups:"
+    }
   }
 }

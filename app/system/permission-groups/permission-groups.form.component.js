@@ -35,10 +35,7 @@
           ).get();
         })
         .then(function (response) {
-          _.merge(
-            permissionGroupsForm.permissions,
-            response.getOriginalData()
-          );
+          _.merge(permissionGroupsForm.permissions, response.getOriginalData());
           PermissionLang.load(permissionGroupsForm.permissions);
         });
       permissionGroupsForm.form.getData = getData;
@@ -55,12 +52,15 @@
     }
 
     function getPermissions() {
-      return _.clone(permissionGroupsForm.permissions)
+      return _.clone(permissionGroupsForm.permissions);
     }
 
     function fillFormInputs() {
       _.overwrite(permissionGroupsForm.input, permissionGroupsForm.form.input);
-      _.overwrite(permissionGroupsForm.permissions, permissionGroupsForm.form.permissions);
+      _.overwrite(
+        permissionGroupsForm.permissions,
+        permissionGroupsForm.form.permissions
+      );
     }
 
     function savePermissions(created) {

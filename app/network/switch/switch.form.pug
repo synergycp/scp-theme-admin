@@ -55,6 +55,15 @@ hr
         ng-model="switchForm.input.port"
       )
 
+div(ng-if="switchForm.input.use_snmp_ip")
+  +label("{{ 'switch.form.snmp_ip.LABEL' | translate }}")
+    .col-xs-8
+      input.form-control(
+        type="text",
+        placeholder="{{ 'switch.form.network.snmp_ip.PLACEHOLDER' | translate }}",
+        ng-model="switchForm.input.snmp_ip"
+      )
+
 +label("{{ 'switch.form.ssh.LABEL' | translate }}")
   .row
     .col-xs-6
@@ -118,6 +127,9 @@ hr
     +checkbox("{{ 'switch.form.layer.layer_three.LABEL' | translate }}")(
       ng-model="switchForm.layer3"
     )
+  +checkbox("{{ 'switch.form.options.use_snmp_ip.LABEL' | translate }}")(
+    ng-model="switchForm.input.use_snmp_ip"
+  )
     p.help-block(translate="switch.form.layer.layer_three.HELP_TEXT")
 
 +label("{{ 'switch.form.layer.uplinks.LABEL' | translate }}")

@@ -40,19 +40,44 @@ include /resources/angle/pug/mixins/form
 
 hr
 
-+label("{{ 'switch.form.network.LABEL' | translate }}")
-  .row
+div(ng-if="switchForm.input.use_ssh_ip == false")
+  +label("{{ 'switch.form.network.LABEL' | translate }}")
+    .row
+      .col-xs-8
+        input.form-control(
+          type="text",
+          placeholder="{{ 'switch.form.network.ip.PLACEHOLDER' | translate }}",
+          ng-model="switchForm.input.ip"
+        )
+      .col-xs-4
+        input.form-control(
+          type="text",
+          placeholder="{{ 'switch.form.network.port.PLACEHOLDER' | translate }}",
+          ng-model="switchForm.input.port"
+        )
+
+div(ng-if="switchForm.input.use_ssh_ip")
+  +label("{{ 'switch.form.network.ssh_ip.LABEL' | translate }}")
+    .row
+      .col-xs-8
+        input.form-control(
+          type="text",
+          placeholder="{{ 'switch.form.network.ssh_ip.PLACEHOLDER' | translate }}",
+          ng-model="switchForm.input.ssh_ip"
+        )
+      .col-xs-4
+        input.form-control(
+          type="text",
+          placeholder="{{ 'switch.form.network.port.PLACEHOLDER' | translate }}",
+          ng-model="switchForm.input.port"
+        )
+
+  +label("{{ 'switch.form.network.snmp_ip.LABEL' | translate }}")
     .col-xs-8
       input.form-control(
         type="text",
-        placeholder="{{ 'switch.form.network.ip.PLACEHOLDER' | translate }}",
+        placeholder="{{ 'switch.form.network.snmp_ip.PLACEHOLDER' | translate }}",
         ng-model="switchForm.input.ip"
-      )
-    .col-xs-4
-      input.form-control(
-        type="text",
-        placeholder="{{ 'switch.form.network.port.PLACEHOLDER' | translate }}",
-        ng-model="switchForm.input.port"
       )
 
 +label("{{ 'switch.form.ssh.LABEL' | translate }}")
@@ -113,6 +138,9 @@ hr
 +label("{{ 'switch.form.options.LABEL' | translate }}")
   +checkbox("{{ 'switch.form.options.snmp_use_32_bit.LABEL' | translate }}")(
     ng-model="switchForm.input.snmp_use_32_bit"
+  )
+  +checkbox("{{ 'switch.form.options.use_ssh_ip.LABEL' | translate }}")(
+    ng-model="switchForm.input.use_ssh_ip"
   )
   div(ng-if="switchForm.input.layer === switchForm.LAYER.RACK")
     +checkbox("{{ 'switch.form.layer.layer_three.LABEL' | translate }}")(

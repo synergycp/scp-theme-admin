@@ -40,6 +40,7 @@
     function: FUNCTION.LAYER_2,
     ipv4_address: '',
     ipv6_address: '',
+    use_ssh_ip: false,
   };
 
   angular

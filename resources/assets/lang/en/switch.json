@@ -52,6 +52,14 @@
       "ip": {
         "PLACEHOLDER": "IP"
       },
+      "ssh_ip": {
+        "LABEL": "SSH IP/Port",
+        "PLACEHOLDER": "SSH IP"
+      },
+      "snmp_ip": {
+        "LABEL": "SNMP IP",
+        "PLACEHOLDER": "SNMP IP"
+      },
       "port": {
         "PLACEHOLDER": "SSH Port"
       }
@@ -136,6 +144,9 @@
         "LABEL": "SNMP Version",
         "V2c": "Version 2c (most common)",
         "V1": "Version 1 (outdated)"
+      },
+      "use_ssh_ip": {
+        "LABEL": "Use Seperate SSH & SNMP IPs"
       }
     }
   },

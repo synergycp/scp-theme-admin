@@ -40,7 +40,7 @@ include /resources/angle/pug/mixins/form
 
 hr
 
-div(ng-if="switchForm.input.use_ssh_ip == false")
+div(ng-if="!switchForm.input.use_ssh_ip")
   +label("{{ 'switch.form.network.LABEL' | translate }}")
     .row
       .col-xs-8

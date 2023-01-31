@@ -27,6 +27,7 @@
     name: '',
     type: 0,
     ip: '',
+    ssh_ip: '',
     port: '',
     ssh_user: '',
     ssh_pass: '',

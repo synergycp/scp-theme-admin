@@ -91,6 +91,7 @@
         return;
       }
       profileForm.isos.selected = iso;
+      syncIso();
       profileForm.isos.selectedEdition = iso ? iso.edition : null;
     }
 

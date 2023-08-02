@@ -73,6 +73,7 @@
         "password": {
           "LABEL": "Root Password",
           "PLACEHOLDER": "Enter server password",
+          "HINT": "Password rules: alphanumeric is most compatible. Some combinations of special characters may not be valid, especially & and multiple instances of + and is completely dependent on the operating system. ",      
           "GENERATE": "Generate Password",
           "HELP": "This password will not be saved! Please copy it somewhere safe."
         }

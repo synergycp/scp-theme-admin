@@ -36,6 +36,9 @@
       "search": {
         "LABEL": "Search",
         "PLACEHOLDER": "Type to search..."
+      },
+      "showVip": {
+        "LABEL": "Show Vip clients"
       }
     }
   },

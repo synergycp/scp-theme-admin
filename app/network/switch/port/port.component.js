@@ -24,8 +24,6 @@
 
     ports.$onInit = init;
 
-
-
     ports.createPort = openCreatePortModal;
     //////////
 

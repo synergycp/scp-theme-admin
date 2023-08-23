@@ -3,6 +3,7 @@
 
   angular
     .module('app.network.switch.port', [
-      'app.network.switch.port.filters'
+      'app.network.switch.port.filters',
+      'scp.angle.network.switch.port.modal',
     ]);
 })();

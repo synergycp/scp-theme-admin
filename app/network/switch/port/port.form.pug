@@ -1,0 +1,11 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field(
+  "{{ 'switch.port.list.modal.form.name.LABEL' | translate }}",
+  "port"
+)(
+  ng-model="portForm.input.name"
+  placeholder="{{ 'switch.port.list.modal.form.name.PLACEHOLDER' | translate }}"
+)
+

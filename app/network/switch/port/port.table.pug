@@ -1,4 +1,4 @@
-extends /resources/angle/pug/table
+extends /resources/angle/pug/table-checkable
 
 block headings
   th.sortable
@@ -15,7 +15,7 @@ block headings
     sort(col="usage.percent")
   th.sortable
     span(translate="switch.port.list.heading.usage.MAX")
-    sort(col="usage.max")
+    sort(col="usage.max") 
 
 block columns
   td

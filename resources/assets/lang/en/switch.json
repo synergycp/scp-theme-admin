@@ -200,6 +200,27 @@
       },
       "empty": {
         "BODY": "We haven't discovered any ports on this switch yet."
+      },
+      "modal": {
+        "create": {
+          "CANCEL": "Cancel",
+          "CREATE": "Create Port"
+        },
+        "form": {
+          "title": {
+            "ADD": "Create Port"
+          },
+          "name": {
+            "LABEL": "Port",
+            "PLACEHOLDER": "Port Name"
+          }
+        },
+        "delete": {
+          "TITLE": "Delete Switch Ports",
+          "SUBMIT": "Delete",
+          "CANCEL": "Cancel",
+          "BODY": "Click \"Delete\" to permanently delete these Switch Ports:"
+        }
       }
     },
     "filter": {

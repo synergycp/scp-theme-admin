@@ -238,7 +238,7 @@
   },
   "ipmi": {
     "HOSTNAME": "Hostname",
-    "TITLE": "Power Controls",
+    "TITLE": "Controls",
     "NOT_ENABLED": "This server has not been assigned an IPMI IP, username, or password.",
     "web_panel": {
       "HEADING": "Web CP",

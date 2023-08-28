@@ -416,8 +416,7 @@
             serverForm.form.form[portPrefix + "max_bandwidth"] &&
             serverForm.form.form[portPrefix + "max_bandwidth"].$dirty
           ) &&
-          !serverForm.form.form["billing.date"].$dirty &&
-          !(port.switch.port && port.switch.port.$dirty) // save bandwidth if port changed
+          !serverForm.form.form["billing.date"].$dirty
         ) {
           return;
         }

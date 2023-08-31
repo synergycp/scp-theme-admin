@@ -10,3 +10,7 @@ include /resources/angle/pug/mixins/form
           placeholder="{{ 'client.list.filter.search.PLACEHOLDER' | translate }}"
           observable-focus="filters.searchFocus"
         )
+      +label("{{ 'client.list.filter.showVip.LABEL' | translate }}")
+        .checkbox
+          label
+            input(type="checkbox" ng-model="filters.current['billing_ignore_auto_suspend']" ng-change="filters.fireChangeEvent()")

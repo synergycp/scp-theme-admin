@@ -6,23 +6,29 @@ include /resources/angle/pug/mixins/form
       ng-class="tab.ssl.loader.class"
     )
       .loader
-      .panel-body
+      .panel-body.form-horizontal
         form.text-center(
           ng-submit="tab.form.submit()"
         )
-          +ui-select("tab.form.engine")
-            ui-select-match(placeholder="{{ 'system.setting.notification.form.engine.PLACEHOLDER' | translate }}")
-              span(ng-bind="$select.selected.name")
+          +label("system.setting.notification.form.engine.LABEL")
+            +ui-select(ng-model="tab.form.engine")
+              ui-select-match(placeholder="{{ 'system.setting.notification.form.engine.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.name")
 
-            ui-select-choices(
-              repeat="engine in tab.engines track by engine.id"
-              refresh="notificationForm.server.load($select.search)"
-              refresh-delay="400"
-            )
-              span(ng-bind-html="engine.name | highlight: $select.search")
-          .panel-footer.clearfix()
-            .pull-right
-              button.btn.btn-primary(
-                type="submit"
-                translate="system.setting.notification.form.submit.LABEL"
+              ui-select-choices(
+                repeat="engine in tab.engines track by engine.id"
+                refresh="notificationForm.server.load($select.search)"
+                refresh-delay="400"
               )
+                span(ng-bind-html="engine.name | highlight: $select.search")
+          div(ng-if="tab.form.engine.id == 1")
+            +field(
+              "{{ 'system.setting.notification.form.engine.slack.token.LABEL' | translate }}"
+            )(
+              placeholder="{{ 'system.email.form.name.PLACEHOLDER' | translate }}"
+              ng-model="emailForm.input.name"
+            )
+            button.btn.btn-primary(
+              type="submit"
+              translate="system.setting.notification.form.submit.LABEL"
+            )

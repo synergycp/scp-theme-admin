@@ -70,7 +70,12 @@
       "form":{
         "engine":{
           "LABEL":"Engine",
-          "PLACEHOLDER": "Select a notification engine"
+          "PLACEHOLDER": "Select a notification engine",
+          "slack":{
+            "token":{
+              "LABEL":"Token"
+            }
+          }
         },
         "submit":{
           "LABEL":"Submit"

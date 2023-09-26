@@ -1,0 +1,28 @@
+include /resources/angle/pug/mixins/panel
+include /resources/angle/pug/mixins/form
+.row
+  .col-md-6
+    +panel("system.setting.notification.engine.TITLE")(
+      ng-class="tab.ssl.loader.class"
+    )
+      .loader
+      .panel-body
+        form.text-center(
+          ng-submit="tab.form.submit()"
+        )
+          +ui-select("tab.form.engine")
+            ui-select-match(placeholder="{{ 'system.setting.notification.form.engine.PLACEHOLDER' | translate }}")
+              span(ng-bind="$select.selected.name")
+
+            ui-select-choices(
+              repeat="engine in tab.engines track by engine.id"
+              refresh="notificationForm.server.load($select.search)"
+              refresh-delay="400"
+            )
+              span(ng-bind-html="engine.name | highlight: $select.search")
+          .panel-footer.clearfix()
+            .pull-right
+              button.btn.btn-primary(
+                type="submit"
+                translate="system.setting.notification.form.submit.LABEL"
+              )

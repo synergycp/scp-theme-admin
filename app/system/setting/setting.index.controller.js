@@ -18,7 +18,7 @@
    *
    * @ngInject
    */
-  function SettingIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, Api, SettingLang, SettingsTab, HttpTab, $timeout) {
+  function SettingIndexCtrl(_, $scope, $state, $stateParams, $q, Loader, Alert, EventEmitter, Api, SettingLang, SettingsTab, HttpTab,NotificationTab, $timeout) {
     var vm = this;
     var $api = Api.all(API.SETTING);
     var $groups = Api.all(API.SETTING_GROUP);
@@ -48,6 +48,7 @@
 
     function activate() {
       vm.tabs.items.push(new HttpTab(vm));
+      vm.tabs.items.push(new NotificationTab(vm));
       $q.all([
         loadSettingsTabs(),
       ]).then(setActive);

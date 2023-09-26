@@ -61,6 +61,21 @@
         "ALLOW-NON": "Allow non-SSL",
         "REQUIRE": "Require SSL"
       }
+    },
+    "notification": {
+      "TITLE": "Notification",
+      "engine": {
+        "TITLE": "Configuration"
+      },
+      "form":{
+        "engine":{
+          "LABEL":"Engine",
+          "PLACEHOLDER": "Select a notification engine"
+        },
+        "submit":{
+          "LABEL":"Submit"
+        }
+      }
     }
   },
   "integration": {

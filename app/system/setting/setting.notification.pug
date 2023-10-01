@@ -25,8 +25,14 @@ include /resources/angle/pug/mixins/form
             +field(
               "{{ 'system.setting.notification.form.engine.slack.token.LABEL' | translate }}"
             )(
-              placeholder="{{ 'system.email.form.name.PLACEHOLDER' | translate }}"
-              ng-model="emailForm.input.name"
+              placeholder="{{ 'system.setting.notification.form.engine.slack.token.PLACEHOLDER' | translate }}"
+              ng-model="tab.form.slack.token"
+            )
+            +field(
+              "{{ 'system.setting.notification.form.engine.slack.channels.LABEL' | translate }}"
+            )(
+              placeholder="{{ 'system.setting.notification.form.engine.slack.channels.PLACEHOLDER' | translate }}"
+              ng-model="tab.form.slack.channels"
             )
             button.btn.btn-primary(
               type="submit"

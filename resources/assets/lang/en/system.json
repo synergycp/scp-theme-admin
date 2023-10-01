@@ -73,7 +73,12 @@
           "PLACEHOLDER": "Select a notification engine",
           "slack":{
             "token":{
-              "LABEL":"Token"
+              "LABEL":"Token",
+              "PLACEHOLDER":"Enter your Slack token"
+            },
+            "channels":{
+              "LABEL":"Channels",
+              "PLACEHOLDER":"Enter your Slacks channels delimited by comma"
             }
           }
         },

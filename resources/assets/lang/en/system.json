@@ -215,5 +215,45 @@
         }
       }
     }
+  },
+  "notification": {
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Notification engine",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Notification engine:"
+      }
+    },
+    "list": {
+      "TITLE": "Notification engines",
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Type to search..."
+        }
+      }
+    },
+    "form": {
+      "title": {
+        "EDIT": "Edit {{ name }}",
+        "ADD": "Create Notifcation Engine"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Must be unique"
+      },
+      "subject": {
+        "LABEL": "Subject",
+        "PLACEHOLDER": "Optional"
+      },
+      "body": {
+        "LABEL": "Template",
+        "PLACEHOLDER": "Will be parsed using Smarty."
+      }
+    },
+    "buttons": {
+      "DELETE": "Delete"
+    }
   }
 }

@@ -1,0 +1,44 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
+
+div(  
+  ng-if="!notificationForm.isCreationMode"
+)
+  +label(
+    "{{ 'system.notification.form.name.LABEL' | translate }}"
+  )
+    p.form-control-static {{ notificationForm.input.name }}
+div(  
+  ng-if="notificationForm.isCreationMode"
+)
+  +field(
+    "{{ 'system.notification.form.name.LABEL' | translate }}"
+  )(
+    placeholder="{{ 'system.notification.form.name.PLACEHOLDER' | translate }}"
+    ng-model="notificationForm.input.name"
+  )
++label("system.setting.notification.form.engine.LABEL")
+  +ui-select(ng-model="notificationForm.input.engine")
+    ui-select-match(placeholder="{{ 'system.setting.notification.form.engine.PLACEHOLDER' | translate }}")
+      span(ng-bind="$select.selected.name")
+
+    ui-select-choices(
+      repeat="engine in notificationForm.engines track by engine.id"
+      refresh="notificationForm.server.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="engine.name | highlight: $select.search")
+div(ng-if="notificationForm.input.engine.id == 1")
+  +field(
+    "{{ 'system.setting.notification.form.engine.slack.token.LABEL' | translate }}"
+  )(
+    placeholder="{{ 'system.setting.notification.form.engine.slack.token.PLACEHOLDER' | translate }}"
+    ng-model="notificationForm.input.slack.token"
+  )
+  +field(
+    "{{ 'system.setting.notification.form.engine.slack.channels.LABEL' | translate }}"
+  )(
+    placeholder="{{ 'system.setting.notification.form.engine.slack.channels.PLACEHOLDER' | translate }}"
+    ng-model="notificationForm.input.slack.channels"
+  )

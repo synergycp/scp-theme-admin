@@ -1,0 +1,13 @@
+extends /resources/angle/pug/edit
+
+block title
+  span(
+    translate='system.notification.form.title.EDIT'
+    translate-value-name='{{vm.edit.input.name}}'
+  )
+
+block form
+  notification-form(form="vm.edit")  
+
+block append right-side
+  notification-buttons(notification="vm.edit.input")

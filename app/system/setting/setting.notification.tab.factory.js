@@ -23,8 +23,7 @@
       tab.body = 'app/system/setting/setting.notification.html';
       tab.active = false;
       tab.visible = true;
-      tab.engines = [];
-      tab.getChannels = getChannels;
+
       tab.form = {
         submit
       };
@@ -39,7 +38,8 @@
       function storeEngines(response) {
         tab.engines = [];
         if(response.response.code === 200){
-          tab.engines = response.response.data;
+         tab.engines = response.response.data;
+         vm.list = response.response.data;
         }
         console.log(tab.engines);
       }
@@ -53,40 +53,31 @@
             console.log(response);
           })
       }
-
-      function getChannels() {
-      }
       function slackRequest() {
+        let request = {"owner_id": OWNER.id, "owner_type": OWNER_TYPE};
         try {
-          const recipients = tab.form.slack.channels.split(',').map((channel_code)=>{
-            return {
-              "channel_code":channel_code
-            };
-          });
-          return {
-            "credentials":{
+          if (tab.form.engine) {
+            request['notification_type'] = tab.form.engine.id;
+          }
+          if(tab.form.slack && tab.form.slack.token){
+            request['credentials'] = {
               "token": tab.form.slack.token
-            },
-            "owner_id": OWNER.id,
-            "owner_type": OWNER_TYPE,
-            "recipients":recipients,
-            "notification_type":tab.form.engine.id,
-          };
+            };
+          }
+          if (tab.form.slack && tab.form.slack.channels) {
+            const recipients = tab.form.slack.channels.split(',').map((channel_code)=>{
+              return {
+                "channel_code":channel_code
+              };
+            });
+            request['recipients'] = recipients;
+          }
         } catch (error) {
-          console.log(error);
-          return null
+          console.log(error.message);
+        }finally{
+          return request;
         }
       }
-
-      // return [
-      //   "credentials" => ['token' => 'xoxb-5846175915265-5819196402359-DlqU6ThNUpCoKNaGA85vMDKy'],
-      //   "notification_type" => NotificationEngineType::SLACK,
-      //   "recipients" => [
-      //     ['channel_code' => 'C05Q3095PST']
-      //   ],
-      //   "owner_type" => get_class($testAdmin),
-      //   "owner_id" => $testAdmin->id
-      // ];
     }
   }
 })();

@@ -40,7 +40,10 @@
     text: "Permission Groups",
     sref: "app.system.permission-groups.list",
   };
-
+  var NOTIFICATION = {
+    text: "Notification",
+    sref: "app.system.notification.list",
+  };
   angular.module("app.system").run(SystemNavConfig);
 
   /**
@@ -89,6 +92,9 @@
 
       if (map.system.settings.read) {
         group.item(SSH_KEYS);
+      }
+      if (map.notification.read) {
+        group.item(NOTIFICATION);
       }
     }
 

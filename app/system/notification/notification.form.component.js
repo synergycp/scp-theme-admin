@@ -41,8 +41,8 @@
       const storage = JSON.parse(localStorage.getItem('ngStorage-admin.apiKey'));
       OWNER = storage.owner;
       notificationForm.form.getData = getData;
-      fillFormInputs();
       getEngines();
+      fillFormInputs();
       (notificationForm.form.on || function() {})(['change', 'load'], fillFormInputs);
     }
 
@@ -54,9 +54,28 @@
     }
 
     function fillFormInputs() {
-      console.log("fillFormInputs");
-      console.log(notificationForm)
+      if(!notificationForm.form.input.engine)return;  
+      notificationForm = formPreparation(notificationForm);
       _.overwrite(notificationForm.input, notificationForm.form.input);
+    }
+    function formPreparation(notificationForm) {
+      if (notificationForm.form.input.engine.id == 1) {
+        return slackFormPreparation(notificationForm);
+      }
+      return notificationForm; 
+    }
+    function slackFormPreparation(notificationForm) {
+      let slackJson = {};
+      if (notificationForm.form.input.credentials) {
+        slackJson['token'] = notificationForm.form.input.credentials.token;
+      }
+      if (notificationForm.form.input.recipients) {
+        slackJson['channels'] = notificationForm.form.input.recipients.map(function ($channel) {
+          return $channel['channel_code'];
+        }).join(',');
+      }
+      notificationForm.input.slack = slackJson;
+      return notificationForm;      
     }
     function getEngines() {
       return Api.one('notification/engine/all')
@@ -69,10 +88,11 @@
       notificationForm.engines = [];
       if(response.response.code === 200){
         _.setContents(notificationForm.engines, response);
+        fillFormInputs();
       }
     }
     function slackRequest() {
-      let request = {"owner_id": OWNER.id, "owner_type": OWNER_TYPE};
+      let request = {name:notificationForm.input.name,"owner_id": OWNER.id, "owner_type": OWNER_TYPE};
       try {
         if (notificationForm.input.engine) {
           request['notification_type'] = notificationForm.input.engine.id;

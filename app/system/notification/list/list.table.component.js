@@ -25,7 +25,6 @@
    * @ngInject
    */
   function NotificationTableCtrl() {
-    console.log('NotificationTableCtrl');
     var table = this;
 
     table.$onInit = init;

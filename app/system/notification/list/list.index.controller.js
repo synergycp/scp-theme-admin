@@ -35,8 +35,6 @@
     }
 
     function create() {
-      console.log("create notification");
-      console.log(vm.create.getData())
       vm.list.create(vm.create.getData());
     }
 

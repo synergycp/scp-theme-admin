@@ -11,7 +11,7 @@ block columns
       ui-sref="app.system.notification.view({id: row.id})"
       ng-bind="row.name"
     )
-  td(ng-bind="row.engine")
+  td(ng-bind="row.engine.name")
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(

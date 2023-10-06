@@ -62,6 +62,9 @@
       if (notificationForm.form.input.engine.id == 1) {
         return slackFormPreparation(notificationForm);
       }
+      if (notificationForm.form.input.engine.id == 2) {
+        return emailFormPreparation(notificationForm);
+      }
       return notificationForm; 
     }
     function slackFormPreparation(notificationForm) {
@@ -76,6 +79,16 @@
       }
       notificationForm.input.slack = slackJson;
       return notificationForm;      
+    }
+    function emailFormPreparation(notificationForm) {
+      let jsonForm = {};
+      if (notificationForm.form.input.recipients) {
+        jsonForm['emails'] = notificationForm.form.input.recipients.map(function ($channel) {
+          return $channel['email'];
+        }).join(',');
+      }
+      notificationForm.input.email = jsonForm;
+      return notificationForm;
     }
     function getEngines() {
       return Api.one('notification/engine/all')
@@ -116,5 +129,26 @@
         return request;
       }
     }
+    function emailRequest() {
+      let request = {name:notificationForm.input.name,"owner_id": OWNER.id, "owner_type": OWNER_TYPE};
+      try {
+        if (notificationForm.input.engine) {
+          request['notification_type'] = notificationForm.input.engine.id;
+        }
+        if(notificationForm.input.email && notificationForm.input.email.emails){
+          request['recipients'] = notificationForm.input.email.emails.split(',')
+          .map((email)=>{
+                      return {
+                        "email":email
+                      };
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }finally{
+        return request;
+      }
+    }
+
   }
 })();

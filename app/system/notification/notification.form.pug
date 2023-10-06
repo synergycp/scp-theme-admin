@@ -18,7 +18,7 @@ div(
     placeholder="{{ 'system.notification.form.name.PLACEHOLDER' | translate }}"
     ng-model="notificationForm.input.name"
   )
-+label("system.setting.notification.form.engine.LABEL")
++label("system.notification.form.engine.LABEL")
   +ui-select(ng-model="notificationForm.input.engine")
     ui-select-match(placeholder="{{ 'system.setting.notification.form.engine.PLACEHOLDER' | translate }}")
       span(ng-bind="$select.selected.name")
@@ -31,14 +31,21 @@ div(
       span(ng-bind-html="engine.name | highlight: $select.search")
 div(ng-if="notificationForm.input.engine.id == 1")
   +field(
-    "{{ 'system.setting.notification.form.engine.slack.token.LABEL' | translate }}"
+    "{{ 'system.notification.form.engine.slack.token.LABEL' | translate }}"
   )(
-    placeholder="{{ 'system.setting.notification.form.engine.slack.token.PLACEHOLDER' | translate }}"
+    placeholder="{{ 'system.notification.form.engine.slack.token.PLACEHOLDER' | translate }}"
     ng-model="notificationForm.input.slack.token"
   )
   +field(
-    "{{ 'system.setting.notification.form.engine.slack.channels.LABEL' | translate }}"
+    "{{ 'system.notification.form.engine.slack.channels.LABEL' | translate }}"
   )(
-    placeholder="{{ 'system.setting.notification.form.engine.slack.channels.PLACEHOLDER' | translate }}"
+    placeholder="{{ 'system.notification.form.engine.slack.channels.PLACEHOLDER' | translate }}"
     ng-model="notificationForm.input.slack.channels"
+  )
+div(ng-if="notificationForm.input.engine.id == 2")
+  +field(
+    "{{ 'system.notification.form.engine.email.email.LABEL' | translate }}"
+  )(
+    placeholder="{{ 'system.notification.form.engine.email.email.PLACEHOLDER' | translate }}"
+    ng-model="notificationForm.input.email.emails"
   )

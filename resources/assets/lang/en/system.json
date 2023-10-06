@@ -243,9 +243,25 @@
         "LABEL": "Name",
         "PLACEHOLDER": "Must be unique"
       },
-      "subject": {
-        "LABEL": "Subject",
-        "PLACEHOLDER": "Optional"
+      "engine": {
+        "LABEL": "Engine",
+        "PLACEHOLDER": "Select a notification engine",
+        "slack":{
+          "token":{
+            "LABEL":"Token",
+            "PLACEHOLDER":"Enter your Slack token"
+          },
+          "channels":{
+            "LABEL":"Channels",
+            "PLACEHOLDER":"Enter your Slacks channels delimited by comma"
+          }
+        },
+        "email":{
+          "email":{
+            "LABEL":"Emails",
+            "PLACEHOLDER":"Enter your emails delimited by comma"
+          }
+        }
       },
       "body": {
         "LABEL": "Template",

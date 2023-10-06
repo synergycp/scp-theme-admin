@@ -19,7 +19,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'notification-template',
+        target_type: 'notification',
         target_id: $stateParams.id,
       },
     };

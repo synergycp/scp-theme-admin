@@ -21,7 +21,7 @@
 
     vm.logs = {
       filter: {
-        target_type: 'email-template',
+        target_type: 'notification',
       },
     };
 

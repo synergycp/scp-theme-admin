@@ -12,12 +12,6 @@ div(
 div(  
   ng-if="notificationForm.isCreationMode"
 )
-  +field(
-    "{{ 'system.notification.form.name.LABEL' | translate }}"
-  )(
-    placeholder="{{ 'system.notification.form.name.PLACEHOLDER' | translate }}"
-    ng-model="notificationForm.input.name"
-  )
 +label("system.notification.form.engine.LABEL")
   +ui-select(ng-model="notificationForm.input.engine")
     ui-select-match(placeholder="{{ 'system.setting.notification.form.engine.PLACEHOLDER' | translate }}")
@@ -29,6 +23,13 @@ div(
       refresh-delay="400"
     )
       span(ng-bind-html="engine.name | highlight: $select.search")
+div(ng-if="notificationForm.input.engine != null")
+  +field(
+    "{{ 'system.notification.form.name.LABEL' | translate }}"
+  )(
+    placeholder="{{ 'system.notification.form.name.PLACEHOLDER' | translate }}"
+    ng-model="notificationForm.input.name"
+  )
 div(ng-if="notificationForm.input.engine.id == 1")
   +field(
     "{{ 'system.notification.form.engine.slack.token.LABEL' | translate }}"
@@ -49,3 +50,9 @@ div(ng-if="notificationForm.input.engine.id == 2")
     placeholder="{{ 'system.notification.form.engine.email.email.PLACEHOLDER' | translate }}"
     ng-model="notificationForm.input.email.emails"
   )
+div(ng-if="notificationForm.input.engine != null")
+  +label(
+  "{{ 'system.notification.form.massEvent.LABEL' | translate }}",
+  "billing-ignoreAutoSuspend"
+)
+    +checkbox(ng-model="notificationForm.input.massEvent")

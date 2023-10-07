@@ -3,6 +3,8 @@ extends /resources/angle/pug/table-checkable
 block headings
   th Name
   th Engine
+  th Owner
+  th Owner type
   th(ng-if="table.showActions") Actions
 
 block columns
@@ -12,6 +14,8 @@ block columns
       ng-bind="row.name"
     )
   td(ng-bind="row.engine.name")
+  td(ng-bind="row.owner.username")
+  td(ng-bind="row.owner.shortType")
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(

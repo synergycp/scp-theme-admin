@@ -263,9 +263,8 @@
           }
         }
       },
-      "body": {
-        "LABEL": "Template",
-        "PLACEHOLDER": "Will be parsed using Smarty."
+      "massEvent":{
+        "LABEL": "Assign to all events"
       }
     },
     "buttons": {

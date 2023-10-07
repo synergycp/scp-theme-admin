@@ -27,7 +27,7 @@
    * @ngInject
    */
 
-  function NotificationFormCtrl(Api) {
+  function NotificationFormCtrl(Api, Alert) {
     var notificationForm = this;
     notificationForm.engines = [];
     const OWNER_TYPE = 'App\\Admin\\Admin';
@@ -47,6 +47,10 @@
     }
 
     function getData() {
+      if (!notificationForm.input.engine) {
+        Alert.warning('Select a notification engine');
+        return false;
+      }
       const requestFunction = `${notificationForm.input.engine.name.toLowerCase()}Request`;
       // Dynamically called depending on selected engine
       const request = eval(requestFunction + "()");
@@ -105,7 +109,7 @@
       }
     }
     function slackRequest() {
-      let request = {name:notificationForm.input.name,"owner_id": OWNER.id, "owner_type": OWNER_TYPE};
+      let request = baseRequest();
       try {
         if (notificationForm.input.engine) {
           request['notification_type'] = notificationForm.input.engine.id;
@@ -129,8 +133,12 @@
         return request;
       }
     }
+    function baseRequest(){
+      const relateAllAdminEvents = notificationForm.input.massEvent;
+      return {name:notificationForm.input.name,"owner_id": OWNER.id, "owner_type": OWNER_TYPE, relate_all_admin_events: relateAllAdminEvents};
+    }
     function emailRequest() {
-      let request = {name:notificationForm.input.name,"owner_id": OWNER.id, "owner_type": OWNER_TYPE};
+      let request = baseRequest();
       try {
         if (notificationForm.input.engine) {
           request['notification_type'] = notificationForm.input.engine.id;

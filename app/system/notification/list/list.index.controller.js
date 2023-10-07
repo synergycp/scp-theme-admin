@@ -35,7 +35,11 @@
     }
 
     function create() {
-      vm.list.create(vm.create.getData());
+      const data = vm.create.getData();
+      if(!data)return;
+
+
+      vm.list.create(data);
     }
 
     function onDestroy() {

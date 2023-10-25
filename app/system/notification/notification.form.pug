@@ -51,8 +51,19 @@ div(ng-if="notificationForm.input.engine.id == 2")
     ng-model="notificationForm.input.email.emails"
   )
 div(ng-if="notificationForm.input.engine != null")
-  +label(
-  "{{ 'system.notification.form.massEvent.LABEL' | translate }}",
-  "billing-ignoreAutoSuspend"
-)
-    +checkbox(ng-model="notificationForm.input.massEvent")
+  +label("{{ 'system.notification.form.notificableEvent.LABEL' | translate }}")
+    +ui-select("notificationForm.notificableEvents")(
+      multiple,
+      theme="bootstrap",
+      close-on-select="false"
+    )
+      ui-select-match(placeholder="{{ 'system.notification.form.notificableEvent.LABEL' | translate }}")
+        | {{ $item.name }}
+
+      ui-select-choices(
+        repeat='notificableEvent in (' + 'notificationForm.notificableEvents.items |' + 'filter: {name: $select.search} |' + 'filter: notificationForm.notificableEvents.notSelected' + ') track by notificableEvent.id',
+        refresh="notificationForm.notificableEvents.load($select.search)",
+        refresh-delay="400"
+      )
+        div(ng-bind-html="notificableEvent.name | highlight: $select.search")
+          small servers: {{ notificableEvent.serversCount }}

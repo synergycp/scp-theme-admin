@@ -263,6 +263,10 @@
           }
         }
       },
+      "notificableEvent":{
+        "LABEL": "Events",
+        "PLACEHOLDER": "Events"
+      },
       "massEvent":{
         "LABEL": "Assign to all events"
       }

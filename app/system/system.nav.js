@@ -93,9 +93,9 @@
       if (map.system.settings.read) {
         group.item(SSH_KEYS);
       }
-      if (map.notification.read) {
-        group.item(NOTIFICATION);
-      }
+      // if (map.notification.read) {
+      //   group.item(NOTIFICATION);
+      // }
     }
 
     function hide() {
@@ -107,6 +107,7 @@
       group.remove(SSH_KEYS);
       group.remove(PACKAGES);
       group.remove(PERMISSION_GROUPS);
+      group.remove(NOTIFICATION);
     }
   }
 })();

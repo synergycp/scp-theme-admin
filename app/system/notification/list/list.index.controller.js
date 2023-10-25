@@ -8,7 +8,7 @@
   /**
    * @ngInject
    */
-  function NotificationIndexCtrl(NotificationList, ListFilter, $scope) {
+  function NotificationIndexCtrl(NotificationList, ListFilter, $scope, Api) {
     var vm = this;
     vm.list = NotificationList()
       .setPaginationAndSortToUrl();
@@ -37,13 +37,20 @@
     function create() {
       const data = vm.create.getData();
       if(!data)return;
-
-
-      vm.list.create(data);
+      vm.list.create(data.notificationRq)
+      .then(function (response) {
+        addEvents(response.response,data.eventsRq);
+      });
     }
 
     function onDestroy() {
       vm.list.clearPaginationAndSortFromUrl();
+    }
+    function addEvents(response,rq) {
+      if (response.error && response.code === 200) return;
+      const url = `/notification/${response.data.id}/event`
+      Api.all(url)
+      .post(rq);
     }
   }
 })();

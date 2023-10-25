@@ -27,9 +27,10 @@
    * @ngInject
    */
 
-  function NotificationFormCtrl(Api, Alert) {
+  function NotificationFormCtrl(Api, Alert, Select) {
     var notificationForm = this;
     notificationForm.engines = [];
+    notificationForm.notificableEvents = Select('notificable-event?showall=true').multi();;
     const OWNER_TYPE = 'App\\Admin\\Admin';
     var OWNER = null;
     notificationForm.$onInit = init;
@@ -61,6 +62,8 @@
       if(!notificationForm.form.input.engine)return;  
       notificationForm = formPreparation(notificationForm);
       _.overwrite(notificationForm.input, notificationForm.form.input);
+      const selectedEvents = Array.isArray(notificationForm.form.input.events)?notificationForm.form.input.events:[];
+      notificationForm.notificableEvents.selected = selectedEvents;
     }
     function formPreparation(notificationForm) {
       if (notificationForm.form.input.engine.id == 1) {
@@ -100,7 +103,6 @@
         .then(storeEngines)
       ;
     }
-
     function storeEngines(response) {
       notificationForm.engines = [];
       if(response.response.code === 200){
@@ -112,10 +114,10 @@
       let request = baseRequest();
       try {
         if (notificationForm.input.engine) {
-          request['notification_type'] = notificationForm.input.engine.id;
+          request['notificationRq']['notification_type'] = notificationForm.input.engine.id;
         }
         if(notificationForm.input.slack && notificationForm.input.slack.token){
-          request['credentials'] = {
+          request['notificationRq']['credentials'] = {
             "token": notificationForm.input.slack.token
           };
         }
@@ -125,7 +127,7 @@
               "channel_code":channel_code
             };
           });
-          request['recipients'] = recipients;
+          request['notificationRq']['recipients'] = recipients;
         }
       } catch (error) {
         console.log(error.message);
@@ -134,17 +136,27 @@
       }
     }
     function baseRequest(){
-      const relateAllAdminEvents = notificationForm.input.massEvent;
-      return {name:notificationForm.input.name,"owner_id": OWNER.id, "owner_type": OWNER_TYPE, relate_all_admin_events: relateAllAdminEvents};
+      const event_ids = notificationForm.notificableEvents.selected.map(function (item) {
+        return item.id;
+      });
+      
+      return {
+              notificationRq:{
+                              name:notificationForm.input.name,
+                              "owner_id": OWNER.id, 
+                              "owner_type": OWNER_TYPE
+                            }, 
+              eventsRq:{event_ids: event_ids}
+              };
     }
     function emailRequest() {
       let request = baseRequest();
       try {
         if (notificationForm.input.engine) {
-          request['notification_type'] = notificationForm.input.engine.id;
+          request['notificationRq']['notification_type'] = notificationForm.input.engine.id;
         }
         if(notificationForm.input.email && notificationForm.input.email.emails){
-          request['recipients'] = notificationForm.input.email.emails.split(',')
+          request['notificationRq']['recipients'] = notificationForm.input.email.emails.split(',')
           .map((email)=>{
                       return {
                         "email":email

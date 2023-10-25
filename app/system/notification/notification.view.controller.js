@@ -11,7 +11,7 @@
    *
    * @ngInject
    */
-  function NotificationViewCtrl(Edit, $stateParams) {
+  function NotificationViewCtrl(Edit, $stateParams, Api) {
     var vm = this;
 
     vm.edit = Edit('notification/'+$stateParams.id);
@@ -33,7 +33,14 @@
     }
 
     function submit() {
-      vm.edit.patch(vm.edit.getData());
+      const data = vm.edit.getData();
+      const url = `/notification/${$stateParams.id}/event`
+      Api.all(url)
+      .post(data.eventsRq)
+      .then(function () {
+        vm.edit.patch(data.notificationRq);
+      })
+      
     }
   }
 })();

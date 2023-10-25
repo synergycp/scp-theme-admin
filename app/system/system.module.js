@@ -18,6 +18,6 @@
     "app.system.package",
     "app.system.version",
     "app.system.permission-groups",
-    "app.system.notification"
+   // "app.system.notification"
   ]);
 })();

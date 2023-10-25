@@ -22,9 +22,5 @@
         templateUrl: helper.basepath('system/notification/notification.view.html'),
       })
       ;
-
-    // helper.url.map('email/template/?([0-9]*)', function ($state, id) {
-    //   return 'system/email'+(id && '/'+id);
-    // });
   }
 })();

@@ -13,11 +13,11 @@
     "app.system.setting",
     "app.system.template.suggested-change",
     "app.system.theme",
-    "app.system.log",
+    //"app.system.log",
     "app.system.health",
     "app.system.package",
     "app.system.version",
     "app.system.permission-groups",
-   // "app.system.notification"
+    "app.system.notification"
   ]);
 })();

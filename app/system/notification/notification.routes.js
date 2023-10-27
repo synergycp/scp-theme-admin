@@ -22,5 +22,8 @@
         templateUrl: helper.basepath('system/notification/notification.view.html'),
       })
       ;
+      helper.url.map('notification/?([0-9]*)', function ($state, id) {
+        return `system/notification/${id}`;
+      });
   }
 })();

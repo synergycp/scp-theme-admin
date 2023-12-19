@@ -86,7 +86,7 @@
       "LABEL": "PXE Boot Mode",
       "type": {
         "LEGACY": "Legacy",
-        "UEFI": "UEFI (limited support - requires custom Boot Scripts)"
+        "UEFI": "UEFI"
       }
     },
     "switch": {

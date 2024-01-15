@@ -1,7 +1,7 @@
 {
   "modal": {
     "update": {
-      "CANCEL": "Close",
+      "CLOSE": "Close",
       "SUBMIT": "Update Now",
       "TITLE": "SynergyCP Application Version",
       "already_latest": {
@@ -13,7 +13,7 @@
         "LATEST": "Latest Version",
         "CHANGELOG": "Changelog",
         "CHANGELOG_SUB_TEXT": "This changelog will only reflect the latest version, not other versions between the current version and the latest version.",
-        "FULL_CHANGELOG": "Full Changelog",
+        "FULL_CHANGELOG": "Full Changelog and Upgrade Instructions",
         "VERSION_DESCR": "{{semver}} ({{releaseDate}})"
       },
       "release_channel": {

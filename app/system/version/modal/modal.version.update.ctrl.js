@@ -16,11 +16,6 @@
     modal.onChangeReleaseChannel = onChangeReleaseChannel;
     modal.isNewVersionAvailable = isNewVersionAvailable;
     modal.loader = Loader();
-    modal.submit = onSubmit;
-    modal.data = {
-      submitClass: 'btn-primary',
-    };
-
     modal.$onInit = refresh;
 
     function onChangeReleaseChannel() {
@@ -44,20 +39,6 @@
 
     function isNewVersionAvailable() {
       return modal.latest && modal.current && modal.latest.semver !== modal.current.semver;
-    }
-
-    function onSubmit() {
-      // User chose to update, so send the API request.
-      return modal.loader.during(
-        Api.all('version').post({
-          release_channel: modal.releaseChannel,
-        }).then(function () {
-          return $translate('version.UPDATE_STARTED');
-        }).then(function (i18nResult) {
-          Alert.success(i18nResult);
-          modal.$close();
-        })
-      );
     }
   }
 })();

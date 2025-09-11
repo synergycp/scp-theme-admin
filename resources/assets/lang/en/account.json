@@ -89,13 +89,28 @@
             "BODY": "We have sent an {{ type }} to {{ value }}. Please input the code you received here:",
             "CANCEL": "Cancel",
             "SUBMIT": "Verify",
-            "CODE": "Code"
+            "CODE": "Code",
+            "OTP-SECRET": "Secret code"
+          },
+          "verify_otp": {
+            "TITLE": "Verify Two Factor Authentication",
+            "BODY": "Scan the QR Code below using your preferred authenticator app and then enter the provided one-time code below.",
+            "CANCEL": "Cancel",
+            "SUBMIT": "Verify",
+            "CODE": "Code",
+            "OTP-SECRET": "Secret code"
           },
           "confirm_delete": {
             "TITLE": "Are you sure?",
             "BODY": "This will delete the following Two Factor Authentication methods:",
             "CANCEL": "Cancel",
             "SUBMIT": "Delete"
+          },
+          "recovery_codes": {
+            "TITLE": "Two Factor Authentication Successfully Enabled",
+            "BODY": "Keep the following recovery codes in a safe place in case you lose your mobile device, or need to login without your mobile device. Recovery codes are one time use only.",
+            "CANCEL": "Cancel",
+            "SUBMIT": "Cerrar"
           }
         }
       }

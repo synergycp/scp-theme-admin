@@ -13,36 +13,36 @@ block headings
   th.sortable(ng-if="table.showServers")
     span(translate="group.list.heading.SERVERS")
     sort(col="servers")
+  th
+    span(translate="group.list.heading.PXE_STATUS_READINESS")
   th(ng-if="table.showActions")
     span(translate="group.list.heading.ACTIONS")
 
 block columns
   td(ng-if="table.showName")
-    a(
-      ui-sref="app.network.group.view({id: row.id})"
-      ng-bind="row.name"
-    )
+    a(ui-sref="app.network.group.view({id: row.id})", ng-bind="row.name")
   td(ng-if="table.showReserved")
     span.fa.fa-check.text-success(ng-if="row.reserved")
     span.text-muted(ng-if="!row.reserved") -
   td(ng-if="table.showIpEntities")
     a(
-      ui-sref="app.network.entity.list({'group.id': row.id})"
+      ui-sref="app.network.entity.list({'group.id': row.id})",
       ng-bind="row.entities.count"
     )
   td(ng-if="table.showServers")
     a(
-      ui-sref="app.hardware.server.inventory({group: row.id})"
+      ui-sref="app.hardware.server.inventory({group: row.id})",
       ng-bind="row.servers.inventory"
     )
     span /
     a(
-      ui-sref="app.hardware.server.list({group: row.id})"
+      ui-sref="app.hardware.server.list({group: row.id})",
       ng-bind="row.servers.count"
     )
+  td(ng-bind="row.pxe_readiness_status")
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(
-        ui-sref="app.network.group.view({id: row.id})"
+        ui-sref="app.network.group.view({id: row.id})",
         translate="app.action.EDIT"
       )

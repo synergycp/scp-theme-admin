@@ -15,6 +15,7 @@
       "RESERVED": "Reserved",
       "ENTITIES": "IP Entities",
       "SERVERS": "Servers (Inventory / Total)",
+      "PXE_STATUS_READINESS": "Pxe Status Readiness",
       "ACTIONS": "Actions"
     }
   },

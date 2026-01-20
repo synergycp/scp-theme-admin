@@ -6,7 +6,7 @@
   "devDependencies": {
     "@prettier/plugin-pug": "^1.15.2",
     "angular-mergely": "^1.0.0",
-    "browser-sync": "^2.11.0",
+    "browser-sync": "^2.27.10",
     "codemirror": "^5.60.0",
     "del": "^1.2.0",
     "gulp": "^4.0.0",

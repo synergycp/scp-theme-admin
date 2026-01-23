@@ -15,7 +15,7 @@
   var INPUTS = {
     admin_notes: "",
     nickname: "",
-    billing_id: "",
+    billing_id: null,
     vlan: "",
     group: null,
     v4: {

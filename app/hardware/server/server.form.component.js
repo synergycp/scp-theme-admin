@@ -91,6 +91,7 @@
         empty: emptyBillingDate,
       },
     };
+    serverForm.launchKvm = Select("server/launch/kvm");
     serverForm.pxeBootModeTypes = {
       // The key corresponds to a translation key in server.form.pxe-boot-mode.type
       // The value corresponds to the API outputs for the enum ServerPXEBootMode
@@ -263,6 +264,9 @@
         serverForm.cpu.selected = response.cpu;
         serverForm.mem.selected = response.mem;
         serverForm.billing.integration.selected = response.billing.integration;
+        if (response.launch_kvm) {
+          serverForm.launchKvm.selected = response.launch_kvm;
+        }
 
         serverForm.billing.date.value = response.billing.date
           ? Date.parse(response.billing.date)
@@ -564,6 +568,9 @@
         data.cpu = serverForm.cpu.getSelected("id") || null;
         data.mem = serverForm.mem.getSelected("id") || null;
       }
+      if (serverForm.alwaysDirty || serverForm.launchKvm.$dirty) {
+        data.launch_kvm = serverForm.launchKvm.getSelected("value") || null;
+      }
       data.billing = data.billing || {};
       var integration = serverForm.billing.integration;
       if (integration.$dirty) {
@@ -656,6 +663,7 @@
         serverForm.mem.$dirty =
           false;
       serverForm.billing.integration.$dirty = false;
+      serverForm.launchKvm.$dirty = false;
       _.each(serverForm.ports, function (port) {
         port.$setPristine();
       });

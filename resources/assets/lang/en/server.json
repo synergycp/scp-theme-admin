@@ -89,6 +89,10 @@
         "UEFI": "UEFI"
       }
     },
+    "launch-kvm": {
+      "LABEL": "Launch KVM action",
+      "PLACEHOLDER": "Type to search..."
+    },
     "switch": {
       "LABEL": "Switch",
       "port": {

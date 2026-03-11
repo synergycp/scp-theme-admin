@@ -81,6 +81,18 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
   ng-options="'server.form.pxe-boot-mode.type.'+type | translate for (type,value) in serverForm.pxeBootModeTypes"
 )
 
++label("server.form.launch-kvm.LABEL")
+  +ui-select("serverForm.launchKvm")
+    ui-select-match(placeholder="{{ 'server.form.launch-kvm.PLACEHOLDER' | translate }}")
+      span(ng-bind="$select.selected.label")
+
+    ui-select-choices(
+      repeat="kvm in serverForm.launchKvm.items track by kvm.value"
+      refresh="serverForm.launchKvm.load($select.search)"
+      refresh-delay="400"
+    )
+      span(ng-bind-html="kvm.label | highlight: $select.search")
+
 hr
 
 div.relative(

@@ -37,56 +37,39 @@ block headings
   th.sortable(ng-if="table.showUsageMax")
     span(translate="server.heading.usage.MAX")
     sort(col="usage.max")
+  th.sortable
+    span(translate="server.heading.LAUCH")
+    sort(col="lauch")
   th Actions
 
 block columns
   td(ng-if="table.showSrvId")
     a(
-      ui-sref="app.hardware.server.view.manage({id: row.id})"
+      ui-sref="app.hardware.server.view.manage({id: row.id})",
       ng-bind="row.srv_id"
     )
-  td(
-    ng-if="table.showNickname"
-    ng-bind="row.nickname"
-  )
-  td(
-    ng-if="table.showIp"
-    ng-bind="row.entity.name || '-'"
-  )
+  td(ng-if="table.showNickname", ng-bind="row.nickname")
+  td(ng-if="table.showIp", ng-bind="row.entity.name || '-'")
   td(ng-if="table.showClient")
     a(
-      ng-if="row.access"
-      ui-sref="app.user.client.view({id: row.access.client.id})"
+      ng-if="row.access",
+      ui-sref="app.user.client.view({id: row.access.client.id})",
       ng-bind="row.access.client.name"
     )
     span(ng-if="!row.access") -
-  td(
-    ng-if="table.showStatus"
-    ng-bind="row.status_desc"
-  )
-  td(
-    ng-if="table.showCpu"
-    ng-bind="row.cpu.name"
-  )
-  td(
-    ng-if="table.showRam"
-    ng-bind="row.mem.name"
-  )
+  td(ng-if="table.showStatus", ng-bind="row.status_desc")
+  td(ng-if="table.showCpu", ng-bind="row.cpu.name")
+  td(ng-if="table.showRam", ng-bind="row.mem.name")
   td(ng-if="table.showHdds")
     span(ng-repeat="hdd in row.hdd_counts track by hdd.value")
       span(ng-if="hdd.key > 1", ng-bind="hdd.key+'x '")
       span(ng-bind="hdd.value + ($last ? '' : ',')")
       br
 
-  td(
-    ng-if="table.showSwitch"
-  )
+  td(ng-if="table.showSwitch")
     span(ng-bind="row.switch.name || '-'")
     span(ng-bind="row.switch.port ? ' - ' + row.switch.port.name : ''")
-  td(
-    ng-if="table.showGroup"
-    ng-bind="row.group.name || '-'"
-  )
+  td(ng-if="table.showGroup", ng-bind="row.group.name || '-'")
   td(ng-if="table.showUsagePercent")
     span(ng-if="row.usage")
       span(ng-bind="row.usage.percent")
@@ -97,10 +80,12 @@ block columns
       span(ng-bind="row.usage.max | bitsToSize")
     span.text-muted(ng-if="!row.usage") -
   td
+    span(ng-if="row.launch_kvm")
+      span(ng-bind="row.launch_kvm.label")
+    span.text-muted(ng-if="!row.launch_kvm") -
+  td
     .btn-group.btn-group-xs
-      a.btn.btn-default(
-        ui-sref="app.hardware.server.view.edit({id: row.id})"
-      )
+      a.btn.btn-default(ui-sref="app.hardware.server.view.edit({id: row.id})")
         i.fa.fa-pencil
 
       a.btn.btn-default(
@@ -111,7 +96,7 @@ block columns
         | &nbsp;
 
       a.btn.btn-default(
-        ng-if="!row.access"
+        ng-if="!row.access",
         ui-sref="app.hardware.server.provision({ 'server.id': row.id })"
       )
         i.fa.fa-download

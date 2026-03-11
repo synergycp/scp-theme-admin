@@ -235,7 +235,8 @@
     "usage": {
       "PERCENT": "Usage Percent",
       "MAX": "Usage Max"
-    }
+    },
+    "LAUCH": "Launch KVM action"
   },
   "inventory": {
     "TITLE": "Server Inventory"

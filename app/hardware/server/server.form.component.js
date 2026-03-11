@@ -92,6 +92,7 @@
       },
     };
     serverForm.launchKvm = Select("server/launch/kvm");
+    serverForm.launchKvm.load();
     serverForm.pxeBootModeTypes = {
       // The key corresponds to a translation key in server.form.pxe-boot-mode.type
       // The value corresponds to the API outputs for the enum ServerPXEBootMode

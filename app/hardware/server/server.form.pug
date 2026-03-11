@@ -87,9 +87,7 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
       span(ng-bind="$select.selected.label")
 
     ui-select-choices(
-      repeat="kvm in serverForm.launchKvm.items track by kvm.value"
-      refresh="serverForm.launchKvm.load($select.search)"
-      refresh-delay="400"
+      repeat="kvm in serverForm.launchKvm.items | filter: {label: $select.search} track by kvm.value"
     )
       span(ng-bind-html="kvm.label | highlight: $select.search")
 

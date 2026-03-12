@@ -1,12 +1,21 @@
 (function () {
-  'use strict';
+  "use strict";
 
   angular
-    .module('app.system.health.renderer')
-    .constant('ConstantHealthStatusStateChangeRenderer', ConstantHealthStatusStateChangeRenderer)
-    .constant('PkgConstantHealthStatusStateChangeRenderer', PkgConstantHealthStatusStateChangeRenderer)
-    .constant('SimpleHealthStatusRenderer', SimpleHealthStatusRendererFactory)
-    .constant('PkgSimpleHealthStatusRenderer', PkgSimpleHealthStatusRendererFactory);
+    .module("app.system.health.renderer")
+    .constant(
+      "ConstantHealthStatusStateChangeRenderer",
+      ConstantHealthStatusStateChangeRenderer
+    )
+    .constant(
+      "PkgConstantHealthStatusStateChangeRenderer",
+      PkgConstantHealthStatusStateChangeRenderer
+    )
+    .constant("SimpleHealthStatusRenderer", SimpleHealthStatusRendererFactory)
+    .constant(
+      "PkgSimpleHealthStatusRenderer",
+      PkgSimpleHealthStatusRendererFactory
+    );
 
   function ConstantHealthStatusStateChangeRenderer(state, i18nObjectCallback) {
     return SimpleHealthStatusRendererFactory(onClick, i18nObjectCallback);
@@ -19,8 +28,16 @@
     }
   }
 
-  function PkgConstantHealthStatusStateChangeRenderer(pkg, state, i18nObjectCallback) {
-    return PkgSimpleHealthStatusRendererFactory(pkg, onClick, i18nObjectCallback);
+  function PkgConstantHealthStatusStateChangeRenderer(
+    pkg,
+    state,
+    i18nObjectCallback
+  ) {
+    return PkgSimpleHealthStatusRendererFactory(
+      pkg,
+      onClick,
+      i18nObjectCallback
+    );
 
     /**
      * @ngInject
@@ -30,7 +47,10 @@
     }
   }
 
-  function SimpleHealthStatusRendererFactory(onClickCallback, i18nObjectCallback) {
+  function SimpleHealthStatusRendererFactory(
+    onClickCallback,
+    i18nObjectCallback
+  ) {
     /**
      * @ngInject
      * @param $q
@@ -41,24 +61,26 @@
     function SimpleHealthStatusRenderer($q, $injector, healthCheck) {
       var renderer = this;
       renderer.render = render;
-
       function render() {
-        var i18nObject = $injector.invoke(i18nObjectCallback || inferI18nFromHealthCheckSlug, null, {
-          healthCheck: healthCheck,
-        });
+        var i18nObject = $injector.invoke(
+          i18nObjectCallback || inferI18nFromHealthCheckSlug,
+          null,
+          {
+            healthCheck: healthCheck,
+          }
+        );
         // Unwrap the promise if it returns one.
-        return $q.when(i18nObject)
-          .then(function (i18nObject) {
-            return {
-              i18n_key: i18nObject.key || i18nObject,
-              i18n_params: i18nObject.params || healthCheck,
-              onClick: onClick,
-            };
-          });
+        return $q.when(i18nObject).then(function (i18nObject) {
+          return {
+            i18n_key: i18nObject.key || i18nObject,
+            i18n_params: i18nObject.params || healthCheck,
+            onClick: onClick,
+          };
+        });
       }
 
       function onClick() {
-        return $injector.invoke(onClickCallback, {healthCheck: healthCheck});
+        return $injector.invoke(onClickCallback, { healthCheck: healthCheck });
       }
     }
 
@@ -68,19 +90,30 @@
     return SimpleHealthStatusRenderer;
   }
 
-
-  function PkgSimpleHealthStatusRendererFactory(packageName, onClickCallback, i18nObjectCallback) {
-    return SimpleHealthStatusRendererFactory(onClickCallback, i18nObjectCallback || inferPkgI18nFromHealthCheckSlug);
+  function PkgSimpleHealthStatusRendererFactory(
+    packageName,
+    onClickCallback,
+    i18nObjectCallback
+  ) {
+    return SimpleHealthStatusRendererFactory(
+      onClickCallback,
+      i18nObjectCallback || inferPkgI18nFromHealthCheckSlug
+    );
 
     /** @ngInject */
     function inferPkgI18nFromHealthCheckSlug(healthCheck, RouteHelpers) {
-      return RouteHelpers
-        .package(packageName)
+      return RouteHelpers.package(packageName)
         .loadLang("admin:health")
         .then(function () {
-          var slug = healthCheck.slug.replace('pkg.'+packageName+'.', '');
+          var slug = healthCheck.slug.replace("pkg." + packageName + ".", "");
           return {
-            key: 'pkg.' + packageName + '.admin.health.' + slug + '.' + healthCheck.status,
+            key:
+              "pkg." +
+              packageName +
+              ".admin.health." +
+              slug +
+              "." +
+              healthCheck.status,
           };
         });
     }
@@ -89,7 +122,7 @@
   /** @ngInject */
   function inferI18nFromHealthCheckSlug(healthCheck) {
     return {
-      key: 'health.check.' + healthCheck.slug + '.' + healthCheck.status,
+      key: "health.check." + healthCheck.slug + "." + healthCheck.status,
     };
   }
 })();

@@ -93,10 +93,10 @@
         return;
       }
       widget.customChecks = healthChecks.filter(
-        (healthCheck) => healthCheck.is_custom
+        function (healthCheck) { return healthCheck.is_custom; }
       );
       healthChecks = healthChecks.filter(
-        (healthCheck) => !healthCheck.is_custom
+        function (healthCheck) { return !healthCheck.is_custom; }
       );
       return $q
         .all(

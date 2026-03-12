@@ -92,12 +92,12 @@
         setMinState(STATE.WARN);
         return;
       }
-      widget.customChecks = healthChecks.filter(
-        function (healthCheck) { return healthCheck.is_custom; }
-      );
-      healthChecks = healthChecks.filter(
-        function (healthCheck) { return !healthCheck.is_custom; }
-      );
+      widget.customChecks = healthChecks.filter(function (healthCheck) {
+        return healthCheck.is_custom;
+      });
+      healthChecks = healthChecks.filter(function (healthCheck) {
+        return !healthCheck.is_custom;
+      });
       return $q
         .all(
           _.map(healthChecks, function (healthCheck) {
@@ -106,7 +106,6 @@
           })
         )
         .then(function (checks) {
-          //console.log(checks);
           _.setContents(widget.checks, _.filter(checks));
         });
     }

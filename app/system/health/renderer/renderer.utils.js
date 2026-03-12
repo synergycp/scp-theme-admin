@@ -61,7 +61,6 @@
     function SimpleHealthStatusRenderer($q, $injector, healthCheck) {
       var renderer = this;
       renderer.render = render;
-      console.log(healthCheck);
       function render() {
         var i18nObject = $injector.invoke(
           i18nObjectCallback || inferI18nFromHealthCheckSlug,
@@ -72,7 +71,6 @@
         );
         // Unwrap the promise if it returns one.
         return $q.when(i18nObject).then(function (i18nObject) {
-          console.log(i18nObject);
           return {
             i18n_key: i18nObject.key || i18nObject,
             i18n_params: i18nObject.params || healthCheck,

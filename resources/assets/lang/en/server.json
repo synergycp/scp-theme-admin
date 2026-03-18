@@ -142,21 +142,21 @@
         "PLACEHOLDER": "Hostname or IP Address"
       },
       "admin": {
-        "LABEL": "Admin",
+        "LABEL": "IPMI Admin",
         "username": {
-          "PLACEHOLDER": "Admin Username"
+          "PLACEHOLDER": "IPMI Admin Username"
         },
         "password": {
-          "PLACEHOLDER": "Admin Password"
+          "PLACEHOLDER": "IPMI Admin Password"
         }
       },
       "client": {
-        "LABEL": "Client",
+        "LABEL": "IPMI Client",
         "username": {
-          "PLACEHOLDER": "Client Username"
+          "PLACEHOLDER": "IPMI Client Username"
         },
         "password": {
-          "PLACEHOLDER": "Client Password"
+          "PLACEHOLDER": "IPMI Client Password"
         }
       },
       "snmp": {
@@ -236,7 +236,7 @@
       "PERCENT": "Usage Percent",
       "MAX": "Usage Max"
     },
-    "LAUCH": "Launch KVM action"
+    "LAUNCH": "Launch KVM action"
   },
   "inventory": {
     "TITLE": "Server Inventory"
@@ -296,8 +296,8 @@
       }
     },
     "client": {
-      "USER": "Client Username",
-      "PASS": "Client Password",
+      "USER": "IPMI Username",
+      "PASS": "IPMI Password",
       "EMPTY": "Not created",
       "CREATE": "create",
       "DELETE": "delete",

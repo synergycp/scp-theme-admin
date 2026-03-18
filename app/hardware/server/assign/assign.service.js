@@ -20,6 +20,7 @@
     ServerAssign.unsuspend = unsuspend;
     ServerAssign.client = ServerAssignModal.client;
     ServerAssign.suspend = ServerAssignModal.suspend;
+    ServerAssign.launchKvm = ServerAssignModal.launchKvm;
     ServerAssign.billing = {
       limits: billingLimits,
       date: billingDate,

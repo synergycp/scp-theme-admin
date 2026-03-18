@@ -487,6 +487,15 @@
         }
       }
     },
+    "launch-kvm": {
+      "TITLE": "Assign Launch KVM Action",
+      "SUBMIT": "Assign",
+      "CANCEL": "Cancel",
+      "launch-kvm": {
+        "LABEL": "Launch KVM Action",
+        "PLACEHOLDER": "Type to search..."
+      }
+    },
     "client": {
       "TITLE": "Assign Client",
       "SUBMIT": "Assign",

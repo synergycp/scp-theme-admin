@@ -1,0 +1,37 @@
+include /resources/angle/pug/mixins/form
+
+form(ng-submit="modal.submit()")
+  .modal-header
+    button.close(
+      type="button"
+      ng-click="modal.$dismiss()"
+    ) &times;
+
+    h4.modal-title(data-translate="server.modal.launch-kvm.TITLE")
+
+  .modal-body.form-horizontal
+    +label("{{ 'server.modal.servers.LABEL' | translate }}")
+      p.form-control-static
+        span(ng-repeat="server in modal.servers")
+          span(ng-bind="server.name")
+          br
+    +label("{{ 'server.modal.launch-kvm.launch-kvm.LABEL' | translate }}")
+      +ui-select("modal.launchKvm")
+        ui-select-match(placeholder="{{ 'server.modal.launch-kvm.launch-kvm.PLACEHOLDER' | translate }}")
+          span(ng-bind="$select.selected.label")
+
+        ui-select-choices(
+          repeat="kvm in modal.launchKvm.items | filter: {label: $select.search} track by kvm.value"
+        )
+          span(ng-bind-html="kvm.label | highlight: $select.search")
+
+  .modal-footer
+    button.btn.btn-secondary(
+      type="button"
+      ng-click="modal.$dismiss()"
+      data-translate="server.modal.launch-kvm.CANCEL"
+    )
+    button.btn.btn-primary(
+      type="submit"
+      data-translate="server.modal.launch-kvm.SUBMIT"
+    )

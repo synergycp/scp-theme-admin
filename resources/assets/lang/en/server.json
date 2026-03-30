@@ -89,6 +89,10 @@
         "UEFI": "UEFI"
       }
     },
+    "launch-kvm": {
+      "LABEL": "Launch KVM action",
+      "PLACEHOLDER": "Type to search..."
+    },
     "switch": {
       "LABEL": "Switch",
       "port": {
@@ -138,21 +142,21 @@
         "PLACEHOLDER": "Hostname or IP Address"
       },
       "admin": {
-        "LABEL": "Admin",
+        "LABEL": "IPMI Admin",
         "username": {
-          "PLACEHOLDER": "Admin Username"
+          "PLACEHOLDER": "IPMI Admin Username"
         },
         "password": {
-          "PLACEHOLDER": "Admin Password"
+          "PLACEHOLDER": "IPMI Admin Password"
         }
       },
       "client": {
-        "LABEL": "Client",
+        "LABEL": "IPMI Client",
         "username": {
-          "PLACEHOLDER": "Client Username"
+          "PLACEHOLDER": "IPMI Client Username"
         },
         "password": {
-          "PLACEHOLDER": "Client Password"
+          "PLACEHOLDER": "IPMI Client Password"
         }
       },
       "snmp": {
@@ -231,7 +235,8 @@
     "usage": {
       "PERCENT": "Usage Percent",
       "MAX": "Usage Max"
-    }
+    },
+    "LAUNCH": "Launch KVM action"
   },
   "inventory": {
     "TITLE": "Server Inventory"
@@ -291,8 +296,8 @@
       }
     },
     "client": {
-      "USER": "Client Username",
-      "PASS": "Client Password",
+      "USER": "IPMI Username",
+      "PASS": "IPMI Password",
       "EMPTY": "Not created",
       "CREATE": "create",
       "DELETE": "delete",
@@ -480,6 +485,15 @@
           "LABEL": "Date",
           "PLACEHOLDER": "Bandwidth date before this data will be hidden"
         }
+      }
+    },
+    "launch-kvm": {
+      "TITLE": "Assign Launch KVM Action",
+      "SUBMIT": "Assign",
+      "CANCEL": "Cancel",
+      "launch-kvm": {
+        "LABEL": "Launch KVM Action",
+        "PLACEHOLDER": "Type to search..."
       }
     },
     "client": {

@@ -18,6 +18,7 @@
     ServerAssignModal.client = client;
     ServerAssignModal.delete = remove;
     ServerAssignModal.suspend = suspend;
+    ServerAssignModal.launchKvm = launchKvm;
 
     //////////
 
@@ -166,6 +167,24 @@
             .then(saveAccessResponse.bind(null, server))
             ;
         }
+      });
+    }
+
+    function launchKvm(servers) {
+      var modal = $uibModal.open({
+        templateUrl: 'app/hardware/server/assign/modal/modal.launch-kvm.html',
+        controller: 'ServerAssignLaunchKvmModalCtrl',
+        bindToController: true,
+        controllerAs: 'modal',
+        resolve: {
+          servers: function () {
+            return servers;
+          },
+        },
+      });
+
+      return modal.result.then(function (input) {
+        return $bulk(servers).patch(input);
       });
     }
 

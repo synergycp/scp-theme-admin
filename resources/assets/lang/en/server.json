@@ -93,6 +93,9 @@
       "LABEL": "Launch KVM action",
       "PLACEHOLDER": "Type to search..."
     },
+    "console-type": {
+      "LABEL": "Console Type"
+    },
     "switch": {
       "LABEL": "Switch",
       "port": {

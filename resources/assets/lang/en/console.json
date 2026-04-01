@@ -1,0 +1,47 @@
+{
+  "server": {
+    "status": {
+      "OK": "OK",
+      "WARN": "Warning",
+      "ERROR": "Error"
+    },
+    "list": {
+      "TITLE": "Console Servers",
+      "heading": {
+        "NAME": "Name",
+        "HEALTH": "Health",
+        "HOSTNAME": "Hostname",
+        "ACTIONS": "Actions"
+      }
+    },
+    "form": {
+      "title": {
+        "CREATE": "Create Console Server",
+        "EDIT": "Edit Console Server: {{name}}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Enter a name for this console server"
+      },
+      "hostname": {
+        "LABEL": "Hostname",
+        "PLACEHOLDER": "e.g. console.example.com"
+      },
+      "port": {
+        "LABEL": "API Port",
+        "PLACEHOLDER": "3000"
+      },
+      "api_key": {
+        "LABEL": "API Key",
+        "PLACEHOLDER": "Enter the API key"
+      },
+      "health": {
+        "LABEL": "Health"
+      },
+      "group": {
+        "LABEL": "IP Groups"
+      },
+      "SUBMIT": "Save"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
++field(
+  "console.server.form.name.LABEL",
+  "name"
+)(
+  placeholder="{{ 'console.server.form.name.PLACEHOLDER' | translate }}"
+  ng-model="consoleServerForm.input.name"
+)
+
++field(
+  "console.server.form.hostname.LABEL",
+  "hostname"
+)(
+  placeholder="{{ 'console.server.form.hostname.PLACEHOLDER' | translate }}"
+  ng-model="consoleServerForm.input.hostname"
+)
+
++field(
+  "console.server.form.port.LABEL",
+  "port"
+)(
+  type="number"
+  placeholder="{{ 'console.server.form.port.PLACEHOLDER' | translate }}"
+  ng-model="consoleServerForm.input.port"
+)
+
++field(
+  "console.server.form.api_key.LABEL",
+  "api_key"
+)(
+  placeholder="{{ 'console.server.form.api_key.PLACEHOLDER' | translate }}"
+  ng-model="consoleServerForm.input.api_key"
+)
+
+div(ng-if="!consoleServerForm.isCreating")
+  +label("console.server.form.health.LABEL")
+    p.form-control-static
+      console-server-health(server="consoleServerForm.server")
+
++label("console.server.form.group.LABEL")
+  +ui-select("consoleServerForm.groups")(
+    multiple
+    theme="bootstrap"
+    close-on-select="false"
+  )
+    ui-select-match(placeholder="{{ 'console.server.form.group.LABEL' | translate }}")
+      | {{ $item.name }}
+
+    ui-select-choices(
+      repeat=
+        "group in (" +
+        "consoleServerForm.groups.items |" +
+        "filter: {name: $select.search} |" +
+        "filter: consoleServerForm.groups.notSelected" +
+        ") track by group.id"
+      refresh="consoleServerForm.groups.load($select.search)"
+      refresh-delay="400"
+    )
+      div(ng-bind-html="group.name | highlight: $select.search")

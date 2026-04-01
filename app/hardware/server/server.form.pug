@@ -91,6 +91,16 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
     )
       span(ng-bind-html="kvm.label | highlight: $select.search")
 
+div(ng-if="serverForm.launchKvm.selected.value == 'containerized_console'")
+  +select(
+    "server.form.console-type.LABEL",
+    "console_type"
+  )(
+    name="console_type"
+    ng-model="serverForm.input.console_type"
+    ng-options="option.value as option.label for option in serverForm.consoleTypeOptions"
+  )
+
 hr
 
 div.relative(

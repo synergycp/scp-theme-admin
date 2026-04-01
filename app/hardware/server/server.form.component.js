@@ -99,6 +99,9 @@
       LEGACY: "LEGACY",
       UEFI: "UEFI",
     };
+    serverForm.consoleTypeOptions = [
+      { value: 'scp-console-container-legacy', label: 'scp-console-container-legacy' },
+    ];
 
     //////////
 

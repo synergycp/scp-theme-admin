@@ -38,6 +38,11 @@
     sref: "app.network.forward.gateway.list",
   };
 
+  var CONSOLE_SERVERS = {
+    text: "Console Servers",
+    sref: "app.network.console.server.list",
+  };
+
   /**
    * @ngInject
    */
@@ -80,6 +85,7 @@
 
       if (map.network.forward.read) {
         group.item(FORWARD_GATEWAYS);
+        group.item(CONSOLE_SERVERS);
       }
     }
 
@@ -88,6 +94,7 @@
       group.remove(ENTITIES);
       group.remove(SWITCHES);
       group.remove(FORWARD_GATEWAYS);
+      group.remove(CONSOLE_SERVERS);
       group.remove(SPEEDS);
     }
   }

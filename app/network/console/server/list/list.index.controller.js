@@ -30,6 +30,7 @@
     activate();
 
     function activate() {
+      vm.list.load();
       $scope.$on('$destroy', onDestroy);
     }
 

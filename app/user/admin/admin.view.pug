@@ -2,14 +2,12 @@ extends /resources/angle/pug/edit
 
 block title
   span(
-    translate='admin.form.title.EDIT'
-    translate-value-username='{{vm.edit.input.username}}'
+    translate="admin.form.title.EDIT",
+    translate-value-username="{{ vm.edit.input.username }}"
   )
 
 block form
   admin-form(form="vm.edit")
 
 block append right-side
-  admin-buttons(
-    admin="vm.edit.input"
-  )
+  admin-buttons(admin="vm.edit.input")

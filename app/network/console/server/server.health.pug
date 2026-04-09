@@ -1,6 +1,6 @@
 span(
   ng-class="health.getClassMap()"
-  translate="console.server.status.{{health.server.status_health}}"
+  translate="console.server.status.{{health.server.status_health || 'null'}}"
 )
 |&nbsp;
 span(ng-class="health.loader.class")

@@ -3,7 +3,8 @@
     "status": {
       "OK": "OK",
       "WARN": "Warning",
-      "ERROR": "Error"
+      "ERROR": "Error",
+      "null": "Unknown"
     },
     "list": {
       "TITLE": "Console Servers",
@@ -12,6 +13,14 @@
         "HEALTH": "Health",
         "HOSTNAME": "Hostname",
         "ACTIONS": "Actions"
+      }
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Console Servers",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Console Servers:"
       }
     },
     "form": {

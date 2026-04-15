@@ -94,7 +94,8 @@
       "PLACEHOLDER": "Type to search..."
     },
     "console-type": {
-      "LABEL": "Console Type"
+      "LABEL": "Console Type",
+      "PLACEHOLDER": "Select console type..."
     },
     "switch": {
       "LABEL": "Switch",

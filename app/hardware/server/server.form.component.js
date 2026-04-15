@@ -99,9 +99,8 @@
       LEGACY: "LEGACY",
       UEFI: "UEFI",
     };
-    serverForm.consoleTypeOptions = [
-      { value: 'scp-console-container-legacy', label: 'scp-console-container-legacy' },
-    ];
+    serverForm.consoleType = Select("server/console/type");
+    serverForm.consoleType.load();
 
     //////////
 
@@ -270,6 +269,9 @@
         serverForm.billing.integration.selected = response.billing.integration;
         if (response.launch_kvm) {
           serverForm.launchKvm.selected = response.launch_kvm;
+        }
+        if (response.console_type) {
+          serverForm.consoleType.selected = response.console_type;
         }
 
         serverForm.billing.date.value = response.billing.date
@@ -575,6 +577,9 @@
       if (serverForm.alwaysDirty || serverForm.launchKvm.$dirty) {
         data.launch_kvm = serverForm.launchKvm.getSelected("value") || null;
       }
+      if (serverForm.alwaysDirty || serverForm.consoleType.$dirty) {
+        data.console_type = serverForm.consoleType.getSelected("value") || null;
+      }
       data.billing = data.billing || {};
       var integration = serverForm.billing.integration;
       if (integration.$dirty) {
@@ -668,6 +673,7 @@
           false;
       serverForm.billing.integration.$dirty = false;
       serverForm.launchKvm.$dirty = false;
+      serverForm.consoleType.$dirty = false;
       _.each(serverForm.ports, function (port) {
         port.$setPristine();
       });

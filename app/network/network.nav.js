@@ -1,17 +1,12 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  angular
-    .module('app.network')
-    .config(NavConfig)
-    .run(NavRun)
-  ;
+  angular.module("app.network").config(NavConfig).run(NavRun);
 
   var GROUPS = {
     translate: "nav.network.GROUPS",
     sref: "app.network.group.list",
   };
-
 
   var ENTITIES = {
     translate: "nav.network.ENTITIES",
@@ -39,7 +34,7 @@
   };
 
   var CONSOLE_SERVERS = {
-    text: "Console Servers",
+    text: "Deploy Console Servers",
     sref: "app.network.console.server.list",
   };
 
@@ -47,7 +42,7 @@
    * @ngInject
    */
   function NavConfig(NavProvider) {
-    NavProvider.group('network', {
+    NavProvider.group("network", {
       translate: "nav.network.TITLE",
       icon: "fa fa-sitemap",
     });
@@ -57,15 +52,12 @@
    * @ngInject
    */
   function NavRun(Auth, Nav, Permission) {
-    var group = Nav.group('network');
+    var group = Nav.group("network");
 
     Auth.whileLoggedIn(checkPerms, hide);
 
     function checkPerms() {
-      Permission
-        .map()
-        .then(showPermitted)
-      ;
+      Permission.map().then(showPermitted);
     }
 
     function showPermitted(map) {

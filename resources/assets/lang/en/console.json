@@ -52,5 +52,33 @@
       },
       "SUBMIT": "Save"
     }
+  },
+  "session": {
+    "list": {
+      "TITLE": "Manage Consoles",
+      "EMPTY": "No active console sessions.",
+      "heading": {
+        "SERVER": "Server",
+        "CONSOLE_SERVER": "Console Server",
+        "SRC_IP": "Source IP",
+        "DEST_IP": "Destination IP",
+        "CREATOR": "User",
+        "EXPIRES": "Expires",
+        "CREATED": "Created",
+        "ACTIONS": "Actions"
+      }
+    },
+    "action": {
+      "OPEN": "Open",
+      "DELETE": "Delete"
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Console Sessions",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Console Sessions:"
+      }
+    }
   }
 }

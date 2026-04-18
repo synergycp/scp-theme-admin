@@ -16,6 +16,11 @@
     sref: "app.hardware.server.provision",
   };
 
+  var MANAGE_CONSOLES = {
+    text: "Manage Consoles",
+    sref: "app.hardware.console.list",
+  };
+
   /**
    * @ngInject
    */
@@ -51,6 +56,10 @@
       if (map.server.settings.read) {
         group.item(PARTS);
       }
+
+      if (map.server.in_use.read) {
+        group.item(MANAGE_CONSOLES);
+      }
     }
 
     function hide() {
@@ -58,6 +67,7 @@
       group.remove(PARTS);
       group.remove(ServerListNav);
       group.remove(ServerInventoryNav);
+      group.remove(MANAGE_CONSOLES);
     }
   }
 })();

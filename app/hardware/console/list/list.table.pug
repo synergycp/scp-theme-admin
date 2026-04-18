@@ -1,0 +1,63 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th(translate="console.session.list.heading.SERVER")
+  th(
+    ng-if="table.showConsoleServer"
+    translate="console.session.list.heading.CONSOLE_SERVER"
+  )
+  th(translate="console.session.list.heading.SRC_IP")
+  th(translate="console.session.list.heading.DEST_IP")
+  th(
+    ng-if="table.showCreator"
+    translate="console.session.list.heading.CREATOR"
+  )
+  th(translate="console.session.list.heading.CREATED")
+  th(translate="console.session.list.heading.EXPIRES")
+  th(translate="console.session.list.heading.ACTIONS")
+
+block columns
+  td
+    a(
+      ng-if="row.server"
+      ui-sref="app.hardware.server.view.edit({id: row.server.id})"
+      ng-bind="row.server.name || row.server.nickname || row.server.srv_id"
+    )
+    span(
+      ng-if="!row.server"
+      ng-bind="'—'"
+    )
+  td(ng-if="table.showConsoleServer")
+    span(
+      ng-if="row.console_server"
+      ng-bind="row.console_server.name"
+    )
+    span(
+      ng-if="!row.console_server"
+      ng-bind="'—'"
+    )
+  td(ng-bind="row.src_ip")
+  td(ng-bind="row.dest_ip")
+  td(ng-if="table.showCreator")
+    span(
+      ng-if="row.creator"
+      ng-bind="row.creator.name || row.creator.email"
+    )
+    span(
+      ng-if="!row.creator"
+      ng-bind="'—'"
+    )
+  td(date="row.created_at")
+  td(date="row.expires_at")
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-primary(
+        ng-if="row.url"
+        ng-href="{{ row.url }}"
+        target="_blank"
+        translate="console.session.action.OPEN"
+      )
+      a.btn.btn-danger(
+        ng-click="table.list.list.confirm.delete([row])"
+        translate="console.session.action.DELETE"
+      )

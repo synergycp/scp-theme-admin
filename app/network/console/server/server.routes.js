@@ -35,5 +35,9 @@
         templateUrl: helper.basepath('network/console/server/list/list.index.html'),
       })
       ;
+
+    helper.url.map('console/server/?([0-9]*)', function ($state, id) {
+      return 'network/console/server' + (id ? '/' + id : '');
+    });
   }
 })();

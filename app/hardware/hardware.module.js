@@ -6,5 +6,6 @@
       'app.hardware.server',
       'app.network.switch',
       'app.hardware.part',
+      'app.hardware.console',
     ]);
 })();

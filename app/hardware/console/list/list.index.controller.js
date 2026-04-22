@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function HardwareConsoleSessionIndexCtrl(ConsoleSessionList, $scope) {
+  function HardwareConsoleSessionIndexCtrl(ConsoleSessionList, Permission, $scope) {
     var vm = this;
 
     vm.list = ConsoleSessionList()
@@ -21,10 +21,15 @@
       },
     };
 
+    vm.canWrite = false;
+
     activate();
 
     function activate() {
       vm.list.load();
+      Permission.has('network.console_session.delete').then(function (can) {
+        vm.canWrite = can;
+      });
       $scope.$on('$destroy', onDestroy);
     }
 

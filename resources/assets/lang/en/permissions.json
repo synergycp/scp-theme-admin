@@ -181,6 +181,18 @@
       "write": {
         "LABEL": "Edit"
       }
+    },
+    "console_session": {
+      "TITLE": "Manage Consoles",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      },
+      "delete": {
+        "LABEL": "Delete"
+      }
     }
   },
   "pkg": {

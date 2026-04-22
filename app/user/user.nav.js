@@ -49,7 +49,7 @@
         group.item(ADMINS);
       }
 
-      if (_.get(map, 'network.console.read')) {
+      if (_.get(map, 'network.console_session.read')) {
         group.item(CONSOLES);
       }
     }

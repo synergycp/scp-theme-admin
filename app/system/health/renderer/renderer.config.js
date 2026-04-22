@@ -24,6 +24,12 @@
       )
     );
     HealthStatusRendererProvider.set(
+      "console.server.status",
+      ConstantHealthStatusStateChangeRenderer(
+        "app.network.console.server.list"
+      )
+    );
+    HealthStatusRendererProvider.set(
       "package.update_available",
       ConstantHealthStatusStateChangeRenderer("app.system.package.list")
     );

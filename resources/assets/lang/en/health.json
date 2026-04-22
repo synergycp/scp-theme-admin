@@ -40,6 +40,16 @@
         }
       }
     },
+    "console": {
+      "server": {
+        "status": {
+          "OK": "Console servers healthy",
+          "WARN": "Console server warning",
+          "ERROR": "Console server error",
+          "LOADING": "Checking if console servers are healthy"
+        }
+      }
+    },
     "package": {
       "update_available": {
         "OK": "All Packages are up to date.",

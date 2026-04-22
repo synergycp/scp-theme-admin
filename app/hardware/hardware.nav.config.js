@@ -24,7 +24,7 @@
   /**
    * @ngInject
    */
-  function NavConfig(Auth, Nav, Permission, ServerInventoryNav, ServerListNav) {
+  function NavConfig(Auth, Nav, Permission, ServerInventoryNav, ServerListNav, _) {
     var group = Nav.group('hardware', {
       translate: "nav.HARDWARE",
       sref: "app.hardware.server.list",
@@ -57,7 +57,7 @@
         group.item(PARTS);
       }
 
-      if (map.server.in_use.read) {
+      if (_.get(map, 'network.console_session.read')) {
         group.item(MANAGE_CONSOLES);
       }
     }

@@ -51,7 +51,7 @@
   /**
    * @ngInject
    */
-  function NavRun(Auth, Nav, Permission) {
+  function NavRun(Auth, Nav, Permission, _) {
     var group = Nav.group("network");
 
     Auth.whileLoggedIn(checkPerms, hide);
@@ -77,6 +77,9 @@
 
       if (map.network.forward.read) {
         group.item(FORWARD_GATEWAYS);
+      }
+
+      if (_.get(map, 'network.console.read')) {
         group.item(CONSOLE_SERVERS);
       }
     }

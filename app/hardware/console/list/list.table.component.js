@@ -10,6 +10,7 @@
       bindings: {
         showCreator: '=?',
         showConsoleServer: '=?',
+        canWrite: '=?',
       },
       controller: 'ConsoleSessionTableCtrl as table',
       transclude: true,
@@ -30,6 +31,7 @@
       _.defaults(table, {
         showCreator: false,
         showConsoleServer: true,
+        canWrite: false,
       });
     }
   }

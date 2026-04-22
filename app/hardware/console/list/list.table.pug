@@ -58,6 +58,7 @@ block columns
         translate="console.session.action.OPEN"
       )
       a.btn.btn-danger(
+        ng-if="table.canWrite"
         ng-click="table.list.list.confirm.delete([row])"
         translate="console.session.action.DELETE"
       )

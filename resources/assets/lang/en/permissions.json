@@ -172,6 +172,15 @@
       "write": {
         "LABEL": "Edit"
       }
+    },
+    "console": {
+      "TITLE": "Console Servers",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      }
     }
   },
   "pkg": {

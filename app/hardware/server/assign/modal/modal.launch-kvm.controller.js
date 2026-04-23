@@ -17,14 +17,25 @@
     modal.servers = servers;
     modal.launchKvm = Select('server/launch/kvm');
     modal.launchKvm.load();
+    modal.consoleType = Select('server/console/type');
+    modal.consoleType.load();
     modal.submit = submit;
 
     //////////
 
     function submit() {
-      return modal.$close({
-        launch_kvm: modal.launchKvm.getSelected('value') || null,
-      });
+      var launchKvm = modal.launchKvm.getSelected('value') || null;
+      var data = {
+        launch_kvm: launchKvm,
+      };
+
+      if (launchKvm === 'containerized_console') {
+        data.console_type = modal.consoleType.getSelected('value') || null;
+      } else {
+        data.console_type = null;
+      }
+
+      return modal.$close(data);
     }
   }
 })();

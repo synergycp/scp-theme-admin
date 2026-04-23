@@ -25,6 +25,17 @@ form(ng-submit="modal.submit()")
         )
           span(ng-bind-html="kvm.label | highlight: $select.search")
 
+    div(ng-if="modal.launchKvm.selected.value == 'containerized_console'")
+      +label("{{ 'server.form.console-type.LABEL' | translate }}")
+        +ui-select("modal.consoleType")
+          ui-select-match(placeholder="{{ 'server.form.console-type.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.label")
+
+          ui-select-choices(
+            repeat="type in modal.consoleType.items | filter: {label: $select.search} track by type.value"
+          )
+            span(ng-bind-html="type.label | highlight: $select.search")
+
   .modal-footer
     button.btn.btn-secondary(
       type="button"

@@ -52,10 +52,14 @@ block columns
   td
     .btn-group.btn-group-xs
       a.btn.btn-primary(
-        ng-if="row.url"
-        ng-href="{{ row.url }}"
+        ng-if="row.vnc_url"
+        ng-href="{{ row.vnc_url }}"
         target="_blank"
         translate="console.session.action.OPEN"
+      )
+      span.text-muted.small(
+        ng-if="!row.vnc_url"
+        translate="console.session.action.WARMING_UP"
       )
       a.btn.btn-danger(
         ng-if="table.canWrite"

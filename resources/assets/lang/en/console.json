@@ -70,7 +70,8 @@
     },
     "action": {
       "OPEN": "Open",
-      "DELETE": "Delete"
+      "DELETE": "Delete",
+      "WARMING_UP": "Warming up…"
     },
     "modal": {
       "delete": {

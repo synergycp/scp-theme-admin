@@ -4,6 +4,8 @@ block headings
   th Name
   th Group
   th Host
+  th Version
+  th Last Update
 
 block columns
   td
@@ -17,3 +19,7 @@ block columns
   td(
     ng-bind="'http'+(row.http.use_https ? 's' : '')+'://'+row.http.host+':'+ row.http.port"
   )
+  td(
+    ng-bind="row.health.version || '—'"
+  )
+  td(date="row.health.files_last_updated_at")

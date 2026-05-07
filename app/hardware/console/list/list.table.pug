@@ -57,8 +57,10 @@ block columns
         target="_blank"
         translate="console.session.action.OPEN"
       )
-      span.text-muted.small(
+      button.btn.btn-primary(
         ng-if="!row.vnc_url"
+        type="button"
+        disabled
         translate="console.session.action.WARMING_UP"
       )
       a.btn.btn-danger(

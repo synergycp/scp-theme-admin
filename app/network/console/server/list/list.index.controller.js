@@ -9,7 +9,7 @@
   /**
    * @ngInject
    */
-  function ConsoleServerIndexCtrl(ConsoleServerList, ListFilter, Todo, $scope) {
+  function ConsoleServerIndexCtrl(ConsoleServerList, ListFilter, Todo, $scope, Api, Alert) {
     var vm = this;
 
     vm.list = ConsoleServerList()
@@ -27,7 +27,25 @@
       },
     };
 
+    vm.catalogRefreshing = false;
+    vm.refreshCatalog = refreshCatalog;
+
     activate();
+
+    function refreshCatalog() {
+      if (vm.catalogRefreshing) return;
+      vm.catalogRefreshing = true;
+      Api.all('server/console/type/refresh').post({})
+        .then(function () {
+          Alert.success('Console image catalog refreshed');
+        })
+        .catch(function () {
+          Alert.warning('Failed to refresh console image catalog');
+        })
+        .finally(function () {
+          vm.catalogRefreshing = false;
+        });
+    }
 
     function activate() {
       vm.list.load();

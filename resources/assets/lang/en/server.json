@@ -97,6 +97,14 @@
       "LABEL": "Console Type",
       "PLACEHOLDER": "Select console type..."
     },
+    "console-image": {
+      "LABEL": "Console Image",
+      "PLACEHOLDER": "Select console image..."
+    },
+    "console-tag": {
+      "LABEL": "Console Tag",
+      "PLACEHOLDER": "Select tag..."
+    },
     "switch": {
       "LABEL": "Switch",
       "port": {

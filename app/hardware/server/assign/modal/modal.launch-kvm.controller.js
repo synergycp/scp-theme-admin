@@ -11,14 +11,27 @@
    *
    * @ngInject
    */
-  function ServerAssignLaunchKvmModalCtrl(Select, servers) {
+  function ServerAssignLaunchKvmModalCtrl(Select, Api, servers) {
     var modal = this;
 
     modal.servers = servers;
     modal.launchKvm = Select('server/launch/kvm');
     modal.launchKvm.load();
-    modal.consoleType = Select('server/console/type');
-    modal.consoleType.load();
+    modal.consoleImage = { items: [], selected: null };
+    modal.consoleTag = { items: [], selected: null };
+    modal.onLaunchKvmSelected = function () {
+      modal.consoleImage.selected = null;
+      modal.consoleTag.selected = null;
+      modal.consoleTag.items = [];
+    };
+    modal.onConsoleImageSelected = function () {
+      modal.consoleTag.selected = null;
+      modal.consoleTag.items =
+        (modal.consoleImage.selected && modal.consoleImage.selected.tags) || [];
+    };
+    Api.one('server/console/type').get().then(function (response) {
+      modal.consoleImage.items = response.images || [];
+    });
     modal.submit = submit;
 
     //////////
@@ -30,7 +43,9 @@
       };
 
       if (launchKvm === 'containerized_console') {
-        data.console_type = modal.consoleType.getSelected('value') || null;
+        var img = modal.consoleImage.selected;
+        var tag = modal.consoleTag.selected;
+        data.console_type = img && tag ? img.value + ':' + tag.value : null;
       } else {
         data.console_type = null;
       }

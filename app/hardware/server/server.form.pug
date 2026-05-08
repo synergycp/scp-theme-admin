@@ -82,7 +82,9 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
 )
 
 +label("server.form.launch-kvm.LABEL")
-  +ui-select("serverForm.launchKvm")
+  +ui-select("serverForm.launchKvm")(
+    on-select="serverForm.onLaunchKvmSelected()"
+  )
     ui-select-match(placeholder="{{ 'server.form.launch-kvm.PLACEHOLDER' | translate }}")
       span(ng-bind="$select.selected.label")
 
@@ -92,15 +94,37 @@ div(ng-repeat="addOn in serverForm.addOns.items track by $index")
       span(ng-bind-html="kvm.label | highlight: $select.search")
 
 div(ng-if="serverForm.launchKvm.selected.value == 'containerized_console'")
-  +label("server.form.console-type.LABEL")
-    +ui-select("serverForm.consoleType")
-      ui-select-match(placeholder="{{ 'server.form.console-type.PLACEHOLDER' | translate }}")
-        span(ng-bind="$select.selected.label")
+  +label("server.form.console-image.LABEL")
+    .row
+      .col-xs-8
+        ui-select(
+          ng-model="serverForm.consoleImage.selected"
+          on-select="serverForm.onConsoleImageSelected()"
+          name="console_image"
+          ng-required="true"
+        )
+          ui-select-match(placeholder="{{ 'server.form.console-image.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.label")
 
-      ui-select-choices(
-        repeat="type in serverForm.consoleType.items | filter: {label: $select.search} track by type.value"
-      )
-        span(ng-bind-html="type.label | highlight: $select.search")
+          ui-select-choices(
+            repeat="image in serverForm.consoleImage.items | filter: {label: $select.search} track by image.value"
+          )
+            span(ng-bind-html="image.label | highlight: $select.search")
+      .col-xs-4
+        ui-select(
+          ng-model="serverForm.consoleTag.selected"
+          ng-disabled="!serverForm.consoleImage.selected"
+          on-select="serverForm.onConsoleTagSelected()"
+          name="console_tag"
+          ng-required="!!serverForm.consoleImage.selected"
+        )
+          ui-select-match(placeholder="{{ 'server.form.console-tag.PLACEHOLDER' | translate }}")
+            span(ng-bind="$select.selected.label")
+
+          ui-select-choices(
+            repeat="tag in serverForm.consoleTag.items | filter: {label: $select.search} track by tag.value"
+          )
+            span(ng-bind-html="tag.label | highlight: $select.search")
 
 hr
 

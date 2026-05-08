@@ -93,14 +93,51 @@
     };
     serverForm.launchKvm = Select("server/launch/kvm");
     serverForm.launchKvm.load();
+    serverForm.onLaunchKvmSelected = function () {
+      serverForm.consoleImage.selected = null;
+      serverForm.consoleImage.$dirty = true;
+      serverForm.consoleTag.selected = null;
+      serverForm.consoleTag.items = [];
+      serverForm.consoleTag.$dirty = true;
+    };
     serverForm.pxeBootModeTypes = {
       // The key corresponds to a translation key in server.form.pxe-boot-mode.type
       // The value corresponds to the API outputs for the enum ServerPXEBootMode
       LEGACY: "LEGACY",
       UEFI: "UEFI",
     };
-    serverForm.consoleType = Select("server/console/type");
-    serverForm.consoleType.load();
+    var consoleTypePending = null;
+    serverForm.consoleImage = { items: [], selected: null, $dirty: false };
+    serverForm.consoleTag = { items: [], selected: null, $dirty: false };
+    serverForm.onConsoleImageSelected = function () {
+      serverForm.consoleImage.$dirty = true;
+      serverForm.consoleTag.selected = null;
+      serverForm.consoleTag.items =
+        (serverForm.consoleImage.selected && serverForm.consoleImage.selected.tags) || [];
+      serverForm.consoleTag.$dirty = true;
+    };
+    serverForm.onConsoleTagSelected = function () {
+      serverForm.consoleTag.$dirty = true;
+    };
+    Api.one("server/console/type").get().then(function (response) {
+      serverForm.consoleImage.items = response.images || [];
+      if (consoleTypePending) {
+        applyConsoleTypePending();
+      }
+    });
+
+    function applyConsoleTypePending() {
+      var value = consoleTypePending;
+      consoleTypePending = null;
+      if (!value) return;
+      var parts = value.split(":");
+      if (parts.length !== 2) return;
+      var image = _.find(serverForm.consoleImage.items, { value: parts[0] });
+      if (!image) return;
+      serverForm.consoleImage.selected = image;
+      serverForm.consoleTag.items = image.tags || [];
+      serverForm.consoleTag.selected = _.find(image.tags, { value: parts[1] }) || null;
+    }
 
     //////////
 
@@ -271,7 +308,10 @@
           serverForm.launchKvm.selected = response.launch_kvm;
         }
         if (response.console_type) {
-          serverForm.consoleType.selected = response.console_type;
+          consoleTypePending = response.console_type;
+          if (serverForm.consoleImage.items.length) {
+            applyConsoleTypePending();
+          }
         }
 
         serverForm.billing.date.value = response.billing.date
@@ -577,8 +617,14 @@
       if (serverForm.alwaysDirty || serverForm.launchKvm.$dirty) {
         data.launch_kvm = serverForm.launchKvm.getSelected("value") || null;
       }
-      if (serverForm.alwaysDirty || serverForm.consoleType.$dirty) {
-        data.console_type = serverForm.consoleType.getSelected("value") || null;
+      if (
+        serverForm.alwaysDirty ||
+        serverForm.consoleImage.$dirty ||
+        serverForm.consoleTag.$dirty
+      ) {
+        var img = serverForm.consoleImage.selected;
+        var tag = serverForm.consoleTag.selected;
+        data.console_type = img && tag ? img.value + ":" + tag.value : null;
       }
       data.billing = data.billing || {};
       var integration = serverForm.billing.integration;
@@ -673,7 +719,8 @@
           false;
       serverForm.billing.integration.$dirty = false;
       serverForm.launchKvm.$dirty = false;
-      serverForm.consoleType.$dirty = false;
+      serverForm.consoleImage.$dirty = false;
+      serverForm.consoleTag.$dirty = false;
       _.each(serverForm.ports, function (port) {
         port.$setPristine();
       });

@@ -16,7 +16,9 @@ form(ng-submit="modal.submit()")
           span(ng-bind="server.name")
           br
     +label("{{ 'server.modal.launch-kvm.launch-kvm.LABEL' | translate }}")
-      +ui-select("modal.launchKvm")
+      +ui-select("modal.launchKvm")(
+        on-select="modal.onLaunchKvmSelected()"
+      )
         ui-select-match(placeholder="{{ 'server.modal.launch-kvm.launch-kvm.PLACEHOLDER' | translate }}")
           span(ng-bind="$select.selected.label")
 
@@ -26,15 +28,36 @@ form(ng-submit="modal.submit()")
           span(ng-bind-html="kvm.label | highlight: $select.search")
 
     div(ng-if="modal.launchKvm.selected.value == 'containerized_console'")
-      +label("{{ 'server.form.console-type.LABEL' | translate }}")
-        +ui-select("modal.consoleType")
-          ui-select-match(placeholder="{{ 'server.form.console-type.PLACEHOLDER' | translate }}")
-            span(ng-bind="$select.selected.label")
+      +label("{{ 'server.form.console-image.LABEL' | translate }}")
+        .row
+          .col-xs-6
+            ui-select(
+              ng-model="modal.consoleImage.selected"
+              on-select="modal.onConsoleImageSelected()"
+              name="console_image"
+              ng-required="true"
+            )
+              ui-select-match(placeholder="{{ 'server.form.console-image.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.label")
 
-          ui-select-choices(
-            repeat="type in modal.consoleType.items | filter: {label: $select.search} track by type.value"
-          )
-            span(ng-bind-html="type.label | highlight: $select.search")
+              ui-select-choices(
+                repeat="image in modal.consoleImage.items | filter: {label: $select.search} track by image.value"
+              )
+                span(ng-bind-html="image.label | highlight: $select.search")
+          .col-xs-6
+            ui-select(
+              ng-model="modal.consoleTag.selected"
+              ng-disabled="!modal.consoleImage.selected"
+              name="console_tag"
+              ng-required="!!modal.consoleImage.selected"
+            )
+              ui-select-match(placeholder="{{ 'server.form.console-tag.PLACEHOLDER' | translate }}")
+                span(ng-bind="$select.selected.label")
+
+              ui-select-choices(
+                repeat="tag in modal.consoleTag.items | filter: {label: $select.search} track by tag.value"
+              )
+                span(ng-bind-html="tag.label | highlight: $select.search")
 
   .modal-footer
     button.btn.btn-secondary(

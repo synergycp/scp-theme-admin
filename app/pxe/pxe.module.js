@@ -14,5 +14,6 @@
       'app.pxe.driver',
       'app.pxe.dhcp',
       'app.pxe.file',
+      'app.pxe.catalog',
     ]);
 })();

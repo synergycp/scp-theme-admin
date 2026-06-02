@@ -1,0 +1,29 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th Slug
+  th Piece
+  th Catalog Version
+  th Template Version
+  th Decision
+  th Discarded At
+  th User ID
+  th Reason
+  th Actions
+
+block columns
+  td(ng-bind="row.slug")
+  td(ng-bind="row.piece")
+  td(ng-bind="row.catalog_version")
+  td(ng-bind="row.source_template_version")
+  td(ng-bind="row.decision")
+  td(ng-bind="row.decided_at | date:'medium'")
+  td(ng-bind="row.decided_by_user_id || '-'")
+  td(ng-bind="row.reason || '-'")
+  td
+    .btn-group.btn-group-xs
+      a.btn.btn-warning(
+        ng-click="table.restore(row)"
+        title="Restore"
+      )
+        i.fa.fa-undo

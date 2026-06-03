@@ -93,6 +93,18 @@
       "LABEL": "Launch KVM action",
       "PLACEHOLDER": "Type to search..."
     },
+    "console-type": {
+      "LABEL": "Console Type",
+      "PLACEHOLDER": "Select console type..."
+    },
+    "console-image": {
+      "LABEL": "Console Image",
+      "PLACEHOLDER": "Select console image..."
+    },
+    "console-tag": {
+      "LABEL": "Console Tag",
+      "PLACEHOLDER": "Select tag..."
+    },
     "switch": {
       "LABEL": "Switch",
       "port": {
@@ -266,6 +278,33 @@
         "modal": {
           "TITLE": "BMC Info",
           "REFRESH": "Refresh BMC Info"
+        }
+      }
+    },
+    "console": {
+      "TITLE": "Manage Consoles",
+      "heading": {
+        "CONSOLE_SERVER": "Console Server",
+        "SRC_IP": "Source IP",
+        "DEST_IP": "Destination IP",
+        "CREATOR": "User",
+        "CREATED": "Created",
+        "EXPIRES": "Expires",
+        "ACTIONS": "Actions"
+      },
+      "action": {
+        "DELETE": "Delete"
+      },
+      "modal": {
+        "manage": {
+          "TITLE": "Console Sessions",
+          "EMPTY": "No active console sessions."
+        },
+        "delete": {
+          "TITLE": "Delete Console Sessions",
+          "SUBMIT": "Delete",
+          "CANCEL": "Cancel",
+          "BODY": "Click \"Delete\" to permanently delete these Console Sessions:"
         }
       }
     },

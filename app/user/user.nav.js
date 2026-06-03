@@ -16,10 +16,15 @@
     sref: "app.user.admin.list",
   };
 
+  var CONSOLES = {
+    text: "Manage Consoles",
+    sref: "app.user.console.list",
+  };
+
   /**
    * @ngInject
    */
-  function SystemNavConfig(Auth, Nav, Permission) {
+  function SystemNavConfig(Auth, Nav, Permission, _) {
     var group = Nav.group('user', {
       translate: "nav.USERS",
       sref: "app.user.client.list",
@@ -43,11 +48,16 @@
       if (map.users.admins.read) {
         group.item(ADMINS);
       }
+
+      if (_.get(map, 'network.console_session.read')) {
+        group.item(CONSOLES);
+      }
     }
 
     function hide() {
       group.remove(CLIENTS);
       group.remove(ADMINS);
+      group.remove(CONSOLES);
     }
   }
 })();

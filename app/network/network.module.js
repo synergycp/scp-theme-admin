@@ -7,5 +7,6 @@
       'app.network.pool',
       'app.network.group',
       'app.network.forward.gateway',
+      'app.network.console.server',
     ]);
 })();

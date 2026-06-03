@@ -1,413 +1,420 @@
 {
-  "shell": {
-    "list": {
-      "TITLE": "OS Reload Shell Scripts",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
+    "shell": {
+        "list": {
+            "TITLE": "OS Reload Shell Scripts",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
+        },
+        "modal": {
+            "delete": {
+                "TITLE": "Delete Shell Scripts",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these Shell Scripts:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create PXE Shell Script",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "description": {
+                "LABEL": "Description",
+                "PLACEHOLDER": ""
+            },
+            "body": {
+                "LABEL": "Body",
+                "PLACEHOLDER": "This will be parsed using Smarty."
+            }
+        },
+        "buttons": {
+            "DELETE": "Delete"
         }
-      }
     },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete Shell Scripts",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these Shell Scripts:"
-      }
-    },
-    "form": {
-      "title": {
-        "ADD": "Create PXE Shell Script",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "description": {
-        "LABEL": "Description",
-        "PLACEHOLDER": ""
-      },
-      "body": {
-        "LABEL": "Body",
-        "PLACEHOLDER": "This will be parsed using Smarty."
-      }
-    },
-    "buttons": {
-      "DELETE": "Delete"
-    }
-  },
-  "boot": {
-    "list": {
-      "TITLE": "PXE Boot Scripts",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
+    "boot": {
+        "list": {
+            "TITLE": "PXE Boot Scripts",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
+        },
+        "modal": {
+            "delete": {
+                "TITLE": "Delete Boot Scripts",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these Boot Scripts:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create Boot Script",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "body": {
+                "LABEL": "Body",
+                "PLACEHOLDER": "This will be parsed using Smarty."
+            }
+        },
+        "buttons": {
+            "DELETE": "Delete"
         }
-      }
     },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete Boot Scripts",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these Boot Scripts:"
-      }
-    },
-    "form": {
-      "title": {
-        "ADD": "Create Boot Script",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "body": {
-        "LABEL": "Body",
-        "PLACEHOLDER": "This will be parsed using Smarty."
-      }
-    },
-    "buttons": {
-      "DELETE": "Delete"
-    }
-  },
-  "iso": {
-    "list": {
-      "TITLE": "ISO Manager",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
-        }
-      }
-    },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete ISOs",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these ISOs:"
-      }
-    },
-    "form": {
-      "title": {
-        "ADD": "Create ISO",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "folder": {
-        "LABEL": "Folder",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "url": {
-        "LABEL": "URL",
-        "PLACEHOLDER": "e.g. http://example.com/win2008r2.iso"
-      }
-    },
-    "logs": {
-      "TITLE": "ISO Logs"
-    },
-    "edition": {
-      "TITLE": "{{ name }} Editions",
-      "SUBMIT": "Save Changes",
-      "license_key": {
-        "PLACEHOLDER": "Optional"
-      }
-    },
-    "buttons": {
-      "DELETE": "Delete"
-    }
-  },
-  "profile": {
-    "list": {
-      "TITLE": "OS Reload Profiles",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
-        }
-      }
-    },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete OS Reload Profiles",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these OS Reload Profiles:"
-      }
-    },
-    "form": {
-      "title": {
-        "ADD": "Create OS Reload Profile",
-        "SUBMIT_DUPLICATE": "Create and add next",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "billing_id": {
-        "LABEL": "Billing ID",
-        "PLACEHOLDER": "Optional. Must be unique"
-      },
-      "preseed": {
-        "LABEL": "Preseed",
-        "PLACEHOLDER": "Type to search..."
-      },
-      "iso": {
-        "LABEL": "ISO",
-        "PLACEHOLDER": "Type to search...",
+    "iso": {
+        "list": {
+            "TITLE": "ISO Manager",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
+        },
+        "modal": {
+            "delete": {
+                "TITLE": "Delete ISOs",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these ISOs:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create ISO",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "folder": {
+                "LABEL": "Folder",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "url": {
+                "LABEL": "URL",
+                "PLACEHOLDER": "e.g. http://example.com/win2008r2.iso"
+            }
+        },
+        "logs": {
+            "TITLE": "ISO Logs"
+        },
         "edition": {
-          "LABEL": "Default Edition",
-          "PLACEHOLDER": "Type to search..."
-        }
-      },
-      "email": {
-        "LABEL": "Email",
-        "PLACEHOLDER": "Type to search..."
-      },
-      "boot": {
-        "LABEL": "Boot Script",
-        "PLACEHOLDER": "Type to search..."
-      },
-      "shell": {
-        "during": {
-          "HELP": "These Shell Scripts will be run in the live OS just before installation to the disk.",
-          "LABEL": "During Shell Scripts",
-          "PLACEHOLDER": "Type to search..."
+            "TITLE": "{{ name }} Editions",
+            "SUBMIT": "Save Changes",
+            "license_key": {
+                "PLACEHOLDER": "Optional"
+            }
         },
-        "after": {
-          "HELP": "These Shell Scripts will be run in the live OS after installation has completed, just before reboot.",
-          "LABEL": "After Shell Scripts",
-          "PLACEHOLDER": "Type to search..."
+        "buttons": {
+            "DELETE": "Delete"
         }
-      },
-      "driver": {
-        "LABEL": "Drivers",
-        "PLACEHOLDER": "Type to search..."
-      },
-      "client_access": {
-        "LABEL": "Client Access"
-      },
-      "platform": {
-        "LABEL": "Platform",
-        "linux": "Linux",
-        "windows": "Windows"
-      },
-      "time_until_marked_failed": {
-        "LABEL": "Time Until Install Fails",
-        "PLACEHOLDER": "Optional, Enter a Number of Minutes."
-      }
     },
-    "buttons": {
-      "DELETE": "Delete"
-    }
-  },
-  "dhcp": {
-    "list": {
-      "TITLE": "Deploy DHCP Servers",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
-        }
-      }
-    },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete OS Reload DHCP Servers",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these OS Reload DHCP Servers:"
-      }
-    },
-    "form": {
-      "title": {
-        "ADD": "Create PXE DHCP Server",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "group": {
-        "LABEL": "Group",
-        "PLACEHOLDER": ""
-      },
-      "host": {
-        "LABEL": "Host",
-        "PLACEHOLDER": "localhost"
-      },
-      "port": {
-        "LABEL": "Port",
-        "PLACEHOLDER": "3000"
-      },
-      "https": {
-        "LABEL": "Use HTTPS"
-      },
-      "api_key": {
-        "LABEL": "API Key"
-      }
-    },
-    "buttons": {
-      "DELETE": "Delete"
-    }
-  },
-  "file": {
-    "list": {
-      "TITLE": "Deploy File Servers",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
-        }
-      }
-    },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete OS Reload File Servers",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these OS Reload File Servers:"
-      }
-    },
-    "form": {
-      "title": {
-        "ADD": "Create PXE File Server",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "parent": {
-        "LABEL": "Parent PXE File server",
-        "PLACEHOLDER": "Type to search..."
-      },
-      "max_installs": {
-        "LABEL": "Max Installs",
-        "PLACEHOLDER": ""
-      },
-      "host": {
-        "LABEL": "Host",
-        "PLACEHOLDER": "localhost"
-      },
-      "port": {
-        "LABEL": "API Port",
-        "PLACEHOLDER": "3000"
-      },
-      "group": {
-        "LABEL": "Group",
-        "PLACEHOLDER": ""
-      },
-      "https": {
-        "LABEL": "Use HTTPS"
-      },
-      "api_key": {
-        "LABEL": "API Key"
-      },
-      "ssh": {
-        "port": {
-          "LABEL": "SSH Port"
+    "profile": {
+        "list": {
+            "TITLE": "OS Reload Profiles",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
         },
-        "public_key": {
-          "LABEL": "SSH Public Key"
+        "modal": {
+            "delete": {
+                "TITLE": "Delete OS Reload Profiles",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these OS Reload Profiles:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create OS Reload Profile",
+                "SUBMIT_DUPLICATE": "Create and add next",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "billing_id": {
+                "LABEL": "Billing ID",
+                "PLACEHOLDER": "Optional. Must be unique"
+            },
+            "preseed": {
+                "LABEL": "Preseed",
+                "PLACEHOLDER": "Type to search..."
+            },
+            "iso": {
+                "LABEL": "ISO",
+                "PLACEHOLDER": "Type to search...",
+                "edition": {
+                    "LABEL": "Default Edition",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            },
+            "email": {
+                "LABEL": "Email",
+                "PLACEHOLDER": "Type to search..."
+            },
+            "boot": {
+                "LABEL": "Boot Script",
+                "PLACEHOLDER": "Type to search..."
+            },
+            "shell": {
+                "during": {
+                    "HELP": "These Shell Scripts will be run in the live OS just before installation to the disk.",
+                    "LABEL": "During Shell Scripts",
+                    "PLACEHOLDER": "Type to search..."
+                },
+                "after": {
+                    "HELP": "These Shell Scripts will be run in the live OS after installation has completed, just before reboot.",
+                    "LABEL": "After Shell Scripts",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            },
+            "driver": {
+                "LABEL": "Drivers",
+                "PLACEHOLDER": "Type to search..."
+            },
+            "client_access": {
+                "LABEL": "Client Access"
+            },
+            "platform": {
+                "LABEL": "Platform",
+                "linux": "Linux",
+                "windows": "Windows"
+            },
+            "time_until_marked_failed": {
+                "LABEL": "Time Until Install Fails",
+                "PLACEHOLDER": "Optional, Enter a Number of Minutes."
+            }
+        },
+        "buttons": {
+            "DELETE": "Delete"
         }
-      }
     },
-    "buttons": {
-      "DELETE": "Delete",
-      "SYNC_CHILDREN": "Sync Files to Children"
-    }
-  },
-  "driver": {
-    "list": {
-      "TITLE": "PXE Drivers",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
+    "dhcp": {
+        "list": {
+            "TITLE": "Deploy DHCP Servers",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
+        },
+        "modal": {
+            "delete": {
+                "TITLE": "Delete OS Reload DHCP Servers",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these OS Reload DHCP Servers:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create PXE DHCP Server",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "group": {
+                "LABEL": "Group",
+                "PLACEHOLDER": ""
+            },
+            "host": {
+                "LABEL": "Host",
+                "PLACEHOLDER": "localhost"
+            },
+            "port": {
+                "LABEL": "Port",
+                "PLACEHOLDER": "3000"
+            },
+            "https": {
+                "LABEL": "Use HTTPS"
+            },
+            "api_key": {
+                "LABEL": "API Key"
+            }
+        },
+        "buttons": {
+            "DELETE": "Delete"
         }
-      }
     },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete PXE Drivers",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these PXE Drivers:"
-      }
-    },
-    "form": {
-      "title": {
-        "ADD": "Create PXE Driver",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "path": {
-        "LABEL": "Path",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "driver": {
-        "LABEL": "Driver",
-        "HELP": "Can be .zip, .tar.gz, etc."
-      }
-    },
-    "buttons": {
-      "DELETE": "Delete"
-    }
-  },
-  "preseed": {
-    "list": {
-      "TITLE": "OS Reload Preseed Configurations",
-      "filter": {
-        "search": {
-          "LABEL": "Search",
-          "PLACEHOLDER": "Type to search..."
+    "file": {
+        "list": {
+            "TITLE": "Deploy File Servers",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
+        },
+        "modal": {
+            "delete": {
+                "TITLE": "Delete OS Reload File Servers",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these OS Reload File Servers:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create PXE File Server",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "parent": {
+                "LABEL": "Parent PXE File server",
+                "PLACEHOLDER": "Type to search..."
+            },
+            "max_installs": {
+                "LABEL": "Max Installs",
+                "PLACEHOLDER": ""
+            },
+            "host": {
+                "LABEL": "Host",
+                "PLACEHOLDER": "localhost"
+            },
+            "port": {
+                "LABEL": "API Port",
+                "PLACEHOLDER": "3000"
+            },
+            "group": {
+                "LABEL": "Group",
+                "PLACEHOLDER": ""
+            },
+            "https": {
+                "LABEL": "Use HTTPS"
+            },
+            "api_key": {
+                "LABEL": "API Key"
+            },
+            "ssh": {
+                "port": {
+                    "LABEL": "SSH Port"
+                },
+                "public_key": {
+                    "LABEL": "SSH Public Key"
+                }
+            }
+        },
+        "buttons": {
+            "DELETE": "Delete",
+            "SYNC_CHILDREN": "Sync Files to Children"
         }
-      }
     },
-    "modal": {
-      "delete": {
-        "TITLE": "Delete PXE Preseeds",
-        "SUBMIT": "Delete",
-        "CANCEL": "Cancel",
-        "BODY": "Click \"Delete\" to permanently delete these PXE Preseeds:"
-      }
+    "driver": {
+        "list": {
+            "TITLE": "PXE Drivers",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
+        },
+        "modal": {
+            "delete": {
+                "TITLE": "Delete PXE Drivers",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these PXE Drivers:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create PXE Driver",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "path": {
+                "LABEL": "Path",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "driver": {
+                "LABEL": "Driver",
+                "HELP": "Can be .zip, .tar.gz, etc."
+            }
+        },
+        "buttons": {
+            "DELETE": "Delete"
+        }
     },
-    "form": {
-      "title": {
-        "ADD": "Create PXE Preseed Script",
-        "EDIT": "Edit {{ name }}"
-      },
-      "name": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Must be unique"
-      },
-      "description": {
-        "LABEL": "Description",
-        "PLACEHOLDER": ""
-      },
-      "body": {
-        "LABEL": "Body",
-        "PLACEHOLDER": "This will be parsed using Smarty."
-      },
-      "is_installable": {
-        "LABEL": "Installable"
-      }
+    "preseed": {
+        "list": {
+            "TITLE": "OS Reload Preseed Configurations",
+            "filter": {
+                "search": {
+                    "LABEL": "Search",
+                    "PLACEHOLDER": "Type to search..."
+                }
+            }
+        },
+        "modal": {
+            "delete": {
+                "TITLE": "Delete PXE Preseeds",
+                "SUBMIT": "Delete",
+                "CANCEL": "Cancel",
+                "BODY": "Click \"Delete\" to permanently delete these PXE Preseeds:"
+            }
+        },
+        "form": {
+            "title": {
+                "ADD": "Create PXE Preseed Script",
+                "EDIT": "Edit {{ name }}"
+            },
+            "name": {
+                "LABEL": "Name",
+                "PLACEHOLDER": "Must be unique"
+            },
+            "description": {
+                "LABEL": "Description",
+                "PLACEHOLDER": ""
+            },
+            "body": {
+                "LABEL": "Body",
+                "PLACEHOLDER": "This will be parsed using Smarty."
+            },
+            "is_installable": {
+                "LABEL": "Installable"
+            }
+        },
+        "buttons": {
+            "DELETE": "Delete"
+        }
     },
-    "buttons": {
-      "DELETE": "Delete"
+    "catalog": {
+        "decision": {
+            "list": {
+                "TITLE": "Discarded Templates"
+            }
+        }
     }
-  }
 }

@@ -21,7 +21,7 @@
 
       list.restore = function (item) {
         return Api
-          .post(API + '/' + item.id + '/restore')
+          .all(API + '/' + item.id + '/restore').post()
           .then(function () {
             Alert.success('Template decision restored. Catalog will re-sync.');
             list.refresh.now();

@@ -29,8 +29,7 @@
           '<div class="modal-body">' +
           '<p>Restore the discarded suggestion for <strong>{{ vm.slug }}</strong> ({{ vm.piece }})? The catalog will re-sync and the suggested change will reappear.</p>' +
           '<table class="table table-condensed m-t-sm">' +
-          '<tr><th>Discarded by</th><td>{{ vm.decidedByUserId || \'-\' }}</td></tr>' +
-          '<tr><th>Reason</th><td>{{ vm.reason || \'-\' }}</td></tr>' +
+          '<tr><th>Discarded by</th><td>{{ vm.decidedByUserName || \'-\' }}</td></tr>' +
           '</table>' +
           '</div>' +
           '<div class="modal-footer">' +
@@ -41,8 +40,7 @@
           var m = this;
           m.slug = item.slug;
           m.piece = item.piece;
-          m.decidedByUserId = item.decided_by_user_id;
-          m.reason = item.reason;
+          m.decidedByUserName = item.decided_by_user_name;
           m.confirm = function () { $uibModalInstance.close(); };
           m.cancel = function () { $uibModalInstance.dismiss(); };
         },

@@ -7,8 +7,7 @@ block headings
   th Template Version
   th Decision
   th Discarded At
-  th User ID
-  th Reason
+  th User
   th Actions
 
 block columns
@@ -18,8 +17,7 @@ block columns
   td(ng-bind="row.source_template_version")
   td(ng-bind="row.decision")
   td(ng-bind="row.decided_at | date:'medium'")
-  td(ng-bind="row.decided_by_user_id || '-'")
-  td(ng-bind="row.reason || '-'")
+  td(ng-bind="row.decided_by_user_name || '-'")
   td
     .btn-group.btn-group-xs
       a.btn.btn-warning(

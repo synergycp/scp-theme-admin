@@ -9,5 +9,6 @@
       'app.user.admin',
       'app.user.admin.buttons',
       'app.user.key',
+      'app.user.console',
     ]);
 })();

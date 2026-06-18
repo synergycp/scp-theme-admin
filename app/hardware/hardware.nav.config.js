@@ -16,10 +16,15 @@
     sref: "app.hardware.server.provision",
   };
 
+  var MANAGE_CONSOLES = {
+    text: "Manage Consoles",
+    sref: "app.hardware.console.list",
+  };
+
   /**
    * @ngInject
    */
-  function NavConfig(Auth, Nav, Permission, ServerInventoryNav, ServerListNav) {
+  function NavConfig(Auth, Nav, Permission, ServerInventoryNav, ServerListNav, _) {
     var group = Nav.group('hardware', {
       translate: "nav.HARDWARE",
       sref: "app.hardware.server.list",
@@ -51,6 +56,10 @@
       if (map.server.settings.read) {
         group.item(PARTS);
       }
+
+      if (_.get(map, 'network.console_session.read')) {
+        group.item(MANAGE_CONSOLES);
+      }
     }
 
     function hide() {
@@ -58,6 +67,7 @@
       group.remove(PARTS);
       group.remove(ServerListNav);
       group.remove(ServerInventoryNav);
+      group.remove(MANAGE_CONSOLES);
     }
   }
 })();

@@ -1,0 +1,36 @@
+extends /resources/angle/pug/list-page
+include /resources/angle/pug/mixins/list
+
+block list
+  list.panel.panel-default(list="vm.list")
+    list-header(text="console.server.list.TITLE")
+      a.btn.btn-default(
+        ng-click="vm.refreshCatalog()"
+        ng-disabled="vm.catalogRefreshing"
+        title="Refresh console image catalog"
+      )
+        i.fa(ng-class="vm.catalogRefreshing ? 'fa-spinner fa-spin' : 'fa-cloud-download'")
+      a.btn.btn-default(ng-click="vm.list.scrollToAnchor('console.server-edit-form')")
+        i.fa.fa-plus
+      a.btn.btn-default(ng-click="vm.list.refresh.now()")
+        i.fa.fa-refresh
+    console-server-table.border-top-table.scrollable-block
+    list-footer
+
+block bottom-left
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title(translate="console.server.form.title.CREATE")
+    .panel-body.form-horizontal
+      console-server-form(form="vm.create" is-creating="true")
+      button.btn.btn-primary.pull-right(
+        ng-click="vm.create.submit()"
+        translate="console.server.form.SUBMIT"
+      )
+
+block bottom-right
+  logs(
+    heading="Console Server Logs"
+    filter="vm.logs.filter"
+    listen-to="vm.list"
+  )

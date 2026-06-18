@@ -1,17 +1,12 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  angular
-    .module('app.network')
-    .config(NavConfig)
-    .run(NavRun)
-  ;
+  angular.module("app.network").config(NavConfig).run(NavRun);
 
   var GROUPS = {
     translate: "nav.network.GROUPS",
     sref: "app.network.group.list",
   };
-
 
   var ENTITIES = {
     translate: "nav.network.ENTITIES",
@@ -38,11 +33,16 @@
     sref: "app.network.forward.gateway.list",
   };
 
+  var CONSOLE_SERVERS = {
+    text: "Deploy Console Servers",
+    sref: "app.network.console.server.list",
+  };
+
   /**
    * @ngInject
    */
   function NavConfig(NavProvider) {
-    NavProvider.group('network', {
+    NavProvider.group("network", {
       translate: "nav.network.TITLE",
       icon: "fa fa-sitemap",
     });
@@ -51,16 +51,13 @@
   /**
    * @ngInject
    */
-  function NavRun(Auth, Nav, Permission) {
-    var group = Nav.group('network');
+  function NavRun(Auth, Nav, Permission, _) {
+    var group = Nav.group("network");
 
     Auth.whileLoggedIn(checkPerms, hide);
 
     function checkPerms() {
-      Permission
-        .map()
-        .then(showPermitted)
-      ;
+      Permission.map().then(showPermitted);
     }
 
     function showPermitted(map) {
@@ -81,6 +78,10 @@
       if (map.network.forward.read) {
         group.item(FORWARD_GATEWAYS);
       }
+
+      if (_.get(map, 'network.console.read')) {
+        group.item(CONSOLE_SERVERS);
+      }
     }
 
     function hide() {
@@ -88,6 +89,7 @@
       group.remove(ENTITIES);
       group.remove(SWITCHES);
       group.remove(FORWARD_GATEWAYS);
+      group.remove(CONSOLE_SERVERS);
       group.remove(SPEEDS);
     }
   }

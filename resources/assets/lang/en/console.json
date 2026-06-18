@@ -1,0 +1,85 @@
+{
+  "server": {
+    "status": {
+      "OK": "OK",
+      "WARN": "Warning",
+      "ERROR": "Error",
+      "null": "Unknown"
+    },
+    "list": {
+      "TITLE": "Console Servers",
+      "heading": {
+        "NAME": "Name",
+        "HEALTH": "Health",
+        "HOSTNAME": "Hostname",
+        "ACTIONS": "Actions"
+      }
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Console Servers",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Console Servers:"
+      }
+    },
+    "form": {
+      "title": {
+        "CREATE": "Create Console Server",
+        "EDIT": "Edit Console Server: {{name}}"
+      },
+      "name": {
+        "LABEL": "Name",
+        "PLACEHOLDER": "Enter a name for this console server"
+      },
+      "hostname": {
+        "LABEL": "Hostname",
+        "PLACEHOLDER": "e.g. console.example.com"
+      },
+      "port": {
+        "LABEL": "API Port",
+        "PLACEHOLDER": "3000"
+      },
+      "api_key": {
+        "LABEL": "API Key",
+        "PLACEHOLDER": "Enter the API key"
+      },
+      "health": {
+        "LABEL": "Health"
+      },
+      "group": {
+        "LABEL": "IP Groups"
+      },
+      "SUBMIT": "Save"
+    }
+  },
+  "session": {
+    "list": {
+      "TITLE": "Manage Consoles",
+      "EMPTY": "No active console sessions.",
+      "heading": {
+        "SERVER": "Server",
+        "CONSOLE_SERVER": "Console Server",
+        "SRC_IP": "Source IP",
+        "DEST_IP": "Destination IP",
+        "CREATOR": "User",
+        "EXPIRES": "Expires",
+        "CREATED": "Created",
+        "ACTIONS": "Actions"
+      }
+    },
+    "action": {
+      "OPEN": "Open",
+      "DELETE": "Delete",
+      "WARMING_UP": "Warming up…"
+    },
+    "modal": {
+      "delete": {
+        "TITLE": "Delete Console Sessions",
+        "SUBMIT": "Delete",
+        "CANCEL": "Cancel",
+        "BODY": "Click \"Delete\" to permanently delete these Console Sessions:"
+      }
+    }
+  }
+}

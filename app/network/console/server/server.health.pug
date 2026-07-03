@@ -1,0 +1,9 @@
+span(
+  ng-class="health.getClassMap()"
+  translate="console.server.status.{{health.server.status_health || 'null'}}"
+)
+|&nbsp;
+span(ng-class="health.loader.class")
+  .loader
+  a.btn.btn-xs(ng-click="health.refresh($event)")
+    .fa.fa-refresh

@@ -1,0 +1,33 @@
+extends /resources/angle/pug/table-checkable
+
+block headings
+  th.sortable(ng-if="table.showName")
+    span(translate="console.server.list.heading.NAME")
+    sort(col="name")
+  th.sortable(ng-if="table.showHealth")
+    span(translate="console.server.list.heading.HEALTH")
+    sort(col="hostname")
+  th.sortable(ng-if="table.showHostname")
+    span(translate="console.server.list.heading.HOSTNAME")
+    sort(col="hostname")
+  th(ng-if="table.showActions")
+    span(translate="console.server.list.heading.ACTIONS")
+
+block columns
+  td(ng-if="table.showName")
+    a(
+      ui-sref="app.network.console.server.view({id: row.id})"
+      ng-bind="row.name"
+    )
+  td(ng-if="table.showHealth")
+    console-server-health(server="row")
+  td(
+    ng-if="table.showHostname"
+    ng-bind="row.hostname"
+  )
+  td(ng-if="table.showActions")
+    .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.network.console.server.view({id: row.id})"
+        translate="app.action.EDIT"
+      )

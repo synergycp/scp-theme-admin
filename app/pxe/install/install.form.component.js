@@ -87,7 +87,15 @@
         return Alert.warning('Please select an OS Edition.');
       }
 
-      OsReloadModals.openCreate().result.then(function (result) {
+      OsReloadModals.openCreate({
+        loadSshKeys: function () {
+          return pxeInstallForm.server.selected.all('ssh-key').getList().then(function (items) {
+            return items.map(function (k) {
+              return { id: k.id, name: k.name, fingerprint: k.fingerprint };
+            });
+          });
+        },
+      }).result.then(function (result) {
         create({
           pxe_profile_id: profile.id,
           disk: {
@@ -97,6 +105,9 @@
           queue: true,
           edition_id: (edition || {}).id,
           license_key: licenseKey,
+          login_type: result.login_type,
+          ssh_key_ids: result.ssh_key_ids,
+          ssh_keys_raw: result.ssh_keys_raw,
           password: result.password,
         })
       });

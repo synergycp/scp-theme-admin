@@ -31,6 +31,17 @@
           });
       };
 
+      list.updateCatalog = function () {
+        return Api
+          .all('pxe/catalog/sync').post()
+          .then(function () {
+            Alert.success('Catalog update started. New suggestions will appear shortly.');
+          })
+          .catch(function () {
+            Alert.danger('Failed to start catalog update.');
+          });
+      };
+
       return list;
     };
   }

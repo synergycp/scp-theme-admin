@@ -14,9 +14,20 @@
     vm.list = CatalogDecisionList()
       .setPaginationAndSortToUrl();
 
+    vm.updating = false;
+    vm.updateCatalog = updateCatalog;
+
     activate();
 
     ///////////
+
+    function updateCatalog() {
+      vm.updating = true;
+      return vm.list.updateCatalog()
+        .finally(function () {
+          vm.updating = false;
+        });
+    }
 
     function activate() {
       vm.list.refresh.now();

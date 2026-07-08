@@ -4,6 +4,12 @@ include /resources/angle/pug/mixins/list
 block list
   list.panel.panel-default(list="vm.list")
     list-header(text="pxe.catalog.decision.list.TITLE")
+      a.btn.btn-primary(
+        ng-click="vm.updateCatalog()"
+        ng-disabled="vm.updating"
+        title="{{ 'pxe.catalog.decision.list.UPDATE' | translate }}"
+      )
+        i.fa(ng-class="vm.updating ? 'fa-spinner fa-spin' : 'fa-cloud-download'")
       a.btn.btn-default(ng-click="vm.list.refresh.now()")
         i.fa.fa-refresh
     catalog-decision-table.border-top-table

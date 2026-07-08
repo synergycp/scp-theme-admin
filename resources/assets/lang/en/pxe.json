@@ -413,7 +413,8 @@
     "catalog": {
         "decision": {
             "list": {
-                "TITLE": "Discarded Templates"
+                "TITLE": "Discarded Templates",
+                "UPDATE": "Update Catalog"
             }
         }
     }

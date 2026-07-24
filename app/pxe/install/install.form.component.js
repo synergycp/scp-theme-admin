@@ -89,10 +89,11 @@
 
       OsReloadModals.openCreate({
         loadSshKeys: function () {
-          return pxeInstallForm.server.selected.all('ssh-key').getList().then(function (items) {
-            return items.map(function (k) {
+          return pxeInstallForm.server.selected.one('ssh-key').get().then(function (resp) {
+            var keys = (resp.keys || []).map(function (k) {
               return { id: k.id, name: k.name, fingerprint: k.fingerprint };
             });
+            return { keys: keys, clientAssigned: resp.client_assigned !== false };
           });
         },
       }).result.then(function (result) {

@@ -7,6 +7,7 @@ block headings
     sort(col="description")
   th.sortable(ng-if="table.showInstallable") Installable
       sort(col="is_installable")
+  th(ng-if="table.showVersion") Version
   th(ng-if="table.showActions") Actions
 
 block columns
@@ -15,9 +16,10 @@ block columns
       ui-sref="app.pxe.preseed.view({id: row.id})"
       ng-bind="row.name"
     )
-  td(ng-bind="row.description") 
+  td(ng-bind="row.description")
   td
     span.fa.fa-check.text-success(ng-if="row.is_installable")
+  td(ng-if="table.showVersion" ng-bind="row.catalog_version")
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(

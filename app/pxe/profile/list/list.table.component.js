@@ -39,6 +39,8 @@
         showClientAccess: true,
         showIpEntities: true,
         showServers: true,
+        showVersion: true,
+        showDeprecated: true,
         showActions: true,
       });
     }

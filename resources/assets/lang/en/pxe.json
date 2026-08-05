@@ -157,6 +157,12 @@
                 "LABEL": "Billing ID",
                 "PLACEHOLDER": "Optional. Must be unique"
             },
+            "catalog_version": {
+                "LABEL": "Catalog Version"
+            },
+            "deprecated": {
+                "LABEL": "Deprecated"
+            },
             "preseed": {
                 "LABEL": "Preseed",
                 "PLACEHOLDER": "Type to search..."

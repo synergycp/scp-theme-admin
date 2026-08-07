@@ -7,6 +7,8 @@ block headings
         sort(col="billing_id")
     th.sortable(ng-if="table.showClientAccess") Client Access
         sort(col="client_access")
+    th(ng-if="table.showVersion") Version
+    th(ng-if="table.showDeprecated") Deprecated
     th(ng-if="table.showActions") Actions
 
 block columns
@@ -18,6 +20,9 @@ block columns
   td(ng-bind="row.billing_id")
   td
     span.fa.fa-check.text-success(ng-if="row.access_client")
+  td(ng-if="table.showVersion" ng-bind="row.catalog_version")
+  td(ng-if="table.showDeprecated")
+    span.fa.fa-exclamation-triangle.text-warning(ng-if="row.deprecated")
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(

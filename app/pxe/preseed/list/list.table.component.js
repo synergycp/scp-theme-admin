@@ -39,6 +39,7 @@
         showReserved: true,
         showIpEntities: true,
         showServers: true,
+        showVersion: true,
         showActions: true,
       });
     }

@@ -102,6 +102,21 @@
       "write": {
         "LABEL": "Edit"
       }
+    },
+    "catalog": {
+      "TITLE": "OS Catalog",
+      "read": {
+        "LABEL": "View"
+      },
+      "write": {
+        "LABEL": "Edit"
+      },
+      "decision": {
+        "TITLE": "Catalog Decisions",
+        "read": {
+          "LABEL": "View"
+        }
+      }
     }
   },
   "server": {

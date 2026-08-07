@@ -3,6 +3,7 @@ extends /resources/angle/pug/table-checkable
 block headings
   th.sortable(ng-if="table.showName") Name
     sort(col="name")
+  th Version
   th Actions
 
 block columns
@@ -11,6 +12,7 @@ block columns
       ui-sref="app.pxe.boot.view({id: row.id})"
       ng-bind="row.name"
     )
+  td(ng-bind="row.catalog_version")
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(

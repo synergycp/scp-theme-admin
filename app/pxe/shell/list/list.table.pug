@@ -5,6 +5,7 @@ block headings
     sort(col="name")
   th.sortable(ng-if="table.showDescription") Description
     sort(col="description")
+  th Version
   th Actions
 
 block columns
@@ -14,6 +15,7 @@ block columns
       ng-bind="row.name"
     )
   td(ng-bind="row.description")
+  td(ng-bind="row.catalog_version")
   td
     .btn-group.btn-group-xs
       a.btn.btn-default(

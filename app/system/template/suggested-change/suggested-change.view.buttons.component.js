@@ -62,9 +62,12 @@
     function deleteAndSetBody() {
       return Api.one(
         "template/suggested-change/" + buttons.templateSuggestedChange.id
-      ).remove({
-        body: buttons.templateSuggestedChange.suggested_body,
-      });
+      ).customDELETE(
+        "",
+        {},
+        { "Content-Type": "application/json;charset=UTF-8" },
+        { body: buttons.templateSuggestedChange.suggested_body }
+      );
     }
 
     function transferToList() {

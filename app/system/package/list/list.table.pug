@@ -39,6 +39,10 @@ block columns
     )
   td(ng-if="table.showVersion")
     span(ng-bind="row.version.latest.semver")
+    a.btn.btn-link.btn-xs.ml(
+      ng-click="table.list.list.viewChangelog(row); $event.stopPropagation()"
+      translate="package.list.action.CHANGELOG"
+    )
   td(ng-if="table.showActions")
     .btn-group.btn-group-xs
       a.btn.btn-default(

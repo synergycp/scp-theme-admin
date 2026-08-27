@@ -82,12 +82,23 @@
     "action": {
       "ENABLE": "Enable",
       "DISABLE": "Disable",
-      "UPDATE": "Update"
+      "UPDATE": "Update",
+      "CHANGELOG": "Changelog"
     },
     "filter": {
       "search": {
         "LABEL": "Search",
         "PLACEHOLDER": "Type to search..."
+      }
+    },
+    "changelog": {
+      "modal": {
+        "TITLE": "Changelog",
+        "SEMVER": "Version: {{ semver }}",
+        "RELEASE_DATE": "Release Date: {{ releaseDate }}",
+        "CHANGELOG": "Changes:",
+        "NO_CHANGELOG": "No changelog available for this version.",
+        "CLOSE": "Close"
       }
     }
   },

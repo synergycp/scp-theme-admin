@@ -12,6 +12,10 @@ include /resources/angle/pug/mixins/form
     ng-model="profileForm.input.billing_id"
   )
 
+  div(ng-if="profileForm.form.input.catalog_version")
+    +label("{{ 'pxe.profile.form.catalog_version.LABEL' | translate }}")
+      p.form-control-static(ng-bind="profileForm.form.input.catalog_version")
+
   +label("{{ 'pxe.profile.form.preseed.LABEL' | translate }}")
     +input-with-btn("fa fa-times-circle")(ng-click="profileForm.input.preseed = null")
       +ui-select("profileForm.preseeds")(ng-model="profileForm.input.preseed")
@@ -154,6 +158,10 @@ include /resources/angle/pug/mixins/form
       ng-model="profileForm.input.access_client"
     )
       span(translate="pxe.profile.form.client_access.LABEL")
+
+  +label()
+    div(ng-if="profileForm.form.input.deprecated")
+      span.label.label-warning(translate="pxe.profile.form.deprecated.LABEL")
 .panel-footer.clearfix(
   ng-if="!profileForm.form.isEditing"
 )

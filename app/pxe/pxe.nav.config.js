@@ -46,6 +46,11 @@
       sref: "app.pxe.file.list",
   };
 
+  var DISCARDED_TEMPLATES = {
+    text: "Discarded Templates",
+    sref: "app.pxe.catalog.decision.list",
+  };
+
   /**
    * @ngInject
    */
@@ -80,6 +85,10 @@
         group.item(DEPLOY_DHCP_SERVERS);
         group.item(DEPLOY_FILE_SERVERS);
       }
+
+      if (map.pxe.catalog && map.pxe.catalog.decision && map.pxe.catalog.decision.read) {
+        group.item(DISCARDED_TEMPLATES);
+      }
     }
 
     function hide() {
@@ -92,6 +101,7 @@
       group.remove(DRIVERS);
       group.remove(DEPLOY_DHCP_SERVERS);
       group.remove(DEPLOY_FILE_SERVERS);
+      group.remove(DISCARDED_TEMPLATES);
     }
   }
 })();

@@ -70,6 +70,9 @@
         "SUBMIT": "Reload Operating System",
         "CANCEL": "Cancel",
         "CONFIRM": "I understand that this will delete all data on the disk.",
+        "login_mode": {
+          "LABEL": "Root SSH Login Mode"
+        },
         "password": {
           "LABEL": "Root Password",
           "PLACEHOLDER": "Enter server password",

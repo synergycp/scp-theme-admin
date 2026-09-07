@@ -94,6 +94,12 @@ include /resources/angle/pug/mixins/form
             input(type="checkbox" ng-model="filters.current['parts.exact']" ng-change="filters.fireChangeEvent()")
             span(translate="server.list.filter.parts-exact.DESCRIPTION")
 
+      +label("{{ 'server.list.filter.provisioning_hold.LABEL' | translate }}")
+        .checkbox
+          label
+            input(type="checkbox" ng-model="filters.current.provisioning_hold" ng-change="filters.fireChangeEvent()")
+            span(translate="server.list.filter.provisioning_hold.DESCRIPTION")
+
     .col-md-6
       +label("{{ 'server.list.filter.client.LABEL' | translate }}")(
         ng-if="filters.showClient"

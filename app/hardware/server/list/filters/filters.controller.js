@@ -52,6 +52,7 @@
       _.assign(filters.current, {
         q: $state.params.q,
         "parts.exact": $state.params["parts.exact"] == "true",
+        provisioning_hold: $state.params.provisioning_hold == "true",
       });
 
       var promises = [

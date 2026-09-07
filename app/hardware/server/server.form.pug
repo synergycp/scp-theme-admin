@@ -359,3 +359,9 @@ hr
   translate-attr="{ 'placeholder': 'server.form.nickname.PLACEHOLDER' }"
   ng-model="serverForm.input.nickname"
 )
+
++label("server.form.provisioning_hold.LABEL")
+  +checkbox()(
+    ng-model="serverForm.input.provisioning_hold"
+  )
+    span(translate="server.form.provisioning_hold.DESCRIPTION")

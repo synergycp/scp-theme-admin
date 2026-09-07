@@ -36,6 +36,11 @@ block columns
     )
     span /
     a(
+      ui-sref="app.hardware.server.list({group: row.id, provisioning_hold: true})",
+      ng-bind="row.servers.hold"
+    )
+    span /
+    a(
       ui-sref="app.hardware.server.list({group: row.id})",
       ng-bind="row.servers.count"
     )

@@ -606,6 +606,7 @@
   },
   "notes": {
     "TITLE": "Server Notes",
+    "INFO": "Server Information",
     "CLIENT": "Client Notes",
     "ADMIN": "Administrator Notes",
     "SUBMIT": "Save Notes"

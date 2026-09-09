@@ -31,6 +31,10 @@
           });
       };
 
+      list.bulk.add('Restore', function (items) {
+        return Promise.all(items.map(list.restore));
+      });
+
       list.updateCatalog = function () {
         return Api
           .all('pxe/catalog/sync').post()

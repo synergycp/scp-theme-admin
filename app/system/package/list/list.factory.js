@@ -10,7 +10,7 @@
    *
    * @ngInject
    */
-  function PackageListFactory(List, ListConfirm, ApiUpload) {
+  function PackageListFactory(List, ListConfirm, ApiUpload, Modal) {
     return function () {
       var list = List("package");
       list.confirm = ListConfirm(list);
@@ -42,6 +42,13 @@
           submitClass: "btn-success",
         }
       );
+
+      list.viewChangelog = function (row) {
+        return Modal.information("package.list.changelog.modal")
+          .templateUrl("app/system/package/list/list.changelog.modal.html")
+          .data({ version: row.version.latest })
+          .open();
+      };
 
       list.bulk.add("Delete", list.confirm.delete);
       list.bulk.add("Enable", list.confirm.enable);

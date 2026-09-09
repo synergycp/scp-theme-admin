@@ -146,6 +146,7 @@
   },
   "search": {
     "TITLE": "IP Pools",
-    "EMPTY": "No IP Group or Server assigned"
+    "EMPTY": "No IP Group or Server assigned",
+    "RESERVED": "Reserved"
   }
 }

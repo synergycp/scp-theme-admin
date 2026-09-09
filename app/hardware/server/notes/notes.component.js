@@ -33,7 +33,8 @@
 
     function init() {
       notes.isExpanded = notes.server.notes.client ||
-        notes.server.notes.admin;
+        notes.server.notes.admin ||
+        notes.server.notes.info;
     }
 
     function save() {
@@ -41,6 +42,7 @@
         notes: {
           client: notes.server.notes.client,
           admin: notes.server.notes.admin,
+          info: notes.server.notes.info,
         },
       };
 

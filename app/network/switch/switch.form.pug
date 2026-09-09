@@ -124,6 +124,16 @@ hr
   ng-options="'switch.form.options.snmp_version.'+version | translate for (version,value) in switchForm.SNMP_VERSION"
 )
 
++field(
+  "{{ 'switch.form.options.ssh_command_timeout.LABEL' | translate }}",
+  "ssh_command_timeout"
+)(
+  placeholder="{{ 'switch.form.options.ssh_command_timeout.PLACEHOLDER' | translate }}",
+  ng-model="switchForm.input.ssh_command_timeout",
+  type="number",
+  max="600"
+)
+
 +label("switch.form.options.multi_vlan_logic.LABEL")
   select.form-control(
     ng-model="switchForm.input.multi_vlan_logic",

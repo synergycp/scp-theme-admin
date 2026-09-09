@@ -147,6 +147,10 @@
       },
       "use_ssh_ip": {
         "LABEL": "Use Seperate SSH & SNMP IPs"
+      },
+      "ssh_command_timeout": {
+        "LABEL": "SSH Command Timeout (seconds)",
+        "PLACEHOLDER": "Default: 60"
       }
     }
   },

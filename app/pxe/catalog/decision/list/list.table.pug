@@ -1,6 +1,7 @@
 extends /resources/angle/pug/table-checkable
 
 block headings
+  th Name
   th Slug
   th Piece
   th Catalog Version
@@ -11,6 +12,7 @@ block headings
   th Actions
 
 block columns
+  td(ng-bind="row.name || '-'")
   td(ng-bind="row.slug")
   td(ng-bind="row.piece")
   td(ng-bind="row.catalog_version")

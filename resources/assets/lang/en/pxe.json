@@ -421,6 +421,14 @@
             "list": {
                 "TITLE": "Discarded Templates",
                 "UPDATE": "Update Catalog"
+            },
+            "view": {
+                "TITLE": "Discarded Template: {{name}}"
+            },
+            "form": {
+                "title": {
+                    "COMPARE": "Compare to Current"
+                }
             }
         }
     }

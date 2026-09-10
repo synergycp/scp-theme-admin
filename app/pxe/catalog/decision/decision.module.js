@@ -4,5 +4,6 @@
   angular
     .module('app.pxe.catalog.decision', [
       'app.pxe.catalog.decision.list',
+      'app.pxe.catalog.decision.view',
     ]);
 })();

@@ -1,6 +1,7 @@
 extends /resources/angle/pug/table-checkable
 
 block headings
+  th Name
   th Slug
   th Piece
   th Catalog Version
@@ -11,6 +12,11 @@ block headings
   th Actions
 
 block columns
+  td
+    a(
+      ui-sref="app.pxe.catalog.decision.view({ id: row.id })"
+      ng-bind="row.name || '-'"
+    )
   td(ng-bind="row.slug")
   td(ng-bind="row.piece")
   td(ng-bind="row.catalog_version")
@@ -20,6 +26,11 @@ block columns
   td(ng-bind="row.decided_by_user_name || '-'")
   td
     .btn-group.btn-group-xs
+      a.btn.btn-default(
+        ui-sref="app.pxe.catalog.decision.view({ id: row.id })"
+        title="View / Compare"
+      )
+        i.fa.fa-eye
       a.btn.btn-warning(
         ng-click="table.restore(row)"
         title="Restore"

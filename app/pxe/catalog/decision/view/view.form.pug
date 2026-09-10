@@ -1,0 +1,13 @@
+doctype html
+include /resources/angle/pug/mixins/form
+
+h3(translate="pxe.catalog.decision.form.title.COMPARE")
+mergely-editor.scp-mergely(
+  accept-button-class="btn btn-warning btn-lg"
+  accept-callback="catalogDecisionForm.restore"
+  cancel-button-class="hidden"
+  original-files="catalogDecisionForm.ourFiles"
+  other-files="catalogDecisionForm.theirFiles"
+  settings="catalogDecisionForm.mergelySettings"
+  style="height:calc(100vh - 450px);min-height: 400px"
+)

@@ -12,7 +12,11 @@ block headings
   th Actions
 
 block columns
-  td(ng-bind="row.name || '-'")
+  td
+    a(
+      ui-sref="app.pxe.catalog.decision.view({ id: row.id })"
+      ng-bind="row.name || '-'"
+    )
   td(ng-bind="row.slug")
   td(ng-bind="row.piece")
   td(ng-bind="row.catalog_version")

@@ -18,7 +18,7 @@
     "modal": {
       "delete": {
         "TITLE": "Ignore Suggested Template Changes",
-        "BODY": "This will ignore the suggested template change(s), keeping your customizations. This means you will not get the features from these changes. This operation cannot be undone.",
+        "BODY": "This will ignore the suggested template change(s), keeping your customizations. This means you will not get the features from these changes. This can be recovered under Discarded Templates.",
         "CANCEL": "Cancel",
         "SUBMIT": "Ignore"
       },

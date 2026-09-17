@@ -88,6 +88,7 @@
       }
 
       OsReloadModals.openCreate({
+        isLive: !!profile.is_live,
         loadSshKeys: function () {
           return pxeInstallForm.server.selected.one('ssh-key').get().then(function (resp) {
             var keys = (resp.keys || []).map(function (k) {

@@ -160,6 +160,12 @@ include /resources/angle/pug/mixins/form
       span(translate="pxe.profile.form.client_access.LABEL")
 
   +label()
+    +checkbox()(
+      ng-model="profileForm.input.is_live"
+    )
+      span(translate="pxe.profile.form.is_live.LABEL")
+
+  +label()
     div(ng-if="profileForm.form.input.deprecated")
       span.label.label-warning(translate="pxe.profile.form.deprecated.LABEL")
 .panel-footer.clearfix(

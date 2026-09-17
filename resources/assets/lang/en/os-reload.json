@@ -70,6 +70,12 @@
         "SUBMIT": "Reload Operating System",
         "CANCEL": "Cancel",
         "CONFIRM": "I understand that this will delete all data on the disk.",
+        "live": {
+          "TITLE": "Are you sure?",
+          "NOTICE": "You are about to reboot this server into a live Operating System. This will not affect the disks, but will reboot the server immediately. You will need to login via IPMI to access the OS interface.",
+          "CONFIRM": "I understand that this will reboot the server immediately.",
+          "SUBMIT": "Reboot into Live OS"
+        },
         "login_mode": {
           "LABEL": "Root SSH Login Mode"
         },

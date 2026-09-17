@@ -87,7 +87,9 @@
         return Alert.warning('Please select an OS Edition.');
       }
 
-      OsReloadModals.openCreate().result.then(function (result) {
+      OsReloadModals.openCreate({
+        isLive: !!profile.is_live,
+      }).result.then(function (result) {
         create({
           pxe_profile_id: profile.id,
           disk: {

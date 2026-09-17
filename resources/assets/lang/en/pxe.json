@@ -163,6 +163,9 @@
             "deprecated": {
                 "LABEL": "Deprecated"
             },
+            "is_live": {
+                "LABEL": "Live OS"
+            },
             "preseed": {
                 "LABEL": "Preseed",
                 "PLACEHOLDER": "Type to search..."

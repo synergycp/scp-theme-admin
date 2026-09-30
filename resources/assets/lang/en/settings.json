@@ -73,6 +73,10 @@
       "rate_limit_admin_keys": {
         "LABEL": "Rate limit admin API keys",
         "PLACEHOLDER": "When unchecked, requests authenticated with an Admin-owned API key bypass all rate limiting (login, password reset, 2FA code, SSO)."
+      },
+      "sso_key_expiration_seconds": {
+        "LABEL": "SSO Link Expiration",
+        "PLACEHOLDER": "How long, in seconds, a single sign-on link (welcome, bandwidth, verification and install emails, WHMCS) stays valid before it is used. Minimum 300. Once used, a link stops working 5 minutes later."
       }
     }
   },

@@ -88,6 +88,10 @@
     "catalog_auto_sync": {
       "LABEL": "Templates Catalog Sync",
       "PLACEHOLDER": "When enabled, automatically syncs OS templates from the catalog server."
+    },
+    "set_disk_boot_on_install": {
+      "LABEL": "Switch boot device to disk after OS install",
+      "PLACEHOLDER": "When enabled, the server's IPMI permanent boot device and one-time boot flag are set to disk when the OS installer reaches the packages step, and again when the last install for the server is deleted. Disable this if you manage boot order outside of SynergyCP (e.g. servers left on network-first boot order, or a DHCP/iPXE setup that hands off to the local disk)."
     }
   },
   "Bandwidth": {

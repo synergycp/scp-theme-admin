@@ -19,7 +19,8 @@
     "status": {
       "OK": "OK",
       "WARN": "Warning",
-      "ERROR": "Error"
+      "ERROR": "Error",
+      "PORT_TO_PORT_DEPRECATED": "Port to Port is deprecated"
     },
     "list": {
       "TITLE": "Port Forwarding Gateways",
@@ -80,8 +81,9 @@
       },
       "forwarding_type": {
         "LABEL": "Forwarding Type",
-        "PORT_TO_PORT": "Port to Port",
-        "IP_TO_IP": "IP To IP"
+        "PORT_TO_PORT": "Port to Port (Deprecated)",
+        "IP_TO_IP": "IP to IP",
+        "DEPRECATED": "Port to Port forwarding is deprecated. Use IP to IP for new gateways."
       },
       "port_limit": {
         "LABEL": "Port Limit",

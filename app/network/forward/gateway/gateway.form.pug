@@ -33,14 +33,15 @@ div(ng-if="!gatewayForm.isCreating")
     p.form-control-static
       forward-gateway-version(gateway="gatewayForm.gateway")
 
-+select(
-  "forward.gateway.form.forwarding_type.LABEL",
-  "forwarding_type"
-)(
-  placeholder="{{ 'forward.gateway.form.forwarding_type.PLACEHOLDER' | translate }}"
-  ng-model="gatewayForm.input.forwarding_type"
-  ng-options="'forward.gateway.form.forwarding_type.'+type | translate for (type,value) in gatewayForm.FORWARDING_TYPE"
-)
++label("forward.gateway.form.forwarding_type.LABEL", "forwarding_type")
+  select.form-control#form-forwarding_type(
+    ng-model="gatewayForm.input.forwarding_type"
+    ng-options="'forward.gateway.form.forwarding_type.'+type | translate for (type,value) in gatewayForm.FORWARDING_TYPE"
+  )
+  p.help-block.text-danger(
+    ng-if="gatewayForm.input.forwarding_type == gatewayForm.FORWARDING_TYPE.PORT_TO_PORT"
+    translate="forward.gateway.form.forwarding_type.DEPRECATED"
+  )
 
 div(ng-if="gatewayForm.input.forwarding_type == 'IP_TO_IP'")
   +field(

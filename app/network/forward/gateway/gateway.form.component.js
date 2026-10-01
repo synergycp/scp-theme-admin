@@ -2,15 +2,15 @@
     'use strict';
 
     var FORWARDING_TYPE = {
-        PORT_TO_PORT: 'PORT_TO_PORT',
         IP_TO_IP: 'IP_TO_IP',
+        PORT_TO_PORT: 'PORT_TO_PORT',
     };
 
     var INPUTS = {
         name: '',
         hostname: '',
         api_key: '',
-        forwarding_type: FORWARDING_TYPE.PORT_TO_PORT,
+        forwarding_type: FORWARDING_TYPE.IP_TO_IP,
         port_limit: '',
         usable_ips: '',
     };

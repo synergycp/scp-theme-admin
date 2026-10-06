@@ -4,6 +4,7 @@
   var INPUTS = {
     srv_id: "",
     nickname: "",
+    provisioning_hold: false,
     billing: {
       id: "",
       date: "",

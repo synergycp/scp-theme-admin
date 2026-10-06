@@ -7,6 +7,7 @@
     preseed: null,
     boot_script: null,
     access_client: false,
+    is_live: false,
     time_until_marked_failed: "",
   };
 

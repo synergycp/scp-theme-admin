@@ -1,20 +1,18 @@
 (function () {
-  'use strict';
+  "use strict";
 
   angular
-    .module('app.pxe.install')
-    .component('pxeInstallForm', {
-      require: {
-      },
+    .module("app.pxe.install")
+    .component("pxeInstallForm", {
+      require: {},
       bindings: {
-        form: '=',
+        form: "=",
       },
-      controller: 'PxeInstallFormCtrl as pxeInstallForm',
+      controller: "PxeInstallFormCtrl as pxeInstallForm",
       transclude: true,
-      templateUrl: 'app/pxe/install/install.form.html'
+      templateUrl: "app/pxe/install/install.form.html",
     })
-    .controller('PxeInstallFormCtrl', PxeInstallFormCtrl)
-    ;
+    .controller("PxeInstallFormCtrl", PxeInstallFormCtrl);
 
   /**
    * @ngInject
@@ -23,28 +21,27 @@
     var pxeInstallForm = this;
 
     pxeInstallForm.$onInit = init;
-    pxeInstallForm.server = Select('server').on('change', syncServer);
+    pxeInstallForm.server = Select("server").on("change", syncServer);
     pxeInstallForm.isEnabled = true;
     pxeInstallForm.submit = submit;
     pxeInstallForm.input = {
-      profile: Select('pxe/profile').on('change', syncProfile),
+      profile: Select("pxe/profile").on("change", syncProfile),
       disk: {
-        raid: 'None',
+        raid: "None",
         index: 0,
       },
       edition: null,
-      licenseKey: '',
-      password: '',
+      licenseKey: "",
+      password: "",
     };
-
 
     //////////
 
     function init() {
       pxeInstallForm.osSettingsControl = {};
-      pxeInstallForm.form.on('reload_server', function(server) {
+      pxeInstallForm.form.on("reload_server", function (server) {
         pxeInstallForm.server.setSelectedId(server.id);
-      })
+      });
     }
 
     function syncServer(server) {
@@ -56,18 +53,21 @@
 
     function syncProfile(profile) {
       if (profile.iso) {
-        pxeInstallForm.input.edition = Select('pxe/iso/' + profile.iso.id + '/edition')
+        pxeInstallForm.input.edition = Select(
+          "pxe/iso/" + profile.iso.id + "/edition"
+        )
           .filter({
             is_enabled: true,
           })
-          .on('change', syncEdition);
+          .on("change", syncEdition);
       } else {
         pxeInstallForm.input.edition = null;
       }
     }
 
     function syncEdition(edition) {
-      pxeInstallForm.input.licenseKey = edition.key || pxeInstallForm.input.licenseKey;
+      pxeInstallForm.input.licenseKey =
+        edition.key || pxeInstallForm.input.licenseKey;
     }
 
     function submit() {
@@ -80,22 +80,29 @@
       var password = osData.password;
 
       if (!profile) {
-        return Alert.warning('Please select an OS Reload Profile.');
+        return Alert.warning("Please select an OS Reload Profile.");
       }
 
       if (profile.iso && !edition) {
-        return Alert.warning('Please select an OS Edition.');
+        return Alert.warning("Please select an OS Edition.");
       }
 
       OsReloadModals.openCreate({
         loadSshKeys: function () {
-          return pxeInstallForm.server.selected.one('ssh-key').get().then(function (resp) {
-            var keys = (resp.keys || []).map(function (k) {
-              return { id: k.id, name: k.name, fingerprint: k.fingerprint };
+          return pxeInstallForm.server.selected
+            .one("ssh-key")
+            .get()
+            .then(function (resp) {
+              var keys = (resp.keys || []).map(function (k) {
+                return { id: k.id, name: k.name, fingerprint: k.fingerprint };
+              });
+              return {
+                keys: keys,
+                clientAssigned: resp.client_assigned !== false,
+              };
             });
-            return { keys: keys, clientAssigned: resp.client_assigned !== false };
-          });
         },
+        isLive: !!profile.is_live,
       }).result.then(function (result) {
         create({
           pxe_profile_id: profile.id,
@@ -110,20 +117,20 @@
           ssh_key_ids: result.ssh_key_ids,
           ssh_keys_raw: result.ssh_keys_raw,
           password: result.password,
-        })
+        });
       });
     }
 
     function create(data) {
       return pxeInstallForm.server.selected
-        .all('install')
+        .all("install")
         .post(data)
         .branch()
         .then(fireChangeEvent)
-        .unbranch()
+        .unbranch();
     }
     function fireChangeEvent() {
-      pxeInstallForm.form.fire('created');
+      pxeInstallForm.form.fire("created");
     }
   }
 })();

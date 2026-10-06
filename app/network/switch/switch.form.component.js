@@ -42,6 +42,7 @@
     ipv4_address: '',
     ipv6_address: '',
     use_ssh_ip: false,
+    ssh_command_timeout: '',
   };
 
   angular

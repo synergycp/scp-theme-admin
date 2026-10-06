@@ -13,6 +13,16 @@ form.panel.panel-default(
   .panel-body(ng-class="notes.isExpanded ? '' : 'hidden'")
     .form-group
       label.control-label(
+        for="form-server-info"
+        translate="server.notes.INFO"
+      )
+      textarea.form-control(
+        ng-model="notes.server.notes.info"
+        id="form-server-info"
+      )
+
+    .form-group
+      label.control-label(
         for="form-client-notes"
         translate="server.notes.CLIENT"
       )

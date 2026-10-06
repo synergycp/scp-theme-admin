@@ -70,13 +70,19 @@
         "SUBMIT": "Reload Operating System",
         "CANCEL": "Cancel",
         "CONFIRM": "I understand that this will delete all data on the disk.",
+        "live": {
+          "TITLE": "Are you sure?",
+          "NOTICE": "You are about to reboot this server into a live Operating System. This will not affect the disks, but will reboot the server immediately. You will need to login via IPMI to access the OS interface.",
+          "CONFIRM": "I understand that this will reboot the server immediately.",
+          "SUBMIT": "Reboot into Live OS"
+        },
         "login_mode": {
           "LABEL": "Root SSH Login Mode"
         },
         "password": {
           "LABEL": "Root Password",
           "PLACEHOLDER": "Enter server password",
-          "HINT": "Password rules: alphanumeric is most compatible. Some combinations of special characters may not be valid, especially & and multiple instances of + and is completely dependent on the operating system. ",      
+          "HINT": "Password rules: alphanumeric is most compatible. Some combinations of special characters may not be valid, especially & and multiple instances of + and is completely dependent on the operating system. ",
           "GENERATE": "Generate Password",
           "HELP": "This password will not be saved! Please copy it somewhere safe."
         }

@@ -4,8 +4,14 @@ include /resources/angle/pug/mixins/list
 block list
   list.panel.panel-default(list="vm.list")
     list-header(text="template.suggested-change.list.TITLE")
+      a.btn.btn-default(ng-click="vm.filters.visible = !vm.filters.visible")
+        i.fa.fa-filter
       a.btn.btn-default(ng-click="vm.list.refresh.now()")
         i.fa.fa-refresh
+    template-suggested-change-filters(
+      show="vm.filters.visible"
+      current="vm.filters.current"
+      change="vm.filters.change()"
+    )
     template-suggested-change-table.border-top-table.scrollable-block
     list-footer
-

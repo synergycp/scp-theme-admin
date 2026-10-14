@@ -31,7 +31,7 @@
     ////////////
 
     function activate() {
-      vm.list.load();
+      // The filters component fires the first (filtered) load.
       $scope.$on("$destroy", onDestroy);
     }
 

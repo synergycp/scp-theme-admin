@@ -1,7 +1,27 @@
 {
   "suggested-change": {
     "list": {
-      "TITLE": "Suggested Template Changes"
+      "TITLE": "Suggested Template Changes",
+      "OVERWRITE": "Overwrite",
+      "column": {
+        "TYPE": "Type",
+        "CATALOG": "Catalog"
+      },
+      "type": {
+        "preseed": "Preseed",
+        "boot_script": "Boot Script",
+        "shell_script": "Shell Script"
+      },
+      "filter": {
+        "search": {
+          "LABEL": "Search",
+          "PLACEHOLDER": "Catalog slug or version"
+        },
+        "type": {
+          "LABEL": "Type",
+          "PLACEHOLDER": "All types"
+        }
+      }
     },
     "view": {
       "TITLE": "Suggested Template Change: {{name}}"

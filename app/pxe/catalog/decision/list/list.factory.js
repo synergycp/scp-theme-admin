@@ -12,7 +12,7 @@
    *
    * @ngInject
    */
-  function CatalogDecisionListFactory(List, Api, Alert) {
+  function CatalogDecisionListFactory(List, Api, Alert, $q) {
     return function () {
       var list = List(API);
 
@@ -30,6 +30,14 @@
             Alert.danger('Failed to restore decision.');
           });
       };
+
+      list.bulk.add('Restore', function (items) {
+        return items.reduce(function (promise, item) {
+          return promise.then(function () {
+            return list.restore(item);
+          });
+        }, $q.when());
+      });
 
       list.updateCatalog = function () {
         return Api

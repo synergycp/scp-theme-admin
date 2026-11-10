@@ -15,6 +15,23 @@ script(
           ng-model="item.value"
           ng-change="tab.onFieldChanged(item)"
         )
+      div(ng-switch-when="Secret")
+        input.form-control(
+          type="password"
+          autocomplete="new-password"
+          name="{{item.id}}.value"
+          ng-model="item.value"
+          ng-disabled="item.clear"
+          placeholder="{{ (item.is_set ? 'system.setting.secret.PLACEHOLDER_SET' : 'system.setting.secret.PLACEHOLDER_UNSET') | translate }}"
+        )
+        .checkbox(ng-if="item.is_set")
+          label
+            input(
+              type="checkbox"
+              name="{{item.id}}.clear"
+              ng-model="item.clear"
+            )
+            span(translate="system.setting.secret.CLEAR")
       div(ng-switch-when="Select")
         select.form-control(
           name="{{item.id}}.value"

@@ -54,11 +54,28 @@
             value: item.value,
           };
 
+          if (item.type === 'Secret') {
+            // Secrets are write-only: an empty field keeps the saved value,
+            // the "remove" checkbox clears it.
+            if (item.clear) {
+              formData.value = '';
+            } else if (!item.value) {
+              _.invokeMap(formElems, '$setPristine');
+              return;
+            }
+          }
+
           return vm.patchSetting(item.id, formData)
             .then(setFormToClean);
 
           function setFormToClean(response) {
             _.invokeMap(formElems, '$setPristine');
+
+            if (item.type === 'Secret') {
+              item.is_set = formData.value !== '';
+              item.value = '';
+              item.clear = false;
+            }
 
             return response;
           }
@@ -66,9 +83,10 @@
       }
 
       function getFormElems(id) {
-        return [
+        return _.filter([
           tab.form[id + '.value'],
-        ];
+          tab.form[id + '.clear'],
+        ]);
       }
 
       function onFieldChanged(item) {

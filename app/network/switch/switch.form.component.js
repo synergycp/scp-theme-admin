@@ -43,6 +43,7 @@
     ipv6_address: '',
     use_ssh_ip: false,
     ssh_command_timeout: '',
+    reset_ssh_host_key: false,
   };
 
   angular
@@ -93,6 +94,8 @@
       if(switchForm.form.on) {
         switchForm.form.on(['change', 'load'], function (response) {
           fillFormInputs();
+          // Resetting the SSH host key is a one-off action, not a setting: don't repeat it on the next save.
+          switchForm.input.reset_ssh_host_key = false;
 
           _.setContents(switchForm.groups.selected, response.groups);
         });

@@ -61,6 +61,11 @@
         "ALLOW-NON": "Allow non-SSL",
         "REQUIRE": "Require SSL"
       }
+    },
+    "secret": {
+      "PLACEHOLDER_SET": "Saved. Type a new value to replace it.",
+      "PLACEHOLDER_UNSET": "Not set",
+      "CLEAR": "Remove the saved value"
     }
   },
   "integration": {

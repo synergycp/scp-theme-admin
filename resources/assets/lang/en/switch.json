@@ -73,6 +73,13 @@
         "PLACEHOLDER": "SSH Password"
       }
     },
+    "ssh_host_key": {
+      "LABEL": "SSH Host Key",
+      "RECORDED": "Recorded {{date}}",
+      "NOT_RECORDED": "Not recorded yet. It will be recorded the next time SynergyCP connects to this switch.",
+      "RESET": "Reset SSH host key on save",
+      "HELP_TEXT": "SynergyCP only sends the switch's credentials after checking this key. If the switch was replaced or its SSH key was regenerated, commands will fail until you reset the key; the new key is recorded on the next connection."
+    },
     "enable": {
       "type": {
         "LABEL": "Use (En)able",

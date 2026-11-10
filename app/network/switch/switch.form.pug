@@ -107,6 +107,26 @@ div(ng-if="switchForm.input.ssh_en_type !== 1")
     ng-model="switchForm.input.ssh_en_pass"
   )
 
+div(ng-if="switchForm.form.input.id")
+  +label("{{ 'switch.form.ssh_host_key.LABEL' | translate }}")
+    div(ng-if="switchForm.form.input.ssh_host_key")
+      p.form-control-static
+        code {{ switchForm.form.input.ssh_host_key.type }} {{ switchForm.form.input.ssh_host_key.fingerprint }}
+        br
+        small.text-muted(
+          ng-if="switchForm.form.input.ssh_host_key.recorded_at",
+          translate="switch.form.ssh_host_key.RECORDED",
+          translate-value-date="{{ switchForm.form.input.ssh_host_key.recorded_at.unix * 1000 | date:'medium' }}"
+        )
+      +checkbox("{{ 'switch.form.ssh_host_key.RESET' | translate }}")(
+        ng-model="switchForm.input.reset_ssh_host_key"
+      )
+    p.form-control-static.text-muted(
+      ng-if="!switchForm.form.input.ssh_host_key",
+      translate="switch.form.ssh_host_key.NOT_RECORDED"
+    )
+    p.help-block(translate="switch.form.ssh_host_key.HELP_TEXT")
+
 +field("{{ 'switch.form.snmp.LABEL' | translate }}", "snmp")(
   placeholder="{{ 'switch.form.snmp.PLACEHOLDER' | translate }}",
   ng-model="switchForm.input.snmp_pass"

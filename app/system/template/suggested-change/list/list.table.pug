@@ -2,6 +2,8 @@ extends /resources/angle/pug/table-checkable
 
 block headings
   th(ng-if="table.showName") Name
+  th(translate="template.suggested-change.list.column.TYPE")
+  th(translate="template.suggested-change.list.column.CATALOG")
   th(ng-if="table.showChangelog") Changelog
   th Actions
 
@@ -11,6 +13,9 @@ block columns
       ui-sref="app.system.template.suggested-change.view({id: row.id})"
       ng-bind="row.name"
     )
+  td {{ ('template.suggested-change.list.type.' + row.type) | translate }}
+  td
+    span(ng-if="row.source_template_slug") {{ row.source_template_slug }} @ {{ row.source_template_version }}
   td
     ul.no-margin(style="padding-left: 15px")
       li(ng-repeat="entry in row.changelog" ng-bind="entry")
@@ -19,4 +24,8 @@ block columns
       a.btn.btn-default(
         ui-sref="app.system.template.suggested-change.view({id: row.id})"
         translate="app.action.EDIT"
+      )
+      a.btn.btn-warning(
+        ng-click="table.list.list.overwrite([row])"
+        translate="template.suggested-change.list.OVERWRITE"
       )

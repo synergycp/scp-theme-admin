@@ -7,3 +7,7 @@ span(ng-class="health.loader.class")
   .loader
   a.btn.btn-xs(ng-click="health.refresh($event)")
     .fa.fa-refresh
+span.text-warning(
+  ng-if="health.isDeprecated()"
+  translate="forward.gateway.status.PORT_TO_PORT_DEPRECATED"
+)

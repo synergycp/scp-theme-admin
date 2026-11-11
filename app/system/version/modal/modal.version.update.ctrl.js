@@ -38,7 +38,9 @@
     }
 
     function isNewVersionAvailable() {
-      return modal.latest && modal.current && modal.latest.semver !== modal.current.semver;
+      if (!modal.latest || !modal.current) return false;
+      if (modal.latest.semver !== modal.current.semver) return true;
+      return !!(modal.latest.commit && modal.current.commit && modal.latest.commit !== modal.current.commit);
     }
   }
 })();

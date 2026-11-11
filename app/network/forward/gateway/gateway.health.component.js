@@ -23,10 +23,15 @@
     health.$onInit = init;
     health.refresh = refresh;
     health.getClassMap = getClassMap;
+    health.isDeprecated = isDeprecated;
 
     //////////
 
     function init() {
+    }
+
+    function isDeprecated() {
+      return health.gateway.forwarding_type === 'PORT_TO_PORT';
     }
 
     function getClassMap() {

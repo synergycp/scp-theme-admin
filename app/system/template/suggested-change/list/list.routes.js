@@ -9,7 +9,7 @@
   function routeConfig($stateProvider, RouteHelpersProvider) {
     var helper = RouteHelpersProvider;
     $stateProvider.state("app.system.template.suggested-change.list", {
-      url: "?q",
+      url: "?q&type",
       title: "Suggested Template Changes",
       controller: "TemplateSuggestedChangeIndexCtrl as vm",
       templateUrl: helper.basepath(

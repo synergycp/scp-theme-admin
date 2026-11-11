@@ -1,0 +1,22 @@
+include /resources/angle/pug/mixins/form
+
+.panel-body.form-horizontal(ng-show="filters.show")
+  .row
+    .col-md-6
+      +label("{{ 'template.suggested-change.list.filter.search.LABEL' | translate }}")
+        +search-field()(
+          ng-model="filters.current.q"
+          ng-change="filters.fireChangeEvent()"
+          placeholder="{{ 'template.suggested-change.list.filter.search.PLACEHOLDER' | translate }}"
+          observable-focus="filters.searchFocus"
+        )
+    .col-md-6
+      +label("{{ 'template.suggested-change.list.filter.type.LABEL' | translate }}")
+        select.form-control(
+          ng-model="filters.current.type"
+          ng-change="filters.fireChangeEvent()"
+        )
+          option(value="") {{ 'template.suggested-change.list.filter.type.PLACEHOLDER' | translate }}
+          option(value="preseed") {{ 'template.suggested-change.list.type.preseed' | translate }}
+          option(value="boot_script") {{ 'template.suggested-change.list.type.boot_script' | translate }}
+          option(value="shell_script") {{ 'template.suggested-change.list.type.shell_script' | translate }}

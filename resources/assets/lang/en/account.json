@@ -25,6 +25,11 @@
       "KEY": "API Key",
       "NAME": "Name"
     },
+    "created": {
+      "TITLE": "API Key created",
+      "BODY": "Copy this API Key now and store it somewhere safe. For your security it is not stored in a readable form and will not be shown again.",
+      "DISMISS": "Done"
+    },
     "form": {
       "title": {
         "ADD": "Create an API Key"

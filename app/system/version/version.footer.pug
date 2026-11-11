@@ -1,0 +1,3 @@
+span(ng-if="$ctrl.current")
+  |  &ndash;&nbsp;v{{ $ctrl.current.semver }}
+  span(ng-if="$ctrl.current.commit") &nbsp;({{ $ctrl.current.commit | limitTo:7 }})

@@ -16,7 +16,13 @@ block body
     .text-center(ng-if="!modal.isNewVersionAvailable()")
       h3.text-success(
         translate=lang + '.already_latest.HEADING',
-        translate-value-semver="{{ modal.current.semver }}"
+        translate-value-semver="{{ modal.current.semver }}",
+        translate-value-commit="{{ modal.current.commit | limitTo:7 }}"
+      )
+      p.text-muted(
+        ng-if="modal.current.release_date",
+        translate=lang + '.already_latest.RELEASED',
+        translate-value-release-date="{{ modal.current.release_date ? (modal.current.release_date.unix * 1000 | date) : '' }}"
       )
       p(translate=lang + '.already_latest.BODY')
 
@@ -25,13 +31,15 @@ block body
         p.form-control-static(
           translate=lang + '.new.VERSION_DESCR',
           translate-value-semver="{{ modal.current.semver }}",
-          translate-value-release-date="{{ modal.current.release_date.unix * 1000 | date }}"
+          translate-value-commit="{{ modal.current.commit | limitTo:7 }}",
+          translate-value-release-date="{{ modal.current.release_date ? (modal.current.release_date.unix * 1000 | date) : '' }}"
         )
       +label(lang+".new.LATEST").clearfix
         p.form-control-static(
           translate=lang + '.new.VERSION_DESCR',
           translate-value-semver="{{ modal.latest.semver }}",
-          translate-value-release-date="{{ modal.latest.release_date.unix * 1000 | date }}"
+          translate-value-commit="{{ modal.latest.commit | limitTo:7 }}",
+          translate-value-release-date="{{ modal.latest.release_date ? (modal.latest.release_date.unix * 1000 | date) : '' }}"
         )
       +label(lang+".new.CHANGELOG").clearfix
         .form-control-static

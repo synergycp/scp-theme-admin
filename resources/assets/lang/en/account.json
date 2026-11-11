@@ -25,6 +25,11 @@
       "KEY": "API Key",
       "NAME": "Name"
     },
+    "created": {
+      "TITLE": "API Key created",
+      "BODY": "Copy this API Key now and store it somewhere safe. For your security it is not stored in a readable form and will not be shown again.",
+      "DISMISS": "Done"
+    },
     "form": {
       "title": {
         "ADD": "Create an API Key"
@@ -54,6 +59,15 @@
     },
     "security": {
       "TITLE": "Account Security",
+      "confirm": {
+        "TITLE": "Confirm It's You",
+        "BODY": "{{ message }}",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Confirm",
+        "PASSWORD": "Current password",
+        "EMAILED": "Code emailed to",
+        "CODE": "Two factor code"
+      },
       "password": {
         "TITLE": "Change Password",
         "SUBMIT": "Change Password",
@@ -74,6 +88,7 @@
         "SUBMIT": "Verify",
         "REQUIRE": "Require Two Factor Authentication",
         "NONE-VERIFIED": "Please verify a Two Factor Authentication below in order to use it.",
+        "NEW-RECOVERY-CODES": "Generate new recovery codes",
         "method": {
           "LABEL": "Method",
           "PLACEHOLDER": "Type to filter..."
@@ -109,6 +124,12 @@
           "recovery_codes": {
             "TITLE": "Two Factor Authentication Successfully Enabled",
             "BODY": "Keep the following recovery codes in a safe place in case you lose your mobile device, or need to login without your mobile device. Recovery codes are one time use only.",
+            "CANCEL": "Cancel",
+            "SUBMIT": "Close"
+          },
+          "new_recovery_codes": {
+            "TITLE": "New Recovery Codes",
+            "BODY": "Your previous recovery codes no longer work. Keep the following recovery codes in a safe place in case you lose your mobile device, or need to login without your mobile device. Recovery codes are one time use only.",
             "CANCEL": "Cancel",
             "SUBMIT": "Close"
           }

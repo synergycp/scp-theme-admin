@@ -67,9 +67,14 @@
         }).items;
 
         _.each(group.settings, function (setting) {
-          _.find(items, {
+          var item = _.find(items, {
             id: setting.id,
-          }).value = setting.value;
+          });
+
+          item.value = setting.value;
+          if (setting.type === 'Secret') {
+            item.is_set = setting.is_set;
+          }
         });
       }
     }

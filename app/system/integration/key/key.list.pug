@@ -30,6 +30,22 @@ block bottom-left
 
 
 block bottom-right
+  .panel.panel-success(ng-if="vm.created.key")
+    .panel-heading
+      h3.panel-title(translate="account.key.created.TITLE")
+    .panel-body
+      p(translate="account.key.created.BODY")
+      p
+        strong(ng-bind="vm.created.name")
+      input.form-control(
+        type="text"
+        readonly
+        onclick="this.select()"
+        ng-value="vm.created.key"
+      )
+    .panel-footer.clearfix
+      .pull-right
+        a.btn.btn-default(ng-click="vm.created = null", translate="account.key.created.DISMISS")
   logs(
     heading="Integration Logs"
     filter="vm.logs.filter"

@@ -52,7 +52,10 @@
       vm.list.create(_.assign(vm.create.getData(), {
         type: 'integration',
         owner_id: vm.integrationId,
-      }));
+      })).then(function (item) {
+        // [BA-434] The API only returns a key's value when it is created.
+        vm.created = item;
+      });
     }
   }
 })();

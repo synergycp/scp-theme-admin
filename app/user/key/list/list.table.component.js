@@ -33,7 +33,8 @@
     function init() {
       _.defaults(table, {
         showName: true,
-        showKey: true,
+        // [BA-434] Key values can't be read back after creation.
+        showKey: false,
         showActions: true,
       });
     }

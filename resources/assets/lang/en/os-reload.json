@@ -85,6 +85,13 @@
           "HINT": "Password rules: alphanumeric is most compatible. Some combinations of special characters may not be valid, especially & and multiple instances of + and is completely dependent on the operating system. ",
           "GENERATE": "Generate Password",
           "HELP": "This password will not be saved! Please copy it somewhere safe."
+        },
+        "ssh": {
+          "LABEL": "SSH Public Keys",
+          "PLACEHOLDER": "Select SSH public keys",
+          "NO_CLIENT": "No SSH Public Keys were found because no user is assigned to this server. You can paste a public key below.",
+          "NONE_STORED": "No stored SSH Public Keys available. You can paste public keys below.",
+          "PASTE_LABEL": "Or paste additional SSH public keys (one per line)"
         }
       }
     }

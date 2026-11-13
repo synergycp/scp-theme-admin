@@ -598,9 +598,10 @@
         "Remove IPMI user",
         "Turn server off via IPMI",
         "Turn off server's switch port",
-        "Remove any IPMI ACLs"
+        "Remove any IPMI ACLs",
+        "Delete all containerized console sessions"
       ],
-      "ACTION_COUNT": "7",
+      "ACTION_COUNT": "8",
       "CONFIRM": "Click \"Wipe\" to wipe these servers:"
     }
   },

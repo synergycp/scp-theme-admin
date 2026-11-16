@@ -38,7 +38,8 @@
     }
   },
   "alert": {
-    "SUSPENDED": "This server is currently suspended so the client does not have access to any controls."
+    "SUSPENDED": "This server is currently suspended so the client does not have access to any controls.",
+    "PROVISIONING_HOLD": "This server is on Provisioning Hold, so it is excluded from automatic provisioning. Edit the server to remove the hold."
   },
   "form": {
     "no-space": {

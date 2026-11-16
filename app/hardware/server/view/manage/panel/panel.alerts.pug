@@ -2,3 +2,7 @@
   ng-if="server.access && !server.access.is_active"
   translate="server.alert.SUSPENDED"
 )
+.alert.alert-warning.ng-fadeInUp(
+  ng-if="server.provisioning_hold"
+  translate="server.alert.PROVISIONING_HOLD"
+)

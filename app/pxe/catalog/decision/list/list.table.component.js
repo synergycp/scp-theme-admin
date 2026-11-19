@@ -36,7 +36,7 @@
           '<button class="btn btn-danger" ng-click="vm.confirm()">Restore</button>' +
           '<button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>' +
           '</div>',
-        controller: function ($uibModalInstance) {
+        controller: /* @ngInject */ function ($uibModalInstance) {
           var m = this;
           m.slug = item.slug;
           m.piece = item.piece;

@@ -644,8 +644,9 @@
           "ONE": "1"
         },
         "index": {
-          "LABEL": "Disk Index",
-          "HELP": "0 for first disk, 1 for second, etc."
+          "LABEL": "Install to Disk",
+          "OPTION": "Disk",
+          "HELP": "Disks are listed in inventory order, which is not guaranteed to match the order the installer detects them."
         }
       }
     },

@@ -93,6 +93,10 @@
       },
       "permission_group": {
         "LABEL": "Permission Group"
+      },
+      "allowed_origin": {
+        "LABEL": "Allowed Website",
+        "PLACEHOLDER": "Optional. The website of this program if its pages call the API from the browser, e.g. https://billing.example.com"
       }
     },
     "modal": {

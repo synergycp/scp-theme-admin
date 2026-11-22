@@ -74,6 +74,14 @@
         "LABEL": "Rate limit admin API keys",
         "PLACEHOLDER": "When unchecked, requests authenticated with an Admin-owned API key bypass all rate limiting (login, password reset, 2FA code, SSO)."
       },
+      "cors_restrict_origins": {
+        "LABEL": "Limit browser access to the API",
+        "PLACEHOLDER": "When checked, only the admin and client panels, the websites listed below and the Allowed Website of each Integration can call the API from a browser. Other websites are refused. If your billing system (e.g. the WHMCS client area) calls the API from its own pages, list its website first. API calls that do not come from a browser are not affected."
+      },
+      "cors_allowed_origins": {
+        "LABEL": "Additional websites allowed to call the API",
+        "PLACEHOLDER": "Website addresses (e.g. https://billing.example.com) separated by new lines. Only used when browser access to the API is limited."
+      },
       "sso_key_expiration_seconds": {
         "LABEL": "SSO Link Expiration",
         "PLACEHOLDER": "How long, in seconds, a single sign-on link (welcome, bandwidth, verification and install emails, WHMCS) stays valid before it is used. Minimum 300. Once used, a link stops working 5 minutes later."

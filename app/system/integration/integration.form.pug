@@ -8,6 +8,13 @@ include /resources/angle/pug/mixins/form
   ng-model="integrationForm.input.name"
 )
 
++field(
+  "{{ 'system.integration.form.allowed_origin.LABEL' | translate }}"
+)(
+  placeholder="{{ 'system.integration.form.allowed_origin.PLACEHOLDER' | translate }}"
+  ng-model="integrationForm.input.allowed_origin"
+)
+
 +select("{{ 'system.integration.form.permission_group.LABEL' | translate }}","permission_group")(
   placeholder="{{ 'system.integration.form.permission_group.PLACEHOLDER' | translate }}"
   ng-model= "integrationForm.input.permission_group_id",

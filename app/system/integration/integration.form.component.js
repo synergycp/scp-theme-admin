@@ -6,6 +6,7 @@
     subject: "",
     body: "",
     permission_group_id: null,
+    allowed_origin: "",
   };
 
   angular

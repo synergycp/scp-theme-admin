@@ -6,3 +6,7 @@
   ng-if="server.provisioning_hold"
   translate="server.alert.PROVISIONING_HOLD"
 )
+.alert.alert-warning.ng-fadeInUp(
+  ng-if="!server.access && server.is_provisionable === false"
+  translate="server.alert.NOT_PROVISIONABLE"
+)

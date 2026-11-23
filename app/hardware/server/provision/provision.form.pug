@@ -102,6 +102,11 @@ div(ng-if="!provisionForm.serverId")
           )
             span(ng-bind-html="choice.name | highlight: $select.search")
 
+.alert.alert-warning(
+  ng-if="provisionForm.isBlocked()"
+  translate="server.provision.blocked.{{ provisionForm.server.selected.access ? 'ASSIGNED' : 'NO_MAC' }}"
+)
+
 +label("{{ 'server.provision.server.LABEL' | translate }}")
   p.form-control-static(ng-if="provisionForm.serverId")
     a(ui-sref="app.hardware.server.view.manage({id: provisionForm.serverId})")

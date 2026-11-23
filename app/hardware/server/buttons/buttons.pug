@@ -38,7 +38,7 @@ div(
             ng-click="buttons.setActive(!server.access.is_active)"
             translate="server.{{ server.access.is_active ? 'SUSPEND' : 'UNSUSPEND' }}"
           )
-        li(ng-if="!server.access")
+        li(ng-if="server.is_provisionable")
           a(
             ui-sref="app.hardware.server.provision({ 'server.id': buttons.server.id })"
             translate="server.PROVISION"

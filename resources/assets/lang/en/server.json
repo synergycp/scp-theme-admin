@@ -39,7 +39,8 @@
   },
   "alert": {
     "SUSPENDED": "This server is currently suspended so the client does not have access to any controls.",
-    "PROVISIONING_HOLD": "This server is on Provisioning Hold, so it is excluded from automatic provisioning. Edit the server to remove the hold."
+    "PROVISIONING_HOLD": "This server is on Provisioning Hold, so it is excluded from automatic provisioning. Edit the server to remove the hold.",
+    "NOT_PROVISIONABLE": "This server cannot be provisioned until a MAC address is set on its primary port. Edit the server to add one."
   },
   "form": {
     "no-space": {
@@ -616,6 +617,10 @@
   "provision": {
     "TITLE": "Provision Server",
     "SUBMIT": "Provision",
+    "blocked": {
+      "NO_MAC": "This server cannot be provisioned until a MAC address is set on its primary port.",
+      "ASSIGNED": "This server already has a client assigned."
+    },
     "server": {
       "LABEL": "Server",
       "PLACEHOLDER": "Type to search..."

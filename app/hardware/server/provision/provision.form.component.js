@@ -59,6 +59,7 @@
     provisionForm.input = _.clone(INPUT);
     provisionForm.client = Select('client');
     provisionForm.createClient = openCreateClientModal;
+    provisionForm.isBlocked = isBlocked;
     provisionForm.bandwidthModal = openBandwidthHelpModal;
     provisionForm.group = Select('group')
       .filter(FILTER.GROUP)
@@ -134,6 +135,16 @@
       fillFormInputs();
 
       provisionForm.form.getData = getData;
+      provisionForm.form.isBlocked = isBlocked;
+    }
+
+    /**
+     * The page was opened for a specific server that cannot be provisioned
+     * (no MAC address on the primary port, or a client is already assigned).
+     */
+    function isBlocked() {
+      return !!provisionForm.serverId &&
+        _.get(provisionForm, 'server.selected.is_provisionable') === false;
     }
 
     function syncServer(server) {

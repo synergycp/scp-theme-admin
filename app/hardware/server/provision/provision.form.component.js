@@ -157,14 +157,20 @@
           provisionForm.server.selected = res;
         });
 
+      // A server without a port has no group.
+      var groupId = _.get(server, 'group.id');
+      if (!groupId) {
+        return;
+      }
+
       if (!provisionForm.group.getSelected('id')) {
-        provisionForm.group.setSelectedId(server.group.id);
+        provisionForm.group.setSelectedId(groupId);
       }
 
       // Primary group can be different from the IP group.
       provisionForm.entities
         .filter({
-          ip_group: server.group.id,
+          ip_group: groupId,
         })
         .load()
       ;

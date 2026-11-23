@@ -96,7 +96,7 @@ block columns
         | &nbsp;
 
       a.btn.btn-default(
-        ng-if="!row.access",
+        ng-if="row.is_provisionable",
         ui-sref="app.hardware.server.provision({ 'server.id': row.id })"
       )
         i.fa.fa-download

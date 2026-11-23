@@ -18,5 +18,6 @@ include /resources/angle/pug/mixins/panel
           .pull-right
             button.btn.btn-primary(
               type="submit"
+              ng-disabled="vm.form.isBlocked && vm.form.isBlocked()"
               data-translate="server.provision.SUBMIT"
             )

@@ -23,6 +23,14 @@
     },
     "bandwidth_default_home": {
       "LABEL": "Bandwidth Default Home"
+    },
+    "client_login_disabled": {
+      "LABEL": "Disable direct client logins",
+      "PLACEHOLDER": "When checked, clients cannot sign in to the client panel with their email and password, use the sign-in links in emails, reset their password or use API keys of their own. Clients who are signed in are signed out. Clients can still be signed in by an Integration (e.g. the Manage button and embedded client area of a billing system such as WHMCS) and by administrators using Login as Client. Administrator logins are not affected."
+    },
+    "client_login_redirect_url": {
+      "LABEL": "Client login redirect URL",
+      "PLACEHOLDER": "Only used while direct client logins are disabled. Clients who open the client panel login page, or a sign-in link from an email, are sent to this address instead, e.g. https://billing.example.com/clientarea.php. Leave empty to show a notice that logins are disabled."
     }
   },
   "Email Settings": {

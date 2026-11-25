@@ -44,6 +44,11 @@
       "LABEL": "Receive All Emails"
     }
   },
+  "notifications": {
+    "TITLE": "Email Notifications",
+    "HELP": "Emails sent to this administrator's email address when something needs attention. Changes are saved straight away.",
+    "EMPTY": "This administrator's permission group does not include any notifications."
+  },
   "buttons": {
   }
 }

@@ -9,5 +9,11 @@ block title
 block form
   admin-form(form="vm.edit")
 
+block append left-side
+  admin-notifications(
+    ng-if="vm.edit.input.id"
+    admin-id="vm.edit.input.id"
+  )
+
 block append right-side
   admin-buttons(admin="vm.edit.input")

@@ -16,6 +16,11 @@
       serversInUse: null,
       key: null,
       serversAllowed: null,
+      // [BA-100] Renewal state, as milliseconds since the epoch (or null).
+      dueAt: null,
+      isOverdue: false,
+      isInGracePeriod: false,
+      stopsAt: null,
     };
 
     LicenseService.onChange = onChange;
@@ -85,6 +90,10 @@
       cachedLicense.key = res.key;
       cachedLicense.serversAllowed = res.max_servers;
       cachedLicense.serversInUse = res.in_use_servers;
+      cachedLicense.dueAt = res.due_at ? res.due_at.unix * 1000 : null;
+      cachedLicense.isOverdue = !!res.is_overdue;
+      cachedLicense.isInGracePeriod = !!res.is_in_grace_period;
+      cachedLicense.stopsAt = res.stops_at ? res.stops_at.unix * 1000 : null;
     }
 
     /**

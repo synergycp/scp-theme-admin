@@ -78,6 +78,10 @@
         "LABEL": "Session Duration",
         "PLACEHOLDER": "Default Session Duration, in minutes. Applies to clients and administrators. Sessions auto-renew while active. Set to 0 for no session expiration."
       },
+      "require_admin_2fa": {
+        "LABEL": "Require two factor authentication for administrators",
+        "PLACEHOLDER": "When checked, every administrator must have two factor authentication turned on and cannot turn it off. Administrators who have not set it up yet can still sign in, but can only reach its setup (Account > Security) until they have. You need two factor authentication on your own account before you can check this. API keys that administrators created for scripts are not affected, and neither are clients."
+      },
       "rate_limit_admin_keys": {
         "LABEL": "Rate limit admin API keys",
         "PLACEHOLDER": "When unchecked, requests authenticated with an Admin-owned API key bypass all rate limiting (login, password reset, 2FA code, SSO)."

@@ -44,5 +44,8 @@
     "VIEW": "view",
     "MANAGE": "manage",
     "DELETE": "delete"
+  },
+  "two_factor_setup": {
+    "REQUIRED": "Two factor authentication is required for administrators. Set it up below and turn it on to use the rest of the control panel."
   }
 }

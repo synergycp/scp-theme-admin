@@ -94,6 +94,7 @@
             }
         },
         "form": {
+            "NOTICE": "The ISO Manager is for Windows ISOs only. Use ISOs that are activated through SPLA, MAK or KMS licensing. Evaluation ISOs are not tested and are not supported.",
             "title": {
                 "ADD": "Create ISO",
                 "EDIT": "Edit {{ name }}"

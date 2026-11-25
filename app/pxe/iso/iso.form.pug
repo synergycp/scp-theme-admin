@@ -1,6 +1,11 @@
 doctype html
 include /resources/angle/pug/mixins/form
 
+.alert.alert-info(
+  ng-if="isoForm.create"
+  translate="pxe.iso.form.NOTICE"
+)
+
 +field(
   "{{ 'pxe.iso.form.name.LABEL' | translate }}",
   "name"

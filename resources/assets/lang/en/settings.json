@@ -31,6 +31,14 @@
     "client_login_redirect_url": {
       "LABEL": "Client login redirect URL",
       "PLACEHOLDER": "Only used while direct client logins are disabled. Clients who open the client panel login page, or a sign-in link from an email, are sent to this address instead, e.g. https://billing.example.com/clientarea.php. Leave empty to show a notice that logins are disabled."
+    },
+    "client_default_sso_only": {
+      "LABEL": "New clients: single sign-on only",
+      "PLACEHOLDER": "When checked, clients created by an administrator or an Integration start with \"Single sign-on only\" turned on, unless the request says otherwise. It can be changed per client on the client's page. Existing clients, and sub clients created by clients, are not affected."
+    },
+    "client_default_sub_clients_disabled": {
+      "LABEL": "New clients: cannot add sub clients",
+      "PLACEHOLDER": "When checked, new clients start with \"Cannot add sub clients, super clients or share servers\" turned on, unless the request says otherwise. It can be changed per client on the client's page. Existing clients are not affected."
     }
   },
   "Email Settings": {

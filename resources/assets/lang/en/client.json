@@ -39,6 +39,12 @@
       },
       "showVip": {
         "LABEL": "Show Vip clients"
+      },
+      "ssoOnly": {
+        "LABEL": "Single sign-on only"
+      },
+      "subClientsDisabled": {
+        "LABEL": "Cannot add sub clients"
       }
     }
   },
@@ -82,6 +88,13 @@
         "last": {
           "PLACEHOLDER": "Last Name"
         }
+    },
+    "access": {
+      "LABEL": "Access",
+      "SSO-ONLY": "Single sign-on only",
+      "SSO-ONLY-HELP": "The client cannot sign in with a password, reset their password, use sign-in links from emails or use API keys of their own, and cannot change their email or password. They can still be signed in by an Integration (e.g. the Manage button of a billing system such as WHMCS) and by administrators using Login as Client. Turning this on signs the client out.",
+      "SUB-CLIENTS-DISABLED": "Cannot add sub clients, super clients or share servers",
+      "SUB-CLIENTS-DISABLED-HELP": "The client cannot create sub clients, add super clients or give another client access to their servers. The ones they already have stay, and can be removed."
     },
     "options": {
       "LABEL": "Options",

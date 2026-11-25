@@ -14,3 +14,13 @@ include /resources/angle/pug/mixins/form
         .checkbox
           label
             input(type="checkbox" ng-model="filters.current['billing_ignore_auto_suspend']" ng-change="filters.fireChangeEvent()")
+    //- [BA-404]
+    .col-md-6
+      +label("{{ 'client.list.filter.ssoOnly.LABEL' | translate }}")
+        .checkbox
+          label
+            input(type="checkbox" ng-model="filters.current['auth_sso_only']" ng-change="filters.fireChangeEvent()")
+      +label("{{ 'client.list.filter.subClientsDisabled.LABEL' | translate }}")
+        .checkbox
+          label
+            input(type="checkbox" ng-model="filters.current['sub_clients_disabled']" ng-change="filters.fireChangeEvent()")

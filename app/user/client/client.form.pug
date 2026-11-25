@@ -60,8 +60,20 @@ hr
   )
     span(translate="client.form.billing.vip.IGNORE_AUTO_SUSPEND")
 
+//- [BA-404]
++label("client.form.access.LABEL")
+  +checkbox("client.form.access.SSO-ONLY")(
+    ng-model="clientForm.input.auth.sso_only"
+  )
+  p.help-block(translate="client.form.access.SSO-ONLY-HELP")
+  +checkbox("client.form.access.SUB-CLIENTS-DISABLED")(
+    ng-model="clientForm.input.sub_clients.disabled"
+  )
+  p.help-block(translate="client.form.access.SUB-CLIENTS-DISABLED-HELP")
+
 div(ng-if="!clientForm.form.input.id")
   +label("client.form.options.LABEL")
     +checkbox("client.form.options.SEND-WELCOME-EMAIL")(
     ng-model="clientForm.input.sendEmail.welcome"
+    ng-disabled="clientForm.input.auth.sso_only"
     )

@@ -1,0 +1,23 @@
+.panel.panel-default.relative(
+  ng-class="notifications.loader.class"
+  ng-show="notifications.loaded"
+)
+  .loader
+  .panel-heading
+    h3.panel-title(translate="admin.notifications.TITLE")
+  .panel-body
+    p.text-muted(translate="admin.notifications.HELP")
+    p.text-muted(
+      ng-if="!notifications.items.length"
+      translate="admin.notifications.EMPTY"
+    )
+    .checkbox(ng-repeat="item in notifications.items track by item.key")
+      label
+        input(
+          type="checkbox"
+          ng-model="item.enabled"
+          ng-change="notifications.save(item)"
+        )
+        strong {{ item.name }}
+        br
+        span.text-muted {{ item.description }}

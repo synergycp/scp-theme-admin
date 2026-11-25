@@ -23,7 +23,11 @@
     },
     "heading": {
       "KEY": "API Key",
-      "NAME": "Name"
+      "NAME": "Name",
+      "LAST_USED": "Last used"
+    },
+    "last_used": {
+      "NEVER": "Never"
     },
     "created": {
       "TITLE": "API Key created",

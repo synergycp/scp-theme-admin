@@ -90,6 +90,10 @@
         "LABEL": "Require two factor authentication for administrators",
         "PLACEHOLDER": "When checked, every administrator must have two factor authentication turned on and cannot turn it off. Administrators who have not set it up yet can still sign in, but can only reach its setup (Account > Security) until they have. You need two factor authentication on your own account before you can check this. API keys that administrators created for scripts are not affected, and neither are clients."
       },
+      "password_reset_disabled": {
+        "LABEL": "Disable password reset by email",
+        "PLACEHOLDER": "When checked, the \"Forgot your password?\" link is removed from the admin and client login pages, nobody can ask for a password reset email, and reset links that were already sent stop working. Signed-in users can still change their own password, and administrators can still change the passwords of other users."
+      },
       "rate_limit_admin_keys": {
         "LABEL": "Rate limit admin API keys",
         "PLACEHOLDER": "When unchecked, requests authenticated with an Admin-owned API key bypass all rate limiting (login, password reset, 2FA code, SSO)."

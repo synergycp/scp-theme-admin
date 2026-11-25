@@ -1,5 +1,11 @@
 {
   "widget": {
     "TITLE": "License"
+  },
+  "banner": {
+    "OVERDUE": "Your SynergyCP license renewal is overdue. This control panel will stop working on {{ date }} unless the invoice is paid.",
+    "GRACE": "The SynergyCP license service could not be reached to confirm your license renewal. This control panel will stop working on {{ date }} unless it can be reached. Check that this server can connect to api.billing.synergycp.com.",
+    "PAY": "Pay invoice",
+    "REFRESH": "Refresh license"
   }
 }

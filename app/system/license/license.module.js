@@ -4,5 +4,6 @@
   angular
     .module('app.system.license', [
       'app.system.license.widget',
+      'app.system.license.banner',
     ]);
 })();

@@ -78,7 +78,12 @@ block columns
   td(ng-if="table.showUsageMax")
     span(ng-if="row.usage")
       span(ng-bind="row.usage.max | bitsToSize")
-    span.text-muted(ng-if="!row.usage") -
+      | &nbsp;
+      span.text-muted(
+        ng-if="row.usage.type === 'ingress' || row.usage.type === 'egress'"
+        translate="server.usage.type.{{ row.usage.type }}"
+      )
+    span.text-muted(ng-if="!row.usage" translate="server.usage.type.unmetered")
   td
     span(ng-if="row.launch_kvm")
       span(ng-bind="row.launch_kvm.label")

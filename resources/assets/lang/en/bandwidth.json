@@ -16,7 +16,12 @@
     "TEXT": "This {{ type }} does not have bandwidth setup."
   },
   "billing": {
-    "USAGE": "You have used {{ used }} out of {{ max }} since {{ since }}."
+    "USAGE": "You have used {{ used }} out of {{ max }} since {{ since }}.",
+    "UNMETERED": "This port is unmetered: it has no Max Bandwidth.",
+    "type": {
+      "ingress": "Only ingress traffic (arriving at the server) counts towards the Max Bandwidth.",
+      "egress": "Only egress traffic (leaving the server) counts towards the Max Bandwidth."
+    }
   },
   "stats": {
     "MIN": "Min",

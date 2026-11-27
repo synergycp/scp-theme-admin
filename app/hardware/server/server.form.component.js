@@ -66,6 +66,7 @@
     serverForm.ports.add = addPort;
     serverForm.ports.remove = removePort;
     serverForm.bandwidthModal = openBandwidthHelpModal;
+    serverForm.maxBandwidthTypes = ["unmetered", "combined", "ingress", "egress"];
     serverForm.controls = [];
     serverForm.controls.add = addControl;
     serverForm.controls.remove = removeControl;
@@ -272,6 +273,8 @@
                 port.max_bandwidth = $filter("bitsToSize")(
                   bandwidthData.data[0].max
                 );
+                port.max_bandwidth_type =
+                  bandwidthData.data[0].type || "combined";
               }
             });
         })
@@ -461,15 +464,32 @@
       }
 
       function updatePortBandwidth() {
+        var fields = serverForm.form.form;
+        var maxField = fields[portPrefix + "max_bandwidth"];
+        var typeField = fields[portPrefix + "max_bandwidth_type"];
+
         if (
           !serverForm.alwaysDirty &&
-          !(
-            serverForm.form.form[portPrefix + "max_bandwidth"] &&
-            serverForm.form.form[portPrefix + "max_bandwidth"].$dirty
-          ) &&
-          !serverForm.form.form["billing.date"].$dirty
+          !(maxField && maxField.$dirty) &&
+          !(typeField && typeField.$dirty) &&
+          !fields["billing.date"].$dirty
         ) {
           return;
+        }
+
+        // Unmetered is having no max bandwidth at all.
+        if (port.max_bandwidth_type === "unmetered") {
+          if (!port.bandwidthUsage) {
+            return;
+          }
+
+          return $ports
+            .one(port.id + "/bandwidth/usage/" + port.bandwidthUsage.id)
+            .remove()
+            .then(function () {
+              port.bandwidthUsage = null;
+              port.max_bandwidth = "";
+            });
         }
 
         var startDate = serverForm.billing.date
@@ -478,50 +498,36 @@
 
         // The API is expecting the value in bits and the frontend takes in bytes if it's an integer,
         // otherwise the string is passed through and the backend parses it.
-        var maxBandwidth = isNaN(port.max_bandwidth)
-          ? port.max_bandwidth
-          : port.max_bandwidth * 8;
+        var maxBandwidth =
+          port.max_bandwidth === "" || isNaN(port.max_bandwidth)
+            ? port.max_bandwidth
+            : port.max_bandwidth * 8;
+        var data = {
+          max: maxBandwidth,
+          type: port.max_bandwidth_type,
+          started_at: startDate,
+        };
 
         if (
           port.id &&
           !serverForm.isCreating &&
-          port.max_bandwidth &&
           port.bandwidthUsage &&
           !port.switch.port.$dirty
         ) {
           return $ports
             .one(port.id + "/bandwidth/usage/" + port.bandwidthUsage.id)
-            .patch({
-              max: maxBandwidth,
-              started_at: startDate,
-            });
-        }
-        if (
-          port.max_bandwidth &&
-          (!port.bandwidthUsage || port.switch.port.$dirty)
-        ) {
-          return $ports
-            .all(port.id + "/bandwidth/usage")
-            .post({
-              max: maxBandwidth,
-              started_at: startDate,
-            })
-            .then(function (bandwidthData) {
-              port.bandwidthUsage = bandwidthData.response.data;
-              port.max_bandwidth = $filter("bitsToSize")(
-                bandwidthData.response.data.max
-              );
-            });
+            .patch(data);
         }
 
-        if (!port.max_bandwidth && port.bandwidthUsage) {
-          return $ports
-            .one(port.id + "/bandwidth/usage/" + port.bandwidthUsage.id)
-            .remove()
-            .then(function () {
-              port.bandwidthUsage = null;
-            });
-        }
+        return $ports
+          .all(port.id + "/bandwidth/usage")
+          .post(data)
+          .then(function (bandwidthData) {
+            port.bandwidthUsage = bandwidthData.response.data;
+            port.max_bandwidth = $filter("bitsToSize")(
+              bandwidthData.response.data.max
+            );
+          });
       }
     }
 

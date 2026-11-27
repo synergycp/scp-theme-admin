@@ -61,6 +61,7 @@
     provisionForm.createClient = openCreateClientModal;
     provisionForm.isBlocked = isBlocked;
     provisionForm.bandwidthModal = openBandwidthHelpModal;
+    provisionForm.maxBandwidthTypes = ['unmetered', 'combined', 'ingress', 'egress'];
     provisionForm.group = Select('group')
       .filter(FILTER.GROUP)
       .on('change', syncGroupToEntities)
@@ -98,6 +99,8 @@
     provisionForm.addOns.on(['set', 'add', 'rem', 'change'], clear.bind(null, provisionForm.server));
     provisionForm.osReloads = (new Profiles()).add();
     provisionForm.billing = {
+      max_bandwidth: '',
+      max_bandwidth_type: 'unmetered',
       integration: Select('integration'),
       date: {
         value: new Date(),
@@ -305,7 +308,10 @@
       };
       data.billing.date = provisionForm.billing.date.value ? moment(provisionForm.billing.date.value)
         .toISOString() : null;
-      data.billing.max_bandwidth = provisionForm.billing.max_bandwidth;
+      data.billing.max_bandwidth_type = provisionForm.billing.max_bandwidth_type;
+      data.billing.max_bandwidth = provisionForm.billing.max_bandwidth_type === 'unmetered'
+        ? ''
+        : provisionForm.billing.max_bandwidth;
       data.server = {
         id: provisionForm.server.getSelected('id'),
       };

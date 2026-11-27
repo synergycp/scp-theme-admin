@@ -105,6 +105,7 @@
       var billing = bandwidth.billing;
       var data = usageData.length ? usageData[0] : null;
       billing.isActive = data && 'used' in data;
+      billing.isLoaded = true;
       if (!billing.isActive) {
         return false;
       }
@@ -113,6 +114,7 @@
       billing.used = data.used;
       billing.cycleStart = Date.parse(data.cycle_started_at.iso_8601).format(Date.formatDate);
       billing.percent = data.percent;
+      billing.type = data.type || 'combined';
     }
   }
 })();

@@ -20,6 +20,8 @@
     var billing = this;
 
     billing.isActive = false;
+    billing.isLoaded = false;
+    billing.type = 'combined';
     billing.used = 0;
     billing.max = 0;
     billing.cycleStart = '';

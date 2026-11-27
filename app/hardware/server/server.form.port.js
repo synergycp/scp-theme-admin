@@ -27,6 +27,8 @@
     var port = this;
 
     port.allowMultipleVLANs = false;
+    port.max_bandwidth = "";
+    port.max_bandwidth_type = "unmetered";
     port.input = {
       mac: "",
       max_bandwidth: "",

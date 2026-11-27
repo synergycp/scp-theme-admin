@@ -15,14 +15,24 @@ form(ng-submit="modal.submit()")
         span(ng-repeat="item in modal.items")
           span(ng-bind="item.name")
           br
-    +label("{{ 'server.modal.billing.limits.bandwidth.LABEL' | translate }}")
-      +input-with-btn("fa fa-times-circle")(
-        ng-click="modal.input.limit = ''"
+    +label("{{ 'server.modal.billing.limits.type.LABEL' | translate }}")
+      select.form-control(
+        ng-model="modal.input.type"
+        ng-options="type as ('server.modal.billing.limits.type.option.' + (type || 'unchanged') | translate) for type in modal.types"
       )
-        input.form-control(
-          ng-model="modal.input.limit"
-          placeholder="{{ 'server.modal.billing.limits.bandwidth.PLACEHOLDER' | translate }}"
+    div(ng-if="modal.input.type !== 'unmetered'")
+      +label("{{ 'server.modal.billing.limits.bandwidth.LABEL' | translate }}")
+        +input-with-btn("fa fa-times-circle")(
+          ng-click="modal.input.limit = ''"
         )
+          input.form-control(
+            ng-model="modal.input.limit"
+            placeholder="{{ 'server.modal.billing.limits.bandwidth.PLACEHOLDER' | translate }}"
+          )
+    p.help-block.text-center(
+      ng-if="modal.input.type === 'unmetered'"
+      translate="server.modal.billing.limits.type.UNMETERED_HELP"
+    )
 
   .modal-footer
     button.btn.btn-secondary(

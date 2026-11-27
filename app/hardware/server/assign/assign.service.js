@@ -13,7 +13,7 @@
    *
    * @ngInject
    */
-  function ServerAssignService ($q, $uibModal, List, ServerAssignModal) {
+  function ServerAssignService ($q, $uibModal, List, Modal, ServerAssignModal) {
     var ServerAssign = this;
     var list = List('server');
 
@@ -40,12 +40,33 @@
       });
 
       return modal.result.then(function (input) {
-        // TODO: use /server/{server}/port/{port}/bandwidth/usage
-        return list.patch({
-          billing: {
-            max_bandwidth: input.limit,
-          },
-        }, items);
+        var billing = {};
+
+        if (input.type) {
+          billing.max_bandwidth_type = input.type;
+        }
+        if (input.type !== 'unmetered' && input.limit) {
+          billing.max_bandwidth = input.limit;
+        }
+        if (_.isEmpty(billing)) {
+          return;
+        }
+
+        if (input.type !== 'unmetered') {
+          return patch();
+        }
+
+        return Modal
+          .confirm(items, 'server.modal.billing.limits.unmetered')
+          .open()
+          .result
+          .then(patch);
+
+        function patch() {
+          return list.patch({
+            billing: billing,
+          }, items);
+        }
       });
     }
 

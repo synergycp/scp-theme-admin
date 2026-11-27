@@ -16,7 +16,9 @@
 
     modal.items = items;
     modal.submit = submit;
+    modal.types = ['', 'unmetered', 'combined', 'ingress', 'egress'];
     modal.input = {
+      type: '',
       limit: '',
     };
 
